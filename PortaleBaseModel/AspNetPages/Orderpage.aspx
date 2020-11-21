@@ -10,11 +10,7 @@
         <script type="text/javascript">
             makeRevLower = true;
         </script>
-        <%--<asp:ValidationSummary runat="server" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") %>' />--%>
-        <asp:Panel runat="server" ID="pnlFormOrdine">
-            <div class="position-relative my-4 py-0 my-sm-5 py-sm-3" style="z-index: 1;">
-                <div id="divOrderformOverlay" style="position: absolute; top: 0; bottom: 0; z-index: 2"></div>
-                <%-- TITOLO --%>
+         <%-- TITOLO --%>
                 <div class="row">
                     <div class="col-12">
                         <%= references.ResMan("basetext", Lingua,"testoordine1") %>
@@ -23,6 +19,11 @@
                             ShowValidationErrors="true"  HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<style> span.errorvalidateclass + * {  border: 2px solid red; }  </style>" %>' />
                     </div>
                 </div>
+        <%--<asp:ValidationSummary runat="server" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") %>' />--%>
+        <asp:Panel runat="server" ID="pnlFormOrdine">
+            <div class="position-relative my-4 py-0 my-sm-5 py-sm-3" style="z-index: 1;">
+                <div id="divOrderformOverlay" style="position: absolute; top: 0; bottom: 0; z-index: 2"></div>
+               
                 
                 <div class="row">
                     <div class="col-12 col-lg-7">

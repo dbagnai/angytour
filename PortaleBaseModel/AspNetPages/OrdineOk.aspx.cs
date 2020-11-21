@@ -484,30 +484,172 @@ public partial class AspNetPages_OrdineOk : CommonPage
     protected string CreaMailPerFornitore(TotaliCarrello totali, CarrelloCollection prodotti)
     {
         string TestoMail = "";
-
         //Mi preparo il testo della mail (formattiamo in html)
-        TestoMail += "<table cellpadding='0' cellspacing='0'  style='font-size:14px;'><tr><td> Ordine effettuato da " + totali.Denominazionecliente + " tramite sito " + Nome + "  <br/>";
-        TestoMail += "<br/>EMAIL CLIENTE : <br/> ";
-        TestoMail += totali.Mailcliente + "<br/>";
-        TestoMail += "<br/>I dati dell' utente sono indirizzo fatturazione : <br/> ";
+        TestoMail += "<table cellpadding='0' cellspacing='0'  style='font-size:14px;'>";
+        TestoMail += "<tr><td> Ordine effettuato da " + totali.Denominazionecliente + " tramite sito " + Nome + "  <br/>";
+        TestoMail += "<br/><b>EMAIL CLIENTE :</b>  <br/>";
+        TestoMail += totali.Mailcliente;
+        TestoMail += "<br/><b>Indirizzo fatturazione</b> : <br/> ";
+        TestoMail += totali.Indirizzofatturazione + "<br/>";
+        //if (string.IsNullOrEmpty(totali.Indirizzospedizione))
+        //{
+        TestoMail += "<br/><b>Indirizzo spedizione</b> : <br/> ";
+        TestoMail += totali.Indirizzospedizione;
+        //}
+        TestoMail += "</td></tr>";
+        if (!string.IsNullOrEmpty(totali.Note))
+            TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
+        TestoMail += "<tr><td><table cellpadding='0' cellspacing='0' style='font-size:14px;'><tr><td><br/> DETTAGLIO ORDINE </td></tr>";
+        TestoMail += "<tr><td> <br/><b>CODICE ORDINE</b> : " + totali.CodiceOrdine + "<br/></td></tr>";
+        int i = 1;
+        foreach (Carrello item in prodotti)
+        {
+            TestoMail += "<tr><td><br/><b>Articolo:</b> " + item.Offerta.DenominazioneI + "<br/>";
+            //DATE A CARRELLO SE PRESENTI
+            if (item.Dataend != null && item.Datastart != null)
+            {
+                TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiododa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Datastart.Value) + "</b> ";
+                TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiodoa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Dataend.Value) + "</b><br/> ";
+            }
+            //CARATTERISTICHE CARRELLO IN BASE ALLE PROPRIETA IN jsonfield1
+            if (!string.IsNullOrEmpty(item.jsonfield1))
+            {
+                string valore3 = eCommerceDM.Selezionadajson(item.jsonfield1, "adulti", Lingua);
+                string valore4 = eCommerceDM.Selezionadajson(item.jsonfield1, "bambini", Lingua);
+                if (!string.IsNullOrEmpty(valore3))
+                    TestoMail += "<br/>" + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "adulti") + ": " + "</b>" + valore4 + "<br/>";
+                if (!string.IsNullOrEmpty(valore4))
+                    TestoMail += " " + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "bambini") + ": " + "</b>" + valore4 + "<br/>";
+            }
+            //CARATTERISTICHE
+            string valore1 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica1", Lingua);
+            string valore2 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica2", Lingua);
+            if (!string.IsNullOrEmpty(valore1) || !string.IsNullOrEmpty(valore2))
+            {
+                valore1 = references.TestoCaratteristica(0, valore1, Lingua);
+                if (!string.IsNullOrEmpty(valore1))
+                    TestoMail += " <b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica1") + ": " + "</b>" + valore1;
+                valore2 = references.TestoCaratteristica(1, valore2, Lingua);
+                if (!string.IsNullOrEmpty(valore2))
+                    TestoMail += " <b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica2") + ": " + "</b>" + valore2;
+            }
+            //ALTRI VALORI DA jsonfield1
+            //////////////////////////////////
+            //INSERIMENTO DATI PER SCAGLIONI
+            //////////////////////////////////
+            //string prezzoscaglione = eCommerceDM.Selezionadajson(item.jsonfield1, "prezzo", Lingua);
+            string datapartenza = eCommerceDM.Selezionadajson(item.jsonfield1, "datapartenza", Lingua);
+            string dataritorno = eCommerceDM.Selezionadajson(item.jsonfield1, "dataritorno", Lingua);
+            string idscaglione = eCommerceDM.Selezionadajson(item.jsonfield1, "idscaglione", Lingua);
+            //caglione completo nel carrello
+            //Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>(eCommerceDM.Selezionadajson(item.jsonfield1, "scaglione", Lingua));
+            if (!string.IsNullOrEmpty(idscaglione) || !string.IsNullOrEmpty(datapartenza))
+            {
+                if (!string.IsNullOrEmpty(datapartenza))
+                    TestoMail += "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglionedata") + "</b>" + datapartenza + "<br/>";
+                if (!string.IsNullOrEmpty(idscaglione))
+                    TestoMail += "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglionedataritorno") + "</b>" + dataritorno + "<br/>";
+                if (!string.IsNullOrEmpty(idscaglione))
+                    TestoMail += "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglioneid") + "</b>" + idscaglione + "<br/>";
+            }
+            if (!string.IsNullOrWhiteSpace(item.CodiceProdotto))
+                TestoMail += "<b>Codice Articolo : </b>" + item.CodiceProdotto + "<br/>";
+            TestoMail += "<b>Id articolo :</b> " + item.Offerta.Id.ToString() + "<br/>";
+            if (!string.IsNullOrEmpty(item.Campo2))
+            {
+                List<ModelCarCombinate> listCarr = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(item.Offerta.Xmlvalue);
+                ResultAutocomplete taglia = new ResultAutocomplete();
+                ResultAutocomplete colore = new ResultAutocomplete();
+                ModelCarCombinate elem = listCarr.Find(e => e.id == item.Campo2);
+                if (elem != null)
+                    TestoMail += " - " + references.ResMan("BaseText", Lingua, "selectcat1") + " : " + elem.caratteristica1.value + " - " + references.ResMan("BaseText", Lingua, "selectcat2") + " : " + elem.caratteristica2.value + "<br/>";
+            }
+            TestoMail += "<b> Quantità :</b> " + item.Numero + "<br/>";
+            if (item.Prezzo != 0)
+                TestoMail += "<b>  Prezzo Unitario :</b> " + item.Prezzo + " €<br/>";
+
+            //QUI POSSIAMO INSERIRE I DETTAGLI SE E' UN PACCHETTO KIT OFFERTA
+            //if (item != null && item.Offerta != null && item.Offerta.CodiceTipologia == "rif000101")
+            //{
+            //    TestoMail += "      Prodotti Contenuti nel pacchetto:<br/>";
+            //    List<ResultAutocomplete> listprod = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ResultAutocomplete>>(item.Offerta.XmlValue);
+            //    foreach (ResultAutocomplete p in listprod) //Calcolo il totale non scontato del kit ->
+            //    {
+            //        TestoMail += "      Codice:" + p.codice + " Descrizione:" + p.value + " Qta:" + p.qta + "<br/>";
+            //    }
+            //}
+
+            TestoMail += " <br/></td></tr>";
+            i++;
+        }
+
+
+        if (totali.TotaleSconto != 0)
+            TestoMail += "<tr><td>SCONTO APPLICATO " + totali.TotaleSconto + " € </td></tr>";
+        TestoMail += "<tr><td>";
+        if (totali.TotaleSpedizione != 0)
+            TestoMail += "SPESE DI SPEDIZIONE " + totali.TotaleSpedizione + "  €<br/>";
+        if (totali.TotaleSmaltimento != 0)
+            TestoMail += "<br/>SPESE DI SMALTIMENTO(PFU) " + totali.TotaleSmaltimento + "  €<br/>";
+        TestoMail += "<br/><b>TOTALE ORDINE COMPLESSIVO: </b>" + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
+
+        if (totali.Percacconto != 100)
+            TestoMail += "<tr><td><b>PAGATO ACCONTO </b> " + totali.Percacconto + "% :</b> " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) * totali.Percacconto / 100 + " €</td></tr>";
+        else
+            TestoMail += "<tr><td><b>PAGATO SALDO  :</b> " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
+
+        TestoMail += "<tr><td><br/>Metodo di pagamento:  " + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento).ToString() + " </td></tr>";
+        //chiudo tabella e riga relativa
+        TestoMail += "</table></td><tr/>";
+        TestoMail += "<tr><td><br/>L'utente è in attesa di essere ricontattato per confermare la disponibilità e per comunicargli i dettagli del pagamento.";
+        TestoMail += "</td></tr></table>";
+
+        return TestoMail;
+    }
+
+    protected string CreaMailCliente(TotaliCarrello totali, CarrelloCollection prodotti)
+    {
+        string TestoMail = "";
+        //MAIL PER IL CLIENTE DI CONFERMA ORDINE
+        TestoMail = "<div style='width:600px;font-size:14px'><table  style='font-size:14px;' cellpadding='0' cellspacing='0'><tr><td  valign='top'>" + "<img width=\"200\" src=\"" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/images/main_logo.png\" />" + "</td></tr>";
+        TestoMail += "<div style='width:600px;'><table cellpadding='0' cellspacing='0'><tr><td  valign='top'> </td></tr>";
+        //Testo mail
+        TestoMail += "<tr><td style='font-size:14px;'><br/> " + references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + "<a href='" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "'>" + Nome + "</a> da " + totali.Denominazionecliente + " <br/>";
+        TestoMail += "<br/><font color='#e12222'>Dettaglio Ordine</font> " + "<br/>";
+
+        TestoMail += "<br/><b>Fatturazione</b> :<br/> ";
         TestoMail += totali.Indirizzofatturazione + "<br/>";
 
         //if (string.IsNullOrEmpty(totali.Indirizzospedizione))
         //{
-        TestoMail += "<br/>I dati dell' utente sono indirizzo spedizione : <br/> ";
+        TestoMail += "<br/><b>Spedizione</b> :<br/>";
         TestoMail += totali.Indirizzospedizione;
         //}
         TestoMail += "</td></tr>";
         if (!string.IsNullOrEmpty(totali.Note))
             TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
 
-
-        TestoMail += "<tr><td><table cellpadding='0' cellspacing='0' style='font-size:14px;'><tr><td><br/> DETTAGLIO ORDINE <br/></td></tr>";
-        TestoMail += "<tr><td> <br/>CODICE ORDINE : " + totali.CodiceOrdine + "<br/></td></tr>";
+        TestoMail += "<tr><td><table cellpadding='0' cellspacing='0'>";
+        TestoMail += "<tr><td style='font-size:14px;'><br/><br/><b>CODICE ORDINE :</b> " + totali.CodiceOrdine + "<br/><br/></td></tr>";
         int i = 1;
         foreach (Carrello item in prodotti)
         {
-            TestoMail += "<tr><td><br/>" + i.ToString() + " - " + item.Offerta.DenominazioneI + "<br/>";
+            TestoMail += "<tr><td style=' font-size:14px;'><b>Articolo:</b> ";
+            switch (Lingua)
+            {
+                case "I":
+                    TestoMail += item.Offerta.DenominazioneI + "<br/>";
+                    break;
+                case "GB":
+                    TestoMail += item.Offerta.DenominazioneGB + "<br/>";
+                    break;
+                case "RU":
+                    TestoMail += item.Offerta.DenominazioneRU + "<br/>";
+                    break;
+                case "FR":
+                    TestoMail += item.Offerta.DenominazioneFR + "<br/>";
+                    break;
+            }
 
             if (item.Dataend != null && item.Datastart != null)
             {
@@ -535,10 +677,27 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 if (!string.IsNullOrEmpty(valore4))
                     TestoMail += " " + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "bambini") + ": " + "</b>" + valore4 + "<br/>";
             }
-
+            //////////////////////////////////
+            //INSERIMENTO DATI PER SCAGLIONI
+            //////////////////////////////////
+            //string prezzoscaglione = eCommerceDM.Selezionadajson(item.jsonfield1, "prezzo", Lingua);
+            string datapartenza = eCommerceDM.Selezionadajson(item.jsonfield1, "datapartenza", Lingua);
+            string dataritorno = eCommerceDM.Selezionadajson(item.jsonfield1, "dataritorno", Lingua);
+            string idscaglione = eCommerceDM.Selezionadajson(item.jsonfield1, "idscaglione", Lingua);
+            //caglione completo nel carrello
+            //Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>(eCommerceDM.Selezionadajson(item.jsonfield1, "scaglione", Lingua));
+            if (!string.IsNullOrEmpty(idscaglione) || !string.IsNullOrEmpty(datapartenza))
+            {
+                if (!string.IsNullOrEmpty(datapartenza))
+                    TestoMail += "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglionedata") + "</b>" + datapartenza + "<br/>";
+                if (!string.IsNullOrEmpty(idscaglione))
+                    TestoMail += "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglionedataritorno") + "</b>" + dataritorno + "<br/>";
+                if (!string.IsNullOrEmpty(idscaglione))
+                    TestoMail += "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglioneid") + "</b>" + idscaglione + "<br/>";
+            }
             if (!string.IsNullOrWhiteSpace(item.CodiceProdotto))
-                TestoMail += "CODICE PRODOTTO : " + item.CodiceProdotto + "<br/>";
-            TestoMail += " ID PRODOTTO : " + item.Offerta.Id.ToString();
+                TestoMail += "<b>Codice Articolo : </b>" + item.CodiceProdotto + "<br/>";
+            TestoMail += "<b>Id articolo :</b> " + item.Offerta.Id.ToString() + "<br/>";
             if (!string.IsNullOrEmpty(item.Campo2))
             {
                 List<ModelCarCombinate> listCarr = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(item.Offerta.Xmlvalue);
@@ -546,143 +705,11 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 ResultAutocomplete colore = new ResultAutocomplete();
                 ModelCarCombinate elem = listCarr.Find(e => e.id == item.Campo2);
                 if (elem != null)
-                    TestoMail += " - " + references.ResMan("BaseText", Lingua, "selectcat1") + " : " + elem.caratteristica1.value + " - " + references.ResMan("BaseText", Lingua, "selectcat2") + " : " + elem.caratteristica2.value;
+                    TestoMail += " - " + references.ResMan("BaseText", Lingua, "selectcat1") + " : " + elem.caratteristica1.value + " - " + references.ResMan("BaseText", Lingua, "selectcat2") + " : " + elem.caratteristica2.value + "<br/>";
             }
-            TestoMail += " QUANTITA' : " + item.Numero;
+            TestoMail += "<b> Quantità :</b> " + item.Numero + "<br/>";
             if (item.Prezzo != 0)
-                TestoMail += "  Prezzo Unitario : " + item.Prezzo + " €<br/>";
-
-            //QUI POSSIAMO INSERIRE I DETTAGLI SE E' UN PACCHETTO KIT OFFERTA
-            //if (item != null && item.Offerta != null && item.Offerta.CodiceTipologia == "rif000101")
-            //{
-            //    TestoMail += "      Prodotti Contenuti nel pacchetto:<br/>";
-            //    List<ResultAutocomplete> listprod = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ResultAutocomplete>>(item.Offerta.XmlValue);
-            //    foreach (ResultAutocomplete p in listprod) //Calcolo il totale non scontato del kit ->
-            //    {
-            //        TestoMail += "      Codice:" + p.codice + " Descrizione:" + p.value + " Qta:" + p.qta + "<br/>";
-            //    }
-            //}
-
-            TestoMail += " <br/></td></tr>";
-            i++;
-        }
-
-
-        if (totali.TotaleSconto != 0)
-            TestoMail += "<tr><td><br/>SCONTO APPLICATO " + totali.TotaleSconto + " € </td></tr>";
-        TestoMail += "<tr><td>";
-        if (totali.TotaleSpedizione != 0)
-            TestoMail += "SPESE DI SPEDIZIONE " + totali.TotaleSpedizione + "  €<br/>";
-        if (totali.TotaleSmaltimento != 0)
-            TestoMail += "<br/>SPESE DI SMALTIMENTO(PFU) " + totali.TotaleSmaltimento + "  €<br/>";
-        TestoMail += "<br/>TOTALE COMPLESSIVO: " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
-
-        if (totali.Percacconto != 100)
-            TestoMail += "<tr><td><br/>RICHIESTO PAGAMENTO ACCONTO " + totali.Percacconto + "%: " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) * totali.Percacconto / 100 + " €</td></tr>";
-
-
-        TestoMail += "<tr><td><br/>MODALITA' DI PAGAMENTO: " + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento).ToString() + " </td></tr>";
-        //chiudo tabella e riga relativa
-        TestoMail += "</table></td><tr/>";
-        TestoMail += "<tr><td><br/>L'utente è in attesa di essere ricontattato per confermare la disponibilità e per comunicargli i dettagli del pagamento.";
-        TestoMail += "</td></tr></table>";
-
-        return TestoMail;
-    }
-
-    protected string CreaMailCliente(TotaliCarrello totali, CarrelloCollection prodotti)
-    {
-        string TestoMail = "";
-
-        //CAMPI NECESSARI DAL FORM 
-        //txtNome.Text- txtEmail.Text  - txtTelefono.Text -  txtIndirizzo.Text - lblPrezzoSpedizione.Text - lblTotaleSpese.Text
-
-        //MAIL PER IL CLIENTE DI CONFERMA ORDINE
-        TestoMail = "<div style='width:600px;font-size:14px'><table  style='font-size:14px;' cellpadding='0' cellspacing='0'><tr><td  valign='top'>" + "<img width=\"200\" src=\"" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/images/main_logo.png\" />" + "</td></tr>";
-        TestoMail += "<div style='width:600px;'><table cellpadding='0' cellspacing='0'><tr><td  valign='top'> </td></tr>";
-        //Testo mail
-        TestoMail += "<tr><td style='font-size:14px;'><br/> " + references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + "<a href='" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "'>" + Nome + "</a> da " + totali.Denominazionecliente + " <br/>";
-        TestoMail += "<br/><font color='#e12222'>Dettaglio Ordine</font> " + "<br/>";
-
-        TestoMail += "<br/>Fatturazione : <br/> ";
-        TestoMail += totali.Indirizzofatturazione + "<br/>";
-
-        //if (string.IsNullOrEmpty(totali.Indirizzospedizione))
-        //{
-        TestoMail += "<br/>Spedizione : <br/> ";
-        TestoMail += totali.Indirizzospedizione;
-        //}
-        TestoMail += "</td></tr>";
-        if (!string.IsNullOrEmpty(totali.Note))
-            TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
-
-        TestoMail += "<tr><td><table cellpadding='0' cellspacing='0'>";
-        TestoMail += "<tr><td style='font-size:14px;'>CODICE ORDINE : " + totali.CodiceOrdine + "<br/></td></tr>";
-        int i = 1;
-        foreach (Carrello item in prodotti)
-        {
-            TestoMail += "<tr><td style=' font-size:14px;'>" + i.ToString() + " - ";
-            switch (Lingua)
-            {
-                case "I":
-                    TestoMail += item.Offerta.DenominazioneI + "<br/>";
-                    break;
-                case "GB":
-                    TestoMail += item.Offerta.DenominazioneGB + "<br/>";
-                    break;
-                case "RU":
-                    TestoMail += item.Offerta.DenominazioneRU + "<br/>";
-                    break;
-                case "FR":
-                    TestoMail += item.Offerta.DenominazioneFR + "<br/>";
-                    break;
-
-            }
-
-
-            if (item.Dataend != null && item.Datastart != null)
-            {
-                TestoMail += " <b>" + references.ResMan("Common", Lingua, "formtestoperiododa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Datastart.Value) + "</b> ";
-                TestoMail += " <b>" + references.ResMan("Common", Lingua, "formtestoperiodoa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Dataend.Value) + "</b><br/>";
-            }
-            string valore1 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica1", Lingua);
-            string valore2 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica2", Lingua);
-            if (!string.IsNullOrEmpty(valore1) || !string.IsNullOrEmpty(valore2))
-            {
-                valore1 = references.TestoCaratteristica(0, valore1, Lingua);
-                if (!string.IsNullOrEmpty(valore1))
-                    TestoMail += "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica1") + ": " + "</b>" + valore1;
-                valore2 = references.TestoCaratteristica(1, valore2, Lingua);
-                if (!string.IsNullOrEmpty(valore2))
-                    TestoMail += "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica2") + ": " + "</b>" + valore2;
-            }
-
-            if (!string.IsNullOrEmpty(item.jsonfield1))
-            {
-                string valore3 = eCommerceDM.Selezionadajson(item.jsonfield1, "adulti", Lingua);
-                string valore4 = eCommerceDM.Selezionadajson(item.jsonfield1, "bambini", Lingua);
-                if (!string.IsNullOrEmpty(valore3))
-                    TestoMail += "<br/>" + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "adulti") + ": " + "</b>" + valore4 + "<br/>";
-                if (!string.IsNullOrEmpty(valore4))
-                    TestoMail += " " + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "bambini") + ": " + "</b>" + valore4 + "<br/>";
-            }
-
-
-            if (!string.IsNullOrWhiteSpace(item.CodiceProdotto))
-                TestoMail += "Codice Prodotto : " + item.CodiceProdotto + "<br/>";
-            TestoMail += "  Id Prodotto : " + item.Offerta.Id.ToString();
-            if (!string.IsNullOrEmpty(item.Campo2))
-            {
-                List<ModelCarCombinate> listCarr = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(item.Offerta.Xmlvalue);
-                ResultAutocomplete taglia = new ResultAutocomplete();
-                ResultAutocomplete colore = new ResultAutocomplete();
-                ModelCarCombinate elem = listCarr.Find(e => e.id == item.Campo2);
-                if (elem != null)
-                    TestoMail += " - " + references.ResMan("BaseText", Lingua, "selectcat1") + " : " + elem.caratteristica1.value + " - " + references.ResMan("BaseText", Lingua, "selectcat2") + " : " + elem.caratteristica2.value;
-            }
-            TestoMail += " Quantità : " + item.Numero;
-            if (item.Prezzo != 0)
-                TestoMail += "  Prezzo unitario : " + item.Prezzo + " €<br/>";
+                TestoMail += "<b>  Prezzo Unitario :</b> " + item.Prezzo + " €<br/>";
 
             //QUI POSSIAMO INSERIRE I DETTAGLI SE E' UN PACCHETTO KIT OFFERTA
             //if (item != null && item.Offerta != null && item.Offerta.CodiceTipologia == "rif000101")
@@ -706,12 +733,12 @@ public partial class AspNetPages_OrdineOk : CommonPage
             TestoMail += "<br/>Spese di spedizione " + totali.TotaleSpedizione + " €<br/>";
         if (totali.TotaleSmaltimento != 0)
             TestoMail += "<br/>Spese smaltimento(PFU) " + totali.TotaleSmaltimento + " €<br/>";
-        TestoMail += "Totale ordine: " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
+        TestoMail += "<b>Totale ordine complessivo:</b> " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
 
-        //La percentuale di anticipo è 100% se la data di inizio periodo ripetto oggi è inferiore a 60 gg
         if (totali.Percacconto != 100)
-            TestoMail += "<tr><td><br/>RICHIESTO PAGAMENTO ACCONTO " + totali.Percacconto + "%: " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) * totali.Percacconto / 100 + " €</td></tr>";
-
+            TestoMail += "<tr><td><b>PAGATO ACCONTO </b> " + totali.Percacconto + "% :</b> " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) * totali.Percacconto / 100 + " €</td></tr>";
+        else
+            TestoMail += "<tr><td><b>PAGATO SALDO  :</b> " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
 
         TestoMail += "<tr><td><br/>Metodo di pagamento: " + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento).ToString() + " </td></tr>";
         //chiudo tabella e riga relativa
@@ -727,6 +754,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
 
         return TestoMail;
     }
+
 
 
 

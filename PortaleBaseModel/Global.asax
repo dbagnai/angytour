@@ -548,7 +548,6 @@
             "~/js/landing/jarallax.min.js",
             "~/js/jarallaxinit.js",
             "~/css/bcomponents/ui-259.js",
-
             //"~/js/odometer/odometer.js",
             "~/js/masonry.pkgd.min.js",
             "~/lib/js/common.js",
