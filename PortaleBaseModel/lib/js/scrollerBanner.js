@@ -158,7 +158,9 @@ function ScrollerInitBanner(controlid) {
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
             slideSpeed: 1000,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            beforeMove: lazyLoad,
+            startDragging: lazyLoad
         });
 
         // Custom Navigation Events
@@ -182,7 +184,9 @@ function ScrollerInitBanner1(controlid) {
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
             slideSpeed: 1000,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            beforeMove: lazyLoad,
+            startDragging: lazyLoad
         });
 
         // Custom Navigation Events
@@ -206,7 +210,9 @@ function ScrollerInitBanner2(controlid) {
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
             slideSpeed: 1000,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            beforeMove: lazyLoad,
+            startDragging: lazyLoad
         });
 
         // Custom Navigation Events
@@ -231,7 +237,9 @@ function ScrollerInitBanner4(controlid) {
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
             slideSpeed: 1000,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            beforeMove: lazyLoad,
+            startDragging: lazyLoad
         });
 
         // Custom Navigation Events
@@ -256,7 +264,9 @@ function ScrollerInitBanner5(controlid) {
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
             slideSpeed: 1000,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            beforeMove: lazyLoad,
+            startDragging: lazyLoad
         });
 
         // Custom Navigation Events
@@ -280,7 +290,9 @@ function ScrollerInitBanner3(controlid) {
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
             slideSpeed: 1000,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            beforeMove: lazyLoad,
+            startDragging: lazyLoad
         });
 
         // Custom Navigation Events

@@ -1066,7 +1066,8 @@ namespace WelcomeLibrary.DAL
                 SQLiteParameter p1 = new SQLiteParameter("@Email", "%");
                 if (_paramCliente != null && !string.IsNullOrEmpty(_paramCliente.Email))
                 {
-                    p1 = new SQLiteParameter("@Email", "%" + _paramCliente.Email + "%"); //OleDbType.VarChar
+                    //p1 = new SQLiteParameter("@Email", "%" + _paramCliente.Email + "%"); //puo restituire piu clienti se la mail è contenuta nella parte inizio o fine di un altra
+                    p1 = new SQLiteParameter("@Email", _paramCliente.Email); //puo restituire piu clienti se la mail è contenuta nella parte inizio o fine di un altra
                 }
                 parColl.Add(p1);
                 if (_paramCliente != null)
@@ -1082,7 +1083,8 @@ namespace WelcomeLibrary.DAL
                     if (!string.IsNullOrWhiteSpace(_paramCliente.Codicisconto))
                     {
                         //Il tipo cliente di default è lo 0 (consumatore ) quindi se non definito il tipo prende quel tipo lì
-                        SQLiteParameter pcodsconto = new SQLiteParameter("@Codicisconto", "%" + _paramCliente.Codicisconto + "%"); //OleDbType.VarChar
+                        //SQLiteParameter pcodsconto = new SQLiteParameter("@Codicisconto", "%" + _paramCliente.Codicisconto + "%"); //OleDbType.VarChar
+                        SQLiteParameter pcodsconto = new SQLiteParameter("@Codicisconto",  _paramCliente.Codicisconto ); //OleDbType.VarChar
                         parColl.Add(pcodsconto);
                         queryfilter += " and Codicisconto like @Codicisconto ";
                     }

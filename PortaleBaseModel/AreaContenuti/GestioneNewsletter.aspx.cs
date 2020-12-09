@@ -121,7 +121,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
                     //{
                     //    File.Delete(pathDestinazione + "\\" + NomeCorretto);
                     //}
-                    if (fileupload.PostedFile.ContentType == "image/jpeg" || fileupload.PostedFile.ContentType == "image/pjpeg" || fileupload.PostedFile.ContentType == "image/gif" || fileupload.PostedFile.ContentType == "image/png")
+                    if (fileupload.PostedFile.ContentType == "image/jpeg" || fileupload.PostedFile.ContentType == "image/pjpeg"   || fileupload.PostedFile.ContentType == "image/png")
                     {
                         bool ridimensiona = true;
                         //RIDIMENSIONO E FACCIO L'UPLOAD DELLA FOTO!!!

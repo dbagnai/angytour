@@ -184,6 +184,8 @@ public partial class AspNetPages_OrdineOk : CommonPage
             prodotti = (CarrelloCollection)Session["prodotti_" + CodiceOrdine];
             Session.Remove("prodotti_" + CodiceOrdine);
 
+            spanbtnriprova.Visible = false;
+
             string jscodetoinject = Creaeventopurchaseagooglegtag(totali, prodotti);
             output.Text = jscodetoinject;
             output.Text += references.ResMan("Common", Lingua, "risposta_5");
@@ -601,7 +603,8 @@ public partial class AspNetPages_OrdineOk : CommonPage
         TestoMail += "<tr><td><br/>Metodo di pagamento:  " + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento).ToString() + " </td></tr>";
         //chiudo tabella e riga relativa
         TestoMail += "</table></td><tr/>";
-        TestoMail += "<tr><td><br/>L'utente è in attesa di essere ricontattato per confermare la disponibilità e per comunicargli i dettagli del pagamento.";
+        TestoMail += "<tr><td><br/>L'utente ha correttamente pagato tramite la modalità qui indicata, è in attesa di vorstro contatto per la  spedizione della merce.";
+
         TestoMail += "</td></tr></table>";
 
         return TestoMail;

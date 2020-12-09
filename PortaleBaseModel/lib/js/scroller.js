@@ -112,7 +112,7 @@ function BindScroller(el, localObjects, container) {
         $('#' + el).html('');
         return;
     }
-   // var container = objfiltrotmp.container;
+    // var container = objfiltrotmp.container;
     var str = $('#' + el)[0].innerHTML;
 
     //Se presente nella memoria temporanea globale modelli devo riprendere la struttura HTML template da li e non dalla pagina modficata
@@ -149,7 +149,7 @@ function BindScroller(el, localObjects, container) {
     initScrollertype(el, container, globalObject[el + "params"].scrollertype);
 };
 
-function initScrollertype(el,container, type) {
+function initScrollertype(el, container, type) {
 
     $('#' + el).parent().parent().parent().parent().show();
     $('#' + container + 'Title').show();
@@ -190,7 +190,9 @@ function ScrollerInit(controlid) {
             pagination: true,
             navigation: false,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            beforeMove: lazyLoad,
+            startDragging: lazyLoad
         });
 
         // Custom Navigation Events
@@ -214,7 +216,9 @@ function ScrollerInit1(controlid) {
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
             slideSpeed: 1000,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            beforeMove: lazyLoad,
+            startDragging: lazyLoad
         });
 
         // Custom Navigation Events
@@ -240,7 +244,9 @@ function ScrollerInit2(controlid) {
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
             slideSpeed: 1000,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            beforeMove: lazyLoad,
+            startDragging: lazyLoad
         });
 
         // Custom Navigation Events
@@ -264,7 +270,9 @@ function ScrollerInit5(controlid) {
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
             slideSpeed: 1000,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            beforeMove: lazyLoad,
+            startDragging: lazyLoad
         });
 
         // Custom Navigation Events
@@ -288,7 +296,9 @@ function ScrollerInitSingolo(controlid) {
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
             slideSpeed: 1000,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            beforeMove: lazyLoad,
+            startDragging: lazyLoad
         });
 
         // Custom Navigation Events

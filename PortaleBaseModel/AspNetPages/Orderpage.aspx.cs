@@ -461,9 +461,7 @@ public partial class AspNetPages_Orderpage : CommonPage
 
             //DATI DEL CLIENTE PRESI DAL FORM
             Cliente cliente = new Cliente();
-            CaricaDatiClienteDaForm(cliente);
-            if (!(User.Identity != null && !string.IsNullOrWhiteSpace(User.Identity.Name))) // Se non loggato metto il cliente tra quelli newsletter
-                MemorizzaClientePerNewsletter(cliente);
+            if (!CaricaDatiClienteDaForm(cliente)) return; //aggiorno/inserisco clientie ma se la verifica anagrafica cliente fallisce stoppo tutto
 
             //per prima cosa mi riprendo i dati del carrello in base alla sessione per completare l'ordine
             CarrelloCollection prodotti = new CarrelloCollection();
@@ -1253,42 +1251,44 @@ public partial class AspNetPages_Orderpage : CommonPage
             output.CssClass = "alert alert-danger"; output.Text = references.ResMan("Common", Lingua, "risposta_4").ToString() + "  Assente importo operazione.<br/>";
         }
     }
-    public void MemorizzaClientePerNewsletter(Cliente cli)
-    {
-        try
-        {
-            //------------------------------------------------
-            //Memorizzo i dati nel cliente per la newsletter
-            //------------------------------------------------
-            ClientiDM cliDM = new ClientiDM();
-            string lingua = Lingua;
-            string tipocliente = "0"; //Cliente standard per newsletter
+    //public void MemorizzaClientePerNewsletter(Cliente cli)
+    //{
+    //    try
+    //    {
+    //        //------------------------------------------------
+    //        //Memorizzo i dati nel cliente per la newsletter
+    //        //------------------------------------------------
+    //        ClientiDM cliDM = new ClientiDM();
+    //        string lingua = Lingua;
+    //        string tipocliente = "0"; //Cliente standard per newsletter
 
-            cli.DataNascita = System.DateTime.Now.Date;
-            cli.Lingua = lingua;
-            cli.id_tipi_clienti = tipocliente;
-            cli.Consenso1 = true;
-            cli.ConsensoPrivacy = true;
-            cli.Validato = true;
-            cli.Email = cli.Email.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
-            cli.Emailpec = cli.Emailpec.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
-            Cliente _tmp = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, cli.Email);
-            if ((_tmp != null && _tmp.Id_cliente != 0))
-                cli.Id_cliente = _tmp.Id_cliente;
-            cliDM.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref cli);
-        }
-        catch
-        { }
-    }
+    //        cli.DataNascita = System.DateTime.Now.Date;
+    //        cli.Lingua = lingua;
+    //        cli.id_tipi_clienti = tipocliente;
+    //        cli.Consenso1 = true;
+    //        cli.ConsensoPrivacy = true;
+    //        cli.Validato = true;
+    //        cli.Email = cli.Email.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+    //        cli.Emailpec = cli.Emailpec.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+    //        Cliente _tmp = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, cli.Email);
+    //        if ((_tmp != null && _tmp.Id_cliente != 0))
+    //            cli.Id_cliente = _tmp.Id_cliente;
+    //        cliDM.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref cli);
+    //    }
+    //    catch
+    //    { }
+    //}
 
     /// <summary>
     /// carica i dati dal form cliente e aggiona il database clienti se presenti clienti corrispondenti in anagrafica con mail coincidente
+    /// se non presente nel database inserisce il cliente nella tipologia 0
     /// </summary>
     /// <param name="cliente"></param>
-    private void CaricaDatiClienteDaForm(Cliente cliente)
+    private bool CaricaDatiClienteDaForm(Cliente cliente)
     {
+        bool ret = true;
         //MEMORIZZO I DATI DI SPEDIZIONE DI DETTAGLIO IN UN CLIENTE TEMPORANEO AD HOC CHE SERIALIZZO IN UN CAMPO CLIENTEcmd
-        Cliente clispediz = new Cliente(cliente);
+        Cliente clispediz = new Cliente();
         if (!string.IsNullOrEmpty(inpCaps.Value.Trim()))
             clispediz.Cap = inpCaps.Value;
         if (!string.IsNullOrEmpty(inpComuneS.Value.Trim()))
@@ -1302,7 +1302,6 @@ public partial class AspNetPages_Orderpage : CommonPage
         string cliserialized = Newtonsoft.Json.JsonConvert.SerializeObject(clispediz);
         cliente.Serialized = cliserialized; //Appoggio i dati di spedizione in Serialized del cliente !!!
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         //dati base cliente
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         cliente.CodiceNAZIONE = ddlNazione.SelectedValue;
@@ -1322,39 +1321,131 @@ public partial class AspNetPages_Orderpage : CommonPage
         cliente.CodicePROVINCIA = inpProvincia.Value;
         cliente.Cap = inpCap.Value;
         cliente.Telefono = inpTel.Value;
+        //////////////////////////////////////////////////////////////////////////////////////////////
 
+        //////////////////////////////////////////////////////////////////////////////////////////////
+        //RICARICAMENTO E VERIFICA PRESENZA UTENTE NEL DB E/O STATO LOGGATO
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //Qui procedo ad aggiornare i dati in TBL_CLIENTI con quelli inseriti nel form ( facendo un match sulla mail del cliente in tabella!! )
+        //Qui procedo ad aggiornare i dati in TBL_CLIENTI con quelli inseriti nel form
+        //( facendo un match sulla mail del cliente in tabella! oppure se loggato prendo il cliente per id )
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        ClienteCollection clifiltrati = new ClienteCollection();
         ClientiDM cliDM = new ClientiDM();
         Cliente clitmp = new Cliente();
         clitmp.Email = cliente.Email;
-        clitmp.id_tipi_clienti = ""; //ricerco su tutte le tipologie non su una sola
-        ClienteCollection clifiltrati = cliDM.CaricaClientiFiltrati(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, clitmp, true);
-        //clifiltrati = cliDM.GetLista(clitmp.Email, ""); 
-        //aggiornamento dati per clienti in archivio
-        foreach (Cliente c in clifiltrati)
+        //clitmp.id_tipi_clienti = ""; //ricerco su tutte le tipologie non su una sola
+        clitmp.id_tipi_clienti = "0"; //ricerco per email SOLO SULLA TIPOLOGIA CLIENTI 0 (ISCRITTO WEB )  
+
+        // cerco in anagrafica cliente con la mail/tipologia inserita
+        Cliente clienteinanagraficaperemail = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, clitmp.Email, clitmp.id_tipi_clienti);
+
+
+        if (User.Identity != null && !string.IsNullOrEmpty(User.Identity.Name)) //Cliente loggato
         {
-            Cliente ctmp = new Cliente(c);
-            ctmp.CodiceNAZIONE = cliente.CodiceNAZIONE;
-            ctmp.Nome = cliente.Nome;
-            ctmp.Cognome = cliente.Cognome;
-            ctmp.Email = cliente.Email;
-            ctmp.Emailpec = cliente.Emailpec;
-            ctmp.Pivacf = cliente.Pivacf;
-            ctmp.Indirizzo = cliente.Indirizzo;
-            ctmp.CodiceCOMUNE = cliente.CodiceCOMUNE;
-            ctmp.CodicePROVINCIA = cliente.CodicePROVINCIA;
-            ctmp.Cap = cliente.Cap;
-            ctmp.Telefono = cliente.Telefono;
-            ctmp.Serialized = cliente.Serialized; //Dati serializzati aggiuntivi
+            //PER PRIMA COSA SE LOGGATO PRENDO IL CLIENTE CORRISPONDENTE SE PRESENTE (IL CLEINTE LOGGATO E' PRIMARIO RISPETTO ALLA MAIL INSERITA!!!!!)
+            string idcliente = getidcliente(User.Identity.Name); //prendo l'id anagrafica associato al cliente loggato ( se disponibile )
+            Cliente cbyid = cliDM.CaricaClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idcliente); //prende il cliente per idcliente con qualsiasi tipologia questo avesse
+            if (cbyid == null || cbyid.Id_cliente == 0) //non presente cliente anagrafica associato alla login
+            {
+                //Utente loggato ma non ha nessun cliente associato (anomalia !) ( blocco l'ordine )
+                output.CssClass = "alert alert-danger"; output.Text = "Errore. Non trovato utenza associata alla login attuale, cambiare utente o registrarsi per procedere!"; //output.Text = references.ResMan("Common", Lingua, "txtPagamento").ToString();
+                return false;
+            }
+            else
+            {
+                //Presente altro cliente in anagrafica con quella mail/tipologia riportata non coincidente con l'anagrafica del cliente loggato !!!!!
+                if (clienteinanagraficaperemail != null && clienteinanagraficaperemail.Id_cliente != cbyid.Id_cliente)
+                {
+                    //Presente altro cliente in anagrafica con quella mail/tipologia inseritta nel form non coincidente con il cliente loggato !!!!!
+                    output.CssClass = "alert alert-danger"; output.Text = "Errore. La mail inserita è già in anagrafica associata ad altro utente, recuperare la login o inserire altra mail per procedere!";
+                    //output.Text = references.ResMan("Common", Lingua, "txterrconincidenzaemail").ToString();
+                    return false;
+                }
+                clifiltrati.Add(cbyid); //procedo con il cliente loggato
+            }
 
-            cliDM.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref ctmp);
-            cliente.Id_cliente = ctmp.Id_cliente;
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        else //cliente non loggato
+        {
 
+            // DA RAGIONARE QUESTO CASO NON LOGGATO CON O SENZA CLIENTE IN DB
+            //Valutare se presente il cliente con la mail richieste e non loggato ... che fare ( decidere se si vuole richiedere la login o procedo e aggiorno i dati in anagrafica a MENO
+            //if (clienteinanagraficaperemail != null && clienteinanagraficaperemail.Id_cliente != 0) //Presente in anagarfica cliente con la mail indicata e non loggato
+            //{
+            //}else
+            clifiltrati.Add(clienteinanagraficaperemail); //procedo con il cliente non loggato 
 
+        }
+
+#if false  //vecchia versione
+
+        if (User.Identity != null && !string.IsNullOrEmpty(User.Identity.Name) && (cbyid == null || cbyid.Id_cliente == 0)) //Utente loggato ma senza cliente associato
+        {
+            //Utente loggato ma non ha nessun cliente associato (anomalia !) .. decidere che fare ... ( per ora blocco l'ordine )
+            //Presente altoo cliente in anagrafica con quella mail/tipologia riportata non coincidente con il cliente loggato !!!!!
+            output.CssClass = "alert alert-danger"; output.Text = "Errore. Non trovato utenza associata alla login attuale, cambiare utente o registrarsi per procedere!"; //output.Text = references.ResMan("Common", Lingua, "txtPagamento").ToString();
+            return false;
+        }
+        if (cbyid == null || cbyid.Id_cliente == 0) //NON TROVATO CLIENTE IN BASE ALLA LOGIN O UTENTE NON LOGGATO ( faccio acquistare e inserisco/aggiorno il cliente )
+        {
+            // DA RAGIONARE QUESTO CASO NON LOGGATO CON O SENZA CLIENTE IN DB
+            //Valutare se presente il clinte con la mail richieste e non loggato ... che fare ( decidere se si vuole richiedere la logi o procedo e aggiorno i dati in anagrafica a MENO
+            //if (clienteinanagraficaperemail != null && clienteinanagraficaperemail.Id_cliente != 0) //Presente in anagarfica cliente con la mail indicata e non loggato
+            //{
+            //}else
+            clifiltrati.Add(clienteinanagraficaperemail); //procedo con il cliente non loggato 
+        }
+        else //PRESENTE cliente registrato e loggato 
+        {
+            //VERIFICA se presente un cliente con la mail inserita nel form che non è quello loggato
+            if (clienteinanagraficaperemail != null && clienteinanagraficaperemail.Id_cliente != cbyid.Id_cliente) //presente altro cliente con la mail inserita
+            {
+                //Presente altoo cliente in anagrafica con quella mail/tipologia inseritta nel form non coincidente con il cliente loggato !!!!!
+                output.CssClass = "alert alert-danger"; output.Text = "Errore. La mail inserita è già in anagrafica associata ad altro utente, recuperare la login o inserire altra mail per procedere!";
+                return false;
+            }
+            clifiltrati.Add(cbyid); //procedo con il cliente loggato
+        }
+
+#endif
+        //////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////
+
+        if (clifiltrati != null && clifiltrati.Count > 0) //trovato cliente corrispondente nel database da aggiornare ( aggiorno solo i campi specifici dal form acquisto )
+        {
+            //Su tutti i clienti trovati nel db aggiono i campi non modificando gli altri
+            foreach (Cliente c in clifiltrati)
+            {
+                Cliente ctmp = new Cliente(c);
+                ctmp.CodiceNAZIONE = cliente.CodiceNAZIONE;
+                ctmp.Nome = cliente.Nome;
+                ctmp.Cognome = cliente.Cognome;
+                ctmp.Email = cliente.Email;
+                ctmp.Emailpec = cliente.Emailpec;
+                ctmp.Pivacf = cliente.Pivacf;
+                ctmp.Indirizzo = cliente.Indirizzo;
+                ctmp.CodiceCOMUNE = cliente.CodiceCOMUNE;
+                ctmp.CodicePROVINCIA = cliente.CodicePROVINCIA;
+                ctmp.Cap = cliente.Cap;
+                ctmp.Telefono = cliente.Telefono;
+                ctmp.Serialized = cliente.Serialized; //Dati serializzati aggiuntivi
+                cliDM.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref ctmp);
+                cliente.Id_cliente = ctmp.Id_cliente;
+            }
+        }
+        else //se non TROVATO ALCUN cliente con quella mail nella tipologia cercata o nei clienti registrati nei profili accesso  
+        {
+            //MEMORIZZO CON LINGUA E CONSENSI ATTIVI PER NEWSLETTER E STORICIZZAZIONE CLIENTE
+            cliente.DataNascita = System.DateTime.Now.Date;
+            cliente.Lingua = Lingua;
+            cliente.Consenso1 = true;
+            cliente.ConsensoPrivacy = true;
+            cliente.Validato = true;
+            cliDM.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref cliente);
+        }
+        return ret;
     }
+
 
     protected string GeneraCodiceOrdine()
     {
@@ -1531,7 +1622,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         TestoMail += "<tr><td><br/>Metodo di pagamento:  " + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento).ToString() + " </td></tr>";
         //chiudo tabella e riga relativa
         TestoMail += "</table></td><tr/>";
-        TestoMail += "<tr><td><br/>L'utente è in attesa di essere ricontattato per confermare la disponibilità e per comunicargli i dettagli del pagamento.";
+        TestoMail += "<tr><td><br/>Contattare l'utente per la verifica del pagamento prescelto e le informazioni sulla spedizione e le tempistiche.";
         TestoMail += "</td></tr></table>";
 
         return TestoMail;
