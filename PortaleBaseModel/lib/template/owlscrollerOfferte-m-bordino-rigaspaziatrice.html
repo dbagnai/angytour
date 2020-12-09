@@ -1,0 +1,46 @@
+﻿ <style>
+     .noimgovercontainer:hover:after {
+         background: none !important;
+     }
+ </style>
+    <!-- Scroller  -->
+<div style="padding-bottom: 20px; display: none">
+
+    <a class="owl-btn prev-v2 position-absolute" style="z-index: 2; top: 50%; margin-top: -40px; left: 0; margin-left: -50px;" id="replaceidprev"><i class="fa fa-chevron-left tx-primary-color"></i></a>
+    <a class="owl-btn next-v2 position-absolute" style="z-index: 2; top: 50%; margin-top: -40px; right: 0; margin-right: -50px;" id="replaceidnext"><i class="fa fa-chevron-right tx-primary-color"></i></a>
+
+    <div class="row py-0 text-center squarevariable" style="min-height: 400px;">
+        <div class="col-md-12 col-sm-12 col-12 px-0">
+
+
+            <div class="owl-carousel-v1 owl-work-v1 margin-bottom-40">
+                <div class="owl-slider-v2" id="replaceid">
+                    <div class="item box mb-4 mx-3 mx-sm-2">
+                        <div class="card border-tipo2 rounded border" style="overflow: hidden;">
+                            <div style="border: none; box-shadow: none" class="feature">
+                                <!--<a target="_self" href="link" class="bind" title="titolo" mybind="Id" style="overflow:hidden; margin-bottom:-0.3rem !Important">-->
+                                    <div class="work-image noimgovercontainer m-0" style="max-height:300px;overflow:hidden">
+                                        <img src="/images/dummylogo.png" alt="" class="bind" mybind="Id" />
+                                    </div>
+                                <!--</a>-->
+                                <div class="body-banner-slider mx-3 mb-4 pt-4 border-top" style="height:217px;">
+                                    <h3 class="h3-body-title-1 mb-2 title-banner-slider">
+                                        <!--<a class="bind title-banner-slider" target="_self" href="link" title="titolo" mybind="Id">-->
+                                            <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                                        <!--</a>-->
+                                    </h3>
+                                    <!--<a class="bind subtitle-banner-slider mt-0" target="_self" href="link" title="titolo" mybind="Id">-->
+                                        <p class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style="font-size:1.3rem"></p>
+                                    <!--</a>-->
+                                    <p style="font-size:1rem" class="bind" mybind="Id" myvalue="descrizione" myvalue1="175" format="formatdescrizione"></p>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
