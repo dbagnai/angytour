@@ -66,10 +66,13 @@ namespace WelcomeLibrary.UF
         public bool VerificaPresenzaUtente(string username)
         {
             bool ret = false;
-            MembershipUserCollection mucoll = Membership.FindUsersByName(username);
-            if (mucoll != null && mucoll.Count > 0)
+            if (!string.IsNullOrEmpty(username))
             {
-                ret = true;
+                MembershipUserCollection mucoll = Membership.FindUsersByName(username);
+                if (mucoll != null && mucoll.Count > 0)
+                {
+                    ret = true;
+                }
             }
             return ret;
         }

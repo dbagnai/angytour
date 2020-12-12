@@ -1287,7 +1287,9 @@ public partial class AspNetPages_Orderpage : CommonPage
     private bool CaricaDatiClienteDaForm(Cliente cliente)
     {
         bool ret = true;
-        //MEMORIZZO I DATI DI SPEDIZIONE DI DETTAGLIO IN UN CLIENTE TEMPORANEO AD HOC CHE SERIALIZZO IN UN CAMPO CLIENTEcmd
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //MEMORIZZO I DATI DI SPEDIZIONE DI DETTAGLIO IN UN CLIENTE TEMPORANEO AD HOC CHE SERIALIZZO IN UN CAMPO CLIENTE
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Cliente clispediz = new Cliente();
         if (!string.IsNullOrEmpty(inpCaps.Value.Trim()))
             clispediz.Cap = inpCaps.Value;
@@ -1299,10 +1301,10 @@ public partial class AspNetPages_Orderpage : CommonPage
             clispediz.Indirizzo = inpIndirizzoS.Value;
         if (!string.IsNullOrEmpty(inpTelS.Value.Trim()))
             clispediz.Telefono = inpTelS.Value;
-        string cliserialized = Newtonsoft.Json.JsonConvert.SerializeObject(clispediz);
-        cliente.Serialized = cliserialized; //Appoggio i dati di spedizione in Serialized del cliente !!!
+        string datispedizione = Newtonsoft.Json.JsonConvert.SerializeObject(clispediz);
+        cliente.Serialized = datispedizione; //Appoggio i dati di spedizione in Serialized del cliente !!!
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //dati base cliente
+        //Dati base cliente da form
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         cliente.CodiceNAZIONE = ddlNazione.SelectedValue;
         cliente.Cognome = inpCognome.Value;
@@ -1321,28 +1323,30 @@ public partial class AspNetPages_Orderpage : CommonPage
         cliente.CodicePROVINCIA = inpProvincia.Value;
         cliente.Cap = inpCap.Value;
         cliente.Telefono = inpTel.Value;
-        //////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //////////////////////////////////////////////////////////////////////////////////////////////
         //RICARICAMENTO E VERIFICA PRESENZA UTENTE NEL DB E/O STATO LOGGATO
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //Qui procedo ad aggiornare i dati in TBL_CLIENTI con quelli inseriti nel form
-        //( facendo un match sulla mail del cliente in tabella! oppure se loggato prendo il cliente per id )
         ///////////////////////////////////////////////////////////////////////////////////////////////////
+        usermanager USM = new usermanager();
         ClienteCollection clifiltrati = new ClienteCollection();
         ClientiDM cliDM = new ClientiDM();
         Cliente clitmp = new Cliente();
+        string tipologiaclientiecommece = "0"; //LA TIPOLOGIA USATA PER I CLIENTI ECOMMERCE
         clitmp.Email = cliente.Email;
+        clitmp.id_tipi_clienti = tipologiaclientiecommece; //ricerco per email SOLO SULLA TIPOLOGIA CLIENTI SPECIFICATA  
         //clitmp.id_tipi_clienti = ""; //ricerco su tutte le tipologie non su una sola
-        clitmp.id_tipi_clienti = "0"; //ricerco per email SOLO SULLA TIPOLOGIA CLIENTI 0 (ISCRITTO WEB )  
 
+        ////////////////////////////////////////////////////
         // cerco in anagrafica cliente con la mail/tipologia inserita
+        ////////////////////////////////////////////////////
         Cliente clienteinanagraficaperemail = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, clitmp.Email, clitmp.id_tipi_clienti);
-
-
-        if (User.Identity != null && !string.IsNullOrEmpty(User.Identity.Name)) //Cliente loggato
+        bool generazioneutente = false;
+        if (User.Identity != null && !string.IsNullOrEmpty(User.Identity.Name)) //UTENTE MEMBERSHIP LOGGATO   
         {
-            //PER PRIMA COSA SE LOGGATO PRENDO IL CLIENTE CORRISPONDENTE SE PRESENTE (IL CLEINTE LOGGATO E' PRIMARIO RISPETTO ALLA MAIL INSERITA!!!!!)
+            //PER PRIMA PRENDO IL CLIENTE CORRISPONDENTE PER L'UTENTE LOGGATO SE PRESENTE
+            //(IL CLIENTE LOGGATO E' PRIMARIO RISPETTO AL QUELLO ASSOCIATO ALLA MAIL INSERITA!!)
             string idcliente = getidcliente(User.Identity.Name); //prendo l'id anagrafica associato al cliente loggato ( se disponibile )
             Cliente cbyid = cliDM.CaricaClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idcliente); //prende il cliente per idcliente con qualsiasi tipologia questo avesse
             if (cbyid == null || cbyid.Id_cliente == 0) //non presente cliente anagrafica associato alla login
@@ -1353,64 +1357,36 @@ public partial class AspNetPages_Orderpage : CommonPage
             }
             else
             {
-                //Presente altro cliente in anagrafica con quella mail/tipologia riportata non coincidente con l'anagrafica del cliente loggato !!!!!
                 if (clienteinanagraficaperemail != null && clienteinanagraficaperemail.Id_cliente != cbyid.Id_cliente)
                 {
-                    //Presente altro cliente in anagrafica con quella mail/tipologia inseritta nel form non coincidente con il cliente loggato !!!!!
-                    output.CssClass = "alert alert-danger"; output.Text = "Errore. La mail inserita è già in anagrafica associata ad altro utente, recuperare la login o inserire altra mail per procedere!";
-                    //output.Text = references.ResMan("Common", Lingua, "txterrconincidenzaemail").ToString();
+                    //Presente altro cliente in anagrafica con quella mail/tipologia inserita nel form non coincidente con il cliente loggato !!!!!
+                    output.CssClass = "alert alert-danger";
+                    //output.Text = "Errore. La mail inserita è già in anagrafica associata ad altro utente, recuperare la login o inserire altra mail per procedere!";
+                    output.Text = references.ResMan("Common", Lingua, "txterrconincidenzaemail").ToString();
                     return false;
                 }
-                clifiltrati.Add(cbyid); //procedo con il cliente loggato
+                clifiltrati.Add(cbyid); //procedo aggiornando il cliente associato a quello loggato per l'aggiornamento dei dati dal form acquisto
             }
 
         }
-        else //cliente non loggato
+        else  //UTENTE NON LOGGATO -> AGGIORNAMENTO + VERIFICA GENERAZIONE UTENTE MEMBERSHIP
         {
-
-            // DA RAGIONARE QUESTO CASO NON LOGGATO CON O SENZA CLIENTE IN DB
-            //Valutare se presente il cliente con la mail richieste e non loggato ... che fare ( decidere se si vuole richiedere la login o procedo e aggiorno i dati in anagrafica a MENO
-            //if (clienteinanagraficaperemail != null && clienteinanagraficaperemail.Id_cliente != 0) //Presente in anagarfica cliente con la mail indicata e non loggato
-            //{
-            //}else
-            clifiltrati.Add(clienteinanagraficaperemail); //procedo con il cliente non loggato 
-
-        }
-
-#if false  //vecchia versione
-
-        if (User.Identity != null && !string.IsNullOrEmpty(User.Identity.Name) && (cbyid == null || cbyid.Id_cliente == 0)) //Utente loggato ma senza cliente associato
-        {
-            //Utente loggato ma non ha nessun cliente associato (anomalia !) .. decidere che fare ... ( per ora blocco l'ordine )
-            //Presente altoo cliente in anagrafica con quella mail/tipologia riportata non coincidente con il cliente loggato !!!!!
-            output.CssClass = "alert alert-danger"; output.Text = "Errore. Non trovato utenza associata alla login attuale, cambiare utente o registrarsi per procedere!"; //output.Text = references.ResMan("Common", Lingua, "txtPagamento").ToString();
-            return false;
-        }
-        if (cbyid == null || cbyid.Id_cliente == 0) //NON TROVATO CLIENTE IN BASE ALLA LOGIN O UTENTE NON LOGGATO ( faccio acquistare e inserisco/aggiorno il cliente )
-        {
-            // DA RAGIONARE QUESTO CASO NON LOGGATO CON O SENZA CLIENTE IN DB
-            //Valutare se presente il clinte con la mail richieste e non loggato ... che fare ( decidere se si vuole richiedere la logi o procedo e aggiorno i dati in anagrafica a MENO
-            //if (clienteinanagraficaperemail != null && clienteinanagraficaperemail.Id_cliente != 0) //Presente in anagarfica cliente con la mail indicata e non loggato
-            //{
-            //}else
-            clifiltrati.Add(clienteinanagraficaperemail); //procedo con il cliente non loggato 
-        }
-        else //PRESENTE cliente registrato e loggato 
-        {
-            //VERIFICA se presente un cliente con la mail inserita nel form che non è quello loggato
-            if (clienteinanagraficaperemail != null && clienteinanagraficaperemail.Id_cliente != cbyid.Id_cliente) //presente altro cliente con la mail inserita
+            if (clienteinanagraficaperemail != null && clienteinanagraficaperemail.Id_cliente != 0) //Presente in anagrafica cliente con la mail indicata e ma utente attuale non loggato
             {
-                //Presente altoo cliente in anagrafica con quella mail/tipologia inseritta nel form non coincidente con il cliente loggato !!!!!
-                output.CssClass = "alert alert-danger"; output.Text = "Errore. La mail inserita è già in anagrafica associata ad altro utente, recuperare la login o inserire altra mail per procedere!";
-                return false;
+                clifiltrati.Add(clienteinanagraficaperemail);//aggiorno il cliente caricato per email  
+
+                //DEVO CERCARE SE IL CLIENTE ASSOCIATO HA UN UTENTE CORRISPONDENTE NEL MEMBERSHIP IN CASO NEGATIVO INSERISCO L'UTENTE NUOVO
+                string username = USM.GetUsernamebycamporofilo("idCliente", clienteinanagraficaperemail.Id_cliente.ToString());
+                if (string.IsNullOrEmpty(username)) //non presente utente associato al cliente! -> lo devo generare ex novo
+                    generazioneutente = true;
             }
-            clifiltrati.Add(cbyid); //procedo con il cliente loggato
+            //Se non presente utente con la mail/tipologia indicata viene inserito e genero l'utente corrispondente
+            else generazioneutente = true;
         }
-
-#endif
+ 
         //////////////////////////////////////////////////////////////////////////////////////////////
+        //INSERIMENTO O AGGIORNAMENTO CLIENTE ANAGRAFICA
         //////////////////////////////////////////////////////////////////////////////////////////////
-
         if (clifiltrati != null && clifiltrati.Count > 0) //trovato cliente corrispondente nel database da aggiornare ( aggiorno solo i campi specifici dal form acquisto )
         {
             //Su tutti i clienti trovati nel db aggiono i campi non modificando gli altri
@@ -1433,7 +1409,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                 cliente.Id_cliente = ctmp.Id_cliente;
             }
         }
-        else //se non TROVATO ALCUN cliente con quella mail nella tipologia cercata o nei clienti registrati nei profili accesso  
+        else //NON TROVATO ALCUN cliente con quella mail nella tipologia cercata  -> lo inserisco NUOVO nel database 
         {
             //MEMORIZZO CON LINGUA E CONSENSI ATTIVI PER NEWSLETTER E STORICIZZAZIONE CLIENTE
             cliente.DataNascita = System.DateTime.Now.Date;
@@ -1441,8 +1417,43 @@ public partial class AspNetPages_Orderpage : CommonPage
             cliente.Consenso1 = true;
             cliente.ConsensoPrivacy = true;
             cliente.Validato = true;
+            cliente.id_tipi_clienti = tipologiaclientiecommece; // tipologia impostata per ecommerce
             cliDM.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref cliente);
         }
+
+#if true //da abilitare per la gestione della generazione delle utenze per il sistema ecommerce
+
+        //////////////////////////////////////////////////////////////////////////////////////////////
+        //SE richiesto GENERIAMO L'UTENTE NEL MEMBERSHIP E INVIAMO UNA MAIL DI CONFERMA AL CLIENTE CON I DATI DI REGISTRAZIONE
+        //////////////////////////////////////////////////////////////////////////////////////////////
+         if (generazioneutente)
+        {
+            string password = "";
+            string username = cliente.Id_cliente.ToString() + "-" + cliente.Email;
+            if (USM.VerificaPresenzaUtente(username)) //controllo se utente esistente -> devo avvisare che presente!!!
+            {
+                output.Text = "Utente " + username + " già registrato! Fare recupero della password o contattate il supporto per il recupero dell'acesso!";
+                //devo avvisare l'utente!
+            }
+            else //utente da creare ex novo
+            {
+                USM.CreaUtente(cliente.Id_cliente.ToString(), ref username, ref password, "Operatore");
+                ///////////////////////////////////////////////////////////
+                //INVIA MAIL REGISTRAZIONE ALL'UTENTE
+                string oggetto = references.ResMan("Common", Lingua, "txtoggettocreateuser").ToString();
+                oggetto += " " + Nome;
+                string testo = references.ResMan("Common", Lingua, "txttestocreateuser").ToString();
+                testo = testo.Replace("|NOME|", Nome);
+                testo = testo.Replace("|CREDENZIALI|", password);
+                testo = testo.Replace("|LOGINPAGE|", "<a href=" + ReplaceAbsoluteLinks(references.ResMan("Common", "I", "linklogin")) + ">" + ReplaceAbsoluteLinks(references.ResMan("Common", "I", "linklogin")) + "</a>");
+                testo += references.ResMan("Common", "I", "txtFooter").ToString();
+                Utility.invioMailGenerico(Nome, Email, oggetto, testo, cliente.Email, cliente.Cognome, null, "", true, Server);
+                ///////////////////////////////////////////////////////////
+            }
+        }
+        //////////////////////////////////////////////////////////////////////////////////////////////
+
+#endif
         return ret;
     }
 
