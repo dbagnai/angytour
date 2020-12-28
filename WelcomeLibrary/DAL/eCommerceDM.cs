@@ -1656,7 +1656,7 @@ namespace WelcomeLibrary.DAL
                     if (listaarray != null && listaarray.Length > 0)
                     {
                         if (!queryfilter.ToLower().Contains("where"))
-                            queryfilter += " WHEREJSON_VALID(jsonfield1) and json_extract(jsonfield1, '$.idscaglione')  in (    ";
+                            queryfilter += " WHERE JSON_VALID(jsonfield1) and json_extract(jsonfield1, '$.idscaglione')  in (    ";
                         else
                             queryfilter += " WHERE JSON_VALID(jsonfield1) and json_extract(jsonfield1, '$.idscaglione')  in (      ";
                         foreach (string codice in listaarray)
