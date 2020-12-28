@@ -28,7 +28,19 @@ namespace WelcomeLibrary.DAL
 
             return _tmpdate;
         }
+        private static void EnableJSON(SQLiteConnection conn, bool useJSON)
+        {
+            if (useJSON)
+            {
+                //string extpath = Hosting.OSPath( Hosting.WebRootDir + "\\SQLite.Interop.dll");//  "D:\\ORC\\WebMouse\\P4ALL\\progetto4all\\CorePortaleBaseModel\\SQLite.Interop.dll";
+                ////   WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\bin\\SQLite.Interop.dll"
+                //string extpath = "D:\\ORC\\WebMouse\\P4ALL\\progetto4all\\CorePortaleBaseModel\\SQLite.Interop.dll";
+                //string extpath = WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\bin\\SQLite.Interop.dll";
+                conn.EnableExtensions(true);
+                conn.LoadExtension("SQLite.Interop.dll", "sqlite3_json_init");
+            }
 
+        }
 
         /// <summary>
         /// Apre un reader tramite una connessione oledb (per sqllite)
@@ -59,11 +71,12 @@ namespace WelcomeLibrary.DAL
         /// <param name="parms"></param>
         /// <param name="Conn"></param>
         /// <returns></returns>
-        public static SQLiteDataReader GetReaderListOle(string query, List<SQLiteParameter> parms, string Conn)
+        public static SQLiteDataReader GetReaderListOle(string query, List<SQLiteParameter> parms, string Conn, bool usejson = false)
         {
             string connessione = System.Configuration.ConfigurationManager.ConnectionStrings[Conn].ConnectionString;
             SQLiteConnection conn = new SQLiteConnection(connessione);
             conn.Open();
+            EnableJSON(conn, usejson);
 
             SQLiteCommand cmd = new SQLiteCommand(query, conn);
 

@@ -1045,7 +1045,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     {
                         File.Delete(pathDestinazione + "\\" + NomeCorretto);
                     }
-                    if (fileupload.PostedFile.ContentType == "image/jpeg" || fileupload.PostedFile.ContentType == "image/pjpeg"   || fileupload.PostedFile.ContentType == "image/png")
+                    if (fileupload.PostedFile.ContentType == "image/jpeg" || fileupload.PostedFile.ContentType == "image/pjpeg"  || fileupload.PostedFile.ContentType == "image/png")
                     {
                         bool ridimensiona = true;
                         //RIDIMENSIONO E FACCIO L'UPLOAD DELLA FOTO!!!
@@ -1183,7 +1183,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     else
                     {
                         //Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                        if (UploadFoto.PostedFile.ContentType == "image/jpeg" || UploadFoto.PostedFile.ContentType == "image/pjpeg"  || UploadFoto.PostedFile.ContentType == "image/png")
+                        if (UploadFoto.PostedFile.ContentType == "image/jpeg" || UploadFoto.PostedFile.ContentType == "image/pjpeg" || UploadFoto.PostedFile.ContentType == "image/gif" || UploadFoto.PostedFile.ContentType == "image/png")
                         {
                             int maxheight = 800;
                             int maxwidth = 1000;

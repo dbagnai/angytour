@@ -24,6 +24,11 @@
     });
 })(jQuery);
 
+if (typeof String.prototype.trim != 'function') { // detect native implementation
+    String.prototype.trim = function () {
+        return this.replace(/^\s+/, '').replace(/\s+$/, '');
+    };
+}
 
 $.fn.isOnScreen = function () {
     var win = $(window);

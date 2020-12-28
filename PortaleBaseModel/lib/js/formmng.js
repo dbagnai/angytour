@@ -39,12 +39,12 @@ function ConfirmValidationFormGeneral(btnid, serveroperation) {
     ////////////////////////////////////////////////////////////////
     /////ABILITARE PER CONTROLLO CAPTCHA
     ////////////////////////////////////////////////////////////////
-    //var response = grecaptcha.getResponse();
-    //if (response.length == 0)  //reCaptcha not verified
-    //{
-    //    out1.innerHTML = localmessagegeneral.captcha;
-    //    return false;
-    //}
+    var response = grecaptcha.getResponse();
+    if (response.length == 0)  //reCaptcha not verified
+    {
+        out1.innerHTML = localmessagegeneral.captcha;
+        return false;
+    }
     //else {
     if (true) { //fare controllo di validazione ...
         /*do work and go for postback*/
@@ -123,6 +123,7 @@ function getcontactdataformgeneral(serveroperation, contactdatas, btnid, callbac
     var contactdatas = contactdatas || {};
     contactdatas.idofferta = idofferta;
 
+    contactdatas.cognome = $("[id$='cognome" + (btnid).id + "']").val();
     contactdatas.nome = $("[id$='nome" + (btnid).id + "']").val();
     contactdatas.ragsoc = $("[id$='ragsoc" + (btnid).id + "']").val();
     contactdatas.piva = $("[id$='piva" + (btnid).id + "']").val();
@@ -156,6 +157,7 @@ function getcontactdataformgeneral(serveroperation, contactdatas, btnid, callbac
     if ($("[id$='comunes" + (btnid).id + "']").length != 0)
         contactdatas.comunes = $("[id$='comunes" + (btnid).id + "']")[0].value;
     contactdatas.tipologia = localmessagegeneral.tipologia;
+    contactdatas.generautente = localmessagegeneral.generautente;
     if ($("[id$='chkprivacy" + (btnid).id + "']").length != 0)
         contactdatas.consenso = $("[id$='chkprivacy" + (btnid).id + "']")[0].checked;
     if ($("[id$='chkprivacy1" + (btnid).id + "']").length != 0)
@@ -163,7 +165,7 @@ function getcontactdataformgeneral(serveroperation, contactdatas, btnid, callbac
     if ($("[id$='chkprivacy2" + (btnid).id + "']").length != 0)
         contactdatas.consenso2 = $("[id$='chkprivacy2" + (btnid).id + "']")[0].checked;
     contactdatas.lingua = lng;
-    contactdatas.tipocontenuto = "campionatura"; //campionatura o altro che voglio specificare
+    contactdatas.tipocontenuto = "iscrizione"; //campionatura o altro che voglio specificare
     contactdatas.tipo = "post";
 
     var validated = true;
@@ -176,6 +178,7 @@ function getcontactdataformgeneral(serveroperation, contactdatas, btnid, callbac
         if (contactdatas.indirizzo == '') { validated = false; $("[id$='indirizzo" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='indirizzo" + (btnid).id + "']").css("borderColor", "white"); };
         if (contactdatas.ragsoc == '') { validated = false;; $("[id$='ragsoc" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='ragsoc" + (btnid).id + "']").css("borderColor", "white"); };
         if (contactdatas.nome == '') { validated = false; $("[id$='nome" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='nome" + (btnid).id + "']").css("borderColor", "white"); };
+        if (contactdatas.cognome == '') { validated = false; $("[id$='cognome" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='cognome" + (btnid).id + "']").css("borderColor", "white"); };
         if (contactdatas.piva == '') { validated = false; $("[id$='piva" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='piva" + (btnid).id + "']").css("borderColor", "white"); };
         if (contactdatas.sdi == '') { validated = false; $("[id$='sdi" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='sdi" + (btnid).id + "']").css("borderColor", "white"); };
         if (contactdatas.cap == '') { validated = false; $("[id$='cap" + (btnid).id + "']").css("borderColor", "red"); } else { $("[id$='cap" + (btnid).id + "']").css("borderColor", "white"); };

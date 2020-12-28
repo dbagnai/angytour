@@ -154,6 +154,7 @@ public class CommonPage : Page
     }
 
 
+
     /// <summary>
     ///  Ritorna un contenuto renderizzato da template come stringa html
     /// </summary>
@@ -271,7 +272,7 @@ public class CommonPage : Page
             }
         }
 
-#if true
+#if false
         /////////////////////////
         //////MINIFICAZIONE HTML
         /////////////////////////
@@ -282,8 +283,9 @@ public class CommonPage : Page
         nfset.ShortBooleanAttribute = false;
         nfset.RemoveInvalidClosingTags = false;
         nfset.RemoveQuotedAttributes = false;
+        //nfset.MinifyJs = false;
         if (!(IsPostBack || IsCallback)) //se vuoi evitare manipolazione nei post o callback ( per updatepanel)
-            html = NUglify.Uglify.Html(html, nfset).Code; 
+            html = NUglify.Uglify.Html(html, nfset).Code;
 #endif
         // da salvare l'html per la cache in corrispondenza dell' Request.RawUrl
 
@@ -761,7 +763,7 @@ public class CommonPage : Page
             try
             {
                 ret = "<b>" + references.ResMan("basetext", Lingua, "formtesto" + key) + ": " + "</b>";
-                Dictionary<string, string> dic = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(item.ToString());
+                Dictionary<string, object> dic = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(item.ToString());
                 if (dic != null && dic.ContainsKey(key))
                     ret += dic[key];
                 else
@@ -772,7 +774,7 @@ public class CommonPage : Page
         return ret;
     }
 
-    public static string VisualizzaCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, string codiceordine, bool nofoto = false, string Lingua = "I", bool serializeddatas = false, bool perstampa = false)
+    public static string VisualizzaCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, string codiceordine, bool nofoto = false, string Lingua = "I", bool serializeddatas = false, bool perstampa = false, string username = "")
     {
         string sessionid = "";
         string trueIP = "";
@@ -780,6 +782,7 @@ public class CommonPage : Page
         StringBuilder sb = new StringBuilder();
         //sb.Append(codiceordine);
         eCommerceDM ecmDM = new eCommerceDM();
+        offerteDM offDM = new offerteDM();
         CarrelloCollection carrello = new CarrelloCollection();
         if (codiceordine != "")
         {
@@ -797,6 +800,7 @@ public class CommonPage : Page
                 // da fare <li>  contenuto da prendere sotto  </li>
                 sb.Append("<li style=\"position:relative;border-bottom:1px solid #ddd\">");
                 string linkofferta = "";
+                string linkoffertaadmin = "";
                 string testoofferta = "";
                 string imgofferta = "";
                 string titoloofferta = "";
@@ -806,12 +810,14 @@ public class CommonPage : Page
                     {
                         if (c.Offerta.DenominazioneI != null)
                         {
-                            //linkofferta = CommonPage.ReplaceAbsoluteLinks(CommonPage.CreaLinkRoutes(null, false, Lingua, CommonPage.CleanUrl(c.Offerta.UrltextforlinkbyLingua(Lingua)), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, ""));
                             linkofferta = CommonPage.ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(c.Offerta.UrltextforlinkbyLingua(Lingua)), c.Offerta.Id.ToString(), c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl));
+
+                            linkoffertaadmin = "/AreaContenuti/GestioneProdotti.aspx?CodiceTipologia=" + c.Offerta.CodiceTipologia + "&id_prodotto=" + c.Offerta.Id.ToString();
 
                             testoofferta = CommonPage.CleanInput(CommonPage.ConteggioCaratteri(c.Offerta.DenominazioneI, 300, true));
                             imgofferta = CommonPage.ReplaceAbsoluteLinks(filemanage.ComponiUrlAnteprima(c.Offerta.FotoCollection_M.FotoAnteprima, c.Offerta.CodiceTipologia, c.Offerta.Id.ToString()));
-                            titoloofferta = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(c.Offerta.DenominazioneI);
+                            //titoloofferta = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(c.Offerta.DenominazioneI);
+                            titoloofferta = offDM.estraititolo(c.Offerta, Lingua);
                         }
                     }
                     catch { }
@@ -861,7 +867,6 @@ public class CommonPage : Page
                     sb.Append(" <p class=\"product-name\" style=\"\">");
                     sb.Append(titoloofferta);
                     sb.Append(" </p>");
-
                 }
 
                 //sb.Append(" <p class=\"product-calc muted\">");
@@ -904,9 +909,37 @@ public class CommonPage : Page
                 }
                 #endregion
 
+                //////////////////////////////////
+                //INSERIMENTO DATI PER SCAGLIONI
+                //////////////////////////////////
+                string prezzoscaglione = (String)eCommerceDM.Selezionadajson(c.jsonfield1, "prezzo", Lingua);
+                //string datapartenza = string.Format("{0:dd/MM/yyyy}", eCommerceDM.Selezionadajson(c.jsonfield1, "datapartenza", Lingua));
+                //string dataritorno = string.Format("{0:dd/MM/yyyy}", eCommerceDM.Selezionadajson(c.jsonfield1, "dataritorno", Lingua));
+                string datapartenza = Utility.reformatdatetimestring((string)eCommerceDM.Selezionadajson(c.jsonfield1, "datapartenza", Lingua));
+                string dataritorno = Utility.reformatdatetimestring((string)eCommerceDM.Selezionadajson(c.jsonfield1, "dataritorno", Lingua));
+                string idscaglione = (String)eCommerceDM.Selezionadajson(c.jsonfield1, "idscaglione", Lingua);
+                try
+                {
+                    Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>((String)eCommerceDM.Selezionadajson(c.jsonfield1, "scaglione", Lingua));
+                }
+                catch { }
+                if (!string.IsNullOrEmpty(idscaglione) || !string.IsNullOrEmpty(datapartenza))
+                {
+                    sb.Append(" <p class=\"product-categories muted\">");
+                    if (!string.IsNullOrEmpty(datapartenza))
+                        sb.Append("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglionedata") + " </b>" + datapartenza + "<br/>");
+                    if (!string.IsNullOrEmpty(idscaglione))
+                        sb.Append("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglionedataritorno") + " </b>" + dataritorno + "<br/>");
+                    if (!string.IsNullOrEmpty(idscaglione))
+                        sb.Append("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglioneid") + " </b>" + idscaglione);
+                    sb.Append(" </p>");
+                }
+
+                //////////////////////////////////
                 //CARATTERISTICHE CARRELLO IN BASE ALLE PROPRIETA IN jsonfield1
-                string valore1 = eCommerceDM.Selezionadajson(c.jsonfield1, "Caratteristica1", Lingua);
-                string valore2 = eCommerceDM.Selezionadajson(c.jsonfield1, "Caratteristica2", Lingua);
+                //////////////////////////////////
+                string valore1 = (String)eCommerceDM.Selezionadajson(c.jsonfield1, "Caratteristica1", Lingua);
+                string valore2 = (String)eCommerceDM.Selezionadajson(c.jsonfield1, "Caratteristica2", Lingua);
                 if (!string.IsNullOrEmpty(valore1) || !string.IsNullOrEmpty(valore2))
                 {
                     sb.Append(" <p class=\"product-categories muted\">");
@@ -919,6 +952,9 @@ public class CommonPage : Page
                     sb.Append(" </p>");
                 }
 
+                //////////////////////////////////
+                //CARATTERISTICHE PERIODO DA / A
+                //////////////////////////////////
                 if (c.Datastart != null && c.Dataend != null)
                 {
                     sb.Append(" <p class=\"product-categories muted\">");
@@ -926,8 +962,9 @@ public class CommonPage : Page
                     sb.Append(references.ResMan("Common", Lingua, "formtestoperiodoa") + ": " + "</b>" + string.Format("{0:dd/MM/yyyy}", c.Dataend));
                     sb.Append(" </p>");
                 }
-                string valore3 = eCommerceDM.Selezionadajson(c.jsonfield1, "adulti", Lingua);
-                string valore4 = eCommerceDM.Selezionadajson(c.jsonfield1, "bambini", Lingua);
+                //CARATTERISTICHE ADULTI BAMBINI
+                string valore3 = (String)eCommerceDM.Selezionadajson(c.jsonfield1, "adulti", Lingua);
+                string valore4 = (String)eCommerceDM.Selezionadajson(c.jsonfield1, "bambini", Lingua);
                 if (!string.IsNullOrEmpty(valore3) || !string.IsNullOrEmpty(valore4))
                 {
                     sb.Append(" <p class=\"product-categories muted\">");
@@ -942,14 +979,30 @@ public class CommonPage : Page
                 //sb.Append(TestoSezione(c.Offerta.CodiceTipologia));
                 //sb.Append(" </div>");
 
+                //////////////////////////////////
+                //PREZZO
+                //////////////////////////////////
                 sb.Append(" <p class=\"product-categories muted product-price\" ");
                 if (!perstampa)
-                    sb.Append(" style =\"font-size:1rem; color:#fff; padding:8px; text-align:center;\"");
+                    sb.Append(" style =\"font-size:1rem; color:#fff; text-align:center;\"");
                 sb.Append(">");
                 sb.Append(c.Numero + "&times;" + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { c.Prezzo }) + " €");
                 sb.Append(" </p>");
 
-
+                if (!string.IsNullOrEmpty(username))
+                {
+                    usermanager USM = new usermanager();
+                    if (USM.ControllaRuolo(username, "GestorePortale") || USM.ControllaRuolo(username, "WebMaster"))
+                    {
+                        
+                        sb.Append("<a target=\"_blank\"   href=\"" +
+                               linkoffertaadmin
+                                  + "\"  class=\"product-thumb pull-left\" style=\"margin:0; border:none;\"  >");
+                        sb.Append("link admin");
+                        sb.Append(" </a>");
+                        sb.Append(" <div class=\"clearfix\"></div>");
+                    }
+                }
 
                 sb.Append(" </div>");
                 sb.Append(" </li>");
@@ -1002,13 +1055,13 @@ public class CommonPage : Page
             else
                 ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, null, null, 0, "", idcarrello); //forzo di caricare il carrello solo per idcarrello e non per prodotto in modo da consentire righe carrello multiple per l stesso prodotto!!!!
 
+            //se passato idcarrello l'elemento è unico per forza in quanto viene passato l'id del rigo di carrello
             if (ColItem != null && ColItem.Count > 0)
             {
                 Item = ColItem[0]; //SUPPONENDO CHE PER UN CERTO idprodotto/sdcombinato ci sia solo un elemento a carrello
-
-                //se la richiesta di caricamento del rigo era per idcarrello   -> aggiorno l'idprodotto
+                //se la richiesta di caricamento del rigo era per idcarrello -> aggiorno l'idprodotto
                 idprodotto = Item.id_prodotto;
-                //se la richiesta di caricamento del rigo era per idcarrello   -> aggiorno il selettore per le caratteristiche
+                //se la richiesta di caricamento del rigo era per idcarrello -> aggiorno il selettore per le caratteristiche
                 idcombinato = Item.Campo2;
             }
 
@@ -1095,10 +1148,71 @@ public class CommonPage : Page
                 }
             }
 
+#if true
+            //METTO UN controllo per evitare l'aggiunta di viaggi/scaglioni diversi nel carrello per avere la gestione unica degli acconti/saldi e non mescolarli
+            //VERIFICO  elemento dal carrello e facendo il controllo sull'idscaglione che deve essere uno solo tra tutti i righi a carrello
+            //inoltre controllo se lo stato di conferma dello scaglione è tale da permetter l'inserimento
+            string idscaglionedajson = (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(((!string.IsNullOrEmpty(jsonfield1)) ? jsonfield1 : Item.jsonfield1), "idscaglione", "I");
+            if (!string.IsNullOrEmpty(idscaglionedajson) && quantita > Item.Numero) //sto cercado di aggiungere elementi
+            {
+                long idscaglione = 0;
+                if (long.TryParse(idscaglionedajson, out idscaglione))
+                {
+                    if (ControllaUnicitaScaglioniAcarrello(Request, Session, Item.ID, idscaglione))
+                    {
+                        //presenti altri righi carrello con scaglioni
+                        Session.Add("scaglionimultipli", ""); //mettere un testo per segnalare impossibilità aggiungere scaglioni multipli
+                        Session.Add("superamentoquantita", 0);
+                        return ret;
+                    }
+                    else { Session.Remove("scaglionimultipli"); Session.Remove("superamentoquantita"); }
+
+                    /////////////////////////////////////////////////////////////////////////
+                    /////Controlliamo anche che il niscritti non superi il massimo consentito dallo scaglione sommando la quantità a carreòòp leggendo il valore degli iscritti allo scaglione attuale
+                    /////////////////////////////////////////////////////////////////////////
+                    ScaglioniCollection listascaglioni = new ScaglioniCollection();
+                    //(Alternativa)Leggo il numero iscritti nel json degli scaglioni passato dalla chiamata ( non è quello del db diretto ma ha una permanenza in pagina è preso da un campo hidden in pagina inerito al rendering )!!
+#if false
+                    Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>((String)eCommerceDM.Selezionadajson(((!string.IsNullOrEmpty(jsonfield1)) ? jsonfield1 : Item.jsonfield1), "scaglione", "I"));
+                    listascaglioni.Add(scaglionedacarrello); 
+#endif
+                    //Leggo dal db lo scaglione e verificare direttamente il numero di iscritti effettivi attuali
+#if true
+                    List<SQLiteParameter> parscaglioni = new List<SQLiteParameter>();
+                    SQLiteParameter ps1 = new SQLiteParameter("@id", idscaglione);//OleDbType.VarChar
+                    parscaglioni.Add(ps1);
+                    listascaglioni = offerteDM.CaricaOfferteScaglioni(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parscaglioni);
+#endif
+                    if (listascaglioni != null)
+                    {
+                        string s_niscritti = ""; long niscritti = 0;
+                        Scaglioni scitem = listascaglioni.Find(s => s.id == idscaglione);
+                        if (scitem != null && scitem.addedvalues.ContainsKey("niscritti"))
+                        {
+                            s_niscritti = scitem.addedvalues["niscritti"];
+                            long.TryParse(s_niscritti, out niscritti);
+                            if ((quantita + niscritti) > scitem.nmax)
+                            {
+                                Session.Add("superamentoquantita", scitem.nmax);
+                                return Item.ID.ToString();
+                            }
+                        }
+                    }
+                    ///////////////////////////////////////////////////////////////////////////
+                }
+            }
+#endif
+
+            //modificatore di prezzo nella gestione scaglioni se passato prendo prioritariamente quello senno lo leggo dall'elemento a carrello
+            string sprezzodajson = (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(
+               ((!string.IsNullOrEmpty(jsonfield1)) ? jsonfield1 : Item.jsonfield1)
+                , "prezzo", "I");
             double prezzocarrello = 0;
-            if (prezzo != 0)
+            if (!string.IsNullOrEmpty(sprezzodajson))
+                double.TryParse(sprezzodajson, out prezzocarrello);
+            else if (prezzo != 0) // se passato un prezzo si prende quello
                 prezzocarrello = prezzo;
-            else
+            else // in ultimo lo prendo dall'articolo di catalogo
                 prezzocarrello = off.Prezzo;
 
             if (Item == null || Item.ID == 0) //Nuovo elemento da mettere nel carrello
@@ -1148,7 +1262,7 @@ public class CommonPage : Page
             {
                 Item.ID_cliente = idcliente;
             }
-            if (!string.IsNullOrEmpty(username))
+            if (!string.IsNullOrEmpty(username)) //fORZO L'ID CLIENTE A QUELLO CHE E' LOGGATO IGNORANDO L'ID CLIENTE PASSATO
             {
                 long i = 0;
                 long.TryParse(getidcliente(username), out i);
@@ -1162,6 +1276,31 @@ public class CommonPage : Page
             ret = Item.ID.ToString();
         }
         return ret;
+    }
+
+
+    /// <summary>
+    /// Controlla se a carrello sono presenti inserimenti di righi ordine con scaglioni in quantita maggiore di uno!
+    /// </summary>
+    /// <param name="Request"></param>
+    /// <param name="Session"></param>
+    /// <param name="idcarrello"></param>
+    /// <param name="idscaglione"></param>
+    /// <returns></returns>
+    public static bool ControllaUnicitaScaglioniAcarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, long idcarrello, long idscaglione)
+    {
+        string sessionid = "";
+        string trueIP = "";
+        CaricaRiferimentiCarrello(Request, Session, ref sessionid, ref trueIP);
+        eCommerceDM ecom = new eCommerceDM();
+        CarrelloCollection ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP);
+        bool presenzamultipli = false;
+        foreach (Carrello c in ColItem)
+        {
+            string idscaglionetmp = (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(c.jsonfield1, "idscaglione", "I");
+            if (c.ID != idcarrello && !string.IsNullOrEmpty(idscaglionetmp)) presenzamultipli = true;
+        }
+        return presenzamultipli;
     }
 
     public static bool SvuotaCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, long id = 0)
@@ -1183,6 +1322,7 @@ public class CommonPage : Page
         }
         return true;
     }
+
 
     /// <summary>
     /// Calcola i totali del carrello con vari costi accessori per la procedura di ordine
@@ -1209,6 +1349,7 @@ public class CommonPage : Page
 
         List<long> idtodelete = new List<long>();
         long idclienteincarrello = 0;
+        bool richiestasaldo = false;
         foreach (Carrello c in ColItem)
         {
             //////////////////////////////////////////////////////////
@@ -1235,12 +1376,26 @@ public class CommonPage : Page
             else foundzeropeso = true;
             //////////////////////////////////////////////////////////
 
+            //////////////////////////////////////////////////////////
+            ////CONTROLLO RICHIESTA DEL SALDO A CARRELLO PER SCAGLIONI
+            //////////////////////////////////////////////////////////
+            try
+            {
+                Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>((String)eCommerceDM.Selezionadajson(c.jsonfield1, "scaglione", "I"));
+                if (scaglionedacarrello != null)
+                {
+                    if (scaglionedacarrello.datapartenza != null && ((TimeSpan)(scaglionedacarrello.datapartenza.Value - DateTime.Now)).Days < 30)
+                        richiestasaldo = true;
+                }
+            }
+            catch { }
 
             //totali.TotaleOrdine += c.Numero * (c.Prezzo * (1 + c.Iva/100)); //nel caso di prezzi imponibili
             totali.TotaleOrdine += c.Numero * (c.Prezzo);
             idlist += c.ID.ToString() + ",";
             idclienteincarrello = c.ID_cliente;//Ogni articolo nel carrello ha lo stesso codice id cliente
-            codicesconto = c.Codicesconto;
+
+            codicesconto = c.Codicesconto; //E' il codice sconto inserito nel carrello da validare (prevalidato nella pagina ordine )
         }
         if (idlist.Length > 1)
         {
@@ -1271,10 +1426,15 @@ public class CommonPage : Page
 
         //Momorizziamo nei totali se presente un acconto!!!
         double percentualeanticipo = Convert.ToDouble(ConfigManagement.ReadKey("percAnticipoPagamento"));
-        //La percentuale di anticipo è 100% se la data di inizio periodo ripetto oggi è inferiore a 60 gg
+        //La percentuale di anticipo è 100% se la data di inizio periodo ripetto oggi è inferiore a 60 gg ( PER il Booking )
         if (ColItem.Exists(p => p.Datastart != null && ((TimeSpan)(p.Datastart.Value - DateTime.Now)).Days < 60))
             percentualeanticipo = 100;
+
+        //La percentuale di anticipo deve essere 100% ( saldo ) se la datapartenza è < 30 gg )
+        if (richiestasaldo) percentualeanticipo = 100;
         totali.Percacconto = percentualeanticipo;
+
+        //gli acconti e saldi sono proprità calcolate nell'istanza della classe (VEDI LI)!!
 
         return totali;
     }
@@ -1371,39 +1531,92 @@ public class CommonPage : Page
         return pezzi;
     }
 
+    /// <summary>
+    /// Prende i codici sconto dallo scaglione nel carrello ( si suppone nel carrelo 1 solo codice )
+    /// </summary>
+    /// <param name="Request"></param>
+    /// <param name="Session"></param>
+    /// <returns></returns>
+    public static Dictionary<string, double> CercaCodiceScontoSuCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, CarrelloCollection ColItem = null)
+    {
+        if (ColItem == null)
+        {
+            string sessionid = "";
+            string trueIP = "";
+            CaricaRiferimentiCarrello(Request, Session, ref sessionid, ref trueIP);
+            eCommerceDM ecom = new eCommerceDM();
+            ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP);
+        }
+
+        Dictionary<string, double> codiciscontosuscaglioni = new Dictionary<string, double>();
+        //scorro gli elementi a carrello e prendo quello contente scaglioni ( teoricamente uno solo avendo bloccato l'acquisto contemporaneo di pacchetit diversi )
+        foreach (Carrello c in ColItem)
+        {
+            try
+            {
+                string jsonfieldsucarrello = (String)eCommerceDM.Selezionadajson(c.jsonfield1, "scaglione", "I");
+                if (!string.IsNullOrEmpty(jsonfieldsucarrello))
+                {
+                    Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>(jsonfieldsucarrello);
+                    if (scaglionedacarrello != null && scaglionedacarrello.id != 0 && !string.IsNullOrEmpty(scaglionedacarrello.codicesconto))
+                    {
+                        codiciscontosuscaglioni = ClientiDM.SplitCodiciSconto(scaglionedacarrello.codicesconto);
+                        break; //trovato il primo scaglione esco
+                    }
+                }
+            }
+            catch { }
+        }
+        return codiciscontosuscaglioni;
+    }
+
     private static double CalcolaSconto(System.Web.SessionState.HttpSessionState Session, CarrelloCollection ColItem, double totalecarrello, Cliente cli = null) // da modificare per gestione sconti commerciali!!!!
     {
         double valoresconto = 0;
-        string percentualesconto = ConfigManagement.ReadKey("percentualesconto");
         //Prendo la percentuale da quella in configurazione
         if (Session["codicesconto"] != null && Session["codicesconto"].ToString().ToLower() == ConfigManagement.ReadKey("codicesconto").ToLower())
         {
+            string percentualesconto = ConfigManagement.ReadKey("percentualesconto");
             double tmp = 0;
             double.TryParse(percentualesconto, out tmp);
             valoresconto = Math.Round(((double)totalecarrello * tmp / 100), 2, MidpointRounding.ToEven);
         }
 
-        //Testo Se presente una percentuale tra quelle associate ai commerciali e nel caso prendo quella (PRIORITA')
         if (Session["codicesconto"] != null && !string.IsNullOrEmpty(Session["codicesconto"].ToString()))
         {
-            double percscontocommerciale = 0;
+            double percentualesconto = 0;
             //Se presente un codice sconto
             string codicesconto = Session["codicesconto"].ToString().ToLower();
-            //Promviamo a vedere se il codice sconto ha associato un0anagrafica commerciale
+
+            //ASSOCIAZIONE SCONTO AD ANAGRAFICA COMMERCIALE
+            //Testo Se presente una percentuale tra quelle associate ai commerciali 
+            //Promviamo a vedere se il codice sconto ha associato un'anagrafica commerciale
             //Metto il riferimento all' id cliente commerciale se presente associato al codice sconto
             if (cli != null && cli.Id_cliente != 0)
             {
                 Dictionary<string, double> dict = ClientiDM.SplitCodiciSconto(cli.Codicisconto);
                 if (dict != null && dict.ContainsKey(codicesconto))
                 {
-                    percscontocommerciale = dict[codicesconto];
-                    valoresconto = Math.Round(((double)totalecarrello * percscontocommerciale / 100), 2, MidpointRounding.ToEven);
+                    percentualesconto = dict[codicesconto];
+                    valoresconto = Math.Round(((double)totalecarrello * percentualesconto / 100), 2, MidpointRounding.ToEven);
                 }
             }
+
+            //SCONTO DA SCAGLIONI
+            //cerchiamo il codice sconto tra quelli dello scaglione ( supponendo sempre un solo scaglione nel carrello ) se coincide lo applico
+            //Carichiamo i codici sconto dello scaglione
+            Dictionary<string, double> codiciscontoscaglione = CercaCodiceScontoSuCarrello(null, Session, ColItem);
+            if (codiciscontoscaglione != null && codiciscontoscaglione.Count > 0)
+            {
+                //Vediamo se lo sconto è presente tra quelli dello scaglione inserito a carrello
+                if (codiciscontoscaglione.ContainsKey(codicesconto))
+                {
+                    percentualesconto = codiciscontoscaglione[codicesconto];
+                    valoresconto = Math.Round(((double)totalecarrello * percentualesconto / 100), 2, MidpointRounding.ToEven);
+                }
+            }
+
         }
-
-
-
         return valoresconto;
     }
 
@@ -1617,46 +1830,75 @@ public class CommonPage : Page
             ret = Item.Numero.ToString();
         return ret;
     }
-    public static TotaliCarrelloCollection CaricaDatiOrdini(string id_cliente = "", string codiceordine = "", string datamin = "", string datamax = "", string idcommerciale = "", long page = 1, long pagesize = 0)
+    public static TotaliCarrelloCollection CaricaDatiOrdini(Dictionary<string, string> parametri, long page = 1, long pagesize = 0)
     {
+        if (parametri == null) parametri = new Dictionary<string, string>();
+        //string id_cliente = "", string codiceordine = "", string datamin = "", string datamax = "", string idcommerciale = ""
+
         eCommerceDM eDM = new eCommerceDM();
         TotaliCarrelloCollection ordini = new TotaliCarrelloCollection();
         List<SQLiteParameter> parcoll = new List<SQLiteParameter>();
-        if (!string.IsNullOrWhiteSpace(id_cliente))
+        if (parametri.ContainsKey("idcliente") && !string.IsNullOrWhiteSpace(parametri["idcliente"]))
         {
-            SQLiteParameter parid = new SQLiteParameter("@Id_cliente", id_cliente);
+            SQLiteParameter parid = new SQLiteParameter("@Id_cliente", parametri["idcliente"]);
             parcoll.Add(parid);
         }
-        if (!string.IsNullOrWhiteSpace(idcommerciale))
+        if (parametri.ContainsKey("idcommerciale") && !string.IsNullOrWhiteSpace(parametri["idcommerciale"]))
         {
-            SQLiteParameter parid1 = new SQLiteParameter("@Id_commerciale", idcommerciale);
+            SQLiteParameter parid1 = new SQLiteParameter("@Id_commerciale", parametri["idcommerciale"]);
             parcoll.Add(parid1);
         }
-        if (!string.IsNullOrEmpty(codiceordine))
+
+        if (parametri.ContainsKey("codiceordine") && !string.IsNullOrWhiteSpace(parametri["codiceordine"]))
         {
-            SQLiteParameter parcod = new SQLiteParameter("@Codiceordine", codiceordine);
+            SQLiteParameter parcod = new SQLiteParameter("@Codiceordine", parametri["codiceordine"]);
             parcoll.Add(parcod);
         }
-        if (!string.IsNullOrEmpty(datamin))
+
+        if (parametri.ContainsKey("datamin") && !string.IsNullOrWhiteSpace(parametri["datamin"]))
         {
             DateTime _dt;
             //if (DateTime.TryParse(datamin, out _dt))
-            if (DateTime.TryParseExact(datamin, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _dt))
+            if (DateTime.TryParseExact(parametri["datamin"], "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _dt))
             {
                 SQLiteParameter pardmin = new SQLiteParameter("@DataMin", dbDataAccess.CorrectDatenow(_dt));
                 parcoll.Add(pardmin);
             }
         }
-        if (!string.IsNullOrEmpty(datamax))
+
+        if (parametri.ContainsKey("datamax") && !string.IsNullOrWhiteSpace(parametri["datamax"]))
         {
             DateTime _dt;
             //if (DateTime.TryParse(datamax, out _dt))
-            if (DateTime.TryParseExact(datamax, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _dt))
+            if (DateTime.TryParseExact(parametri["datamax"], "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _dt))
             {
                 SQLiteParameter pardmax = new SQLiteParameter("@DataMax", dbDataAccess.CorrectDatenow(_dt));
                 parcoll.Add(pardmax);
             }
         }
+
+        if (parametri.ContainsKey("idprodotto") && !string.IsNullOrWhiteSpace(parametri["idprodotto"]))
+        {
+            SQLiteParameter paridprodotto = new SQLiteParameter("@idprodotto", parametri["idprodotto"]);
+            parcoll.Add(paridprodotto);
+        }
+        if (parametri.ContainsKey("idscaglione") && !string.IsNullOrWhiteSpace(parametri["idscaglione"]))
+        {
+            SQLiteParameter paridscaglione = new SQLiteParameter("@idscaglione", parametri["idscaglione"]);
+            parcoll.Add(paridscaglione);
+        }
+        if (parametri.ContainsKey("statoacconto") && !string.IsNullOrWhiteSpace(parametri["statoacconto"]))
+        {
+            SQLiteParameter parstatoacconto = new SQLiteParameter("@statoacconto", parametri["statoacconto"]);
+            parcoll.Add(parstatoacconto);
+        }
+        if (parametri.ContainsKey("statosaldo") && !string.IsNullOrWhiteSpace(parametri["statosaldo"]))
+        {
+            SQLiteParameter parstatosaldo = new SQLiteParameter("@statosaldo", parametri["statosaldo"]);
+            parcoll.Add(parstatosaldo);
+        }
+
+
 
         ordini = eDM.CaricaListaOrdini(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parcoll, "", false, page, pagesize);
 
@@ -1667,6 +1909,7 @@ public class CommonPage : Page
     #endregion
 
     #region MODIX automotive import
+#if false
 
     public static void ParseXmlFile(HttpServerUtility server, string sourcebaseaddress, string codicedestinazione, string nrecord = "0")
     {
@@ -2206,88 +2449,7 @@ public class CommonPage : Page
         return list;
     }
 
-#if false
-
-    private static void ReadXmlMetodo1(Dictionary<string, Dictionary<string, Tabrif>> dict, string key, XmlTextReader scriptXmlReader, string tag)
-    {
-        bool stopreading = false;
-        string xmlNodeText = "";
-        string nodeName = "";
-        int numAttributes;
-
-
-        if (scriptXmlReader.NodeType == XmlNodeType.Element) //Se entro già su un elemento lo metto nel dictonary
-        {
-            string idattr = scriptXmlReader.GetAttribute("id");
-            //bool startElement = scriptXmlReader.IsStartElement();
-            //string nodevalue = scriptXmlReader.ReadString();
-            nodeName = scriptXmlReader.Name;
-            //Caso default
-            if (dict.ContainsKey(key) && !dict[key].ContainsKey(nodeName))
-            {
-                dict[key].Add(nodeName, new Tabrif());
-            }
-            //PER GLI ATTRIBUTI ULTERIORI DEL NODO LI INSERISCO NEL CAMPO2
-            numAttributes = scriptXmlReader.AttributeCount;
-            for (int i = 0; i < numAttributes; i++)
-            {
-                ((Tabrif)dict[key][nodeName]).Campo2 += (scriptXmlReader.GetAttribute(i)) + "|";
-            }
-            ((Tabrif)dict[key][nodeName]).Campo2 = ((Tabrif)dict[key][nodeName]).Campo2.TrimEnd('|');
-        }
-
-#if true
-        while (!stopreading && scriptXmlReader.Read()) //Leggo una riga alla volta
-        {
-            switch (scriptXmlReader.NodeType)
-            {
-                case XmlNodeType.Element:
-                    string idattr = scriptXmlReader.GetAttribute("id");
-                    //bool startElement = scriptXmlReader.IsStartElement();
-                    //string nodevalue = scriptXmlReader.ReadString();
-                    nodeName = scriptXmlReader.Name;
-                    //Caso default
-                    if (dict.ContainsKey(key) && !dict[key].ContainsKey(nodeName))
-                    {
-                        dict[key].Add(nodeName, new Tabrif());
-                    }
-                    //PER GLI ATTRIBUTI ULTERIORI DEL NODO LI INSERISCO NEL CAMPO2
-                    numAttributes = scriptXmlReader.AttributeCount;
-                    for (int i = 0; i < numAttributes; i++)
-                    {
-                        ((Tabrif)dict[key][nodeName]).Campo2 += (scriptXmlReader.GetAttribute(i)) + "|";
-                    }
-                    ((Tabrif)dict[key][nodeName]).Campo2 = ((Tabrif)dict[key][nodeName]).Campo2.TrimEnd('|');
-
-                    break;
-
-                case XmlNodeType.Text: //Se sono nel contenuto del nodo -> memorizzo il valore
-                    xmlNodeText = scriptXmlReader.Value;
-                    if (dict.ContainsKey(key) && dict[key].ContainsKey(nodeName))
-                        ((Tabrif)dict[key][nodeName]).Campo1 = xmlNodeText;
-
-                    break;
-                case XmlNodeType.CDATA: //Se sono nel contenuto del nodo -> memorizzo il valore
-                    xmlNodeText = scriptXmlReader.Value;
-                    if (dict.ContainsKey(key) && dict[key].ContainsKey(nodeName))
-                        ((Tabrif)dict[key][nodeName]).Campo1 = xmlNodeText;
-
-                    break;
-                case XmlNodeType.EndElement:
-                    xmlNodeText = string.Empty;
-                    if (scriptXmlReader.Name == "vehicle" && scriptXmlReader.Depth == 0)
-                        stopreading = true; //Fermo la lettura del file al termine per evitare una read fasulla
-                    if (scriptXmlReader.Name == tag) return;//Se esco dal livello nodo torno al chiamante
-                    break;
-                default:
-                    break;
-            }
-
-        }
 #endif
-    }
-#endif
-
     #endregion
 
     #region FUNZIONI PER INMPORT EXPORT CONTENUTI DA ALTRI SITI

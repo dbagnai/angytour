@@ -385,7 +385,8 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
         {
             //Prepariamo e inviamo il mail
             string nomemittente = txtNome.Text;
-            string cognomemittente = txtSoc.Text;
+            string ragionesociale = txtSoc.Text;
+            string cognomemittente = txtCognome.Text;
             string mittenteMail = txtEmail.Text;
             string nomedestinatario = Nome;
             string maildestinatario = Email;
@@ -397,7 +398,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
                 tipo = "richiesta preventivo prenotazione ";
             if (TipoContenuto == "Acquistousato")
                 tipo = "vendita usato ";
-            string SoggettoMail = "Richiesta " + tipo + " da " + cognomemittente + " " + nomemittente + " tramite il sito " + Nome;
+            string SoggettoMail = "Richiesta " + tipo + " da " + ragionesociale + " "  + cognomemittente + " " + nomemittente + " tramite il sito " + Nome;
             string Descrizione = txtDescrizione.Text.Replace("\r", "<br/>") + " <br/> ";
 
             if (idOfferta != "") //Inseriamo il dettaglio della scheda di provenienza
@@ -431,7 +432,8 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
             //    Descrizione += " <br/>Marca Veicolo:" + txtMarca.Text + " Modello : " + txtModello.Text;
             //    Descrizione += " <br/>Targa :" + txttarga.Text + " Km percorsi : " + txtKm.Text;
             //}
-            Descrizione += " <br/> Nome Cliente:" + nomemittente + " Cognome o rag soc. Cliente: " + cognomemittente;
+            Descrizione += " <br/> Nome Cliente:" + nomemittente + " Cognome   Cliente: " + cognomemittente;
+            Descrizione += " <br/> Azienda:" + ragionesociale ;
             Descrizione += " <br/> Telefono Cliente:" + txtTel.Text + " Email Cliente: " + mittenteMail + " Lingua Cliente: " + Lingua;
             Descrizione += " <br/> Il cliente ha Confermato l'autorizzazione al trattamento dei  dati personali ";
 
@@ -452,6 +454,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
                 cli.id_tipi_clienti = tipocliente;
                 cli.Nome = nomemittente.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
                 cli.Cognome = cognomemittente.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                cli.Ragsoc = ragionesociale.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
                 cli.Consenso1 = true;
                 cli.ConsensoPrivacy = true;
                 cli.Validato = true;
@@ -474,7 +477,8 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
                 stat.EmailDestinatario = maildestinatario;
                 stat.EmailMittente = mittenteMail;
                 stat.Idattivita = idperstatistiche;
-                stat.Testomail = cognomemittente + " " + nomemittente;
+                stat.Testomail = ragionesociale;
+                stat.Testomail += "<br/>" + cognomemittente + " " + nomemittente;
                 stat.Testomail += "<br/>" + SoggettoMail + "<br/>" + Descrizione;
                 stat.TipoContatto = enumclass.TipoContatto.invioemail.ToString();
                 stat.Url = "";
@@ -502,7 +506,8 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
                         stat.EmailDestinatario = maildestinatario;
                         stat.EmailMittente = mittenteMail;
                         stat.Idattivita = idperstatistiche;
-                        stat.Testomail = cognomemittente + " " + nomemittente;
+                        stat.Testomail = ragionesociale;
+                        stat.Testomail += "<br/>" + cognomemittente + " " + nomemittente;
                         stat.Testomail += "<br/>" + SoggettoMail + "<br/>" + Descrizione;
                         stat.TipoContatto = enumclass.TipoContatto.invioemail.ToString();
                         stat.Url = "";

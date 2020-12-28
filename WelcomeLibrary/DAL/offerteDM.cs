@@ -8,6 +8,8 @@ using System.Xml;
 using WelcomeLibrary.UF;
 using System.Data.SQLite;
 using Newtonsoft.Json;
+using ActiveUp.Net.Mail;
+using System.ComponentModel;
 
 namespace WelcomeLibrary.DAL
 {
@@ -20,6 +22,7 @@ namespace WelcomeLibrary.DAL
             set { _tblarchivio = value; }
         }
         private string _tblarchiviodettaglio = "TBL_ATTIVITA_DETAIL";
+        private string _tblarchivioscaglioni = "TBL_ATTIVITA_SCAGLIONI";
 
         public offerteDM()
         { }
@@ -62,6 +65,7 @@ namespace WelcomeLibrary.DAL
                         queryfilter = queryfilter.TrimEnd(',') + " ) ";
                     }
                 }
+
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceTIPOLOGIA"; }))
                 {
 
@@ -118,10 +122,13 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter pnaz = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceNAZIONE"; });
                     _parUsed.Add(pnaz);
                     if (!queryfilter.ToLower().Contains("where"))
-                        queryfilter += " WHERE ( CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE  ) ";
+                        queryfilter += " WHERE (CodiceNazione like @CodiceNAZIONE or CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE  ) ";
                     else
-                        queryfilter += " AND( CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE  )  ";
+                        queryfilter += " AND(CodiceNazione like @CodiceNAZIONE or CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE  )  ";
                 }
+
+
+
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceREGIONE"; }))
                 {
                     SQLiteParameter preg = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceREGIONE"; });
@@ -423,6 +430,10 @@ namespace WelcomeLibrary.DAL
                                 item.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
                             if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
                                 item.CodiceProvincia = reader.GetString(reader.GetOrdinal("CodicePROVINCIA"));
+
+                            if (!reader["CodiceNazione"].Equals(DBNull.Value))
+                                item.CodiceNazione = reader.GetString(reader.GetOrdinal("CodiceNazione"));
+
                             if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
                                 item.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
                             if (!reader["CodiceNAZIONE1_dts"].Equals(DBNull.Value))
@@ -455,7 +466,7 @@ namespace WelcomeLibrary.DAL
         }
 
 
-        public OfferteCollection GetLista(string testoricerca, string maxresults, string lingua, string connection)
+        public OfferteCollection GetLista(string testoricerca, string maxresults, string lingua, string connection, string tipologia = "")
         {
             OfferteCollection list = new OfferteCollection();
             if (connection == null || connection == "") return list;
@@ -465,8 +476,38 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter ptesto = new SQLiteParameter("@testoricerca", "%" + testoricerca.Trim().Replace(" ", "%") + "%");
             _pars.Add(ptesto);
 
-            //sarebbe ance da fare il filtro con la verifica dell'input utente di regione o comune anzichè del nome immobile
-            // da fare .....
+            if (!string.IsNullOrEmpty(tipologia))
+            {
+                SQLiteParameter ptipologia = new SQLiteParameter("@CodiceTIPOLOGIA", tipologia);
+                _pars.Add(ptipologia);
+            }
+            list = CaricaOfferteFiltrate(connection, _pars, maxresults, "", null, "Denominazione" + lingua);
+            return list;
+
+        }
+
+        /// <summary>
+        /// torna una lista di offete in base alla lista id passati ed alla tipologia
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="idlist"></param>
+        /// <param name="lingua"></param>
+        /// <param name="tipologia"></param>
+        /// <param name="maxresults"></param>
+        /// <returns></returns>
+        public OfferteCollection GetOffertebyidlist(string connection, string idlist, string lingua, string tipologia = "", string maxresults = "")
+        {
+            OfferteCollection list = new OfferteCollection();
+            if (connection == null || connection == "") return list;
+
+            List<SQLiteParameter> _pars = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@IdList", idlist);
+            _pars.Add(p1);
+            if (!string.IsNullOrEmpty(tipologia))
+            {
+                SQLiteParameter p2 = new SQLiteParameter("@CodiceTIPOLOGIA", tipologia);
+                _pars.Add(p2);
+            }
 
             list = CaricaOfferteFiltrate(connection, _pars, maxresults, "", null, "Denominazione" + lingua);
             return list;
@@ -493,10 +534,7 @@ namespace WelcomeLibrary.DAL
 
                 string query = "";
                 string queryfilter = "";
-
-                //	query = "SELECT " + queryCols.ToString() + " FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
                 query = "SELECT A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  ";
-
 
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Id"; }))
                 {
@@ -537,9 +575,9 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter pnaz = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceNAZIONE"; });
                     _parUsed.Add(pnaz);
                     if (!queryfilter.ToLower().Contains("where"))
-                        queryfilter += " WHERE ( CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE   ) ";
+                        queryfilter += " WHERE (CodiceNazione like @CodiceNAZIONE or CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE   ) ";
                     else
-                        queryfilter += " AND  ( CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE )   ";
+                        queryfilter += " AND  (CodiceNazione like @CodiceNAZIONE or CodiceNAZIONE1_dts like @CodiceNAZIONE or  CodiceNAZIONE2_dts like @CodiceNAZIONE  or  CodiceNAZIONE3_dts like @CodiceNAZIONE )   ";
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceREGIONE"; }))
                 {
@@ -1129,6 +1167,9 @@ namespace WelcomeLibrary.DAL
                             item.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
                         if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
                             item.CodiceProvincia = reader.GetString(reader.GetOrdinal("CodicePROVINCIA"));
+                        if (!reader["CodiceNazione"].Equals(DBNull.Value))
+                            item.CodiceNazione = reader.GetString(reader.GetOrdinal("CodiceNazione"));
+
                         if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
                             item.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
                         if (!reader["linkVideo"].Equals(DBNull.Value))
@@ -1331,6 +1372,23 @@ namespace WelcomeLibrary.DAL
                         list.Add(item);
                     }
                 }
+
+                ////////////////////////////////////
+                //carico la lista scaglioni se richiesto per la lista id filtrati 
+                ////////////////////////////////////
+                if (true && list != null)
+                {
+                    string listaid = "";
+                    list.ForEach(i => listaid += i.Id + ",");
+                    listaid = listaid.TrimEnd(',');
+                    List<SQLiteParameter> parscaglioni = new List<SQLiteParameter>();
+                    SQLiteParameter ps1 = new SQLiteParameter("@id_attivita", listaid);//OleDbType.VarChar
+                    parscaglioni.Add(ps1);
+                    ScaglioniCollection listascaglioni = offerteDM.CaricaOfferteScaglioni(connection, parscaglioni); // !!!! (da capire se utile inserire il parametro di filtro scaglioni per Data_inizio > data attuale in modo da non averli sempre tutti anche nel passato!!!! )
+                    if (listascaglioni != null)
+                        list.ForEach(i => i.Scaglioni = new ScaglioniCollection((listascaglioni.FindAll(s => s.id_attivita == i.Id))));
+                }
+                ////////////////////////////////////////////////////////
 
             }
             catch (Exception error)
@@ -1528,6 +1586,8 @@ namespace WelcomeLibrary.DAL
                             item.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
                         if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
                             item.CodiceProvincia = reader.GetString(reader.GetOrdinal("CodicePROVINCIA"));
+                        if (!reader["CodiceNazione"].Equals(DBNull.Value))
+                            item.CodiceNazione = reader.GetString(reader.GetOrdinal("CodiceNazione"));
                         if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
                             item.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
 
@@ -1732,7 +1792,22 @@ namespace WelcomeLibrary.DAL
                         list.Add(item);
                     }
                 }
-
+                ////////////////////////////////////
+                //carico la lista scaglioni se richiesto per la lista id filtrati
+                ////////////////////////////////////
+                if (true && list != null)
+                {
+                    string listaid = "";
+                    list.ForEach(i => listaid += i.Id + ",");
+                    listaid = listaid.TrimEnd(',');
+                    List<SQLiteParameter> parscaglioni = new List<SQLiteParameter>();
+                    SQLiteParameter ps1 = new SQLiteParameter("@id_attivita", listaid);//OleDbType.VarChar
+                    parscaglioni.Add(ps1);
+                    ScaglioniCollection listascaglioni = offerteDM.CaricaOfferteScaglioni(connection, parscaglioni);// !!!! (da capire se utile inserire il parametro di filtro scaglioni per Data_inizio > data attuale in modo da non averli sempre tutti anche nel passato!!!! )
+                    if (listascaglioni != null)
+                        list.ForEach(i => i.Scaglioni = new ScaglioniCollection((listascaglioni.FindAll(s => s.id_attivita == i.Id))));
+                }
+                ////////////////////////////////////////////////////////
             }
             catch (Exception error)
             {
@@ -1957,6 +2032,8 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Anno"].Equals(DBNull.Value))
                             item.Anno = reader.GetInt64(reader.GetOrdinal("Anno"));
 
+                        if (!reader["CodiceNazione"].Equals(DBNull.Value))
+                            item.CodiceNazione = reader.GetString(reader.GetOrdinal("CodiceNazione"));
 
                         if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
                             item.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
@@ -2170,7 +2247,22 @@ namespace WelcomeLibrary.DAL
                         list.Add(item);
                     }
                 }
-
+                ////////////////////////////////////
+                //carico la lista scaglioni se richiesto per la lista id filtrati
+                ////////////////////////////////////
+                if (true && list != null)
+                {
+                    string listaid = "";
+                    list.ForEach(i => listaid += i.Id + ",");
+                    listaid = listaid.TrimEnd(',');
+                    List<SQLiteParameter> parscaglioni = new List<SQLiteParameter>();
+                    SQLiteParameter ps1 = new SQLiteParameter("@id_attivita", listaid);//OleDbType.VarChar
+                    parscaglioni.Add(ps1);
+                    ScaglioniCollection listascaglioni = offerteDM.CaricaOfferteScaglioni(connection, parscaglioni);// !!!! (da capire se utile inserire il parametro di filtro scaglioni per Data_inizio > data attuale in modo da non averli sempre tutti anche nel passato!!!! )
+                    if (listascaglioni != null)
+                        list.ForEach(i => i.Scaglioni = new ScaglioniCollection((listascaglioni.FindAll(s => s.id_attivita == i.Id))));
+                }
+                ////////////////////////////////////////////////////////
             }
             catch (Exception error)
             {
@@ -2310,6 +2402,8 @@ namespace WelcomeLibrary.DAL
                             item.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
                         if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
                             item.CodiceProvincia = reader.GetString(reader.GetOrdinal("CodicePROVINCIA"));
+                        if (!reader["CodiceNazione"].Equals(DBNull.Value))
+                            item.CodiceNazione = reader.GetString(reader.GetOrdinal("CodiceNazione"));
                         if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
                             item.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
                         if (!reader["linkVideo"].Equals(DBNull.Value))
@@ -2511,11 +2605,24 @@ namespace WelcomeLibrary.DAL
                             item.Textfield1_dts = reader.GetString(reader.GetOrdinal("Textfield1_dts"));
                         if (!reader["Interventieseguiti_dts"].Equals(DBNull.Value))
                             item.Interventieseguiti_dts = reader.GetString(reader.GetOrdinal("Interventieseguiti_dts"));
-
-                        return (item);
+                        break;
+                        //return (item);
                     }
                 }
 
+
+                ////////////////////////////////////
+                //carico la lista scaglioni se richiesto
+                ////////////////////////////////////
+                if (true && item != null)
+                {
+                    List<SQLiteParameter> parscaglioni = new List<SQLiteParameter>();
+                    SQLiteParameter ps1 = new SQLiteParameter("@id_attivita", item.Id);
+                    parscaglioni.Add(ps1);
+
+                    ScaglioniCollection listascaglioni = offerteDM.CaricaOfferteScaglioni(connection, parscaglioni);// !!!! (da capire se utile inserire il parametro di filtro scaglioni per Data_inizio > data attuale in modo da non averli sempre tutti anche nel passato!!!! )
+                    item.Scaglioni = listascaglioni;
+                }
             }
             catch (Exception error)
             {
@@ -2655,6 +2762,8 @@ namespace WelcomeLibrary.DAL
                             item.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
                         if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
                             item.CodiceProvincia = reader.GetString(reader.GetOrdinal("CodicePROVINCIA"));
+                        if (!reader["CodiceNazione"].Equals(DBNull.Value))
+                            item.CodiceNazione = reader.GetString(reader.GetOrdinal("CodiceNazione"));
                         if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
                             item.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
                         if (!reader["linkVideo"].Equals(DBNull.Value))
@@ -2853,9 +2962,22 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Interventieseguiti_dts"].Equals(DBNull.Value))
                             item.Interventieseguiti_dts = reader.GetString(reader.GetOrdinal("Interventieseguiti_dts"));
 
-
-                        return (item);
+                        break;
+                        // return (item);
                     }
+                }
+
+                ////////////////////////////////////
+                //carico la lista scaglioni se richiesto
+                ////////////////////////////////////
+                if (true && item != null)
+                {
+                    List<SQLiteParameter> parscaglioni = new List<SQLiteParameter>();
+                    SQLiteParameter ps1 = new SQLiteParameter("@id_attivita", idOfferta);//OleDbType.VarChar
+                    parscaglioni.Add(ps1);
+
+                    ScaglioniCollection listascaglioni = offerteDM.CaricaOfferteScaglioni(connection, parscaglioni);// !!!! (da capire se utile inserire il parametro di filtro scaglioni per Data_inizio > data attuale in modo da non averli sempre tutti anche nel passato!!!! )
+                    item.Scaglioni = listascaglioni;
                 }
 
             }
@@ -2869,24 +2991,40 @@ namespace WelcomeLibrary.DAL
 
 
         /// <summary>
-        /// Ricarica un'offerta specifica in base all'id
+        /// ritorna la lista delle offete per testo della denominazione ed eventual tipologia
         /// </summary>
         /// <param name="connection"></param>
-        /// <param name="idOfferta"></param>
+        /// <param name="testoricerca"></param>
+        /// <param name="tipologia"></param>
         /// <returns></returns>
-        public Offerte CaricaOffertaPerTestourl(string connection, string testoricerca)
+        public OfferteCollection CaricaOffertaPerTestourl(string connection, string testoricerca, string tipologia = "")
         {
-            if (connection == null || connection == "") return null;
-            if (testoricerca == null || testoricerca == "") return null;
+
             OfferteCollection list = new OfferteCollection();
+            if (connection == null || connection == "") return list;
+            if (testoricerca == null || testoricerca == "") return list;
+
             Offerte item = null;
 
             try
             {
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+
+                string query = "SELECT  A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts ";
+                query += " where ( Id like @Titolo  or  DENOMINAZIONEI like @Titolo or DENOMINAZIONEGB like @Titolo or DENOMINAZIONERU like @Titolo or DENOMINAZIONEFR like @Titolo ) ";
                 SQLiteParameter p1 = new SQLiteParameter("@Titolo", "%" + testoricerca + "%");//OleDbType.VarChar
                 parColl.Add(p1);
-                string query = "SELECT  A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts where ( DENOMINAZIONEI like @Titolo or DENOMINAZIONEGB like @Titolo or DENOMINAZIONERU like @Titolo or DENOMINAZIONEFR like @Titolo ) order BY DataInserimento Desc";
+
+                if (!string.IsNullOrEmpty(tipologia))
+                {
+                    SQLiteParameter p2 = new SQLiteParameter("@CodiceTIPOLOGIA", tipologia);//OleDbType.VarChar
+                    parColl.Add(p2);
+                    if (!query.ToLower().Contains("where"))
+                        query += " WHERE CodiceTIPOLOGIA like @CodiceTIPOLOGIA ";
+                    else
+                        query += " AND CodiceTIPOLOGIA like @CodiceTIPOLOGIA  ";
+                }
+                query += " order BY DataInserimento Desc";
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
@@ -3002,6 +3140,8 @@ namespace WelcomeLibrary.DAL
                             item.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
                         if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
                             item.CodiceProvincia = reader.GetString(reader.GetOrdinal("CodicePROVINCIA"));
+                        if (!reader["CodiceNazione"].Equals(DBNull.Value))
+                            item.CodiceNazione = reader.GetString(reader.GetOrdinal("CodiceNazione"));
                         if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
                             item.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
                         if (!reader["linkVideo"].Equals(DBNull.Value))
@@ -3200,10 +3340,27 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Interventieseguiti_dts"].Equals(DBNull.Value))
                             item.Interventieseguiti_dts = reader.GetString(reader.GetOrdinal("Interventieseguiti_dts"));
 
-
-                        return (item);
+                        list.Add(item);
+                        //break;
+                        //return (item);
                     }
                 }
+                ////////////////////////////////////
+                //carico la lista scaglioni se richiesto per la lista id filtrati
+                ////////////////////////////////////
+                if (true && list != null)
+                {
+                    string listaid = "";
+                    list.ForEach(i => listaid += i.Id + ",");
+                    listaid = listaid.TrimEnd(',');
+                    List<SQLiteParameter> parscaglioni = new List<SQLiteParameter>();
+                    SQLiteParameter ps1 = new SQLiteParameter("@id_attivita", listaid);//OleDbType.VarChar
+                    parscaglioni.Add(ps1);
+                    ScaglioniCollection listascaglioni = offerteDM.CaricaOfferteScaglioni(connection, parscaglioni);// !!!! (da capire se utile inserire il parametro di filtro scaglioni per Data_inizio > data attuale in modo da non averli sempre tutti anche nel passato!!!! )
+                    if (listascaglioni != null)
+                        list.ForEach(i => i.Scaglioni = new ScaglioniCollection((listascaglioni.FindAll(s => s.id_attivita == i.Id))));
+                }
+                ////////////////////////////////////////////////////////
 
             }
             catch (Exception error)
@@ -3211,7 +3368,7 @@ namespace WelcomeLibrary.DAL
                 throw new ApplicationException("Errore Caricamento offerta :" + error.Message, error);
             }
 
-            return item;
+            return list;
         }
 
 
@@ -3501,6 +3658,8 @@ namespace WelcomeLibrary.DAL
                             item.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
                         if (!reader["CodicePROVINCIA"].Equals(DBNull.Value))
                             item.CodiceProvincia = reader.GetString(reader.GetOrdinal("CodicePROVINCIA"));
+                        if (!reader["CodiceNazione"].Equals(DBNull.Value))
+                            item.CodiceNazione = reader.GetString(reader.GetOrdinal("CodiceNazione"));
                         if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
                             item.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
                         if (!reader["linkVideo"].Equals(DBNull.Value))
@@ -3682,9 +3841,9 @@ namespace WelcomeLibrary.DAL
                         start = end + 1;
                         //LEGGIAMO IL VALORE (NOMEALLEGATO)
                         item.NomeFile = Value.Substring(i, j);
-                        //if (!Value.Substring(i, j).ToLower().StartsWith("http://") && !Value.Substring(i, j).ToLower().StartsWith("https://"))
-                        //    item.NomeAnteprima = "Ant" + Value.Substring(i, j);
-                        //else
+                        if (!Value.Substring(i, j).ToLower().StartsWith("http://") && !Value.Substring(i, j).ToLower().StartsWith("https://"))
+                            item.NomeAnteprima = "Ant" + Value.Substring(i, j);
+                        else
                             item.NomeAnteprima = Value.Substring(i, j);
                         break;
                     case "des":
@@ -4105,7 +4264,8 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p6);
             SQLiteParameter p7 = new SQLiteParameter("@FotoValori", valori);
             parColl.Add(p7);
-
+            SQLiteParameter p8b = new SQLiteParameter("@CodiceNAZIONE", item.CodiceNazione);
+            parColl.Add(p8b);
             SQLiteParameter p8 = new SQLiteParameter("@CodiceCOMUNE", item.CodiceComune);
             parColl.Add(p8);
             SQLiteParameter p9 = new SQLiteParameter("@CodicePROVINCIA", item.CodiceProvincia);
@@ -4249,7 +4409,7 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pr1 = new SQLiteParameter("@robots", item.Robots);
             parColl.Add(pr1);
 
-            string query = "INSERT INTO " + _tblarchivio + " ([CodiceTIPOLOGIA],[DENOMINAZIONEI],[DENOMINAZIONEGB],[DescrizioneI],[DescrizioneGB],[FotoSchema],[FotoValori],[CodiceCOMUNE],[CodicePROVINCIA],[CodiceREGIONE],[DATITECNICII],[DATITECNICIGB],[EMAIL],[FAX],[INDIRIZZO],[TELEFONO],[WEBSITE],[DataInserimento],[Data1],[CodiceProdotto],[CodiceCategoria],[CodiceCategoria2Liv],[Prezzo],[PrezzoListino],[Vetrina],[Abilitacontatto],linkVideo,campo1I,campo2I,campo1GB,campo2GB,Caratteristica1,Caratteristica2,Caratteristica3,Caratteristica4,Caratteristica5,Caratteristica6,Anno,Archiviato,Id_collegato,Id_dts_collegato,Autore,xmlValue,DENOMINAZIONERU,DescrizioneRU,DATITECNICIRU,campo1RU,campo2RU,DENOMINAZIONEFR,DescrizioneFR,DATITECNICIFR,campo1FR,campo2FR,Qta_vendita,Peso,Promozione,urlcustomI,urlcustomGB,urlcustomRU,urlcustomFR,canonicalI,canonicalGB,canonicalRU,canonicalFR,robots  ) VALUES (@CodiceTIPOLOGIA,@DENOMINAZIONEI,@DENOMINAZIONEGB,@DescrizioneI,@DescrizioneGB,@FotoSchema,@FotoValori,@CodiceCOMUNE,@CodicePROVINCIA,@CodiceREGIONE,@DATITECNICII,@DATITECNICIGB,@EMAIL,@FAX,@INDIRIZZO,@TELEFONO,@WEBSITE,@Data,@data1,@CodiceProdotto,@CodiceCategoria,@CodiceCategoria2Liv,@Prezzo,@PrezzoListino,@Vetrina,@Abilitacontatto,@linkVideo,@Campo1I,@Campo2I,@Campo1GB,@Campo2GB,@Caratteristica1,@Caratteristica2,@Caratteristica3,@Caratteristica4,@Caratteristica5,@Caratteristica6,@Anno,@Archiviato,@Id_collegato,@Id_dts_collegato,@Autore,@xmlValue,@DENOMINAZIONERU,@DescrizioneRU,@DATITECNICIRU,@Campo1RU,@Campo2RU,@DENOMINAZIONEFR,@DescrizioneFR,@DATITECNICIFR,@Campo1FR,@Campo2FR,@Qta_vendita,@Peso,@Promozione,@urlcustomI,@urlcustomGB,@urlcustomRU,@urlcustomFR,@canonicalI,@canonicalGB,@canonicalRU,@canonicalFR,@robots )";
+            string query = "INSERT INTO " + _tblarchivio + " ([CodiceTIPOLOGIA],[DENOMINAZIONEI],[DENOMINAZIONEGB],[DescrizioneI],[DescrizioneGB],[FotoSchema],[FotoValori],[CodiceNAZIONE],[CodiceCOMUNE],[CodicePROVINCIA],[CodiceREGIONE],[DATITECNICII],[DATITECNICIGB],[EMAIL],[FAX],[INDIRIZZO],[TELEFONO],[WEBSITE],[DataInserimento],[Data1],[CodiceProdotto],[CodiceCategoria],[CodiceCategoria2Liv],[Prezzo],[PrezzoListino],[Vetrina],[Abilitacontatto],linkVideo,campo1I,campo2I,campo1GB,campo2GB,Caratteristica1,Caratteristica2,Caratteristica3,Caratteristica4,Caratteristica5,Caratteristica6,Anno,Archiviato,Id_collegato,Id_dts_collegato,Autore,xmlValue,DENOMINAZIONERU,DescrizioneRU,DATITECNICIRU,campo1RU,campo2RU,DENOMINAZIONEFR,DescrizioneFR,DATITECNICIFR,campo1FR,campo2FR,Qta_vendita,Peso,Promozione,urlcustomI,urlcustomGB,urlcustomRU,urlcustomFR,canonicalI,canonicalGB,canonicalRU,canonicalFR,robots  ) VALUES (@CodiceTIPOLOGIA,@DENOMINAZIONEI,@DENOMINAZIONEGB,@DescrizioneI,@DescrizioneGB,@FotoSchema,@FotoValori,@CodiceNAZIONE,@CodiceCOMUNE,@CodicePROVINCIA,@CodiceREGIONE,@DATITECNICII,@DATITECNICIGB,@EMAIL,@FAX,@INDIRIZZO,@TELEFONO,@WEBSITE,@Data,@data1,@CodiceProdotto,@CodiceCategoria,@CodiceCategoria2Liv,@Prezzo,@PrezzoListino,@Vetrina,@Abilitacontatto,@linkVideo,@Campo1I,@Campo2I,@Campo1GB,@Campo2GB,@Caratteristica1,@Caratteristica2,@Caratteristica3,@Caratteristica4,@Caratteristica5,@Caratteristica6,@Anno,@Archiviato,@Id_collegato,@Id_dts_collegato,@Autore,@xmlValue,@DENOMINAZIONERU,@DescrizioneRU,@DATITECNICIRU,@Campo1RU,@Campo2RU,@DENOMINAZIONEFR,@DescrizioneFR,@DATITECNICIFR,@Campo1FR,@Campo2FR,@Qta_vendita,@Peso,@Promozione,@urlcustomI,@urlcustomGB,@urlcustomRU,@urlcustomFR,@canonicalI,@canonicalGB,@canonicalRU,@canonicalFR,@robots )";
             try
             {
                 long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -4459,6 +4619,8 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pvalori = new SQLiteParameter("@FotoValori", valori);
             parColl.Add(pvalori);
 
+            SQLiteParameter p5b = new SQLiteParameter("@CodiceNAZIONE", item.CodiceNazione);
+            parColl.Add(p5b);
             SQLiteParameter p5 = new SQLiteParameter("@CodiceCOMUNE", item.CodiceComune);
             parColl.Add(p5);
             SQLiteParameter p6 = new SQLiteParameter("@CodicePROVINCIA", item.CodiceProvincia);
@@ -4604,7 +4766,7 @@ namespace WelcomeLibrary.DAL
 
             SQLiteParameter p16 = new SQLiteParameter("@Id", item.Id);
             parColl.Add(p16);
-            string query = "UPDATE " + _tblarchivio + " SET [DENOMINAZIONEI]=@DENOMINAZIONEI , [DENOMINAZIONEGB]= @DENOMINAZIONEGB , [DescrizioneI]=@DescrizioneI , [DescrizioneGB]= @DescrizioneGB , [FotoSchema]=@FotoSchema, [FotoValori]=@FotoValori, [CodiceCOMUNE]=@CodiceCOMUNE ,[CodicePROVINCIA]=@CodicePROVINCIA , [CodiceREGIONE]= @CodiceREGIONE , [DATITECNICII]=@DATITECNICII , [DATITECNICIGB]= @DATITECNICIGB , [EMAIL]=@EMAIL , [FAX]=@FAX , [INDIRIZZO]= @INDIRIZZO , [TELEFONO]=@TELEFONO , [WEBSITE]=@WEBSITE , [Datainserimento]= @data , [Data1]= @data1, [CodiceProdotto]=@CodiceProdotto  , [CodiceCategoria]= @CodiceCategoria  , [CodiceCategoria2Liv]= @CodiceCategoria2Liv , [Prezzo]= @Prezzo ,  [PrezzoListino]= @PrezzoListino  , [Vetrina]= @Vetrina , [Abilitacontatto]= @Abilitacontatto  , [linkVideo]= @linkVideo , [Campo1I]= @Campo1I, [Campo2I]= @Campo2I, [Campo1GB]= @Campo1GB, [Campo2GB]= @Campo2GB ,[Caratteristica1]=@Caratteristica1,[Caratteristica2]=@Caratteristica2,[Caratteristica3]=@Caratteristica3,[Caratteristica4]=@Caratteristica4,[Caratteristica5]=@Caratteristica5,[Caratteristica6]=@Caratteristica6,[Anno]=@Anno, [Archiviato]=@Archiviato, [Id_collegato]=@Id_collegato, [Id_dts_collegato]=@Id_dts_collegato,[Autore]=@Autore,[Xmlvalue]=@Xmlvalue, DenominazioneRU=@DENOMINAZIONERU,DescrizioneRU=@DescrizioneRU,DATITECNICIRU=@DATITECNICIRU,Campo1RU=@Campo1RU,Campo2RU=@Campo2RU, DenominazioneFR=@DENOMINAZIONEFR,DescrizioneFR=@DescrizioneFR,DATITECNICIFR=@DATITECNICIFR,Campo1FR=@Campo1FR,Campo2FR=@Campo2FR,  [Qta_vendita]=@Qta_vendita,[Peso]=@Peso,[Promozione]=@Promozione,urlcustomI=@urlcustomI,urlcustomGB=@urlcustomGB,urlcustomRU=@urlcustomRU,urlcustomFR=@urlcustomFR ,canonicalI=@canonicalI,canonicalGB=@canonicalGB,canonicalRU=@canonicalRU,canonicalFR=@canonicalFR,robots=@robots   WHERE [Id]=@Id ";
+            string query = "UPDATE " + _tblarchivio + " SET [DENOMINAZIONEI]=@DENOMINAZIONEI , [DENOMINAZIONEGB]= @DENOMINAZIONEGB , [DescrizioneI]=@DescrizioneI , [DescrizioneGB]= @DescrizioneGB , [FotoSchema]=@FotoSchema, [FotoValori]=@FotoValori,[CodiceNAZIONE]=@CodiceNAZIONE , [CodiceCOMUNE]=@CodiceCOMUNE ,[CodicePROVINCIA]=@CodicePROVINCIA , [CodiceREGIONE]= @CodiceREGIONE , [DATITECNICII]=@DATITECNICII , [DATITECNICIGB]= @DATITECNICIGB , [EMAIL]=@EMAIL , [FAX]=@FAX , [INDIRIZZO]= @INDIRIZZO , [TELEFONO]=@TELEFONO , [WEBSITE]=@WEBSITE , [Datainserimento]= @data , [Data1]= @data1, [CodiceProdotto]=@CodiceProdotto  , [CodiceCategoria]= @CodiceCategoria  , [CodiceCategoria2Liv]= @CodiceCategoria2Liv , [Prezzo]= @Prezzo ,  [PrezzoListino]= @PrezzoListino  , [Vetrina]= @Vetrina , [Abilitacontatto]= @Abilitacontatto  , [linkVideo]= @linkVideo , [Campo1I]= @Campo1I, [Campo2I]= @Campo2I, [Campo1GB]= @Campo1GB, [Campo2GB]= @Campo2GB ,[Caratteristica1]=@Caratteristica1,[Caratteristica2]=@Caratteristica2,[Caratteristica3]=@Caratteristica3,[Caratteristica4]=@Caratteristica4,[Caratteristica5]=@Caratteristica5,[Caratteristica6]=@Caratteristica6,[Anno]=@Anno, [Archiviato]=@Archiviato, [Id_collegato]=@Id_collegato, [Id_dts_collegato]=@Id_dts_collegato,[Autore]=@Autore,[Xmlvalue]=@Xmlvalue, DenominazioneRU=@DENOMINAZIONERU,DescrizioneRU=@DescrizioneRU,DATITECNICIRU=@DATITECNICIRU,Campo1RU=@Campo1RU,Campo2RU=@Campo2RU, DenominazioneFR=@DENOMINAZIONEFR,DescrizioneFR=@DescrizioneFR,DATITECNICIFR=@DATITECNICIFR,Campo1FR=@Campo1FR,Campo2FR=@Campo2FR,  [Qta_vendita]=@Qta_vendita,[Peso]=@Peso,[Promozione]=@Promozione,urlcustomI=@urlcustomI,urlcustomGB=@urlcustomGB,urlcustomRU=@urlcustomRU,urlcustomFR=@urlcustomFR ,canonicalI=@canonicalI,canonicalGB=@canonicalGB,canonicalRU=@canonicalRU,canonicalFR=@canonicalFR,robots=@robots   WHERE [Id]=@Id ";
 
             try
             {
@@ -4796,6 +4958,10 @@ namespace WelcomeLibrary.DAL
                     query = "DELETE FROM " + _tblarchiviodettaglio + " WHERE ([ID_DTS]=@id_dts)";
                     dbDataAccess.ExecuteStoredProcListOle(query, parCollsub, connessione);
                 }
+
+                //Elimino gli scaglioni collegati...
+                CancellaScaglioni(connessione, 0, item.Id.ToString());
+
             }
             catch (Exception error)
             {
@@ -5095,13 +5261,10 @@ namespace WelcomeLibrary.DAL
         public static Dictionary<string, string> filterData(string lingua, Dictionary<string, string> filtri, string spage, string spagesize, string senablepager, string sessionid = "")
         {
             WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();
-
             bool gen = true;
             bool.TryParse(ConfigManagement.ReadKey("generaUrlrewrited"), out gen);
-
             bool enabledpager = false;
             bool.TryParse(senablepager, out enabledpager);
-
             int page = 0;
             int pagesize = 0;
             int.TryParse(spage, out page);
@@ -5151,31 +5314,168 @@ namespace WelcomeLibrary.DAL
                     parColl.Add(pidlist);
                 }
             }
-            else if (filtri.ContainsKey("latitudine") && !string.IsNullOrEmpty(filtri["longitudine"]))
+
+            // List<string> idlisttofilter = new List<string>(); //creo una lista unica di id per il filtro idlist che è un and di tutti gli id risultanti
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////FILTRI IN BASE A SCAGLIONI //////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+            if (!parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@IdList"; }))
             {
-                double lat = 0;
-                double.TryParse(filtri["latitudine"].Replace(".", ","), System.Globalization.NumberStyles.Number, System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), out lat);
-                double lon = 0;
-                double.TryParse(filtri["longitudine"].Replace(".", ","), System.Globalization.NumberStyles.Number, System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), out lon);
-                if (lat != 0 && lon != 0)
+                bool filtriaggiunti = false;
+                //aggiungere i paametri per il fitraggio su tabella scaglioni, raccogliendo gli id per idlist 
+                //////////// campi di filtro per scaglioni: 
+                /////prezzo scaglione (@PrezzoMin)(@PrezzoMax) 
+                string idlistattivitafilter = "";
+                List<SQLiteParameter> parCollScaglioni = new List<SQLiteParameter>();
+                if (filtri.ContainsKey("prezzofilter") && !string.IsNullOrEmpty(filtri["prezzofilter"]))
                 {
-                    List<string> idlist = GetIdinRange(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, lat, lon);
-
-                    //Se non ho risultati -> nessun risultato nel raggio indicato Aggiungo l'id 0 in modo da non avere sisuramente risultati!!!
-                    if (idlist.Count == 0)
-                        idlist.Add("0");
-
-                    string idlistfiltro = "";
-                    idlist.ForEach(i => idlistfiltro += i + ",");
-                    idlistfiltro = idlistfiltro.TrimEnd(',');
-                    if (!string.IsNullOrEmpty(idlistfiltro))
+                    string[] prezzi = filtri["prezzofilter"].Split('|');
+                    if (prezzi.Length == 2)
                     {
-                        SQLiteParameter pidlist = new SQLiteParameter("@IdList", idlistfiltro);
-                        parColl.Add(pidlist);
+                        SQLiteParameter pprezzominscaglioni = new SQLiteParameter("@PrezzoMin", prezzi[0]);
+                        parCollScaglioni.Add(pprezzominscaglioni);
+                        SQLiteParameter pprezzomaxscaglioni = new SQLiteParameter("@PrezzoMax", prezzi[1]);
+                        parCollScaglioni.Add(pprezzomaxscaglioni);
+                        filtriaggiunti = true;
                     }
+                }
+                //da inserire tutti gli altri parametri di filtro scaglioni nella collection dei paramentri di filtraggio parCollScaglioni
+                //da finire  datapartenza (@Data_inizio)(@Data_fine), stato viaggio (@stato), durata viaggio  (@duratamin)(@duratamax), fascia di eta (@fasciaeta), coordinatore (@idcoordinatore)
+
+
+                if (filtri.ContainsKey("statusconfirmfilter") && !string.IsNullOrEmpty(filtri["statusconfirmfilter"]))
+                {
+                    //  (@stato) nei filtr in questo caso voglio normalmente gli stati 3 o 4  ( sarebbe da fare un radio button invece di una ddl ... ) -tutti -confermati/quasi confermati/quasi completi ( stati 2,3,4)
+                    //{"0":"iscrizioni aperte","1":"quasi confermato","2":"confermato","3":"quasi completo","4":"completo","5":"in partenza","6":"scaduto","7":"sospeso"}
+                    string valorifiltro = "";
+                    if (filtri["statusconfirmfilter"] == "true")
+                        valorifiltro = "2,3";
+                    {
+                        SQLiteParameter pstatoscaglioni = new SQLiteParameter("@stato", valorifiltro);
+                        parCollScaglioni.Add(pstatoscaglioni);
+                        filtriaggiunti = true;
+                    }
+                }
+                else if (filtri.ContainsKey("statuslistfilter") && !string.IsNullOrEmpty(filtri["statuslistfilter"]))
+                {
+                    //  (@stato) nei filtr in questo caso voglio normalmente gli stati 3 o 4  ( sarebbe da fare un radio button invece di una ddl ... ) -tutti -confermati/quasi confermati/quasi completi ( stati 2,3,4)
+                    //{"0":"iscrizioni aperte","1":"quasi confermato","2":"confermato","3":"quasi completo","4":"completo","5":"in partenza","6":"scaduto","7":"sospeso"}
+                    SQLiteParameter pstatoscaglioni = new SQLiteParameter("@stato", filtri["statuslistfilter"]);
+                    parCollScaglioni.Add(pstatoscaglioni);
+                    filtriaggiunti = true;
 
                 }
+                if (filtri.ContainsKey("etalistfilter") && !string.IsNullOrEmpty(filtri["etalistfilter"]))
+                {
+                    // dafare  (@fasciaeta)
+                    SQLiteParameter petacaglioni = new SQLiteParameter("@fasciaeta", filtri["etalistfilter"]);
+                    parCollScaglioni.Add(petacaglioni);
+                    filtriaggiunti = true;
+
+                }
+                if (filtri.ContainsKey("duratalistfilter") && !string.IsNullOrEmpty(filtri["duratalistfilter"]))
+                {
+                    // dafare (@duratamin)(@duratamax) 
+                    filtriaggiunti = true;
+                    SQLiteParameter pduratascaglioni = new SQLiteParameter("@duratamax", filtri["duratalistfilter"]);
+                    parCollScaglioni.Add(pduratascaglioni);
+                    filtriaggiunti = true;
+
+                }
+
+                if (filtri.ContainsKey("datapartenzafilter") && !string.IsNullOrEmpty(filtri["datapartenzafilter"]))
+                {
+                    // dafare (@Data_inizio)(@Data_fine)
+                    string[] date = filtri["datapartenzafilter"].Split('|');
+                    if (date.Length == 2)
+                    {
+                        DateTime _tmpdate = System.DateTime.Now;
+                        DateTime? ds = null;
+                        DateTime? de = null;
+
+                        if (DateTime.TryParseExact(date[0], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate))
+                            ds = _tmpdate;
+                        if (DateTime.TryParseExact(date[1], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate))
+                            de = _tmpdate;
+                        if (ds != null && de != null)
+                        {
+                            ////prendo sempre da inizio a fine mese ( per non essere troppo stringente sulla data di partenza )
+                            ////primo giorno del mese per la data di inizio
+                            //var firstDayOfMonths = new DateTime(ds.Value.Year, ds.Value.Month, 1);
+                            ////ultimo giorno del mese per la data di fine
+                            //var firstDayOfMonthe = new DateTime(de.Value.Year, de.Value.Month, 1);
+                            //var lastDayOfMonthe = firstDayOfMonthe.AddMonths(1).AddDays(-1);
+
+                            //allargo il range impostato di +-20 gg per non essere troppo stretto con i filtri
+                            int rangeextend = 15;
+                            DateTime datapartenza = ds.Value.AddDays(-rangeextend);
+                            DateTime dateritorno = de.Value.AddDays(+rangeextend);
+
+                            //ceccare che se il parametro (@Data_inizio) passato è minore di oggi -> metto minimo oggi
+                            if (datapartenza < System.DateTime.Now) datapartenza = System.DateTime.Now;
+                            SQLiteParameter ppdataminscaglioni = new SQLiteParameter("@Data_inizio", datapartenza);
+                            parCollScaglioni.Add(ppdataminscaglioni);
+                            SQLiteParameter pdatamaxscaglioni = new SQLiteParameter("@Data_fine", dateritorno);
+                            parCollScaglioni.Add(pdatamaxscaglioni);
+                            filtriaggiunti = true;
+                        }
+                    }
+                }
+                //filtra solo quelli con partenza maggiore della data attuale in caso di almento un filtro aggiunto per gli  scaglioni
+                if (filtriaggiunti && !parCollScaglioni.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_inizio"; }))
+                {
+                    SQLiteParameter pdatapartenza = new SQLiteParameter("@Data_inizio", System.DateTime.Now);
+                    parCollScaglioni.Add(pdatapartenza);
+                }
+
+                if (parCollScaglioni.Count > 0)
+                {
+                    ScaglioniCollection filteredscaglioni = offerteDM.CaricaOfferteScaglioni(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parCollScaglioni);
+                    filteredscaglioni.ForEach(s => idlistattivitafilter += s.id_attivita.ToString() + ","); //prendo la lista degli id attività
+                    idlistattivitafilter = idlistattivitafilter.TrimEnd(',');
+
+                }
+                if (filtriaggiunti) //se esiste una lista di id da filtrare o ho eseguito la ricerca con risultati nessun id -> devo filtrare tenendone conto (... )
+                {
+                    if (string.IsNullOrEmpty(idlistattivitafilter)) idlistattivitafilter = "0,"; //se il filtro scaglioni ha girato e non ha dato risultati -> devo 
+                    SQLiteParameter pidlist = new SQLiteParameter("@IdList", idlistattivitafilter);
+                    parColl.Add(pidlist);
+                }
             }
+            /////////////FILTRI IN BASE A SCAGLIONI //////////////////////////////////////////////////////////
+
+            /////////////FILTRI IN BASE ALLA POSZIONE GEOGRAFICA (per ora esclusiva rispetto a quelle sopra) //////////////////////////////////////////////////////////
+            if (!parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@IdList"; }))
+            {
+                if (filtri.ContainsKey("latitudine") && !string.IsNullOrEmpty(filtri["longitudine"]))
+                {
+                    double lat = 0;
+                    double.TryParse(filtri["latitudine"].Replace(".", ","), System.Globalization.NumberStyles.Number, System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), out lat);
+                    double lon = 0;
+                    double.TryParse(filtri["longitudine"].Replace(".", ","), System.Globalization.NumberStyles.Number, System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), out lon);
+                    if (lat != 0 && lon != 0)
+                    {
+                        List<string> idlist = GetIdinRange(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, lat, lon);
+                        //Se non ho risultati -> nessun risultato nel raggio indicato Aggiungo l'id 0 in modo da non avere sisuramente risultati!!!
+                        if (idlist.Count == 0)
+                            idlist.Add("0");
+
+                        string idlistfiltro = "";
+                        idlist.ForEach(i => idlistfiltro += i + ",");
+                        idlistfiltro = idlistfiltro.TrimEnd(',');
+                        if (!string.IsNullOrEmpty(idlistfiltro))
+                        {
+                            SQLiteParameter pidlist = new SQLiteParameter("@IdList", idlistfiltro);
+                            parColl.Add(pidlist);
+                        }
+
+                    }
+                }
+            }
+            /////////////FILTRI IN BASE ALLA POSZIONE GEOGRAFICA //////////////////////////////////////////////////////////
+
+
 
             if (filtri.ContainsKey("id") && !string.IsNullOrEmpty(filtri["id"]))
             {
@@ -5318,34 +5618,8 @@ namespace WelcomeLibrary.DAL
             }
             else
                 offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxrecords, lingua, null, "");
-            //}
-            //else
-            //    offerte = filtri[4];
 
 
-#if false
-        /*Old paging method*/
-        if (offerte != null && offerte.Count > 0 && enabledpager && page != 0 && pagesize != 0)
-        {
-            //Facciamo il take skip
-            int start = ((page - 1) * pagesize);
-            //int end = start + pagesize - 1;
-            if (start + pagesize > offerte.Count - 1)
-                filteredData = offerte.GetRange(start, offerte.Count - start);
-            else
-                filteredData = offerte.GetRange(start, pagesize);
-        }
-        else filteredData = offerte;
-#endif
-#if false
-        if (filtri.ContainsKey("maxelement") && !string.IsNullOrEmpty(filtri["maxelement"]))
-        {
-            int maxelem = 0;
-            int.TryParse(filtri["maxelement"], out maxelem);
-            if (maxelem < filteredData.Count())
-                filteredData = filteredData.GetRange(0, maxelem);
-        } 
-#endif
             /////////////////////////////////////////////////////////
             //Settiamo in base alla lingua la foto di anteprima 
             /////////////////////////////////////////////////////////
@@ -5491,21 +5765,15 @@ namespace WelcomeLibrary.DAL
                 if (visite != null && visite.ContainsKey(_o.Id))
                     numeroviews = visite[_o.Id].ToString();
                 tmp.Add("views", numeroviews); //Numero di visualizzazioni della scheda
-
-
                 string mediastars = "";
                 if (scores != null && scores.ContainsKey(_o.Id) && scores[_o.Id].Count > 0)
                     //mediastars = scores[_o.Id][0].ToString();
                     mediastars = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N1}", new object[] { scores[_o.Id][0] }).Replace(".", "").Replace(",", ".");// scores[_o.Id][0].ToString();
-
-
                 tmp.Add("stars", mediastars); //media delle recensioni per la scheda
                 string nfeeds = "";
                 if (scores != null && scores.ContainsKey(_o.Id) && scores[_o.Id].Count > 1)
                     nfeeds = scores[_o.Id][1].ToString();
                 tmp.Add("nfeeds", nfeeds); //numero delle recensioni per la scheda
-
-
                 tmp.Add("contactlink", contactlink);
                 tmp.Add("prenotalink", prenotalink);
                 tmp.Add("printlink", printlink);
@@ -5521,10 +5789,11 @@ namespace WelcomeLibrary.DAL
                 tmp.Add("avatar", pathavatar);
                 tmp.Add("video", _o.linkVideo);
 
-                //DETTAGLI PER LA LISTA COMPLETA ALLEGATI //////////////////////////////////
+                //DETTAGLIO PER SINGOLA SCHEDA COMPLETAMENTO CON ALLEGATI, PREV/NEXT RECORD / ALTRI DETTAGLI //////////////////////////////////
                 if (filteredData != null && filteredData.Count == 1)  //Si riempiono solo per la scheda singola
                 {
 
+                    #region creazione link prev e next
                     /****CREO IL LINK ALLA SCHEDA PRECEDENTRE E PROSSIMA RISPETTO ALLA SCHEDA ATTUALE **********/
                     //Carichiamo la prossima e precedente scheda di settore !!!
                     if (parColl.Exists(delegate (SQLiteParameter _par) { return _par.ParameterName == "@Id"; }))
@@ -5564,8 +5833,6 @@ namespace WelcomeLibrary.DAL
                         SQLiteParameter pc2liv = new SQLiteParameter("@CodiceCategoria2Liv", _o.CodiceCategoria2Liv);
                         parColl.Add(pc2liv);
                     }
-
-
                     Dictionary<string, Offerte> prevnextcontent = offDM.CaricaPrevNextOfferte(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl);
                     if (prevnextcontent != null)
                     {
@@ -5584,15 +5851,32 @@ namespace WelcomeLibrary.DAL
                             tmp.Add("nextlinktext", prevnextcontent["next"].DenominazionebyLingua(lingua));
                         }
                     }
-                    /*****************************************************************************************************/
+                    /* FINE CREAZIONE LINK PREV E NEXT *******************************************************************************************/
+                    #endregion
+
+
+                    #region CARICAMENTO DETTAGLIO SCAGLIONI PER LA SCHEDA ATTUALE 
+
+                    //Se non attivo il caricamento degli scaglioni nel load della lista offerte ( ! l'ho attivato )
+                    //List<SQLiteParameter> parscaglioni = new List<SQLiteParameter>();
+                    //SQLiteParameter pidact = new SQLiteParameter("@id_attivita", _o.Id);
+                    //parscaglioni.Add(pidact);
+                    //ScaglioniCollection scaglioniperid = offDM.CaricaOfferteScaglioni(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parscaglioni);
+                    //tmp.Add("Scaglioni", Newtonsoft.Json.JsonConvert.SerializeObject(scaglioniperid));
+
+                    //se attivo il caricamento scaglioni in lista offerte ( prendo dall'elemento della lista offerte caricata )
+                    tmp.Add("Scaglioni", Newtonsoft.Json.JsonConvert.SerializeObject(_o.Scaglioni));
+
+                    #endregion
+
+
+                    #region creazione liste immagini e file allegati
 
                     List<string> imagescomplete = new List<string>();
                     List<string> imagesdesc = new List<string>();
                     List<string> imagesratio = new List<string>();
                     List<string> filescomplete = new List<string>();
                     List<string> filesdesc = new List<string>();
-
-
                     if ((_o != null) && (_o.FotoCollection_M.Count > 0))
                     {
                         foreach (Allegato a in _o.FotoCollection_M)
@@ -5602,9 +5886,7 @@ namespace WelcomeLibrary.DAL
                                 //IMMAGINE
                                 string tmppathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString(), true, true);
                                 tmppathimmagine = filemanage.SelectImageByResolution(tmppathimmagine, Utility.ViewportwManagerGet(sessionid));
-
                                 string abspathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-
                                 imagescomplete.Add(abspathimmagine);
                                 //a.Descrizione -> dove la mettiamo
                                 imagesdesc.Add(a.DescrizionebyLingua(lingua));
@@ -5621,14 +5903,11 @@ namespace WelcomeLibrary.DAL
                             }
                             else
                             {
-                                //a.Descrizione -> dove la mettiamo
                                 string tmppathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, _o.CodiceTipologia, _o.Id.ToString(), true, true);
                                 //tmppathimmagine = filemanage.SelectImageByResolution(tmppathimmagine,  Utility.ViewportwManagerGet(sessionid));
-
                                 tmppathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                                 filescomplete.Add(tmppathimmagine);
                                 filesdesc.Add(a.DescrizionebyLingua(lingua));
-
                             }
                         }
                     }
@@ -5641,6 +5920,8 @@ namespace WelcomeLibrary.DAL
                         tmp.Add("fileslist", Newtonsoft.Json.JsonConvert.SerializeObject(filescomplete));
                         tmp.Add("filesdesc", Newtonsoft.Json.JsonConvert.SerializeObject(filesdesc));
                     }
+                    #endregion
+
                 }
                 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -6942,6 +7223,8 @@ namespace WelcomeLibrary.DAL
                 parColl.Add(pcom);
                 SQLiteParameter ptip = new SQLiteParameter("@CodiceTIPOLOGIA", "%");
                 parColl.Add(ptip);
+                SQLiteParameter pnaz = new SQLiteParameter("@CodiceNazione", "%");
+                parColl.Add(pnaz);
                 SQLiteParameter preg = new SQLiteParameter("@CodiceREGIONE", "%");
                 parColl.Add(preg);
                 SQLiteParameter prmin = new SQLiteParameter("@PrezzoMin", "0");
@@ -7063,6 +7346,8 @@ namespace WelcomeLibrary.DAL
                 parColl.Add(pcom);
                 SQLiteParameter ptip = new SQLiteParameter("@CodiceTIPOLOGIA", "%");
                 parColl.Add(ptip);
+                SQLiteParameter pnaz = new SQLiteParameter("@CodiceNAZIONE", "%");
+                parColl.Add(pnaz);
                 SQLiteParameter preg = new SQLiteParameter("@CodiceREGIONE", "%");
                 parColl.Add(preg);
                 SQLiteParameter prmin = new SQLiteParameter("@PrezzoMin", "0");
@@ -7665,5 +7950,477 @@ namespace WelcomeLibrary.DAL
 
 
         #endregion
+
+        #region GESTIONE TABELLA SCAGLIONI ATTIVITA _tblarchivioscaglioni
+
+
+
+        /// <summary>
+        /// Carica la lista dettaglio scaglioni dalla tabella in base ai parametri filtro passati
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="parColl"></param>
+        /// <param name="campoordinamento"></param>
+        /// <param name="page"></param>
+        /// <param name="pagesize"></param>
+        /// <returns></returns>
+        public static ScaglioniCollection CaricaOfferteScaglioni(string connection, List<SQLiteParameter> parColl, string campoordinamento = "", long page = 1, long pagesize = 0)
+        {
+            ScaglioniCollection list = new ScaglioniCollection();
+            if (connection == null || connection == "") return list;
+            Scaglioni item;
+
+            try
+            {
+                List<SQLiteParameter> _parUsed = new List<SQLiteParameter>();
+
+                string query = "";
+                string queryfilter = "";
+                query = "SELECT * FROM TBL_ATTIVITA_SCAGLIONI";
+
+
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@id"; }))
+                {
+                    SQLiteParameter pidlist = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@id"; });
+                    string listaid = pidlist.Value.ToString();
+                    listaid = listaid.Trim().ToString().Replace("|", ",");
+
+                    if (!listaid.Contains(","))
+                    {
+                        _parUsed.Add(pidlist);
+                        if (!queryfilter.ToLower().Contains("where"))
+                            queryfilter += " WHERE id like @id ";
+                        else
+                            queryfilter += " AND id like @id  ";
+                    }
+                    else
+                    {
+                        string[] listaarray = listaid.Trim().Split(',');
+                        if (listaarray != null && listaarray.Length > 0)
+                        {
+                            if (!queryfilter.ToLower().Contains("where"))
+                                queryfilter += " WHERE id in (    ";
+                            else
+                                queryfilter += " AND  id in (      ";
+                            foreach (string codice in listaarray)
+                            {
+                                if (!string.IsNullOrEmpty(codice.Trim()))
+                                    queryfilter += " " + codice + " ,";
+                            }
+                            queryfilter = queryfilter.TrimEnd(',') + " ) ";
+                        }
+                    }
+                }
+
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@id_attivita"; }))
+                {
+                    SQLiteParameter pidlist = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@id_attivita"; });
+                    string listaid = pidlist.Value.ToString();
+                    listaid = listaid.Trim().ToString().Replace("|", ",");
+
+                    if (!listaid.Contains(","))
+                    {
+                        _parUsed.Add(pidlist);
+                        if (!queryfilter.ToLower().Contains("where"))
+                            queryfilter += " WHERE id_attivita like @id_attivita ";
+                        else
+                            queryfilter += " AND id_attivita like @id_attivita  ";
+                    }
+                    else
+                    {
+                        string[] listaarray = listaid.Trim().Split(',');
+                        if (listaarray != null && listaarray.Length > 0)
+                        {
+                            if (!queryfilter.ToLower().Contains("where"))
+                                queryfilter += " WHERE id_attivita in (    ";
+                            else
+                                queryfilter += " AND  id_attivita in (      ";
+                            foreach (string codice in listaarray)
+                            {
+                                if (!string.IsNullOrEmpty(codice.Trim()))
+                                    queryfilter += " " + codice + " ,";
+                            }
+                            queryfilter = queryfilter.TrimEnd(',') + " ) ";
+                        }
+                    }
+                }
+
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@idcoordinatore"; }))
+                {
+                    SQLiteParameter pidlist = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@idcoordinatore"; });
+                    string listaid = pidlist.Value.ToString();
+
+                    listaid = listaid.Trim().ToString().Replace("|", ",");
+
+                    if (!listaid.Contains(","))
+                    {
+                        _parUsed.Add(pidlist);
+                        if (!queryfilter.ToLower().Contains("where"))
+                            queryfilter += " WHERE idcoordinatore like @idcoordinatore ";
+                        else
+                            queryfilter += " AND idcoordinatore like @idcoordinatore  ";
+                    }
+                    else
+                    {
+                        string[] listaarray = listaid.Trim().Split(',');
+                        if (listaarray != null && listaarray.Length > 0)
+                        {
+                            if (!queryfilter.ToLower().Contains("where"))
+                                queryfilter += " WHERE idcoordinatore in (    ";
+                            else
+                                queryfilter += " AND  idcoordinatore in (      ";
+                            foreach (string codice in listaarray)
+                            {
+                                if (!string.IsNullOrEmpty(codice.Trim()))
+                                    queryfilter += " " + codice + " ,";
+                            }
+                            queryfilter = queryfilter.TrimEnd(',') + " ) ";
+                        }
+                    }
+                }
+
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@fasciaeta"; }))
+                {
+
+                    SQLiteParameter ptip = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@fasciaeta"; });
+                    ptip.Value = ptip.Value.ToString().Trim().Replace("|", ",");
+
+                    if (!ptip.Value.ToString().Contains(","))
+                    {
+                        _parUsed.Add(ptip);
+                        if (!queryfilter.ToLower().Contains("where"))
+                            queryfilter += " WHERE fasciaeta like @fasciaeta ";
+                        else
+                            queryfilter += " AND fasciaeta like @fasciaeta  ";
+                    }
+                    else
+                    {
+                        string[] codici = ptip.Value.ToString().Split(',');
+                        if (codici != null && codici.Length > 0)
+                        {
+                            if (!queryfilter.ToLower().Contains("where"))
+                                queryfilter += " WHERE fasciaeta in (    ";
+                            else
+                                queryfilter += " AND  fasciaeta in (      ";
+                            foreach (string codice in codici)
+                            {
+                                if (!string.IsNullOrEmpty(codice.Trim()))
+                                    queryfilter += " " + codice + " ,";
+                            }
+                            queryfilter = queryfilter.TrimEnd(',') + " ) ";
+                        }
+                    }
+                }
+
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@stato"; }))
+                {
+
+                    SQLiteParameter ptip = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@stato"; });
+                    ptip.Value = ptip.Value.ToString().Trim().Replace("|", ",");
+
+                    if (!ptip.Value.ToString().Contains(","))
+                    {
+                        _parUsed.Add(ptip);
+                        if (!queryfilter.ToLower().Contains("where"))
+                            queryfilter += " WHERE stato like @stato ";
+                        else
+                            queryfilter += " AND stato like @stato  ";
+                    }
+                    else
+                    {
+                        string[] codici = ptip.Value.ToString().Split(',');
+                        if (codici != null && codici.Length > 0)
+                        {
+                            if (!queryfilter.ToLower().Contains("where"))
+                                queryfilter += " WHERE stato in (    ";
+                            else
+                                queryfilter += " AND  stato in (      ";
+                            foreach (string codice in codici)
+                            {
+                                if (!string.IsNullOrEmpty(codice.Trim()))
+                                    queryfilter += " " + codice + " ,";
+                            }
+                            queryfilter = queryfilter.TrimEnd(',') + " ) ";
+                        }
+                    }
+                }
+
+
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@duratamin"; }))
+                {
+                    SQLiteParameter pdura = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@duratamin"; });
+                    _parUsed.Add(pdura);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE durata >= @duratamin ";
+                    else
+                        queryfilter += " AND durata >= @duratamin  ";
+                }
+
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@duratamax"; }))
+                {
+                    SQLiteParameter pdura = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@duratamax"; });
+                    _parUsed.Add(pdura);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE durata <= @duratamax ";
+                    else
+                        queryfilter += " AND durata <= @duratamax  ";
+                }
+
+
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@PrezzoMin"; }))
+                {
+                    SQLiteParameter ppmin = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@PrezzoMin"; });
+                    _parUsed.Add(ppmin);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE prezzo >= @PrezzoMin ";
+                    else
+                        queryfilter += " AND prezzo >= @PrezzoMin  ";
+                }
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@PrezzoMax"; }))
+                {
+                    SQLiteParameter ppmax = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@PrezzoMax"; });
+                    _parUsed.Add(ppmax);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE  prezzo <= @PrezzoMax  ";
+                    else
+                        queryfilter += " AND  prezzo <= @PrezzoMax   ";
+                }
+
+
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_fine"; }))
+                {
+
+                    SQLiteParameter _datafine = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_fine"; });
+                    SQLiteParameter datafine = new SQLiteParameter(_datafine.ParameterName, _datafine.Value);
+                    _parUsed.Add(datafine);
+
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE  (   datapartenza <= @Data_fine )  ";
+                    else
+                        queryfilter += " AND   (   datapartenza <= @Data_fine )  ";
+                }
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_inizio"; }))
+                {
+                    SQLiteParameter _datainizio = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_inizio"; });
+                    SQLiteParameter datainizio = new SQLiteParameter(_datainizio.ParameterName, _datainizio.Value);
+                    _parUsed.Add(datainizio);
+
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE  ( datapartenza >= @Data_inizio   )  ";
+                    else
+                        queryfilter += " AND   ( datapartenza >= @Data_inizio   )  ";
+                }
+
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@annofiltro"; }))
+                {
+                    SQLiteParameter _annofiltro = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@annofiltro"; });
+                    SQLiteParameter annofiltro = new SQLiteParameter(_annofiltro.ParameterName, _annofiltro.Value);
+                    _parUsed.Add(_annofiltro);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE ((strftime('%Y',[datapartenza])=@annofiltro))  ";
+                    else
+                        queryfilter += " AND  ((strftime('%Y',[datapartenza])=@annofiltro))    ";
+                }
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@mesefiltro"; }))
+                {
+                    SQLiteParameter _mesefiltro = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@mesefiltro"; });
+                    SQLiteParameter mesefiltro = new SQLiteParameter(_mesefiltro.ParameterName, _mesefiltro.Value);
+                    _parUsed.Add(mesefiltro);
+
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE ((strftime('%m',[datapartenza])=@mesefiltro))  ";
+                    else
+                        queryfilter += " AND  ((strftime('%m',[datapartenza])=@mesefiltro))    ";
+
+                }
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@giornofiltro"; }))
+                {
+                    SQLiteParameter _giornofiltro = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@giornofiltro"; });
+                    SQLiteParameter giornofiltro = new SQLiteParameter(_giornofiltro.ParameterName, _giornofiltro.Value);
+                    _parUsed.Add(giornofiltro);
+
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE ((strftime('%d',[datapartenza])=@giornofiltro))  ";
+                    else
+                        queryfilter += " AND  ((strftime('%d',[datapartenza])=@giornofiltro))    ";
+
+                }
+
+
+                query += queryfilter;
+
+                if (campoordinamento == "")
+                    query += "  order BY datapartenza Asc, id_attivita Desc  ";
+                else
+                    query += "  order BY " + campoordinamento + " COLLATE NOCASE Desc, datapartenza Asc, id_attivita Desc ";
+
+                //if (!string.IsNullOrEmpty(maxrecord))
+                //    query += " LIMIT " + maxrecord;
+                //else
+                //{
+                if (pagesize != 0)
+                {
+                    query += " limit " + (page - 1) * pagesize + "," + pagesize;
+                }
+                //}
+
+                /*CALCOLO IL NUMERO DI RIGHE FILTRATE TOTALI*/
+                long totalrecords = dbDataAccess.ExecuteScalar<long>("SELECT count(*) FROM  TBL_ATTIVITA_SCAGLIONI " + queryfilter, _parUsed, connection);
+                list.Totrecs = totalrecords;
+
+
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
+                using (reader)
+                {
+                    if (reader == null) { return list; };
+                    if (reader.HasRows == false)
+                        return list;
+
+                    while (reader.Read())
+                    {
+                        item = new Scaglioni();
+
+                        item.id = reader.GetInt64(reader.GetOrdinal("id"));
+                        if (!reader["id_attivita"].Equals(DBNull.Value))
+                            item.id_attivita = reader.GetInt64(reader.GetOrdinal("id_attivita"));
+                        if (!reader["idcoordinatore"].Equals(DBNull.Value))
+                            item.idcoordinatore = reader.GetInt64(reader.GetOrdinal("idcoordinatore"));
+                        if (!reader["durata"].Equals(DBNull.Value))
+                            item.durata = reader.GetInt64(reader.GetOrdinal("durata"));
+                        if (!reader["datapartenza"].Equals(DBNull.Value))
+                            item.datapartenza = reader.GetDateTime(reader.GetOrdinal("datapartenza"));
+                        if (!reader["prezzo"].Equals(DBNull.Value))
+                            item.prezzo = reader.GetDouble(reader.GetOrdinal("prezzo"));
+                        if (!reader["nconferma"].Equals(DBNull.Value))
+                            item.nconferma = reader.GetInt64(reader.GetOrdinal("nconferma"));
+                        if (!reader["nmax"].Equals(DBNull.Value))
+                            item.nmax = reader.GetInt64(reader.GetOrdinal("nmax"));
+                        if (!reader["fasciaeta"].Equals(DBNull.Value))
+                            item.fasciaeta = reader.GetInt64(reader.GetOrdinal("fasciaeta"));
+                        if (!reader["stato"].Equals(DBNull.Value))
+                            item.stato = reader.GetInt64(reader.GetOrdinal("stato"));
+                        if (!reader["codicesconto"].Equals(DBNull.Value))
+                            item.codicesconto = reader.GetString(reader.GetOrdinal("codicesconto"));
+
+                        if (!reader["jsonvalues"].Equals(DBNull.Value))
+                            item.jsonvalues = reader.GetString(reader.GetOrdinal("jsonvalues"));
+                        item.addedvalues = (!string.IsNullOrEmpty(item.jsonvalues)) ? Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(item.jsonvalues) : new Dictionary<string, string>();
+
+                        list.Add(item);
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Caricamento scaglioni :" + error.Message, error);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// Inserisce o aggiorna un elemento nella tabella scalioni attivita
+        /// </summary>
+        /// <param name="connessione"></param>
+        /// <param name="item"></param>
+        public static void InserisciAggiornaScaglioni(string connessione, Scaglioni item)
+        {
+            string ret = string.Empty;
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            if (connessione == null || connessione == "") throw new ApplicationException("no connection specified");
+            if (item.id_attivita == 0) throw new ApplicationException("no idattivita specified");
+            if (item.idcoordinatore == 0) throw new ApplicationException("no idcoordinator specified");
+            if (item.durata == 0) throw new ApplicationException("no durata specified");
+            if (item.datapartenza == null) throw new ApplicationException("no datapartenza specified");
+
+
+            SQLiteParameter p2 = new SQLiteParameter("@id_attivita", item.id_attivita);
+            parColl.Add(p2);
+            SQLiteParameter p3 = new SQLiteParameter("@idcoordinatore", item.idcoordinatore);
+            parColl.Add(p3);
+            SQLiteParameter p5 = new SQLiteParameter("@datapartenza", item.datapartenza);
+            parColl.Add(p5);
+            SQLiteParameter p5b = new SQLiteParameter("@durata", item.durata);
+            parColl.Add(p5b);
+
+            SQLiteParameter p6 = new SQLiteParameter("@prezzo", item.prezzo);
+            parColl.Add(p6);
+            SQLiteParameter p7 = new SQLiteParameter("@nconferma", item.nconferma);
+            parColl.Add(p7);
+            SQLiteParameter p8 = new SQLiteParameter("@nmax", item.nmax);
+            parColl.Add(p8);
+            SQLiteParameter p9 = new SQLiteParameter("@fasciaeta", item.fasciaeta);
+            parColl.Add(p9);
+            SQLiteParameter p10 = new SQLiteParameter("@stato", item.stato);
+            parColl.Add(p10);
+            SQLiteParameter p11 = new SQLiteParameter("@codicesconto", item.codicesconto);
+            parColl.Add(p11);
+            SQLiteParameter p12 = new SQLiteParameter("@jsonvalues", item.jsonvalues);
+            parColl.Add(p12);
+
+            string query = "";
+            if (item.id != 0)
+            {
+                //Update
+                query = "UPDATE TBL_ATTIVITA_SCAGLIONI SET id_attivita=@id_attivita,idcoordinatore=@idcoordinatore,datapartenza=@datapartenza,durata=@durata,prezzo=@prezzo,nconferma=@nconferma ,nmax=@nmax ,fasciaeta=@fasciaeta ,stato=@stato,codicesconto=@codicesconto,jsonvalues=@jsonvalues  ";
+                query += " WHERE [id] = " + item.id;
+            }
+            else
+            {
+                //Insert
+                query = "INSERT INTO TBL_ATTIVITA_SCAGLIONI (id_attivita,idcoordinatore,datapartenza,durata,prezzo,nconferma,nmax,fasciaeta,stato,codicesconto,jsonvalues )";
+                query += " values ( ";
+                query += "@id_attivita,@idcoordinatore,@datapartenza,@durata,@prezzo,@nconferma,@nmax,@fasciaeta,@stato,@codicesconto,@jsonvalues )";
+            }
+
+            try
+            {
+                long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                if (item.id == 0) item.id = lastidentity; //Inserisco nell'id dell'elemento inseito l'id generato dal db   
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, inserimento/aggiornamento  :" + error.Message, error);
+            }
+            return;
+        }
+
+        /// <summary>
+        /// Cancella una voce in tabella attivita scaglioni per id o id_attivita
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="id"></param>
+        /// <param name="id_attivita"></param>
+        public static string CancellaScaglioni(string connection, long id, string id_attivita = "")
+        {
+            if (connection == null || connection == "") return "noconnection specified";
+
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@id", id);//OleDbType.VarChar
+            parColl.Add(p1);
+            string query = "DELETE FROM TBL_ATTIVITA_SCAGLIONI WHERE ([id]=@id) ";
+            if (!string.IsNullOrEmpty(id_attivita))
+            {
+                SQLiteParameter p2 = new SQLiteParameter("@id_attivita", id_attivita);//OleDbType.VarChar
+                parColl.Add(p2);
+                query += " or id_attivita = @id_attivita ";
+            }
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connection);
+            }
+            catch (Exception error)
+            {
+                return error.Message.ToString();
+                //throw new ApplicationException("Errore, cancellazione   :" + error.Message, error);
+            }
+            return "";
+        }
+
+
+
+        #endregion
+
+
     }
 }

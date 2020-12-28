@@ -16,9 +16,20 @@ using ActiveUp.Net;
 using ActiveUp.Net.Mail;
 using ActiveUp.Net.Security;
 using Newtonsoft.Json;
+using System.Collections.Specialized;
 
 namespace WelcomeLibrary.UF
 {
+
+    public class listegeografiche
+    {
+        public OrderedDictionary ListNazione = new OrderedDictionary();
+        public OrderedDictionary ListRegione = new OrderedDictionary();
+        public OrderedDictionary ListProvincia = new OrderedDictionary();
+        public OrderedDictionary ListComune = new OrderedDictionary();
+        //public string Lingua = "";
+
+    }
 
     public class ResultAutocomplete
     {
@@ -26,6 +37,8 @@ namespace WelcomeLibrary.UF
         public string label { get; set; }
         public string value { get; set; }
         public string codice { get; set; }
+        public string link { get; set; }
+        public string linktext { get; set; }
         public string email { get; set; }
         public string nome { get; set; }
         public string cognome { get; set; }
@@ -66,6 +79,14 @@ namespace WelcomeLibrary.UF
 
     public static class Utility
     {
+        public static string reformatdatetimestring(string inputdatetext, string inputformat = "yyyy-MM-dd HH:mm:ss", string outformat = "{0:dd/MM/yyyy}")
+        {
+            string ret = "";
+            DateTime _dt;
+            if (DateTime.TryParseExact(inputdatetext, inputformat, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _dt))
+                ret = string.Format(outformat, _dt);
+            return ret;
+        }
 
         public static string waitwrappercall(string functionname, string functioncall, string mseconds = "300")
         {
@@ -1597,7 +1618,7 @@ namespace WelcomeLibrary.UF
             //Caratteristica6
             Caratteristiche.Add(CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica6"));
 
-            Caratteristiche[2].Sort(new WelcomeLibrary.UF.GenericComparer<WelcomeLibrary.DOM.Tabrif>("Double1", System.ComponentModel.ListSortDirection.Ascending));
+            //Caratteristiche[2].Sort(new WelcomeLibrary.UF.GenericComparer<WelcomeLibrary.DOM.Tabrif>("Double1", System.ComponentModel.ListSortDirection.Ascending));
             Caratteristiche[3].Sort(new WelcomeLibrary.UF.GenericComparer<WelcomeLibrary.DOM.Tabrif>("Double1", System.ComponentModel.ListSortDirection.Ascending));
             Caratteristiche[4].Sort(new WelcomeLibrary.UF.GenericComparer<WelcomeLibrary.DOM.Tabrif>("Double1", System.ComponentModel.ListSortDirection.Ascending));
 

@@ -121,7 +121,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
                     //{
                     //    File.Delete(pathDestinazione + "\\" + NomeCorretto);
                     //}
-                    if (fileupload.PostedFile.ContentType == "image/jpeg" || fileupload.PostedFile.ContentType == "image/pjpeg"   || fileupload.PostedFile.ContentType == "image/png")
+                    if (fileupload.PostedFile.ContentType == "image/jpeg" || fileupload.PostedFile.ContentType == "image/pjpeg" ||   fileupload.PostedFile.ContentType == "image/png")
                     {
                         bool ridimensiona = true;
                         //RIDIMENSIONO E FACCIO L'UPLOAD DELLA FOTO!!!
@@ -135,13 +135,21 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
 
                         }
                     }
-                    //else if (fileupload.PostedFile.ContentType == "application/pdf")
-                    //{
-                    //    //ANZICHE COME FOTO LO CARICO COME DOCUMENTO PERCHE' NON RICONOSCO IL FORMATO  
-                    //    //    outupload.Text = ("La foto non è stata caricata! (Formato non previsto)"); 
-                    //    fileupload.PostedFile.SaveAs(pathDestinazione + "\\" + NomeCorretto);
-                    //}
-                    else error += ("La foto non è stata caricata! (Formato non previsto)");
+                    else if (fileupload.PostedFile.ContentType == "application/pdf")
+                    {
+                        //ANZICHE COME FOTO LO CARICO COME DOCUMENTO PERCHE' NON RICONOSCO IL FORMATO  
+                        //    outupload.Text = ("La foto non è stata caricata! (Formato non previsto)"); 
+                        fileupload.PostedFile.SaveAs(pathDestinazione + "\\" + NomeCorretto);
+                        rethtml = ReplaceAbsoluteLinks(percorsovirtualedestinazione + NomeCorretto);
+                    }
+                    else
+                    {
+                        //ANZICHE COME FOTO LO CARICO COME DOCUMENTO PERCHE' NON RICONOSCO IL FORMATO  
+                        //    outupload.Text = ("La foto non è stata caricata! (Formato non previsto)"); 
+                        fileupload.PostedFile.SaveAs(pathDestinazione + "\\" + NomeCorretto);
+                        rethtml = ReplaceAbsoluteLinks(percorsovirtualedestinazione + NomeCorretto);
+                        //error += ("La foto non è stata caricata! (Formato non previsto)");
+                    }
 
                 }
             }

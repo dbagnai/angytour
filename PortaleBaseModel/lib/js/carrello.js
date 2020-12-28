@@ -89,18 +89,23 @@ var carrellotool = new function () {
         aggiungiacarrello: function (operatingtype) {
             var operatingtype = operatingtype || '';
 
-
             getjsonfield(function (jsondetails) { //Leggiamo eventuali proprieta dell'articolo e aggiungiamole all'elemento del carrello attuale
-
-                if (jsondetails != null && jsondetails.hasOwnProperty("notvalidmsg")) {
+                if (jsondetails != null && jsondetails.hasOwnProperty("notvalidmsg")) //controllo della validazione dei dati dettaglio dal form
+                {
                     $('#' + controlid + "messages").html(jsondetails["notvalidmsg"]);
                     return;
                 }
-                var Jsonfield1 = JSON.stringify(jsondetails);
+                //////////MODIFICA DEL PREZZO ARTICOLO SULLO SCAGLIONE//////////
+                var prezzo = "";
+                // forziamo il prezzo articolo per il caso degli scaglioni prendendolo dallo scaglione
+                if (jsondetails != null && jsondetails.hasOwnProperty("prezzo") && jsondetails.hasOwnProperty("idscaglione"))
+                    prezzo = jsondetails['prezzo'];
+                ////////////////////////////
 
+                var Jsonfield1 = JSON.stringify(jsondetails);
                 if (operatingtype == '') {
                     //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-                    AddCurrentCarrelloNopostback('', idprodotto, lng, username, idcombined, '', '', null, null, Jsonfield1, '', false, function (data) {
+                    AddCurrentCarrelloNopostback('', idprodotto, lng, username, idcombined, '', prezzo, null, null, Jsonfield1, '', false, function (data) {
                         var ret = "";
                         var parsedret = "";
                         if (data != null && data != "")
@@ -108,12 +113,13 @@ var carrellotool = new function () {
                         if (parsedret != null && parsedret.hasOwnProperty("id"))
                             ret = parsedret.id;
                         $('#' + controlid + "messages").html(parsedret.stato);
+                        idcarrello = ret;  //(aggiunta)comunque memorizzo l'id del record carrello inserito o modificato
                         carrellotool.caricaquantita();
                     });
                 }
                 else if (operatingtype == 'multiplo') {
                     //VERSIONE CHE PERMETTE DI INSERIRE PIù RIGHI CARRELLO CON STESSO PRODOTTO
-                    AddCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, '', null, null, Jsonfield1, '', true, function (data) {
+                    AddCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, prezzo, null, null, Jsonfield1, '', true, function (data) {
                         var ret = "";
                         var parsedret = "";
                         if (data != null && data != "")
@@ -127,25 +133,29 @@ var carrellotool = new function () {
                         carrellotool.caricaquantita(operatingtype);
                     });
                 }
-
             });
-
             return;
         },
         sottradiacarrello: function (operatingtype) {
             var operatingtype = operatingtype || '';
             getjsonfield(function (jsondetails) { //Leggiamo eventuali proprieta dell'articolo e aggiungiamole all'elemento del carrello attuale
-
-                if (jsondetails != null && jsondetails.hasOwnProperty("notvalidmsg")) {
+                if (jsondetails != null && jsondetails.hasOwnProperty("notvalidmsg")) //controllo della validazione dei dati dettaglio dal form
+                {
                     $('#' + controlid + "messages").html(jsondetails["notvalidmsg"]);
                     return;
                 }
+                //////////MODIFICA DEL PREZZO ARTICOLO SULLO SCAGLIONE//////////
+                var prezzo = "";
+                // forziamo il prezzo articolo per il caso degli scaglioni prendendolo dallo scaglione
+                if (jsondetails != null && jsondetails.hasOwnProperty("prezzo") && jsondetails.hasOwnProperty("idscaglione"))
+                    prezzo = jsondetails['prezzo'];
+                ////////////////////////////
+
+
                 var Jsonfield1 = JSON.stringify(jsondetails);
-
-
                 if (operatingtype == '') {
                     //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-                    SubtractCurrentCarrelloNopostback('', idprodotto, lng, username, idcombined, '', '', null, null, Jsonfield1, '', false, function (data) {
+                    SubtractCurrentCarrelloNopostback('', idprodotto, lng, username, idcombined, '', prezzo, null, null, Jsonfield1, '', false, function (data) {
                         var ret = "";
                         var parsedret = "";
                         if (data != null && data != "")
@@ -153,12 +163,13 @@ var carrellotool = new function () {
                         if (parsedret != null && parsedret.hasOwnProperty("id"))
                             ret = parsedret.id;
                         $('#' + controlid + "messages").html(parsedret.stato);
+                        idcarrello = ret;  //(aggiunta)comunque memorizzo l'id del record carrello inserito o modificato
                         carrellotool.caricaquantita();
                     });
                 }
                 else if (operatingtype == 'multiplo') {
                     //VERSIONE CHE  PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
-                    SubtractCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, '', null, null, Jsonfield1, '', true, function (data) {
+                    SubtractCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, prezzo, null, null, Jsonfield1, '', true, function (data) {
                         var ret = "";
                         var parsedret = "";
                         if (data != null && data != "")
@@ -211,7 +222,6 @@ var carrellotool = new function () {
             return;
         },
         calcolatotale: function () {
-
             GetPriceForItem(idprodotto, function (ret) {
                 var prezzototaleitem = '';
                 if (prv != -1 && cur != -1) {
@@ -233,12 +243,18 @@ var carrellotool = new function () {
         }
     };
 
-
+    //////////////////////////////////////////////////////////////
+    ///PREPARA IL JSON A PARTIRE DEI CAMPI DI INSERIMENTO SUL FORM
+    //////////////////////////////////////////////////////////////
     function getjsonfield(callback) {
         var jsondetails = {};
         var mustvalidate = false;
+
+        /////////////////////////////////////////////////////////////////////
+        //Memorizzazione caratteristiche secondarie selezionabili a carrello
+        /////////////////////////////////////////////////////////////////////
         $(".ddlproperties").each(function () {
-            var idelem = $(this).attr('id');
+            var idelem = $(this).attr('id');  //id delle select box
             var proprarr = $(this).attr('bindingprop');
             //////
             var needed = $(this).attr('needed');
@@ -258,16 +274,75 @@ var carrellotool = new function () {
                     }
             }
         });
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        //////////GESTIONE memorizzazione PER SCADENZE PARTENZE nel carrello
+        //////////////////////////////////////////////////////////////////////////////////////////
+        //controllo select con nome "#" + controlid + "dllscaglione" contine la lista scaglione/idscaglione selezionato
+        // controllo input di tipo hidden "#" + controlid + "hiddenscaglioni" contiene il serializzato encodedbase64 competo della lsita scaglioni
+        // controllo input di tipo hidden "#" + controlid + "hiddenstatus" contiene il serializzato encodedbase64 competo della lsita statuslist
+        // controllo input di tipo hidden "#" + controlid + "hiddenetalist" contiene il serializzato encodedbase64 competo della lsita etalist
+        if ($("#" + controlid + "dllscaglione").length) {
+            var actcontrol = $("#" + controlid + "dllscaglione");
+            var idscaglione = actcontrol.val();
+            var statoscaglione = 0;
+            var needed = actcontrol.attr('needed');
+            if (needed != null && needed != "" && needed == "true")
+                mustvalidate = true;
+            else
+                mustvalidate = false;
+            var scaglioniserialized = $("#" + controlid + "hiddenscaglioni").val();
+            scaglioniserialized = b64ToUtf8(scaglioniserialized);
+            if (scaglioniserialized != null && scaglioniserialized != '') {
+                var scaglioni = JSON.parse(scaglioniserialized);
+                //se non ci sono scaglioni inseriti
+                if (scaglioni.length != 0) {
+                    //devo cercare nella lsita scaglioni quello con id == idscaglione selezionato per inserilo nel record del carrello
+                    for (var j = 0; j < scaglioni.length; j++) {
+                        if (scaglioni[j] != null && scaglioni[j].hasOwnProperty("id") && scaglioni[j]["id"] == idscaglione) {
+
+                            //Contorllo lo stato dello scaglione per bloccare l'acquisto quando non possibile in base allo stato
+                            if (scaglioni[j].hasOwnProperty("stato"))
+                                statoscaglione = scaglioni[j]['stato'];
+                            if (!isNaN(Number(statoscaglione)))
+                                statoscaglione = Number(statoscaglione);
+
+                            //Preparazione di jsondetails mettiamo idscaglione , prezzo , datapartenza, dataritorno diretti nel record carrello jsonfield1
+                            jsondetails["idscaglione"] = idscaglione;
+                            if (scaglioni[j].hasOwnProperty("prezzo"))
+                                jsondetails["prezzo"] = scaglioni[j]['prezzo'];
+                            if (scaglioni[j] != null && scaglioni[j].hasOwnProperty("datapartenza"))
+                                jsondetails["datapartenza"] = moment(new Date(scaglioni[j]['datapartenza'])).format("YYYY-MM-DD HH:mm:ss");
+                            if (scaglioni[j] != null && scaglioni[j].hasOwnProperty("durata")) {
+                                var durata = scaglioni[j]["durata"];
+                                jsondetails["dataritorno"] = moment(new Date(scaglioni[j]['datapartenza'])).add(durata - 1, 'days').format("YYYY-MM-DD HH:mm:ss");
+                            }
+                            //Con la seguente metto nel record del carrello tutti i dati completi dello scaglione selezionato serializzato in jsonfield1
+                            //jsondetails["scaglione"] = JSON.stringify(scaglioni[j]);
+                            jsondetails["scaglione"] = scaglioni[j];
+
+
+                        }
+                    }
+                    //fare la validazione se mustvalidate e controllo stato scaglioni
+                    if (mustvalidate)
+                        if (idscaglione == null || idscaglione == "" || statoscaglione >= 5) {
+                            if (jsondetails["notvalidmsg"] == null) jsondetails["notvalidmsg"] = (GetResourcesValue("msgcarrellovalido") + "<br/>");
+                            if (idscaglione == null || idscaglione == "" )  jsondetails["notvalidmsg"] += (GetResourcesValue("msgcarrellodata"  ) + "<br/>");
+                            if (statoscaglione >= 5) jsondetails["notvalidmsg"] += (GetResourcesValue("msgcarrellostato" ) + "<br/>");
+                        }
+                }
+            }
+
+        }
         callback(jsondetails);
     }
-
-
 
     function Visualizzatasti(abilita) {
         var abilita = abilita || false;
         var optiontype = $('#' + controlid + "qty").attr('optiontype');
 
-        if (configview == 1 || configview == 3) {
+        if (configview == 1 || configview == 3) { //versione con calendari di selezione
             $('#' + controlid + "messages").html('');
             var onclickevent = "style=\"width:160px;cursor:pointer;margin-top:10px\" onclick =\"carrellotool.inserisciacarrelloquantita()\"";
             if (!abilita) onclickevent = "style=\"width:160px;cursor:pointer;margin-top:10px\"";
@@ -275,6 +350,7 @@ var carrellotool = new function () {
             $('#' + controlid + "messages").append(btninserisci);
             carrellotool.calcolatotale();
         }
+
         if (configview == 2 || configview == 3) {
             $('#' + controlid + "addsingle").html('');
             $('#' + controlid + "plus").html('');
@@ -285,10 +361,8 @@ var carrellotool = new function () {
             var btnaggiungi = "<div class=\"button-carrello\" style=\"padding-left: 2px !important;font-size: 1.4rem;\" " + onclickevent1 + ">+</div>";
             $('#' + controlid + "plus").append(btnaggiungi);
 
-
-            var btnaggiungisingle = "<div class=\"divbuttonstyle\"  onclick =\"carrellotool.aggiungiacarrello()\">" + GetResourcesValue("testoinseriscicarrellostd") + "</div>";
+            var btnaggiungisingle = "<div class=\"divbuttonstyle\"  onclick =\"carrellotool.aggiungiacarrello('" + optiontype + "')\">" + GetResourcesValue("testoinseriscicarrellostd") + "</div>";
             $('#' + controlid + "addsingle").append(btnaggiungisingle);
-
 
             var onclickevent2 = "style=\"cursor:pointer;margin-top:10px\" onclick =\"carrellotool.sottradiacarrello('" + optiontype + "')\"";
             // if (!abilita) onclickevent1 = "style=\"width:60px;cursor:pointer;margin-top:10px\"";
@@ -315,7 +389,7 @@ var carrellotool = new function () {
                     case "":
                         break;
                 }
-                $(this).change(setviewfield);//visualizziamo in valore correlato alla selezione
+                $(this).change(setviewfield);//visualizziamo immagine correlata alla selezione
 
                 // per riempire la ddl
                 var idcontrollo = $(this).attr('id');
@@ -372,12 +446,48 @@ var carrellotool = new function () {
             });
             ///////////////////////////////////////////////////////////////////////////////////////////
 
+            ///////////////////////////////////////////////////////////////////////////////////////////
+            //////////GESTIONE VISUALIZZAZIONE PER SCADENZE PARTENZE
+            ///////////////////////////////////////////////////////////////////////////////////////////
+            if ($("#" + controlid + "dllscaglione").length) {
+                $("#" + controlid + "dllscaglione").change(setscaglionedetail);//impostiamo i valori di dettaglio nella visualizzazione se necessario
+            }
+
             carrellotool.caricaquantita(optiontype);
         }
 
     }
 
+    function setscaglionedetail() {
+        console.log('inserire qui le modifiche al form da visualizzare al cambio scaglione!!!' + ' idcarrello: ' + idcarrello);
+        //id ddl per la selizione scaglione
+        //var idcontrollo = $(event.target).attr('id');
+        //var valore = $("#" + idcontrollo + " option:selected").val(); //qyest è l'id database dello scaglione
+        //var testo = $("#" + idcontrollo + " option:selected").text();
 
+        //Prendiamo lo scaglione selezionato e visualizziamo i valori
+        //getjsonfield(function (jsondetails) { //Leggiamo eventuali proprieta dell'articolo
+        //    if (jsondetails != null && jsondetails.hasOwnProperty("prezzo") && jsondetails.hasOwnProperty("idscaglione"))
+        //        prezzo = jsondetails['prezzo'];
+        //    //controlli da valorizzare ( da vedere dove serve all'interno di jsondetails ho i valori per la visualizzazione)
+        //    // mettendoli nel template posso trovarli e modificarli di seguito
+        //    //$("#" + controlid + "testodadecidere")
+        //});
+
+        //Eliminiamo l'elemento dal carrello al cambio scaglione
+        if (idcarrello != '')
+        {
+            CancellaCurrentCarrellobyid(idcarrello, function (ret) {
+                //da vedere se mandare un messaggio
+                console.log('eliminato voce' + ret);
+                carrellotool.caricaquantita();
+            });
+        }
+
+
+    }
+
+    //Visualizza in nase alla selezione della selectbox l'immagine giusta
     function setviewfield() {
         var idcontrollo = $(event.target).attr('id');
         var valore = $("#" + idcontrollo + " option:selected").val();
@@ -394,7 +504,10 @@ var carrellotool = new function () {
 
 
     function initcalendarrange() {
+
         Visualizzatasti(false);
+
+        // casistica con selezione di periodo calendario per booking
         if (configview == 1 || configview == 3) {
             //console.log('called init initcalendarrange id: ' + controlid);
             //console.log($("#" + controlid + "calendar"));
@@ -690,6 +803,7 @@ function CancellaCurrentCarrello(callback) {
 }
 
 function CancellaCurrentCarrellobyid(idcarrello, callback) {
+    var contenitoredestinazione = '';//$(el).parent().find("[class*='carrelloelemslist']");
     $.ajax({
         destinationControl: contenitoredestinazione,
         contentType: "application/json; charset=utf-8",
@@ -707,6 +821,25 @@ function CancellaCurrentCarrellobyid(idcarrello, callback) {
     });
 }
 
+
+function CancellaOrdineByCodice(codiceordine, callback) {
+    var contenitoredestinazione = '';//$(el).parent().find("[class*='carrelloelemslist']");
+    $.ajax({
+        destinationControl: contenitoredestinazione,
+        contentType: "application/json; charset=utf-8",
+        type: "POST",
+        dataType: "text",
+        url: pathAbs + carrellohandlerpath + "?Azione=eliminaordine",
+        data: { 'codiceordine': codiceordine },
+        success: function (data) {
+            OnSuccesscarrelloNopostback('', '', callback(data));
+        },
+        failure: function (response) {
+            //  alert(response);
+            callback(result.responseText);
+        }
+    });
+}
 function OnSuccesscarrelloNopostback(response, destination, callback) {
     //$(".totalItems").empty();
     //$(".totalItems").append(response);

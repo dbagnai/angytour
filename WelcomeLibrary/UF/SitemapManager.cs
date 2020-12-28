@@ -242,7 +242,8 @@ namespace WelcomeLibrary.UF
         }
 
         /// <summary>
-        /// Crea i link urlrewrited usando il dictionarty dei parametri aggiuntivi
+        /// Crea i link urlrewrited usando il dictionarty dei parametri aggiuntivi a partre da tipologia, categoria e sottocategoria
+        /// aggiungendo i parametri aggiuntivi di filtro
         /// </summary>
         /// <param name="filtriadded"></param>
         /// <param name="lingua"></param>
@@ -507,7 +508,6 @@ namespace WelcomeLibrary.UF
         {
             Tabrif urlRewrited = new Tabrif();
             var parameters = new Dictionary<string, string>();
-
             parameters.Add("Lingua", Lingua.ToUpper());
             if (Tipologia.ToLower().StartsWith("rif"))
             {
@@ -612,8 +612,9 @@ namespace WelcomeLibrary.UF
             if (addparms != null)
                 foreach (KeyValuePair<string, string> kv in addparms)
                 {
-                    testomodificatore1 += modificatestourlbyparameter(kv, Lingua) + "-"; //estendo l'url col testo in base al filtro dei parametri aggiuntivi passati
-                    testomodificatore2 += CleanUrl(kv.Value).Replace("p", "").TrimStart('0'); ;//sono i codici concatenati per differenziare l'url
+                    string tmptxt = modificatestourlbyparameter(kv, Lingua);
+                    testomodificatore1 += (!string.IsNullOrEmpty(tmptxt)) ? tmptxt + "-" : ""; //estendo l'url col testo in base al filtro dei parametri aggiuntivi passati
+                    testomodificatore2 += CleanUrl(kv.Value).Replace("p", "").TrimStart('0'); ;//modifico il testo dell'url usando i codici concatenati per differenziare l'url a prescindere dal testo!
                 }
 
             if (!string.IsNullOrEmpty(testomodificatore2))
@@ -623,6 +624,7 @@ namespace WelcomeLibrary.UF
                     testounicolink = (testomodificatore1).Trim('-');
                 if (!string.IsNullOrEmpty(testomodificatore2))
                     testounicolink += "-p" + testomodificatore2;
+
 
                 testounicolink = testounicolink.Trim('-');
                 /////////////////////////////////////
@@ -634,7 +636,7 @@ namespace WelcomeLibrary.UF
         }
 
         /// <summary>
-        /// Modifica il testo dell'url in base al valore ed al testo relativo del panametro di filtraggio passato
+        /// Modifica il testo dell'url in base al testo relativo del panametro di filtraggio passato
         /// </summary>
         /// <param name="kv"></param>
         /// <returns></returns>
@@ -689,6 +691,31 @@ namespace WelcomeLibrary.UF
                 {
                     retxt = nomeregione.Trim();
                 }
+            }
+
+            if (kv.Key.ToLower() == ("prezzofilter"))
+            {
+                retxt = "prezzofilter"; //per ora metto fisso questo testo
+            }
+            if (kv.Key.ToLower() == ("datapartenzafilter"))
+            {
+                retxt = "datafilter"; //per ora metto fisso questo testo
+            }
+            if (kv.Key.ToLower() == ("statuslistfilter"))
+            {
+                retxt = "statuslistfilter"; //per ora metto fisso questo testo
+            }
+            if (kv.Key.ToLower() == ("statusconfirmfilter"))
+            {
+                retxt = "statusconfirmed"; //per ora metto fisso questo testo
+            }
+            if (kv.Key.ToLower() == ("etalistfilter"))
+            {
+                retxt = "etalistfilter"; //per ora metto fisso questo testo
+            }
+            if (kv.Key.ToLower() == ("duratalistfilter"))
+            {
+                retxt = "duratalistfilter"; //per ora metto fisso questo testo
             }
 
             //if (kv.Key.ToLower() == ("promozioni"))

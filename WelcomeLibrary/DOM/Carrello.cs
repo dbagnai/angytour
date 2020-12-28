@@ -123,6 +123,7 @@ namespace WelcomeLibrary.DOM
             set { _TotaleSconto = value; }
         }
 
+
         private bool _bloccaacquisto;
         public bool Bloccaacquisto
         {
@@ -145,6 +146,18 @@ namespace WelcomeLibrary.DOM
             get { return _precacconto; }
             set { _precacconto = value; }
         }
+
+        public double TotaleAcconto
+        {
+            get { return (_precacconto != 100) ? ((_TotaleSmaltimento + _TotaleSpedizione + _TotaleOrdine) - _TotaleSconto) * _precacconto / 100 : 0; }
+            //set { _TotaleAcconto = value; }
+        }
+        public double TotaleSaldo
+        {
+            get { return (_precacconto != 100) ? ((_TotaleSmaltimento + _TotaleSpedizione + _TotaleOrdine) - _TotaleSconto) * (100 - _precacconto) / 100 : (_TotaleSmaltimento + _TotaleSpedizione + _TotaleOrdine) - _TotaleSconto; }
+            //set { _TotaleSaldo = value; }
+        }
+
 
         private string _Indirizzofatturazione;
         public string Indirizzofatturazione
@@ -195,6 +208,12 @@ namespace WelcomeLibrary.DOM
         {
             get { return _pagato; }
             set { _pagato = value; }
+        }
+        private bool _pagatoacconto;
+        public bool Pagatoacconto
+        {
+            get { return _pagatoacconto; }
+            set { _pagatoacconto = value; }
         }
         private DateTime? _Dataordine;
         public DateTime? Dataordine
@@ -258,6 +277,7 @@ namespace WelcomeLibrary.DOM
             Bloccaacquisto = false;
             Note = "";
             Pagato = false;
+            Pagatoacconto = false;
             Urlpagamento = "";
             Modalitapagamento = "";
             Mailcliente = "";
@@ -267,6 +287,7 @@ namespace WelcomeLibrary.DOM
             Supplementospedizione = false;
             Supplementocontrassegno = false;
             TotaleSmaltimento = 0;
+
             Percacconto = 0;
         }
         public TotaliCarrello(TotaliCarrello tmp)
@@ -284,6 +305,7 @@ namespace WelcomeLibrary.DOM
             Indirizzospedizione = tmp.Indirizzospedizione;
             Note = tmp.Note;
             Pagato = tmp.Pagato;
+            Pagatoacconto = tmp.Pagatoacconto;
             Urlpagamento = tmp.Urlpagamento;
             Mailcliente = tmp.Mailcliente;
             Modalitapagamento = tmp.Modalitapagamento;
@@ -295,6 +317,7 @@ namespace WelcomeLibrary.DOM
             Supplementospedizione = tmp.Supplementospedizione;
             Supplementocontrassegno = tmp.Supplementocontrassegno;
             TotaleSmaltimento = tmp.TotaleSmaltimento;
+
             Percacconto = tmp.Percacconto;
 
         }

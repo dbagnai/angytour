@@ -44,15 +44,6 @@
     <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png" />
     <meta name="msapplication-TileColor" content="#000000" />
     <link rel="manifest" href="~/manifest.json" runat="server">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3TGE4JQVFV"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-3TGE4JQVFV');
-</script>
 </head>
 <%--<body class="bckGray">--%>
 <body>
@@ -61,18 +52,16 @@
     </div>
     <form id="form1" runat="server">
         <%= InjectedStartPageScripts() %>
-      
         <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss2",null," rel=\"preload\" as=\"style\" onload=\"this.rel='stylesheet'\" ") %>
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
         <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0",null," async ") %>--%>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
-
-        <div id="carrello-go" class="float-left bind button-carrello d-none" style="opacity: 0.5; position: absolute; display: none;"><i class="fa fa-cart-plus"></i></div>
+   <%--           <%= references.ResMan("Common", Lingua,"tastoprenota") %> --%>
+        <%--<%= references.ResMan("Common", Lingua,"pulsantecontattipopup") %>--%>
         <!-- MENU -->
         <div class="fixedtop" id="divTop" runat="server" visible="true">
             <div class="d-block" style="padding: 5px 0;">
-
                 <!-- LINGUE --->
                 <div runat="server" visible="true">
                     <div id="divCambioLingua1" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
@@ -91,7 +80,6 @@
                         <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio3")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio3") %>'><%= references.ResMan("Common", Lingua,"testoCambio3").ToUpper() %></a>
                     </div>
                 </div>
-
                 <!-- CERCA --->
                 <div class="float-right">
                     <div class="input-group flex-nowrap px-2 px-lg-4 bd-secondary-color" style="width: 200px; padding-top: 3px; padding-bottom: 3px; border-left: 1px solid;">
@@ -178,7 +166,6 @@
                         <!-- DOVE SIAMO --->
                         <li runat="server" class="px-2 px-lg-4 d-block">
                             <a id="googlemap" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"googleurl1")) %>' target='_blank'>
-                                <%--<a href="https://www.w3schools.com" target="_blank">--%>
                                 <i class="fa fa-map-marker mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"testoid5") %></span>
                             </a>
                         </li>
@@ -233,26 +220,6 @@
                 <a style="padding-top: 0px;" class="float-right" href='<%=  references.ResMan("Common", Lingua,"iconwhatsapp") %>'>
                     <i class="fa fa-2x fa-whatsapp" style="color: #2f7b40; font-size: 30px; font-weight: 900; margin-top: 5px;"></i></a>
             </div>
-            <%--<div class="container" id="divImg">
-                <div class="row">
-                    <div class="col-sm-6" style="line-height: 0; min-height: 0px; text-align: left">
-                        <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>'  >
-                            <div id="divlogo" class="fulllogobckdark" style="margin: 0px 0px;"></div>
-                        </a>
-                    </div>
-                    <div class="col-sm-6">
-                        <div id="divMessage">
-                            <%= references.ResMan("Common",Lingua,"testospedizione")  %>
-                        </div>
-                    </div>
-                </div>
-            </div>--%>
-            <%--   <script>
-                if (lng == "GB") {
-                    $(".spegnigb").remove();
-                }
-            </script>--%>
-
             <div id="menuzord" class="menuzord menuzord-responsive white pb-0 pb-sm-0">
                 <a class="menuzord-brand" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome") ) %>'>
                     <div id="divlogoBrand" class="fulllogobckdark"></div>
@@ -261,28 +228,41 @@
                 <ul class="menuzord-menu menuzord-indented scrollable menuzord-right outofsight">
                     <%= CreaLinkPaginastatica(2) %>
 
-                    <%--MEGAMENU DANY--%>
-                    <%--<li runat="server">
-                        <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezione("rif000001",true,true) %> </a>
-                        <div class="megamenu megamenu-full-width">
-                            <div class="megamenu-row">
-                                <div class="col4 text-left text-md-right megamenu-menulist">
-                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000030,prod000031","menutext-1 menutext-bold",true) %>
-                                </div>
-                                <div class="col4 text-left text-md-right megamenu-menulist">
-                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000032,prod000033","menutext-1 menutext-bold",true) %>
-                                </div>
-                                <div class="col4 text-left text-md-right megamenu-menulist">
-                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000034,prod000035","menutext-1 menutext-bold",true) %>
+                    <%--                     <li runat="server">
+                        <%= CreaLinkTipologie(1,1,"a-dropdown tx-sottomenu-color",true) %>
+                        <div class="megamenu megamenu-full-text">
+                            <div class="row megamenu-row justify-content-center m-0">
+                                <div class="col-auto text-left megamenu-menulist">
+                                    <%= CreaLinkCategorie("rif000001","","",true) %>
                                 </div>
                             </div>
                         </div>
                     </li>--%>
 
-                    <%--MEGAMENU MIRCO (EDOARDO MONDI)--%>
+
+                    <%--MEGAMENU DANY--%>
                     <li runat="server">
-                        <%--<a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezione("rif000001",true,true) %> </a>--%>
-                        <%--<a class="a-dropdown tx-sottomenu-color" href="/it/catalogo-2" style="cursor: pointer;"><%= TestoSezione("rif000001",true,true) %> </a>--%>
+                        <%= CreaLinkTipologie(1,1,"a-dropdown tx-sottomenu-color",true) %>
+                        <div class="megamenu megamenu-full-width">
+                            <div class="megamenu-row">
+                                <div class="col4 text-left text-md-right megamenu-menulist">
+                                    <%= CreaLinkCategorie("rif000001","","",true) %>
+                                </div>
+                                <%-- <div class="col4 text-left text-md-right megamenu-menulist">
+                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000032,prod000033","menutext-1 menutext-bold",true) %>
+                                </div>
+                                <div class="col4 text-left text-md-right megamenu-menulist">
+                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000034,prod000035","menutext-1 menutext-bold",true) %>
+                                </div>--%>
+                            </div>
+                        </div>
+                    </li>
+
+
+
+
+                    <%--MEGAMENU  --%>
+                    <%--   <li runat="server">
                         <%= CreaLinkTipologie(1,1,"a-dropdown tx-sottomenu-color",true) %>
                         <div class="megamenu megamenu-full-text">
                             <div class="row megamenu-row justify-content-center m-0">
@@ -298,15 +278,9 @@
                                 <div class="col-auto text-left megamenu-menulist">
                                     <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000048,prod000049,prod000052","menutext-1 menutext-bold",true) %>
                                 </div>
-                                <%--<div class="col-auto text-left megamenu-menulist">
-                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000047,prod000048","menutext-1 menutext-bold",true) %>
-                                </div>
-                                    <div class="col-auto text-left megamenu-menulist">
-                                    <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000049,prod000052","menutext-1 menutext-bold",true) %>
-                                </div>--%>
                             </div>
                         </div>
-                    </li>
+                    </li>--%>
                     <%-- <li runat="server">
                         <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= references.ResMan("Common", Lingua,"testomenu5")  %> </a>
                         <div class="megamenu megamenu-full-text" style="min-width: 40%">
@@ -370,14 +344,13 @@
                         </div>
                     </li>--%>
                     <%-- Catalogo --%>
-                    <li class="catalogo-menu" runat="server">
-                        <%--<a href="#" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common",Lingua,"testomenu4") %></a>--%>
+                    <%--   <li class="catalogo-menu" runat="server">
                         <%= CreaLinkTipologie(1,1,"a-dropdown",true) %>
                         <ul class="dropdown visible-ok">
                             <li><%= CreaLinkPersonalizzato(references.ResMan("Common",Lingua,"testomenu4"),"rif000004","") %></li>
                             <%= CreaLinkCategorieNested("rif000001","",true) %>
                         </ul>
-                    </li>
+                    </li>--%>
                     <%= CreaLinkTipologie(5,5) %>
                     <%= CreaLinkPaginastatica(4) %>
                     <%= CreaLinkTipologie(9,9) %>
@@ -438,17 +411,13 @@
                             <%= CreaLinkPaginastatica(4) %>
                         </ul>
                     </li>--%>
-
-                    <%--<%= CreaLinkTipologie(4,5) %>--%>
-
                     <%--<li runat="server" id="liHome">
                         <a id="linkHomeHigh" style="padding: 0px;" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome")) %>' >
                             <div class="iconlogo"></div>
                         </a>
                     </li>--%>
-
-                    <%--   <%= CreaLinkCategorieNested("rif000002","",true) %>--%>
-                    <%--   <li runat="server">
+                    <%-- <%= CreaLinkCategorieNested("rif000002","",true) %>--%>
+                    <%-- <li runat="server">
                         <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000001","prod000031",true,true) %> </a>
                         <ul class="dropdown">
                             <%= CreaLinkCategorie("rif000001","prod000031","",false) %>
@@ -457,22 +426,21 @@
                             </li>
                             <%= CaricaLinksPerTipologia("rif000001","prod000031","20") %>
                         </ul>
-                    </li>--%>
-                    <%--    <li runat="server" class="d-block">
+                    </li> --%>
+                    <%--  <li runat="server" class="d-block">
                         <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%=  TestoSezione("rif000002",true,true) %> </a>
                         <ul class="dropdown">
                             <%= CreaLinkTipologie(2,2,"",false) %>
                             <li><hr /></li>
                             <%= CreaLinkCategorie("rif000002") %>
                         </ul>
-                    </li>--%>
+                    </li> --%>
                     <%--  <li runat="server">
                         <a href="<%= CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(TestoSezioneCategoria("rif000002","prod000027",true)), "9".ToString(), "con001000") %>" class="a-dropdown" style="cursor: pointer;"><%= TestoSezioneCategoria("rif000002","prod000027",true) %></a>
                         <ul class="dropdown">
                             <%= CreaLinkSottoCategorie("rif000002","prod000027") %>
                         </ul>
-                    </li>--%>
-
+                    </li> --%>
                     <%-- <li runat="server">
                         <a href="javascript:void(0)" class="a-dropdown" style="cursor: pointer;"><%= references.ResMan("Common", Lingua,"testomenu3") %></a>
                         <ul class="dropdown">
@@ -483,7 +451,7 @@
                             <%=  CaricaLinksPerTipologia ("rif000001") %>
                             <%= CreaLinkCategorie("rif000004") %>
                         </ul>
-                    </li>--%>
+                    </li> --%>
 
                     <%-- Blog --%>
                     <li runat="server" class="d-block d-md-none">
@@ -534,7 +502,6 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
             <div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px">
-                <%--<div class="row" style="padding-top: 0; padding-left: 0px; padding-right: 0px">--%>
                 <div>
                     <asp:ContentPlaceHolder ID="ContentPlaceHoldermasternorow" runat="server">
                     </asp:ContentPlaceHolder>
@@ -837,22 +804,6 @@
                     </div>
                 </div>
 
-                <%--CREDIT CARD BOX--%>
-                <div class="logos-payment">
-                    <div class="container">
-                        <div class="row d-flex justify-content-center">
-                            <div class="logo-payment"></div>
-                            <div class="logo-payment"></div>
-                            <div class="logo-payment"></div>
-                            <div class="logo-payment"></div>
-                            <div class="logo-payment"></div>
-                            <div class="logo-payment"></div>
-                            <div class="logo-payment"></div>
-                            <%--<div class="logo-payment"></div>--%>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="copyright">
                     <div class="container">
                         <div class="row">
@@ -876,9 +827,6 @@
                 </div>
             </div>
         </footer>
-        <%--<div class="loader" style="display: none">
-            <div class="spinner"></div>
-        </div>--%>
         <div id="divSearchBarPlaceholder">
         </div>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib1",null," async ") %>
@@ -910,6 +858,6 @@
     <%= InjectedEndPageScripts() %>
     <%--SERVICE WORKER--%>
     <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>  --%>
-    <%-- <script src='https://www.google.com/recaptcha/api.js'></script>--%>
+     <script src='https://www.google.com/recaptcha/api.js'></script>
 </body>
 </html>

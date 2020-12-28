@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -57,14 +58,28 @@ public partial class AspNetPages_Orderpage : CommonPage
                     return;
                 }
 
-
-                if (registrazione != "false")
-                VerificaStatoLoginUtente();
+                if (registrazione != "false") // da abilita se non si vuole far far acquisti senza login ..... di registrazione utente!!!
+                    VerificaStatoLoginUtente();
                 RiempiDdlNazione("IT", ddlNazione);
                 CaricaCarrello();
             }
             else
             {
+
+
+
+                if (Request["__EVENTTARGET"] == "recuperapass")
+                {
+                    recuperapass();
+                }
+                if (Request["__EVENTTARGET"] == "logoffuser")
+                {
+                    logoffbtn_Click();
+                }
+                if (Request["__EVENTTARGET"] == "verificalogin")
+                {
+                    loginbtn_Click();
+                }
                 if (Request["__EVENTTARGET"] == "refreshcarrello")
                 {
                     CaricaCarrello();
@@ -82,7 +97,6 @@ public partial class AspNetPages_Orderpage : CommonPage
             output.Text = err.Message;
         }
     }
-
 
 
     protected void Visualizzarisposta()
@@ -108,8 +122,12 @@ public partial class AspNetPages_Orderpage : CommonPage
     protected void btnCodiceSconto_Click(object sender, EventArgs e)
     {
         string insertedcode = txtCodiceSconto.Text;
-        string validcode = ConfigManagement.ReadKey("codicesconto");
+        string validcode = ConfigManagement.ReadKey("codicesconto"); //Codicesconto in tabella configurazione
 
+        //Carichiamo i codici sconto dello scaglione
+        Dictionary<string, double> codiciscontoscaglione = CercaCodiceScontoSuCarrello(Request, Session);
+
+        //sconto presente su cliente anagrafica
         ClientiDM cDM = new ClientiDM();
         Cliente cli = cDM.CaricaClientePerCodicesconto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, insertedcode);
         if (cli != null && cli.Id_cliente != 0)
@@ -124,6 +142,17 @@ public partial class AspNetPages_Orderpage : CommonPage
             //    percscontocommerciale = dict[insertedcode];
             //}
         }
+        ////facciamo il check dei codici presenti negli scagioni a carrello e verifichiamo se  valido in caso lo inserisco a carrello
+        else if (codiciscontoscaglione != null && codiciscontoscaglione.Count > 0)
+        {
+            //Vediamo se lo sconto è presente tra quelli dello scaglione inserito a carrello
+            if (codiciscontoscaglione.ContainsKey(insertedcode))
+            {
+                Session.Add("codicesconto", insertedcode);
+                lblCodiceSconto.Text = "";
+            }
+        }
+        //vediamo se corrisponde al codice sconto presente in configurazione
         else if (insertedcode == validcode)
         {
             Session.Add("codicesconto", validcode);
@@ -133,6 +162,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         else
         {
             Session.Remove("codicesconto");
+            txtCodiceSconto.Text = "";
             lblCodiceSconto.Text = references.ResMan("Common", Lingua, "testoErrCodiceSconto").ToString();
         }
         CaricaCarrello();
@@ -244,12 +274,10 @@ public partial class AspNetPages_Orderpage : CommonPage
             trueIP = Request.ServerVariables["REMOTE_ADDR"].Trim();
         }
         CarrelloCollection carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Session.SessionID, trueIP);
-
         rptProdotti.DataSource = carrello;
         rptProdotti.DataBind();
 
         string codicenazione = SelezionaNazione(carrello, ddlNazione.SelectedValue);
-
 
         //Spengo paypal se non riesco a calcolare le spese di spedizione
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -271,98 +299,6 @@ public partial class AspNetPages_Orderpage : CommonPage
 
     }
 
-    /// <summary>
-    /// Aggiorna i dati del cliente nel form visualizzato in base ai dati presenti nell'archivio clienti
-    /// ( Per i clienti loggati che quindi hanno un utente associato per lo login )
-    /// </summary>
-    private void CaricaDatiCliente()
-    {
-        string idcliente = getidcliente(User.Identity.Name); //prendo l'id associato al cliente loggato
-        ClientiDM cliDM = new ClientiDM();
-        Cliente c = cliDM.CaricaClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idcliente);
-        //Riempiamo il form dei dati cliente dal database
-        if (c != null && c.Id_cliente != 0)
-        {
-            //////////////////////////////////////////////////////////////////////////////////
-            //se presente sul cliente setto il codice sconto ( il primo che trovo ) e lo applico
-            Dictionary<string, double> dict = ClientiDM.SplitCodiciSconto(c.Codicisconto);
-            if (dict != null && dict.Count > 0)
-            {
-                foreach (KeyValuePair<string, double> kv in dict)
-                {
-                    txtCodiceSconto.Text = kv.Key;
-                    Session.Add("codicesconto", kv.Key);
-                    txtCodiceSconto.Enabled = false;
-                    break;
-                }
-            }
-            //////////////////////////////////////////////////////////////////////////////////
-            //VISUALIZZO I DATI DEL CLIENTE LETTI DAL DB
-            ///////////////////////////////////////////////////////////
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(c.CodiceNAZIONE))
-                    ddlNazione.SelectedValue = c.CodiceNAZIONE;
-            }
-            catch
-            { }
-
-            if (string.IsNullOrWhiteSpace(inpNome.Value))
-                inpNome.Value = c.Nome;
-            if (string.IsNullOrWhiteSpace(inpCognome.Value))
-                inpCognome.Value = c.Cognome;
-            if (string.IsNullOrWhiteSpace(inpRagsoc.Value))
-            {
-                inpRagsoc.Value = c.Cognome;
-            }
-
-            if (string.IsNullOrWhiteSpace(inpPiva.Value))
-                inpPiva.Value = c.Pivacf;
-            if (string.IsNullOrWhiteSpace(inpIndirizzo.Value))
-                inpIndirizzo.Value = c.Indirizzo;
-            if (string.IsNullOrWhiteSpace(inpComune.Value))
-                inpComune.Value = c.CodiceCOMUNE;
-            if (string.IsNullOrWhiteSpace(inpProvincia.Value))
-                inpProvincia.Value = (!(string.IsNullOrWhiteSpace(NomeProvincia(c.CodicePROVINCIA, Lingua)))) ? NomeProvincia(c.CodicePROVINCIA, Lingua) : c.CodicePROVINCIA;
-            if (string.IsNullOrWhiteSpace(inpCap.Value))
-                inpCap.Value = c.Cap;
-            if (string.IsNullOrWhiteSpace(inpEmail.Value))
-                inpEmail.Value = c.Email;
-            if (string.IsNullOrWhiteSpace(inpTel.Value))
-                inpTel.Value = c.Telefono;
-            if (string.IsNullOrWhiteSpace(inpPec.Value))
-                inpPec.Value = c.Emailpec;
-
-            //Precaricare dal db anche i campi per la spedizione da .serialized
-            Cliente clispediz = Newtonsoft.Json.JsonConvert.DeserializeObject<Cliente>(c.Serialized);
-            if (clispediz != null)
-            {
-                if (string.IsNullOrWhiteSpace(inpCaps.Value))
-                    inpCaps.Value = clispediz.Cap;
-                if (string.IsNullOrWhiteSpace(inpComuneS.Value))
-                    inpComuneS.Value = clispediz.CodiceCOMUNE;
-                //if (string.IsNullOrWhiteSpace(inpProvinciaS.Value))
-                //    inpProvinciaS.Value = clispediz.CodicePROVINCIA;
-                if (string.IsNullOrWhiteSpace(inpProvinciaS.Value))
-                    inpProvinciaS.Value = (!(string.IsNullOrWhiteSpace(NomeProvincia(clispediz.CodicePROVINCIA, Lingua)))) ? NomeProvincia(clispediz.CodicePROVINCIA, Lingua) : clispediz.CodicePROVINCIA;
-                if (string.IsNullOrWhiteSpace(inpIndirizzoS.Value))
-                    inpIndirizzoS.Value = clispediz.Indirizzo;
-                if (string.IsNullOrWhiteSpace(inpTelS.Value))
-                    inpTelS.Value = clispediz.Telefono;
-
-            }
-
-            //Abilita i dati spedizione se presenti
-            if (!string.IsNullOrEmpty(inpCaps.Value) || !string.IsNullOrEmpty(inpComuneS.Value) || !string.IsNullOrEmpty(inpProvinciaS.Value)
-            || !string.IsNullOrEmpty(inpIndirizzoS.Value) || !string.IsNullOrEmpty(inpTelS.Value))
-            {
-                chkSpedizione.Checked = false; plhShipping.Visible = true;
-            }
-
-
-        }
-
-    }
 
     private void SelezionaClientePerAffitti(CarrelloCollection carrello)
     {
@@ -432,6 +368,8 @@ public partial class AspNetPages_Orderpage : CommonPage
 
     }
 
+
+
     /// <summary>
     /// Invia la mail d'ordine finale
     /// </summary>
@@ -461,7 +399,7 @@ public partial class AspNetPages_Orderpage : CommonPage
 
             //DATI DEL CLIENTE PRESI DAL FORM
             Cliente cliente = new Cliente();
-            if (!CaricaDatiClienteDaForm(cliente)) return; //aggiorno/inserisco clientie ma se la verifica anagrafica cliente fallisce stoppo tutto
+            if (!CaricaDatiClienteDaForm(cliente)) return; //se la verifica cliente fallisce stoppo tutto
 
             //per prima cosa mi riprendo i dati del carrello in base alla sessione per completare l'ordine
             CarrelloCollection prodotti = new CarrelloCollection();
@@ -478,6 +416,8 @@ public partial class AspNetPages_Orderpage : CommonPage
                     return;
                 }
                 ////////////////////////////////////
+                ///
+
 
                 prodotti.Sort(new GenericComparer<Carrello>("Data", System.ComponentModel.ListSortDirection.Descending));
                 //Genero il codice ordine dato che il cliente me lo ha confermato e me lo salvo in tabella per tutti i prodotti del carrello attuale
@@ -524,29 +464,45 @@ public partial class AspNetPages_Orderpage : CommonPage
                 totali.Dataordine = System.DateTime.Now;
                 totali.CodiceOrdine = CodiceOrdine;
                 totali.Indirizzofatturazione = cliente.Indirizzo + "<br/>";
-                totali.Indirizzofatturazione += cliente.Cap + " " + cliente.CodiceCOMUNE + "  (" + cliente.CodicePROVINCIA + ")<br/>";
-                totali.Indirizzofatturazione += "Country: " + cliente.CodiceNAZIONE + "<br/>";
-                totali.Indirizzofatturazione += "Ph: " + cliente.Telefono + "<br/>";
-                totali.Indirizzofatturazione += "Vat: " + cliente.Pivacf + "<br/>";
+                totali.Indirizzofatturazione += cliente.Cap + " " + cliente.CodiceCOMUNE + "  (" + ((!(string.IsNullOrWhiteSpace(NomeProvincia(cliente.CodicePROVINCIA, Lingua)))) ? NomeProvincia(cliente.CodicePROVINCIA, Lingua) : cliente.CodicePROVINCIA) + ")<br/>";
+                totali.Indirizzofatturazione += "Nazione: " + cliente.CodiceNAZIONE + "<br/>";
+                totali.Indirizzofatturazione += "Telefono: " + cliente.Telefono + "<br/>";
+                totali.Indirizzofatturazione += "P.Iva: " + cliente.Pivacf + "<br/>";
                 totali.Indirizzofatturazione += "CodiceDestinatario/Pec: " + cliente.Emailpec + "<br/>";
 
                 //SE INDIRIZZO SPEDIIZONE DIVERSO -> LO MEMORIZZO NEI TOTALI ( E serializzo il dettaglio nel cliente nel campo serialized )
                 string indirizzospedizione = "";
                 if (!chkSpedizione.Checked)
                 {
-                    indirizzospedizione = inpIndirizzoS.Value + "<br/>";
-                    indirizzospedizione += inpCaps.Value + " " + inpComuneS.Value + "  (" + inpProvinciaS.Value + ")<br/>";
-                    indirizzospedizione += "Country: " + cliente.CodiceNAZIONE + "<br/>";
-                    indirizzospedizione += "Ph: " + inpTelS.Value + "<br/>";
+                    if (!string.IsNullOrEmpty(inpIndirizzoS.Value))
+                        indirizzospedizione = inpIndirizzoS.Value + "<br/>";
+                    if (!string.IsNullOrEmpty(inpCaps.Value) && !string.IsNullOrEmpty(inpComuneS.Value) && !string.IsNullOrEmpty(inpProvinciaS.Value))
+                    {
+                        indirizzospedizione += inpCaps.Value + " " + inpComuneS.Value + "  (" + ((!(string.IsNullOrWhiteSpace(NomeProvincia(inpProvinciaS.Value, Lingua)))) ? NomeProvincia(inpProvinciaS.Value, Lingua) : inpProvinciaS.Value) + ")<br/>";
+                        indirizzospedizione += "Nazione: " + cliente.CodiceNAZIONE + "<br/>";
+                    }
+                    if (!string.IsNullOrEmpty(inpTelS.Value))
+                        indirizzospedizione += "Telefono: " + inpTelS.Value + "<br/>";
+
                     totali.Indirizzospedizione = indirizzospedizione;
                 }
+#if true   // con questa visualizza sempre la spedizione
                 if (string.IsNullOrWhiteSpace(indirizzospedizione))
                 {
                     totali.Indirizzospedizione = totali.Indirizzofatturazione;
-                }
+                } 
+#endif
                 totali.Note = inpNote.Value;
                 totali.Modalitapagamento = modalita;
-                totali.Pagato = false; //Valorizzato solo alla ricezione del pagamento prima della spedizione o tramite la procedura con pagamento anticipato
+
+                //Valorizzato solo alla ricezione del pagamento prima della spedizione o tramite la procedura con pagamento anticipato
+                //totali.Pagato = false;
+                if (totali.Percacconto == 100)
+                { totali.Pagato = false; totali.Pagatoacconto = false; } // da capire se acconto è zero se vogliamo spuntare pagato acconto!
+                else
+                { totali.Pagato = false; totali.Pagatoacconto = false; }
+
+
                 totali.Urlpagamento = "";
 
                 //Prepariamo i valori per la chiamata a Paypal
@@ -571,7 +527,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                     remotepost.Add("MID", merchantid);//id mercante fornito da soar
                     remotepost.Add("OID", CodiceOrdine);//codice dell'ordine attuale identificativo
                     System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("it-IT");
-                    string costo = string.Format(culture, "{0:0}", new object[] { Convert.ToDouble(totali.TotaleOrdine - totali.TotaleSconto + totali.TotaleSpedizione) * 100 }); //Il totale da passare è in centesimi di euro
+                    string costo = string.Format(culture, "{0:0}", new object[] { Convert.ToDouble((totali.TotaleAcconto + totali.TotaleSaldo)) * 100 }); //Il totale da passare è in centesimi di euro
                     remotepost.Add("IMP", costo);//Il campo importo è numerico, specificato in centesimi. Esempio : 001920 = 19 Euro e 20 centesimi
                     remotepost.Add("LAN", "it");//it o en
                     remotepost.Add("_Nome", cliente.Nome);
@@ -612,6 +568,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                     //    cancelurl = PercorsoAssolutoApplicazione + "/" + cancelurl;
                     Dictionary<string, List<string>> paypaldatas = new Dictionary<string, List<string>>();
                     //Formattiamo i dati per paypal per le descrizioni e il totale ordine
+
                     MemorizzaDatiPerPaypal(totali.Percacconto, totali, prodotti, ref paypaldatas);
                     //eseguiamo la procedura di pagamento su paypal
                     bool authandcapturemode = Convert.ToBoolean(ConfigManagement.ReadKey("authandcapturePaypal"));
@@ -702,17 +659,22 @@ public partial class AspNetPages_Orderpage : CommonPage
                         item.CodiceOrdine = CodiceOrdine;
                         SalvaCodiceOrdine(item);
                     }
+                    ////////////////////////////////////////
+                    //Aggiorniamo lo stato degli scaglioni caricati per i prodotti se presenti
+                    ////////////////////////////////////////
+                    string listcod = "";
+                    prodotti.ForEach(item => listcod += item.id_prodotto + ",");
+                    Dictionary<string, string> parametri = new Dictionary<string, string>();
+                    parametri["idprodotto"] = listcod;
+                    ecom.AggiornaStatoscaglioni(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parametri);
+                    ////////////////////////////////////////
+
                     InsertEventoBooking(prodotti, totali, "rif000001");
 
-
-                    //CreaNuovaSessione(Session, Request); //Svuota la session per un nuovo ordine!!
                     pnlFormOrdine.Visible = false;
+                    string jscodetoinject = Creaeventopurchaseagooglegtag(totali, prodotti);
 
-                    //Memoria ultimo ordine a buno fine .... pulisco
-                    //cliente = (Cliente)Session["cliente_" + CodiceOrdine];
-                    //totali = (TotaliCarrello)Session["totali_" + CodiceOrdine];
-                    //prodotti = (CarrelloCollection)Session["prodotti_" + CodiceOrdine];
-                    string jscodetoinject = Creaeventopurchaseagooglegtag((TotaliCarrello)Session["totali_" + CodiceOrdine], (CarrelloCollection)Session["prodotti_" + CodiceOrdine]);
+                    //Pulizia dell'ordine dalla sesoione
                     Session.Remove("cliente_" + CodiceOrdine);
                     Session.Remove("totali_" + CodiceOrdine);
                     Session.Remove("prodotti_" + CodiceOrdine);
@@ -1261,7 +1223,6 @@ public partial class AspNetPages_Orderpage : CommonPage
     //        ClientiDM cliDM = new ClientiDM();
     //        string lingua = Lingua;
     //        string tipocliente = "0"; //Cliente standard per newsletter
-
     //        cli.DataNascita = System.DateTime.Now.Date;
     //        cli.Lingua = lingua;
     //        cli.id_tipi_clienti = tipocliente;
@@ -1270,10 +1231,22 @@ public partial class AspNetPages_Orderpage : CommonPage
     //        cli.Validato = true;
     //        cli.Email = cli.Email.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
     //        cli.Emailpec = cli.Emailpec.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
-    //        Cliente _tmp = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, cli.Email);
-    //        if ((_tmp != null && _tmp.Id_cliente != 0))
-    //            cli.Id_cliente = _tmp.Id_cliente;
-    //        cliDM.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref cli);
+    //        Cliente ctmp = new Cliente(cli);
+    //        Cliente cliindb = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, cli.Email, tipocliente); //carico per email ma dalla tipologia cliente di default (0)
+    //        if ((cliindb != null && cliindb.Id_cliente != 0)) //cleiinte per la tipologia gia presente in db
+    //        {
+    //            //aggiorno solo i  campi indicati
+    //            ctmp = new Cliente(cliindb);
+    //            //ctmp.Lingua = cli.Lingua;
+    //            //ctmp.id_tipi_clienti = cli.id_tipi_clienti;
+    //            ctmp.Consenso1 = cli.Consenso1;
+    //            ctmp.ConsensoPrivacy = cli.ConsensoPrivacy;
+    //            ctmp.Validato = cli.Validato;
+    //            ctmp.Email = cli.Email;
+    //            ctmp.Emailpec = cli.Emailpec;
+    //        }
+    //        cliDM.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref ctmp);
+    //        cli.Id_cliente = ctmp.Id_cliente;
     //    }
     //    catch
     //    { }
@@ -1291,38 +1264,45 @@ public partial class AspNetPages_Orderpage : CommonPage
         //MEMORIZZO I DATI DI SPEDIZIONE DI DETTAGLIO IN UN CLIENTE TEMPORANEO AD HOC CHE SERIALIZZO IN UN CAMPO CLIENTE
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Cliente clispediz = new Cliente();
+        clispediz.CodiceNAZIONE = ddlNazione.SelectedValue.Trim();
         if (!string.IsNullOrEmpty(inpCaps.Value.Trim()))
-            clispediz.Cap = inpCaps.Value;
+            clispediz.Cap = inpCaps.Value.Trim();
         if (!string.IsNullOrEmpty(inpComuneS.Value.Trim()))
-            clispediz.CodiceCOMUNE = inpComuneS.Value;
+            clispediz.CodiceCOMUNE = inpComuneS.Value.Trim();
         if (!string.IsNullOrEmpty(inpProvinciaS.Value.Trim()))
-            clispediz.CodicePROVINCIA = inpProvinciaS.Value;
+            clispediz.CodicePROVINCIA = inpProvinciaS.Value.Trim();
         if (!string.IsNullOrEmpty(inpIndirizzoS.Value.Trim()))
-            clispediz.Indirizzo = inpIndirizzoS.Value;
+            clispediz.Indirizzo = inpIndirizzoS.Value.Trim();
         if (!string.IsNullOrEmpty(inpTelS.Value.Trim()))
-            clispediz.Telefono = inpTelS.Value;
+            clispediz.Telefono = inpTelS.Value.Trim();
+        //Proviamo a cercare i codici geografici e settarli in base al testo
+        SearchGeoCodesByText(clispediz);
+
         string datispedizione = Newtonsoft.Json.JsonConvert.SerializeObject(clispediz);
         cliente.Serialized = datispedizione; //Appoggio i dati di spedizione in Serialized del cliente !!!
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //Dati base cliente da form
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        cliente.CodiceNAZIONE = ddlNazione.SelectedValue;
         cliente.Cognome = inpCognome.Value;
         cliente.Nome = inpNome.Value;
-        if (inpRagsoc.Value != "")
-        {
-            if (inpCognome.Value != inpRagsoc.Value)
-                cliente.Nome += " " + cliente.Cognome;
-            cliente.Cognome = inpRagsoc.Value;
-        }
-        cliente.Email = inpEmail.Value;
-        cliente.Emailpec = inpPec.Value;
-        cliente.Pivacf = inpPiva.Value;
-        cliente.Indirizzo = inpIndirizzo.Value;
-        cliente.CodiceCOMUNE = inpComune.Value;
-        cliente.CodicePROVINCIA = inpProvincia.Value;
-        cliente.Cap = inpCap.Value;
-        cliente.Telefono = inpTel.Value;
+        cliente.Ragsoc = inpRagsoc.Value;
+
+        //if (inpRagsoc.Value != "")
+        //{
+        //    if (inpCognome.Value != inpRagsoc.Value)
+        //        cliente.Nome += " " + cliente.Cognome;
+        //    cliente.Cognome = inpRagsoc.Value;
+        //}
+        cliente.Email = inpEmail.Value.Trim();
+        cliente.Emailpec = inpPec.Value.Trim();
+        cliente.Pivacf = inpPiva.Value.Trim();
+        cliente.Indirizzo = inpIndirizzo.Value.Trim();
+        cliente.CodiceNAZIONE = ddlNazione.SelectedValue.Trim();
+        cliente.CodiceCOMUNE = inpComune.Value.Trim();
+        cliente.CodicePROVINCIA = inpProvincia.Value.Trim();
+        cliente.Cap = inpCap.Value.Trim();
+        cliente.Telefono = inpTel.Value.Trim();
+        SearchGeoCodesByText(cliente);
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //////////////////////////////////////////////////////////////////////////////////////////////
@@ -1343,7 +1323,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         ////////////////////////////////////////////////////
         Cliente clienteinanagraficaperemail = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, clitmp.Email, clitmp.id_tipi_clienti);
         bool generazioneutente = false;
-        if (User.Identity != null && !string.IsNullOrEmpty(User.Identity.Name)) //UTENTE MEMBERSHIP LOGGATO   
+        if (User.Identity != null && !string.IsNullOrEmpty(User.Identity.Name)) //UTENTE MEMBERSHIP LOGGATO   -> VERIFICHE SU DATI INSERITI E AGGIONAMENTO DATI CLIENTE
         {
             //PER PRIMA PRENDO IL CLIENTE CORRISPONDENTE PER L'UTENTE LOGGATO SE PRESENTE
             //(IL CLIENTE LOGGATO E' PRIMARIO RISPETTO AL QUELLO ASSOCIATO ALLA MAIL INSERITA!!)
@@ -1371,10 +1351,9 @@ public partial class AspNetPages_Orderpage : CommonPage
         }
         else  //UTENTE NON LOGGATO -> AGGIORNAMENTO + VERIFICA GENERAZIONE UTENTE MEMBERSHIP
         {
-            if (clienteinanagraficaperemail != null && clienteinanagraficaperemail.Id_cliente != 0) //Presente in anagrafica cliente con la mail indicata e ma utente attuale non loggato
+            if (clienteinanagraficaperemail != null && clienteinanagraficaperemail.Id_cliente != 0) //Presente in anagrafica cliente con la mail inserita nel form e ma utente attuale non loggato
             {
                 clifiltrati.Add(clienteinanagraficaperemail);//aggiorno il cliente caricato per email  
-
                 //DEVO CERCARE SE IL CLIENTE ASSOCIATO HA UN UTENTE CORRISPONDENTE NEL MEMBERSHIP IN CASO NEGATIVO INSERISCO L'UTENTE NUOVO
                 string username = USM.GetUsernamebycamporofilo("idCliente", clienteinanagraficaperemail.Id_cliente.ToString());
                 if (string.IsNullOrEmpty(username)) //non presente utente associato al cliente! -> lo devo generare ex novo
@@ -1383,7 +1362,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             //Se non presente utente con la mail/tipologia indicata viene inserito e genero l'utente corrispondente
             else generazioneutente = true;
         }
- 
+
         //////////////////////////////////////////////////////////////////////////////////////////////
         //INSERIMENTO O AGGIORNAMENTO CLIENTE ANAGRAFICA
         //////////////////////////////////////////////////////////////////////////////////////////////
@@ -1393,15 +1372,18 @@ public partial class AspNetPages_Orderpage : CommonPage
             foreach (Cliente c in clifiltrati)
             {
                 Cliente ctmp = new Cliente(c);
+                //Aggiorno nel db solo i campi che sono nel form
                 ctmp.CodiceNAZIONE = cliente.CodiceNAZIONE;
+                ctmp.CodiceCOMUNE = cliente.CodiceCOMUNE;
+                ctmp.CodicePROVINCIA = cliente.CodicePROVINCIA;
+                ctmp.CodiceREGIONE = (!string.IsNullOrEmpty(cliente.CodiceREGIONE) ? cliente.CodiceREGIONE : ctmp.CodiceREGIONE);//Se vuoto mantengo il vecchio valore
                 ctmp.Nome = cliente.Nome;
                 ctmp.Cognome = cliente.Cognome;
+                ctmp.Ragsoc = cliente.Ragsoc;
                 ctmp.Email = cliente.Email;
                 ctmp.Emailpec = cliente.Emailpec;
                 ctmp.Pivacf = cliente.Pivacf;
                 ctmp.Indirizzo = cliente.Indirizzo;
-                ctmp.CodiceCOMUNE = cliente.CodiceCOMUNE;
-                ctmp.CodicePROVINCIA = cliente.CodicePROVINCIA;
                 ctmp.Cap = cliente.Cap;
                 ctmp.Telefono = cliente.Telefono;
                 ctmp.Serialized = cliente.Serialized; //Dati serializzati aggiuntivi
@@ -1412,7 +1394,8 @@ public partial class AspNetPages_Orderpage : CommonPage
         else //NON TROVATO ALCUN cliente con quella mail nella tipologia cercata  -> lo inserisco NUOVO nel database 
         {
             //MEMORIZZO CON LINGUA E CONSENSI ATTIVI PER NEWSLETTER E STORICIZZAZIONE CLIENTE
-            cliente.DataNascita = System.DateTime.Now.Date;
+            //cliente.DataNascita = System.DateTime.Now.Date;
+            cliente.DataRicezioneValidazione = System.DateTime.Now.Date;
             cliente.Lingua = Lingua;
             cliente.Consenso1 = true;
             cliente.ConsensoPrivacy = true;
@@ -1421,12 +1404,11 @@ public partial class AspNetPages_Orderpage : CommonPage
             cliDM.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref cliente);
         }
 
-#if true //da abilitare per la gestione della generazione delle utenze per il sistema ecommerce
-
+#if false //abilitare per generazione utente all'acquisto
         //////////////////////////////////////////////////////////////////////////////////////////////
         //SE richiesto GENERIAMO L'UTENTE NEL MEMBERSHIP E INVIAMO UNA MAIL DI CONFERMA AL CLIENTE CON I DATI DI REGISTRAZIONE
         //////////////////////////////////////////////////////////////////////////////////////////////
-         if (generazioneutente)
+        if (generazioneutente)
         {
             string password = "";
             string username = cliente.Id_cliente.ToString() + "-" + cliente.Email;
@@ -1444,19 +1426,194 @@ public partial class AspNetPages_Orderpage : CommonPage
                 oggetto += " " + Nome;
                 string testo = references.ResMan("Common", Lingua, "txttestocreateuser").ToString();
                 testo = testo.Replace("|NOME|", Nome);
-                testo = testo.Replace("|CREDENZIALI|", password);
+                testo = testo.Replace("|CREDENZIALI|", "User: " + username + " Pass: " + password);
                 testo = testo.Replace("|LOGINPAGE|", "<a href=" + ReplaceAbsoluteLinks(references.ResMan("Common", "I", "linklogin")) + ">" + ReplaceAbsoluteLinks(references.ResMan("Common", "I", "linklogin")) + "</a>");
                 testo += references.ResMan("Common", "I", "txtFooter").ToString();
                 Utility.invioMailGenerico(Nome, Email, oggetto, testo, cliente.Email, cliente.Cognome, null, "", true, Server);
                 ///////////////////////////////////////////////////////////
             }
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////
-
+        //////////////////////////////////////////////////////////////////////////////////////////////  
 #endif
+
         return ret;
     }
 
+    /// <summary>
+    /// Ricerca i codici geografici dal testo inserito nel campi cliente in caso di italia
+    /// </summary>
+    /// <param name="item"></param>
+    private void SearchGeoCodesByText(Cliente item)
+    {
+        //Se codice nazione = it Fare la ricerca per comune / provincia -> inserire codice regione 
+        if (item.CodiceNAZIONE.ToLower() == "it")
+        {
+            // cerchiamo la provincia prima per codice
+            string nomeprovincia = references.NomeProvincia(item.CodicePROVINCIA, Lingua);
+            if (string.IsNullOrEmpty(nomeprovincia)) //non trovata per codice
+            {
+                //Cerco per nome della provincia  
+                string codiceprovincia = references.TrovaCodiceProvincia(item.CodicePROVINCIA, Lingua);
+                //Cerco per sigla della provincia
+                if (string.IsNullOrEmpty(codiceprovincia)) codiceprovincia = references.TrovaCodiceProvinciaPerSigla(item.CodicePROVINCIA, Lingua);
+                //se trovato il codice lo setto 
+                if (!string.IsNullOrEmpty(codiceprovincia)) item.CodicePROVINCIA = codiceprovincia;
+            }
+            Province provincia = Utility.ElencoProvince.Find(p => p.Lingua == Lingua && p.Codice == item.CodicePROVINCIA);
+
+            //Cerco il comune per nome e da li setto la provincia se non trovata sopra
+            Comune comune = Utility.ElencoComuni.Find(delegate (WelcomeLibrary.DOM.Comune tmp) { return (tmp.Nome.ToLower().Trim() == item.CodiceCOMUNE.ToLower().Trim()); });
+            if (comune != null && !string.IsNullOrEmpty(comune.Nome))
+            {
+                if (provincia == null) //se non trovata la provincia provo a settarla in base al comune
+                {
+                    item.CodicePROVINCIA = comune.CodiceIncrocio;
+                    provincia = Utility.ElencoProvince.Find(p => p.Lingua == Lingua && p.Codice == item.CodicePROVINCIA);
+                }
+            }
+            //Riempiamo il valore della regione se trovata la corretta provincia
+            //Lista completa regioni
+            ProvinceCollection regioni = references.ListaRegioni(Lingua);
+            if (regioni != null && provincia != null)
+            {
+                Province regione = regioni.Find(r => r.Lingua == Lingua && r.CodiceRegione == provincia.CodiceRegione);
+                if (regione != null) item.CodiceREGIONE = regione.Codice;
+            }
+        }
+        return;
+    }
+
+    protected bool ControlloLogin()
+    {
+        bool ret = true;
+        if (User.Identity != null && !string.IsNullOrEmpty(User.Identity.Name))
+            ret = false;
+        return ret;
+    }
+
+    protected void recuperapass()
+    {
+        usermanager USM = new usermanager();
+        string username = inputName.Value;
+        outputlogin.Text = USM.SendAccessData(Lingua, username, Email, Nome);
+    }
+    protected void logoffbtn_Click()
+    {
+        FormsAuthentication.SignOut();
+
+        Response.Redirect(System.Web.HttpContext.Current.Request.Url.ToString());
+    }
+    protected void loginbtn_Click()
+    {
+        string username = inputName.Value;
+        string password = inputPassword.Value;
+        if (Membership.ValidateUser(username, password))
+        {
+            //FormsAuthentication.LoginUrl = references.ResMan("Common",Lingua,"Linklogin");
+            //FormsAuthentication.DefaultUrl
+            //FormsAuthentication.RedirectFromLoginPage(username, false);
+            //FormsAuthentication.Authenticate(username, password);
+            FormsAuthentication.SetAuthCookie(username, false);
+            Response.Redirect(System.Web.HttpContext.Current.Request.Url.ToString());
+            outputlogin.Text = "Accesso riuscito.";
+            CaricaCarrello();
+        }
+        else
+        {
+            outputlogin.Text = "Accesso non riuscito. Se sei un nuovo utente, effettua la registrazione.";
+        }
+    }
+
+    /// <summary>
+    /// Aggiorna i dati del cliente nel form visualizzato in base ai dati presenti nell'archivio clienti
+    /// ( Per i clienti loggati che quindi hanno un utente associato per lo login )
+    /// </summary>
+    private void CaricaDatiCliente()
+    {
+        string idcliente = getidcliente(User.Identity.Name); //prendo l'id associato al cliente loggato
+        ClientiDM cliDM = new ClientiDM();
+        Cliente c = cliDM.CaricaClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idcliente);
+        //Riempiamo il form dei dati cliente dal database
+        if (c != null && c.Id_cliente != 0)
+        {
+            //////////////////////////////////////////////////////////////////////////////////
+            //se presente sul cliente loggato setto il codice sconto ( il primo che trovo ) e lo applico
+            //////////////////////////////////////////////////////////////////////////////////
+            Dictionary<string, double> dict = ClientiDM.SplitCodiciSconto(c.Codicisconto);
+            if (dict != null && dict.Count > 0)
+            {
+                foreach (KeyValuePair<string, double> kv in dict)
+                {
+                    txtCodiceSconto.Text = kv.Key;
+                    Session.Add("codicesconto", kv.Key);
+                    txtCodiceSconto.Enabled = false;
+                    break;
+                }
+            }
+            //////////////////////////////////////////////////////////////////////////////////
+            //VISUALIZZO I DATI DEL CLIENTE LETTI DAL DB
+            ///////////////////////////////////////////////////////////
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(c.CodiceNAZIONE))
+                    ddlNazione.SelectedValue = c.CodiceNAZIONE;
+            }
+            catch
+            { }
+
+            if (string.IsNullOrWhiteSpace(inpNome.Value))
+                inpNome.Value = c.Nome;
+            if (string.IsNullOrWhiteSpace(inpCognome.Value))
+                inpCognome.Value = c.Cognome;
+            //if (string.IsNullOrWhiteSpace(inpRagsoc.Value))
+            //{
+            //    inpRagsoc.Value = c.Cognome;
+            //}
+            if (string.IsNullOrWhiteSpace(inpRagsoc.Value))
+                inpRagsoc.Value = c.Ragsoc;
+            if (string.IsNullOrWhiteSpace(inpPiva.Value))
+                inpPiva.Value = c.Pivacf;
+            if (string.IsNullOrWhiteSpace(inpIndirizzo.Value))
+                inpIndirizzo.Value = c.Indirizzo;
+            if (string.IsNullOrWhiteSpace(inpComune.Value))
+                inpComune.Value = c.CodiceCOMUNE;
+            if (string.IsNullOrWhiteSpace(inpProvincia.Value))
+                inpProvincia.Value = (!(string.IsNullOrWhiteSpace(NomeProvincia(c.CodicePROVINCIA, Lingua)))) ? NomeProvincia(c.CodicePROVINCIA, Lingua) : c.CodicePROVINCIA;
+            if (string.IsNullOrWhiteSpace(inpCap.Value))
+                inpCap.Value = c.Cap;
+            if (string.IsNullOrWhiteSpace(inpEmail.Value))
+                inpEmail.Value = c.Email;
+            if (string.IsNullOrWhiteSpace(inpTel.Value))
+                inpTel.Value = c.Telefono;
+            if (string.IsNullOrWhiteSpace(inpPec.Value))
+                inpPec.Value = c.Emailpec;
+
+            //Precaricare dal db anche i campi per la spedizione da .serialized
+            Cliente clispediz = Newtonsoft.Json.JsonConvert.DeserializeObject<Cliente>(c.Serialized);
+            if (clispediz != null)
+            {
+                if (string.IsNullOrWhiteSpace(inpCaps.Value))
+                    inpCaps.Value = clispediz.Cap;
+                if (string.IsNullOrWhiteSpace(inpComuneS.Value))
+                    inpComuneS.Value = clispediz.CodiceCOMUNE;
+                //if (string.IsNullOrWhiteSpace(inpProvinciaS.Value))
+                //    inpProvinciaS.Value = clispediz.CodicePROVINCIA;
+                if (string.IsNullOrWhiteSpace(inpProvinciaS.Value))
+                    inpProvinciaS.Value = (!(string.IsNullOrWhiteSpace(NomeProvincia(clispediz.CodicePROVINCIA, Lingua)))) ? NomeProvincia(clispediz.CodicePROVINCIA, Lingua) : clispediz.CodicePROVINCIA;
+                if (string.IsNullOrWhiteSpace(inpIndirizzoS.Value))
+                    inpIndirizzoS.Value = clispediz.Indirizzo;
+                if (string.IsNullOrWhiteSpace(inpTelS.Value))
+                    inpTelS.Value = clispediz.Telefono;
+            }
+
+            //Abilita i dati spedizione se presenti
+            if (!string.IsNullOrEmpty(inpCaps.Value) || !string.IsNullOrEmpty(inpComuneS.Value) || !string.IsNullOrEmpty(inpProvinciaS.Value)
+            || !string.IsNullOrEmpty(inpIndirizzoS.Value) || !string.IsNullOrEmpty(inpTelS.Value))
+            {
+                chkSpedizione.Checked = false; plhShipping.Visible = true;
+            }
+        }
+    }
 
     protected string GeneraCodiceOrdine()
     {
@@ -1524,11 +1681,11 @@ public partial class AspNetPages_Orderpage : CommonPage
         TestoMail += totali.Mailcliente;
         TestoMail += "<br/><b>Indirizzo fatturazione</b> : <br/> ";
         TestoMail += totali.Indirizzofatturazione + "<br/>";
-        //if (string.IsNullOrEmpty(totali.Indirizzospedizione))
-        //{
-        TestoMail += "<br/><b>Indirizzo spedizione</b> : <br/> ";
-        TestoMail += totali.Indirizzospedizione;
-        //}
+        if (!string.IsNullOrEmpty(totali.Indirizzospedizione))
+        {
+            TestoMail += "<br/><b>Indirizzo spedizione</b> : <br/> ";
+            TestoMail += totali.Indirizzospedizione;
+        }
         TestoMail += "</td></tr>";
         if (!string.IsNullOrEmpty(totali.Note))
             TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
@@ -1547,16 +1704,16 @@ public partial class AspNetPages_Orderpage : CommonPage
             //CARATTERISTICHE CARRELLO IN BASE ALLE PROPRIETA IN jsonfield1
             if (!string.IsNullOrEmpty(item.jsonfield1))
             {
-                string valore3 = eCommerceDM.Selezionadajson(item.jsonfield1, "adulti", Lingua);
-                string valore4 = eCommerceDM.Selezionadajson(item.jsonfield1, "bambini", Lingua);
+                string valore3 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "adulti", Lingua);
+                string valore4 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "bambini", Lingua);
                 if (!string.IsNullOrEmpty(valore3))
                     TestoMail += "<br/>" + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "adulti") + ": " + "</b>" + valore4 + "<br/>";
                 if (!string.IsNullOrEmpty(valore4))
                     TestoMail += " " + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "bambini") + ": " + "</b>" + valore4 + "<br/>";
             }
             //CARATTERISTICHE
-            string valore1 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica1", Lingua);
-            string valore2 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica2", Lingua);
+            string valore1 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica1", Lingua);
+            string valore2 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica2", Lingua);
             if (!string.IsNullOrEmpty(valore1) || !string.IsNullOrEmpty(valore2))
             {
                 valore1 = references.TestoCaratteristica(0, valore1, Lingua);
@@ -1571,11 +1728,12 @@ public partial class AspNetPages_Orderpage : CommonPage
             //INSERIMENTO DATI PER SCAGLIONI
             //////////////////////////////////
             //string prezzoscaglione = eCommerceDM.Selezionadajson(item.jsonfield1, "prezzo", Lingua);
-            string datapartenza = eCommerceDM.Selezionadajson(item.jsonfield1, "datapartenza", Lingua);
-            string dataritorno = eCommerceDM.Selezionadajson(item.jsonfield1, "dataritorno", Lingua);
-            string idscaglione = eCommerceDM.Selezionadajson(item.jsonfield1, "idscaglione", Lingua);
-            //caglione completo nel carrello
-            //Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>(eCommerceDM.Selezionadajson(item.jsonfield1, "scaglione", Lingua));
+            string datapartenza = WelcomeLibrary.UF.Utility.reformatdatetimestring((string)eCommerceDM.Selezionadajson(item.jsonfield1, "datapartenza", Lingua));
+            string dataritorno = WelcomeLibrary.UF.Utility.reformatdatetimestring((string)eCommerceDM.Selezionadajson(item.jsonfield1, "dataritorno", Lingua));
+
+            string idscaglione = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "idscaglione", Lingua);
+            //scaglione completo nel carrello
+            //Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>((String)eCommerceDM.Selezionadajson(item.jsonfield1, "scaglione", Lingua));
             if (!string.IsNullOrEmpty(idscaglione) || !string.IsNullOrEmpty(datapartenza))
             {
                 if (!string.IsNullOrEmpty(datapartenza))
@@ -1615,20 +1773,22 @@ public partial class AspNetPages_Orderpage : CommonPage
             TestoMail += " <br/></td></tr>";
             i++;
         }
-
-
+        TestoMail += "<tr><td>Totale articoli " + totali.TotaleOrdine + " € </td></tr>";
         if (totali.TotaleSconto != 0)
-            TestoMail += "<tr><td>SCONTO APPLICATO " + totali.TotaleSconto + " € </td></tr>";
+            TestoMail += "<tr><td>Sconto applicato " + totali.TotaleSconto + " € </td></tr>";
         TestoMail += "<tr><td>";
         if (totali.TotaleSpedizione != 0)
-            TestoMail += "SPESE DI SPEDIZIONE " + totali.TotaleSpedizione + "  €<br/>";
+            TestoMail += "Spese di spedizione " + totali.TotaleSpedizione + "  €<br/>";
         if (totali.TotaleSmaltimento != 0)
-            TestoMail += "<br/>SPESE DI SMALTIMENTO(PFU) " + totali.TotaleSmaltimento + "  €<br/>";
-        TestoMail += "<br/><b>TOTALE ORDINE COMPLESSIVO: </b>" + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
+            TestoMail += "<br/>Spese di smaltimeto(PFU) " + totali.TotaleSmaltimento + "  €<br/>";
+        TestoMail += "<br/><b>TOTALE ORDINE COMPLESSIVO: </b>" + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
         if (totali.Percacconto != 100)
-            TestoMail += "<tr><td><b>RICHIESTO PAGAMENTO ACCONTO " + totali.Percacconto + "% :</b> " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) * totali.Percacconto / 100 + " €</td></tr>";
+        {
+            TestoMail += "<tr><td><b>RICHIESTO PAGAMENTO ACCONTO " + totali.Percacconto + "% :</b> " + totali.TotaleAcconto + " €</td></tr>";
+            TestoMail += "<tr><td><b>DA SALDARE ENTRO 30 GG DATA PARTENZA " + ":</b> " + totali.TotaleSaldo + " €</td></tr>";
+        }
         else
-            TestoMail += "<tr><td><b>RICHIESTO SALDO  :</b> " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
+            TestoMail += "<tr><td><b>RICHIESTO PAGAMENTO SALDO  :</b> " + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
 
         TestoMail += "<tr><td><br/>Metodo di pagamento:  " + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento).ToString() + " </td></tr>";
         //chiudo tabella e riga relativa
@@ -1651,12 +1811,11 @@ public partial class AspNetPages_Orderpage : CommonPage
 
         TestoMail += "<br/><b>Fatturazione</b> :<br/> ";
         TestoMail += totali.Indirizzofatturazione + "<br/>";
-
-        //if (string.IsNullOrEmpty(totali.Indirizzospedizione))
-        //{
-        TestoMail += "<br/><b>Spedizione</b> :<br/>";
-        TestoMail += totali.Indirizzospedizione;
-        //}
+        if (!string.IsNullOrEmpty(totali.Indirizzospedizione))
+        {
+            TestoMail += "<br/><b>Spedizione</b> :<br/>";
+            TestoMail += totali.Indirizzospedizione;
+        }
         TestoMail += "</td></tr>";
         if (!string.IsNullOrEmpty(totali.Note))
             TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
@@ -1688,8 +1847,8 @@ public partial class AspNetPages_Orderpage : CommonPage
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiododa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Datastart.Value) + "</b> ";
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiodoa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Dataend.Value) + "</b><br/>";
             }
-            string valore1 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica1", Lingua);
-            string valore2 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica2", Lingua);
+            string valore1 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica1", Lingua);
+            string valore2 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica2", Lingua);
             if (!string.IsNullOrEmpty(valore1) || !string.IsNullOrEmpty(valore2))
             {
                 valore1 = references.TestoCaratteristica(0, valore1, Lingua);
@@ -1702,8 +1861,8 @@ public partial class AspNetPages_Orderpage : CommonPage
 
             if (!string.IsNullOrEmpty(item.jsonfield1))
             {
-                string valore3 = eCommerceDM.Selezionadajson(item.jsonfield1, "adulti", Lingua);
-                string valore4 = eCommerceDM.Selezionadajson(item.jsonfield1, "bambini", Lingua);
+                string valore3 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "adulti", Lingua);
+                string valore4 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "bambini", Lingua);
                 if (!string.IsNullOrEmpty(valore3))
                     TestoMail += "<br/>" + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "adulti") + ": " + "</b>" + valore4 + "<br/>";
                 if (!string.IsNullOrEmpty(valore4))
@@ -1713,11 +1872,11 @@ public partial class AspNetPages_Orderpage : CommonPage
             //INSERIMENTO DATI PER SCAGLIONI
             //////////////////////////////////
             //string prezzoscaglione = eCommerceDM.Selezionadajson(item.jsonfield1, "prezzo", Lingua);
-            string datapartenza = eCommerceDM.Selezionadajson(item.jsonfield1, "datapartenza", Lingua);
-            string dataritorno = eCommerceDM.Selezionadajson(item.jsonfield1, "dataritorno", Lingua);
-            string idscaglione = eCommerceDM.Selezionadajson(item.jsonfield1, "idscaglione", Lingua);
+            string datapartenza = WelcomeLibrary.UF.Utility.reformatdatetimestring((string)eCommerceDM.Selezionadajson(item.jsonfield1, "datapartenza", Lingua));
+            string dataritorno = WelcomeLibrary.UF.Utility.reformatdatetimestring((string)eCommerceDM.Selezionadajson(item.jsonfield1, "dataritorno", Lingua));
+            string idscaglione = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "idscaglione", Lingua);
             //caglione completo nel carrello
-            //Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>(eCommerceDM.Selezionadajson(item.jsonfield1, "scaglione", Lingua));
+            //Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>((String)eCommerceDM.Selezionadajson(item.jsonfield1, "scaglione", Lingua));
             if (!string.IsNullOrEmpty(idscaglione) || !string.IsNullOrEmpty(datapartenza))
             {
                 if (!string.IsNullOrEmpty(datapartenza))
@@ -1758,19 +1917,22 @@ public partial class AspNetPages_Orderpage : CommonPage
             i++;
         }
 
+        TestoMail += "<tr><td>Totale articoli " + totali.TotaleOrdine + " € </td></tr>";
         if (totali.TotaleSconto != 0)
-            TestoMail += "<tr><td><br/>Sconto applicato " + totali.TotaleSconto + " € </td></tr>";
+            TestoMail += "<tr><td>Sconto applicato " + totali.TotaleSconto + " € </td></tr>";
         TestoMail += "<tr><td>";
         if (totali.TotaleSpedizione != 0)
-            TestoMail += "<br/>Spese di spedizione " + totali.TotaleSpedizione + " €<br/>";
+            TestoMail += "Spese di spedizione " + totali.TotaleSpedizione + "  €<br/>";
         if (totali.TotaleSmaltimento != 0)
-            TestoMail += "<br/>Spese smaltimento(PFU) " + totali.TotaleSmaltimento + " €<br/>";
-        TestoMail += "<b>Totale ordine complessivo:</b> " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
-        //La percentuale di anticipo è 100% se la data di inizio periodo ripetto oggi è inferiore a 60 gg
+            TestoMail += "<br/>Spese di smaltimeto(PFU) " + totali.TotaleSmaltimento + "  €<br/>";
+        TestoMail += "<br/><b>TOTALE ORDINE COMPLESSIVO: </b>" + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
         if (totali.Percacconto != 100)
-            TestoMail += "<tr><td><b>RICHIESTO PAGAMENTO ACCONTO " + totali.Percacconto + "% :</b> " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) * totali.Percacconto / 100 + " €</td></tr>";
+        {
+            TestoMail += "<tr><td><b>RICHIESTO PAGAMENTO ACCONTO " + totali.Percacconto + "% :</b> " + totali.TotaleAcconto + " €</td></tr>";
+            TestoMail += "<tr><td><b>DA SALDARE ENTRO 30 GG DATA PARTENZA " + ":</b> " + totali.TotaleSaldo + " €</td></tr>";
+        }
         else
-            TestoMail += "<tr><td><b>RICHIESTO SALDO  :</b> " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
+            TestoMail += "<tr><td><b>RICHIESTO PAGAMENTO SALDO  :</b> " + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
 
         TestoMail += "<tr><td><br/>Metodo di pagamento: " + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento).ToString() + " </td></tr>";
         //chiudo tabella e riga relativa
@@ -1786,6 +1948,7 @@ public partial class AspNetPages_Orderpage : CommonPage
 
         return TestoMail;
     }
+
 
 
     protected void inpContanti_ServerChange(object sender, EventArgs e)
@@ -1804,4 +1967,5 @@ public partial class AspNetPages_Orderpage : CommonPage
         CaricaCarrello();
 
     }
+
 }

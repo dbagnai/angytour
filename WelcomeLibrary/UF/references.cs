@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,8 @@ public class references
     public static string refcondizione = "";
     public static string reflanguages = "";
     public static string refivacategorie = "";
+
+
 
 
     public class jpath
@@ -688,8 +691,8 @@ public class references
     public static void CaricaMemoriaStatica(HttpServerUtility Server)
     {
         WelcomeLibrary.STATIC.Global.NomeConnessioneDb = "dbdataaccess";
-        WelcomeLibrary.UF.ConfigManagement.LoadConfig();
-        WelcomeLibrary.UF.ResourceManagement.LoadResources();
+        WelcomeLibrary.UF.ConfigManagement.LoadConfig(); //Carico in memoria statica tutte le variabili di cofnfigurazione
+        WelcomeLibrary.UF.ResourceManagement.LoadResources(); //Carico in memoria statica tutte le risorse testuali
 
         //MEMORIZZO I VALORI dei PERCORSI FISICI DELL APPLICAZIONE
         if (ConfigManagement.ReadKey("Posizione") == "Remoto")
@@ -792,7 +795,7 @@ public class references
         jpathcomplete.versionforcache = WelcomeLibrary.STATIC.Global.versionforcache;
         ////////////// REGIONI E PROIVINCE/////////////////////
 
-#if false //da abilitare dove serve la posizione geografica servono lato javascript
+#if false //da abilitare dove serve la posizione geografica lato javascript
         WelcomeLibrary.DOM.TabrifCollection trifregioni = new TabrifCollection();
         WelcomeLibrary.DOM.TabrifCollection trifprovince = new TabrifCollection();
         WelcomeLibrary.DOM.ProvinceCollection regionitmp = new WelcomeLibrary.DOM.ProvinceCollection();
@@ -879,6 +882,7 @@ public class references
                 p1.Codice = p.Codice;
                 p1.Campo1 = p.Descrizione;
                 p1.Lingua = p.Lingua;
+
                 tmptipo.Add(p1);
             }
         jpathcomplete.jsontipologie = Newtonsoft.Json.JsonConvert.SerializeObject(tmptipo);
@@ -886,14 +890,27 @@ public class references
         Dictionary<string, string> retdict = new Dictionary<string, string>();
 
         ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
+
 #if false
+        retdict.Add("JSONrefprezzi", references.refprezzi); //fasce di prezzo per filtro
         retdict.Add("JSONrefmetrature", references.refmetrature);
-        retdict.Add("JSONrefprezzi", references.refprezzi);
         retdict.Add("JSONrefcondizione", references.refcondizione);
         retdict.Add("JSONreftipocontratto", references.reftipocontratto);
         retdict.Add("JSONreftiporisorse", references.reftiporisorse);
         //retdict.Add("JSONgeogenerale", references.refgeogenerale);  
 #endif
+        ///////////////////////////
+        //Liste Gestione scaglioni
+        ///////////////////////////
+        string serializestatuslist = references.ResMan("Common", lingua, "statuslist");
+        if (!string.IsNullOrEmpty(serializestatuslist))
+            retdict.Add("JSONstatuslist", serializestatuslist);
+        string serializeetalist = references.ResMan("Common", lingua, "etalist");
+        if (!string.IsNullOrEmpty(serializeetalist))
+            retdict.Add("JSONetalist", serializeetalist);
+        string serializeduratalist = references.ResMan("Common", lingua, "duratalist");
+        if (!string.IsNullOrEmpty(serializeduratalist))
+            retdict.Add("JSONduratalist", serializeduratalist);
         ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
 
         retdict.Add("JSONcar1", Newtonsoft.Json.JsonConvert.SerializeObject(Utility.Caratteristiche[0]));
@@ -915,6 +932,90 @@ public class references
     public static string ResMan(string Gruppo, string Lingua, string Chiave, string Categoria = "")
     {
         return WelcomeLibrary.UF.ResourceManagement.ReadKey(Gruppo, Lingua, Chiave, Categoria).Valore;
+    }
+
+
+    /// <summary>
+    /// Carica le liste geografiche nel modello indicato nei parametri in base ai valori passati
+    /// </summary>
+    /// <param name="m"></param>
+    /// <param name="Regione"></param>
+    /// <param name="Provincia"></param>
+    /// <param name="nazione"></param>
+    /// <param name="Lingua"></param>
+    public static void caricadatiddlgeo(listegeografiche m, string Regione = "", string Provincia = "", string Comune = "", string nazione = "IT", string Lingua = "I")
+    {
+        List<Tabrif> nazioni = Utility.Nazioni.FindAll(delegate (Tabrif _nz) { return _nz.Lingua == Lingua; });
+        nazioni.Sort(new GenericComparer<Tabrif>("Campo1", System.ComponentModel.ListSortDirection.Ascending));
+        m.ListNazione.Clear();
+        //m.ListRegione.Insert(0, "0", references.ResMan("Common", Lingua, "ddlTuttiregione"));
+        nazioni.ForEach(t => m.ListNazione.Add(t.Codice, t.Campo1));
+
+        //if (nazione == "IT")
+        //{
+        WelcomeLibrary.DOM.ProvinceCollection regioni = (nazione == "IT") ? references.ListaRegioni(Lingua) : new ProvinceCollection();
+        //List<Province> provincelingua = Utility.ElencoProvince.FindAll(delegate (Province tmp) { return (tmp.Lingua == Lingua); });
+        if (m != null)
+        {
+            regioni.Sort(new GenericComparer<Province>("Regione", System.ComponentModel.ListSortDirection.Ascending));
+            m.ListRegione.Clear();
+            m.ListRegione.Insert(0, "", references.ResMan("Common", Lingua, "ddlTuttiregione"));
+            regioni.ForEach(t => m.ListRegione.Add(t.Codice, t.Regione));
+            //Controllo il valore passato ed in caso lo metto in lista 
+            if (Regione != "") { if (!regioni.Exists(r => r.Codice == Regione)) m.ListRegione.Add(Regione, Regione); }
+
+            m.ListProvincia.Clear();
+            m.ListProvincia.Insert(0, "", references.ResMan("Common", Lingua, "ddlTuttiprovincia"));
+            List<Province> provincelingua = new List<Province>();
+            if (Regione != "")
+            {
+                Province _tmp = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == Lingua && tmp.Codice == Regione); }); //prendo il codiceregione dal codiceidentificativo per la selezione delle province
+                if (_tmp != null)
+                {
+                    provincelingua = Utility.ElencoProvince.FindAll(delegate (Province tmp) { return (tmp.Lingua == Lingua && tmp.CodiceRegione == _tmp.CodiceRegione); });
+                    provincelingua.Sort(new GenericComparer<Province>("Provincia", System.ComponentModel.ListSortDirection.Ascending));
+                }
+                provincelingua.ForEach(t => m.ListProvincia.Add(t.Codice, t.Provincia));
+            }
+            //Controllo il valore passato ed in caso lo metto in lista per la ddl
+            if (Provincia != "")
+            {
+                if (!provincelingua.Exists(r => r.Codice == Provincia))
+                {
+                    //cerco il nome tra tutte le province
+                    string nomeprovincia = references.NomeProvincia(Provincia, Lingua);
+                    if (!string.IsNullOrEmpty(nomeprovincia))
+                        m.ListProvincia.Add(Provincia, nomeprovincia);
+                    else
+                        m.ListProvincia.Add(Provincia, Provincia);
+                }
+            }
+
+            m.ListComune.Clear();
+            m.ListComune.Insert(0, "", references.ResMan("Common", Lingua, "ddlTuttiComune"));
+            List<Comune> comunilingua = new List<Comune>();
+            if (Provincia != "")
+            {
+                comunilingua = Utility.ElencoComuni.FindAll(delegate (WelcomeLibrary.DOM.Comune tmp) { return (tmp.CodiceIncrocio == Provincia); });
+                if (comunilingua != null)
+                    comunilingua.Sort(new GenericComparer<Comune>("Nome", System.ComponentModel.ListSortDirection.Ascending));
+                comunilingua.ForEach(t => m.ListComune.Add(t.Nome, t.Nome));
+            }
+            //Controllo il valore passato ed in caso lo metto in lista 
+            if (Comune != "") { if (!comunilingua.Exists(r => r.Nome == Comune)) m.ListComune.Add(Comune, Comune); }
+
+        }
+        //}
+        //else
+        //{
+        //    m.ListRegione.Clear();
+        //    m.ListRegione.Insert(0, "", references.ResMan("Common", Lingua, "ddlTuttiregione"));
+        //    m.ListProvincia.Clear();
+        //    m.ListProvincia.Insert(0, "", references.ResMan("Common", Lingua, "ddlTuttiprovincia"));
+        //    m.ListComune.Clear();
+        //    m.ListComune.Insert(0, "", references.ResMan("Common", Lingua, "ddlTuttiComune"));
+        //}
+
     }
 
     public static string NomeRegione(string codiceprovincia, string Lingua)
@@ -974,7 +1075,18 @@ public class references
     {
         string ritorno = "";
         if (string.IsNullOrEmpty(nomeprovincia)) return ritorno;
-        Province item = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == Lingua && tmp.Provincia.ToLower().Contains(nomeprovincia.ToLower().Trim())); });
+        //Province item = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == Lingua && tmp.Provincia.ToLower().Contains(nomeprovincia.ToLower().Trim())); });
+        Province item = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == Lingua && tmp.Provincia.ToLower().Trim() == nomeprovincia.ToLower().Trim()); });
+        if (item != null)
+            ritorno = item.Codice;
+        return ritorno;
+    }
+    public static string TrovaCodiceProvinciaPerSigla(string siglaprovincia, string Lingua)
+    {
+        string ritorno = "";
+        if (string.IsNullOrEmpty(siglaprovincia)) return ritorno;
+        //Province item = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == Lingua && tmp.Provincia.ToLower().Contains(nomeprovincia.ToLower().Trim())); });
+        Province item = Utility.ElencoProvince.Find(delegate (Province tmp) { return (tmp.Lingua == Lingua && tmp.SiglaProvincia.ToLower().Trim() == siglaprovincia.ToLower().Trim()); });
         if (item != null)
             ritorno = item.Codice;
         return ritorno;

@@ -7,6 +7,7 @@ using HtmlAgilityPack;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.DAL;
 using System.Text.RegularExpressions;
+using System.Collections.Specialized;
 
 namespace WelcomeLibrary.UF
 {
@@ -1357,6 +1358,7 @@ namespace WelcomeLibrary.UF
                         //return;
 
                         if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", WelcomeLibrary.UF.dataManagement.EncodeToBase64(node.OuterHtml)); //memorizzo l'elemento da bindare ai dati per utilizzo del sistema di pager per riuso dopo paginazione
+
                         //if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", WelcomeLibrary.UF.dataManagement.EncodeToBase64(node.ParentNode.OuterHtml)); //memorizzo l'elemento padrea cui appendere tutto per utilizzo del sistema di pager
                         //if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", node.ParentNode.OuterHtml.Replace("\"", "\\\"").Replace("'", "|")); //memorizzo l'elemento padrea cui appendere tutto per utilizzo del sistema di pager
                         //if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", Newtonsoft.Json.JsonConvert.SerializeObject(node.ParentNode.OuterHtml)); //memorizzo l'elemento padrea cui appendere tutto per utilizzo del sistema di pager
@@ -1386,7 +1388,7 @@ namespace WelcomeLibrary.UF
                         try
                         {
                             ////////////////////////////////////////////////
-                            // Se ho passatto dei parametri aggiuntivi alla funzione li sposto nella collectio di filtro ( E SONO PRIORITARI RISPETTO ALLA SESSIONE )
+                            // Se ho passatto dei parametri aggiuntivi alla funzione li sposto nella collection di filtro ( E SONO PRIORITARI RISPETTO ALLA SESSIONE )
                             ////////////////////////////////////////////////
                             bool flag_addedpars1 = false;
                             if (dictpars.ContainsKey("objfiltro"))
@@ -1894,7 +1896,7 @@ namespace WelcomeLibrary.UF
                         }
                         break;
                     case "injectbootstrapportfolioandload":
-                        // injectPortfolioAndLoad(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, mostviewed,objfiltro) 
+                        // injectbootstrapportfolioandload(type, container, controlid, page, pagesize, enablepager, listShow, tipologia, categoria, visualData, visualPrezzo, maxelement, testoricerca, vetrina, promozioni, connectedid, categoria2Liv, mostviewed,objfiltro) 
                         //return;
 
                         if (!dictpars.ContainsKey("maincontainertext")) dictpars.Add("maincontainertext", WelcomeLibrary.UF.dataManagement.EncodeToBase64(node.OuterHtml)); //memorizzo l'elemento da bindare ai dati per utilizzo del sistema di pager per riuso dopo paginazione
@@ -1927,7 +1929,7 @@ namespace WelcomeLibrary.UF
                         try
                         {
                             ////////////////////////////////////////////////
-                            // Se ho passatto dei parametri aggiuntivi alla funzione li sposto nella collectio di filtro ( E SONO PRIORITARI RISPETTO ALLA SESSIONE )
+                            // Se ho passatto dei parametri aggiuntivi alla funzione inject li sposto nella collection di filtro ( E SONO PRIORITARI RISPETTO ALLA SESSIONE )
                             ////////////////////////////////////////////////
                             bool flag_addedpars1 = false;
                             if (dictpars.ContainsKey("objfiltro"))
@@ -1950,6 +1952,7 @@ namespace WelcomeLibrary.UF
 #if true
                             //////////////////////////////////////////////////
                             //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
+                            //SECONDARIO: LA priprità e ai prametri passati nella chiamata se presenti
                             //////////////////////////////////////////////////
                             if (!flag_addedpars1)
                                 if (Session != null && Session["objfiltro"] != null)
@@ -2887,8 +2890,6 @@ namespace WelcomeLibrary.UF
 
                         if (itemdic.ContainsKey(bindprophref))
                         {
-
-
                             link = itemdic[bindprophref];
                             if (!string.IsNullOrEmpty(link))
                             {
@@ -2906,11 +2907,7 @@ namespace WelcomeLibrary.UF
                                 else
                                     nodetobind.Attributes.Add("style", "display:none");
                             }
-
-
                         }
-
-
                     }
                     else if (nodetobind.Name == "a")
                     {
@@ -2982,11 +2979,11 @@ namespace WelcomeLibrary.UF
                                 //else
                                 //    nodetobind.Attributes.Add("style", "display:block");
                             }
-                            if (!(nodetobind.Attributes.Contains("target")))
-                                if (link.ToLower().IndexOf(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) != -1)
-                                    nodetobind.SetAttributeValue("target", "_self");
-                                else
-                                    nodetobind.SetAttributeValue("target", "_blank");
+
+                            if (link.ToLower().IndexOf(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) != -1)
+                                nodetobind.SetAttributeValue("target", "_self");
+                            else
+                                nodetobind.SetAttributeValue("target", "_blank");
 
                         }
                         else
@@ -3808,6 +3805,188 @@ namespace WelcomeLibrary.UF
                                 }
 
                             }
+                        }
+                    }
+                    else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("scaglionitoolminprice"))
+                    {
+                        ScaglioniCollection scaglioni = new ScaglioniCollection();
+                        string idscheda = "";
+                        if (itemdic.ContainsKey(property))
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            string idcontrolcarrello = "";
+                            if (nodetobind.Attributes.Contains("myvalue"))
+                                idcontrolcarrello = nodetobind.Attributes["myvalue"].Value;
+                            idscheda = itemdic[property];
+                            string proprieta = "";
+                            if (nodetobind.Attributes.Contains("mybind1"))
+                                proprieta = nodetobind.Attributes["mybind1"].Value;
+                            string scaglioniserialized = "";
+                            //if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey(proprieta) && !string.IsNullOrEmpty(linkloaded[idscheda][proprieta]))
+                            if (itemdic.ContainsKey(proprieta) && !string.IsNullOrEmpty(itemdic[proprieta]))
+                            {
+                                //Prendo i dati dello scaglione da itemdic[proprieta] deserializzandolo ....
+                                scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(itemdic[proprieta]);
+                                //Alternativa da linkedresource
+                                //scaglioniserialized = linkloaded[idscheda][proprieta];
+                                //scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(scaglioniserialized);;
+                                //ELIMINIAMO DALLA LISTA VISUALIZZATA GLI SCAGLIONI PASSATI che non servono nella scheda con data inferiore a oggi
+                                if (scaglioni != null)
+                                {
+                                    scaglioni.RemoveAll(s => s.datapartenza < System.DateTime.Now);
+                                    scaglioniserialized = Newtonsoft.Json.JsonConvert.SerializeObject(scaglioni);
+                                }
+                            }
+                            double pricemin = 9999999;
+                            foreach (Scaglioni el in scaglioni)
+                            {
+                                //cerco il prezzo minimo ....
+                                if (el.prezzo < pricemin) pricemin = el.prezzo;
+                            }
+                            string unit = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "valuta").Valore;
+                            sb.Append(String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { pricemin }) + ' ' + unit);
+                            string contenutoslide = sb.ToString();
+                            nodetobind.InnerHtml += contenutoslide;
+                            //Visualizzazione elemento
+                            if (nodetobind != null && scaglioni != null && scaglioni.Count > 0)
+                            {
+                                if (nodetobind.Attributes.Contains("style"))
+                                {
+                                    nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                    nodetobind.Attributes["style"].Value += ";display:block";
+                                }
+                                else
+                                    nodetobind.Attributes.Add("style", "display:block");
+                            }
+                        }
+                    }
+                    else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("scaglionitool"))
+                    {
+                        ScaglioniCollection scaglioni = new ScaglioniCollection();
+                        string idscheda = "";
+                        if (itemdic.ContainsKey(property))
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            string idcontrolcarrello = "";
+                            if (nodetobind.Attributes.Contains("myvalue"))
+                                idcontrolcarrello = nodetobind.Attributes["myvalue"].Value;
+
+                            idscheda = itemdic[property];
+                            string proprieta = "";
+                            if (nodetobind.Attributes.Contains("mybind1"))
+                                proprieta = nodetobind.Attributes["mybind1"].Value;
+
+                            string scaglioniserialized = "";
+                            //if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey(proprieta) && !string.IsNullOrEmpty(linkloaded[idscheda][proprieta]))
+                            if (itemdic.ContainsKey(proprieta) && !string.IsNullOrEmpty(itemdic[proprieta]))
+                            {
+                                //Prendo i dati dello scaglione da itemdic[proprieta] deserializzandolo ....
+                                scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(itemdic[proprieta]);
+                                //Alternativa da linkedresource
+                                //scaglioniserialized = linkloaded[idscheda][proprieta];
+                                //scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(scaglioniserialized);
+                                //ELIMINIAMO DALLA LISTA VISUALIZZATA GLI SCAGLIONI PASSATI che non servono nella scheda con data inferiore a oggi
+                                if (scaglioni != null)
+                                {
+                                    scaglioni.RemoveAll(s => s.datapartenza < System.DateTime.Now);
+                                    scaglioniserialized = Newtonsoft.Json.JsonConvert.SerializeObject(scaglioni);
+                                }
+                            }
+                            /////////////////////////////////////////////////////////////////////////////////////
+                            //Metto i valori degli scaglioni su controlli hidden in pagina per la visualizzazione
+                            /////////////////////////////////////////////////////////////////////////////////////
+                            string scaglioniserializedencoded = dataManagement.EncodeUtfToBase64(scaglioniserialized);
+                            //memorizzo i dati di tutti gli scaglioni caricati per la gestione lato client dei valori di selezione
+                            sb.Append("<input id=\"" + idcontrolcarrello + "hiddenscaglioni\" type=\"hidden\" value=\"" + scaglioniserializedencoded + "\" />");
+                            string serializestatuslist = references.ResMan("Common", Lingua, "statuslist");
+                            string serializestatuslistencoded = dataManagement.EncodeUtfToBase64(serializestatuslist);
+                            sb.Append("<input id=\"" + idcontrolcarrello + "hiddenstatus\" type=\"hidden\" value=\"" + serializestatuslistencoded + "\" />");
+                            string serializeetalist = references.ResMan("Common", Lingua, "etalist");
+                            string serializeetalistencoded = dataManagement.EncodeUtfToBase64(serializeetalist);
+                            sb.Append("<input id=\"" + idcontrolcarrello + "hiddenetalist\" type=\"hidden\" value=\"" + serializeetalistencoded + "\" />");
+
+
+                            string controltype = "";
+                            if (nodetobind.Attributes.Contains("controltype"))
+                                controltype = nodetobind.Attributes["controltype"].Value;
+                            string mustvalidate = "";
+                            if (nodetobind.Attributes.Contains("needed"))
+                                mustvalidate = nodetobind.Attributes["needed"].Value;
+                            sb.Append(WelcomeLibrary.UF.ResourceManagement.ReadKey("common", Lingua, "txtintroscaglione").Valore);
+                            //Renderizziamo la lista degli scaglioni ... con l'elemento che preferisci dropdown, lista o altro 
+                            //in base al valore dell'attributo controltype 
+                            //creazione controllo select
+                            if (controltype == "select")
+                            {
+                                sb.Append("<select id=\"" + idcontrolcarrello + "dllscaglione\" needed=\"" + mustvalidate + "\" class=\"mx-auto form-control w-100\"  >");
+                                //aggiungiamo l'elemento vuoto
+                                sb.Append("<option value=\"\" >");
+                                sb.Append(WelcomeLibrary.UF.ResourceManagement.ReadKey("common", Lingua, "txtselectscaglione").Valore); // da prendere dalle risorse txtselectscaglione
+                                sb.Append("</option>");
+
+                                foreach (Scaglioni el in scaglioni)
+                                {
+                                    //STATO VIAGGIO DISABILITATO SE STATO MAGGIORE DI COMPLETO //////////////////////////////
+                                    string disabled = "";
+                                    string stato = "";
+                                    if (el.stato != null)
+                                    {
+                                        if (el.stato.Value >= 4) disabled = "disabled";
+                                        OrderedDictionary statuslist = Newtonsoft.Json.JsonConvert.DeserializeObject<OrderedDictionary>(serializestatuslist);
+                                        if (statuslist != null)
+                                            stato = (string)statuslist[el.stato.Value.ToString()];
+                                    }
+                                    //////////////////////////////////////////////
+
+                                    /////FASCIA DI ETA///////////
+                                    string fasciaeta = "";
+                                    if (el.fasciaeta != null)
+                                    {
+                                        OrderedDictionary etalist = Newtonsoft.Json.JsonConvert.DeserializeObject<OrderedDictionary>(serializeetalist);
+                                        if (etalist != null)
+                                            fasciaeta = (string)etalist[el.fasciaeta.Value.ToString()];
+                                    }
+                                    //////////////////////////////////////////////
+
+                                    string datapartenza = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:dd MMM yyyy}", new object[] { el.datapartenza });
+                                    string dataritorno = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:dd MMM yyyy}", new object[] { el.datapartenza.Value.AddDays(el.durata - 1) });
+                                    sb.Append("<option " + disabled + " value=\"" + el.id + "\" >");
+                                    sb.Append(datapartenza + "/" + dataritorno + " - " + el.prezzo + "€" + " - " + stato);
+                                    sb.Append("</option>");
+                                }
+                                sb.Append("</select>");
+                            }
+                            //Controllo solo lista di testo
+                            if (controltype == "")
+                            {
+                                foreach (Scaglioni el in scaglioni)
+                                {
+                                    sb.Append(String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:dd MMM yyyy}", new object[] { el.datapartenza }));
+                                    sb.Append("  - ");
+                                    sb.Append(el.durata);
+                                    sb.Append(" gg ");
+                                    sb.Append(" ");
+                                    sb.Append(el.prezzo);
+                                    sb.Append(" € ");
+                                    sb.Append("<br/>");
+                                }
+                            }
+
+                            string contenutoslide = sb.ToString();
+                            nodetobind.InnerHtml = contenutoslide;
+
+                            //Visualizzazione elemento
+                            if (nodetobind != null && scaglioni != null && scaglioni.Count > 0)
+                            {
+                                if (nodetobind.Attributes.Contains("style"))
+                                {
+                                    nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                    nodetobind.Attributes["style"].Value += ";display:block";
+                                }
+                                else
+                                    nodetobind.Attributes.Add("style", "display:block");
+                            }
+
                         }
                     }
                     else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("carellotool"))

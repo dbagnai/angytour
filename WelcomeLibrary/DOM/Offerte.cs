@@ -34,7 +34,12 @@ namespace WelcomeLibrary.DOM
             get { return _CodiceTipologia; }
             set { _CodiceTipologia = value; }
         }
-
+        private string _CodiceNazione;
+        public string CodiceNazione
+        {
+            get { return _CodiceNazione; }
+            set { _CodiceNazione = value; }
+        }
         private string _CodiceRegione;
         public string CodiceRegione
         {
@@ -299,6 +304,11 @@ namespace WelcomeLibrary.DOM
             get { return _FotoCollection_M; }
             set { _FotoCollection_M = value; }
         }
+
+
+        private ScaglioniCollection _scaglioni;
+        public ScaglioniCollection Scaglioni { get => _scaglioni; set => _scaglioni = value; }
+
 
         private string _Autore;
         public string Autore
@@ -1187,6 +1197,7 @@ namespace WelcomeLibrary.DOM
             this.CodiceTipologia = "";
             this.CodiceComune = "";
             this.CodiceProvincia = "";
+            this.CodiceNazione = "";
             this.CodiceRegione = "";
             this.CodiceOfferta = "";
             this.CodiceProdotto = "";
@@ -1211,6 +1222,9 @@ namespace WelcomeLibrary.DOM
             this.DataInserimento = Convert.ToDateTime("01/01/1900");
             this.Data1 = Convert.ToDateTime("01/01/1900");
             this.FotoCollection_M = new AllegatiCollection();
+
+            this.Scaglioni = new ScaglioniCollection();
+
             this.DescrizioneGB = "";
             this.DescrizioneRU = "";
             this.DescrizioneFR = "";
@@ -1328,6 +1342,7 @@ namespace WelcomeLibrary.DOM
             this.CodiceTipologia = tmp.CodiceTipologia;
             this.CodiceComune = tmp.CodiceComune;
             this.CodiceProvincia = tmp.CodiceProvincia;
+            this.CodiceNazione = tmp.CodiceNazione;
             this.CodiceRegione = tmp.CodiceRegione;
             this._CodiceCategoria = tmp._CodiceCategoria;
             this._CodiceCategoria2Liv = tmp._CodiceCategoria2Liv;
@@ -1388,9 +1403,8 @@ namespace WelcomeLibrary.DOM
                 this.FotoCollection_M.Add(_tmp);
             }
 
-
+            this.Scaglioni = new ScaglioniCollection(tmp.Scaglioni);
             this.Pivacf_dts = tmp.Pivacf_dts;
-
             this.Nome_dts = tmp.Nome_dts;
             this.Cognome_dts = tmp.Cognome_dts;
             this.Datanascita_dts = tmp.Datanascita_dts;
@@ -1492,6 +1506,7 @@ namespace WelcomeLibrary.DOM
             _tmp["CodiceTipologia"] = this.CodiceTipologia.ToString();
             _tmp["CodiceComune"] = this.CodiceComune.ToString();
             _tmp["CodiceProvincia"] = this.CodiceProvincia.ToString();
+            _tmp["CodiceNazione"] = this.CodiceNazione.ToString();
             _tmp["CodiceRegione"] = this.CodiceRegione.ToString();
             _tmp["CodiceCategoria"] = this._CodiceCategoria.ToString();
             _tmp["CodiceCategoria2Liv"] = this._CodiceCategoria2Liv.ToString();
@@ -1602,6 +1617,9 @@ namespace WelcomeLibrary.DOM
             _tmp["Textfield1_dts"] = this.Textfield1_dts.ToString();
             _tmp["Interventieseguiti_dts"] = this.Interventieseguiti_dts.ToString();
 
+
+            //inserisco gli scaglioni come elemento serializzato nel dictionary
+            _tmp["Scaglioni"] = Newtonsoft.Json.JsonConvert.SerializeObject(this.Scaglioni);// this.Scaglioni.Serialized;
 
             //Allegato _tmp;
             //this.FotoCollection_M = new AllegatiCollection();
