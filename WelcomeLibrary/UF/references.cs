@@ -853,7 +853,6 @@ public class references
                 Tabrif p1 = new Tabrif();
                 p1.Codice = p.CodiceProdotto;
                 p1.Campo1 = p.Descrizione;
-                p1.Lingua = p.Lingua;
                 trifprodotti.Add(p1);
             }
         jpathcomplete.jsoncategorie = Newtonsoft.Json.JsonConvert.SerializeObject(trifprodotti);
@@ -866,7 +865,6 @@ public class references
                 p1.Codice = p.CodiceSProdotto;
                 p1.Campo2 = p.CodiceProdotto;
                 p1.Campo1 = p.Descrizione;
-                p1.Lingua = p.Lingua;
                 trifsprodotti.Add(p1);
             }
         jpathcomplete.jsoncategorie2liv = Newtonsoft.Json.JsonConvert.SerializeObject(trifsprodotti);

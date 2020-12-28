@@ -897,18 +897,16 @@ function convertToDictionaryandFill(data, levelfilter, lng, ddlid, selecttext, s
     for (var j = 0; j < data.length; j++) {
         var codice = data[j].Codice;
         var descrizione = data[j].Campo1;
-        var Lingua = data[j].Lingua;
-        if (Lingua == lng) {
-            var filtercode = "";
-            if (data[j] != null && data[j].hasOwnProperty("Campo2"))
-                filtercode = data[j].Campo2;
-            if (filtercode != "" && filter != null) {
-                if (filtercode == filter)
-                    dictobjjs[codice] = descrizione;
-            }
-            else
+
+        var filtercode = "";
+        if (data[j] != null && data[j].hasOwnProperty("Campo2"))
+            filtercode = data[j].Campo2;
+        if (filtercode != "" && filter != null) {
+            if (filtercode == filter)
                 dictobjjs[codice] = descrizione;
         }
+        else
+            dictobjjs[codice] = descrizione;
     }
     //console.log(dictobjjs);
     fillDDL(ddlid, JSON.stringify(dictobjjs), selecttext, selectvalue, selectedvalue);

@@ -271,21 +271,6 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         }
         catch { }
 
-
-
-        ddlTipiClientiImporta.Items.Clear();
-        ddlTipiClientiImporta.Items.Insert(0, "Seleziona tipo");
-        ddlTipiClientiImporta.Items[0].Value = "";
-        ddlTipiClientiImporta.DataSource = tipiclienti;
-        ddlTipiClientiImporta.DataTextField = "Campo1";
-        ddlTipiClientiImporta.DataValueField = "Codice";
-        ddlTipiClientiImporta.DataBind();
-        try
-        {
-            ddlTipiClientiImporta.SelectedValue = "";
-        }
-        catch { }
-
     }
     protected void TipoClienteUpdate(object sender, EventArgs e)
     {
