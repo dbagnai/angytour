@@ -2,13 +2,15 @@
 
 
 
-function InitSearchControls(idcontainer) {
+function InitSearchControls(idcontainer, partipologia, template) {
     var idcontainer = idcontainer || "divSearchBarPlaceholder1";
-    if (tipologia == "") tipologia = "rif000001";
-    $("#" + idcontainer).load(pathAbs + "/lib/Template/" + "searchbar2.html", function () {
+    if (tipologia == "") tipologia = "rif000001"; //questa cerca nella tipologia in base alla pagina dove sei
+    tipologia = partipologia || tipologia;
+    template = template || "searchbar3.html";
+
+    $("#" + idcontainer).load(pathAbs + "/lib/Template/" + template, function () {
         //Qui puoi fare inizializzazione controlli su allegati
         //FillSearchControls(objfiltro);
-
 
         (function wait() {
             if (typeof baseresources !== 'undefined' && baseresources != null && baseresources != '') {
@@ -20,9 +22,44 @@ function InitSearchControls(idcontainer) {
         initAutocompleteRicercaCaratteristiche();
     });
 }
+
 function initAutocompleteRicercaCaratteristiche() {
 
     //  initializePlacesAutocomplete("geolocation");
+
+
+    $(".autocompletesearch").each(function () {
+        var idact = $(this).attr("id");
+        $("#" + idact).autocomplete({
+            source: pathAbs + commonhandlerpath + '?q=autocompletericercalist&r=20&tipologia=' + tipologia + "&lng=" + lng,
+            minLength: 3,
+            //appendTo: '#' + idact , //in alternativa puoi maettere la calsee ui-front al container
+            open: function (event, ui) {
+                $('.ui-autocomplete').css('position', 'absolute');
+                $('.ui-autocomplete').css('z-index', 99999999999999);
+                $('.ui-autocomplete').css('top', '0px');
+                $('.ui-autocomplete').css('left', '0px');
+                setTimeout(function () {
+                    $('.ui-autocomplete').css('z-index', 99999999999999);
+                }, 1);
+            },
+            select: function (event, ui) {
+                if (ui.item != null) {
+                    //$("#hidCaratteristica1").val(ui.item.codice);
+                    //$("#txthidCaratteristica1").text(ui.item.value);
+                    $("#" + idact).text(ui.item.label);
+                    location.replace(ui.item.link); //per navigare verso eventuale link
+                }
+            }
+        }).data("ui-autocomplete")._renderItem = function (ul, item) {
+            return $("<li></li>")
+                .data("item.autocomplete", item)
+                .append("<a>" + item.linktext + "</a>")
+                .appendTo(ul);
+        };
+    });
+
+
 
     $("#txt" + "hidricercaid").autocomplete({
         source: pathAbs + commonhandlerpath + '?q=autocompletericerca&r=20&tipologia=' + tipologia + "&lng=" + lng,
@@ -72,6 +109,7 @@ function initAutocompleteRicercaCaratteristiche() {
             if (ui.item != null) {
                 $("#hidCaratteristica1").val(ui.item.codice);
                 $("#txthidCaratteristica1").text(ui.item.value);
+                //location.replace(ui.item.link); //per navigare verso eventuale link
             }
         }
     });
@@ -112,42 +150,86 @@ function initAutocompleteRicercaCaratteristiche() {
     });
 
 }
+/**************************************************************************************************************************************************************************/
+//CHIAMATA DI FILTRAGGIO Riempie objfiltro con le chiavi|valore di filtraggio e lo passa alla funzione per generare l'url di chiamata e poi fa il redirect all'URL generato!
+/**************************************************************************************************************************************************************************/
 function Visualizzalistadati() {
     var objfiltro = {};
-    //emptysession('', function (retval) {
+    //emptysession('', function (retval) {  //non serve piu tanto i parametri non son letti per i filtri dalla sessione ma da quelli inseriti nella route
 
+    $(".searchcheck").each(function () {
+        var idsel = $(this).attr("id");
+        //if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
+        if (objfiltro != null && $(this)[0].checked)
+            objfiltro[idsel] = $(this)[0].checked;
+    });
+
+    $(".searchcalendarrange").each(function () {
+        var idsel = $(this).attr("id");
+        var startDate = $('#' + idsel + 'startdate').val();
+        var endDate = $('#' + idsel + 'enddate').val();
+        if (objfiltro != null && startDate != "" && endDate != "")
+            objfiltro[idsel] = startDate + "|" + endDate;
+    });
 
     // console.log(retval);
     $(".searchdropdown").each(function () {
         var idsel = $(this).attr("id");
         // if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
-        if (objfiltro != null)
+        if (objfiltro != null && $(this)[0].value != '')
             objfiltro[idsel] = $(this)[0].value;
     });
+
     $(".searchpar").each(function () {
         var idsel = $(this).attr("id");
         //if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
-        if (objfiltro != null)
+        if (objfiltro != null && $(this)[0].value != '')
             objfiltro[idsel] = $(this)[0].value;
     });
     $(".searchval").each(function () {
         var idsel = $(this).attr("id");
         //if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
-        if (objfiltro != null)
+        if (objfiltro != null && $(this)[0].value != '')
             objfiltro[idsel] = $(this)[0].value;
     });
     $(".searchgeo").each(function () {
         var idsel = $(this).attr("id");
         //if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
-        if (objfiltro != null)
+        if (objfiltro != null && $(this)[0].value != '')
             objfiltro[idsel] = $(this)[0].value;
     });
 
+    $(".searchjqrange").each(function () {
+        var idsel = $(this).attr("id");
+        var low = $(this).slider("values", 0);
+        var high = $(this).slider("values", 1);
+
+        var min = $(this).slider("option", "min");
+        var max = $(this).slider("option", "max");
+
+        var valore = '';
+        if ($(this).slider().length > 0 && (low != min || high != max))
+            valore = low + "|" + high;
+        //if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
+        if (objfiltro != null && low != '' && high != '')
+            objfiltro[idsel] = valore;
+    });
 
     objfiltro["tipologia"] = tipologia; //memorizzo in ogni caso la tipologia di ricerca che serve anche alla creazione del link url di filtraggio 
-    ///////////RICERCA Con link customizzato /DA TESTARE)
-    //getlinkbyfilters restituisce il link urlrewrited per il redirect // passando un objfiltro serializzato con tipologia,regione,provincia,comune,carartteristica1 ... per fare il redirect all'url generato!!!
-    var functiontocallonend = makesearch;  //FUNZIIONE CHIAMATA ALLA FINE ....
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    ///VISUALIZZIAMO LA STRINGA DA USARE NELL FUNZIONE DI INJECT debugprametersforinject COME PARAMETRO DI CHIAMATA PER FILTRAGGIO
+    var debugprametersforinject = utf8ToB64(JSON.stringify(objfiltro));
+    console.log('stringa codificata per filtro objfiltro da usare nelle funzioni inject: ' + debugprametersforinject);
+    console.log('reverse da base 64 a utf parsed: ' );
+    console.log( JSON.parse(b64ToUtf8(debugprametersforinject)));
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    
+
+    ///////////RICERCA Con link customizzato  )
+    //getlinkbyfilters restituisce il link urlrewrited per il redirect // passando un objfiltro serializzato con tipologia,regione,provincia,comune,carartteristica1 ... poi faccio il redirect all'url generato!!!
+    var functiontocallonend = makesearch;  //FUNZIONE CHIAMATA ALLA FINE ....
     caricaDatiServerLinkCustom(lng, objfiltro,
         function (result, callafterfilter) {
             try {
@@ -164,11 +246,9 @@ function Visualizzalistadati() {
     //putinsession('objfiltro', JSON.stringify(objfiltro), function (ret) {
     //    openLink(percorsolistaristoranti);
     //});
-
-
     //});
-
 }
+
 function makesearch(link) {
     openLink(link);
 }
@@ -184,6 +264,13 @@ function setclickfocus(idcontrollo) {
     //    $('#txtSearchImmobili').focus();
 }
 
+function resettuttifiltri() {
+    FillSearchControls({});
+}
+
+/**************************************************************************************************************************************************************************/
+//VISUALIZZAZIONE CONTROLLI DI RICERCA e impostazione valori da session objfiltro
+/**************************************************************************************************************************************************************************/
 function VisualizzaSearchControls() {
     var objfiltro = {};
     var retstring = "";
@@ -191,25 +278,36 @@ function VisualizzaSearchControls() {
         retstring = retval;
         if (retstring != null && retstring != '')
             objfiltro = JSON.parse(retstring);
-        // console.log("VisualizzaSearchControls " + JSON.stringify(objfiltro));
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        ///VISUALIZZIAMO LA STRINGA DA USARE NELL FUNZIONE DI INJECT debugprametersforinject COME PARAMETRO DI CHIAMATA PER FILTRAGGIO
+        var debugprametersforinject = utf8ToB64(JSON.stringify(objfiltro));
+        console.log('stringa codificata per filtro objfiltro da usare nelle funzioni inject: ' + debugprametersforinject);
+        console.log('reverse da base 64 a utf parsed: ');
+        console.log(JSON.parse(b64ToUtf8(debugprametersforinject)));
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
         FillSearchControls(objfiltro);//RIcarico e riassegno i valori alle caselle di ricerca
         // $('#divSearchBar').modal('show'); 
     });
 }
-function HideSearchControls() {
-    //$('#divSearchBar').modal('hide');
-}
-function OnCloseSearch() {
-}
-
-
-
 function FillSearchControls(objfiltro) {
+
     var objfiltroint = objfiltro || {};
     //console.log(objfiltroint);
     //var message = "";
     //CaricaVariabiliRiferimento(function (result) {
     //    message = result;
+
+    $(".searchreset").each(function () {
+        var linkazzera = '<a href="#" onclick="javascript:resettuttifiltri()">Resetta filtri</a>';
+        $('#' + $(this).attr('id')).html(linkazzera);
+    });
+
+    $(".searchcalendarrange").each(function () {
+        renderCalendarControl($(this).attr('id'), objfiltroint);
+    });
 
     //var val1 = "";
     //var val2 = "";
@@ -229,6 +327,7 @@ function FillSearchControls(objfiltro) {
     //        val5 = objfiltroint['ddlAtcgmp5'];
     //}
     //combinedselect('', 'all', lng, val1, val2, val3, val4, val5, 'ddlAtcgmp1', 'ddlAtcgmp2', 'ddlAtcgmp3', 'ddlAtcgmp4', 'ddlAtcgmp5');
+
 
     $(".searchdropdown").each(function () {
         //try {
@@ -253,8 +352,28 @@ function FillSearchControls(objfiltro) {
             }
         //} catch (e) { }
     });
-
     //});
+
+    $(".searchcheck").each(function () {
+        try {
+            // da fare gestiione checkbox si/no per id="statusconfirmfilter"
+            //statusconfirmfilter ....
+            var selectedvalueact = "";
+            var idcontrollo = $(this).attr('id');
+            if (objfiltroint != null && objfiltroint.hasOwnProperty(idcontrollo))
+                selectedvalueact = objfiltroint[idcontrollo];
+            if (selectedvalueact == "true")
+                //$("#" + idcontrollo).attr("checked", true)
+                $("#" + idcontrollo).prop("checked", true)
+            else
+                $("#" + idcontrollo).prop("checked", false)
+            //$("#" + idcontrollo).attr("checked", false)
+        } catch (e) { }
+    });
+
+    /*----------------------------------------------------------------------*/
+    //CASELLE RICERCA
+    /*----------------------------------------------------------------------*/
     $(".searchval").each(function () {
         try {
             var selectedvalueact = "";
@@ -264,7 +383,6 @@ function FillSearchControls(objfiltro) {
             var idcontrollotxt = 'txt' + $(this).attr('id');
             $("#" + idcontrollo).val(selectedvalueact);
             $("#" + idcontrollotxt).val(selectedvalueact);
-
 
             if (idcontrollo.includes('geolocation'))
                 positionfromLatLng(selectedvalueact, idcontrollo);
@@ -283,13 +401,34 @@ function FillSearchControls(objfiltro) {
                 });
 
         } catch (e) { }
+    });
 
+
+    $(".searchjqrange").each(function () {
+        try {
+
+            var selectedvalueact = "";
+            var idcontrollo = $(this).attr('id');
+            if (objfiltroint != null && objfiltroint.hasOwnProperty(idcontrollo))
+                selectedvalueact = objfiltroint[idcontrollo];
+
+            InitRangeControl(idcontrollo, function (ret) {
+                //Set valori ( vanno presi da selectedvalueact splittando il min e il max)
+                var values = selectedvalueact.split('|');
+                //sample to set ranges
+                if (values.length == 2) {
+                    $("#" + idcontrollo).slider("values", 0, values[0]);
+                    $("#" + idcontrollo).slider("values", 1, values[1]);
+                }
+            });
+        } catch (e) { }
     });
 
     /*----------------------------------------------------------------------*/
     //FILL DELLE RICERCHE GEOGRAFICHE 
-    var seln = "IT";
-    var selr = "p94"; //preselezione regione  ....
+    /*----------------------------------------------------------------------*/
+    var seln = "";
+    var selr = ""; //preselezione regione  ....
     var selp = "";
     var selc = "";
     if (objfiltro != null && objfiltro.hasOwnProperty('nazione'))
@@ -309,8 +448,10 @@ function FillSearchControls(objfiltro) {
         }
     })();
     /*----------------------------------------------------------------------*/
+
     /*----------------------------------------------------------------------*/
     //FILL CATEGORIE E SOTTOCATEGORIE
+    /*----------------------------------------------------------------------*/
     var cat1 = "";
     var cat2 = "";
     if (objfiltro != null && objfiltro.hasOwnProperty('categoria'))
@@ -320,17 +461,168 @@ function FillSearchControls(objfiltro) {
     (function wait() {
         if (typeof baseresources !== 'undefined' && baseresources != null && baseresources != '') {
             combinedselect('', 'all', lng, cat1, cat2, '', '', '', 'categoria', 'categoria2Liv', '', '', '');
-
         } else {
             setTimeout(wait, 300);
         }
     })();
 
     /*----------------------------------------------------------------------*/
+}
 
+function InitRangeControl(idrangecontrol, callback) {
+    var idrangecontrolview = idrangecontrol + "amount";
+    var sliderprezzo = $("#" + idrangecontrol).slider({
+        range: true,
+        min: 0,
+        max: 5000,
+        step: 50,
+        values: [0, 5000],
+        slide: function (event, ui) {
+            $("#" + idrangecontrolview).val("$" + ui.values[0] + " - €" + ui.values[1]);
+        },
+        change: function (event, ui) {
+            $("#" + idrangecontrolview).val("$" + ui.values[0] + " - €" + ui.values[1]);
+        }
+    });
+    $("#" + idrangecontrolview).val("€" + $("#" + idrangecontrol).slider("values", 0) +
+        " - €" + $("#" + idrangecontrol).slider("values", 1));
+    callback('');
 }
 
 
+function renderCalendarControl(controlid, objfiltroint) {
+    var rangeselected = "";
+    var selectedvalueact = '';
+
+    if (objfiltroint != null && objfiltroint.hasOwnProperty(controlid))
+        selectedvalueact = objfiltroint[controlid];
+    var prvseldate = -1, curseldate = -1;
+    var values = selectedvalueact.split('|');
+    //sample to set ranges
+    if (values.length == 2) {
+        var ds = values[0].split('/');
+        var de = values[1].split('/');
+        if (ds != null && de != null && ds.length == 3 && de.length == 3) {
+            prvseldate = (new Date(ds[2], (Number(ds[1])) - 1, ds[0])).getTime();
+            curseldate = (new Date(de[2], (Number(de[1])) - 1, de[0])).getTime();
+            //Risetto i valori dei campi hidden con i valori memorizzati per la chiamata successiva
+            var d1 = $.datepicker.formatDate('dd/mm/yy', new Date(prvseldate), {});
+            var d2 = $.datepicker.formatDate('dd/mm/yy', new Date(curseldate), {});
+            $('#' + controlid + "startdate").val(d1);
+            $('#' + controlid + "enddate").val(d2);
+            rangeselected = (d1 + ' - ' + d2);
+            $('#' + controlid + "info").html('Filtro attivo: ' + rangeselected);
+
+            var linkazzera = '<a href="#" onclick="javascript:renderCalendarControl(\'' + controlid + '\',\'\')">Azzera filtro</a>';
+            $('#' + controlid + "reset").html(linkazzera);
+        }
+    } else {
+        $('#' + controlid + "startdate").val('');
+        $('#' + controlid + "enddate").val('');
+        $('#' + controlid + "info").html('');
+        $("#" + controlid).datepicker('setDate', null);
+        $("#" + controlid).datepicker("destroy");
+    }
+
+    //Forzare avanti e indietro del datepicker
+    //$('.ui-datepicker-' + 'prev').trigger("click");
+    //$('.ui-datepicker-' + 'nexr').trigger("click");
+
+    $("#" + controlid).datepicker({
+        //numberOfMonths: 3,
+        changeMonth: true,
+        changeYear: true,
+        minDate: "0", showOtherMonths: true, selectOtherMonths: true, altFormat: "dd", dateFormat: "dd/m/yy", regional: "it",
+        beforeShowDay: function (date) {
+            var elem = {};
+            elem.stato = true;
+            elem.Class = '';
+            elem.Tooltip = '';
+            var retvalue = "";
+            //Evidenzio i giorni tra prv e cur per il range select
+            //retvalue = [true, ((date.getTime() >= Math.min(prv, cur) && date.getTime() <= Math.max(prv, cur)) ? 'date-range-selected' : '')];
+            //Evidenzio i giorni tra prv e cur per il range select
+            retvalue = [elem.stato, ((date.getTime() >= Math.min(prvseldate, curseldate) && date.getTime() <= Math.max(prvseldate, curseldate)) ? elem.Class + ' date-range-selected' : elem.Class + ''), elem.Tooltip];
+            return retvalue;
+        },
+        onSelect: function (dateText, inst) {
+            var d1, d2;
+            prvseldate = curseldate;
+            curseldate = (new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay)).getTime();
+            if (prvseldate == -1 || prvseldate == curseldate) {
+                prvseldate = curseldate;
+                //  rangeselected = (dateText);
+
+                d1 = $.datepicker.formatDate('dd/mm/yy', new Date(Math.min(prvseldate, curseldate)), {});
+                d2 = $.datepicker.formatDate('dd/mm/yy', new Date(Math.max(prvseldate, curseldate)), {});
+                if (d1 != '' && d2 != '') {
+                    //Visualizziamo le date per la selezione e controlliamo i vincoli di selezione
+                    rangeselected = (d1 + ' - ' + d2);
+                    $('#' + controlid + "startdate").val(d1);
+                    $('#' + controlid + "enddate").val(d2);
+                    $('#' + controlid + "info").html('Filtro attivo: ' + rangeselected);
+                }
+                else {
+                    $('#' + controlid + "info").html('');
+                    $('#' + controlid + "info").attr('class', '');
+                    //$('#' + controlid + "messages").html('');
+                    //$('#' + controlid + "messages").attr('class', '');
+                }
+            } else {
+                rangeselected = '';
+                d1 = $.datepicker.formatDate('dd/mm/yy', new Date(Math.min(prvseldate, curseldate)), {});
+                d2 = $.datepicker.formatDate('dd/mm/yy', new Date(Math.max(prvseldate, curseldate)), {});
+                //d1 = moment(new Date(Math.min(prv, cur))).format("DD/MM/YYYY HH:mm:ss");// $.datepicker.formatDate('dd/mm/yy', new Date(Math.min(prv, cur)), {});
+                //d2 = moment(new Date(Math.max(prv, cur))).format("DD/MM/YYYY HH:mm:ss");//$.datepicker.formatDate('dd/mm/yy', new Date(Math.max(prv, cur)), {});
+                if (d1 != '' && d2 != '') {
+                    //Visualizziamo le date per la selezione e controlliamo i vincoli di selezione
+                    rangeselected = (d1 + ' - ' + d2);
+                    $('#' + controlid + "startdate").val(d1);
+                    $('#' + controlid + "enddate").val(d2);
+                    $('#' + controlid + "info").html('Filtro attivo: ' + rangeselected);
+                }
+                else {
+                    $('#' + controlid + "info").html('');
+                    $('#' + controlid + "info").attr('class', '');
+                    //$('#' + controlid + "messages").html('');
+                    //$('#' + controlid + "messages").attr('class', '');
+                }
+            }
+            console.log(rangeselected);
+        },
+        onChangeMonthYear: function (year, month, inst) {
+        },
+        onAfterUpdate: function (inst) {
+        },
+        beforeShow: function () {
+        }
+    });
+    $("#" + controlid).datepicker($.datepicker.regional["it"]);
+
+
+    $(window).on('click', function (e) {
+        if (document.getElementById(controlid + 'selectdate').contains(e.target)) {
+            // Clicked in box
+        } else {
+            // Clicked outside the box
+            $("#" + controlid).hide();
+        }
+    });
+    $("#" + controlid + "selectdate").off('click').on('click', function (e) {
+        e.stopPropagation();
+        $("#" + controlid).show();
+    });
+
+    //$("#" + controlid).datepicker("refresh");
+    //$("#" + controlid).datepicker("setDate", $("#" + controlid).datepicker("getDate").toString("yyyy/MM/dd"));
+}
+
+
+function HideSearchControls() {
+    //$('#divSearchBar').modal('hide');
+}
+function OnCloseSearch() {
+}
 function onchangetest(el) {
     alert($(el).id);
     //var filtervalue = "";

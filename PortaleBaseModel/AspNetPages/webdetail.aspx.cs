@@ -350,7 +350,8 @@ public partial class _webdetail : CommonPage
 
                     //BIND PER LA SCHEDA!!!!
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject no-plygon\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetailsprod.html,divItemContainter, divitem,true,true, " + idOfferta + "");
+                    //sb.Append("injectandloadgenericcontent,schedadetailsprod.html,divItemContainter, divitem,true,true, " + idOfferta + ""); //scheda normale
+                    sb.Append("injectandloadgenericcontent,schedadetailsprod-turni.html,divItemContainter, divitem,true,true, " + idOfferta + ""); //scheda con scaglioni
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);
                 }

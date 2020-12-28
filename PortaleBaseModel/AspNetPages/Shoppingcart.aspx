@@ -82,6 +82,7 @@
                                                 <%--</div>--%>
                                             </a>
                                             <div class="product-details prod-tabella" style="padding-top: 0;">
+
                                                 <h3 class="product-name tx-dark-color">
                                                     <a id="a1" runat="server"
                                                         href='<%# CreaLinkRoutes(Session,true,Lingua,CleanUrl( ((WelcomeLibrary.DOM.Offerte)(((WelcomeLibrary.DOM.Carrello)Container.DataItem).Offerta)).UrltextforlinkbyLingua(Lingua) ),Eval("Offerta.Id").ToString(),Eval("Offerta.CodiceTipologia").ToString(), Eval("Offerta.CodiceCategoria").ToString()) %>'
@@ -90,15 +91,29 @@
                                                             runat="server"></asp:Literal>
                                                     </a>
                                                 </h3>
+
+                                                <div class="product-categories muted">
+                                                    <%# !string.IsNullOrEmpty( (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"datapartenza", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglionedata")  + "</b>" +  
+                                                        WelcomeLibrary.UF.Utility.reformatdatetimestring((string)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1"), "datapartenza", Lingua) ) ) : "" %>
+                                                </div>
+                                                <div class="product-categories muted">
+                                                    <%# !string.IsNullOrEmpty( (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"dataritorno", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglionedataritorno")  + "</b>" +  
+                                                            WelcomeLibrary.UF.Utility.reformatdatetimestring((string)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1"), "dataritorno", Lingua) ) ) : "" %>
+                                                </div>
+
+                                                <div class="product-categories muted">
+                                                    <%# !string.IsNullOrEmpty( (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"idscaglione", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglioneid") + "</b>" +  WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"idscaglione", Lingua)  ):"" %>
+                                                </div>
+
                                                 <div class="product-categories muted">
                                                     <%# Eval("Datastart") !=null? "<b>" + references.ResMan("Common", Lingua,"formtestoperiododa") + ": " + "</b>" +  string.Format("{0:dd/MM/yyyy}", Eval("Datastart")):"" %>
                                                     <%# Eval("Dataend") !=null? "<b>" + references.ResMan("Common", Lingua,"formtestoperiodoa") + ": " + "</b>" + string.Format("{0:dd/MM/yyyy}", Eval("Dataend")) : "" %>
                                                 </div>
                                                 <div class="product-categories muted">
-                                                    <%# !string.IsNullOrEmpty( WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica1", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica1") + ": " + "</b>" +  references.TestoCaratteristica(0, WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica1", Lingua), Lingua)):"" %>
+                                                    <%# !string.IsNullOrEmpty( (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica1", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica1") + ": " + "</b>" +  references.TestoCaratteristica(0, (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica1", Lingua), Lingua)):"" %>
                                                 </div>
                                                 <div class="product-categories muted">
-                                                    <%# !string.IsNullOrEmpty( WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica2", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica2") + ": " + "</b>" +  references.TestoCaratteristica(1,WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica2", Lingua), Lingua)) : "" %>
+                                                    <%# !string.IsNullOrEmpty( (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica2", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica2") + ": " + "</b>" +  references.TestoCaratteristica(1,(String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica2", Lingua), Lingua)) : "" %>
                                                 </div>
                                                 <%--  
                                                 <div class="product-categories muted">
@@ -107,30 +122,34 @@
                                                 <div class="product-categories muted">
                                                     <%#   "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "bambini") + ": " + "</b>" + WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"bambini", Lingua) %>
                                                 </div>--%>
-
-                                                <div class="product-categories muted d-none d-sm-block">
+                                                <%--  CATEGORIA E SOTTOCATEGORIA--%>
+                                                <%-- <div class="product-categories muted d-none d-sm-block">
                                                     <%# CommonPage.TestoCategoria(Eval("Offerta.CodiceTipologia").ToString(),Eval("Offerta.CodiceCategoria").ToString(),Lingua) %>
                                                 &nbsp;<%# CommonPage.TestoCategoria2liv(Eval("Offerta.CodiceTipologia").ToString(),Eval("Offerta.CodiceCategoria").ToString(),Eval("Offerta.CodiceCategoria2Liv").ToString(),Lingua) %>
-                                                </div>
+                                                </div> --%>
+
                                                 <div class="product-categories muted">
                                                     <%# CommonPage.TestoCaratteristicaJson(Eval("Campo2").ToString(),Eval("Offerta.Xmlvalue").ToString(),Lingua) %>
                                                 </div>
-                                                <%--                                            <div class="product-categories muted">
+                                                <%--   <div class="product-categories muted">
                                                 <%# CommonPage.TestoCaratteristica(1,Eval("Offerta.Caratteristica2").ToString(),Lingua) %>
-                                            </div>--%>
-
-
+                                                </div>--%>
                                                 <%-- <div class="product-categories muted">
                                                         <%# TestoSezione(Eval("Offerta.CodiceTipologia").ToString()) %>
-                                                    </div>--%>
-                                                <b class="product-price d-none d-sm-block ">
+                                                </div>--%>
+
+                                                <b class="product-price d-none d-sm-block">
                                                     <asp:Literal ID="lblPrezzo" runat="server" Visible='<%# VerificaPresenzaPrezzo( Eval("Offerta.Prezzo") ) %>'
-                                                        Text='<%#  Eval("Numero").ToString() + "&times" +      String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("Offerta.Prezzo") }) + " €" %>'></asp:Literal>
-                                                    <em>
+                                                        Text='<%#  Eval("Numero").ToString() + "&times" +  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] {
+                                                                (!string.IsNullOrEmpty( (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"prezzo", Lingua)) ? (   WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"prezzo", Lingua)  ): Eval("Offerta.Prezzo"))
+                                                        }) + " €" %>'></asp:Literal>
+
+                                                    <%--  <em>
                                                         <asp:Literal ID="lblPrezzoListino" runat="server" Visible='<%# VerificaPresenzaPrezzo( Eval("Offerta.Prezzolistino") ) %>'
                                                             Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("Offerta.Prezzolistino") }) + " €" %>'></asp:Literal>
-                                                    </em>
+                                                    </em>--%>
                                                 </b>
+
                                             </div>
                                         </td>
                                         <td>
@@ -167,7 +186,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="widget shop-shipping" style="display: none">
+                <div class="widget shop-shipping d-none">
                     <h3><%= references.ResMan("Common", Lingua,"CarrelloCalcolaTotaleSpedizione") %></h3>
                     <div class="form-group">
                         <asp:DropDownList ID="ddlNazione" CssClass="form-control" Width="100%" runat="server">
@@ -216,12 +235,6 @@
                                                 Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}", new object[] { Eval("TotaleOrdine") }) + " €" %>'></asp:Literal>
                                         </span></td>
                                     </tr>
-                                    <%--<tr class="shipping">
-                                    <th>
-                                        <%# references.ResMan("Common", Lingua,"CarrelloTotaleSmaltimento %> </th>
-                                    <td>
-                                       <%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] {Eval("TotaleSmaltimento")}) + " €" %></td>
-                                </tr>--%>
                                     <tr class="shipping">
                                         <th>
                                             <%# references.ResMan("Common", Lingua,"CarrelloTotaleSpedizione") %></th>
@@ -234,7 +247,9 @@
                                             <%# references.ResMan("Common", Lingua,"CarrelloTotaleOrdine") %></th>
                                         <td style="text-align: right;">
                                             <span class="amount">
-                                                <%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { (double)Eval("TotaleSmaltimento") + (double)Eval("TotaleSpedizione") + (double)Eval("TotaleOrdine") - (double)Eval("TotaleSconto") }  ) + " €" %> 
+                                                <%--     <%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { (double)Eval("TotaleSmaltimento") + (double)Eval("TotaleSpedizione") + (double)Eval("TotaleOrdine") - (double)Eval("TotaleSconto") }  ) + " €" %> --%>
+
+                                                <%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { (double)Eval("TotaleAcconto") + (double)Eval("TotaleSaldo")  }  ) + " €" %> 
                                             </span>
                                         </td>
                                     </tr>

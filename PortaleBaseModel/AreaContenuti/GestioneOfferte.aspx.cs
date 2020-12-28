@@ -143,7 +143,7 @@ public partial class AreaContenuti_Default3 : CommonPage
             CaricaDllLocalizzazione("IT", "", "", "", ddlCodiceNAZIONE1_dts, ddlCodiceREGIONE1_dts, ddlCodicePROVINCIA1_dts, ddlCodiceCOMUNE1_dts, txtCodiceREGIONE1_dts, txtCodicePROVINCIA1_dts, txtCodiceCOMUNE1_dts);
             //Carichiamo le ddl per la collocazione geografica senza selezioni
             // CaricaDatiDdlRicercaRepeater("", "");
-            this.CaricaDatiDdlRicerca("", "", "", "", "");
+            this.CaricaDatiDdlRicerca("", "", "", "", "", "");
             CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
             this.CaricaDatiDllProdotto(TipologiaOfferte, "");
             this.CaricaDatiDllSottoprodotto(TipologiaOfferte, "", "");
@@ -389,7 +389,7 @@ public partial class AreaContenuti_Default3 : CommonPage
             txtAnno.Text = Details.Anno.ToString();
             CaricaDatiDdlCaratteristiche(Details.Caratteristica1, Details.Caratteristica2, Details.Caratteristica3, Details.Caratteristica4, Details.Caratteristica5, Details.Caratteristica6);
 
-            CaricaDatiDdlRicerca(Details.CodiceRegione, Details.CodiceProvincia, Details.CodiceComune, Details.CodiceCategoria, Details.CodiceCategoria2Liv);
+            CaricaDatiDdlRicerca(Details.CodiceNazione,Details.CodiceRegione, Details.CodiceProvincia, Details.CodiceComune, Details.CodiceCategoria, Details.CodiceCategoria2Liv);
 
             CaricaDllLocalizzazione(Details.CodiceNAZIONE1_dts, Details.CodiceREGIONE1_dts, Details.CodicePROVINCIA1_dts, Details.CodiceCOMUNE1_dts, ddlCodiceNAZIONE1_dts, ddlCodiceREGIONE1_dts, ddlCodicePROVINCIA1_dts, ddlCodiceCOMUNE1_dts, txtCodiceREGIONE1_dts, txtCodicePROVINCIA1_dts, txtCodiceCOMUNE1_dts);
 
@@ -463,10 +463,29 @@ public partial class AreaContenuti_Default3 : CommonPage
     /// <param name="Regione">Codice della Regione</param>
     /// <param name="Provincia">Codice della Provincia</param>
     /// <param name="Comune">nome del Comune</param>
-    private void CaricaDatiDdlRicerca(string Regione, string Provincia, string Comune, string Categoria, string SottoCategoria)
+    private void CaricaDatiDdlRicerca(string Nazione, string Regione, string Provincia, string Comune, string Categoria, string SottoCategoria)
     {
+
+        List<Tabrif> nazioni = Utility.Nazioni.FindAll(delegate (Tabrif _nz) { return _nz.Lingua == "I"; });
+        nazioni.Sort(new GenericComparer<Tabrif>("Campo1", System.ComponentModel.ListSortDirection.Ascending));
+        ddlNazione.Items.Clear();
+        ListItem i = new ListItem(references.ResMan("Common", Lingua, "ddltuttinazione"), "");
+        ddlNazione.Items.Add(i);
+        foreach (Tabrif n in nazioni)
+        {
+            i = new ListItem(n.Campo1, n.Codice);
+            ddlNazione.Items.Add(i);
+        }
+
+        try
+        {
+            ddlNazione.SelectedValue = Nazione.ToUpper();
+        }
+        catch { }
+
+
         WelcomeLibrary.DOM.ProvinceCollection regioni = new WelcomeLibrary.DOM.ProvinceCollection();
-        List<Province> provincelingua = Utility.ElencoProvince.FindAll(delegate (Province tmp) { return (tmp.Lingua == "I"); });
+        List<Province> provincelingua = Utility.ElencoProvince.FindAll(delegate (Province tmp) { return (tmp.Lingua == "I") && (tmp.SiglaNazione.ToLower() == ddlNazione.SelectedValue.ToLower()); });
         if (provincelingua != null)
         {
             provincelingua.Sort(new GenericComparer2<Province>("Regione", System.ComponentModel.ListSortDirection.Ascending, "Codice", System.ComponentModel.ListSortDirection.Ascending));
@@ -592,16 +611,21 @@ public partial class AreaContenuti_Default3 : CommonPage
     }
     protected void ddlProdotto_SelectedIndexChanged(object sender, EventArgs e)
     {
-        CaricaDatiDdlRicerca("", "", "", ddlProdotto.SelectedValue, "");
+        CaricaDatiDdlRicerca("","", "", "", ddlProdotto.SelectedValue, "");
     }
+    protected void ddlNazione_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        CaricaDatiDdlRicerca(ddlNazione.SelectedValue, ddlRegione.SelectedValue, "", "", ddlProdotto.SelectedValue, ddlSottoProdotto.SelectedValue);
+    }
+
     protected void ddlRegione_SelectedIndexChanged(object sender, EventArgs e)
     {
-        CaricaDatiDdlRicerca(ddlRegione.SelectedValue, "", "", ddlProdotto.SelectedValue, ddlSottoProdotto.SelectedValue);
+        CaricaDatiDdlRicerca(ddlNazione.SelectedValue, ddlRegione.SelectedValue, "", "", ddlProdotto.SelectedValue, ddlSottoProdotto.SelectedValue);
     }
 
     protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
     {
-        CaricaDatiDdlRicerca(ddlRegione.SelectedValue, ddlProvincia.SelectedValue, "", ddlProdotto.SelectedValue, ddlSottoProdotto.SelectedValue);
+        CaricaDatiDdlRicerca(ddlNazione.SelectedValue, ddlRegione.SelectedValue, ddlProvincia.SelectedValue, "", ddlProdotto.SelectedValue, ddlSottoProdotto.SelectedValue);
     }
 
 
@@ -846,6 +870,7 @@ public partial class AreaContenuti_Default3 : CommonPage
                     updrecord.CodiceComune = ddlComune.SelectedValue;
                     updrecord.CodiceProvincia = ddlProvincia.SelectedValue;
                     updrecord.CodiceRegione = ddlRegione.SelectedValue;
+                    updrecord.CodiceNazione = ddlNazione.SelectedValue;
 
                     updrecord.CodiceProdotto = txtCodiceProd.Text;
 
@@ -991,6 +1016,7 @@ public partial class AreaContenuti_Default3 : CommonPage
                 updrecord.CodiceComune = ddlComune.SelectedValue;
                 updrecord.CodiceProvincia = ddlProvincia.SelectedValue;
                 updrecord.CodiceRegione = ddlRegione.SelectedValue;
+                updrecord.CodiceNazione = ddlNazione.SelectedValue;
                 updrecord.CodiceProdotto = txtCodiceProd.Text;
 
                 updrecord.CodiceNAZIONE1_dts = ddlCodiceNAZIONE1_dts.SelectedValue;
@@ -1289,7 +1315,7 @@ public partial class AreaContenuti_Default3 : CommonPage
 
         txtLatitudine1_dts.Text = string.Empty;
         txtLongitudine1_dts.Text = string.Empty;
-        CaricaDatiDdlRicerca("", "", "", CodiceProdotto, "");
+        CaricaDatiDdlRicerca("","", "", "", CodiceProdotto, "");
         CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
         txtAnno.Text = "";
 
@@ -1359,6 +1385,7 @@ public partial class AreaContenuti_Default3 : CommonPage
         txtVideo.ReadOnly = valore;
         txtAnno.ReadOnly = valore;
         ddlRegione.Enabled = !valore;
+        ddlNazione.Enabled = !valore;
         ddlProvincia.Enabled = !valore;
         ddlComune.Enabled = !valore;
 
@@ -2001,7 +2028,7 @@ public partial class AreaContenuti_Default3 : CommonPage
                 {
                     this.SvuotaDettaglioProd();
                     Utility.CaricaListaStaticaProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
-                    this.CaricaDatiDdlRicerca("", "", "", "", "");
+                    this.CaricaDatiDdlRicerca("","", "", "", "", "");
                     this.CaricaDatiDllSottoprodotto(TipologiaOfferte, "", "");
 
                     OkButton.Text = "Nuovo";
@@ -2355,7 +2382,7 @@ public partial class AreaContenuti_Default3 : CommonPage
 
                         this.SvuotaDettaglioProd();
                         Utility.CaricaListaStaticaSottoProdotto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
-                        this.CaricaDatiDdlRicerca("", "", "", "", "");
+                        this.CaricaDatiDdlRicerca("","", "", "", "", "");
                         this.CaricaDatiDllSottoprodotto(TipologiaOfferte, "", "");
                         //     CaricaDatiDdlRicercaRepeater("", "");
 
@@ -2450,7 +2477,7 @@ public partial class AreaContenuti_Default3 : CommonPage
     {
         //Permette il cambio della tipologia di offerte OCCHIO!!!!
         TipologiaOfferte = ddlTipologiaNewProd.SelectedValue;
-        CaricaDatiDdlRicerca("", "", "", "", "");
+        CaricaDatiDdlRicerca("", "", "", "", "", "");
         linksezioneI.Text = "";
         linksezioneGB.Text = "";
         linksezioneRU.Text = "";

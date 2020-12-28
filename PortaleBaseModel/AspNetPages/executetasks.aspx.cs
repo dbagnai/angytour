@@ -84,9 +84,9 @@ public partial class _executetasks : CommonPage
                     case "aggiornacontenutiweb":
                         AggiornaContenutiDaWeb();
                         break;
-                    case "modiximport":
-                        ModixImport("rif000100");
-                        break;
+                    //case "modiximport":
+                    //    ModixImport("rif000100");
+                    //    break;
                     default:
                         //VerificaScadenzeCard();
                         EseguiMailing();
@@ -186,23 +186,23 @@ public partial class _executetasks : CommonPage
     
 #endif
 
-    void ModixImport(string codicedestinazione)
-    {
-        //Procedura per zippare una cartella
-        //string sourcefilespath = Server.MapPath(WelcomeLibrary.STATIC.Global.PercorsoComune + "/_temp/_modix/");
-        //string destinationarchive = Server.MapPath(WelcomeLibrary.STATIC.Global.PercorsoComune + "/_temp/compressedfile.zip");
-        //WelcomeLibrary.UF.Utility.ZipCompletefolder(destinationarchive, "", sourcefilespath);
+    //void ModixImport(string codicedestinazione)
+    //{
+    //    //Procedura per zippare una cartella
+    //    //string sourcefilespath = Server.MapPath(WelcomeLibrary.STATIC.Global.PercorsoComune + "/_temp/_modix/");
+    //    //string destinationarchive = Server.MapPath(WelcomeLibrary.STATIC.Global.PercorsoComune + "/_temp/compressedfile.zip");
+    //    //WelcomeLibrary.UF.Utility.ZipCompletefolder(destinationarchive, "", sourcefilespath);
 
-        //Unzippo il file originale
-        string sourcefilezippath = Server.MapPath(WelcomeLibrary.STATIC.Global.PercorsoComune + "/_temp/_modix/stock_rubeca.zip");
-        string destinationfilepath = Server.MapPath(WelcomeLibrary.STATIC.Global.PercorsoComune + "/_temp/_modix/");
-        WelcomeLibrary.UF.Utility.UnZip(sourcefilezippath, destinationfilepath, "automotive.it-IT.xml");
-        string UrlSorgente = WelcomeLibrary.STATIC.Global.PercorsoComune + "/_temp/_modix/automotive.it-IT.xml";
+    //    //Unzippo il file originale
+    //    string sourcefilezippath = Server.MapPath(WelcomeLibrary.STATIC.Global.PercorsoComune + "/_temp/_modix/stock_rubeca.zip");
+    //    string destinationfilepath = Server.MapPath(WelcomeLibrary.STATIC.Global.PercorsoComune + "/_temp/_modix/");
+    //    WelcomeLibrary.UF.Utility.UnZip(sourcefilezippath, destinationfilepath, "automotive.it-IT.xml");
+    //    string UrlSorgente = WelcomeLibrary.STATIC.Global.PercorsoComune + "/_temp/_modix/automotive.it-IT.xml";
 
-        ParseXmlFile(Server, UrlSorgente, codicedestinazione
-                          , ConfigManagement.ReadKey("Web_Numerocontenuti"));
+    //    ParseXmlFile(Server, UrlSorgente, codicedestinazione
+    //                      , ConfigManagement.ReadKey("Web_Numerocontenuti"));
 
-    }
+    //}
 
     void AggiornaContenutiDaWeb(string UrlSorgente, string codicedestinazione)
     {

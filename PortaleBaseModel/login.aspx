@@ -132,10 +132,9 @@
                                         --%>
                                         <br />
                                         <br />
-                                        <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText="Disconnetti Utente "
+                                        <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText="Disconnetti Utente"
                                             LoginText="" LogoutPageUrl="~/login.aspx?clear=true" LogoutAction="Redirect" />
                                         <asp:LoginName ID="logName" runat="server" ForeColor="GrayText" Height="10px" />
-
                                     </div>
                                 </div>
                             </ContentTemplate>
@@ -177,11 +176,13 @@
                                 </script>
                                 <div class="row  justify-content-center">
                                     <div class="col-sm-3">
-                                        <%--  <a runat="server" alt="" href="~/AreaRiservata/default.aspx" id="lnkAdminPage">Home
-                            Area Riservata</a><br /><br />--%>
                                         <a runat="server" class="btn btn-block btn-primary" alt="" href='<%# references.ResMan("Common",Lingua,"LinkOrder") %>' id="lnkOrdrpage">
                                             <asp:Literal Text='<%# references.ResMan("Common",Lingua,"TestoProcediOrdine") %>' runat="server" />
                                         </a>
+                                        <br />
+                                          <br />
+                                        <a runat="server" alt="" class="btn btn-block btn-primary" href="~/AreaContenuti/StoricoOrdini.aspx?Lingua=I" id="A2">Area
+                                            Profilo Utente</a><br />
                                         <br />
                                         <br />
                                         <asp:LoginStatus class="btn btn-block btn-primary" ID="LoginStatus1" runat="server" LogoutText='<%# references.ResMan("Common",Lingua,"testoLoginDisconnetti") %>'

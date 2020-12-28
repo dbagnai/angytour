@@ -6,77 +6,75 @@
  </style>
     
     <!-- Scroller  -->
- <div style="padding-bottom: 20px; display: none" class="squarevariable">
-     <div class="container">
-         <div class="row py-0 text-center" style="min-height: 400px;">
-             <div class="col-md-12 col-sm-12 col-12 px-0">
+<div style="padding-bottom: 20px; display: none" class="squarevariable">
+    <div class="row py-0 text-center" style="min-height: 400px;">
+        <div class="col-md-12 col-sm-12 col-12 px-0">
 
-                 <div style="position:absolute;left:0px;top:-30px;display:none">
-                     <a class="owl-btn prev-v2" id="replaceidprev"><i style="color: #1f8b74" class="fa fa-chevron-left"></i></a>
-                 </div>
-                 <div style="position:absolute;left:30px;top:-30px;display:none">
-                     <a class="owl-btn next-v2" id="replaceidnext"><i style="color: #1f8b74" class="fa fa-chevron-right"></i></a>
-                 </div>
+            <div style="position:absolute;left:0px;top:-30px;display:none">
+                <a class="owl-btn prev-v2" id="replaceidprev"><i style="color: #1f8b74" class="fa fa-chevron-left"></i></a>
+            </div>
+            <div style="position:absolute;left:30px;top:-30px;display:none">
+                <a class="owl-btn next-v2" id="replaceidnext"><i style="color: #1f8b74" class="fa fa-chevron-right"></i></a>
+            </div>
 
-                 <div class="owl-carousel-v1 owl-work-v1 margin-bottom-40">
-                     <div class="owl-slider-v4" id="replaceid">
+            <div class="owl-carousel-v1 owl-work-v1 margin-bottom-40">
+                <div class="owl-slider-v2" id="replaceid">
 
-                         <!--<div class="item mb-4 border bd-primary-color">-->
-                         <div class="item box position-relative border bd-secondary-color p-0 mb-4 card border-tipo2 rounded" style="overflow:hidden;">
+                    <!--<div class="item mb-4 border bd-primary-color">-->
+                    <div class="item box position-relative border bd-secondary-color p-0 mb-4 card border-tipo2 rounded" style="overflow:hidden;">
 
-                             <!--RIBBON-->
-                             <div class="bind" mybind="Prezzo" mybind1="PrezzoListino" format="formatlabelsconto"></div>
+                        <!--RIBBON-->
+                        <div class="bind" mybind="Prezzo" mybind1="PrezzoListino" format="formatlabelsconto"></div>
 
-                             <a target="_self" href="link" class="bind mb-0" title="titolo" mybind="Id" style="overflow:hidden">
-                                 <div class="work-image imgovercontainer m-0" style="max-height:300px; overflow:hidden">
-                                     <img src="/images/dummylogo.png" alt="" class="bind" mybind="Id" />
-                                     <!--<div class="item-img-overlay">
-                                </div>-->
-                                 </div>
-                             </a>
+                        <a target="_self" href="link" class="bind mb-0" title="titolo" mybind="Id" style="overflow:hidden">
+                            <div class="work-image imgovercontainer m-0" style="max-height:300px; overflow:hidden">
+                                <img src="/images/dummylogo.png" alt="" class="bind" mybind="Id" />
+                                <!--<div class="item-img-overlay">
+            </div>-->
+                            </div>
+                        </a>
 
-                             <!-- ::::: BODY ::::: -->
-                             <div class="row no-gutters text-center m-3" style="min-height:186px">
-                                 <div class="col-12">
-                                     <a class="bind w-100" target="_self" href="link" title="titolo" mybind="Id">
-                                         <h3 class="card-title titolo-offerta mb-2">
-                                             <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
-                                         </h3>
+                        <!-- ::::: BODY ::::: -->
+                        <div class="row no-gutters text-center m-3" style="min-height:186px">
+                            <div class="col-12">
+                                <a class="bind w-100" target="_self" href="link" title="titolo" mybind="Id">
+                                    <h3 class="card-title titolo-offerta mb-2">
+                                        <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                                    </h3>
 
-                                         <h4 class="card-subtitle sottotitolo-offerta my-2">
-                                             <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
-                                         </h4>
-                                     </a>
-                                     <!--<p style="font-size:0.9rem" class="bind" mybind="Id" myvalue="descrizione" myvalue1="200" format="formatdescrizione"></p>-->
-                                 </div>
-                                 <!-- PREZZO -->
-                                 <div class="col align-self-end prezzo-responsive mt-3">
-                                     <span class="bind tx-primary-color" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta" style="line-height: 2vw;"></span>
-                                     <span style="font-size:0.6em;text-decoration:line-through;" class="bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
-                                 </div>
-                             </div>
+                                    <h4 class="card-subtitle sottotitolo-offerta my-2">
+                                        <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                                    </h4>
+                                </a>
+                                <!--<p style="font-size:0.9rem" class="bind" mybind="Id" myvalue="descrizione" myvalue1="200" format="formatdescrizione"></p>-->
+                            </div>
+                                <!-- PREZZO -->
+                                <div class="col align-self-end prezzo-responsive mt-3">
+                                    <span class="bind tx-primary-color" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta" style="line-height: 2vw;"></span>
+                                    <span style="font-size:0.6em;text-decoration:line-through;" class="bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                                </div>
+                            </div>
 
-                             <div class="card-footer bg-color-sottomeu-tenue no-image">
-                                 <div class="row no-gutters justify-content-between">
-                                     <!-- DETTAGLI PRODOTTO -->
-                                     <div class="col-12 text-center col-sm-6 text-center pb-2 pb-sm-0">
-                                         <a class="bind w-100" target="_self" href="link" title="titolo" mybind="Id">
-                                             <div class="bind divbuttonstyle w-100" mybind="Id" myvalue="vedi" format="formatlabelresource" style="padding-left:0 !important; padding-right:0 !important;"></div>
-                                         </a>
-                                     </div>
-                                     <!-- AGGIUNGI AL CARRELLO -->
-                                     <div class="col-12 col-sm-6 text-center pl-0 pl-sm-2">
-                                         <div id="carrello-click" class="my-0 bind carrello-stop carrellocustomoutline" mybind="Id" mybind1="Qta_vendita" mybind2="Xmlvalue" mybind3="Prezzo" format="formatbtncarrello">
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
+                            <div class="card-footer bg-color-sottomeu-tenue no-image" style="max-height:50px;box-sizing:content-box">
+                                <div class="row no-gutters justify-content-between">
+                                        <!-- DETTAGLI PRODOTTO -->
+                                        <div class="col-12 text-center col-sm-6 text-center">
+                                            <a class="bind w-100" target="_self" href="link" title="titolo" mybind="Id">
+                                                <div class="bind divbuttonstyle w-100" mybind="Id" myvalue="vedi" format="formatlabelresource" style="padding-left:0 !important; padding-right:0 !important;"></div>
+                                            </a>
+                                        </div>
+                                        <!-- AGGIUNGI AL CARRELLO -->
+                                        <div class="col-12 col-sm-6 text-center pl-0 pl-sm-2">
+                                            <div id="carrello-click" class="my-0 bind carrello-stop carrellocustomoutline h-100" mybind="Id" mybind1="Qta_vendita" mybind2="Xmlvalue" mybind3="Prezzo" format="formatbtncarrello">
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
 
-                         </div>
-                     </div>
+                        </div>
+                </div>
 
-                 </div>
-             </div>
-         </div>
-     </div>
-     </div>
+            </div>
+        </div>
+    </div>
+</div>

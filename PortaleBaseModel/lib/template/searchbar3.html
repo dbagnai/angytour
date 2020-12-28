@@ -1,0 +1,160 @@
+﻿
+
+<div class="col-12">
+
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item" style="background-color:#eee">
+            <a class="nav-link active" data-toggle="tab" href="#pan1"><span style="color:#333;font-weight:600">Dove</span></a>
+        </li>
+        <li class="nav-item" style="background-color:#eee">
+            <a class="nav-link" data-toggle="tab" href="#pan2"><span style="color:#333;font-weight:600">Quando</span></a>
+        </li>
+        <li class="nav-item" style="background-color:#eee">
+            <a class="nav-link" data-toggle="tab" href="#pan3"><span style="color:#333;font-weight:600">Filtri</span></a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content pt-3" style="background-color:#eee">
+        <div class="tab-pane container active  p-4" id="pan1">
+            <div class="row">
+                <div class="col-12 col-md-3 py-1">
+                    <select id="Caratteristica1" class="form-control searchdropdown" style="width: 100%" mybind="Caratteristica1"></select>
+                </div>
+                <div class="col-12 col-md-3   py-1">
+                    <select id="nazione" class="form-control searchgeo"
+                            onchange="javascript:GestioneDdlGeo('nazione,cascade',lng,this.value,'','','','nazione','regione','provincia','comune')"></select>
+                </div>
+                <div class="col-12  col-md-3 py-1">
+                    <select id="regione" class="form-control searchgeo"
+                            onchange="javascript:GestioneDdlGeo('regione,cascade',lng,$('#nazione')[0].value,this.value,'','','nazione','regione','provincia','comune')"></select>
+                </div>
+
+                <!--<div class="col-12 py-1">
+                    <div class="ui-front" style="position:relative;margin:0px auto">
+                        <input id="txtresults1" type="text" class="form-control w-100 autocompletesearch" placeholder="Dove vuoi andare ? es. andalusia " />
+                    </div>
+                </div>-->
+                <!--<li>
+                    <select id="ddlRegione" name="ddlRegione" class="form-control searchdropdown" style="width: 160px"
+                            mybind="Regione"></select>
+                </li>-->
+                <!--style="display:none;width:0px"-->
+                <!--<div class="col-12 col-auto col-lg py-1">
+                    <select id="nazione" class="form-control searchgeo"
+                            onchange="javascript:GestioneDdlGeo('nazione,cascade',lng,this.value,'','','','nazione','regione','provincia','comune')"></select>
+                </div>
+                <div class="col-12   col-auto  col-lg py-1">
+                    <select id="regione" class="form-control searchgeo"
+                            onchange="javascript:GestioneDdlGeo('regione,cascade',lng,$('#nazione')[0].value,this.value,'','','nazione','regione','provincia','comune')"></select>
+                </div>
+                <div class="col-12  col-auto  col-lg py-1">
+                    <select id="provincia" class="form-control searchgeo" style="width:100%"
+                            onchange="javascript:GestioneDdlGeo('provincia,cascade',lng,$('#nazione')[0].value,$('#regione')[0].value,this.value,'','nazione','regione','provincia','comune')"></select>
+                </div>
+                <div class="col-12  col-auto  col-lg py-1">
+                    <select id="comune" class="form-control searchgeo" style="width:100%"></select>
+                </div>-->
+                <!--<div class="col-12  col-md-4 col-lg py-1">
+                    <div id="divgeolocation" style="position:relative;margin:0px auto">
+                        <input id="txtgeolocation" autocomplete="new-password" type="text" class="form-control" placeholder="Vicino a Città ....." style="width: 100%" onkeypress="javascript:setclickfocus('btnSearchStart')" />
+                        <input type="hidden" id="geolocation" class="searchval" />
+                    </div>
+
+                </div>-->
+
+            </div>
+        </div>
+        <div class="tab-pane container fade  p-4" id="pan2">
+            <div class="row">
+                <div class="col-12 col-md-6  py-1">
+                    <div class=" w-100" style="display:table;margin: 0px auto;position:relative" id="datapartenzafilterselectdate">
+                        <!--<select id="datapartenzafilter" class="form-control searchdropdown" style="width: 100%" mybind="datapartenzafilter"></select>-->
+                        <input id="" class="form-control " style="min-width:160px" placeholder="Scegli periodo" />
+                        <div class="searchcalendarrange" id="datapartenzafilter" style="position:absolute;left:0px;top:35px;display:none;z-index:1100"> </div>
+                        <input type="hidden" id="datapartenzafilterstartdate" />
+                        <input type="hidden" id="datapartenzafilterenddate" />
+                        <span id="datapartenzafilterinfo"></span>
+                    </div>
+                    <br /> <span id="datapartenzafilterreset"></span>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane container fade p-4" id="pan3">
+            <div class="row">
+                <div class="col-12 col-md-3  py-1">
+                    <select id="categoria" class="form-control searchdropdown" style="width:100%"
+                            mybind="categoria" onchange="javascript:combinedselect('categoria','cascade',lng,this.value,'','','','','categoria','categoria2Liv','','','')"></select>
+                </div>
+                <!--<div class="col-12 col-md-2 col-lg  py-1">
+                    <select id="categoria2Liv" class="form-control searchdropdown" style="width:100%"
+                            mybind="categoria2Liv"></select>
+                </div>-->
+                <div class="col-12 col-md-3  py-1">
+                    <select id="Caratteristica2" class="form-control searchdropdown" style="width: 100%" mybind="Caratteristica2"></select>
+                </div>
+                <div class="col-12 col-md-3  py-1">
+                    Solo Confermati
+                    <input type="checkbox" id="statusconfirmfilter" class="searchcheck" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-3  py-1">
+                    <select id="statuslistfilter" class="form-control searchdropdown" style="width: 100%" mybind="statuslist"></select>
+                </div>
+                <div class="col-12 col-md-3  py-1">
+                    <select id="etalistfilter" class="form-control searchdropdown" style="width: 100%" mybind="etalist"></select>
+                </div>
+                <div class="col-12 col-md-3  py-1">
+                    <select id="duratalistfilter" class="form-control searchdropdown" style="width: 100%" mybind="duratalist"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6  py-1">
+                    <p>
+                        <label for="prezzofilteramount">Fascia di prezzo:</label>
+                        <input type="text" id="prezzofilteramount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                    </p>
+                    <div id="prezzofilter" class="searchjqrange"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" id="resetall" class="btn btn-small btn-black-outline  w-auto mt-2 searchreset">Azzera Filtri</button>
+
+</div>
+
+
+
+<!--<div class="col-12  col-md-4 col-lg py-1">
+    <div id="divAutocomplete2" style="position:relative;margin:0px auto">
+        <input id="txthidricercaid" type="text" class="form-control" placeholder="Nome struttura" style="width: 100%" />
+        <input type="hidden" id="hidricercaid" class="searchval" />
+    </div>
+</div>-->
+<!--<div class="col-12 col-md-2 col-lg  py-1">
+    <select id="Caratteristica3" class="form-control searchdropdown" style="width: 100%" mybind="Caratteristica3"></select>
+</div>-->
+<!--<li>
+    <div id="divAutocomplete" style="position:relative;width:160px ;margin:0px auto">
+        <input id="txthidCaratteristica1" type="text" class="form-control" placeholder="Autore" style="width: 160px" />
+        <input type="hidden" id="hidCaratteristica1" class="searchval" />
+    </div>
+</li>-->
+<!--<li>
+    <div id="divAutocomplete1" style="position:relative;width:160px ;margin:0px auto">
+        <input id="txthidCaratteristica2" type="text" class="form-control" placeholder="Galleria" style="width: 160px" />
+        <input type="hidden" id="hidCaratteristica2" class="searchval" />
+    </div>
+</li>-->
+
+
+
+<div class="col-12  mt-4 pt-2 text-center" style="border-top:1px solid #ccc">
+    <button type="button" onclick="javascript:Visualizzalistadati()" class="form-control btn-black-outline  w-auto" style="padding: .55rem 2rem !important;">Cerca</button>
+</div>
+
+<!--<li>
+    <button type="button"  class="form-control divbuttonstyle" style="max-width:180px;padding:2px 15px 2px 15px">svuota</button>
+</li>-->

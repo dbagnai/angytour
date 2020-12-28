@@ -39,6 +39,10 @@
     <script src="assets/js/respond.js"></script>
     <![endif]-->
     <style type="text/css">
+        .selected {
+            color: red;
+            border: 1px solid red;
+        }
         .divColTagl {
             background: #fff;
             padding: 20px;
@@ -180,13 +184,15 @@
         .blue {
             color: #428bca !important;
         }
-
+       
         .table > thead > tr > th {
             background-color: #428bca;
             color: #fff;
         }
+         
 
 
+      
         /* ==========================================================================
    Page Loader
 ============================================================================= */
@@ -240,6 +246,108 @@
                 -webkit-animation: page-loader .6s linear infinite;
             }
     </style>
+
+    <style>
+        /*Stili form vue autocomplete extender*/
+        .autocomplete {
+            position: relative;
+            /*width: 130px;*/
+        }
+
+        .autocomplete-results {
+            position: absolute;
+            left: 0px;
+            top: 35px;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #eeeeee;
+            background-color: #fff;
+            width: 100%;
+            height: 120px;
+            z-index: 999;
+            overflow: auto;
+        }
+
+        .autocomplete-result {
+            list-style: none;
+            text-align: left;
+            padding: 4px 2px;
+            cursor: pointer;
+        }
+
+            .autocomplete-result:hover {
+                background-color: #4AAE9B;
+                color: white;
+            }
+    </style>
+    <style>
+
+     
+
+
+        /* STILI PER TABELLE a TESTATA FISSA*/
+        .table-fixed tbody {
+            height: 300px;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .table-fixed thead,
+        .table-fixed tbody,
+        .table-fixed tr,
+        .table-fixed td,
+        .table-fixed th {
+            display: block;
+        }
+
+        .table-fixed > thead   > tr  {
+              background:none;
+            background-color: #51596a !important;
+           
+            color: #fff;
+        }
+            .table-fixed tr:after {
+                content: "";
+                display: block;
+                visibility: hidden;
+                clear: both;
+            }
+
+            .table-fixed tbody td,
+            .table-fixed thead > tr > th {
+                float: left;
+            }
+
+        .table > thead > tr > th,
+        .table > thead > tr > td {
+            font-size: .9em;
+            font-weight: 400;
+            border-bottom: 0;
+            letter-spacing: 1px;
+            vertical-align: top;
+            padding: 8px;
+            background: #51596a;
+            /*text-transform: uppercase;*/
+            color: #ffffff;
+        }
+
+       /* RETTIFICHE PER DATEPICKER*/
+        .ui-datepicker {
+            width: auto;
+        }
+
+        .ui-datepicker td {
+            padding: 0px !important;
+        }
+
+        .ui-datepicker td a {
+            padding: 0.1em !important;
+        }
+
+        table.ui-datepicker-calendar {
+            border-collapse: collapse !important;
+        }
+    </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -281,9 +389,10 @@
         <link href="/js/dropzone/dropzone.css" rel="stylesheet" />
         <script src="/js/dropzone/dropzone.js"></script>
         <script src="/lib/js/dropzonemng.js"></script>
+        <script src="/js/vue/vue.js"></script>
+        <script src="/js/v-mask/v-mask.min.js"></script>
 
-
-        <%--        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
+        <%--   <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.js")%>"></script>
         <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.css")%>" rel="stylesheet" type="text/css" media="screen" />
         <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/jquery-ui.theme.css")%>" rel="stylesheet" type="text/css" media="screen" />
         <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.11.4.custom/customizeautocomplete.css")%>" rel="stylesheet" type="text/css" media="screen" />
@@ -292,8 +401,10 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.12.1.custom/jquery-ui.js")%>"></script>
         <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.12.1.custom/jquery-ui.css")%>" rel="stylesheet" type="text/css" media="screen" />
         <link href="<%= CommonPage.ReplaceAbsoluteLinks("~/js/jquery-ui-1.12.1.custom/customizeautocomplete.css")%>" rel="stylesheet" type="text/css" media="screen" />
-
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/moment-with-locales.min.js")%>"></script>
+        <script>
+            moment.locale("it");
+        </script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/localforage.min.js" )%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify.min.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/js/notifications/notify-metro.js")%>"></script>
@@ -302,13 +413,15 @@
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/commonvars.js")+ CommonPage.AppendModTime(Server,"~/lib/js/commonvars.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/commonfunct.js")+ CommonPage.AppendModTime(Server,"~/lib/js/commonfunct.js")%>"></script>
         <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/common.js")+ CommonPage.AppendModTime(Server,"~/lib/js/common.js")%>"></script>
-        <%--        <script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/xCom.js")+ CommonPage.AppendModTime(Server,"~/lib/js/xCom.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/carrello.js")+ CommonPage.AppendModTime(Server,"~/lib/js/carrello.js")%>"></script>
+        <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/usermng.js")+ CommonPage.AppendModTime(Server,"~/lib/js/usermng.js")%>"></script>
+
+        <%--  <script>
             var pathAbs = '<%=  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione %>';
             initLingua('I');
             loadref(initLingua, 'I');
         </script>--%>
-
-
 
         <div id="navbar" class="navbar navbar-default    navbar-collapse       h-navbar">
             <script type="text/javascript">
@@ -421,7 +534,7 @@
                         </ul>
                     </li>
 
-                    <li id="tagPwa" runat="server" class="hover" style="display: block">
+                    <li id="tagPwa" runat="server" class="hover" style="display: none">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-mobile"></i>
                             <span class="menu-text">Gestione Sezione APP
@@ -560,7 +673,7 @@
                                 </a>
                                 <b class="arrow"></b>
                             </li>
-                             <li class="hover">
+                            <li class="hover">
                                 <a id="linkPaginestaticheesempi" href="#" runat="server">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     <asp:Label ID="Titolopaginestaticheesempi" CssClass="menu-text" runat="server" Text=""></asp:Label>
@@ -646,7 +759,7 @@
                                                                 <span class="menu-text">Banner Navigazione Sezioni</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
-                                                         <li class="newLi hover">
+                                                        <li class="newLi hover">
                                                             <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni-2">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
                                                                 <span class="menu-text">Banner Navigazione Sezioni 2</span></a>
@@ -766,7 +879,7 @@
                                                                 <span class="menu-text">Banner Gallery</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
-                                                         <li class="newLi hover">
+                                                        <li class="newLi hover">
                                                             <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-gallery-2">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
                                                                 <span class="menu-text">Banner Gallery masonry</span></a>
@@ -1095,6 +1208,7 @@
 
     <!-- page specific plugin scripts -->
     <!-- ace scripts -->
+    <script src="assets/js/date-time/bootstrap-datetimepicker.js"></script>
     <script src="assets/js/ace/elements.scroller.js"></script>
     <script src="assets/js/ace/elements.colorpicker.js"></script>
     <script src="assets/js/ace/elements.fileinput.js"></script>
@@ -1139,16 +1253,11 @@
                     $window.off('scroll.ace.top_menu')
                     return;
                 }
-
-
                 var done = false;
                 $window.on('scroll.ace.top_menu', function (e) {
-
                     var scroll = $window.scrollTop();
                     scroll = parseInt(scroll / 4);//move the menu up 1px for every 4px of document scrolling
                     if (scroll > 17) scroll = 17;
-
-
                     if (scroll > 16) {
                         if (!done) {
                             $sidebar.addClass('lower-highlight');
@@ -1161,17 +1270,12 @@
                             done = false;
                         }
                     }
-
                     sidebar.style['marginTop'] = (17 - scroll) + 'px';
                 }).triggerHandler('scroll.ace.top_menu');
-
             }).triggerHandler('settings.ace.top_menu', ['sidebar_fixed', $sidebar.hasClass('sidebar-fixed')]);
-
             $(window).on('resize.ace.top_menu', function () {
                 $(document).triggerHandler('settings.ace.top_menu', ['sidebar_fixed', $sidebar.hasClass('sidebar-fixed')]);
             });
-
-
         });
     </script>
     <%= InjectedEndPageScripts() %>

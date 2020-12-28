@@ -10,21 +10,70 @@
         <script type="text/javascript">
             makeRevLower = true;
         </script>
-         <%-- TITOLO --%>
-                <div class="row">
-                    <div class="col-12">
-                        <%= references.ResMan("basetext", Lingua,"testoordine1") %>
-                        <h4>  <asp:Label Style="font-size: 2em" Text="" ID="output" runat="server" /></h4>
-                        <asp:ValidationSummary runat="server" BackColor="#f0f0f0" DisplayMode="List" Font-Size="Medium"  
-                            ShowValidationErrors="true"  HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<style> span.errorvalidateclass + * {  border: 2px solid red; }  </style>" %>' />
-                    </div>
-                </div>
+        <%-- TITOLO --%>
+        <div class="row">
+            <div class="col-12">
+                <%= references.ResMan("basetext", Lingua,"testoordine1") %>
+                <h4>
+                    <asp:Label Style="font-size: 2em" Text="" ID="output" runat="server" /></h4>
+                <asp:ValidationSummary runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium"
+                    ShowValidationErrors="true" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<br/><style> span.errorvalidateclass + * {  border: 2px solid red; }  </style>" %>' />
+                <%--      <asp:ValidationSummary runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium"  
+                            ShowValidationErrors="true"  HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError")  %>' />--%>
+            </div>
+        </div>
         <%--<asp:ValidationSummary runat="server" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") %>' />--%>
         <asp:Panel runat="server" ID="pnlFormOrdine">
-            <div class="position-relative my-4 py-0 my-sm-5 py-sm-3" style="z-index: 1;">
+            <div class="position-relative mt-1 mb-3 py-0" style="z-index: 1;">
                 <div id="divOrderformOverlay" style="position: absolute; top: 0; bottom: 0; z-index: 2"></div>
-               
-                
+                <%--ACCESSO UTENTE E LOGIN--%>
+                <div class="row py-2 my-2 d-none">
+                    <div class="col-12">
+                        <div class=" border-tipo1 p-2 bg-light-color w-100">
+                            <%= references.ResMan("Common",Lingua,"testologinacquisto") %><br /><br />
+                            <script>
+                                //function verificalogin(btn, args) { __doPostBack('verificalogin', args); }
+                                function verificalogin(callcontrol)
+                                {
+                                    Loginuser($("[id*='inputName']").val(), $("[id*='inputPassword']").val(), function (ret) {
+                                        if (ret == '') { 
+                                            refreshcarrello();
+                                        }
+                                        $("[id*='outputlogin']").html(ret)
+                                    })
+                                }
+                                //function logoffuser(btn, args) { __doPostBack('logoffuser', args); }
+                                function logoffuser(callcontrol) {
+                                    Logoff(function (ret) {
+                                        if (ret == '') {
+                                            refreshcarrello();
+                                        }
+                                        $("[id*='outputlogin']").html(ret)
+                                    })
+                                }
+                                //function recuperapass(btn, args) { __doPostBack('recuperapass', args); }
+                                function recuperapass(callcontrol)
+                                {
+                                    RecuperoPassword($("[id*='inputName']").val() , function (ret) {
+                                        $("[id*='outputlogin']").html(ret)
+                                    })
+                                }
+                            </script>
+                            <div runat="server" visible='<%# ControlloLogin() %>'>
+                                <input type="text" class="form-control" placeholder="Username" style="display: inline-block; width: 180px;background-color:#fff" runat="server" id="inputName" value="" />
+                                <input type="password" class="form-control" placeholder="Pasword" style="display: inline-block; width: 180px;background-color:#fff" runat="server" id="inputPassword" value="" />
+                                <input type="button" id="btnlogin" class="btn btn-small" onclick="verificalogin(this)" value="<%= references.ResMan("Common",Lingua,"testoLoginAccedi") %>" />
+                                <br />
+                                <a id="linkpassrecover"  href="#" onclick="recuperapass(this)" class="secondary-color pt-2" style="display:block"> <%= references.ResMan("Common",Lingua,"forgetrequest0") %> </a>
+                            </div>
+                            <div runat="server" visible='<%# !ControlloLogin() %>'>
+                                <input type="button" id="btnlogoff" class="btn btn-small" onclick="logoffuser(this)" value="<%= references.ResMan("Common",Lingua,"testologindisconnetti") + " " + Page.User.Identity.Name %>" />
+                            </div> 
+                             <div class="pt-2" style="font-weight:bold"><asp:Label ID="outputlogin" ClientIDMode="Static" Text="" runat="server" /></div>
+                        </div>
+                    </div>
+                </div>
+                <%--fine ACCESSO UTENTE E LOGIN--%>
                 <div class="row">
                     <div class="col-12 col-lg-7">
                         <div class="widget bill-address">
@@ -34,14 +83,14 @@
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"FormTesto2") %>
                                         </label>
-                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="*" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ControlToValidate="inpNome" runat="server" />
+                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="* Error" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ControlToValidate="inpNome" runat="server" />
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpNome" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' />
                                     </div>
                                     <div class="col-6 form-group">
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"FormTesto3") %>
                                         </label>
-                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="*" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto3Err") %>' ControlToValidate="inpCognome" runat="server"  />
+                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="* Error" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto3Err") %>' ControlToValidate="inpCognome" runat="server" />
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpCognome" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' />
                                     </div>
                                 </div>
@@ -61,19 +110,19 @@
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpPiva" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17s") %>' />
                                     </div>
                                 </div>
-                                <div class="form-row row"> 
+                                <div class="form-row row">
                                     <div class="col-6 form-group">
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"FormTesto10") %>
                                         </label>
-                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="*" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto10Err") %>' ControlToValidate="inpIndirizzo" runat="server" />
+                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="* Error" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto10Err") %>' ControlToValidate="inpIndirizzo" runat="server" />
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpIndirizzo" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto10") %>' />
                                     </div>
                                     <div class="col-6 form-group">
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"FormTesto8") %>
                                         </label>
-                                          <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="*"  ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto8Err") %>' ControlToValidate="inpComune" runat="server" />
+                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="* Error" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto8Err") %>' ControlToValidate="inpComune" runat="server" />
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpComune" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto8") %>' />
                                     </div>
                                 </div>
@@ -82,14 +131,14 @@
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"FormTesto7") %>
                                         </label>
-                                         <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="*"  ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto7Err") %>' ControlToValidate="inpProvincia" runat="server" />
+                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="* Error" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto7Err") %>' ControlToValidate="inpProvincia" runat="server" />
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpProvincia" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto7") %>' />
                                     </div>
                                     <div class="col-4 form-group">
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"FormTesto9") %>
                                         </label>
-                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="*"  ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto9Err") %>' ControlToValidate="inpCap" runat="server" />
+                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="* Error" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto9Err") %>' ControlToValidate="inpCap" runat="server" />
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpCap" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto9") %>' />
                                     </div>
                                     <div class="col-4 form-group">
@@ -106,14 +155,14 @@
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"FormTesto4") %>
                                         </label>
-                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="*"  ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>'  ControlToValidate="inpEmail" runat="server" />
+                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="* Error" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ControlToValidate="inpEmail" runat="server" />
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpEmail" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto4") %>' />
                                     </div>
                                     <div class="col-6 form-group">
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"FormTesto11") %>
                                         </label>
-                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="*"  ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto11Err") %>'  ControlToValidate="inpTel" runat="server" />
+                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="* Error" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto11Err") %>' ControlToValidate="inpTel" runat="server" />
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpTel" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto11") %>' />
                                     </div>
                                 </div>
@@ -256,14 +305,19 @@
                                                                 runat="server"></asp:Literal>
                                                             <%--</a>--%>
                                                         </h3>
+
                                                         <div class="product-categories muted">
-                                                            <%# !string.IsNullOrEmpty( WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"datapartenza", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglionedata") + "</b>" +  WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"datapartenza", Lingua)  ):"" %>
+                                                            <%# !string.IsNullOrEmpty( (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"datapartenza", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglionedata")  + "</b>" +  
+                                                             WelcomeLibrary.UF.Utility.reformatdatetimestring((string)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1"), "datapartenza", Lingua) ) ) : "" %>
                                                         </div>
                                                         <div class="product-categories muted">
-                                                            <%# !string.IsNullOrEmpty( WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"dataritorno", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglionedataritorno")  + "</b>" +  WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"dataritorno", Lingua)  ):"" %>
+                                                            <%# !string.IsNullOrEmpty( (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"dataritorno", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglionedataritorno")  + "</b>" +  
+                                                             WelcomeLibrary.UF.Utility.reformatdatetimestring((string)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1"), "dataritorno", Lingua) ) ) : "" %>
                                                         </div>
+
+
                                                         <div class="product-categories muted">
-                                                            <%# !string.IsNullOrEmpty( WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"idscaglione", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglioneid")  + "</b>" +  WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"idscaglione", Lingua)  ):"" %>
+                                                            <%# !string.IsNullOrEmpty((String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"idscaglione", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglioneid")  + "</b>" +  WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"idscaglione", Lingua)  ):"" %>
                                                         </div>
                                                         <div class="product-categories muted">
                                                             <%# Eval("Datastart") !=null? "<b>" + references.ResMan("Common", Lingua,"formtestoperiododa") + ": " + "</b>" +  string.Format("{0:dd/MM/yyyy}", Eval("Datastart")):"" %>
@@ -272,10 +326,10 @@
                                                         </div>
 
                                                         <div class="product-categories muted">
-                                                            <%# !string.IsNullOrEmpty( WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica1", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica1") + ": " + "</b>" +  references.TestoCaratteristica(0, WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica1", Lingua), Lingua)):"" %>
+                                                            <%# !string.IsNullOrEmpty( (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica1", Lingua)) ? ("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica1") + ": " + "</b>" +  references.TestoCaratteristica(0, (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica1", Lingua), Lingua)):"" %>
                                                         </div>
                                                         <div class="product-categories muted">
-                                                            <%# !string.IsNullOrEmpty( WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica2", Lingua)) ?("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica2") + ": " + "</b>" +  references.TestoCaratteristica(1,WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica2", Lingua), Lingua)) : "" %>
+                                                            <%# !string.IsNullOrEmpty( (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica2", Lingua)) ?("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "Caratteristica2") + ": " + "</b>" +  references.TestoCaratteristica(1, (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"Caratteristica2", Lingua), Lingua)) : "" %>
                                                         </div>
                                                         <%--  
                                                             <div class="product-categories muted">
@@ -307,7 +361,7 @@
                                                         <%--      <asp:Literal ID="lblPrezzo" runat="server"
                                                             Text='<%# (Eval("Offerta.Prezzo")!=null && (Double)Eval("Offerta.Prezzo") !=0 )? String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { Eval("Offerta.Prezzo") }) + " €" :"" %>'></asp:Literal>--%>
                                                         <asp:Literal ID="Literal4" runat="server" Text='<%#  Eval("Numero").ToString() + "&times" +  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] {
-                                                                (!string.IsNullOrEmpty( WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"prezzo", Lingua)) ? (   WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"prezzo", Lingua)  ): Eval("Offerta.Prezzo"))
+                                                                (!string.IsNullOrEmpty( (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"prezzo", Lingua)) ? (   WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(Eval("jsonfield1") ,"prezzo", Lingua)  ): Eval("Offerta.Prezzo"))
                                                         }) + " €" %>'></asp:Literal>
 
                                                     </b>
@@ -379,9 +433,11 @@
                                                         <%= references.ResMan("Common", Lingua,"CarrelloTotaleOrdine") %></span>
                                                 </th>
                                                 <td class="cart-total" style="text-align: right !important;">
-                                                    <span>
-                                                        <asp:Literal ID="Literal2" runat="server"
-                                                            Text='<%#  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",new object[] { (double)Eval("TotaleSpedizione") + (double)Eval("TotaleSmaltimento") + (double)Eval("TotaleOrdine") - (double)Eval("TotaleSconto") } ) + " €" %>'></asp:Literal></span>
+                                                    <span> 
+                                                        <asp:Literal ID="Literal5" runat="server"
+                                                            Text='<%#   String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
+                                                                  new object[] { (Double)Eval("TotaleAcconto") + (Double)Eval("TotaleSaldo") }  ) + " €" %>'></asp:Literal>
+                                                    </span>
                                                 </td>
                                             </tr>
                                         </ItemTemplate>
@@ -429,7 +485,6 @@
                                 </div>--%>
                                 <div class="widget bill-payment p-2">
                                     <h3><%= references.ResMan("Common", Lingua,"testoMetodopagamento") %></h3>
-
                                     <script>
                                         function refreshcarrello(btn, args) {
                                             bloccaSblocca('divOrderformOverlay');
@@ -510,7 +565,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <div class="col-12 col-sm-8 mx-auto px-0 d-none">
+                                    <div class="col-12 col-sm-8 mx-auto px-0">
                                         <asp:CheckBox ID="chkSupplemento" runat="server" Font-Bold="true" ForeColor="Red" Checked="false" AutoPostBack="true" Text='<%# references.ResMan("Common", Lingua,"TestoSupplementoSpedizioni") %>'
                                             OnCheckedChanged="chkSupplemento_CheckedChanged" /><br />
                                         <br />

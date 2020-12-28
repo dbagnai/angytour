@@ -7,7 +7,7 @@
 
 <script RunAt="server">
 
-    //////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////datepi//////////
     /////KEEP ALIVE TIMER///////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
     public static DateTime When1;
@@ -494,12 +494,12 @@
 
         BundleEngine.AddBundleJS("bundlejslib0",
             "~/lib/js/commonvars.js",
-           //"~/js/jquery321/jquery-3.2.1.min.js",
+         //"~/js/jquery321/jquery-3.2.1.min.js",
              //"~/js/jquery321/jquery-migrate-3.0.1.min.js",
              "~/js/jquery351/jquery-3.5.1.min.js",
             "~/js/jquery351/jquery-migrate-3.3.2.min.js",
             "~/lib/js/commonfunct.js",
-      "~/js/bootstrap452/popper.min.js",
+             "~/js/bootstrap452/popper.min.js",
             "~/js/bootstrap452/js/bootstrap.min.js",
             "~/js/menuzord/files/js/menuzord.js",
             //"~/js/localforage.min.js",
@@ -509,7 +509,7 @@
             //"~/js/notifications/notify-metro.js",
             //"~/js/notifications/notifications.js",
             //"~/js/moment-with-locales.min.js", //versione grande con string locali (pesa)!!!
-            //"~/js/moment.min.js", //no locales!!!
+            "~/js/moment.min.js", //no locales!!!
             "~/js/googleMaps.js"
         );
 
@@ -549,10 +549,10 @@
             "~/js/detect-zoom.min.js",
             "~/js/landing/jarallax.min.js",
             "~/js/jarallaxinit.js",
-            "~/css/bcomponents/ui-259.js",
             //"~/js/odometer/odometer.js",
             "~/js/masonry.pkgd.min.js",
             "~/lib/js/common.js",
+            "~/lib/js/usermng.js",
             "~/lib/js/genericContent.js",
             "~/lib/js/genericBanner.js",
             "~/lib/js/sliderBanner.js",
@@ -619,7 +619,6 @@
             "~/js/bootstrap-notify-master/css/styles/alert-custom2.css",
             "~/css/ashobiz/ashobiz.base.css",
             "~/css/ashobiz/ashobiz-176.css",
-            "~/css/bcomponents/ui-259.css",
                  "~/js/jquery-ui-1.12.1.custom/jquery-ui.min.css",
             "~/js/jquery-ui-1.12.1.custom/customizeautocomplete.css"
      );

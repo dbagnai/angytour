@@ -34,7 +34,6 @@ namespace WelcomeLibrary.DAL
             if ((SessionId == null || string.IsNullOrWhiteSpace(SessionId)) && idrecordcarrello == 0) return list;
             if ((ipClient == null || string.IsNullOrWhiteSpace(ipClient)) && idrecordcarrello == 0) return list;
             if (idcombinato == null) idcombinato = "";
-            //dbDataAccess.ComprimiDbAccess(connection);
 
             Carrello item;
             try
@@ -43,14 +42,11 @@ namespace WelcomeLibrary.DAL
                 string query = "";
                 query = "SELECT A.ID,A.SessionId,A.Data,A.Prezzo,A.Iva,A.Numero,A.CodiceProdotto,A.jsonfield1,A.IpClient,A.Validita,A.Campo1,A.Campo2,A.Campo3,A.Campo4,A.Campo5,A.CodiceOrdine,A.ID_cliente,A.ID_prodotto,A.Codicenazione,A.Codiceprovincia,A.Codicesconto,A.Datastart,A.Dataend,B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento,B.DescrizioneGB,B.DescrizioneRU,B.DescrizioneFR,B.DescrizioneI,B.DENOMINAZIONEGB,B.DENOMINAZIONERU,B.DENOMINAZIONEFR,B.DENOMINAZIONEI,B.linkVideo,B.CodiceCOMUNE,B.CodicePROVINCIA as B_CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto as B_CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.Caratteristica1,B.Caratteristica2,B.Caratteristica3,B.Caratteristica4,B.Caratteristica5,B.Caratteristica6,B.Xmlvalue,B.DATITECNICII,B.DATITECNICIGB,B.DATITECNICIRU,B.DATITECNICIFR,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo as B_Prezzo,B.PrezzoListino,B.Vetrina,B.FotoSchema,B.FotoValori,B.urlcustomI,B.urlcustomGB,B.urlcustomRU,B.urlcustomFR,B.Peso FROM TBL_CARRELLO as A left outer join TBL_ATTIVITA as B on A.id_prodotto=B.Id where SessionId like @SessionId and IpClient like @ipClient and CodiceOrdine = '' ";
 
-
                 if (idrecordcarrello != 0) { SessionId = "%"; ipClient = "%"; };
-
                 SQLiteParameter p1 = new SQLiteParameter("@SessionId", SessionId);//OleDbType.VarChar
                 parColl.Add(p1);
                 SQLiteParameter p2 = new SQLiteParameter("@ipClient", ipClient);//OleDbType.VarChar
                 parColl.Add(p2);
-
                 if (id_prodotto != 0 || !string.IsNullOrEmpty(idcombinato))
                 {
                     query += " and A.id_prodotto like @id_prodotto";
@@ -88,47 +84,35 @@ namespace WelcomeLibrary.DAL
                         item.ID = reader.GetInt64(reader.GetOrdinal("ID"));
                         item.IpClient = reader.GetString(reader.GetOrdinal("IpClient"));
                         item.SessionId = reader.GetString(reader.GetOrdinal("SessionId"));
-
-
                         if (!reader["Id_cliente"].Equals(DBNull.Value))
                             item.ID_cliente = reader.GetInt64(reader.GetOrdinal("Id_cliente"));
-
-
                         if (!reader["Codicenazione"].Equals(DBNull.Value))
                             item.Codicenazione = reader.GetString(reader.GetOrdinal("Codicenazione"));
                         if (!reader["Codiceprovincia"].Equals(DBNull.Value))
                             item.Codiceprovincia = reader.GetString(reader.GetOrdinal("Codiceprovincia"));
                         if (!reader["Codicesconto"].Equals(DBNull.Value))
                             item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
-
                         item.id_prodotto = reader.GetInt64(reader.GetOrdinal("id_prodotto"));
                         if (!reader["CodiceProdotto"].Equals(DBNull.Value))
                             item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
                         if (!reader["jsonfield1"].Equals(DBNull.Value))
                             item.jsonfield1 = reader.GetString(reader.GetOrdinal("jsonfield1"));
-
                         item.Data = reader.GetDateTime(reader.GetOrdinal("Data"));
-
-
                         if (!reader["Datastart"].Equals(DBNull.Value))
                             item.Datastart = reader.GetDateTime(reader.GetOrdinal("Datastart"));
                         if (!reader["Dataend"].Equals(DBNull.Value))
                             item.Dataend = reader.GetDateTime(reader.GetOrdinal("Dataend"));
-
                         if (!reader["Prezzo"].Equals(DBNull.Value))
                             item.Prezzo = reader.GetDouble(reader.GetOrdinal("Prezzo"));
-
                         item.Iva = reader.GetInt64(reader.GetOrdinal("Iva"));
                         item.Numero = reader.GetInt64(reader.GetOrdinal("Numero"));
                         item.Validita = reader.GetInt64(reader.GetOrdinal("Validita"));
-
                         if (!reader["Campo1"].Equals(DBNull.Value))
                             item.Campo1 = reader.GetString(reader.GetOrdinal("Campo1"));
                         if (!reader["Campo2"].Equals(DBNull.Value))
                             item.Campo2 = reader.GetString(reader.GetOrdinal("Campo2"));
                         if (!reader["Campo3"].Equals(DBNull.Value))
                             item.Campo3 = reader.GetString(reader.GetOrdinal("Campo3"));
-
                         if (!reader["CodiceOrdine"].Equals(DBNull.Value))
                             item.CodiceOrdine = reader.GetString(reader.GetOrdinal("CodiceOrdine"));
 
@@ -268,7 +252,7 @@ namespace WelcomeLibrary.DAL
             {
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 string query = "";
-                query = "SELECT A.ID ,A.SessionId,A.Data,A.Prezzo,A.Iva,A.Numero,A.CodiceProdotto,A.jsonfield1,A.IpClient,A.Validita,A.Campo1,A.Campo2,A.Campo3,A.Campo4,A.Campo5,A.CodiceOrdine,A.ID_cliente,A.ID_prodotto,A.Codicenazione,A.Codiceprovincia,A.Codicesconto,A.Datastart,A.Dataend,B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento,B.DescrizioneGB,B.DescrizioneRU,B.DescrizioneFR,B.DescrizioneI,B.DENOMINAZIONEGB,B.DENOMINAZIONERU,B.DENOMINAZIONEFR,B.DENOMINAZIONEI,B.linkVideo,B.CodiceCOMUNE,B.CodicePROVINCIA as B_CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto as B_CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.Caratteristica1,B.Caratteristica2,B.Caratteristica3,B.Caratteristica4,B.Caratteristica5,B.Caratteristica6,B.Xmlvalue,B.DATITECNICII,B.DATITECNICIGB,B.DATITECNICIRU,B.DATITECNICIFR,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo as B_Prezzo,B.PrezzoListino,B.Peso,B.Vetrina,B.FotoSchema,B.FotoValori,B.urlcustomI,B.urlcustomGB,B.urlcustomRU,B.urlcustomFR FROM TBL_CARRELLO A left outer join TBL_ATTIVITA B on A.id_prodotto=B.Id where CodiceOrdine = @Codiceordine ";
+                query = "SELECT A.ID ,A.SessionId,A.Data,A.Prezzo,A.Iva,A.Numero,A.CodiceProdotto,A.jsonfield1,A.IpClient,A.Validita,A.Campo1,A.Campo2,A.Campo3,A.Campo4,A.Campo5,A.CodiceOrdine,A.ID_cliente,A.ID_prodotto,A.Codicenazione,A.Codiceprovincia,A.Codicesconto,A.Datastart,A.Dataend, B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento,B.DescrizioneGB,B.DescrizioneRU,B.DescrizioneFR,B.DescrizioneI,B.DENOMINAZIONEGB,B.DENOMINAZIONERU,B.DENOMINAZIONEFR,B.DENOMINAZIONEI,B.linkVideo,B.CodiceCOMUNE,B.CodicePROVINCIA as B_CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto as B_CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.Caratteristica1,B.Caratteristica2,B.Caratteristica3,B.Caratteristica4,B.Caratteristica5,B.Caratteristica6,B.Xmlvalue,B.DATITECNICII,B.DATITECNICIGB,B.DATITECNICIRU,B.DATITECNICIFR,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo as B_Prezzo,B.PrezzoListino,B.Peso,B.Vetrina,B.FotoSchema,B.FotoValori,B.urlcustomI,B.urlcustomGB,B.urlcustomRU,B.urlcustomFR FROM TBL_CARRELLO A left outer join TBL_ATTIVITA B on A.id_prodotto=B.Id where CodiceOrdine = @Codiceordine ";
 
 
                 SQLiteParameter p1 = new SQLiteParameter("@Codiceordine", Codiceordine);//OleDbType.VarChar
@@ -291,21 +275,17 @@ namespace WelcomeLibrary.DAL
 
                         if (!reader["Id_cliente"].Equals(DBNull.Value))
                             item.ID_cliente = reader.GetInt64(reader.GetOrdinal("Id_cliente"));
-
                         if (!reader["Codicenazione"].Equals(DBNull.Value))
                             item.Codicenazione = reader.GetString(reader.GetOrdinal("Codicenazione"));
                         if (!reader["Codiceprovincia"].Equals(DBNull.Value))
                             item.Codiceprovincia = reader.GetString(reader.GetOrdinal("Codiceprovincia"));
                         if (!reader["Codicesconto"].Equals(DBNull.Value))
                             item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
-
                         item.id_prodotto = reader.GetInt64(reader.GetOrdinal("id_prodotto"));
                         if (!reader["CodiceProdotto"].Equals(DBNull.Value))
                             item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
-
                         if (!reader["jsonfield1"].Equals(DBNull.Value))
                             item.jsonfield1 = reader.GetString(reader.GetOrdinal("jsonfield1"));
-
                         item.Data = reader.GetDateTime(reader.GetOrdinal("Data"));
 
 
@@ -539,15 +519,12 @@ namespace WelcomeLibrary.DAL
                             item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
                         if (!reader["jsonfield1"].Equals(DBNull.Value))
                             item.jsonfield1 = reader.GetString(reader.GetOrdinal("jsonfield1"));
-
                         item.id_prodotto = reader.GetInt64(reader.GetOrdinal("id_prodotto"));
                         item.Data = reader.GetDateTime(reader.GetOrdinal("Data"));
                         if (!reader["Datastart"].Equals(DBNull.Value))
                             item.Datastart = reader.GetDateTime(reader.GetOrdinal("Datastart"));
                         if (!reader["Dataend"].Equals(DBNull.Value))
                             item.Dataend = reader.GetDateTime(reader.GetOrdinal("Dataend"));
-
-
                         if (!reader["Prezzo"].Equals(DBNull.Value))
                             item.Prezzo = reader.GetDouble(reader.GetOrdinal("Prezzo"));
                         item.Iva = reader.GetInt64(reader.GetOrdinal("Iva"));
@@ -677,7 +654,7 @@ namespace WelcomeLibrary.DAL
         }
 
         /// <summary>
-        /// Funzione che Fa inserimento e aggiornamento in tabella carrello prodotti
+        /// Funzione che Fa inserimento e aggiornamento in tabella carrello prodotti di un elemento
         /// </summary>
         /// <param name="connessione"></param>
         /// <param name="item"></param>
@@ -981,6 +958,27 @@ namespace WelcomeLibrary.DAL
             return;
         }
 
+        public void DeleteCarrelloPerCodiceOrdine(string connessione, string codiceordine)
+        {
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            if (connessione == null || connessione == "") return;
+            if (string.IsNullOrEmpty(codiceordine)) return;
+
+            SQLiteParameter p1 = new SQLiteParameter("@CodiceOrdine", codiceordine);//OleDbType.VarChar
+            parColl.Add(p1);
+
+            string query = "DELETE FROM TBL_CARRELLO WHERE ([CodiceOrdine]=@CodiceOrdine)";
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, cancellazione Elemento dal carrello :" + error.Message, error);
+            }
+            return;
+        }
+
 
         /// <summary>
         /// Modifica il campo nazione nel carrello
@@ -1035,7 +1033,218 @@ namespace WelcomeLibrary.DAL
         }
 
         /// <summary>
-        /// CArica l'intera lista degli ordini per data discendente
+        /// Esegue il check su un codiceordine se la quantita di acquisto nel carrello provoca il superamento dello scaglione associato 
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="codiceordine"></param>
+        /// <returns></returns>
+        public bool VerificaSuperamentoSuOrdine(string connection, string codiceordine)
+        {
+            bool ret = false;
+            //TotaliCarrello c = this.CaricaOrdinePerCodiceOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codiceordine);
+            //if (c != null)
+            //{ }
+            offerteDM offDM = new offerteDM();
+            CarrelloCollection righeordine = this.CaricaCarrelloPerCodiceOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codiceordine);
+            //string listcod = "";
+            //righeordine.ForEach(rigo => listcod += rigo.id_prodotto + ",");
+            if (righeordine != null)
+                foreach (Carrello item in righeordine) //nella casistica base dovrei avere un solo rigo con lo scaglione ( non potendo avere + scaglioni per codiceordine )
+                {
+                    if (!string.IsNullOrEmpty(item.jsonfield1))
+                    {
+                        string idscaglionedajson = (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(item.jsonfield1, "idscaglione", "I");
+                        long quantita = item.Numero;//quantita da aggiungere presente nell'ordine sul codice passato
+                        long idscaglione = 0;
+                        if (long.TryParse(idscaglionedajson, out idscaglione))
+                        {
+                            List<SQLiteParameter> parscaglioni = new List<SQLiteParameter>();
+                            SQLiteParameter ps1 = new SQLiteParameter("@id", idscaglione);//OleDbType.VarChar
+                            parscaglioni.Add(ps1);
+
+                            ScaglioniCollection listascaglioni = offerteDM.CaricaOfferteScaglioni(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parscaglioni);
+                            if (listascaglioni != null)
+                            {
+                                string s_niscritti = ""; long niscritti = 0;
+                                Scaglioni scitem = listascaglioni.Find(s => s.id == idscaglione);
+                                if (scitem != null && scitem.addedvalues.ContainsKey("niscritti"))
+                                {
+                                    s_niscritti = scitem.addedvalues["niscritti"];
+                                    long.TryParse(s_niscritti, out niscritti);
+                                    if ((quantita + niscritti) > scitem.nmax)
+                                    {
+                                        ret = true;
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+            return ret;
+        }
+
+        /// <summary>
+        /// Aggiorna lo stato degli scaglione per niscritti (ordini pagati o acconto) e nattesa ( ordini non pagati ) e per gli idscaglione o idprodotto passati nei parametri,
+        /// inoltre aggiorna lo stato dello Scaglione tra quelli previsti.
+        /// Vengono aggionati i numeri ordini solo per gli scaglioni fino a 20 gg successivi alla partenza impostata poi si congelano.
+        /// Per gli scaglioni in stato SOSPESO (7) i numeri di attesa e iscritti si aggionano ma non lo stato che rimane bloccato
+        /// Tutti gli stati maggiori o uguali a 4 ( confermato ) hanno bloccata la possibilità di inserimento a carrello sia in cusotmbind che in javascript 
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="parametri">Passare idprodotto o idscaglione singoli o separati da virgole</param>
+        public void AggiornaStatoscaglioni(string connection, Dictionary<string, string> parametri)
+        {
+            offerteDM offDM = new offerteDM();
+            //parametri.Add("idprodotto", idprodotto);
+            //parametri.Add("idscaglione", idscaglione);
+            //parametri.Add("statoacconto", statoacconto);
+            //parametri.Add("statosaldo", statosaldo);
+
+            //per un idscaglioni o per gli scaglioni di un idattivita devo verificare lo stato dei pagamenti sulla tabella del carrello
+            // eCommerceDM riportare I SEGUENTI VALORI in numero di occorrenze, attenzione da conteggiare in base alla quantità a carrello per gli ordini:
+            //- in attesa pagamento sono GLI ORDINI PER un pacchetto ma che ancora non hanno pagato l'acconto o il saldo
+            //- Iscritti sono quelli che hanno pagato acconto o saldo
+
+            ////////////////////////////////////////////////////////////////
+            //Carichiamo tutti gli scaglioni per idprodotto o idscaglione ( che sono quelli che verranno aggiornati per le disponibilita )
+            ////////////////////////////////////////////////////////////////
+            string listaidprodotto = "";
+            List<SQLiteParameter> parscaglioni = new List<SQLiteParameter>();
+            if (parametri.ContainsKey("idprodotto") && !string.IsNullOrWhiteSpace(parametri["idprodotto"]))
+            {
+                listaidprodotto = parametri["idprodotto"];
+                SQLiteParameter ps1 = new SQLiteParameter("@id_attivita", listaidprodotto);//OleDbType.VarChar
+                parscaglioni.Add(ps1);
+            }
+            string listaidscaglioni = "";
+            if (parametri.ContainsKey("idscaglione") && !string.IsNullOrWhiteSpace(parametri["idscaglione"]))
+            {
+                listaidscaglioni = parametri["idscaglione"];
+                SQLiteParameter ps2 = new SQLiteParameter("@id", listaidscaglioni);//OleDbType.VarChar
+                parscaglioni.Add(ps2);
+            }
+            // inserisco il parametro di filtro scaglioni : prendo gli scaglioni che hanno datapartenza > data attuale - 20 GIORNI
+            //in modo da non aggiornare sempre tutti anche nel passato oltre quelli SCADUTI 20 GG!!!! )
+#if true
+            SQLiteParameter ps3 = new SQLiteParameter("@Data_inizio", System.DateTime.Now.AddDays(-20));
+            parscaglioni.Add(ps3);
+#endif
+            ScaglioniCollection listascaglioni = offerteDM.CaricaOfferteScaglioni(connection, parscaglioni);
+
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            //CARICHIAMO I DATI DI CARRELLO E DELLA TABELLA ORDINI per gli scaglioni che ci interessano
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            eCommerceDM eDM = new eCommerceDM();
+            List<SQLiteParameter> parcoll = new List<SQLiteParameter>();
+
+            if (parametri.ContainsKey("idprodotto") && !string.IsNullOrWhiteSpace(parametri["idprodotto"]))
+            {
+                SQLiteParameter paridprodotto = new SQLiteParameter("@idprodotto", parametri["idprodotto"]);
+                parcoll.Add(paridprodotto);
+            }
+            if (parametri.ContainsKey("idscaglione") && !string.IsNullOrWhiteSpace(parametri["idscaglione"]))
+            {
+                SQLiteParameter paridscaglione = new SQLiteParameter("@idscaglione", parametri["idscaglione"]);
+                parcoll.Add(paridscaglione);
+            }
+            //Faccio il filtro sulle righe a carrello ma questo non fornisce i dati sui pagamenti, però prende la lista dei codici ordini ed i dati relativi allo scaglione o tutti gli scaglioni per un prodotto
+            CarrelloCollection righeordiniacarrello = FiltraCodiciPerOfferteScaglioni(connection, parcoll);
+            if (righeordiniacarrello != null)
+            {
+                List<SQLiteParameter> parcoll1 = new List<SQLiteParameter>();
+                //Partiamo dalla lista codiciordine filtrata che ho caricato
+                SQLiteParameter parcod = new SQLiteParameter("@Codiceordine", "");
+                string listcod = "";
+                righeordiniacarrello.ForEach(c => listcod += c.CodiceOrdine + ",");
+                parcod.Value = listcod;
+                parcoll1.Add(parcod);
+                // CARICHIAMO TUTTI GLI ORDINI ASSOCIATI AI CODICI ORDINE DEL CARRELLO
+                // ESTRATTI in base a idattivita o idscaglione 
+                //dove troviamo i dati sui pagamenti caricando gli ordini corrispondenti
+                TotaliCarrelloCollection ordinicomplessivi = eDM.CaricaListaOrdini(connection, parcoll1);
+                foreach (Scaglioni scaglione in listascaglioni) //Scorriamo ed aggiorniamo i dati degli scaglioni per ciascuno
+                {
+                    //azzeriamo il conteggio per lo scaglione attuale
+                    scaglione.addedvalues.Remove("nattesa");
+                    scaglione.addedvalues.Remove("niscritti");
+                    scaglione.addedvalues["nattesa"] = "0";
+                    scaglione.addedvalues["niscritti"] = "0";
+                    long nattesa = 0; long niscritti = 0;
+                    foreach (Carrello carrello in righeordiniacarrello)   //Scorriamo tutte le righe di carrello che contengono lo scaglione di interesse e sommiamo
+                    {
+                        //    string prezzoscaglione = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "prezzo", "I");
+                        //string datapartenza = Utility.reformatdatetimestring((string)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(itemcarrello.jsonfield1, "datapartenza", "I"));
+                        //string dataritorno = Utility.reformatdatetimestring((string)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(itemcarrello.jsonfield1, "dataritorno", "I"));
+                        //    string idscaglione = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "idscaglione", "I");
+                        //    try
+                        //    {
+                        //        Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>((String)eCommerceDM.Selezionadajson(item.jsonfield1, "scaglione", "I"));
+                        //    }
+                        //    catch { }
+                        if ((string)eCommerceDM.Selezionadajson(carrello.jsonfield1, "idscaglione", "I") == scaglione.id.ToString())
+                        {
+                            //Filtriamo l'ordine corrispondente al rigo attuale ( ce ne puo essere uno solo nella tablella degli ordini !!! )
+                            TotaliCarrello ordinepercodice = (TotaliCarrello)ordinicomplessivi.Find(o => o.CodiceOrdine == carrello.CodiceOrdine);
+                            if (ordinepercodice != null)
+                            {
+                                long quantita = carrello.Numero;
+                                //Adesso conteggiamo i valori per iscritti e in attesa e memorizziamoli per ogni scaglione !
+                                //-  nattesa  : in attesa pagamento sono quelli che hanno ordinato il pacchetto ma ancora non hanno pagato l'acconto o il saldo
+                                //- niscritti : Iscritti sono quelli che hanno pagato acconto o saldo
+                                if (!ordinepercodice.Pagatoacconto && !ordinepercodice.Pagato) nattesa += quantita;
+                                else if (ordinepercodice.Pagatoacconto && !ordinepercodice.Pagato) { if (ordinepercodice.TotaleAcconto != 0) niscritti += quantita; else nattesa += quantita; }
+                                else if (!ordinepercodice.Pagatoacconto && ordinepercodice.Pagato) { niscritti += quantita; } // se pagato un saldo anche se acconto non pagato si considerano iscritti ( caso raro di una che paga il saldo senza pagare l'acconto )
+                                else if (ordinepercodice.Pagatoacconto && ordinepercodice.Pagato) niscritti += quantita;
+                            }
+                        }
+                    }
+                    scaglione.addedvalues["nattesa"] = nattesa.ToString(); ;
+                    scaglione.addedvalues["niscritti"] = niscritti.ToString();
+                    scaglione.jsonvalues = Newtonsoft.Json.JsonConvert.SerializeObject(scaglione.addedvalues);
+                    //    //Facciamo  update dei dati per lo scaglione nel db scaglioni ( da decidere se farlo a fine ciclo completo su tutti ... )
+                    //Settiamo lo stato degli scaglioni in base ai numeri di iscritti
+                    SetScaglioneStatus(scaglione);
+                    offerteDM.InserisciAggiornaScaglioni(connection, scaglione); // aggiornamento per singolo valore nel ciclo ... sarebbe meglio farlo a fine ciclo come update complessivo di  listascaglioni
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// STATO CONFERMATO: iscritti maggiore o uguale a NCONFERMA dello scaglione
+        /// STATO QUASI CONFERMATO: iscritti maggiore o uguale a 70 % del valore NCONFERMA dello scaglione
+        /// STATO QUASI COMPLETO: iscritti maggiore o uguale a 70 % del valore NMAX dello scaglione
+        /// STATO COMPLETO : iscritti uguale a valore NMAX dello scaglione
+        /// {"0":"iscrizioni aperte","1":"quasi confermato","2":"confermato","3":"quasi completo","4":"completo","5":"in partenza","6":"scaduto","7":"sospeso"}
+        /// </summary>
+        /// <param name="scaglione"></param>
+        private void SetScaglioneStatus(Scaglioni scaglione, double percscarto = 0.7)
+        {
+            if (scaglione.stato != 7) // se SOSPESO 7 lo scaglione non ricalcola variazioni di stato in base agli iscritti MA AGGIORNA SOLO I NUMERI ISCRITTI
+            {
+                double niscritti = 0;
+                //   scaglione.addedvalues["nattesa"]
+                if (double.TryParse(scaglione.addedvalues["niscritti"], out niscritti))
+                {
+                    if (niscritti >= 0 && niscritti < (scaglione.nconferma * percscarto)) scaglione.stato = 0;
+                    if (niscritti >= (scaglione.nconferma * percscarto) && niscritti < (scaglione.nconferma)) scaglione.stato = 1;
+                    if (niscritti >= (scaglione.nconferma) && niscritti < (scaglione.nmax * percscarto)) scaglione.stato = 2;
+                    if (niscritti >= (scaglione.nmax * percscarto) && niscritti < (scaglione.nmax)) scaglione.stato = 3;
+                    if (niscritti >= (scaglione.nmax)) scaglione.stato = 4;
+                }
+
+                //aggiornamenti stato post partenza, ATTENZIONE funziona solo se la chiamata di aggiornamento dati degli istritti scaglioni gira entro 20 gg dalla data partenza
+                //cioe se viene chiamato l'evento di aggiornamento dei dati scaglioni entro quel termine
+                if (System.DateTime.Now.AddDays(0) >= scaglione.datapartenza && scaglione.stato >= 2 && scaglione.stato <= 4) scaglione.stato = 5; //confermato ed in partenza
+                if (System.DateTime.Now.AddDays(0) >= scaglione.datapartenza && scaglione.stato < 2) scaglione.stato = 6; //scaduto il termine di iscrizione
+            }
+
+        }
+
+
+        /// <summary>
+        /// CArica la lista degli ordini per data discendente in base ai parametri di filtro passati
         /// opp
         /// </summary>
         /// <param name="connection"></param>
@@ -1049,16 +1258,96 @@ namespace WelcomeLibrary.DAL
             TotaliCarrello item = null;
             try
             {
-
                 string query = "";
                 string queryfilter = "";
                 List<SQLiteParameter> _parUsed = new List<SQLiteParameter>();
 
                 query = "SELECT * FROM TBL_CARRELLO_ORDINI  ";
 
-
                 //if (caricacarrelloitems)
                 //    query += " left join TBL_CARRELLO B on Codiceordine=B.Codiceordine ";
+
+                //if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Codiceordine"; }))
+                //{
+                //    SQLiteParameter pCodiceordine = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Codiceordine"; });
+                //    _parUsed.Add(pCodiceordine);
+                //    if (!queryfilter.ToLower().Contains("where"))
+                //        queryfilter += " WHERE Codiceordine like @Codiceordine ";
+                //    else
+                //        queryfilter += " AND Codiceordine like @Codiceordine  ";
+
+
+                ////////////////////////////////////////////////////////////////////////////////////////////////
+                //FIltro la lista codiciordine presenti nella tbl_carrello in base a attivita e scaglione passati
+                /////////////////////////////////////////////////////////////////////////////////////////// 
+                CarrelloCollection righeordiniacarrello = FiltraCodiciPerOfferteScaglioni(connection, parColl);
+                if (righeordiniacarrello != null) //FILTRO ORDINI ATTIVATO SUI PARAMETRI DEL CARRELLO
+                    if (righeordiniacarrello.Count > 0)
+                    {
+                        string listcod = "";
+                        righeordiniacarrello.ForEach(c => listcod += "," + c.CodiceOrdine);
+                        if (!parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Codiceordine"; }))
+                        {
+                            SQLiteParameter parcod = new SQLiteParameter("@Codiceordine", listcod);
+                            parColl.Add(parcod);
+                        }
+                        else // facciamo un operatore and delle due liste passata e filtrata dal carrello
+                        {
+                            SQLiteParameter pcodlist = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Codiceordine"; });
+                            string parameterscodici = pcodlist.Value.ToString();
+                            parameterscodici = parameterscodici.Trim().ToString().Replace("|", ",");
+                            //FACCIAMO UN'OPERAZIONE AND DELLE DUE LISTE CODICI
+                            List<string> passedlist = parameterscodici.Trim().Split(',').ToList();
+                            List<string> filteredlist = listcod.Trim().Split(',').ToList();
+                            string joinedandlist = string.Empty;
+                            foreach (string el in filteredlist)
+                            {
+                                if (!string.IsNullOrEmpty(el.Trim()))
+                                    if (passedlist.Exists(el1 => el1 == el))
+                                        joinedandlist += "," + el.Trim();
+                            }
+                            if (!string.IsNullOrEmpty(joinedandlist))
+                                pcodlist.Value = joinedandlist; //sovrascrivo lo lista codiciordini passata con quella filtrata dando la priprita a questa
+                            else return list; //parColl.Remove(pcodlist); NON CI SONO CODICI COMUNI NELLE LISTE.. DEVO TORNARE LISTA VUOTA
+                        }
+                    }
+                    else return list; //se il filtro ordini si è attivato per presenza dei parametri dedicati e non ci sono risultati devo tornare lista vuota
+                ////////////////////////////////////////////////////////////////
+                ///
+
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Codiceordine"; }))
+                {
+                    SQLiteParameter pcodlist = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Codiceordine"; });
+                    string listcod = pcodlist.Value.ToString();
+                    listcod = listcod.Trim().ToString().Replace("|", ",");
+                    if (!listcod.Contains(","))
+                    {
+                        _parUsed.Add(pcodlist);
+                        if (!queryfilter.ToLower().Contains("where"))
+                            queryfilter += " WHERE Codiceordine like @Codiceordine ";
+                        else
+                            queryfilter += " AND Codiceordine like @Codiceordine  ";
+                    }
+                    else
+                    {
+                        string[] listaarray = listcod.Trim().Split(',');
+                        if (listaarray != null && listaarray.Length > 0)
+                        {
+                            if (!queryfilter.ToLower().Contains("where"))
+                                queryfilter += " WHERE Codiceordine in (    ";
+                            else
+                                queryfilter += " AND  Codiceordine in (      ";
+                            foreach (string codice in listaarray)
+                            {
+                                if (!string.IsNullOrEmpty(codice.Trim()))
+                                    queryfilter += " '" + codice + "' ,";
+                            }
+                            queryfilter = queryfilter.TrimEnd(',') + " ) ";
+                        }
+                    }
+                }
+
+
 
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Id_cliente"; }))
                 {
@@ -1089,14 +1378,38 @@ namespace WelcomeLibrary.DAL
                         queryfilter += " AND Mailcliente like @Mailcliente  ";
                 }
 
-                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Codiceordine"; }))
+                //Filtro per id ordine o lista id ordini separate da | o da ,
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@id"; }))
                 {
-                    SQLiteParameter pCodiceordine = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Codiceordine"; });
-                    _parUsed.Add(pCodiceordine);
-                    if (!queryfilter.ToLower().Contains("where"))
-                        queryfilter += " WHERE Codiceordine like @Codiceordine ";
+                    SQLiteParameter pidlist = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@id"; });
+                    string listaid = pidlist.Value.ToString();
+                    listaid = listaid.Trim().ToString().Replace("|", ",");
+
+                    if (!listaid.Contains(","))
+                    {
+                        _parUsed.Add(pidlist);
+                        if (!queryfilter.ToLower().Contains("where"))
+                            queryfilter += " WHERE id like @id ";
+                        else
+                            queryfilter += " AND id like @id  ";
+                    }
                     else
-                        queryfilter += " AND Codiceordine like @Codiceordine  ";
+                    {
+                        string[] listaarray = listaid.Trim().Split(',');
+                        if (listaarray != null && listaarray.Length > 0)
+                        {
+                            if (!queryfilter.ToLower().Contains("where"))
+                                queryfilter += " WHERE id in (    ";
+                            else
+                                queryfilter += " AND  id in (      ";
+                            foreach (string codice in listaarray)
+                            {
+                                if (!string.IsNullOrEmpty(codice.Trim()))
+                                    queryfilter += " " + codice + " ,";
+                            }
+                            queryfilter = queryfilter.TrimEnd(',') + " ) ";
+                        }
+                    }
                 }
 
 
@@ -1119,6 +1432,26 @@ namespace WelcomeLibrary.DAL
                         queryfilter += " AND DataOrdine <= @DataMax ";
                 }
 
+
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@statoacconto"; }))
+                {
+                    SQLiteParameter pstatoacconto = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@statoacconto"; });
+                    _parUsed.Add(pstatoacconto);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Pagatoacconto = @statoacconto ";
+                    else
+                        queryfilter += " AND Pagatoacconto = @statoacconto ";
+                }
+
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@statosaldo"; }))
+                {
+                    SQLiteParameter pstatosaldo = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@statosaldo"; });
+                    _parUsed.Add(pstatosaldo);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE Pagato = @statosaldo ";
+                    else
+                        queryfilter += " AND Pagato = @statosaldo ";
+                }
                 //SQL
                 query += queryfilter;
 
@@ -1186,6 +1519,9 @@ namespace WelcomeLibrary.DAL
                         if (!reader["Pagato"].Equals(DBNull.Value))
                             item.Pagato = reader.GetBoolean(reader.GetOrdinal("Pagato"));
 
+                        if (!reader["Pagatoacconto"].Equals(DBNull.Value))
+                            item.Pagatoacconto = reader.GetBoolean(reader.GetOrdinal("Pagatoacconto"));
+
                         if (!reader["TotaleOrdine"].Equals(DBNull.Value))
                             item.TotaleOrdine = reader.GetDouble(reader.GetOrdinal("TotaleOrdine"));
 
@@ -1193,8 +1529,6 @@ namespace WelcomeLibrary.DAL
                             item.TotaleSconto = reader.GetDouble(reader.GetOrdinal("TotaleSconto"));
                         if (!reader["TotaleSpedizione"].Equals(DBNull.Value))
                             item.TotaleSpedizione = reader.GetDouble(reader.GetOrdinal("TotaleSpedizione"));
-
-
                         if (!reader["TotaleSmaltimento"].Equals(DBNull.Value))
                             item.TotaleSmaltimento = reader.GetDouble(reader.GetOrdinal("TotaleSmaltimento"));
                         if (!reader["Supplementospedizione"].Equals(DBNull.Value))
@@ -1220,17 +1554,247 @@ namespace WelcomeLibrary.DAL
             return list;
         }
 
+        /// <summary>
+        /// Filtra i codiciordine a carrello in base ai parametri indicati facendo le query con JSON1 in sqllite direttamente nei campi json.
+        /// Se torna null il filtro non si è attivato quindi lo devo bypassare, ma se trona una lista con count >=0 devo considerare il risultato...
+        /// </summary>
+        /// <param name="parColl"></param>
+        /// <returns></returns>
+        private CarrelloCollection FiltraCodiciPerOfferteScaglioni(string connection, List<SQLiteParameter> parColl)
+        {
+            CarrelloCollection dettagliordini = null;
+
+            //List<string> listacodici = null; //risultato di default per non attivazione
+            List<SQLiteParameter> _parUsed = new List<SQLiteParameter>();
+            string queryfilter = "";
+            //string query = "SELECT DISTINCT CodiceOrdine FROM TBL_CARRELLO  ";
+            string query = "SELECT * FROM TBL_CARRELLO  ";
+            queryfilter += " WHERE CodiceOrdine != ''    ";
+            bool activatefiltering = false;
+
+            //INTRODUCIAMO IL FILTRO PRODOTTI E SCAGLIONI sugli ordini
+            //if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@idprodotto"; }))
+            //{
+            //    SQLiteParameter pidattivita = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@idprodotto"; });
+            //    if (pidattivita.Value != null && !string.IsNullOrEmpty(pidattivita.Value.ToString()))
+            //    {
+            //        _parUsed.Add(pidattivita);
+            //        activatefiltering = true;
+            //        if (!queryfilter.ToLower().Contains("where"))
+            //            queryfilter += " WHERE ID_prodotto = @idprodotto ";
+            //        else
+            //            queryfilter += " AND ID_prodotto = @idprodotto ";
+            //    }
+            //}
+            if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@idprodotto"; }))
+            {
+                SQLiteParameter pidlist = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@idprodotto"; });
+                string listaid = pidlist.Value.ToString();
+                listaid = listaid.Trim().ToString().Replace("|", ",");
+                if (!listaid.Contains(","))
+                {
+                    _parUsed.Add(pidlist);
+                    activatefiltering = true;
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE ID_prodotto like @idprodotto ";
+                    else
+                        queryfilter += " AND ID_prodotto like @idprodotto  ";
+                }
+                else
+                {
+                    string[] listaarray = listaid.Trim().Split(',');
+                    if (listaarray != null && listaarray.Length > 0)
+                    {
+                        activatefiltering = true;
+                        if (!queryfilter.ToLower().Contains("where"))
+                            queryfilter += " WHERE ID_prodotto in (    ";
+                        else
+                            queryfilter += " AND  ID_prodotto in (      ";
+                        foreach (string codice in listaarray)
+                        {
+                            if (!string.IsNullOrEmpty(codice.Trim()))
+                                queryfilter += " " + codice + " ,";
+                        }
+                        queryfilter = queryfilter.TrimEnd(',') + " ) ";
+                    }
+                }
+            }
+
+            //if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@idscaglione"; }))
+            //{
+            //    SQLiteParameter pidscaglione = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@idscaglione"; });
+            //    if (pidscaglione.Value != null && !string.IsNullOrEmpty(pidscaglione.Value.ToString()))
+            //    {
+            //        pidscaglione.DbType = System.Data.DbType.String;
+            //        _parUsed.Add(pidscaglione);
+            //        activatefiltering = true;
+
+            //        if (!queryfilter.ToLower().Contains("where"))
+            //            queryfilter += " WHERE json_extract(jsonfield1, '$.idscaglione') = @idscaglione ";
+            //        else
+            //            queryfilter += " AND  json_extract(jsonfield1, '$.idscaglione') = @idscaglione ";
+            //    }
+            //}
+            if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@idscaglione"; }))
+            {
+                SQLiteParameter pidlistscaglioni = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@idscaglione"; });
+                string listaid = pidlistscaglioni.Value.ToString();
+                listaid = listaid.Trim().ToString().Replace("|", ",");
+                if (!listaid.Contains(","))
+                {
+                    activatefiltering = true;
+                    _parUsed.Add(pidlistscaglioni);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE JSON_VALID(jsonfield1) and json_extract(jsonfield1, '$.idscaglione') = @idscaglione ";
+                    else
+                        queryfilter += " AND JSON_VALID(jsonfield1) and json_extract(jsonfield1, '$.idscaglione') = @idscaglione ";
+                }
+                else
+                {
+                    activatefiltering = true;
+                    string[] listaarray = listaid.Trim().Split(',');
+                    if (listaarray != null && listaarray.Length > 0)
+                    {
+                        if (!queryfilter.ToLower().Contains("where"))
+                            queryfilter += " WHERE JSON_VALID(jsonfield1) and json_extract(jsonfield1, '$.idscaglione')  in (    ";
+                        else
+                            queryfilter += " WHERE JSON_VALID(jsonfield1) and json_extract(jsonfield1, '$.idscaglione')  in (      ";
+                        foreach (string codice in listaarray)
+                        {
+                            if (!string.IsNullOrEmpty(codice.Trim()))
+                                queryfilter += " " + codice + " ,";
+                        }
+                        queryfilter = queryfilter.TrimEnd(',') + " ) ";
+                    }
+                }
+            }
+            if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_fine"; }))
+            {
+                activatefiltering = true;
+                SQLiteParameter pdatapartenza = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_fine"; });
+                //.Value.ToString("yyyy-MM-dd 00:00:00")  //formato corretto per filtro data
+                pdatapartenza.DbType = System.Data.DbType.DateTime;
+                _parUsed.Add(pdatapartenza);
+
+                if (!queryfilter.ToLower().Contains("where"))
+                    queryfilter += " WHERE JSON_VALID(jsonfield1) and json_extract(jsonfield1, '$.datapartenza') < @Data_fine ";
+                else
+                    queryfilter += " AND  JSON_VALID(jsonfield1) and json_extract(jsonfield1, '$.datapartenza') < @Data_fine ";
+
+                //  where((json_extract(jsonfield1, '$.datapartenza')) > '2020-12-17')
+            }
+            if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_inizio"; }))
+            {
+                activatefiltering = true;
+                SQLiteParameter pdatapartenza = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_inizio"; });
+                //.Value.ToString("yyyy-MM-dd 00:00:00")  //formato corretto per filtro data
+                pdatapartenza.DbType = System.Data.DbType.DateTime;
+                _parUsed.Add(pdatapartenza);
+
+                if (!queryfilter.ToLower().Contains("where"))
+                    queryfilter += " WHERE JSON_VALID(jsonfield1) and json_extract(jsonfield1, '$.datapartenza') > @Data_inizio ";
+                else
+                    queryfilter += " AND JSON_VALID(jsonfield1) and  json_extract(jsonfield1, '$.datapartenza') > @Data_inizio ";
+
+                //  where((json_extract(jsonfield1, '$.datapartenza')) > '2020-12-17')
+            }
+
+            if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@PrezzoMin"; }))
+            {
+                activatefiltering = true;
+                SQLiteParameter pdatapartenza = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@PrezzoMin"; });
+                //.Value.ToString("yyyy-MM-dd 00:00:00")  //formato corretto per filtro data
+                pdatapartenza.DbType = System.Data.DbType.DateTime;
+                _parUsed.Add(pdatapartenza);
+
+                if (!queryfilter.ToLower().Contains("where"))
+                    queryfilter += " WHERE JSON_VALID(jsonfield1) and json_extract(jsonfield1, '$.prezzo') >= @PrezzoMin ";
+                else
+                    queryfilter += " AND JSON_VALID(jsonfield1) and  json_extract(jsonfield1, '$.prezzo') >= @PrezzoMin ";
+            }
+
+            if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@PrezzoMax"; }))
+            {
+                activatefiltering = true;
+                SQLiteParameter pdatapartenza = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@PrezzoMax"; });
+                //.Value.ToString("yyyy-MM-dd 00:00:00")  //formato corretto per filtro data
+                pdatapartenza.DbType = System.Data.DbType.DateTime;
+                _parUsed.Add(pdatapartenza);
+
+                if (!queryfilter.ToLower().Contains("where"))
+                    queryfilter += " WHERE JSON_VALID(jsonfield1) and json_extract(jsonfield1, '$.prezzo') <= @PrezzoMax ";
+                else
+                    queryfilter += " AND JSON_VALID(jsonfield1) and  json_extract(jsonfield1, '$.prezzo') <= @PrezzoMax ";
+            }
+
+            query += queryfilter;
+            if (activatefiltering)
+            {
+                dettagliordini = new CarrelloCollection();
+                //listacodici = new List<string>();
+                Carrello item = new Carrello();
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection, true);
+                using (reader)
+                {
+                    if (reader == null) { return dettagliordini; };
+                    if (reader.HasRows == false)
+                        return dettagliordini;
+                    while (reader.Read())
+                    {
+                        item = new Carrello();
+                        item.ID = reader.GetInt64(reader.GetOrdinal("ID"));
+                        item.IpClient = reader.GetString(reader.GetOrdinal("IpClient"));
+                        item.SessionId = reader.GetString(reader.GetOrdinal("SessionId"));
+                        if (!reader["Id_cliente"].Equals(DBNull.Value))
+                            item.ID_cliente = reader.GetInt64(reader.GetOrdinal("Id_cliente"));
+                        if (!reader["Codicenazione"].Equals(DBNull.Value))
+                            item.Codicenazione = reader.GetString(reader.GetOrdinal("Codicenazione"));
+                        if (!reader["Codiceprovincia"].Equals(DBNull.Value))
+                            item.Codiceprovincia = reader.GetString(reader.GetOrdinal("Codiceprovincia"));
+                        if (!reader["Codicesconto"].Equals(DBNull.Value))
+                            item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
+                        item.id_prodotto = reader.GetInt64(reader.GetOrdinal("id_prodotto"));
+                        if (!reader["CodiceProdotto"].Equals(DBNull.Value))
+                            item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
+                        if (!reader["jsonfield1"].Equals(DBNull.Value))
+                            item.jsonfield1 = reader.GetString(reader.GetOrdinal("jsonfield1"));
+                        item.Data = reader.GetDateTime(reader.GetOrdinal("Data"));
+                        if (!reader["Datastart"].Equals(DBNull.Value))
+                            item.Datastart = reader.GetDateTime(reader.GetOrdinal("Datastart"));
+                        if (!reader["Dataend"].Equals(DBNull.Value))
+                            item.Dataend = reader.GetDateTime(reader.GetOrdinal("Dataend"));
+                        if (!reader["Prezzo"].Equals(DBNull.Value))
+                            item.Prezzo = reader.GetDouble(reader.GetOrdinal("Prezzo"));
+                        item.Iva = reader.GetInt64(reader.GetOrdinal("Iva"));
+                        item.Numero = reader.GetInt64(reader.GetOrdinal("Numero"));
+                        item.Validita = reader.GetInt64(reader.GetOrdinal("Validita"));
+                        if (!reader["Campo1"].Equals(DBNull.Value))
+                            item.Campo1 = reader.GetString(reader.GetOrdinal("Campo1"));
+                        if (!reader["Campo2"].Equals(DBNull.Value))
+                            item.Campo2 = reader.GetString(reader.GetOrdinal("Campo2"));
+                        if (!reader["Campo3"].Equals(DBNull.Value))
+                            item.Campo3 = reader.GetString(reader.GetOrdinal("Campo3"));
+                        if (!reader["CodiceOrdine"].Equals(DBNull.Value))
+                            item.CodiceOrdine = reader.GetString(reader.GetOrdinal("CodiceOrdine"));
+
+                        //  Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>((String)eCommerceDM.Selezionadajson(item.jsonfield1, "scaglione", "I"));
+                        dettagliordini.Add(item);
+                        // listacodici.Add(item.CodiceOrdine);
+                    }
+                }
+            }
+
+
+            return dettagliordini;
+        }
+
 
 
         /// <summary>
-        /// Carica la lista completa degli elementi del carrello in base al SessionID o su Ipclient , restituisce tutta la lista relativa ad un certo ip e sessionid
-        /// Escludendo gli elementi relativi a ordini già effettuati(cioè quelli che hanno il codice ordine diverso da vuoto).
-        /// Opzionalmente si può scegliere di selezionare un solo codice prodotto
+        /// Carica la lista completa degli elementi del carrello in base al codice ordine passato 
         /// </summary>
         /// <param name="connection"></param>
-        /// <param name="SessionId"></param>
-        /// <param name="IpClient"></param>
-        /// <param name="CodiceProdotto">Opzionale se specificato torna solo l'elemento del carrello col codiceprodotto indicato</param>
+        /// <param name="Codiceordine"></param>
         /// <returns></returns>
         public TotaliCarrello CaricaOrdinePerCodiceOrdine(string connection, string Codiceordine)
         {
@@ -1296,6 +1860,9 @@ namespace WelcomeLibrary.DAL
 
                         if (!reader["Pagato"].Equals(DBNull.Value))
                             item.Pagato = reader.GetBoolean(reader.GetOrdinal("Pagato"));
+
+                        if (!reader["Pagatoacconto"].Equals(DBNull.Value))
+                            item.Pagatoacconto = reader.GetBoolean(reader.GetOrdinal("Pagatoacconto"));
 
                         if (!reader["TotaleOrdine"].Equals(DBNull.Value))
                             item.TotaleOrdine = reader.GetDouble(reader.GetOrdinal("TotaleOrdine"));
@@ -1368,6 +1935,10 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p9);
             SQLiteParameter ppagato = new SQLiteParameter("@Pagato", item.Pagato);
             parColl.Add(ppagato);
+
+            SQLiteParameter ppagatoacconto = new SQLiteParameter("@Pagatoacconto", item.Pagatoacconto);
+            parColl.Add(ppagatoacconto);
+
             SQLiteParameter ptotaleordine = new SQLiteParameter("@TotaleOrdine", item.TotaleOrdine);// 
             parColl.Add(ptotaleordine);
             SQLiteParameter ptotsconto = new SQLiteParameter("@TotaleSconto", item.TotaleSconto);// 
@@ -1392,7 +1963,7 @@ namespace WelcomeLibrary.DAL
             parColl.Add(pacconto);
 
 
-            string query = "INSERT INTO TBL_CARRELLO_ORDINI([Indirizzofatturazione],[Indirizzospedizione],[Dataordine],[Id_cliente],[Mailcliente],[Modalitapagamento],[Note],[Urlpagamento],[CodiceOrdine],[Denominazionecliente],[Pagato],[TotaleOrdine],[TotaleSconto],[TotaleSpedizione],TotaleSmaltimento,Supplementospedizione,Id_commerciale,Codicesconto,Percacconto) VALUES (@Indirizzofatturazione,@Indirizzospedizione,@Dataordine,@Id_cliente,@Mailcliente,@Modalitapagamento,@Note,@Urlpagamento,@CodiceOrdine,@Denominazionecliente,@Pagato,@TotaleOrdine,@TotaleSconto,@TotaleSpedizione,@TotaleSmaltimento,@Supplementospedizione,@Id_commerciale,@Codicesconto,@Percacconto)";
+            string query = "INSERT INTO TBL_CARRELLO_ORDINI([Indirizzofatturazione],[Indirizzospedizione],[Dataordine],[Id_cliente],[Mailcliente],[Modalitapagamento],[Note],[Urlpagamento],[CodiceOrdine],[Denominazionecliente],[Pagato],[Pagatoacconto],[TotaleOrdine],[TotaleSconto],[TotaleSpedizione],TotaleSmaltimento,Supplementospedizione,Id_commerciale,Codicesconto,Percacconto) VALUES (@Indirizzofatturazione,@Indirizzospedizione,@Dataordine,@Id_cliente,@Mailcliente,@Modalitapagamento,@Note,@Urlpagamento,@CodiceOrdine,@Denominazionecliente,@Pagato,@Pagatoacconto,@TotaleOrdine,@TotaleSconto,@TotaleSpedizione,@TotaleSmaltimento,@Supplementospedizione,@Id_commerciale,@Codicesconto,@Percacconto)";
             try
             {
                 long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -1443,6 +2014,8 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p9);
             SQLiteParameter ppagato = new SQLiteParameter("@Pagato", item.Pagato);
             parColl.Add(ppagato);
+            SQLiteParameter ppagatoacconto = new SQLiteParameter("@Pagatoacconto", item.Pagatoacconto);
+            parColl.Add(ppagatoacconto);
             SQLiteParameter ptotaleordine = new SQLiteParameter("@TotaleOrdine", item.TotaleOrdine);// 
             parColl.Add(ptotaleordine);
             SQLiteParameter ptotsconto = new SQLiteParameter("@TotaleSconto", item.TotaleSconto);// 
@@ -1466,7 +2039,7 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pid = new SQLiteParameter("@Id", item.Id);//OleDbType.VarChar
             parColl.Add(pid);
 
-            string query = "UPDATE [TBL_CARRELLO_ORDINI] SET [Indirizzofatturazione]=@Indirizzofatturazione,[Indirizzospedizione]=@Indirizzospedizione,[Dataordine]=@Dataordine,[Id_cliente]=@Id_cliente,[Mailcliente]=@Mailcliente,[Modalitapagamento]=@Modalitapagamento,[Note]=@Note,[Urlpagamento]=@Urlpagamento,[CodiceOrdine]=@CodiceOrdine,[Denominazionecliente]=@Denominazionecliente,[Pagato]=@Pagato,[TotaleOrdine]=@TotaleOrdine,[TotaleSconto]=@TotaleSconto,[TotaleSpedizione]=@TotaleSpedizione,TotaleSmaltimento=@TotaleSmaltimento,Supplementospedizione=@Supplementospedizione,Id_commerciale=@Id_commerciale,Codicesconto=@Codicesconto,Percacconto=@Percacconto WHERE ([ID]=@Id)";
+            string query = "UPDATE [TBL_CARRELLO_ORDINI] SET [Indirizzofatturazione]=@Indirizzofatturazione,[Indirizzospedizione]=@Indirizzospedizione,[Dataordine]=@Dataordine,[Id_cliente]=@Id_cliente,[Mailcliente]=@Mailcliente,[Modalitapagamento]=@Modalitapagamento,[Note]=@Note,[Urlpagamento]=@Urlpagamento,[CodiceOrdine]=@CodiceOrdine,[Denominazionecliente]=@Denominazionecliente,[Pagato]=@Pagato,[Pagatoacconto]=@Pagatoacconto,[TotaleOrdine]=@TotaleOrdine,[TotaleSconto]=@TotaleSconto,[TotaleSpedizione]=@TotaleSpedizione,TotaleSmaltimento=@TotaleSmaltimento,Supplementospedizione=@Supplementospedizione,Id_commerciale=@Id_commerciale,Codicesconto=@Codicesconto,Percacconto=@Percacconto WHERE ([ID]=@Id)";
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -1506,7 +2079,26 @@ namespace WelcomeLibrary.DAL
             return;
         }
 
+        public void DeleteOrdinePerCodice(string connessione, string CodiceOrdine)
+        {
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            if (connessione == null || connessione == "") return;
+            if (string.IsNullOrEmpty(CodiceOrdine)) return;
 
+            SQLiteParameter p1 = new SQLiteParameter("@CodiceOrdine", CodiceOrdine);//OleDbType.VarChar
+            parColl.Add(p1);
+
+            string query = "delete FROM TBL_CARRELLO_ORDINI WHERE ([CodiceOrdine]=@CodiceOrdine)";
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, cancellazione Elemento ordini :" + error.Message, error);
+            }
+            return;
+        }
 
         public string ExportOrdersToCsv(string DestinationPath, string CsvFilename, TotaliCarrelloCollection list)
         {
@@ -1538,6 +2130,10 @@ namespace WelcomeLibrary.DAL
                     sb.Append(";");
                     sb.Append(WelcomeLibrary.UF.Csv.Escape("Pagato"));
                     sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Pagatoacconto"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Percacconto"));
+                    sb.Append(";");
                     sb.Append(WelcomeLibrary.UF.Csv.Escape("Dettagli"));
                     sb.Append(";");
                     WelcomeLibrary.UF.SharedStatic.WriteToFile(CsvFilename, DestinationPath, sb.ToString(), false);
@@ -1565,6 +2161,11 @@ namespace WelcomeLibrary.DAL
                         sb.Append(t.Id_commerciale);
                         sb.Append(";");
                         sb.Append((t == null) ? false : t.Pagato);
+                        sb.Append(";");
+                        sb.Append((t == null) ? false : t.Pagatoacconto);
+                        sb.Append(";");
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                      new object[] { t.Percacconto })));
                         sb.Append(";");
                         string dettaglioordine = CreaDettaglioCarrello(t.CodiceOrdine);
                         sb.Append(WelcomeLibrary.UF.Csv.Escape(dettaglioordine));
@@ -1615,6 +2216,7 @@ namespace WelcomeLibrary.DAL
             string retString = "";
             try
             {
+                ClientiDM cliDM = new ClientiDM();
 
                 MemoryStream ms = new MemoryStream();
                 if (list == null || list.Count == 0)
@@ -1630,28 +2232,34 @@ namespace WelcomeLibrary.DAL
                 ws.Cell(1, colTarget).Value = "Codice Ordine"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Id Cliente"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Email"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Telefono"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Nome"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Imp.Totale"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Iva Totale"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Sconto"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Spedizione"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Totale ordine"; colTarget++;
+                ws.Cell(1, colTarget).Value = "% acconto"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Acconto"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Saldo"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Pagamento"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Pagatoacconto"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Pagato"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Idcommerciale"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Codice sconto"; colTarget++;
                 //dati specifici di prodotto ( collegati al catalogo sono dettagli,confezione che variano se si varia le descrizioni prodotto in catalogo )
                 ws.Cell(1, colTarget).Value = "Id Prodotto"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Codice Pr."; colTarget++;
-                ws.Cell(1, colTarget).Value = "Dettagli"; colTarget++;
-                ws.Cell(1, colTarget).Value = "Confezione"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Articolo"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Dettaglio"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Qtà"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Prezzo U."; colTarget++;
                 ws.Cell(1, colTarget).Value = "Imp. Rigo"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Iva Rigo"; colTarget++;
                 ws.Cell(1, colTarget).Value = "Iva %"; colTarget++;
-                ws.Cell(1, colTarget).Value = "Car 1"; colTarget++;
-                ws.Cell(1, colTarget).Value = "Car 2"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Scaglione"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Partenza"; colTarget++;
+                ws.Cell(1, colTarget).Value = "Ritorno"; colTarget++;
 
 
                 /////////////////////////////
@@ -1672,7 +2280,9 @@ namespace WelcomeLibrary.DAL
                     //Totali carrello memorizzati nella tabella ordini
                     string dataordine = string.Format("{0:dd/MM/yyyy HH:mm:ss}", t.Dataordine);
                     string codiceordine = string.Format(t.CodiceOrdine);
-                    string idcliente = string.Format(t.Id_cliente.ToString());
+                    string idcliente = string.Format(t.Id_cliente.ToString()); //Caricando i dati del cliente per id puoi inserire anche quelli
+                    Cliente cli = cliDM.CaricaClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idcliente);//Dati completi del cliente
+                    string telefonocliente = cli != null ? cli.Telefono : "";
                     string mailcliente = string.Format(t.Mailcliente);
                     string nomecliente = string.Format(t.Denominazionecliente.Replace("<br/>", " "));
                     //string imponibileordine = string.Format("");  //imponibile totale ordine ( da calcolare in base ai righi di ordine e iva )
@@ -1682,9 +2292,16 @@ namespace WelcomeLibrary.DAL
                     string costospedizione = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
              new object[] { t.TotaleSpedizione }));
                     string totaleordine = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
-          new object[] { t.TotaleSmaltimento + t.TotaleOrdine + t.TotaleSpedizione - t.TotaleSconto }));
+          new object[] { t.TotaleAcconto + t.TotaleSaldo }));
+                    string totaleacconto = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+       new object[] { t.TotaleAcconto }));
+                    string totalesaldo = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+    new object[] { t.TotaleSaldo }));
                     string modalitapagamento = string.Format(t.Modalitapagamento);
                     string pagato = string.Format(((t == null) ? false : t.Pagato).ToString());
+                    string pagatoacconto = string.Format(((t == null) ? false : t.Pagatoacconto).ToString());
+                    string percacconto = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                   new object[] { t.Percacconto }));
                     string idcommerciale = string.Format(t.Id_commerciale.ToString());
                     string codicesconto = string.Format(t.Codicesconto);
 
@@ -1694,6 +2311,7 @@ namespace WelcomeLibrary.DAL
                     CarrelloCollection carrellolist = ecmDM.CaricaCarrelloPerCodiceOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, t.CodiceOrdine);
                     double _imponibileordine = 0;
                     double _ivaordine = 0;
+
                     List<int> listarighi = new List<int>();
                     if (carrellolist != null)
                         foreach (Carrello itemcarrello in carrellolist)
@@ -1710,8 +2328,8 @@ namespace WelcomeLibrary.DAL
                             if (itemcarrello.Iva != 0)
                                 percentualeiva = itemcarrello.Iva; //aliquota iva da usare se memorizzata nel carrello al momento della registrazione del rigo di ordine ( DA FARE per evitare modifiche al variare della tabella caratterstiche / aliquote iva )
 
-                            ws.Cell(j, 15).Value = itemcarrello.id_prodotto;
-                            ws.Cell(j, 16).Value = itemcarrello.CodiceProdotto;
+                            ws.Cell(j, 20).Value = itemcarrello.id_prodotto;
+                            ws.Cell(j, 21).Value = itemcarrello.CodiceProdotto;
                             /////////////////////////////////////////////////////////
                             string nomearticolo = itemcarrello.Offerta.DenominazioneI.Replace(",", "").Replace("\"", "").Replace("'", "").Replace(";", "");
                             int i = nomearticolo.IndexOf('\n');
@@ -1723,28 +2341,38 @@ namespace WelcomeLibrary.DAL
                                 if (nomearticolo.Length >= i + 1)
                                     sottotitolo = nomearticolo.Substring(i + 1);
                             /////////////////////////////////////////////////////////
-                            ws.Cell(j, 17).Value = titolo; //dettagli
-                            ws.Cell(j, 18).Value = sottotitolo; //confezione
-                            ws.Cell(j, 19).Value = string.Format(itemcarrello.Numero.ToString());  //"Qtà"; 
-                            ws.Cell(j, 20).Value = string.Format(itemcarrello.Prezzo.ToString());  //"Prezzo Unitario ivato; 
+                            ws.Cell(j, 22).Value = titolo; //dettagli
+                            ws.Cell(j, 23).Value = sottotitolo; //confezione
+                            ws.Cell(j, 24).Value = string.Format(itemcarrello.Numero.ToString());  //"Qtà"; 
+                            ws.Cell(j, 25).Value = string.Format(itemcarrello.Prezzo.ToString());  //"Prezzo Unitario ivato; 
                             double valoreivarigo = itemcarrello.Numero * itemcarrello.Prezzo * (percentualeiva / 100);
                             double imponibilerigo = (itemcarrello.Numero * itemcarrello.Prezzo) - valoreivarigo;
                             _imponibileordine += imponibilerigo;
                             _ivaordine += valoreivarigo;
-                            ws.Cell(j, 21).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                            ws.Cell(j, 26).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
                               new object[] { imponibilerigo }));  //Imponibile rigo; 
-                            ws.Cell(j, 22).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                            ws.Cell(j, 27).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
            new object[] { valoreivarigo }));  //Iva riga ordine; 
-                            ws.Cell(j, 23).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                            ws.Cell(j, 28).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
     new object[] { percentualeiva }));  //% Iva; 
 
                             #region EVENTUALI INTEGRAZIONI PER EXPORT RELATIVO ALLE CARATTERISTICHE COMBINATE E NON ( da modificare per incolonnare su excel invece che nello strigbuider)
-                            string valore1 = eCommerceDM.Selezionadajson(itemcarrello.jsonfield1, "Caratteristica1", "I");
-                            valore1 = references.TestoCaratteristica(0, valore1, "I");
-                            string valore2 = eCommerceDM.Selezionadajson(itemcarrello.jsonfield1, "Caratteristica2", "I");
-                            valore2 = references.TestoCaratteristica(1, valore2, "I");
-                            ws.Cell(j, 24).Value = valore1;
-                            ws.Cell(j, 25).Value = valore2;
+
+                            //string valore1 = (String)eCommerceDM.Selezionadajson(itemcarrello.jsonfield1, "Caratteristica1", "I");
+                            //valore1 = references.TestoCaratteristica(0, valore1, "I");
+                            //string valore2 = (String)eCommerceDM.Selezionadajson(itemcarrello.jsonfield1, "Caratteristica2", "I");
+                            //valore2 = references.TestoCaratteristica(1, valore2, "I");
+                            //ws.Cell(j, 29).Value = valore1;
+                            //ws.Cell(j, 30).Value = valore2;
+
+                            string datapartenza = Utility.reformatdatetimestring((string)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(itemcarrello.jsonfield1, "datapartenza", "I"));
+                            string dataritorno = Utility.reformatdatetimestring((string)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(itemcarrello.jsonfield1, "dataritorno", "I"));
+
+                            string idscaglione = (String)WelcomeLibrary.DAL.eCommerceDM.Selezionadajson(itemcarrello.jsonfield1, "idscaglione", "I");
+                            ws.Cell(j, 29).Value = idscaglione;
+                            ws.Cell(j, 30).Value = datapartenza;
+                            ws.Cell(j, 31).Value = dataritorno;
+
 
                             //if (!string.IsNullOrEmpty(itemcarrello.Offerta.Xmlvalue))
                             //{
@@ -1803,18 +2431,23 @@ namespace WelcomeLibrary.DAL
                             //Per avere i totali su ogni riga di ordine spostare qui la region sotto
                             #region Valori totali relativi all'ordine dalla tabella carrello ordini
                             //dati ripetuti per ogni rigo di ordine
-                            //ws.Cell(j, 1).Value = dataordine;
-                            //ws.Cell(j, 2).Value = codiceordine;
-                            //ws.Cell(j, 3).Value = idcliente;
-                            //ws.Cell(j, 4).Value = mailcliente;
-                            //ws.Cell(j, 5).Value = nomecliente;
-                            //ws.Cell(j, 8).Value = scontoordine;
-                            //ws.Cell(j, 9).Value = costospedizione;
-                            //ws.Cell(j, 10).Value = totaleordine;
-                            //ws.Cell(j, 11).Value = modalitapagamento;
-                            //ws.Cell(j, 12).Value = pagato;
-                            //ws.Cell(j, 13).Value = idcommerciale;
-                            //ws.Cell(j, 14).Value = codicesconto;
+                            //ws.Cell(i, 1).Value = dataordine;
+                            //ws.Cell(i, 2).Value = codiceordine;
+                            //ws.Cell(i, 3).Value = idcliente;
+                            //ws.Cell(i, 4).Value = mailcliente;
+                            //ws.Cell(i, 5).Value = telefonocliente;
+                            //ws.Cell(i, 6).Value = nomecliente;
+                            //ws.Cell(i, 9).Value = scontoordine;
+                            //ws.Cell(i, 10).Value = costospedizione;
+                            //ws.Cell(i, 11).Value = totaleordine;
+                            //ws.Cell(i, 12).Value = percacconto;
+                            //ws.Cell(i, 13).Value = totaleacconto;
+                            //ws.Cell(i, 14).Value = totalesaldo;
+                            //ws.Cell(i, 15).Value = modalitapagamento;
+                            //ws.Cell(i, 16).Value = pagatoacconto;
+                            //ws.Cell(i, 17).Value = pagato;
+                            //ws.Cell(i, 18).Value = idcommerciale;
+                            //ws.Cell(i, 19).Value = codicesconto;
                             #endregion
 
                             j++;
@@ -1830,20 +2463,25 @@ namespace WelcomeLibrary.DAL
                         ws.Cell(i, 2).Value = codiceordine;
                         ws.Cell(i, 3).Value = idcliente;
                         ws.Cell(i, 4).Value = mailcliente;
-                        ws.Cell(i, 5).Value = nomecliente;
-                        ws.Cell(i, 8).Value = scontoordine;
-                        ws.Cell(i, 9).Value = costospedizione;
-                        ws.Cell(i, 10).Value = totaleordine;
-                        ws.Cell(i, 11).Value = modalitapagamento;
-                        ws.Cell(i, 12).Value = pagato;
-                        ws.Cell(i, 13).Value = idcommerciale;
-                        ws.Cell(i, 14).Value = codicesconto;
+                        ws.Cell(i, 5).Value = telefonocliente;
+                        ws.Cell(i, 6).Value = nomecliente;
+                        ws.Cell(i, 9).Value = scontoordine;
+                        ws.Cell(i, 10).Value = costospedizione;
+                        ws.Cell(i, 11).Value = totaleordine;
+                        ws.Cell(i, 12).Value = percacconto;
+                        ws.Cell(i, 13).Value = totaleacconto;
+                        ws.Cell(i, 14).Value = totalesaldo;
+                        ws.Cell(i, 15).Value = modalitapagamento;
+                        ws.Cell(i, 16).Value = pagatoacconto;
+                        ws.Cell(i, 17).Value = pagato;
+                        ws.Cell(i, 18).Value = idcommerciale;
+                        ws.Cell(i, 19).Value = codicesconto;
                         #endregion
 
                         //Imponibile ed iva totale dell'ordine
-                        ws.Cell(i, 6).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
-                             new object[] { _imponibileordine }));  //imponibile totale ordine ( calcolato in base ai righi di ordine e iva )
                         ws.Cell(i, 7).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                             new object[] { _imponibileordine }));  //imponibile totale ordine ( calcolato in base ai righi di ordine e iva )
+                        ws.Cell(i, 8).Value = string.Format(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
                           new object[] { _ivaordine }));   //iva totale odine ( calcolato in base ai righi di ordine e iva )
                         break; //Abilitare per avre i totali solo sulla 1 riga di ordine
                     }
@@ -1864,7 +2502,7 @@ namespace WelcomeLibrary.DAL
 
         }
 
-        public static string Selezionadajson(object item, string key, string Lingua)
+        public static object Selezionadajson(object item, string key, string Lingua)
         {
             string ret = "";
             if (item != null && item.ToString() != "")
@@ -1872,7 +2510,7 @@ namespace WelcomeLibrary.DAL
                 try
                 {
                     // ret = "<b>" + references.ResMan("basetext", Lingua, "formtesto" + key) + ": " + "</b>";
-                    Dictionary<string, string> dic = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(item.ToString());
+                    Dictionary<string, object> dic = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(item.ToString());
                     if (dic != null && dic.ContainsKey(key))
                         ret += dic[key];
                     else

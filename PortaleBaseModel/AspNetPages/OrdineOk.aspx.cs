@@ -176,15 +176,10 @@ public partial class AspNetPages_OrdineOk : CommonPage
         {
             cliente = (Cliente)Session["cliente_" + CodiceOrdine];
             Session.Remove("cliente_" + CodiceOrdine);
-            //double _d = 0;
-            //double.TryParse(cliente.Spare3, out _d);
-            //double costospediz = _d;
             totali = (TotaliCarrello)Session["totali_" + CodiceOrdine];
             Session.Remove("totali_" + CodiceOrdine);
             prodotti = (CarrelloCollection)Session["prodotti_" + CodiceOrdine];
             Session.Remove("prodotti_" + CodiceOrdine);
-
-            spanbtnriprova.Visible = false;
 
             string jscodetoinject = Creaeventopurchaseagooglegtag(totali, prodotti);
             output.Text = jscodetoinject;
@@ -200,7 +195,11 @@ public partial class AspNetPages_OrdineOk : CommonPage
         //bool authandcapturemode = Convert.ToBoolean(ConfigurationManager.AppSettings["authandcapturePaypal"]);
         //if (!authandcapturemode)
         //    totali.Pagato = true; //Nel caso di transazione paypal con carta in modalità diretta!! la setto pagata!!!
-        totali.Pagato = true;
+        if (totali.Percacconto == 100)
+        { totali.Pagatoacconto = true; totali.Pagato = true; }
+        else
+            totali.Pagatoacconto = true;
+
 
         ecom.InsertOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, totali);
         //AGGIORNO  I PRODOTTI NEL CARRELLO INSERENDO IL CODICE DI ORDINE
@@ -231,7 +230,6 @@ public partial class AspNetPages_OrdineOk : CommonPage
             catch { }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 #if true // da abilitare per decrementare le quantià vendute
             //Decrementiamo anche le quantità per i prodotti che sono a disponibilità limitata
             // togliendo dal catalogo la quantità venduta dell'articolo presente a carrello
@@ -260,8 +258,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
                             else elem.qta = qtaCalc.ToString();
                         }
                     }
-
-                    //adesso serializzo, sostituisco e risalvo
+                    //Adesso serializzo, sostituisco e risalvo
                     string ret = Newtonsoft.Json.JsonConvert.SerializeObject(listCarr);
                     off.Xmlvalue = ret;
 
@@ -269,11 +266,20 @@ public partial class AspNetPages_OrdineOk : CommonPage
                     offDM.UpdateOffertaCollegata(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, off);
                 }
             }
-
 #endif
         }
-        InsertEventoBooking(prodotti, totali, "rif000001");
 
+        ////////////////////////////////////////
+        //Aggiorniamo lo stato degli scaglioni caricati per i prodotti se presenti
+        ////////////////////////////////////////
+        string listcod = "";
+        prodotti.ForEach(item => listcod += item.id_prodotto + ",");
+        Dictionary<string, string> parametri = new Dictionary<string, string>();
+        parametri["idprodotto"] = listcod;
+        ecom.AggiornaStatoscaglioni(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parametri);
+        ////////////////////////////////////////
+
+        InsertEventoBooking(prodotti, totali, "rif000001");
 
         //Creiamo il file per export degli ordini...
         try
@@ -416,7 +422,11 @@ public partial class AspNetPages_OrdineOk : CommonPage
 
         //Siccome tutto a buon fine -> setto pagato ( in realtà nella modalità con accettazione
         // su payway del venditaore il pagato lo dovrebbe settare lui nella gestione ordini ) !!!
-        totali.Pagato = true;
+        if (totali.Percacconto == 100)
+        { totali.Pagatoacconto = true; totali.Pagato = true; }
+        else
+            totali.Pagatoacconto = true;
+
         //Qui devo scrivere nella tabella ordini
         //i dati qui memorizzati ( TBL_CARRELLO_ORDINI )
         //bool authandcapturemode = Convert.ToBoolean(ConfigManagement.ReadKey("authandcapturePaypal"));
@@ -430,6 +440,15 @@ public partial class AspNetPages_OrdineOk : CommonPage
             item.CodiceOrdine = CodiceOrdine;
             SalvaCodiceOrdine(item);
         }
+        ////////////////////////////////////////
+        //Aggiorniamo lo stato degli scaglioni caricati per i prodotti se presenti
+        ////////////////////////////////////////
+        string listcod = "";
+        prodotti.ForEach(item => listcod += item.id_prodotto + ",");
+        Dictionary<string, string> parametri = new Dictionary<string, string>();
+        parametri["idprodotto"] = listcod;
+        ecom.AggiornaStatoscaglioni(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parametri);
+        ////////////////////////////////////////
 
         try
         {
@@ -493,11 +512,11 @@ public partial class AspNetPages_OrdineOk : CommonPage
         TestoMail += totali.Mailcliente;
         TestoMail += "<br/><b>Indirizzo fatturazione</b> : <br/> ";
         TestoMail += totali.Indirizzofatturazione + "<br/>";
-        //if (string.IsNullOrEmpty(totali.Indirizzospedizione))
-        //{
-        TestoMail += "<br/><b>Indirizzo spedizione</b> : <br/> ";
-        TestoMail += totali.Indirizzospedizione;
-        //}
+        if (!string.IsNullOrEmpty(totali.Indirizzospedizione))
+        {
+            TestoMail += "<br/><b>Indirizzo spedizione</b> : <br/> ";
+            TestoMail += totali.Indirizzospedizione;
+        }
         TestoMail += "</td></tr>";
         if (!string.IsNullOrEmpty(totali.Note))
             TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
@@ -516,16 +535,16 @@ public partial class AspNetPages_OrdineOk : CommonPage
             //CARATTERISTICHE CARRELLO IN BASE ALLE PROPRIETA IN jsonfield1
             if (!string.IsNullOrEmpty(item.jsonfield1))
             {
-                string valore3 = eCommerceDM.Selezionadajson(item.jsonfield1, "adulti", Lingua);
-                string valore4 = eCommerceDM.Selezionadajson(item.jsonfield1, "bambini", Lingua);
+                string valore3 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "adulti", Lingua);
+                string valore4 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "bambini", Lingua);
                 if (!string.IsNullOrEmpty(valore3))
                     TestoMail += "<br/>" + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "adulti") + ": " + "</b>" + valore4 + "<br/>";
                 if (!string.IsNullOrEmpty(valore4))
                     TestoMail += " " + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "bambini") + ": " + "</b>" + valore4 + "<br/>";
             }
             //CARATTERISTICHE
-            string valore1 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica1", Lingua);
-            string valore2 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica2", Lingua);
+            string valore1 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica1", Lingua);
+            string valore2 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica2", Lingua);
             if (!string.IsNullOrEmpty(valore1) || !string.IsNullOrEmpty(valore2))
             {
                 valore1 = references.TestoCaratteristica(0, valore1, Lingua);
@@ -540,11 +559,11 @@ public partial class AspNetPages_OrdineOk : CommonPage
             //INSERIMENTO DATI PER SCAGLIONI
             //////////////////////////////////
             //string prezzoscaglione = eCommerceDM.Selezionadajson(item.jsonfield1, "prezzo", Lingua);
-            string datapartenza = eCommerceDM.Selezionadajson(item.jsonfield1, "datapartenza", Lingua);
-            string dataritorno = eCommerceDM.Selezionadajson(item.jsonfield1, "dataritorno", Lingua);
-            string idscaglione = eCommerceDM.Selezionadajson(item.jsonfield1, "idscaglione", Lingua);
-            //caglione completo nel carrello
-            //Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>(eCommerceDM.Selezionadajson(item.jsonfield1, "scaglione", Lingua));
+            string datapartenza = WelcomeLibrary.UF.Utility.reformatdatetimestring((string)eCommerceDM.Selezionadajson(item.jsonfield1, "datapartenza", Lingua));
+            string dataritorno = WelcomeLibrary.UF.Utility.reformatdatetimestring((string)eCommerceDM.Selezionadajson(item.jsonfield1, "dataritorno", Lingua));
+            string idscaglione = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "idscaglione", Lingua);
+            //scaglione completo nel carrello
+            //Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>((String)eCommerceDM.Selezionadajson(item.jsonfield1, "scaglione", Lingua));
             if (!string.IsNullOrEmpty(idscaglione) || !string.IsNullOrEmpty(datapartenza))
             {
                 if (!string.IsNullOrEmpty(datapartenza))
@@ -586,19 +605,23 @@ public partial class AspNetPages_OrdineOk : CommonPage
         }
 
 
+        TestoMail += "<tr><td>Totale Articoli " + totali.TotaleOrdine + " € </td></tr>";
         if (totali.TotaleSconto != 0)
-            TestoMail += "<tr><td>SCONTO APPLICATO " + totali.TotaleSconto + " € </td></tr>";
+            TestoMail += "<tr><td><br/>Sconto applicato " + totali.TotaleSconto + " € </td></tr>";
         TestoMail += "<tr><td>";
         if (totali.TotaleSpedizione != 0)
-            TestoMail += "SPESE DI SPEDIZIONE " + totali.TotaleSpedizione + "  €<br/>";
+            TestoMail += "<br/>Spese di spedizione " + totali.TotaleSpedizione + " €<br/>";
         if (totali.TotaleSmaltimento != 0)
-            TestoMail += "<br/>SPESE DI SMALTIMENTO(PFU) " + totali.TotaleSmaltimento + "  €<br/>";
-        TestoMail += "<br/><b>TOTALE ORDINE COMPLESSIVO: </b>" + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
+            TestoMail += "<br/>Spese smaltimento(PFU) " + totali.TotaleSmaltimento + " €<br/>";
+        TestoMail += "<b>Totale ordine complessivo:</b> " + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
 
         if (totali.Percacconto != 100)
-            TestoMail += "<tr><td><b>PAGATO ACCONTO </b> " + totali.Percacconto + "% :</b> " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) * totali.Percacconto / 100 + " €</td></tr>";
+        {
+            TestoMail += "<tr><td><b>PAGATO ACCONTO </b> " + totali.Percacconto + "% :</b> " + (totali.TotaleAcconto) + " €</td></tr>";
+            TestoMail += "<tr><td><b>DA SALDARE ENTRO 30 GG DATA PARTENZA" + ":</b> " + totali.TotaleSaldo + " €</td></tr>";
+        }
         else
-            TestoMail += "<tr><td><b>PAGATO SALDO  :</b> " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
+            TestoMail += "<tr><td><b>PAGATO SALDO  :</b> " + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
 
         TestoMail += "<tr><td><br/>Metodo di pagamento:  " + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento).ToString() + " </td></tr>";
         //chiudo tabella e riga relativa
@@ -622,12 +645,11 @@ public partial class AspNetPages_OrdineOk : CommonPage
 
         TestoMail += "<br/><b>Fatturazione</b> :<br/> ";
         TestoMail += totali.Indirizzofatturazione + "<br/>";
-
-        //if (string.IsNullOrEmpty(totali.Indirizzospedizione))
-        //{
-        TestoMail += "<br/><b>Spedizione</b> :<br/>";
-        TestoMail += totali.Indirizzospedizione;
-        //}
+        if (!string.IsNullOrEmpty(totali.Indirizzospedizione))
+        {
+            TestoMail += "<br/><b>Spedizione</b> :<br/>";
+            TestoMail += totali.Indirizzospedizione;
+        }
         TestoMail += "</td></tr>";
         if (!string.IsNullOrEmpty(totali.Note))
             TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
@@ -659,8 +681,8 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiododa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Datastart.Value) + "</b> ";
                 TestoMail += "<b>" + references.ResMan("Common", Lingua, "formtestoperiodoa") + " " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", item.Dataend.Value) + "</b><br/>";
             }
-            string valore1 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica1", Lingua);
-            string valore2 = eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica2", Lingua);
+            string valore1 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica1", Lingua);
+            string valore2 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "Caratteristica2", Lingua);
             if (!string.IsNullOrEmpty(valore1) || !string.IsNullOrEmpty(valore2))
             {
                 valore1 = references.TestoCaratteristica(0, valore1, Lingua);
@@ -673,8 +695,8 @@ public partial class AspNetPages_OrdineOk : CommonPage
 
             if (!string.IsNullOrEmpty(item.jsonfield1))
             {
-                string valore3 = eCommerceDM.Selezionadajson(item.jsonfield1, "adulti", Lingua);
-                string valore4 = eCommerceDM.Selezionadajson(item.jsonfield1, "bambini", Lingua);
+                string valore3 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "adulti", Lingua);
+                string valore4 = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "bambini", Lingua);
                 if (!string.IsNullOrEmpty(valore3))
                     TestoMail += "<br/>" + "<b>" + references.ResMan("basetext", Lingua, "formtesto" + "adulti") + ": " + "</b>" + valore4 + "<br/>";
                 if (!string.IsNullOrEmpty(valore4))
@@ -684,11 +706,11 @@ public partial class AspNetPages_OrdineOk : CommonPage
             //INSERIMENTO DATI PER SCAGLIONI
             //////////////////////////////////
             //string prezzoscaglione = eCommerceDM.Selezionadajson(item.jsonfield1, "prezzo", Lingua);
-            string datapartenza = eCommerceDM.Selezionadajson(item.jsonfield1, "datapartenza", Lingua);
-            string dataritorno = eCommerceDM.Selezionadajson(item.jsonfield1, "dataritorno", Lingua);
-            string idscaglione = eCommerceDM.Selezionadajson(item.jsonfield1, "idscaglione", Lingua);
-            //caglione completo nel carrello
-            //Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>(eCommerceDM.Selezionadajson(item.jsonfield1, "scaglione", Lingua));
+            string datapartenza = WelcomeLibrary.UF.Utility.reformatdatetimestring((string)eCommerceDM.Selezionadajson(item.jsonfield1, "datapartenza", Lingua));
+            string dataritorno = WelcomeLibrary.UF.Utility.reformatdatetimestring((string)eCommerceDM.Selezionadajson(item.jsonfield1, "dataritorno", Lingua));
+            string idscaglione = (String)eCommerceDM.Selezionadajson(item.jsonfield1, "idscaglione", Lingua);
+            //scaglione completo nel carrello
+            //Scaglioni scaglionedacarrello =  Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>((String)eCommerceDM.Selezionadajson(item.jsonfield1, "scaglione", Lingua));
             if (!string.IsNullOrEmpty(idscaglione) || !string.IsNullOrEmpty(datapartenza))
             {
                 if (!string.IsNullOrEmpty(datapartenza))
@@ -729,6 +751,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
             i++;
         }
 
+        TestoMail += "<tr><td>Totale Articoli " + totali.TotaleOrdine + " € </td></tr>";
         if (totali.TotaleSconto != 0)
             TestoMail += "<tr><td><br/>Sconto applicato " + totali.TotaleSconto + " € </td></tr>";
         TestoMail += "<tr><td>";
@@ -736,12 +759,15 @@ public partial class AspNetPages_OrdineOk : CommonPage
             TestoMail += "<br/>Spese di spedizione " + totali.TotaleSpedizione + " €<br/>";
         if (totali.TotaleSmaltimento != 0)
             TestoMail += "<br/>Spese smaltimento(PFU) " + totali.TotaleSmaltimento + " €<br/>";
-        TestoMail += "<b>Totale ordine complessivo:</b> " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
+        TestoMail += "<b>Totale ordine complessivo:</b> " + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
 
         if (totali.Percacconto != 100)
-            TestoMail += "<tr><td><b>PAGATO ACCONTO </b> " + totali.Percacconto + "% :</b> " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) * totali.Percacconto / 100 + " €</td></tr>";
+        {
+            TestoMail += "<tr><td><b>PAGATO ACCONTO </b> " + totali.Percacconto + "% :</b> " + (totali.TotaleAcconto) + " €</td></tr>";
+            TestoMail += "<tr><td><b>DA SALDARE ENTRO 30 GG DATA PARTENZA " + ":</b> " + totali.TotaleSaldo + " €</td></tr>";
+        }
         else
-            TestoMail += "<tr><td><b>PAGATO SALDO  :</b> " + (totali.TotaleSmaltimento + totali.TotaleOrdine + totali.TotaleSpedizione - totali.TotaleSconto) + " €</td></tr>";
+            TestoMail += "<tr><td><b>PAGATO SALDO  :</b> " + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
 
         TestoMail += "<tr><td><br/>Metodo di pagamento: " + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento).ToString() + " </td></tr>";
         //chiudo tabella e riga relativa
@@ -757,8 +783,6 @@ public partial class AspNetPages_OrdineOk : CommonPage
 
         return TestoMail;
     }
-
-
 
 
 

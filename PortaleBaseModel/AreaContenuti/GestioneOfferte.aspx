@@ -703,6 +703,16 @@
                     <div class="row">
                         <div class="col-sm-2 item-text">
                             <strong>
+                                <asp:Label ID="Label61" runat="server" Text="Nazione" /></strong>
+                        </div>
+                        <div class="col-sm-10">
+                            <asp:DropDownList CssClass="form-control" AppendDataBoundItems="true" AutoPostBack="true" ID="ddlNazione"
+                                OnSelectedIndexChanged="ddlNazione_SelectedIndexChanged" runat="server" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 item-text">
+                            <strong>
                                 <asp:Label ID="Label9" runat="server" Text="Regione" /></strong>
                         </div>
                         <div class="col-sm-10">
@@ -1065,8 +1075,7 @@
                 </div>
 
             </div>
-
-        </div>
+    </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
@@ -1223,7 +1232,7 @@
                                                             <asp:TextBox CssClass="mceNoEditor" ID="NomeNuovoSottRu" runat="server"></asp:TextBox>
                                                         </td>
                                                     </tr>
-                                                     <tr>
+                                                    <tr>
                                                         <td>
                                                             <asp:Label runat="server" ID="Label60" Text="Nome 2 Livello FR"></asp:Label>
                                                         </td>
@@ -1400,7 +1409,7 @@
                         Descrizione Russo:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar5RU" Text="" Width="300" /><br />
-                                Descrizione Francese:
+                        Descrizione Francese:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar5FR" Text="" Width="300" /><br />
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender10" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar5I">
@@ -1409,7 +1418,7 @@
                         </Ajax:TextBoxWatermarkExtender>
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender17" WatermarkText="Inserire valore (Russo)" TargetControlID="txtCar5RU">
                         </Ajax:TextBoxWatermarkExtender>
-                          <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender22" WatermarkText="Inserire valore (Russo)" TargetControlID="txtCar5FR">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender22" WatermarkText="Inserire valore (Russo)" TargetControlID="txtCar5FR">
                         </Ajax:TextBoxWatermarkExtender>
                         <asp:Button Text="Aggiorna/Inserisci" ID="Button3" runat="server" OnClick="btnAggiornaCaratteristica5_Click" />
                         <br />
@@ -1429,7 +1438,7 @@
                         Descrizione russo:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar6RU" Text="" Width="300" /><br />
-                           Descrizione Francese:
+                        Descrizione Francese:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar6FR" Text="" Width="300" /><br />
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender12" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar6I">
@@ -1438,7 +1447,7 @@
                         </Ajax:TextBoxWatermarkExtender>
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender18" WatermarkText="Inserire valore (Russo)" TargetControlID="txtCar6RU">
                         </Ajax:TextBoxWatermarkExtender>
-                             <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender23" WatermarkText="Inserire valore (Russo)" TargetControlID="txtCar6FR">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender23" WatermarkText="Inserire valore (Russo)" TargetControlID="txtCar6FR">
                         </Ajax:TextBoxWatermarkExtender>
                         <asp:Button Text="Aggiorna/Inserisci" ID="Button4" runat="server" OnClick="btnAggiornaCaratteristica6_Click" />
                         <br />
