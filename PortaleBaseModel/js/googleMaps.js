@@ -615,7 +615,6 @@ function codeLatLng(lat, lng, map) {
 function positionfromLatLng(coordstext, idcontrollo) {
 
     (function wait() {
-
         if (typeof google === "object") {
             var txtcontrol = 'txt' + idcontrollo;
             var latlngStr = coordstext.split(',', 2);
@@ -623,7 +622,6 @@ function positionfromLatLng(coordstext, idcontrollo) {
             var lng = parseFloat(latlngStr[1]);
             var latlng = new google.maps.LatLng(lat, lng);
             geocoder = new google.maps.Geocoder();
-
             if (latlng != null) {
                 geocoder.geocode({ 'latLng': latlng }, function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
@@ -639,9 +637,7 @@ function positionfromLatLng(coordstext, idcontrollo) {
                                 if (results[0].address_components[i].types[0] == "country")
                                     customformattedaddress += ", " + results[0].address_components[i].short_name;
                             }
-
                             document.getElementById(txtcontrol).value = customformattedaddress;// results[0].formatted_address;
-
                         } else {
                             // alert('Posizione non trovata');
                         }
@@ -650,7 +646,6 @@ function positionfromLatLng(coordstext, idcontrollo) {
                     }
                 });
             }
-
         } else {
             setTimeout(function () { positionfromLatLng(coordstext, idcontrollo); }, 50);
         }

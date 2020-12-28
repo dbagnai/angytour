@@ -2,8 +2,39 @@
 using System.Collections.Generic;
 using System.Text;
 
+ 
 namespace WelcomeLibrary.UF
 {
+
+    [Serializable]
+    public class PagerModel
+    {
+        public long CurrentPage { get; set; }
+        public long TotalPages { get; set; }
+        public long PageSize { get; set; }
+        public long TotalRecords { get; set; }
+        public List<long> Pages = new List<long>();
+        public PagerModel()
+        {
+            CurrentPage = 1;
+            PageSize = 20;
+            TotalRecords = 0;
+        }
+        public PagerModel(long cpage, long pagesize, long totalrecords)
+        {
+            CurrentPage = cpage;
+            PageSize = pagesize;
+            TotalRecords = totalrecords;
+        }
+        public void GeneratePages()
+        {
+            Pages = new List<long>();
+            double d = ((double)TotalRecords / (double)PageSize);
+            TotalPages = (long)Math.Ceiling(d);
+            for (long i = 1; i <= TotalPages; i++) Pages.Add(i);
+        }
+    }
+
     /// <summary>
     /// Offre un sistema generico per paginare collection di elementi
     /// </summary>

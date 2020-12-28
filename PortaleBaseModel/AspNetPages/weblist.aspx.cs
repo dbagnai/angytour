@@ -76,6 +76,11 @@ public partial class AspNetPages_weblist : CommonPage
         get { return ViewState["Regione"] != null ? (string)(ViewState["Regione"]) : ""; }
         set { ViewState["Regione"] = value; }
     }
+    public string Nazione
+    {
+        get { return ViewState["Nazione"] != null ? (string)(ViewState["Nazione"]) : ""; }
+        set { ViewState["Nazione"] = value; }
+    }
 
     public string FasciaPrezzo
     {
@@ -162,6 +167,39 @@ public partial class AspNetPages_weblist : CommonPage
         get { return ViewState["Caratteristica5"] != null ? (string)(ViewState["Caratteristica5"]) : ""; }
         set { ViewState["Caratteristica5"] = value; }
     }
+
+    public string prezzofilter
+    {
+        get { return ViewState["prezzofilter"] != null ? (string)(ViewState["prezzofilter"]) : ""; }
+        set { ViewState["prezzofilter"] = value; }
+    }
+    public string datapartenzafilter
+    {
+        get { return ViewState["datapartenzafilter"] != null ? (string)(ViewState["datapartenzafilter"]) : ""; }
+        set { ViewState["datapartenzafilter"] = value; }
+    }
+    public string statuslistfilter
+    {
+        get { return ViewState["statuslistfilter"] != null ? (string)(ViewState["statuslistfilter"]) : ""; }
+        set { ViewState["statuslistfilter"] = value; }
+    }
+    public string statusconfirmfilter
+    {
+        get { return ViewState["statusconfirmfilter"] != null ? (string)(ViewState["statusconfirmfilter"]) : ""; }
+        set { ViewState["statusconfirmfilter"] = value; }
+    }
+    
+    public string etalistfilter
+    {
+        get { return ViewState["etalistfilter"] != null ? (string)(ViewState["etalistfilter"]) : ""; }
+        set { ViewState["etalistfilter"] = value; }
+    }
+    public string duratalistfilter
+    {
+        get { return ViewState["duratalistfilter"] != null ? (string)(ViewState["duratalistfilter"]) : ""; }
+        set { ViewState["duratalistfilter"] = value; }
+    }
+
     public string PercorsoComune
     {
         get { return ViewState["PercorsoComune"] != null ? (string)(ViewState["PercorsoComune"]) : ""; }
@@ -210,8 +248,16 @@ public partial class AspNetPages_weblist : CommonPage
                 //Prendiamo i dati dalla querystring (Lingua) o dal Context ( caso di url rewriting )
                 Lingua = CaricaValoreMaster(Request, Session, "Lingua", false, deflanguage);
                 Regione = CaricaValoreMaster(Request, Session, "Regione", false);
+                Regione = CaricaValoreMaster(Request, Session, "regione", false);
+                Nazione = CaricaValoreMaster(Request, Session, "nazione", false);
                 Provincia = CaricaValoreMaster(Request, Session, "Provincia", false, "");
                 Comune = CaricaValoreMaster(Request, Session, "Comune", false);
+                prezzofilter = CaricaValoreMaster(Request, Session, "prezzofilter", false);
+                datapartenzafilter = CaricaValoreMaster(Request, Session, "datapartenzafilter", false);
+                statuslistfilter = CaricaValoreMaster(Request, Session, "statuslistfilter", false);
+                statusconfirmfilter = CaricaValoreMaster(Request, Session, "statusconfirmfilter", false);
+                etalistfilter = CaricaValoreMaster(Request, Session, "etalistfilter", false);
+                duratalistfilter = CaricaValoreMaster(Request, Session, "duratalistfilter", false);
                 Mesefiltro = CaricaValoreMaster(Request, Session, "Mesefiltro", false);
                 Giornofiltro = CaricaValoreMaster(Request, Session, "Giornofiltro", false);
                 Annata = CaricaValoreMaster(Request, Session, "Annata", false);
@@ -265,10 +311,13 @@ public partial class AspNetPages_weblist : CommonPage
         InizializzaSeo();
         ModificaFiltroJS(); //Preparo il filtor con i parametri aggiuntivi di filtro
 
+
+
 #if FALSE
 
         //////////////////////////////////////////////////////////////////////////////////////
         //Preparo il filtro con i parametri aggiuntivi di filtro ( usabile nel caso di filtro per la preparazione dei parametri da passare agli snippet di inject )
+        // addpardsencoded è il valore da passare alle funzioni di inject in pagina come ultimo parametro per avere i risultati di filtro desiderati
         //////////////////////////////////////////////////////////////////////////////////////
         Dictionary<string, string> addpars = new Dictionary<string, string>();
         if (!string.IsNullOrEmpty(Tipologia)) addpars.Add("tipologia", Tipologia);
@@ -279,6 +328,14 @@ public partial class AspNetPages_weblist : CommonPage
         if (!string.IsNullOrEmpty(Caratteristica1)) addpars.Add("Caratteristica1", Caratteristica1);
         if (!string.IsNullOrEmpty(Caratteristica2)) addpars.Add("Caratteristica2", Caratteristica2);
         if (!string.IsNullOrEmpty(Caratteristica3)) addpars.Add("Caratteristica3", Caratteristica3);
+        if (!string.IsNullOrEmpty(datapartenzafilter)) addpars.Add("datapartenzafilter", datapartenzafilter);
+        if (!string.IsNullOrEmpty(duratalistfilter)) addpars.Add("duratalistfilter", duratalistfilter);
+        if (!string.IsNullOrEmpty(etalistfilter)) addpars.Add("etalistfilter", etalistfilter);
+        if (!string.IsNullOrEmpty(Nazione)) addpars.Add("nazione", Nazione);
+        if (!string.IsNullOrEmpty(Regione)) addpars.Add("regione", Regione);
+        if (!string.IsNullOrEmpty(prezzofilter)) addpars.Add("prezzofilter", prezzofilter);
+        if (!string.IsNullOrEmpty(statusconfirmfilter)) addpars.Add("statusconfirmfilter", statusconfirmfilter);
+        if (!string.IsNullOrEmpty(statuslistfilter)) addpars.Add("statuslistfilter", statuslistfilter);
         string addparsserialized = Newtonsoft.Json.JsonConvert.SerializeObject(addpars, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
         {
             NullValueHandling = NullValueHandling.Ignore,
@@ -304,7 +361,18 @@ public partial class AspNetPages_weblist : CommonPage
                 column3.Visible = false;
                 divSearch.Visible = false;
 
-                if (!string.IsNullOrEmpty(Categoria2liv) || (string.IsNullOrEmpty(Categoria2liv) && !string.IsNullOrEmpty(Categoria)) || (!string.IsNullOrEmpty(testoricerca)) || (!string.IsNullOrEmpty(Caratteristica1)) || (!string.IsNullOrEmpty(Caratteristica2)) || (!string.IsNullOrEmpty(Caratteristica3)))
+                if (!string.IsNullOrEmpty(Categoria2liv) || (string.IsNullOrEmpty(Categoria2liv) && !string.IsNullOrEmpty(Categoria)) || (!string.IsNullOrEmpty(testoricerca)) 
+                    || (!string.IsNullOrEmpty(Caratteristica1)) 
+                    || (!string.IsNullOrEmpty(Caratteristica2)) 
+                    || (!string.IsNullOrEmpty(Caratteristica3) ) 
+                    || (!string.IsNullOrEmpty(Nazione)) 
+                    || (!string.IsNullOrEmpty(Regione)) 
+                    || (!string.IsNullOrEmpty(prezzofilter))
+                    || (!string.IsNullOrEmpty(datapartenzafilter))
+                    || (!string.IsNullOrEmpty(statuslistfilter))
+                    || (!string.IsNullOrEmpty(statusconfirmfilter))
+                    || (!string.IsNullOrEmpty(etalistfilter))
+                    || (!string.IsNullOrEmpty(duratalistfilter)))
                 {
                     if (!string.IsNullOrEmpty(testoricerca)) litTextHeadPage.Text = "";
 
@@ -671,7 +739,12 @@ public partial class AspNetPages_weblist : CommonPage
     }
 
     /// <summary>
-    /// preparazione variabile  objvalue per i filtri aggiuntivi, potrebbe essere rimosso l0uso della sessione passando i parametri nella chiamata dell'inject del controllo, ma non valorizza le ddl di filtraggio
+    /// Preparo il dictionary dei parametri  objvalue per i filtri aggiuntivi, 
+    /// Attuale funzionamento: 
+    /// i parametri sono presi solo da quelli passati in route (URL REWRITE) NON vengono riletti dalla sessione e da questi viene corstruito il dict objvalue che è inserito in sessione per la lettura in funzione server custombind
+    /// L'utilizzo della sessione server attualmente a reimpostare nel frontend javascript i valori di filtraggio altrimenti verrebbero azzerati ad ogni chiamata di pagina ( la sessione è azzerata al cambio tipologia )
+    /// Passando i parametri come oggetto JSON codificato base64 inserendolo nei paramentri di chiamata dello script di inject del controllo ( ultimo param delle funzioni inject ), potrebbe essere rimosso l'uso della sessione
+    /// ma così facendo non si ricorderebbero i valori delle ddl di filtraggio al cambio pagina
     /// </summary>
     private void ModificaFiltroJS()
     {
@@ -700,6 +773,7 @@ public partial class AspNetPages_weblist : CommonPage
             Session.Remove("objfiltro"); //Filtro modificatore che usa la sessione per selezionare i risultati visualizzati
             objvalue = new Dictionary<string, string>();
         }
+
         if (Tipologia != "")
         {
             objvalue["tipologia"] = Tipologia;
@@ -734,130 +808,136 @@ public partial class AspNetPages_weblist : CommonPage
         if (Categoria != "")
         {
             objvalue["categoria"] = Categoria;
-            objvalue["ddlCategoria"] = Categoria;
+            //objvalue["ddlCategoria"] = Categoria;
         }
-        else
-        {
-            if (objvalue.ContainsKey("ddlCategoria"))
-            {
-                objvalue["categoria"] = objvalue["ddlCategoria"];
-            }
-        }
+        //else
+        //{
+        //    if (objvalue.ContainsKey("ddlCategoria"))
+        //    {
+        //        objvalue["categoria"] = objvalue["ddlCategoria"];
+        //    }
+        //}
         if (Categoria2liv != "")
         {
             objvalue["categoria2Liv"] = Categoria2liv;
-            objvalue["ddlCategoria2liv"] = Categoria2liv;
+            //objvalue["ddlCategoria2liv"] = Categoria2liv;
         }
-        else
+        //else
+        //{
+        //    if (objvalue.ContainsKey("ddlCategoria2liv"))
+        //    {
+        //        objvalue["categoria2Liv"] = objvalue["ddlCategoria2liv"];
+        //    }
+        //}
+        if (Nazione != "")
         {
-            if (objvalue.ContainsKey("ddlCategoria2liv"))
-            {
-                objvalue["categoria2Liv"] = objvalue["ddlCategoria2liv"];
-            }
+            objvalue["nazione"] = Nazione;
         }
         if (Regione != "")
         {
-            objvalue["Regione"] = Regione;
-            objvalue["ddlRegione"] = Regione;
-            objvalue["ddlRegioneSearch"] = Regione;
+            objvalue["regione"] = Regione;
+            //objvalue["Regione"] = Regione;
+            //objvalue["ddlRegione"] = Regione;
+            //objvalue["ddlRegioneSearch"] = Regione;
         }
-        else
-        {
-            if (objvalue.ContainsKey("ddlRegione"))
-            {
-                objvalue["Regione"] = objvalue["ddlRegione"];
-                Regione = objvalue["ddlRegione"];
-            }
-            if (objvalue.ContainsKey("ddlRegioneSearch"))
-            {
-                objvalue["Regione"] = objvalue["ddlRegioneSearch"];
-                Regione = objvalue["ddlRegioneSearch"];
-            }
-        }
+        //else
+        //{
+        //    if (objvalue.ContainsKey("ddlRegione"))
+        //    {
+        //        objvalue["Regione"] = objvalue["ddlRegione"];
+        //        Regione = objvalue["ddlRegione"];
+        //    }
+        //    if (objvalue.ContainsKey("ddlRegioneSearch"))
+        //    {
+        //        objvalue["Regione"] = objvalue["ddlRegioneSearch"];
+        //        Regione = objvalue["ddlRegioneSearch"];
+        //    }
+        //}
         if (Provincia != "")
         {
             objvalue["Provincia"] = Provincia;
-            objvalue["ddlProvincia"] = Provincia;
-            objvalue["ddlProvinciaSearch"] = Provincia;
+            //objvalue["ddlProvincia"] = Provincia;
+            //objvalue["ddlProvinciaSearch"] = Provincia;
         }
-        else
-        {
-            if (objvalue.ContainsKey("ddlProvincia"))
-            {
-                objvalue["Provincia"] = objvalue["ddlProvincia"];
-                Provincia = objvalue["ddlProvincia"];
-            }
-            if (objvalue.ContainsKey("ddlProvinciaSearch"))
-            {
-                objvalue["Provincia"] = objvalue["ddlProvinciaSearch"];
-                Provincia = objvalue["ddlProvinciaSearch"];
-            }
-        }
+        //else
+        //{
+        //    if (objvalue.ContainsKey("ddlProvincia"))
+        //    {
+        //        objvalue["Provincia"] = objvalue["ddlProvincia"];
+        //        Provincia = objvalue["ddlProvincia"];
+        //    }
+        //    if (objvalue.ContainsKey("ddlProvinciaSearch"))
+        //    {
+        //        objvalue["Provincia"] = objvalue["ddlProvinciaSearch"];
+        //        Provincia = objvalue["ddlProvinciaSearch"];
+        //    }
+        //}
         if (Comune != "")
         {
             objvalue["Comune"] = Comune;
-            objvalue["ddlComune"] = Comune;
-            objvalue["ddlComuneSearch"] = Comune;
+            //objvalue["ddlComune"] = Comune;
+            //objvalue["ddlComuneSearch"] = Comune;
         }
-        else
-        {
-            if (objvalue.ContainsKey("ddlComune"))
-            {
-                objvalue["Comune"] = objvalue["ddlComune"];
-                Comune = objvalue["ddlComune"];
-            }
-            if (objvalue.ContainsKey("ddlComuneSearch"))
-            {
-                objvalue["Comune"] = objvalue["ddlComuneSearch"];
-                Comune = objvalue["ddlComuneSearch"];
-            }
-        }
+        //else
+        //{
+        //    if (objvalue.ContainsKey("ddlComune"))
+        //    {
+        //        objvalue["Comune"] = objvalue["ddlComune"];
+        //        Comune = objvalue["ddlComune"];
+        //    }
+        //    if (objvalue.ContainsKey("ddlComuneSearch"))
+        //    {
+        //        objvalue["Comune"] = objvalue["ddlComuneSearch"];
+        //        Comune = objvalue["ddlComuneSearch"];
+        //    }
+        //}
         if (Caratteristica1 != "")
         {
             objvalue["Caratteristica1"] = Caratteristica1;
-            objvalue["hidCaratteristica1"] = Caratteristica1;
-            objvalue["ddlCaratteristica1"] = Caratteristica1;
+            //objvalue["hidCaratteristica1"] = Caratteristica1;
+            //objvalue["ddlCaratteristica1"] = Caratteristica1;
         }
-        else
-        {
-            if (objvalue.ContainsKey("hidCaratteristica1"))
-            {
-                objvalue["Caratteristica1"] = objvalue["hidCaratteristica1"];
-                Caratteristica1 = objvalue["hidCaratteristica1"];
-            }
-            if (objvalue.ContainsKey("ddlCaratteristica1"))
-            {
-                objvalue["Caratteristica1"] = objvalue["ddlCaratteristica1"];
-                Caratteristica1 = objvalue["ddlCaratteristica1"];
-            }
+        //else
+        //{
+        //    if (objvalue.ContainsKey("hidCaratteristica1"))
+        //    {
+        //        objvalue["Caratteristica1"] = objvalue["hidCaratteristica1"];
+        //        Caratteristica1 = objvalue["hidCaratteristica1"];
+        //    }
+        //    if (objvalue.ContainsKey("ddlCaratteristica1"))
+        //    {
+        //        objvalue["Caratteristica1"] = objvalue["ddlCaratteristica1"];
+        //        Caratteristica1 = objvalue["ddlCaratteristica1"];
+        //    }
 
-        }
+        //}
         if (Caratteristica2 != "")
         {
             objvalue["Caratteristica2"] = Caratteristica2;
-            objvalue["hidCaratteristica2"] = Caratteristica2;
+            //objvalue["hidCaratteristica2"] = Caratteristica2;
         }
-        else
-        {
-            if (objvalue.ContainsKey("hidCaratteristica2"))
-            {
-                objvalue["Caratteristica2"] = objvalue["hidCaratteristica2"];
-                Caratteristica2 = objvalue["hidCaratteristica2"];
-            }
-        }
+        //else
+        //{
+        //    if (objvalue.ContainsKey("hidCaratteristica2"))
+        //    {
+        //        objvalue["Caratteristica2"] = objvalue["hidCaratteristica2"];
+        //        Caratteristica2 = objvalue["hidCaratteristica2"];
+        //    }
+        //}
         if (Caratteristica3 != "")
         {
             objvalue["Caratteristica3"] = Caratteristica3;
-            objvalue["hidCaratteristica3"] = Caratteristica3;
+            //objvalue["hidCaratteristica3"] = Caratteristica3;
         }
-        else
-        {
-            if (objvalue.ContainsKey("hidCaratteristica3"))
-            {
-                objvalue["Caratteristica3"] = objvalue["hidCaratteristica3"];
-                Caratteristica3 = objvalue["hidCaratteristica3"];
-            }
-        }
+        //else
+        //{
+        //    if (objvalue.ContainsKey("hidCaratteristica3"))
+        //    {
+        //        objvalue["Caratteristica3"] = objvalue["hidCaratteristica3"];
+        //        Caratteristica3 = objvalue["hidCaratteristica3"];
+        //    }
+        //}
+
         //Id selection
         //hidricercaid ( sleezione con id )
         if (objvalue.ContainsKey("hidricercaid"))
@@ -888,6 +968,31 @@ public partial class AspNetPages_weblist : CommonPage
         //        objvalue["ddlAtcgmp3"] = Caratteristica3.Substring(0, 4);
         //}
 
+
+        if (datapartenzafilter != "")
+        {
+            objvalue["datapartenzafilter"] = datapartenzafilter;
+        }
+        if (prezzofilter != "")
+        {
+            objvalue["prezzofilter"] = prezzofilter;
+        }
+        if (statuslistfilter != "")
+        {
+            objvalue["statuslistfilter"] = statuslistfilter;
+        }
+        if (statusconfirmfilter != "")
+        {
+            objvalue["statusconfirmfilter"] = statusconfirmfilter;
+        }
+        if (etalistfilter != "")
+        {
+            objvalue["etalistfilter"] = etalistfilter;
+        }
+        if (duratalistfilter != "")
+        {
+            objvalue["duratalistfilter"] = duratalistfilter;
+        }
 
         if (objvalue.ContainsKey("geolocation"))
         {
@@ -921,7 +1026,6 @@ public partial class AspNetPages_weblist : CommonPage
             objvalue.Remove("longitudine");
         }
 #endif
-
         sobjvalue = Newtonsoft.Json.JsonConvert.SerializeObject(objvalue);
         Session.Add("objfiltro", sobjvalue); //Metto i valori di filtraggio in sessione per usarli nel custombind delle liste risultati
     }
@@ -1290,12 +1394,8 @@ public partial class AspNetPages_weblist : CommonPage
         else linkfr = "";
 
 
-
-
         //SET LINK PER CAMBIO LINGUA
         SettaLinkCambioLingua(linki, sezionedescrizioneI, linken, sezionedescrizioneGB, linkru, sezionedescrizioneRU, linkfr, sezionedescrizioneFR);
-
-
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////SEZIONE META TITLE E DESC E CONTENUTO HEADER/h1 PAGINA ///////////////////////

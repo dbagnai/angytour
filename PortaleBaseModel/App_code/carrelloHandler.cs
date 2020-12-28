@@ -40,7 +40,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
     {
         context.Response.ContentType = "text/plain";
         Dictionary<string, string> pars = parseparams(context);
-
+        eCommerceDM ecDM = new eCommerceDM();
         //Opzionale si possono ricevere parametri anche via querystring
         //string Lingua = "";
         //if (context.Request.QueryString["Lingua"] != null)
@@ -59,6 +59,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
         string sdataend = pars.ContainsKey("dataend") ? pars["dataend"] : "";
         string scodice = pars.ContainsKey("codice") ? pars["codice"] : "";
         //string scodiceCaratt = pars.ContainsKey("codiceCaratt") ? pars["codiceCaratt"] : "";
+        string scodiceordine = pars.ContainsKey("codiceordine") ? pars["codiceordine"] : "";
         string sidcarrello = pars.ContainsKey("idcarrello") ? pars["idcarrello"] : "";
         string sidprodotto = pars.ContainsKey("idprodotto") ? pars["idprodotto"] : "";
         string sidcombined = pars.ContainsKey("idcombined") ? pars["idcombined"] : "";
@@ -120,7 +121,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                         {
                             string q = CommonPage.CaricaQuantitaNelCarrello(context.Request, context.Session, idprodotto.ToString(), sidcombined, sidcarrello);
                             long.TryParse(q, out quantita);
-                            if (bforceidcarrello && (string.IsNullOrEmpty(sidcarrello) || sidcarrello == "0")) quantita = 0; //Azzero la quantità se idcarrello =0 0 e modalità forced per inserimenti multipli
+                            if (bforceidcarrello && (string.IsNullOrEmpty(sidcarrello) || sidcarrello == "0")) quantita = 0; //Azzero la quantità se idcarrello =0 e modalità forced per inserimenti multipli
                             quantita += 1;//Incremento sempre id 1 unità
                         }
                         else //se mode contiene un numero memorizzo quella quantità nel carrello imponendo il valore passato nella richiesta come totale
@@ -129,10 +130,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                         }
                     }
 
-
                     returnedidcarrello = CommonPage.AggiornaProdottoCarrello(context.Request, context.Session, idprodotto, quantita, sUsername, sidcombined, idcarrello, 0, prezzo, datastart, dataend, jsonfield1, bforceidcarrello);
-                    //Old simple idcarrello o vuoto o l'id in tabella carrello
-                    //context.Response.Write((returnedidcarrello));
 
                     /////////////////////RITORNIAMO IDCARRELLO MODIFICATO/INSERITO ED EVENTUALE MESSAGGIO DI STATO 
                     jreturnstatuscarrello jra = new jreturnstatuscarrello();
@@ -143,10 +141,13 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                         if (context.Session["superamentoquantita"] != null && context.Session["superamentoquantita"].ToString() != "0")
                             jra.stato = references.ResMan("Common", Lingua, "testocarellosuperamentoquantita");
                     }
+                    //testi aggiuntivi
                     if (context.Session != null && context.Session["nontrovata"] != null)
                         jra.stato = references.ResMan("Common", Lingua, "testocarellononesistente");
                     if (context.Session != null && context.Session["selezionacaratteristiche"] != null)
                         jra.stato = references.ResMan("Common", Lingua, "testocarrelloselcar");
+                    if (context.Session != null && context.Session["scaglionimultipli"] != null)
+                        jra.stato = references.ResMan("Common", Lingua, "testocarelloscaglionimultipli");
                     //////////////////////////////////////////////////////////////////////////
                     ///
                     string resulta = Newtonsoft.Json.JsonConvert.SerializeObject(jra, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
@@ -158,12 +159,9 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                     });
                     context.Response.Write((resulta));
 
-
-
                     //Calcolo il nuovo totale del carrello e lo ritorno per la visualizzazione
                     //WelcomeLibrary.DOM.TotaliCarrello totali = CommonPage.CalcolaTotaliCarrello(null, null, "", "");
                     //context.Response.Write(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",new object[] { totali.TotaleOrdine }) + " €");
-
                     break;
                 case "subtract":
                     double.TryParse(sprezzo.Replace(".", ","), out prezzo);
@@ -207,7 +205,10 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                     if (context.Session != null && context.Session["nontrovata"] != null)
                         jrs.stato = references.ResMan("Common", Lingua, "testocarellononesistente");
                     if (context.Session != null && context.Session["selezionacaratteristiche"] != null)
-                        jrs.stato = references.ResMan("Common", Lingua, "testocarrelloselcar"); //////////////////////////////////////////////////////////////////////////
+                        jrs.stato = references.ResMan("Common", Lingua, "testocarrelloselcar");
+                    if (context.Session != null && context.Session["scaglionimultipli"] != null)
+                        jrs.stato = references.ResMan("Common", Lingua, "testocarelloscaglionimultipli");
+                    //////////////////////////////////////////////////////////////////////////
                     ///
                     string results = Newtonsoft.Json.JsonConvert.SerializeObject(jrs, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
                     {
@@ -217,6 +218,27 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                         PreserveReferencesHandling = PreserveReferencesHandling.None,
                     });
                     context.Response.Write((results));
+                    break;
+                case "eliminaordine":
+                    ////////////////////////////////////////
+                    //Carichiamo i prodotti per aggiornamento scaglioni a carrello
+                    CarrelloCollection righeordine = ecDM.CaricaCarrelloPerCodiceOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, scodiceordine);
+                    string listcod = "";
+                    righeordine.ForEach(rigo => listcod += rigo.id_prodotto + ",");
+                    ////////////////////////////////////////
+                    
+                    //ELIMINIAMO GLI ORDINI
+                    ecDM.DeleteCarrelloPerCodiceOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, scodiceordine);
+                    ecDM.DeleteOrdinePerCodice(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, scodiceordine);
+
+                    ////////////////////////////////////////
+                    //Aggiorniamo lo stato degli scaglioni
+                    ////////////////////////////////////////
+                    Dictionary<string, string> parametri = new Dictionary<string, string>();
+                    parametri["idprodotto"] = listcod;
+                    ecDM.AggiornaStatoscaglioni(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parametri);
+
+                    context.Response.Write(scodiceordine);
                     break;
                 case "svuotacarrello":
                     CommonPage.SvuotaCarrello(context.Request, context.Session);
@@ -232,19 +254,15 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                 case "selectrowqty":
                     string qty = "0";
                     qty = CommonPage.CaricaQuantitaNelCarrello(context.Request, context.Session, sidprodotto, sidcombined, sidcarrello);
-
                     //Se modalità forced elementi multipili e idcarrello 0 -> annullo le quantità
                     bool b2forceidcarrello;
                     bool.TryParse(forceidcarrello, out b2forceidcarrello);
                     if (b2forceidcarrello && (string.IsNullOrEmpty(sidcarrello) || sidcarrello == "0")) qty = "0";
-
                     context.Response.Write((qty));
-
                     break;
                 default:
                 case "show":
                     output = CommonPage.VisualizzaCarrello(context.Request, context.Session, scodice, false, Lingua);
-
                     context.Response.Write((output));
                     break;
                 case "getitemscarrello":
@@ -288,7 +306,6 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                         //Ricreo e formatto le due liste per passarle al client
                         List<Tabrif> car1selected = new List<Tabrif>();
                         List<Tabrif> car2selected = new List<Tabrif>();
-
                         List<ModelCarCombinate> listprod = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelCarCombinate>>(off1.Xmlvalue);
                         //List<ResultAutocomplete> listaTaglia = new List<ResultAutocomplete>();
                         //List<ResultAutocomplete> listaColore = new List<ResultAutocomplete>();
@@ -327,12 +344,9 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                             PreserveReferencesHandling = PreserveReferencesHandling.None,
                         });
                     }
-
                     context.Response.Write((output));
                     break;
-
             }
-
         }
         catch (Exception ex)
         {

@@ -160,7 +160,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         divContattiMaster.DataBind();
         req1.DataBind();
 
-        CommonPage.CustomContentInject(((HtmlGenericControl)Page.Master.FindControl("masterlow1")), "customcontent3-" + Lingua + ".html", Lingua, Page.User.Identity.Name, Session);
+        //CommonPage.CustomContentInject(((HtmlGenericControl)Page.Master.FindControl("masterlow1")), "customcontent3-" + Lingua + ".html", Lingua, Page.User.Identity.Name, Session);
+        CommonPage.CustomContentInject(((HtmlGenericControl)Page.Master.FindControl("masterlow1")), "customcontent4-" + Lingua + ".html", Lingua, Page.User.Identity.Name, Session);
 
     }
 
@@ -224,7 +225,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //Passo codificate base64 con encoding utf-8 le risorse necessarie al javascript della pagina iniettandole in pagina (   questo evita di attendere la promise per inizializzare le variabili javascript !!! )
         //scriptRegVariables += ";\r\n" + string.Format("loadvariables(utf8ArrayToStr(urlB64ToUint8Array('{0}')))", dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name)));
         scriptRegVariables += ";\r\n" + WelcomeLibrary.UF.Utility.waitwrappercall("loadvariables", string.Format("loadvariables(b64ToUtf8('{0}'))", dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name))));
-
+        scriptRegVariables += ";\r\n" + WelcomeLibrary.UF.Utility.waitwrappercall("moment", string.Format("moment.locale('{0}') ", "it"));
+        //scriptRegVariables += ";\r\n " + string.Format("moment.locale('{0}') ", "it");
         scriptRegVariables += ";\r\n";
 
         if (addelements == null) addelements = new Dictionary<string, string>();

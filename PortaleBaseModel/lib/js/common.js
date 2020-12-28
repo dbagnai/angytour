@@ -1,4 +1,4 @@
-﻿"use strict"; 
+﻿"use strict";
 
 
 /*Memorizzo posizione scrolltop in session ----------------------------------------*/
@@ -29,7 +29,7 @@ var reinitscrollpos = function () {
 
 
 $(document).ready(function () {
-   searchtaginjectandcall();
+    searchtaginjectandcall();
 });
 //searchtaginjectandcall();
 
@@ -71,7 +71,7 @@ function searchtaginjectandcall() {
                 if (levelscopes.length == 2)
                     //if (typeof window[levelscopes[0]] !== undefined && typeof window[levelscopes[0]][levelscopes[1]] === "function") {
                     if (typeof window[levelscopes[0]] !== undefined && window[levelscopes[0]] != null && typeof window[levelscopes[0]][levelscopes[1]] === "function") {
-                             window[levelscopes[0]][levelscopes[1]].apply(this, itemtocall.args);//make the call
+                        window[levelscopes[0]][levelscopes[1]].apply(this, itemtocall.args);//make the call
                     } else {
                         setTimeout(wait, 50);
                     }
@@ -81,7 +81,7 @@ function searchtaginjectandcall() {
 }
 
 function initimoment() {
-   // moment.locale("it");
+    //  moment.locale("it");
 }
 
 function loadvariables(result) { //se precarichi questa roba chiamando la funzione dal server tramite custombind con il result serializzato corretto puoi evitare la chiamata lato client!!! 
@@ -101,8 +101,6 @@ function loadvariables(result) { //se precarichi questa roba chiamando la funzio
     jsonlanguages = jobj["jsonlanguages"];
     percorsolistadati = jobj["percorsolistadati"];
     percorsolistaristoranti = jobj["percorsolistaristoranti"];
-
-
     ///////////////OGGETTO Json con le risorse
     baseresources = JSON.parse(jobj["baseresources"]);
     ///////////////OGGETTO Json con le regioni
@@ -126,6 +124,12 @@ function loadvariables(result) { //se precarichi questa roba chiamando la funzio
         JSONreftipocontratto = JSON.parse(dictresources["JSONreftipocontratto"]);
     if (dictresources["JSONreftiporisorse"] != null && dictresources["JSONreftiporisorse"] != '')
         JSONreftiporisorse = JSON.parse(dictresources["JSONreftiporisorse"]);
+    if (dictresources["JSONstatuslist"] != null && dictresources["JSONstatuslist"] != '')
+        JSONstatuslist = JSON.parse((dictresources["JSONstatuslist"]));
+    if (dictresources["JSONetalist"] != null && dictresources["JSONetalist"] != '')
+        JSONetalist = JSON.parse((dictresources["JSONetalist"]));
+    if (dictresources["JSONduratalist"] != null && dictresources["JSONduratalist"] != '')
+        JSONduratalist = JSON.parse((dictresources["JSONduratalist"]));
     //JSONgeogenerale = JSON.parse(dictresources["JSONgeogenerale"]);
     //JSONcar1 = JSON.parse(dictresources["JSONclasse"]);
     if (dictresources["JSONcar1"] != null && dictresources["JSONcar1"] != '')
@@ -504,7 +508,7 @@ function InizializzaPercorsiApplicazione() {
                 }
             },
             failure: function (result) {
-                    console.log('fail init vars', '');
+                console.log('fail init vars', '');
                 //sendmessage('fail init vars', '');
             }
         });
@@ -514,7 +518,7 @@ function CaricaGlobalResources(lng, searchtext) {
     var lng = lng || "I";
     var searchtext = searchtext || "";
 
-    if (baseresources === '') 
+    if (baseresources === '')
         $.ajax({
             url: pathAbs + commonhandlerpath,
             contentType: "application/json; charset=utf-8",
@@ -851,21 +855,39 @@ function FillAndSelectRef(tableselector, lng, ddlid, selecttext, selectvalue, se
     switch (tableselector) {
         case "Caratteristica1":
             result = JSONcar1;
+            convertToDictionaryandFill(result, levelfilter, lng, ddlid, selecttext, selectvalue, selectedvalue, filter);
             break;
         case "Caratteristica2":
             result = JSONcar2;
+            convertToDictionaryandFill(result, levelfilter, lng, ddlid, selecttext, selectvalue, selectedvalue, filter);
             break;
         case "Caratteristica3":
             result = JSONcar3;
+            convertToDictionaryandFill(result, levelfilter, lng, ddlid, selecttext, selectvalue, selectedvalue, filter);
             break;
         case "categoria":
             result = JSONcategorie;
+            convertToDictionaryandFill(result, levelfilter, lng, ddlid, selecttext, selectvalue, selectedvalue, filter);
             break;
         case "categoria2Liv":
             result = JSONcategorie2liv;
+            convertToDictionaryandFill(result, levelfilter, lng, ddlid, selecttext, selectvalue, selectedvalue, filter);
             break;
         case "Regione":
             result = JSONregioni;
+            convertToDictionaryandFill(result, levelfilter, lng, ddlid, selecttext, selectvalue, selectedvalue, filter);
+            break;
+        case "statuslist":
+            result = JSONstatuslist;
+            fillDDL(ddlid, JSON.stringify(  result ), selecttext, selectvalue, selectedvalue);
+            break;
+        case "etalist":
+            result = JSONetalist;
+            fillDDL(ddlid, JSON.stringify( result ), selecttext, selectvalue, selectedvalue);
+            break;
+        case "duratalist":
+            result = JSONduratalist;
+            fillDDL(ddlid, JSON.stringify( result ), selecttext, selectvalue, selectedvalue);
             break;
         //case "dettaglimetrature":
         //    result = JSONrefmetrature;
@@ -885,7 +907,9 @@ function FillAndSelectRef(tableselector, lng, ddlid, selecttext, selectvalue, se
         case "":
             break;
     }
-    var converteddict = convertToDictionaryandFill(result, levelfilter, lng, ddlid, selecttext, selectvalue, selectedvalue, filter);
+
+
+
 }
 
 function convertToDictionaryandFill(data, levelfilter, lng, ddlid, selecttext, selectvalue, selectedvalue, filter) {
@@ -1508,7 +1532,7 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                     else if ($(this).is("div")
                         && ($(this).hasClass('bookingtool'))
                     ) {
-                        var idrisorsa = dataitem[proprarr[0]]; 
+                        var idrisorsa = dataitem[proprarr[0]];
                         bookingtool.initbookingtool(idrisorsa, $(this).attr("id"));
                     }
                     else if ($(this).is("div")
@@ -2164,7 +2188,7 @@ function inviamessaggiomail(lng, data, callback) {
         dataType: "text",
         type: "POST",
         //async: false,
-        data: { 'q': 'inviamessaggiomail', 'data': JSON.stringify(data), 'lng': lng},
+        data: { 'q': 'inviamessaggiomail', 'data': JSON.stringify(data), 'lng': lng },
         success: function (result) {
             //if (callback)
             //    callback(result);
@@ -2218,7 +2242,7 @@ function caricaParametriConfigServer(lng, objfiltro, callback, functiontocallone
         dataType: "text",
         type: "POST",
         //async: false,
-        data: { 'q': 'caricaConfig', 'objfiltro': JSON.stringify(objfiltro), 'lng': lng},
+        data: { 'q': 'caricaConfig', 'objfiltro': JSON.stringify(objfiltro), 'lng': lng },
         success: function (result) {
             callback(result, functiontocallonend);
         },
@@ -2452,7 +2476,7 @@ function cercacontenuti(lng, data, callback) {
         dataType: "text",
         type: "POST",
         //async: false,
-        data: { 'q': 'cercacontenuti', 'data': JSON.stringify(data), 'lng': lng},
+        data: { 'q': 'cercacontenuti', 'data': JSON.stringify(data), 'lng': lng },
         success: function (result) {
             //if (callback)
             //    callback(result);
@@ -2629,7 +2653,7 @@ function DownloadFile(filetodownload) {
             window.location = (filetodownload);
         });
 }
- 
+
 function registerListener(event, func) {
     if (window.addEventListener) {
         window.addEventListener(event, func);
@@ -2700,11 +2724,7 @@ String.prototype.capitalizeFirstLetter = function () {
 Number.prototype.pad = function (len) {
     return (new Array(len + 1).join("0") + this).slice(-len);
 }
-if (typeof String.prototype.trim != 'function') { // detect native implementation
-    String.prototype.trim = function () {
-        return this.replace(/^\s+/, '').replace(/\s+$/, '');
-    };
-}
+
 Date.prototype.today = function (separator) {
     var separator = separator || "/";
     return ((this.getDate() < 10) ? "0" : "") + this.getDate() + separator + (((this.getMonth() + 1) < 10) ? "0" : "") + (this.getMonth() + 1) + separator + this.getFullYear();
@@ -2764,6 +2784,17 @@ if (!(function f() { }).name) {
             return name;
         }
     });
+}
+function testJSON(text) {
+    if (typeof text !== "string") {
+        return false;
+    }
+    try {
+        JSON.parse(text);
+        return true;
+    } catch (error) {
+        return false;
+    }
 }
 function validateEmail(value) {
     var input = document.createElement('input');

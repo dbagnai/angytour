@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WelcomeLibrary.DOM;
+using WelcomeLibrary.UF;
 
 public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
 {
@@ -22,11 +25,10 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
             if (!IsPostBack)
             {
 
+                ImpostaSuRuoloUtente();
 
                 if (Request.QueryString["Errore"] != null && Request.QueryString["Errore"] != "")
                 { output.Text = Request.QueryString["Errore"].ToString(); }
-
-
 
                 //Inizializzo i valori
 
@@ -88,14 +90,10 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
                 linkPaginestatichepwa.HRef = "GestioneContenuti.aspx?CodiceContenuto=" + paginestatichepwa.Codice;
                 Titolopaginestatichepwa.Text = paginestatichepwa.Descrizione;
 
-
-
                 WelcomeLibrary.DOM.TipologiaContenuti paginestaticheesempi = WelcomeLibrary.UF.Utility.TipologieContenuti.Find(delegate (WelcomeLibrary.DOM.TipologiaContenuti tmp) { return (tmp.Lingua == "I" && tmp.Codice == "con001002"); });
                 linkPaginestaticheesempi.HRef = "GestioneContenuti.aspx?CodiceContenuto=" + paginestaticheesempi.Codice;
                 Titolopaginestaticheesempi.Text = paginestaticheesempi.Descrizione;
 
-
-                
 
                 //attivo l'hover del menu
                 if (Request.FilePath.ToLower().Trim().Contains("gestioneofferte") || Request.FilePath.ToLower().Trim().Contains("gestionerodotti"))
@@ -116,7 +114,7 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
                 else if (Request.FilePath.ToLower().Trim().Contains("gestioneclienti"))
                 {
                     tagContatti.Attributes.Add("class", "active open hover");
-                    lblTitleSection.Text = "GESTIONE CLIENTI";
+                    lblTitleSection.Text = "ANAGRAFICA CLIENTI";
                 }
                 else if (Request.FilePath.ToLower().Trim().Contains("gestionenewsletter"))
                 {
@@ -148,6 +146,24 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
         catch (Exception errore)
         {
 
+        }
+    }
+
+    private void ImpostaSuRuoloUtente()
+    {
+        usermanager USM = new usermanager();
+        if (USM.ControllaRuolo(Page.User.Identity.Name, "Operatore"))
+        {
+            string idcliente = CommonPage.getidcliente(Page.User.Identity.Name);
+            if (!string.IsNullOrEmpty(idcliente))
+            {
+              
+                ulMainbar.Visible = false;
+            }
+            else
+            {
+                Response.Redirect("~/Error.aspx?Error=Utente non trovato");
+            }
         }
     }
 
@@ -196,8 +212,10 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
         //Passo codificate base64 con encoding utf-8 le risorse necessarie al javascript della pagina iniettandole in pagina (   questo evita di attendere la promise per inizializzare le variabili javascript !!! )
         //scriptRegVariables += ";\r\n" + string.Format("loadvariables(utf8ArrayToStr(urlB64ToUint8Array('{0}')))", dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name)));
         scriptRegVariables += ";\r\n" + WelcomeLibrary.UF.Utility.waitwrappercall("loadvariables", string.Format("loadvariables(b64ToUtf8('{0}'))", WelcomeLibrary.UF.dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name))));
-
         scriptRegVariables += ";\r\n";
+
+       
+
 
         if (addelements == null) addelements = new Dictionary<string, string>();
         addelements.Add("jsvarfrommasterend", scriptRegVariables);

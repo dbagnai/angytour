@@ -52,6 +52,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
         context.Response.ContentType = "text/plain";
         try
         {
+            usermanager USM = new usermanager();
             Dictionary<string, string> pars = parseparams(context);
             string q = pars.ContainsKey("q") ? pars["q"] : "";
 
@@ -128,13 +129,51 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     }
                     result = Newtonsoft.Json.JsonConvert.SerializeObject(lra, Newtonsoft.Json.Formatting.Indented);
                     break;
+                case "autocompletericercalist":
+                    long.TryParse(Recs, out irecs);
+                    if (irecs == 0) irecs = 20;
+                    if (term != "null")
+                    {
+                        offerteDM offDM = new offerteDM();
+                        OfferteCollection coll = offDM.GetLista(term, irecs.ToString(), lingua, WelcomeLibrary.STATIC.Global.NomeConnessioneDb, tipologia);
+                        long count = 0;
+                        ResultAutocomplete ra1 = new ResultAutocomplete() { id = "", label = "Scegli destinazione", linktext = "<span style=\"font-weight:600\">" + "Scegli destinazione" + "</span>" };
+                        lra.Add(ra1);
+                        if (coll != null)
+                            foreach (Offerte r in coll)
+                            {
+                                string shorttext = r.DenominazionebyLingua(lingua);
+                                string htmltext = "";
+                                htmltext += "<span style=\"font-weight:600\">" + r.DenominazionebyLingua(lingua) + "</span>";
+                                Scaglioni scaglione = r.Scaglioni.Find(s => s.datapartenza > System.DateTime.Now);  //prendo solo quelli che hanno scaglioni in partenza dopo oggi
+                                if (scaglione != null)
+                                {
+                                    htmltext += " <br/> ";
+                                    htmltext += scaglione.durata + " " + references.ResMan("Common", lingua, "testogiorni").ToString();
+                                    htmltext += " • ";
+                                    htmltext += references.ResMan("Common", lingua, "titoloprezzoapartire").ToString() + " " + scaglione.prezzo + "€";
+
+                                    string linkurlidhtml = "<a target=\"_self\" href =\"" + WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, r.UrltextforlinkbyLingua(lingua), r.Id.ToString(), r.CodiceTipologia.ToString()) + "\" >" + htmltext + "</a>";
+
+                                    string linkurlsimple =  WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, r.UrltextforlinkbyLingua(lingua), r.Id.ToString(), r.CodiceTipologia.ToString()) ;
+
+                                    ra1 = new ResultAutocomplete() { id = r.Id.ToString(),  label = shorttext, link = linkurlsimple, linktext = htmltext };
+                                    if (id == null || id == "") lra.Add(ra1);
+                                    else if (id != "" && r.Id.ToString() == id) lra.Add(ra1);
+                                    count++;
+                                    if (count > irecs) break;
+                                }
+                            }
+                    }
+                    result = Newtonsoft.Json.JsonConvert.SerializeObject(lra, Newtonsoft.Json.Formatting.Indented);
+                    break;
                 case "autocompletericerca":
                     long.TryParse(Recs, out irecs);
                     if (irecs == 0) irecs = 20;
                     if (term != "null")
                     {
                         offerteDM offDM = new offerteDM();
-                        OfferteCollection coll = offDM.GetLista(term, irecs.ToString(), lingua, WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
+                        OfferteCollection coll = offDM.GetLista(term, irecs.ToString(), lingua, WelcomeLibrary.STATIC.Global.NomeConnessioneDb, tipologia);
                         long count = 0;
                         ResultAutocomplete ra1 = new ResultAutocomplete() { id = "", label = "Deseleziona" };
                         lra.Add(ra1);
@@ -151,10 +190,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     result = Newtonsoft.Json.JsonConvert.SerializeObject(lra, Newtonsoft.Json.Formatting.Indented);
                     break;
                 case "initreferencesdata":
-
                     result = references.initreferencesdataserialized(lingua, context.User.Identity.Name);
-
-
                     break;
                 case "cercacontenuti":
                     string ssearchdata = pars.ContainsKey("data") ? pars["data"] : "";
@@ -184,6 +220,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     Dictionary<string, string> destinatariperregione = new Dictionary<string, string>();
                     string nomemittente = (maildata.GetValueOrDefault("name") ?? "");
                     string cognomemittente = (maildata.GetValueOrDefault("cognome") ?? "");
+                    string ragsoc = (maildata.GetValueOrDefault("ragsoc") ?? "");
                     string mittenteMail = (maildata.GetValueOrDefault("email") ?? "");
                     string mittenteTelefono = (maildata.GetValueOrDefault("telefono") ?? "");
                     string message = (maildata.GetValueOrDefault("message") ?? "");
@@ -197,12 +234,13 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     string orario = (maildata.GetValueOrDefault("orario") ?? "");
                     string location1 = (maildata.GetValueOrDefault("location1") ?? "");
                     string datarichiesta = (maildata.GetValueOrDefault("datarichiesta") ?? "");
-                    string chkprivacy = (maildata.GetValueOrDefault("chkprivacy") ?? "");
-                    string chknewsletter = (maildata.GetValueOrDefault("chknewsletter") ?? "");
+
+                    string chkprivacy = (maildata.GetValueOrDefault("chkprivacy") ?? "");  // da form masterpage
+                    if ((maildata.GetValueOrDefault("consenso") != null))
+                        chkprivacy = (maildata.GetValueOrDefault("consenso") ?? ""); //da modulo iscrizione
+                    string chknewsletter = (maildata.GetValueOrDefault("chknewsletter") ?? "");  // da form masterpage
                     if ((maildata.GetValueOrDefault("consenso1") != null))
-                        chknewsletter = (maildata.GetValueOrDefault("consenso1") ?? "");
-
-
+                        chknewsletter = (maildata.GetValueOrDefault("consenso1") ?? ""); //da modulo iscrizione
                     bool spuntaprivacy = false;
                     bool spuntanewsletter = false;
                     bool.TryParse(chkprivacy, out spuntaprivacy);
@@ -219,7 +257,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     if (tipocontenuto == "Acquistousato")
                         tipo = "vendita usato ";
 
-                    string SoggettoMail = "Richiesta " + tipo + " da " + cognomemittente + " " + nomemittente + " tramite il sito " + ConfigManagement.ReadKey("Nome");
+                    string SoggettoMail = "Richiesta " + tipo + " da " + ragsoc + " " + cognomemittente + " " + nomemittente + " tramite il sito " + ConfigManagement.ReadKey("Nome");
                     HtmlToText htmltotext = new HtmlToText();
                     string Descrizione = htmltotext.Convert(message).Replace("\r\n", "\n").Replace("\r", "\n").Replace("\n", "<br/>") + " <br/> ";
                     //string Descrizione = (message).Replace("\r", "<br/>") + " <br/> ";
@@ -259,7 +297,8 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         Descrizione += " <br/> Persone:" + persone;
                         Descrizione += " <br/> Data richiesta:" + datarichiesta + " Orario Richiesto: " + orario;
                     }
-                    Descrizione += " <br/> Nome Cliente:" + nomemittente + " Cognome o rag soc. Cliente: " + cognomemittente;
+                    Descrizione += " <br/> Nome Cliente:" + nomemittente + " Cognome Cliente: " + cognomemittente;
+                    Descrizione += " <br/> Azienda: " + ragsoc;
                     Descrizione += " <br/> Telefono Cliente: " + mittenteTelefono + "  Email Cliente: " + mittenteMail + " Lingua Cliente: " + lingua;
                     Descrizione += " <br/> Il cliente ha Confermato l'autorizzazione al trattamento dei dati personali. ";
 
@@ -279,6 +318,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         cli.id_tipi_clienti = tipocliente;
                         cli.Nome = nomemittente.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
                         cli.Cognome = cognomemittente.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                        cli.Ragsoc = ragsoc.Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
                         cli.Consenso1 = true;
                         cli.ConsensoPrivacy = true;
                         cli.Validato = true;
@@ -299,7 +339,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         stat.EmailDestinatario = maildestinatario;
                         stat.EmailMittente = mittenteMail;
                         stat.Idattivita = idperstatistiche;
-                        stat.Testomail = nomemittente + "<br/>" + SoggettoMail + "<br/>" + Descrizione;
+                        stat.Testomail = ragsoc + " " + nomemittente + "<br/>" + SoggettoMail + "<br/>" + Descrizione;
                         stat.TipoContatto = enumclass.TipoContatto.invioemail.ToString();
                         stat.Url = "";
                         statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
@@ -332,7 +372,8 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     cliente.Serialized = cliserialized; //Appoggio i dati di spedizione in Serialized del cliente !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                     cliente.Nome = (data.GetValueOrDefault("nome") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
-                    cliente.Cognome = (data.GetValueOrDefault("ragsoc") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                    cliente.Cognome = (data.GetValueOrDefault("cognome") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                    cliente.Ragsoc = (data.GetValueOrDefault("ragsoc") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
                     cliente.Email = (data.GetValueOrDefault("email") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
                     cliente.Telefono = (data.GetValueOrDefault("telefono") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
                     cliente.Pivacf = (data.GetValueOrDefault("piva") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
@@ -346,30 +387,40 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     cliente.CodicePROVINCIA = (data.GetValueOrDefault("provincia") ?? "");
                     cliente.CodiceCOMUNE = (data.GetValueOrDefault("comune") ?? "");
 
+
+
                     string datiaggiuntivi = "";
-                    datiaggiuntivi += "Orario aperuta: " + (data.GetValueOrDefault("orario") ?? "");
-                    datiaggiuntivi += " Giorno chiusura: " + (data.GetValueOrDefault("chiusura") ?? "");
-                    datiaggiuntivi += " Quantità giornaliera caffè: " + (data.GetValueOrDefault("chiusura") ?? "");
-                    datiaggiuntivi += " Pranzi veloci: " + (data.GetValueOrDefault("chkpveloci") ?? "");
-
-
+                    //datiaggiuntivi += "Orario aperuta: " + (data.GetValueOrDefault("orario") ?? "");
+                    //datiaggiuntivi += " Giorno chiusura: " + (data.GetValueOrDefault("chiusura") ?? "");
+                    //datiaggiuntivi += " Quantità giornaliera caffè: " + (data.GetValueOrDefault("chiusura") ?? "");
+                    //datiaggiuntivi += " Pranzi veloci: " + (data.GetValueOrDefault("chkpveloci") ?? "");
+                    string generautente = (data.GetValueOrDefault("generautente") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
                     string descrizione1 = (data.GetValueOrDefault("descrizione") ?? "");
                     string tipocontenuto1 = (data.GetValueOrDefault("tipocontenuto") ?? "");
-                    string chkprivacy1 = (data.GetValueOrDefault("chkprivacy") ?? "");
-                    string chknewsletter1 = (data.GetValueOrDefault("chknewsletter") ?? "");
+
+
+                    string chkprivacy1 = (data.GetValueOrDefault("chkprivacy") ?? "");  // da form masterpage
+                    if ((data.GetValueOrDefault("consenso") != null))
+                        chkprivacy1 = (data.GetValueOrDefault("consenso") ?? ""); //da modulo iscrizione
+                    string chknewsletter1 = (data.GetValueOrDefault("chknewsletter") ?? "");  // da form masterpage
+                    if ((data.GetValueOrDefault("consenso1") != null))
+                        chknewsletter1 = (data.GetValueOrDefault("consenso1") ?? ""); //da modulo iscrizione
                     bool spuntaprivacy1 = false;
                     bool spuntanewsletter1 = false;
-                    bool.TryParse(chkprivacy1, out spuntaprivacy);
-                    bool.TryParse(chknewsletter1, out spuntanewsletter);
+                    bool.TryParse(chkprivacy1, out spuntaprivacy1);
+                    bool.TryParse(chknewsletter1, out spuntanewsletter1);
+
+
                     string nomedestinatario1 = ConfigManagement.ReadKey("Nome");
                     string maildestinatario1 = ConfigManagement.ReadKey("Email");
-
 
                     //------------------------------------------------
                     //Memorizzo i dati nel cliente in anagrafica
                     //------------------------------------------------
-                    string tipocliente1 = "0"; //Cliente standard per newsletter
-                                               //  cliente.DataNascita = System.DateTime.Now.Date;
+                    //string tipocliente1 = "0"; //Cliente standard per newsletter ( cambiare il tipo cliente in base al valore desiderato o passarlo alla funzione di inserimento nei dati )
+                    string tipocliente1 = (data.GetValueOrDefault("tipologia") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+
+                    //cliente.DataNascita = System.DateTime.Now.Date;
                     cliente.Lingua = lingua;
                     cliente.id_tipi_clienti = tipocliente1;
                     cliente.Consenso1 = true;
@@ -380,14 +431,19 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     if ((_clitmp1 != null && _clitmp1.Id_cliente != 0))
                         cliente.Id_cliente = _clitmp1.Id_cliente;
                     clidm.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref cliente);
-
+#if false
+                    //Impostiamo  il codice sconto con valore zero per nuovo cliente inserito
+                    cliente.Codicisconto = cliente.Id_cliente + "-sconto;0";
+                    clidm.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref cliente); 
+#endif
                     //------------------------------------------------
-                    //Invio mail richiesta  ( inseriamo tutti i dati dei form )
+                    //Invio mail avviso al gestore  ( inseriamo tutti i dati dei form )
                     //------------------------------------------------
                     string SoggettoMail1 = "Richiesta " + tipocontenuto1 + " da " + cliente.Cognome + " tramite il sito " + ConfigManagement.ReadKey("Nome");
                     string Descrizione1 = descrizione1.Replace("\r", "<br/>") + " <br/> ";
                     Descrizione1 += " <br/> Il cliente ha richiesto : " + tipocontenuto1;
-                    Descrizione1 += " <br/> Ragione sociale:" + cliente.Cognome + "<br/>Referente: " + cliente.Nome;
+                    Descrizione1 += " <br/> Azienda:" + cliente.Ragsoc;
+                    Descrizione1 += " <br/> Cognome cliente:" + cliente.Cognome + "<br/>Nome: " + cliente.Nome;
                     Descrizione1 += " <br/> Id anagrafica:" + cliente.Id_cliente;
                     Descrizione1 += " <br/> Telefono : " + cliente.Telefono + "  <br/>Email : " + cliente.Email;
                     Descrizione1 += " <br/> Piva : " + cliente.Pivacf + "  <br/>SDI/Pec : " + cliente.Emailpec + " <br/>Lingua : " + lingua;
@@ -405,20 +461,51 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         indirizzosped += "Nazione: " + clispediz.CodiceNAZIONE + "<br/>";
                     }
                     Descrizione1 += " <br/>Dati Spedizione: <br/>" + indirizzosped;
-
                     Descrizione1 += " <br/> Info Aggiuntive:" + datiaggiuntivi;
                     Descrizione1 += " <br/> Il cliente ha Confermato l'autorizzazione al trattamento dei dati personali. ";
-
-                    //Utility.invioMailGenerico(cliente.Cognome, cliente.Email, SoggettoMail1, Descrizione1, maildestinatario1, nomedestinatario1);
+                    if (spuntanewsletter1 == true)
+                    {
+                        Descrizione1 += " <br/> Il cliente ha richiesto l'invio newsletter. " + references.ResMan("Common", lingua, "titolonewsletter1").ToString() + "<br/>";
+                    }
                     Utility.invioMailGenerico(nomedestinatario1, maildestinatario1, SoggettoMail1, Descrizione1, maildestinatario1, nomedestinatario1);
 
+#if false //abilitare per generazione utente ecommerce dopo invio del form
+                    //////////////////////////////////////////////////////////////////////////////////////////////
+                    //SE richiesto GENERIAMO L'UTENTE NEL MEMBERSHIP E INVIAMO UNA MAIL DI CONFERMA AL CLIENTE CON I DATI DI REGISTRAZIONE
+                    //////////////////////////////////////////////////////////////////////////////////////////////
+                    if (generautente == "1")
+                    {
+                        string password = "";
+                        //Imposto lo username come da regola
+                        string username = cliente.Id_cliente.ToString() + "-" + cliente.Email;
+                        //Verifichiamo che con la mail usata non ci sia gia un utente del membership
+                        if (USM.VerificaPresenzaUtente(username)) //utente esistente -> devo avvisare che presente!!!
+                        {
+                            result = "Utente " + username + " già registrato! Fare recupero della password o contattate il supporto per il recupero dell'accesso!"; //devo avvisare l'utente!
+                        }
+                        else //utente da creare ex novo
+                        {
+                            USM.CreaUtente(cliente.Id_cliente.ToString(), ref username, ref password, "Operatore");
+                            ///////////////////////////////////////////////////////////
+                            //INVIA MAIL REGISTRAZIONE ALL'UTENTE
+                            string oggetto = references.ResMan("Common", lingua, "txtoggettocreateuser").ToString();
+                            oggetto += " " + ConfigManagement.ReadKey("Nome");
+                            string testo = references.ResMan("Common", lingua, "txttestocreateuser").ToString();
+                            testo = testo.Replace("|NOME|", ConfigManagement.ReadKey("Nome"));
+                            testo = testo.Replace("|CREDENZIALI|", "User: " + username + " Pass: " + password);
+                            testo = testo.Replace("|LOGINPAGE|", "<a href=" + CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", lingua, "linklogin")) + ">" + CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", lingua, "linklogin")) + "</a>");
+                            testo += references.ResMan("Common", lingua, "txtFooter").ToString();
+                            Utility.invioMailGenerico(ConfigManagement.ReadKey("Nome"), ConfigManagement.ReadKey("Email"), oggetto, testo, cliente.Email, cliente.Cognome, null, "", true);
+                            ///////////////////////////////////////////////////////////
+                        }
+                    } 
+#endif
 
                     break;
                 case "putinsession":
                     context.Session.Add(Key, Value);
                     break;
                 case "getfromsession":
-
                     if (context.Session[Key] != null)
                         result = context.Session[Key].ToString();
                     break;
@@ -426,17 +513,12 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     HttpContext.Current.Session.Clear();
                     result = "svuotata sessione";
                     break;
-
                 case "caricaConfig":
-
                     List<ConfigItem> retconfig = new List<ConfigItem>();
-
                     retconfig = ConfigManagement.ReadAsList(filtri);
                     if (retconfig == null || retconfig.Count == 0)
                         retconfig.Add(new ConfigItem());
-
                     //Dictionary<string, string> dictconfig  =  filterDictionaryConfig(filtri);
-
                     result = Newtonsoft.Json.JsonConvert.SerializeObject(retconfig, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
                     {
                         NullValueHandling = NullValueHandling.Ignore,
@@ -461,13 +543,9 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     //ConfigDM cDM = new ConfigDM();
                     //result = cDM.AggiornaConfigList(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref list);
                     result = ConfigManagement.AggiornaConfigList(ref list);
-
                     break;
-
                 case "caricaresources":
-
                     List<ResourceItem> retresource = new List<ResourceItem>();
-
                     retresource = ResourceManagement.ReadItemsByLingua(lingua);
                     if (retresource == null || retresource.Count == 0)
                         retresource.Add(new ResourceItem());
@@ -497,10 +575,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     });
                     //Chiamiamo l'aggiornamento di tutti i dati
                     result = ResourceManagement.AggiornaResourceList(ref listresource);
-
                     break;
-
-
                 case "initresources":/*Caricamento delle risorse di testo per lingua*/
                     //System.Globalization.CultureInfo ci = references.setCulture(lingua);
                     Dictionary<string, Dictionary<string, string>> dict = references.GetResourcesByLingua(lingua);
@@ -547,8 +622,6 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                                     regioni.Add(item);
                         }
                     }
-
-
                     result = Newtonsoft.Json.JsonConvert.SerializeObject(regioni);
                     break;
                 //Caricamento JSON struttura generale COmuni
@@ -559,8 +632,6 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         comuniordered.Sort(new GenericComparer<WelcomeLibrary.DOM.Comune>("Nome", System.ComponentModel.ListSortDirection.Ascending));
                     result = Newtonsoft.Json.JsonConvert.SerializeObject(comuniordered);
                     break;
-
-
                 //Selezione lista delle nazioni--------------------------
                 case "fillddlnazioni":
                     //Parametri di filtro e selezione
@@ -613,7 +684,6 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     break;
                 //Selezione lista comuni ----------------------------------------------
                 case "fillddlcomuni":
-
                     List<WelcomeLibrary.DOM.Comune> comunilingua = Utility.ElencoComuni.FindAll(delegate (WelcomeLibrary.DOM.Comune tmp) { return (tmp.CodiceIncrocio == filter2); });
                     if (comunilingua != null)
                         comunilingua.Sort(new GenericComparer<WelcomeLibrary.DOM.Comune>("Nome", System.ComponentModel.ListSortDirection.Ascending));
@@ -628,7 +698,6 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                 default:
                     break;
                 case "caricaDati":
-
                     //////////////////////////////////////////////////////////////////////
                     //recupero i parametri che mi servono da objfiltro
                     //////////////////////////////////////////////////////////////////////                    
@@ -673,7 +742,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         custombind.jscommands.Remove(context.Session.SessionID);
                     }
                     break;
-                case "getlinkbyid":
+                case "getlinkbyid": //torna una dictionary per id, idname, idimg di valori che linkano delle schede in base all'id o idlist passato
                     Dictionary<string, string> filtriid = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(objfiltro);
                     Dictionary<string, string> valueRet1 = new Dictionary<string, string>();
                     if (filtriid.ContainsKey("id"))
@@ -947,6 +1016,25 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                 case "creasitemapsresources":
                     //Da fare la gnerazione delle sitemap dal file estates.json
                     references.CreaSitemapImmobili(context.Server, "rif000666");
+                    break;
+                case "recuperapass":
+                    result = USM.SendAccessData(lingua, pars.ContainsKey("username") ? pars["username"] : "", ConfigManagement.ReadKey("Email"), ConfigManagement.ReadKey("Nome"));
+                    break;
+                case "logoffuser":
+                    System.Web.Security.FormsAuthentication.SignOut();
+                    break;
+                case "verificalogin":
+                    string usernamelog = pars.ContainsKey("username") ? pars["username"] : "";
+                    string passwordlog = pars.ContainsKey("password") ? pars["password"] : "";
+                    if (System.Web.Security.Membership.ValidateUser(usernamelog, passwordlog))
+                    {
+                        System.Web.Security.FormsAuthentication.SetAuthCookie(usernamelog, false);
+                        result = "";
+                    }
+                    else
+                    {
+                        result = "Accesso non riuscito. Se sei un nuovo utente, effettua la registrazione.";
+                    }
                     break;
 
             }

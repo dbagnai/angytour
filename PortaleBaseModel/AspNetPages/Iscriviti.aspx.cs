@@ -552,7 +552,6 @@ public partial class _Iscriviti : CommonPage
         DateTime tmp = DateTime.MinValue;
         DateTime.TryParse(txtNascita.Text, out tmp);
         DateTime.TryParseExact(txtNascita.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out tmp);
-
         item.DataNascita = tmp;
         item.ConsensoPrivacy = chkPrivacy.Checked;
         item.Consenso1 = chkNewsletter.Checked;

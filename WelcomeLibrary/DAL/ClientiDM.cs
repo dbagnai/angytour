@@ -5,6 +5,7 @@ using System.Text;
 using WelcomeLibrary.UF;
 using WelcomeLibrary.DOM;
 using System.Data.SQLite;
+using Newtonsoft.Json;
 
 namespace WelcomeLibrary.DAL
 {
@@ -24,18 +25,16 @@ namespace WelcomeLibrary.DAL
             string query = "";
             //query = "SELECT A.*,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE A.Email=@Email";
 
-            query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Emailpec,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE  A.Email like @Email";
+            query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Emailpec,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,A.Ragsoc,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE  A.Email like @Email";
 
             //if (parColl == null || parColl.Count < 2) return list;
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             SQLiteParameter p1 = new SQLiteParameter("@Email", email); //OleDbType.VarChar
             parColl.Add(p1);
             if (idtipocliente == "") idtipocliente = "0";//metto il cliente di tipo default per la ricerca se non specificato!!
-
             query += " and id_tipi_clienti=@id_tipi_clienti";
             SQLiteParameter p2 = new SQLiteParameter("@id_tipi_clienti", idtipocliente); //OleDbType.VarChar
             parColl.Add(p2);
-
 
             try
             {
@@ -55,6 +54,7 @@ namespace WelcomeLibrary.DAL
                         item.Id_card = reader.GetInt64(reader.GetOrdinal("ID_CARD"));
                         if (!reader["CodiceCard"].Equals(DBNull.Value))
                             item.CodiceCard = reader.GetString(reader.GetOrdinal("CodiceCard")); // da verificare
+
                         if (!reader["Cap"].Equals(DBNull.Value))
                             item.Cap = reader.GetString(reader.GetOrdinal("Cap"));
                         if (!reader["Cellulare"].Equals(DBNull.Value))
@@ -118,6 +118,10 @@ namespace WelcomeLibrary.DAL
                         item.id_tipi_clienti = reader.GetInt64(reader.GetOrdinal("id_tipi_clienti")).ToString();
                         if (!reader["Serialized"].Equals(DBNull.Value))
                             item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
+                        item.addvalues = (!string.IsNullOrEmpty(item.Serialized)) ? Newtonsoft.Json.JsonConvert.DeserializeObject<Cliente>(item.Serialized) : new Cliente();
+
+                        if (!reader["Ragsoc"].Equals(DBNull.Value))
+                            item.Ragsoc = reader.GetString(reader.GetOrdinal("Ragsoc"));
 
                         break;
                     }
@@ -248,6 +252,10 @@ namespace WelcomeLibrary.DAL
                         item.id_tipi_clienti = reader.GetInt64(reader.GetOrdinal("id_tipi_clienti")).ToString();
                         if (!reader["Serialized"].Equals(DBNull.Value))
                             item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
+                        item.addvalues = (!string.IsNullOrEmpty(item.Serialized)) ? Newtonsoft.Json.JsonConvert.DeserializeObject<Cliente>(item.Serialized) : new Cliente();
+
+                        if (!reader["Ragsoc"].Equals(DBNull.Value))
+                            item.Ragsoc = reader.GetString(reader.GetOrdinal("Ragsoc"));
                         break;
                     }
                 }
@@ -275,7 +283,7 @@ namespace WelcomeLibrary.DAL
             {
                 if (!even)
                 {
-                    key = codice;
+                    key = codice.ToLower().Trim();
                     if (!dict.ContainsKey(key) && !string.IsNullOrEmpty(key)) dict.Add(key, 0);
                 }
                 else
@@ -307,7 +315,7 @@ namespace WelcomeLibrary.DAL
             try
             {
                 string query = "";
-                query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Emailpec,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE A.Id_cliente=@Id_cliente";
+                query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Emailpec,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,A.Ragsoc,B.CodiceCard AS CodiceCard FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE A.Id_cliente=@Id_cliente";
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
@@ -385,6 +393,10 @@ namespace WelcomeLibrary.DAL
                         item.id_tipi_clienti = reader.GetInt64(reader.GetOrdinal("id_tipi_clienti")).ToString();
                         if (!reader["Serialized"].Equals(DBNull.Value))
                             item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
+                        item.addvalues = (!string.IsNullOrEmpty(item.Serialized)) ? Newtonsoft.Json.JsonConvert.DeserializeObject<Cliente>(item.Serialized) : new Cliente();
+
+                        if (!reader["Ragsoc"].Equals(DBNull.Value))
+                            item.Ragsoc = reader.GetString(reader.GetOrdinal("Ragsoc"));
                         break;
                     }
                 }
@@ -425,7 +437,7 @@ namespace WelcomeLibrary.DAL
                         item = new Cliente();
                         if (!reader["Cognome"].Equals(DBNull.Value))
                             item.Cognome = reader.GetString(reader.GetOrdinal("Cognome"));
-                            item.Nome = reader.GetString(reader.GetOrdinal("Nome"));
+                        item.Nome = reader.GetString(reader.GetOrdinal("Nome"));
                         break;
                     }
                 }
@@ -587,6 +599,8 @@ namespace WelcomeLibrary.DAL
                         item.id_tipi_clienti = reader.GetInt64(reader.GetOrdinal("id_tipi_clienti")).ToString();
                     if (!reader["Serialized"].Equals(DBNull.Value))
                             item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
+                               if (!reader["Ragsoc"].Equals(DBNull.Value))
+                            item.Ragsoc = reader.GetString(reader.GetOrdinal("Ragsoc"));
                         list.Add(item);
                     }
                 }
@@ -752,7 +766,7 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p1);
             try
             {
-                string query = "SELECT  G.GruppoMailing as G_GruppoMailing,G.ID_CLIENTE as G_ID_CLIENTE,G.DescrizioneGruppoMailing,G.DataInserimento,G.Attivo,C.ID_CLIENTE as C_ID_CLIENTE,C.ID_CARD,C.Cap,C.Cellulare,C.CodiceCOMUNE,C.CodiceNAZIONE,C.CodicePROVINCIA,C.CodiceREGIONE,C.Cognome,C.Consenso1,C.Consenso2,C.Consenso3,C.Consenso4,C.ConsensoPrivacy,C.DataInvioValidazione,C.Sesso,C.DataNascita,C.DataRicezioneValidazione,C.Email,C.Emailpec,C.Indirizzo,C.IPclient,C.Lingua,C.Nome,C.Professione,C.Spare1,C.Spare2,C.Telefono,C.TestoFormConsensi,C.Validato,C.Pivacf,C.Codicisconto,C.id_tipi_clienti,C.Serialized  FROM TBL_MAILING_GRUPPI_CLIENTI G LEFT JOIN TBL_CLIENTI C ON G.ID_CLIENTE = c.ID_CLIENTE  WHERE GruppoMailing=@GruppoMailing AND  G.ID_CLIENTE <> 0 ";
+                string query = "SELECT  G.GruppoMailing as G_GruppoMailing,G.ID_CLIENTE as G_ID_CLIENTE,G.DescrizioneGruppoMailing,G.DataInserimento,G.Attivo,C.ID_CLIENTE as C_ID_CLIENTE,C.ID_CARD,C.Cap,C.Cellulare,C.CodiceCOMUNE,C.CodiceNAZIONE,C.CodicePROVINCIA,C.CodiceREGIONE,C.Cognome,C.Consenso1,C.Consenso2,C.Consenso3,C.Consenso4,C.ConsensoPrivacy,C.DataInvioValidazione,C.Sesso,C.DataNascita,C.DataRicezioneValidazione,C.Email,C.Emailpec,C.Indirizzo,C.IPclient,C.Lingua,C.Nome,C.Professione,C.Spare1,C.Spare2,C.Telefono,C.TestoFormConsensi,C.Validato,C.Pivacf,C.Codicisconto,C.id_tipi_clienti,C.Serialized,C.Ragsoc FROM TBL_MAILING_GRUPPI_CLIENTI G LEFT JOIN TBL_CLIENTI C ON G.ID_CLIENTE = c.ID_CLIENTE  WHERE GruppoMailing=@GruppoMailing AND  G.ID_CLIENTE <> 0 ";
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
@@ -834,6 +848,10 @@ namespace WelcomeLibrary.DAL
                             item.id_tipi_clienti = reader.GetInt64(reader.GetOrdinal("id_tipi_clienti")).ToString();
                         if (!reader["Serialized"].Equals(DBNull.Value))
                             item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
+                        item.addvalues = (!string.IsNullOrEmpty(item.Serialized)) ? Newtonsoft.Json.JsonConvert.DeserializeObject<Cliente>(item.Serialized) : new Cliente();
+                        if (!reader["Ragsoc"].Equals(DBNull.Value))
+                            item.Ragsoc = reader.GetString(reader.GetOrdinal("Ragsoc"));
+
                         test += 1;
                         List.Add(item);
                     }
@@ -944,7 +962,7 @@ namespace WelcomeLibrary.DAL
                     sb.Append(";");
                     sb.Append(WelcomeLibrary.UF.Csv.Escape("cellulare"));
                     sb.Append(";");
-                    sb.Append(WelcomeLibrary.UF.Csv.Escape("professione"));
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Documento"));
                     sb.Append(";");
                     sb.Append(WelcomeLibrary.UF.Csv.Escape("data nascita"));
                     sb.Append(";");
@@ -1056,12 +1074,10 @@ namespace WelcomeLibrary.DAL
                 //query = "SELECT A.*,B.CodiceCard AS CodiceCard, B.DataGenerazione as DataGenerazione, B.DataAttivazione as DataAttivazione, B.DurataGG as DurataGG,B.AssegnatoACard as AssegnatoACard ";
                 //query += " FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD WHERE Email like @Email ";
 
-                query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Emailpec,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,B.CodiceCard AS CodiceCard, B.DataGenerazione as DataGenerazione, B.DataAttivazione as DataAttivazione, B.DurataGG as DurataGG,B.AssegnatoACard as AssegnatoACard  FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD ";
+                query = "SELECT A.ID_CLIENTE,A.ID_CARD,A.Cap,A.Cellulare,A.CodiceCOMUNE,A.CodiceNAZIONE,A.CodicePROVINCIA,A.CodiceREGIONE,A.Cognome,A.Consenso1,A.Consenso2,A.Consenso3,A.Consenso4,A.ConsensoPrivacy,A.DataInvioValidazione,A.Sesso,A.DataNascita,A.DataRicezioneValidazione,A.Email,A.Emailpec,A.Indirizzo,A.IPclient,A.Lingua,A.Nome,A.Professione,A.Spare1,A.Spare2,A.Telefono,A.TestoFormConsensi,A.Validato,A.Pivacf,A.Codicisconto,A.id_tipi_clienti,A.Serialized,A.Ragsoc,B.CodiceCard AS CodiceCard, B.DataGenerazione as DataGenerazione, B.DataAttivazione as DataAttivazione, B.DurataGG as DurataGG,B.AssegnatoACard as AssegnatoACard  FROM TBL_CLIENTI A left join TBL_CODICICARD B on A.ID_CARD=B.ID_CARD ";
 
                 string queryfilter = " WHERE Email like @Email ";
-
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
-
                 //Prendendo dai campi del cliente posso inserire i parametri di filtraggio!!!! _paramCliente
                 SQLiteParameter p1 = new SQLiteParameter("@Email", "%");
                 if (_paramCliente != null && !string.IsNullOrEmpty(_paramCliente.Email))
@@ -1069,9 +1085,23 @@ namespace WelcomeLibrary.DAL
                     //p1 = new SQLiteParameter("@Email", "%" + _paramCliente.Email + "%"); //puo restituire piu clienti se la mail è contenuta nella parte inizio o fine di un altra
                     p1 = new SQLiteParameter("@Email", _paramCliente.Email); //puo restituire piu clienti se la mail è contenuta nella parte inizio o fine di un altra
                 }
+
                 parColl.Add(p1);
                 if (_paramCliente != null)
                 {
+
+
+
+                    if (_paramCliente.Id_cliente != 0)
+                    {
+                        SQLiteParameter p2 = new SQLiteParameter("@Id_cliente", _paramCliente.Id_cliente); //OleDbType.VarChar
+                        parColl.Add(p2);
+                        if (!queryfilter.ToLower().Contains("where"))
+                            queryfilter += " WHERE  Id_cliente=@Id_cliente";
+                        else
+                            queryfilter += " AND  Id_cliente=@Id_cliente  ";
+                    }
+
                     if (!bypassvalidazione)
                     {
                         queryfilter += " and Validato = @Validato and Consenso1 = @Consenso1 ";
@@ -1084,7 +1114,7 @@ namespace WelcomeLibrary.DAL
                     {
                         //Il tipo cliente di default è lo 0 (consumatore ) quindi se non definito il tipo prende quel tipo lì
                         //SQLiteParameter pcodsconto = new SQLiteParameter("@Codicisconto", "%" + _paramCliente.Codicisconto + "%"); //OleDbType.VarChar
-                        SQLiteParameter pcodsconto = new SQLiteParameter("@Codicisconto",  _paramCliente.Codicisconto ); //OleDbType.VarChar
+                        SQLiteParameter pcodsconto = new SQLiteParameter("@Codicisconto", _paramCliente.Codicisconto); //OleDbType.VarChar
                         parColl.Add(pcodsconto);
                         queryfilter += " and Codicisconto like @Codicisconto ";
                     }
@@ -1280,6 +1310,9 @@ namespace WelcomeLibrary.DAL
                             item.id_tipi_clienti = reader.GetInt64(reader.GetOrdinal("id_tipi_clienti")).ToString();
                         if (!reader["Serialized"].Equals(DBNull.Value))
                             item.Serialized = reader.GetString(reader.GetOrdinal("Serialized"));
+                        item.addvalues = (!string.IsNullOrEmpty(item.Serialized)) ? Newtonsoft.Json.JsonConvert.DeserializeObject<Cliente>(item.Serialized) : new Cliente();
+                        if (!reader["Ragsoc"].Equals(DBNull.Value))
+                            item.Ragsoc = reader.GetString(reader.GetOrdinal("Ragsoc"));
                         list.Add(item);
                     }
                 }
@@ -1475,8 +1508,13 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pcsco = new SQLiteParameter("@Codicisconto", item.Codicisconto);
             parColl.Add(pcsco);
 
+         
             SQLiteParameter pserial = new SQLiteParameter("@Serialized", item.Serialized);
             parColl.Add(pserial);
+
+            SQLiteParameter pragsoc = new SQLiteParameter("@Ragsoc", item.Ragsoc);
+            parColl.Add(pragsoc);
+
             string query = "";
             if (item.Id_cliente != 0)
             {
@@ -1484,7 +1522,7 @@ namespace WelcomeLibrary.DAL
                 query = "UPDATE [TBL_CLIENTI] SET Id_card=@Id_card,Nome=@Nome,Cognome=@Cognome,CodiceNAZIONE=@CodiceNAZIONE,CodiceREGIONE=@CodiceREGIONE,CodicePROVINCIA=@CodicePROVINCIA,CodiceCOMUNE=@CodiceCOMUNE";
                 query += ",Cap=@Cap,Indirizzo=@Indirizzo,Email=@Email,Emailpec=@Emailpec,Telefono=@Telefono,Cellulare=@Cellulare,Professione=@Professione,IPclient=@IPclient,Validato=@Validato,TestoFormConsensi=@TestoFormConsensi";
                 query += ",DataNascita=@DataNascita,DataInvioValidazione=@DataInvioValidazione,DataRicezioneValidazione=@DataRicezioneValidazione";
-                query += ",ConsensoPrivacy=@ConsensoPrivacy,Consenso1=@Consenso1,Consenso2=@Consenso2,Consenso3=@Consenso3,Consenso4=@Consenso4,Lingua=@Lingua,Spare1=@Spare1,Spare2=@Spare2,Pivacf=@Pivacf,Sesso = @Sesso,id_tipi_clienti=@id_tipi_clienti,Codicisconto=@Codicisconto,Serialized=@Serialized";
+                query += ",ConsensoPrivacy=@ConsensoPrivacy,Consenso1=@Consenso1,Consenso2=@Consenso2,Consenso3=@Consenso3,Consenso4=@Consenso4,Lingua=@Lingua,Spare1=@Spare1,Spare2=@Spare2,Pivacf=@Pivacf,Sesso = @Sesso,id_tipi_clienti=@id_tipi_clienti,Codicisconto=@Codicisconto,Serialized=@Serialized,Ragsoc=@Ragsoc";
                 query += " WHERE [Id_cliente] = " + item.Id_cliente;
             }
             else
@@ -1492,18 +1530,18 @@ namespace WelcomeLibrary.DAL
                 //Insert
                 query = "INSERT INTO TBL_CLIENTI (Id_card,Nome,Cognome,CodiceNAZIONE,CodiceREGIONE,CodicePROVINCIA,CodiceCOMUNE";
                 query += ",Cap,Indirizzo,Email,Emailpec,Telefono,Cellulare,Professione,IPclient,Validato,TestoFormConsensi,DataNascita,DataInvioValidazione,DataRicezioneValidazione";
-                query += ",ConsensoPrivacy,Consenso1,Consenso2,Consenso3,Consenso4,Lingua,Spare1,Spare2,Pivacf,Sesso,id_tipi_clienti,Codicisconto,Serialized)";
+                query += ",ConsensoPrivacy,Consenso1,Consenso2,Consenso3,Consenso4,Lingua,Spare1,Spare2,Pivacf,Sesso,id_tipi_clienti,Codicisconto,Serialized,Ragsoc)";
                 query += " values ( ";
                 query += "@Id_card,@Nome,@Cognome,@CodiceNAZIONE,@CodiceREGIONE,@CodicePROVINCIA,@CodiceCOMUNE";
                 query += ",@Cap,@Indirizzo,@Email,@Emailpec,@Telefono,@Cellulare,@Professione, @IPClient, @Validato,@TestoFormConsensi,@DataNascita,@DataInvioValidazione,@DataRicezioneValidazione";
-                query += ",@ConsensoPrivacy,@Consenso1,@Consenso2,@Consenso3,@Consenso4,@Lingua,@Spare1,@Spare2,@Pivacf,@Sesso,@id_tipi_clienti,@Codicisconto,@Serialized )";
+                query += ",@ConsensoPrivacy,@Consenso1,@Consenso2,@Consenso3,@Consenso4,@Lingua,@Spare1,@Spare2,@Pivacf,@Sesso,@id_tipi_clienti,@Codicisconto,@Serialized,@Ragsoc )";
             }
 
             try
             {
                 long retID = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
                 if (item.Id_cliente == 0) item.Id_cliente = retID; // se era insert memorizzo l'id del cliente appena inserito
-              
+
             }
             catch (Exception error)
             {

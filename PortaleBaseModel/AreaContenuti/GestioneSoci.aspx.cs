@@ -121,9 +121,9 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
             litTitolo.Text = (Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return tmp.Lingua == "I" && tmp.Codice == TipologiaOfferte; })).Descrizione;
 
             CaricaDllLocalizzazione("IT", "", "", "", ddlCodiceNAZIONE1_dts, ddlCodiceREGIONE1_dts, ddlCodicePROVINCIA1_dts, ddlCodiceCOMUNE1_dts, txtCodiceREGIONE1_dts, txtCodicePROVINCIA1_dts, txtCodiceCOMUNE1_dts);
-
             CaricaDllLocalizzazione("IT", "", "", "", ddlCodiceNAZIONE2_dts, ddlCodiceREGIONE2_dts, ddlCodicePROVINCIA2_dts, ddlCodiceCOMUNE2_dts, txtCodiceREGIONE2_dts, txtCodicePROVINCIA2_dts, txtCodiceCOMUNE2_dts);
             CaricaDllLocalizzazione("IT", "", "", "", ddlCodiceNAZIONE3_dts, ddlCodiceREGIONE3_dts, ddlCodicePROVINCIA3_dts, ddlCodiceCOMUNE3_dts, txtCodiceREGIONE3_dts, txtCodicePROVINCIA3_dts, txtCodiceCOMUNE3_dts);
+         
             this.CaricaDatiDdlRicerca("", "", "", "", "");
             CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
             this.CaricaDatiDllProdotto(TipologiaOfferte, "");
@@ -4055,6 +4055,7 @@ public partial class AreaContenuti_GestioneSoci : CommonPage
         {
             WelcomeLibrary.DOM.ProvinceCollection regioni = new WelcomeLibrary.DOM.ProvinceCollection();
             List<Province> provincelingua = Utility.ElencoProvince.FindAll(delegate (Province tmp) { return (tmp.SiglaNazione.ToLower() == dnaz.SelectedValue.ToLower()); });
+
             if (provincelingua != null)
             {
                 provincelingua.Sort(new GenericComparer2<Province>("Regione", System.ComponentModel.ListSortDirection.Ascending, "Codice", System.ComponentModel.ListSortDirection.Ascending));

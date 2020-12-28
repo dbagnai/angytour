@@ -234,6 +234,19 @@ namespace WelcomeLibrary.DOM
             get { return _Serialized; }
             set { _Serialized = value; }
         }
+        private Cliente _addvalues;
+        public Cliente addvalues
+        {
+            get { return _addvalues; }
+            set { _addvalues = value; }
+        }
+        private string _ragsoc;
+        public string Ragsoc
+        {
+            get { return _ragsoc; }
+            set { _ragsoc = value; }
+        }
+
         public Cliente()
         {
             this.card = new Card();
@@ -274,6 +287,7 @@ namespace WelcomeLibrary.DOM
             this.id_tipi_clienti = "0";
             this.Codicisconto = string.Empty;
             this.Serialized = string.Empty;
+            this.Ragsoc = string.Empty;
            
         }
         public Cliente(Cliente tmp)
@@ -316,6 +330,7 @@ namespace WelcomeLibrary.DOM
             this.Codicisconto = tmp.Codicisconto;
             this.id_tipi_clienti = tmp.id_tipi_clienti;
             this.Serialized = tmp.Serialized;
+            this.Ragsoc = tmp.Ragsoc;
 
         }
     }

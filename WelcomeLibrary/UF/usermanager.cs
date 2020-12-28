@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Web.Profile;
 using System.Web.Security;
-
+using WelcomeLibrary.DAL;
+using WelcomeLibrary.DOM;
 
 namespace WelcomeLibrary.UF
 {
@@ -22,16 +23,13 @@ namespace WelcomeLibrary.UF
                     WelcomeLibrary.DOM.Cliente c = WelcomeLibrary.DAL.ClientiDM.GetNomeClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idclente);
                     nomecliente = (c.Cognome + " " + c.Nome).Trim();
                 }
-
                 if (!_users.ContainsKey(user.UserName))
                     _users.Add(user.UserName, nomecliente);
                 else
                     _users[user.UserName] = nomecliente;
             }
         }
-
     }
-
 
     /// <summary>
     /// Descrizione di riepilogo per usermanager
@@ -40,12 +38,7 @@ namespace WelcomeLibrary.UF
     {
         public usermanager()
         {
-            //
-            // TODO: aggiungere qui la logica del costruttore
-            //
         }
-
-
         public bool EliminaUtentebyUsername(string username)
         {
             bool esito = true;
@@ -85,7 +78,6 @@ namespace WelcomeLibrary.UF
             }
             return flag;
         }
-
         public string Cambiopassword(string username, string oldpass, string newpass)
         {
             string text = "";
@@ -112,7 +104,6 @@ namespace WelcomeLibrary.UF
                 MembershipUser utente = Membership.GetUser(username, false);
                 string passimpostata = utente.ResetPassword();
                 text = passimpostata;
-
                 //Procedura con requires question and aswer
 #if false
         if (txtanswer.Text != "")
@@ -134,6 +125,65 @@ namespace WelcomeLibrary.UF
             return text;
         }
 
+        /// <summary>
+        /// Cambia la pass per l'utente indicando o la mail o lo username e la invia per email
+        /// e manda un mail con i dati per accedere al sito
+        /// </summary>
+        /// <param name="lingua"></param>
+        /// <param name="email"></param>
+        /// <param name="idtipocliente"></param>
+        /// <param name="mittentenome"></param>
+        /// <param name="mittentemail"></param>
+        /// <returns></returns>
+        public string SendAccessData(string lingua, string emailoruser, string mittentemail, string mittentenome = "", string idtipocliente = "0")
+        {
+            string ret = "";
+            try
+            {
+                usermanager USM = new usermanager();
+                ClientiDM cliDM = new ClientiDM();
+                Cliente cliente = new Cliente();
+                string username = emailoruser; //Ipotizzo che mi possa passare l'username invece della mail
+                string idcliente = getidcliente(username); //prendo l'id anagrafica associato al cliente loggato ( se disponibile )
+                cliente = cliDM.CaricaClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idcliente); //prende il cliente per idcliente con qualsiasi tipologia questo 
+                if (cliente == null || cliente.Id_cliente == 0) //se non trovo l'utente con l'username allora lo cerco per email
+                    cliente = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, emailoruser, idtipocliente);
+                if (cliente != null && cliente.Id_cliente != 0) username = cliente.Id_cliente.ToString() + "-" + cliente.Email;
+
+                if (USM.VerificaPresenzaUtente(username) && cliente != null && cliente.Id_cliente != 0)  //Cliente esistente ed utente esistente
+                {
+                    string newpassword = WelcomeLibrary.UF.RandomPassword.Generate(8);
+                    MembershipUser utente = Membership.GetUser(username, false);
+                    if (utente != null)
+                    {
+                        string resetpass = utente.ResetPassword();
+                        if (utente.ChangePassword(resetpass, newpassword))
+                        {
+                            string SoggettoMail = " Mail invio dati da " + mittentenome;
+                            //Dati per la mail
+                            string nomecliente = cliente.Cognome + " " + cliente.Nome;
+                            string Mailcliente = cliente.Email;
+                            string Descrizione = "Password set for " + username + "<br/>";
+                            Descrizione += newpassword + "<br/><br/>";
+
+                            Descrizione += references.ResMan("Common", lingua, "forgetResponse1").ToString() + "<br/><br/>";
+                            Utility.invioMailGenerico(mittentenome, mittentemail, SoggettoMail, Descrizione, Mailcliente, nomecliente);
+                            ret = references.ResMan("Common", lingua, "forgetResponse2");
+                        }
+                    }
+
+                }
+                else
+                    ret = references.ResMan("Common", lingua, "forgetResponse3");
+            }
+            catch (Exception err)
+            {
+                ret = references.ResMan("Common", lingua, "forgetResponse3") + "<br/>" + err.Message;
+            }
+            return ret;
+        }
+
+
         public bool CreaUtente(string idassociato, ref string username, ref string password, string role = "Operatore")
         {
             bool esito = false;
@@ -152,7 +202,7 @@ namespace WelcomeLibrary.UF
                     ProfileBase prof = ProfileBase.Create(username);
                     prof["IdCliente"] = idassociato;
                     prof.Save();
-                    password = "User: " + username + " Psw: " + password;
+                    //password = "User: " + username + " Psw: " + password;
                     esito = true;
                 }
             }
@@ -289,7 +339,9 @@ namespace WelcomeLibrary.UF
 
             //ProfileCommon prf = (ProfileCommon)Profile.GetProfile(utente);
             ProfileBase profile = ProfileBase.Create(utente);
-            string idCliente = (string)profile["IdCliente"];
+            string idCliente = "";
+            if (profile != null)
+                idCliente = (string)profile["IdCliente"];
 
             // need to reset the UserLastActivityDate that has just been updated by above two lines
             if (_user != null)

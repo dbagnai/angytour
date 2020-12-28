@@ -22,7 +22,6 @@
             //var ctrmail = $('#' + item);
             __doPostBack('aggiornatettaglio', '');
         }
-
         $(function () {
             tinymceinit();
         });
@@ -66,7 +65,6 @@
                 ]
             });
         }
-
     </script>
     <input type="hidden" id="hidIdselected" runat="server" clientidmode="static" />
     <input type="hidden" id="hidTipologia" runat="server" clientidmode="static" />
@@ -183,7 +181,7 @@
                     });
 
                 </script>
-                <div style="overflow-y: auto; height: 370px; width: 600px">
+                <div style="overflow-y: auto; height: 370px; width: 100%">
                     <div id="dzContainer">
                         <div id="dZUpload" class="dropzone" style="background-color: lightyellow; min-height: 370px">
                             <div class="dz-default"></div>
@@ -688,7 +686,16 @@
                     <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="Insertvalidate" />
                     <hr />
                 </div>
-
+                <div class="row">
+                    <div class="col-sm-2 item-text">
+                        <strong>
+                            <asp:Label ID="Label61" runat="server" Text="Nazione" /></strong>
+                    </div>
+                    <div class="col-sm-10">
+                        <asp:DropDownList CssClass="form-control" AppendDataBoundItems="true" AutoPostBack="true" ID="ddlNazione"
+                            OnSelectedIndexChanged="ddlNazione_SelectedIndexChanged" runat="server" />
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-sm-2 item-text">
                         <strong>
@@ -943,6 +950,186 @@
                             FilterType="Custom, Numbers" ValidChars="0123456789," />
                     </div>
                 </div>
+                <%=  InjectedStartPageScripts() %>
+                <asp:Panel runat="server" ID="pnlScaglioni" Visible="false">
+                      <script type="text/javascript" src="<%= CommonPage.ReplaceAbsoluteLinks("~/lib/js/gestioneprodotticontroller.js")+ CommonPage.AppendModTime(Server,"~/lib/js/gestioneprodotticontroller.js")%>"></script>
+                <script>
+                    $(document).ready(function () {
+                        //console.log('sel act: ' + $("#hidIdselected").val());
+                        ProdottiManager.initVUE($("#hidIdselected").val());
+                        //$('.datepicker').datetimepicker({ format: 'D/MM/Y HH:mm' });
+                    });
+                </script>
+                    <div id="vueContainer">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <hr />
+                                <h2>Gestione Scaglioni Partenze</h2>
+                            </div>
+                            <div class="col-sm-12">
+                                <span style="font-size: 1.4rem; color: crimson">
+                                    <span>{{vm.message}}</span>
+                                </span>
+                            </div>
+                            <div class="col-sm-12">
+                                <div style="background: #ccc; padding: 10px 30px 30px 30px;">
+                                    <%--<div id="divblockoverlay1" style="position: absolute; top: 0; bottom: 0; z-index: 2; height: 100%; width: 100%; background-color: rgba(0,0,0,0.2);"></div>--%>
+                                    <div class="row" style="padding-bottom: 10px">
+                                          <div class="col-sm-3 item-text text-left">
+                                               <strong>Id scaglione: </strong>
+                                            <span v-html="vm.itemselected.id" ></span> 
+                                              </div>
+                                              <div class="col-sm-3 item-text  text-left">
+                                            <strong>Id attivita: </strong>  <span v-html="vm.itemselected.id_attivita" ></span> 
+                                                      </div>
+                                              <div class="col-sm-3 item-text  text-left">
+                                            <strong>Stato: </strong> <br/>
+                                            <select v-model="vm.itemselected.stato">												
+												<option v-for="(value,key) in im.statuslist" :value="key">{{ value }}</option>
+											</select>
+                                         </div>
+                                           <div class="col-sm-3 item-text  text-left">
+                                               <strong>Fascia di età: </strong><br />
+                                            <select v-model="vm.itemselected.fasciaeta">												
+												<option v-for="(value,key) in im.etalist" :value="key">{{ value }}</option>
+											</select>   
+                                                </div>
+                                        <div class="col-sm-6 item-text">
+                                                
+                                            <strong>Coordinatore:  <span style="font-size:1.6rem;color:blue" v-html="vm.coordinatoriinlist[vm.itemselected.idcoordinatore]" ></span> </strong>
+                                             <div class="autocomplete">
+                                               <input type="text" id="inpCoordinatore" class="form-control autocompleteinput" v-model="vm.itemselected.idcoordinatore"
+                                                   @keypress="isNumber($event)"   @focus="onChangeAutocomplete()"  />
+                                              <ul class="autocomplete-results" v-show="im.isOpen"  >
+                                                <li><input class="autocompleteinput" placeholder="cerca .." type="text" v-model="im.filterkey" @input="onChangeAutocomplete()" /></li>
+                                                <li v-for="(value, key) in im.filteredautocomplete"
+                                                    @click="setResultAutocomplete(key)"
+                                                    class="autocomplete-result">
+                                                            {{ value }}
+                                                    </li>
+                                               </ul>
+                                             </div>
+
+
+                                             <strong>data: </strong>
+                                            <br />  
+                                            <input id="txtdatapartenza" type="text" class="form-control"
+                                               v-bind:value="vm.itemselected.datapartenza | formatDate"
+                                               v-on:blur="vm.itemselected.datapartenza = formatDateforvue($event.target.value)"
+                                               />
+                                                 
+                                        </div>
+                                        <div class="col-sm-6 item-text">
+                                            <strong>Prezzo €: </strong>
+                                            <br />
+                                               <input type="text" class="form-control"
+                                               @keypress="isNumber($event)"
+                                               v-bind:value="vm.itemselected.prezzo | formatNumber"
+                                               v-on:blur="vm.itemselected.prezzo = formatNumberforvue($event.target.value)" />
+                                                <strong>Durata (gg): </strong>
+                                            <br />
+                                            <input class="form-control"  v-model="vm.itemselected.durata" /><br />
+                                        </div>
+                                          <div class="col-sm-6 item-text">
+                                                <strong>Codice sconto: </strong>
+                                            <br />
+                                            <input class="form-control"  v-model="vm.itemselected.codicesconto" /><br />
+                                        </div>
+                                        <div class="col-sm-3 item-text">
+                                            <strong>Soglia Conferma: </strong>
+                                            <br />
+                                            <input type="text" class="form-control" v-model="vm.itemselected.nconferma" />
+                                        </div>
+                                        <div class="col-sm-3 item-text">
+                                            <strong>Limite Completo: </strong>
+                                            <br />
+                                            <input type="text" class="form-control" v-model="vm.itemselected.nmax" />
+                                         </div>
+                                    </div>
+                                     <input type="button" class="btn btn-primary btn-sm"  v-on:click="svuotaDettaglio()" value="Nuovo" />
+                                     <input type="button" class="btn btn-primary btn-sm"  v-on:click="inserisciAggiornaDettaglio()" value="Aggiorna/Inserisci" />
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div style="max-height: 400px; overflow-y: auto">
+                                    <p style="font-size:1.8rem">
+                                    Nascondi scaglioni passati: <input  v-on:click="fetchMessages()"  v-model:checked="vm.nascondiscaglionipassati" type="checkbox" id="chkfiltroscaglioni"   /><br />
+                                        </p>
+                                    <table class="table table-fixed">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-xs-1">#</th>
+                                                <th class="col-xs-1">Id</th>
+                                                <th class="col-xs-1">Ida</th>
+                                                <th class="col-xs-2">Data</th>
+                                                <th class="col-xs-1">Durata gg</th>
+                                                <th class="col-xs-2">Stato</th>
+                                                <th class="col-xs-1"><i class="fa fa-hand-o-up"></i></th>
+                                                <th class="col-xs-1">Attesa Pag.</th>
+                                                <th class="col-xs-1">Iscritti</th>
+                                                <th class="col-xs-1">Avvisi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="row in vm.list">
+                                                <td class="col-xs-1">
+                                                    <button type="button" v-bind:class="{ selected : isSelected(row.id) }" v-on:click="caricaDettaglio(row.id)"><i class="fa fa-search fa-2x"></i></button>
+                                                </td>
+                                                <td class="col-xs-1">
+                                                    <div style="height: 50px; overflow-y: auto">
+                                                    <a v-bind:href="'/AreaContenuti/storicoordini.aspx?id_scaglione=' + row.id" target="_blank">{{row.id}}</a><br />
+                                                    </div>
+                                                </td>
+                                                <td class="col-xs-1">
+                                                    <div style="height: 50px; overflow-y: auto;">
+                                                    <a v-bind:href="'/AreaContenuti/storicoordini.aspx?id_attivita=' + row.id_attivita" target="_blank">{{row.id_attivita}}</a><br />
+                                                        
+                                                    </div>
+                                                </td>
+                                                <td class="col-xs-2">
+                                                    <div style="height: 50px; overflow-y: auto">
+                                                        <span>{{ row.datapartenza | formatshortDate }}</span>
+                                                    </div>
+                                                </td>
+                                                <td class="col-xs-1">
+                                                    <div style="height: 50px; overflow-y: auto">
+                                                        {{row.durata}}
+                                                    </div>
+                                                </td>
+                                                <td class="col-xs-2">
+                                                    <div style="height: 50px; overflow-y: auto">
+                                                        <%--{{row.stato}}--%>
+                                                        <span v-html="statustext(row.stato)"></span>
+                                                    </div>
+                                                </td>
+                                                <td class="col-xs-1">
+                                                    <div style="height: 50px; overflow-y: auto">
+                                                        <button type="button" class="btn btn-primary btn-sm" v-on:click="eliminaDettaglio(row.id)">Del</button>
+                                                    </div>
+                                                </td>
+                                                 <td class="col-xs-1">
+                                                    <div style="height: 50px; overflow-y: auto">
+                                                      {{row.addedvalues["nattesa"]}}
+                                                    </div>
+                                                </td>
+                                                  <td class="col-xs-1">
+                                                    <div style="height: 50px; overflow-y: auto">
+                                                         {{row.addedvalues["niscritti"]}}
+                                                    </div>
+                                                </td>
+                                                   <td class="col-xs-1">
+                                                    <div style="height: 50px; overflow-y: auto">
+                                                        .
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </asp:Panel>
                 <asp:Panel runat="server" ID="pnlProdottiAssociati" Visible="false">
                     <script>
                         var propcollegati = [];

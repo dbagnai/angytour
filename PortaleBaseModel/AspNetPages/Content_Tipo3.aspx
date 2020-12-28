@@ -251,14 +251,21 @@
                                                                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator6" ControlToValidate="txtNome"
                                                                         ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' Style="text-align: left; width: 100%;" Text="*" ValidationGroup="MailInfo" />
                                                                 </div>
+                                                                 <div class="ui-input my-0">
+                                                                    <asp:TextBox ID="txtCognome" Width="99%" runat="server"
+                                                                        class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' />
+                                                                    <label class="ui-icon"><i class="fa fa-user"></i></label>
+                                                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtCognome"
+                                                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto3Err") %>' Style="text-align: left; width: 100%;" Text="*" ValidationGroup="MailInfo" />
+                                                                </div>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <div class="ui-input my-0">
                                                                     <asp:TextBox ID="txtSoc" Width="99%" runat="server"
-                                                                        class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto16l") %>' />
+                                                                        class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"formtesto16s") %>' />
                                                                     <label class="ui-icon"><i class="fa fa-user"></i></label>
-                                                                    <asp:RequiredFieldValidator runat="server" ID="reqValidatorNome" ControlToValidate="txtSoc"
-                                                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' Text="*" ValidationGroup="MailInfo" />
+                                                                    <%--<asp:RequiredFieldValidator runat="server" ID="reqValidatorNome" ControlToValidate="txtSoc"
+                                                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"formtesto16sErr") %>' Text="*" ValidationGroup="MailInfo" />--%>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -402,8 +409,9 @@
                                                                         contactdatas.persone = $("[id$='txtPersone']").val();
                                                                         contactdatas.datarichiesta = $("[id$='txtData']").val();
                                                                         contactdatas.orario = $("[id$='txtOrario']").val();
+                                                                        contactdatas.cognome = $("[id$='txtCognome']").val();
                                                                         contactdatas.name = $("[id$='txtNome']").val();
-                                                                        contactdatas.cognome = $("[id$='txtSoc']").val();
+                                                                        contactdatas.ragsoc = $("[id$='txtSoc']").val();
                                                                         contactdatas.email = $("[id$='txtEmail']").val();
                                                                         contactdatas.telefono = $("[id$='txtTel']").val();
                                                                         contactdatas.message = $("[id$='txtDescrizione']").val();

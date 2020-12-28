@@ -244,7 +244,6 @@ public partial class AspNetPages_Shoppingcart : CommonPage
             output.Text = references.ResMan("Common", Lingua, "testoCarellosuperamentoquantita");
         }
         txtQuantita_temp.Value = "0";
-        //AggiornaVisualizzazioneDatiCarrello();
         CaricaCarrello();
 
     }
@@ -272,7 +271,6 @@ public partial class AspNetPages_Shoppingcart : CommonPage
         txtQuantita_temp.Value = quantita.ToString();
 
         //QUI DEVI FARE L'AGGIORNAMENTO DEI RIEPILOGHI DEL CARRELLO NELLA MASTER!!!!->
-        //  AggiornaVisualizzazioneDatiCarrello();
         CaricaCarrello();
 
     }
@@ -297,6 +295,7 @@ public partial class AspNetPages_Shoppingcart : CommonPage
         int.TryParse(txtQuantita_temp.Value, out quantita);
 
         quantita += 1;//Incremento
+
         AggiornaProdottoCarrello(Request, Session, 0, quantita, User.Identity.Name, "", idcarrello);
         if (Session["superamentoquantita"] != null)
         {
@@ -309,7 +308,6 @@ public partial class AspNetPages_Shoppingcart : CommonPage
         txtQuantita_temp.Value = quantita.ToString();
 
         //QUI DEVI FARE L'AGGIORNAMENTO DEI RIEPILOGHI DEL CARRELLO NELLA MASTER!!!!->
-        // AggiornaVisualizzazioneDatiCarrello();
         CaricaCarrello();
 
     }
