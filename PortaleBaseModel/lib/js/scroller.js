@@ -190,7 +190,8 @@ function ScrollerInit(controlid) {
             pagination: true,
             navigation: false,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            lazyLoad: true  //assegnare lazyOwl class a img
         });
 
         // Custom Navigation Events
@@ -214,7 +215,9 @@ function ScrollerInit1(controlid) {
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
             slideSpeed: 1000,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            lazyLoad: truelazyLoad,
+            lazyLoad: true //assegnare lazyOwl class a img
         });
 
         // Custom Navigation Events
@@ -240,7 +243,8 @@ function ScrollerInit2(controlid) {
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
             slideSpeed: 1000,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            lazyLoad: true //assegnare lazyOwl class a img
         });
 
         // Custom Navigation Events
@@ -264,7 +268,8 @@ function ScrollerInit5(controlid) {
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
             slideSpeed: 1000,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            lazyLoad: true //assegnare lazyOwl class a img
         });
 
         // Custom Navigation Events
@@ -288,7 +293,8 @@ function ScrollerInitSingolo(controlid) {
             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
             slideSpeed: 1000,
             afterInit: lazyLoad,
-            afterMove: lazyLoad
+            afterMove: lazyLoad,
+            lazyLoad: true //assegnare lazyOwl class a img
         });
 
         // Custom Navigation Events

@@ -521,6 +521,7 @@
              "~/js/owl-carousel.js",
             "~/js/owl-carousel/owl-carousel/owl.carousel.min.js",
             "~/js/jquery-ui-1.12.1.custom/jquery-ui.js", //ingomnrante
+              "~/js/jquery-ui-1.12.1.custom/jquery.ui.touch-punch.min.js", //ingomnrante
             "~/js/jqueryui/jquery.maskedinput.js", //ingommbrante
             "~/js/revolution464/jquery.themepunch.plugins.min.js", //ingomnrante
             "~/js/revolution464/jquery.themepunch.tools.min.js", //ingomnrante

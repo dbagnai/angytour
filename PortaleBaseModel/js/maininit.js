@@ -142,7 +142,12 @@ jQuery(document).ready(function ($) {
             window.location.pathname.toLowerCase() == "/ru/home" ||
             window.location.pathname.toLowerCase() == "/fr/home" ||
             window.location.pathname.toLowerCase() == "/index.aspx") ishome = true;
-        if (ishome) {
+
+        var fulliimageheader = false;
+        if ($('body').find('.setfullscreenheader').length > 0) fulliimageheader = true;
+
+        //if (true) {
+        if (ishome || fulliimageheader) {
             $('.fixedtop').addClass('fixedtop-home');
             $('.fixednav').addClass('fixednav-home');
             $('.fulllogobckdark').addClass('fulllogobckdark-home');

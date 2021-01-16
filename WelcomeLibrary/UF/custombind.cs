@@ -3729,16 +3729,22 @@ namespace WelcomeLibrary.UF
                                 completepath = completepath.Substring(0, position + 1) + "ant" + filename;
                             }
 
-
-                            if (nodetobind != null && !string.IsNullOrEmpty(completepath))
-                                if (nodetobind.Attributes.Contains("style"))
-                                {
-                                    nodetobind.Attributes["style"].Value += ";background-image:url('" + completepath + "')";
-                                }
-                                else
-                                    nodetobind.Attributes.Add("style", "background-image:url('" + completepath + "')");
+                            if (nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("lazy"))
+                            {
+                                if (nodetobind != null && !string.IsNullOrEmpty(completepath))
+                                    nodetobind.SetAttributeValue("data-srcbck", completepath);
+                            }
+                            else
+                            {
+                                if (nodetobind != null && !string.IsNullOrEmpty(completepath))
+                                    if (nodetobind.Attributes.Contains("style"))
+                                    {
+                                        nodetobind.Attributes["style"].Value += ";background-image:url('" + completepath + "')";
+                                    }
+                                    else
+                                        nodetobind.Attributes.Add("style", "background-image:url('" + completepath + "')");
+                            }
                         }
-
                     }
                     else if ((nodetobind.Name == "div" || nodetobind.Name == "section") && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("bckvideoelement"))
                     {

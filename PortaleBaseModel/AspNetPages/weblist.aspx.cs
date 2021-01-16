@@ -308,8 +308,8 @@ public partial class AspNetPages_weblist : CommonPage
         string cattipo = Tipologia;
         ClientScriptManager cs = Page.ClientScript;
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        InizializzaSeo();
         ModificaFiltroJS(); //Preparo il filtor con i parametri aggiuntivi di filtro
+        InizializzaSeo();
 
 
 
@@ -1194,10 +1194,22 @@ public partial class AspNetPages_weblist : CommonPage
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////// ALTERNATE E CANONICAL /////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        string linki = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I", CleanUrl(sezionedescrizioneI), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
-        string linken = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
-        string linkru = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("RU", CleanUrl(sezionedescrizioneRU), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
-        string linkfr = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("FR", CleanUrl(sezionedescrizioneFR), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
+
+        //string linki = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I", CleanUrl(sezionedescrizioneI), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
+        //string linken = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
+        //string linkru = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("RU", CleanUrl(sezionedescrizioneRU), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
+        //string linkfr = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("FR", CleanUrl(sezionedescrizioneFR), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
+
+        Dictionary<string, string> objvalue = new Dictionary<string, string>();
+        if (Session["objfiltro"] != null)
+        {
+            string sobjvalue = Session["objfiltro"].ToString();
+            objvalue = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(sobjvalue);
+        }
+        string linki = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "I"));
+        string linken = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "GB"));
+        string linkru = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "RU"));
+        string linkfr = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "FR"));
 
         contentcollegato = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, linki.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, ""));
         if ((contentcollegato == null || contentcollegato.Id == 0) && WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")

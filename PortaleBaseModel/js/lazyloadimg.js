@@ -13,7 +13,7 @@ var lazy = [];
 })();
 
 function lazyLoad() {
-    lazy = $.grep($('.lazy'), function (e) { return $(e).attr('data-src') != undefined });
+    lazy = $.grep($('.lazy'), function (e) { return ($(e).attr('data-src') != undefined || $(e).attr('data-srcbck') != undefined) });
     //  console.log("found lazy imgs: " + lazy.length);
     for (var i = 0; i < lazy.length; i++) {
         //if (isInViewport(lazy[i])) {
@@ -23,6 +23,14 @@ function lazyLoad() {
                 //console.log(lazy[i].getAttribute('data-src'));
                 lazy[i].src = lazy[i].getAttribute('data-src');
                 lazy[i].removeAttribute('data-src');
+            }
+            if (lazy[i].getAttribute('data-srcbck')) {
+                if (!lazy[i].hasAttribute("style")) lazy[i].setAttribute("style", "");
+                //style="background-image:url('urlimmagine')
+                //lazy[i].style += ";background-image:url('" + lazy[i].getAttribute('data-srcbck') + "');";
+                lazy[i].setAttribute("style", lazy[i].getAttribute('style') + ";background-image:url('" + lazy[i].getAttribute('data-srcbck') + "');");
+                lazy[i].src = lazy[i].getAttribute('data-srcbck');
+                lazy[i].removeAttribute('data-srcbck');
             }
         }
     }
