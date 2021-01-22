@@ -478,10 +478,10 @@ function InitRangeControl(idrangecontrol, callback) {
         step: 50,
         values: [0, 5000],
         slide: function (event, ui) {
-            $("#" + idrangecontrolview).val("$" + ui.values[0] + " - €" + ui.values[1]);
+            $("#" + idrangecontrolview).val("€" + ui.values[0] + " - €" + ui.values[1]);
         },
         change: function (event, ui) {
-            $("#" + idrangecontrolview).val("$" + ui.values[0] + " - €" + ui.values[1]);
+            $("#" + idrangecontrolview).val("€" + ui.values[0] + " - €" + ui.values[1]);
         }
     });
     $("#" + idrangecontrolview).val("€" + $("#" + idrangecontrol).slider("values", 0) +

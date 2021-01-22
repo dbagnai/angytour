@@ -3718,16 +3718,18 @@ namespace WelcomeLibrary.UF
                             if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey("image"))
                                 completepath = linkloaded[idscheda]["image"];
 
-                            if (nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("img-ant") && completepath.ToLower().LastIndexOf("dummylogo") == -1)
-                            {
-                                int position = completepath.LastIndexOf('/');
-                                var filename = completepath.Substring(position + 1);
-                                filename = filename.Replace("-xs.", ".");
-                                filename = filename.Replace("-sm.", ".");
-                                filename = filename.Replace("-md.", ".");
-                                filename = filename.Replace("-lg.", ".");
-                                completepath = completepath.Substring(0, position + 1) + "ant" + filename;
-                            }
+                            if (nodetobind.Attributes.Contains("class"))
+                                if ((nodetobind.Attributes["class"].Value.Contains("img-ant") || (nodetobind.Attributes["class"].Value.Contains("img-noscaling"))) && completepath.ToLower().LastIndexOf("dummylogo") == -1)
+                                {
+                                    int position = completepath.LastIndexOf('/');
+                                    var filename = completepath.Substring(position + 1);
+                                    filename = filename.Replace("-xs.", ".");
+                                    filename = filename.Replace("-sm.", ".");
+                                    filename = filename.Replace("-md.", ".");
+                                    filename = filename.Replace("-lg.", ".");
+                                    if (!(nodetobind.Attributes["class"].Value.Contains("img-noscaling")))
+                                        completepath = completepath.Substring(0, position + 1) + "ant" + filename;
+                                }
 
                             if (nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("lazy"))
                             {
@@ -3745,6 +3747,7 @@ namespace WelcomeLibrary.UF
                                         nodetobind.Attributes.Add("style", "background-image:url('" + completepath + "')");
                             }
                         }
+
                     }
                     else if ((nodetobind.Name == "div" || nodetobind.Name == "section") && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("bckvideoelement"))
                     {

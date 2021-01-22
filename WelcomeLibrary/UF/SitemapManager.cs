@@ -614,7 +614,11 @@ namespace WelcomeLibrary.UF
                 {
                     string tmptxt = modificatestourlbyparameter(kv, Lingua);
                     testomodificatore1 += (!string.IsNullOrEmpty(tmptxt)) ? tmptxt + "-" : ""; //estendo l'url col testo in base al filtro dei parametri aggiuntivi passati
-                    testomodificatore2 += CleanUrl(kv.Value).Replace("p", "").TrimStart('0'); ;//modifico il testo dell'url usando i codici concatenati per differenziare l'url a prescindere dal testo!
+                    if (kv.Value != "0") //per valore chiave a zero non faccio il replace senno la chiave 0 la annullo!!!
+                        testomodificatore2 += CleanUrl(kv.Value).Replace("p", "").TrimStart('0'); //modifico il testo dell'url usando i codici concatenati per differenziare l'url a prescindere dal testo!
+                    else
+                        testomodificatore2 += CleanUrl(kv.Value);//modifico il testo dell'url usando i codici concatenati per differenziare l'url a prescindere dal testo!
+
                 }
 
             if (!string.IsNullOrEmpty(testomodificatore2))
