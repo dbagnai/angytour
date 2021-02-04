@@ -5172,7 +5172,7 @@ namespace WelcomeLibrary.DAL
             }
             else
             {
-                SQLiteParameter pid = new SQLiteParameter("@Idlist", id);
+                SQLiteParameter pid = new SQLiteParameter("@IdList", id);
                 parColl.Add(pid);
             }
             offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", lingua);

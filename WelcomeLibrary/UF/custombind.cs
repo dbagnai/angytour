@@ -3816,6 +3816,182 @@ namespace WelcomeLibrary.UF
                             }
                         }
                     }
+                    else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("scaglionitoolcrd"))
+                    {
+                        ScaglioniCollection scaglioni = new ScaglioniCollection();
+                        string idscheda = "";
+                        if (itemdic.ContainsKey(property))
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            string idcontrolcarrello = "";
+                            if (nodetobind.Attributes.Contains("myvalue"))
+                                idcontrolcarrello = nodetobind.Attributes["myvalue"].Value;
+                            idscheda = itemdic[property];
+                            string proprieta = "";
+                            if (nodetobind.Attributes.Contains("mybind1"))
+                                proprieta = nodetobind.Attributes["mybind1"].Value;
+
+                            Dictionary<string, string> idcoordbyidscaglione = new Dictionary<string, string>();
+                            List<string> idlistcoordinatori = new List<string>();
+                            string coordname = "";
+                            //string scaglioniserialized = "";
+                            //if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey(proprieta) && !string.IsNullOrEmpty(linkloaded[idscheda][proprieta]))
+                            if (itemdic.ContainsKey(proprieta) && !string.IsNullOrEmpty(itemdic[proprieta]))
+                            {
+                                try
+                                {
+                                    //Prendo i dati dello scaglione da itemdic[proprieta] deserializzandolo ....
+                                    scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(itemdic[proprieta]);
+                                    //Alternativa da linkedresource
+                                    //scaglioniserialized = linkloaded[idscheda][proprieta];
+                                    //scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(scaglioniserialized);;
+                                    //ELIMINIAMO DALLA LISTA VISUALIZZATA GLI SCAGLIONI PASSATI che non servono nella scheda con data inferiore a oggi
+                                    if (scaglioni != null)
+                                    {
+                                        scaglioni.RemoveAll(s => s.datapartenza < System.DateTime.Now);
+
+#if false //cevvhia versione che caricava il nome in base a id coordinatore
+                                        string coordinatore = "";
+                                        offerteDM offDM = new offerteDM();
+                                        foreach (Scaglioni el in scaglioni)
+                                        {
+                                            Offerte cordinatore = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, el.idcoordinatore.ToString());
+                                            if (cordinatore != null && cordinatore.Id != 0)
+                                                coordinatore = offDM.estraititolo(cordinatore, Lingua);
+                                            break;//prendo il primo che trovo
+                                        }
+                                        coordname = coordinatore; 
+#endif
+                                        foreach (Scaglioni el in scaglioni)
+                                        {
+                                            ////////////COORDINATORI
+                                            if (!idcoordbyidscaglione.ContainsKey(el.id.ToString().ToString()))
+                                                idcoordbyidscaglione.Add(el.id.ToString(), el.idcoordinatore.ToString());
+                                            if (!idlistcoordinatori.Contains(el.idcoordinatore.ToString()))
+                                                idlistcoordinatori.Add(el.idcoordinatore.ToString());
+                                            //////////////////////////////////////////////
+                                        }
+
+                                        //Creaiamo i link alle schede coordinatori ( a partire dall'id coordinatore devo caricare i dati del coordinatore )
+                                        //scorro dictionary idcoordbyidscaglione dove per ogni idscglione ho idcoordinatore
+                                        // e nel valore sostituisco l'id coordinatore con un dictonary key,value con icon,name,link )
+                                        Dictionary<string, string> coordetails = new Dictionary<string, string>();
+                                        Dictionary<string, Dictionary<string, string>> coordadatabyidscaglione = new Dictionary<string, Dictionary<string, string>>();
+                                        offerteDM offDM = new offerteDM();
+                                        string sessionid = "";
+                                        if (Session != null && !string.IsNullOrEmpty(Session.SessionID))
+                                            sessionid = Session.SessionID;
+                                        string stringidlistcoordinatori = "";
+                                        idlistcoordinatori.ForEach(co => stringidlistcoordinatori += co + ",");
+                                        stringidlistcoordinatori = stringidlistcoordinatori.TrimEnd(',');
+                                        Dictionary<string, string> coordinfos = offerteDM.getlinklist(Lingua, stringidlistcoordinatori, sessionid);//passando la lista idcoordinatori me li tira su tutti senza caricarli ad ogni giro
+
+                                        //GENERAZIONE DIRETTA HTML PER I COORDINATORI
+                                        //puoi aggiungere direttamente qui con lo stringbuider i controllo da mettere in pagina che sono i link alle schede coordinatori con iconcina tonda 
+                                        //<a class=\"link-coord\" href=\"\"><img class=\"img-small-rounded\" src=\"\"></a>
+                                        foreach (string idcoordinatore in idlistcoordinatori)
+                                        {
+#if false
+                                            //html con img contenuta
+                                            sb.Append("<a class=\"link-coord\" href=\"");
+                                            sb.Append(coordinfos[idcoordinatore]);
+                                            sb.Append("\"><img  class=\"coordid-" + idcoordinatore + " img-small-rounded\" src=\"");
+                                            sb.Append(coordinfos[idcoordinatore + "img"]);
+                                            sb.Append("\"></a>");
+
+#endif
+                                            sb.Append("<a data-toggle=\"tooltip\" title=\"" + coordinfos[idcoordinatore + "name"] + "\" class=\"link-coord\" href=\"");
+                                            sb.Append(coordinfos[idcoordinatore]);
+                                            sb.Append("\"><div  class=\"coordid-" + idcoordinatore + " container-small-rounded\" ");
+                                            sb.Append(" style=\"background-image:url('" + coordinfos[idcoordinatore + "img"] + "')");
+                                            sb.Append("\"></div></a>");
+                                        }
+                                    }
+                                }
+                                catch { }
+                            }
+
+                            //sb.Append(coordname);  //questa mette solo il nome ...
+                            string contenutoslide = sb.ToString();
+                            nodetobind.InnerHtml += contenutoslide;
+                            //Visualizzazione elemento
+                            if (nodetobind != null && scaglioni != null && scaglioni.Count > 0)
+                            {
+                                if (nodetobind.Attributes.Contains("style"))
+                                {
+                                    nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                    nodetobind.Attributes["style"].Value += ";display:block";
+                                }
+                                else
+                                    nodetobind.Attributes.Add("style", "display:block");
+                            }
+                        }
+                    }
+                    else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("scaglionitooleta"))
+                    {
+                        ScaglioniCollection scaglioni = new ScaglioniCollection();
+                        string idscheda = "";
+                        if (itemdic.ContainsKey(property))
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            string idcontrolcarrello = "";
+                            if (nodetobind.Attributes.Contains("myvalue"))
+                                idcontrolcarrello = nodetobind.Attributes["myvalue"].Value;
+                            idscheda = itemdic[property];
+                            string proprieta = "";
+                            if (nodetobind.Attributes.Contains("mybind1"))
+                                proprieta = nodetobind.Attributes["mybind1"].Value;
+                            //string scaglioniserialized = "";
+                            //if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey(proprieta) && !string.IsNullOrEmpty(linkloaded[idscheda][proprieta]))
+                            if (itemdic.ContainsKey(proprieta) && !string.IsNullOrEmpty(itemdic[proprieta]))
+                            {
+                                try
+                                {
+                                    //Prendo i dati dello scaglione da itemdic[proprieta] deserializzandolo ....
+                                    scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(itemdic[proprieta]);
+
+
+                                    //Alternativa da linkedresource
+                                    //scaglioniserialized = linkloaded[idscheda][proprieta];
+                                    //scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(scaglioniserialized);;
+                                    //ELIMINIAMO DALLA LISTA VISUALIZZATA GLI SCAGLIONI PASSATI che non servono nella scheda con data inferiore a oggi
+                                    if (scaglioni != null)
+                                    {
+                                        scaglioni.RemoveAll(s => s.datapartenza < System.DateTime.Now);
+                                        //scaglioniserialized = Newtonsoft.Json.JsonConvert.SerializeObject(scaglioni);
+                                        string etastring = "";
+                                        string serializeetalist = references.ResMan("Common", Lingua, "etalist");
+                                        if (!string.IsNullOrEmpty(serializeetalist))
+                                        {
+                                            OrderedDictionary etalist = Newtonsoft.Json.JsonConvert.DeserializeObject<OrderedDictionary>(serializeetalist);
+                                            if (etalist != null)
+                                                foreach (Scaglioni el in scaglioni)
+                                                {
+                                                    long etaval = el.fasciaeta.Value;
+                                                    etastring = etalist[etaval.ToString()].ToString();
+                                                    break;//prendo il primo che trovo
+                                                }
+                                            sb.Append(etastring);
+                                        }
+                                    }
+                                }
+                                catch { }
+                            }
+                            string contenutoslide = sb.ToString();
+                            nodetobind.InnerHtml += contenutoslide;
+                            //Visualizzazione elemento
+                            if (nodetobind != null && scaglioni != null && scaglioni.Count > 0)
+                            {
+                                if (nodetobind.Attributes.Contains("style"))
+                                {
+                                    nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                    nodetobind.Attributes["style"].Value += ";display:initial";
+                                }
+                                else
+                                    nodetobind.Attributes.Add("style", "display:initial");
+                            }
+                        }
+                    }
                     else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("scaglionitoolminprice"))
                     {
                         ScaglioniCollection scaglioni = new ScaglioniCollection();
@@ -3834,28 +4010,96 @@ namespace WelcomeLibrary.UF
                             //if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey(proprieta) && !string.IsNullOrEmpty(linkloaded[idscheda][proprieta]))
                             if (itemdic.ContainsKey(proprieta) && !string.IsNullOrEmpty(itemdic[proprieta]))
                             {
-                                //Prendo i dati dello scaglione da itemdic[proprieta] deserializzandolo ....
-                                scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(itemdic[proprieta]);
-                                //Alternativa da linkedresource
-                                //scaglioniserialized = linkloaded[idscheda][proprieta];
-                                //scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(scaglioniserialized);;
-                                //ELIMINIAMO DALLA LISTA VISUALIZZATA GLI SCAGLIONI PASSATI che non servono nella scheda con data inferiore a oggi
-                                if (scaglioni != null)
+                                try
                                 {
-                                    scaglioni.RemoveAll(s => s.datapartenza < System.DateTime.Now);
-                                    scaglioniserialized = Newtonsoft.Json.JsonConvert.SerializeObject(scaglioni);
+                                    //Prendo i dati dello scaglione da itemdic[proprieta] deserializzandolo ....
+                                    scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(itemdic[proprieta]);
+
+                                    //Alternativa da linkedresource
+                                    //scaglioniserialized = linkloaded[idscheda][proprieta];
+                                    //scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(scaglioniserialized);;
+                                    //ELIMINIAMO DALLA LISTA VISUALIZZATA GLI SCAGLIONI PASSATI che non servono nella scheda con data inferiore a oggi
+                                    if (scaglioni != null)
+                                    {
+                                        scaglioni.RemoveAll(s => s.datapartenza < System.DateTime.Now);
+                                        scaglioniserialized = Newtonsoft.Json.JsonConvert.SerializeObject(scaglioni);
+                                    }
+
+                                    double pricemin = 9999999;
+                                    foreach (Scaglioni el in scaglioni)
+                                    {
+                                        //cerco il prezzo minimo ....
+                                        if (el.prezzo < pricemin) pricemin = el.prezzo;
+                                    }
+                                    string unit = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "valuta").Valore;
+                                    sb.Append(String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { pricemin }) + ' ' + unit);
+
                                 }
+                                catch { }
                             }
-                            double pricemin = 9999999;
-                            foreach (Scaglioni el in scaglioni)
-                            {
-                                //cerco il prezzo minimo ....
-                                if (el.prezzo < pricemin) pricemin = el.prezzo;
-                            }
-                            string unit = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "valuta").Valore;
-                            sb.Append(String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { pricemin }) + ' ' + unit);
+
                             string contenutoslide = sb.ToString();
                             nodetobind.InnerHtml += contenutoslide;
+                            //Visualizzazione elemento
+                            if (nodetobind != null && scaglioni != null && scaglioni.Count > 0)
+                            {
+                                if (nodetobind.Attributes.Contains("style"))
+                                {
+                                    nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
+                                    nodetobind.Attributes["style"].Value += ";display:block";
+                                }
+                                else
+                                    nodetobind.Attributes.Add("style", "display:block");
+                            }
+                        }
+                    }
+                    else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("scaglionitoolmindurata"))
+                    {
+                        ScaglioniCollection scaglioni = new ScaglioniCollection();
+                        string idscheda = "";
+                        if (itemdic.ContainsKey(property))
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            string idcontrolcarrello = "";
+                            if (nodetobind.Attributes.Contains("myvalue"))
+                                idcontrolcarrello = nodetobind.Attributes["myvalue"].Value;
+                            idscheda = itemdic[property];
+                            string proprieta = "";
+                            if (nodetobind.Attributes.Contains("mybind1"))
+                                proprieta = nodetobind.Attributes["mybind1"].Value;
+                            string scaglioniserialized = "";
+                            //if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey(proprieta) && !string.IsNullOrEmpty(linkloaded[idscheda][proprieta]))
+                            if (itemdic.ContainsKey(proprieta) && !string.IsNullOrEmpty(itemdic[proprieta]))
+                            {
+                                try
+                                {
+                                    //Prendo i dati dello scaglione da itemdic[proprieta] deserializzandolo ....
+                                    scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(itemdic[proprieta]);
+
+                                    //Alternativa da linkedresource
+                                    //scaglioniserialized = linkloaded[idscheda][proprieta];
+                                    //scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(scaglioniserialized);;
+                                    //ELIMINIAMO DALLA LISTA VISUALIZZATA GLI SCAGLIONI PASSATI che non servono nella scheda con data inferiore a oggi
+                                    if (scaglioni != null)
+                                    {
+                                        scaglioni.RemoveAll(s => s.datapartenza < System.DateTime.Now);
+                                        scaglioniserialized = Newtonsoft.Json.JsonConvert.SerializeObject(scaglioni);
+                                    }
+
+                                    long duratamin = 9999999;
+                                    foreach (Scaglioni el in scaglioni)
+                                    {
+                                        //cerco il prezzo minimo ....
+                                        if (el.durata < duratamin) duratamin = el.durata;
+                                    }
+                                    sb.Append(String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##}", new object[] { duratamin }));
+                                }
+                                catch { }
+                            }
+
+
+                            string contenutoslide = sb.ToString();
+                            nodetobind.InnerHtml = contenutoslide + nodetobind.InnerHtml;
                             //Visualizzazione elemento
                             if (nodetobind != null && scaglioni != null && scaglioni.Count > 0)
                             {
@@ -3885,21 +4129,31 @@ namespace WelcomeLibrary.UF
                             if (nodetobind.Attributes.Contains("mybind1"))
                                 proprieta = nodetobind.Attributes["mybind1"].Value;
 
+
+                            string idscaglioneselected = "";
+                            if (nodetobind.Attributes.Contains("subidselected"))
+                                idscaglioneselected = nodetobind.Attributes["subidselected"].Value;
+
                             string scaglioniserialized = "";
                             //if (linkloaded.ContainsKey(idscheda) && linkloaded[idscheda].ContainsKey(proprieta) && !string.IsNullOrEmpty(linkloaded[idscheda][proprieta]))
                             if (itemdic.ContainsKey(proprieta) && !string.IsNullOrEmpty(itemdic[proprieta]))
                             {
-                                //Prendo i dati dello scaglione da itemdic[proprieta] deserializzandolo ....
-                                scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(itemdic[proprieta]);
-                                //Alternativa da linkedresource
-                                //scaglioniserialized = linkloaded[idscheda][proprieta];
-                                //scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(scaglioniserialized);
-                                //ELIMINIAMO DALLA LISTA VISUALIZZATA GLI SCAGLIONI PASSATI che non servono nella scheda con data inferiore a oggi
-                                if (scaglioni != null)
+                                try
                                 {
-                                    scaglioni.RemoveAll(s => s.datapartenza < System.DateTime.Now);
-                                    scaglioniserialized = Newtonsoft.Json.JsonConvert.SerializeObject(scaglioni);
+                                    //Prendo i dati dello scaglione da itemdic[proprieta] deserializzandolo ....
+                                    scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(itemdic[proprieta]);
+
+                                    //Alternativa da linkedresource
+                                    //scaglioniserialized = linkloaded[idscheda][proprieta];
+                                    //scaglioni = Newtonsoft.Json.JsonConvert.DeserializeObject<ScaglioniCollection>(scaglioniserialized);
+                                    //ELIMINIAMO DALLA LISTA VISUALIZZATA GLI SCAGLIONI PASSATI che non servono nella scheda con data inferiore a oggi
+                                    if (scaglioni != null)
+                                    {
+                                        scaglioni.RemoveAll(s => s.datapartenza < System.DateTime.Now);
+                                        scaglioniserialized = Newtonsoft.Json.JsonConvert.SerializeObject(scaglioni);
+                                    }
                                 }
+                                catch { }
                             }
                             /////////////////////////////////////////////////////////////////////////////////////
                             //Metto i valori degli scaglioni su controlli hidden in pagina per la visualizzazione
@@ -3914,72 +4168,162 @@ namespace WelcomeLibrary.UF
                             string serializeetalistencoded = dataManagement.EncodeUtfToBase64(serializeetalist);
                             sb.Append("<input id=\"" + idcontrolcarrello + "hiddenetalist\" type=\"hidden\" value=\"" + serializeetalistencoded + "\" />");
 
-
-                            string controltype = "";
-                            if (nodetobind.Attributes.Contains("controltype"))
-                                controltype = nodetobind.Attributes["controltype"].Value;
                             string mustvalidate = "";
                             if (nodetobind.Attributes.Contains("needed"))
                                 mustvalidate = nodetobind.Attributes["needed"].Value;
+                            string controltype = "";
+                            if (nodetobind.Attributes.Contains("controltype"))
+                                controltype = nodetobind.Attributes["controltype"].Value;
+                            string controlopt1 = "";
+                            if (nodetobind.Attributes.Contains("controloption1"))
+                                controlopt1 = nodetobind.Attributes["controloption1"].Value;
+
                             sb.Append(WelcomeLibrary.UF.ResourceManagement.ReadKey("common", Lingua, "txtintroscaglione").Valore);
-                            //Renderizziamo la lista degli scaglioni ... con l'elemento che preferisci dropdown, lista o altro 
+
+                            Dictionary<string, string> idcoordbyidscaglione = new Dictionary<string, string>();
+                            List<string> idlistcoordinatori = new List<string>();
+
+                            //Renderizziamo la lista degli scaglioni con l'elemento che viene specificato in controltype, dropdown, lista o altro 
                             //in base al valore dell'attributo controltype 
                             //creazione controllo select
                             if (controltype == "select")
                             {
-                                sb.Append("<select id=\"" + idcontrolcarrello + "dllscaglione\" needed=\"" + mustvalidate + "\" class=\"mx-auto form-control w-100\"  >");
+                                sb.Append("<select id=\"" + idcontrolcarrello + "dllscaglione\" needed=\"" + mustvalidate + "\" class=\"mx-auto form-control w-100 bg-white\"  >");
                                 //aggiungiamo l'elemento vuoto
                                 sb.Append("<option value=\"\" >");
                                 sb.Append(WelcomeLibrary.UF.ResourceManagement.ReadKey("common", Lingua, "txtselectscaglione").Valore); // da prendere dalle risorse txtselectscaglione
                                 sb.Append("</option>");
 
-                                foreach (Scaglioni el in scaglioni)
-                                {
-                                    //STATO VIAGGIO DISABILITATO SE STATO MAGGIORE DI COMPLETO //////////////////////////////
-                                    string disabled = "";
-                                    string stato = "";
-                                    if (el.stato != null)
+                                if (scaglioni != null)
+                                    foreach (Scaglioni el in scaglioni)
                                     {
-                                        if (el.stato.Value >= 4) disabled = "disabled";
-                                        OrderedDictionary statuslist = Newtonsoft.Json.JsonConvert.DeserializeObject<OrderedDictionary>(serializestatuslist);
-                                        if (statuslist != null)
-                                            stato = (string)statuslist[el.stato.Value.ToString()];
-                                    }
-                                    //////////////////////////////////////////////
+                                        //STATO VIAGGIO DISABILITATO SE STATO MAGGIORE DI COMPLETO //////////////////////////////
+                                        string disabled = "";
+                                        string stato = "";
+                                        if (el.stato != null)
+                                        {
+                                            if (el.stato.Value >= 4) disabled = "disabled";
+                                            OrderedDictionary statuslist = Newtonsoft.Json.JsonConvert.DeserializeObject<OrderedDictionary>(serializestatuslist);
+                                            if (statuslist != null)
+                                                stato = (string)statuslist[el.stato.Value.ToString()];
+                                        }
+                                        //////////////////////////////////////////////
 
-                                    /////FASCIA DI ETA///////////
-                                    string fasciaeta = "";
-                                    if (el.fasciaeta != null)
-                                    {
-                                        OrderedDictionary etalist = Newtonsoft.Json.JsonConvert.DeserializeObject<OrderedDictionary>(serializeetalist);
-                                        if (etalist != null)
-                                            fasciaeta = (string)etalist[el.fasciaeta.Value.ToString()];
-                                    }
-                                    //////////////////////////////////////////////
+                                        /////FASCIA DI ETA///////////
+                                        string fasciaeta = "";
+                                        if (el.fasciaeta != null)
+                                        {
+                                            OrderedDictionary etalist = Newtonsoft.Json.JsonConvert.DeserializeObject<OrderedDictionary>(serializeetalist);
+                                            if (etalist != null)
+                                                fasciaeta = (string)etalist[el.fasciaeta.Value.ToString()];
+                                        }
+                                        //////////////////////////////////////////////
 
-                                    string datapartenza = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:dd MMM yyyy}", new object[] { el.datapartenza });
-                                    string dataritorno = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:dd MMM yyyy}", new object[] { el.datapartenza.Value.AddDays(el.durata - 1) });
-                                    sb.Append("<option " + disabled + " value=\"" + el.id + "\" >");
-                                    sb.Append(datapartenza + "/" + dataritorno + " - " + el.prezzo + "€" + " - " + stato);
-                                    sb.Append("</option>");
-                                }
+                                        ////////////COORDINATORI
+                                        if (!idcoordbyidscaglione.ContainsKey(el.id.ToString().ToString()))
+                                            idcoordbyidscaglione.Add(el.id.ToString(), el.idcoordinatore.ToString());
+                                        if (!idlistcoordinatori.Contains(el.idcoordinatore.ToString()))
+                                            idlistcoordinatori.Add(el.idcoordinatore.ToString());
+                                        //////////////////////////////////////////////
+
+                                        string datapartenza = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:dd MMM yyyy}", new object[] { el.datapartenza });
+                                        string dataritorno = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:dd MMM yyyy}", new object[] { el.datapartenza.Value.AddDays(el.durata - 1) });
+
+                                        string selected = "";
+                                        if (idscaglioneselected == el.id.ToString()) selected = "selected";
+
+                                        sb.Append("<option " + disabled + " value=\"" + el.id + "\" " + selected + " >");
+                                        sb.Append(datapartenza + "/" + dataritorno + " - " + el.prezzo + "€" + " - " + stato);
+                                        sb.Append("</option>");
+                                    }
                                 sb.Append("</select>");
+
                             }
                             //Controllo solo lista di testo
                             if (controltype == "")
                             {
-                                foreach (Scaglioni el in scaglioni)
+                                if (scaglioni != null)
+                                    foreach (Scaglioni el in scaglioni)
+                                    {
+                                        sb.Append(String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:dd MMM yyyy}", new object[] { el.datapartenza }));
+                                        sb.Append("  - ");
+                                        sb.Append(el.durata);
+                                        sb.Append(" gg ");
+                                        sb.Append(" ");
+                                        sb.Append(el.prezzo);
+                                        sb.Append(" € ");
+                                        sb.Append("<br/>");
+                                        ////////////COORDINATORI
+                                        if (!idcoordbyidscaglione.ContainsKey(el.id.ToString().ToString()))
+                                            idcoordbyidscaglione.Add(el.id.ToString(), el.idcoordinatore.ToString());
+                                        if (!idlistcoordinatori.Contains(el.idcoordinatore.ToString()))
+                                            idlistcoordinatori.Add(el.idcoordinatore.ToString());
+                                        //////////////////////////////////////////////
+
+                                    }
+
+                            }
+
+#if true
+                            ///////////////////////////////////////////////////////////////
+                            ////////////////GESTIONE COORDINATORI /////////////////////
+                            /////////////METTO IN PAGINA LE INFO PER I COORDINATORI ////////////////
+                            //Creaiamo i link alle schede coordinatori ( a partire dall'id coordinatore devo caricare i dati del coordinatore )
+                            //scorro dictionary idcoordbyidscaglione dove per ogni idscglione ho idcoordinatore
+                            // e nel valore sostituisco l'id coordinatore con un dictonary key,value con icon,name,link )
+                            Dictionary<string, string> coordetails = new Dictionary<string, string>();
+                            Dictionary<string, Dictionary<string, string>> coordadatabyidscaglione = new Dictionary<string, Dictionary<string, string>>();
+                            offerteDM offDM = new offerteDM();
+                            string sessionid = "";
+                            if (Session != null && !string.IsNullOrEmpty(Session.SessionID))
+                                sessionid = Session.SessionID;
+                            string stringidlistcoordinatori = "";
+                            idlistcoordinatori.ForEach(co => stringidlistcoordinatori += co + ",");
+                            stringidlistcoordinatori = stringidlistcoordinatori.TrimEnd(',');
+                            Dictionary<string, string> coordinfos = offerteDM.getlinklist(Lingua, stringidlistcoordinatori, sessionid);//passando la lista idcoordinatori me li tira su tutti senza caricarli ad ogni giro
+
+                            foreach (KeyValuePair<string, string> kv in idcoordbyidscaglione)
+                            {
+                                coordetails = new Dictionary<string, string>();
+                                if (coordinfos.ContainsKey(kv.Value))
                                 {
-                                    sb.Append(String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:dd MMM yyyy}", new object[] { el.datapartenza }));
-                                    sb.Append("  - ");
-                                    sb.Append(el.durata);
-                                    sb.Append(" gg ");
-                                    sb.Append(" ");
-                                    sb.Append(el.prezzo);
-                                    sb.Append(" € ");
-                                    sb.Append("<br/>");
+                                    coordetails.Add("id", kv.Value); //id del coordinatore
+                                    coordetails.Add("icon", coordinfos[kv.Value + "img"]);
+                                    coordetails.Add("name", coordinfos[kv.Value + "name"]);
+                                    coordetails.Add("link", coordinfos[kv.Value]);
+                                    if (coordadatabyidscaglione.ContainsKey(kv.Key))
+                                        coordadatabyidscaglione.Add(kv.Key, coordetails); //la key è l'id dello scaglione
+                                    else
+                                        coordadatabyidscaglione[kv.Key] = (coordetails);//aggiorno ma improbabile
                                 }
                             }
+                            string serializecoordlist = Newtonsoft.Json.JsonConvert.SerializeObject(coordadatabyidscaglione); ; //  oggetto serializzatto da caricare ( oggetto con idsscaglione, (icona, nome, link scheda per ogni coordinatore )  )
+                            string serializecoordlistencoded = dataManagement.EncodeUtfToBase64(serializecoordlist);
+                            sb.Append("<input id=\"" + idcontrolcarrello + "hiddencoordlist\" type=\"hidden\" value=\"" + serializecoordlistencoded + "\" />");
+                            ///////////////////////////////////////////////////////////////
+
+#endif
+                            //per la selezione assicurazioni
+                            if (controlopt1 == "true")
+                            {
+                                sb.Append("<span id=\"" + idcontrolcarrello + "option1group\" style=\"display:none\">");
+                                sb.Append(WelcomeLibrary.UF.ResourceManagement.ReadKey("common", Lingua, "txtintrooption1").Valore);
+                                sb.Append("<span id=\"" + idcontrolcarrello + "option1infos\"></span>");
+                                sb.Append("<select id=\"" + idcontrolcarrello + "ddlassicurazioni\" needed=\"" + mustvalidate + "\" class=\"mx-auto form-control w-100 bg-white\"  >");
+                                //aggiungiamo l'elemento vuoto
+                                sb.Append("<option value=\"0\" >");
+                                sb.Append(WelcomeLibrary.UF.ResourceManagement.ReadKey("common", Lingua, "txtselectoption1").Valore); // da prendere dalle risorse txtselectscaglione
+                                sb.Append("</option>");
+                                int a = 1;
+                                for (a = 0; a <= 10; a++)
+                                {
+                                    sb.Append("<option value=\"" + a + "\" >");
+                                    sb.Append(a); // da prendere dalle risorse txtselectscaglione
+                                    sb.Append("</option>");
+                                }
+                                sb.Append("</span>");
+                            }
+
 
                             string contenutoslide = sb.ToString();
                             nodetobind.InnerHtml = contenutoslide;

@@ -86,6 +86,59 @@ var carrellotool = new function () {
 
             return;
         },
+        aggiornacarrello: function (operatingtype) {
+            var operatingtype = operatingtype || '';
+            getjsonfield(function (jsondetails) { //Leggiamo eventuali proprieta dell'articolo e aggiungiamole all'elemento del carrello attuale
+
+                if (jsondetails != null && jsondetails.hasOwnProperty("notvalidmsg")) //controllo della validazione dei dati dettaglio dal form
+                {
+                    $('#' + controlid + "messages").html(jsondetails["notvalidmsg"]);
+                    return;
+                }
+                //////////MODIFICA DEL PREZZO ARTICOLO SULLO SCAGLIONE//////////
+                var prezzo = "";
+                // forziamo il prezzo articolo per il caso degli scaglioni prendendolo dallo scaglione
+                if (jsondetails != null && jsondetails.hasOwnProperty("prezzo") && jsondetails.hasOwnProperty("idscaglione"))
+                    prezzo = jsondetails['prezzo'];
+                ////////////////////////////
+                var Jsonfield1 = JSON.stringify(jsondetails);
+
+                var quantitarichiesta = $('#' + controlid + "qtyi").val(); //setto la quantita presente per fare solo l'aggiornamento
+
+                if (quantitarichiesta != '' && quantitarichiesta != '0')
+                    if (operatingtype == '') {
+                        //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
+                        AddCurrentCarrelloNopostback('', idprodotto, lng, username, idcombined, '', prezzo, null, null, Jsonfield1, quantitarichiesta, false, function (data) {
+                            var ret = "";
+                            var parsedret = "";
+                            if (data != null && data != "")
+                                parsedret = JSON.parse(data);
+                            if (parsedret != null && parsedret.hasOwnProperty("id"))
+                                ret = parsedret.id;
+                            $('#' + controlid + "messages").html(parsedret.stato);
+                            idcarrello = ret;  //(aggiunta)comunque memorizzo l'id del record carrello inserito o modificato
+                            carrellotool.caricaquantita();
+                        });
+                    }
+                    else if (operatingtype == 'multiplo') {
+                        //VERSIONE CHE PERMETTE DI INSERIRE PIù RIGHI CARRELLO CON STESSO PRODOTTO
+                        AddCurrentCarrelloNopostback('', idprodotto, lng, username, '', idcarrello, prezzo, null, null, Jsonfield1, quantitarichiesta, true, function (data) {
+                            var ret = "";
+                            var parsedret = "";
+                            if (data != null && data != "")
+                                parsedret = JSON.parse(data);
+                            if (parsedret != null && parsedret.hasOwnProperty("id"))
+                                ret = parsedret.id;
+                            $('#' + controlid + "messages").html(parsedret.stato);
+                            /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO **********************************************************************/
+                            idcarrello = ret;   //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
+                            /***********************************************************************************************************************************************/
+                            carrellotool.caricaquantita(operatingtype);
+                        });
+                    }
+            });
+            return;
+        },
         aggiungiacarrello: function (operatingtype) {
             var operatingtype = operatingtype || '';
 
@@ -282,6 +335,7 @@ var carrellotool = new function () {
         // controllo input di tipo hidden "#" + controlid + "hiddenscaglioni" contiene il serializzato encodedbase64 competo della lsita scaglioni
         // controllo input di tipo hidden "#" + controlid + "hiddenstatus" contiene il serializzato encodedbase64 competo della lsita statuslist
         // controllo input di tipo hidden "#" + controlid + "hiddenetalist" contiene il serializzato encodedbase64 competo della lsita etalist
+        // controllo input di tipo hidden "#" + controlid + "hiddencoordlist" contiene il serializzato encodedbase64 competo della lsita dei coordinatori indicizzata per idscaglione 
         if ($("#" + controlid + "dllscaglione").length) {
             var actcontrol = $("#" + controlid + "dllscaglione");
             var idscaglione = actcontrol.val();
@@ -328,8 +382,8 @@ var carrellotool = new function () {
                     if (mustvalidate)
                         if (idscaglione == null || idscaglione == "" || statoscaglione >= 5) {
                             if (jsondetails["notvalidmsg"] == null) jsondetails["notvalidmsg"] = (GetResourcesValue("msgcarrellovalido") + "<br/>");
-                            if (idscaglione == null || idscaglione == "" )  jsondetails["notvalidmsg"] += (GetResourcesValue("msgcarrellodata"  ) + "<br/>");
-                            if (statoscaglione >= 5) jsondetails["notvalidmsg"] += (GetResourcesValue("msgcarrellostato" ) + "<br/>");
+                            if (idscaglione == null || idscaglione == "") jsondetails["notvalidmsg"] += (GetResourcesValue("msgcarrellodata") + "<br/>");
+                            if (statoscaglione >= 5) jsondetails["notvalidmsg"] += (GetResourcesValue("msgcarrellostato") + "<br/>");
                         }
                 }
             }
@@ -475,8 +529,7 @@ var carrellotool = new function () {
         //});
 
         //Eliminiamo l'elemento dal carrello al cambio scaglione
-        if (idcarrello != '')
-        {
+        if (idcarrello != '') {
             CancellaCurrentCarrellobyid(idcarrello, function (ret) {
                 //da vedere se mandare un messaggio
                 console.log('eliminato voce' + ret);
