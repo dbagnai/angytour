@@ -1197,9 +1197,9 @@ public partial class _webdetail : CommonPage
         string linkurl = "";
 
         Dictionary<string, string> addpars = new Dictionary<string, string>();
-        if (!string.IsNullOrEmpty(Caratteristica1)) addpars.Add("Caratteristica1", Caratteristica1);
-        if (!string.IsNullOrEmpty(Caratteristica2)) addpars.Add("Caratteristica2", Caratteristica2);
-        if (!string.IsNullOrEmpty(Caratteristica3)) addpars.Add("Caratteristica3", Caratteristica3);
+        if (!string.IsNullOrEmpty(Caratteristica1) && Caratteristica1 != "0") addpars.Add("Caratteristica1", Caratteristica1);
+        if (!string.IsNullOrEmpty(Caratteristica2) && Caratteristica2 != "0") addpars.Add("Caratteristica2", Caratteristica2);
+        if (!string.IsNullOrEmpty(Caratteristica3) && Caratteristica3 != "0") addpars.Add("Caratteristica3", Caratteristica3);
 
 
         link = new Tabrif();
