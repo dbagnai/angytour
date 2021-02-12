@@ -959,9 +959,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         return sb.ToString();
     }
 
-
-
-
     /*NEW CREAZIONE LINK MENU SUI 3 LIVELLI*/
 
     public string CaricaLinksPerTipologiaImmobili(string tipologia, string ordinamento = "")
@@ -996,7 +993,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         }
         return sb.ToString();
     }
-
     public string CaricaLinksImmobiliFiltrati(string tipologia)
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -1048,7 +1044,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
         return ret;
     }
-
     public string TestoSezioneCategoria(string codicetipologia, string codicecategoria, bool solotitolo = false, bool nosezione = false)
     {
         string ret = "";
@@ -1063,7 +1058,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         }
         return ret;
     }
-
     public string CaricaLinksPerTipologia(string tipologia, string Categoria = "", string maxlinks = "6", string ordinamento = "", string codicerisorsa = "", string classop = "", bool noli = false, string Sottocategoria = "", bool solotitolo = false)
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -1122,8 +1116,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             }
         return sb.ToString();
     }
-
-
     public void CaricaMenuContenuti(int min, int max, Repeater rptlist)
     {
         List<WelcomeLibrary.DOM.TipologiaOfferte> sezioni = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua); });
@@ -1134,7 +1126,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         rptlist.DataSource = sezioni;
         rptlist.DataBind();
     }
-
     public void CaricaMenuSezioniContenuto(string tipologia, Repeater rptlist, string filtercode = "")
     {
         List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == tipologia)); });

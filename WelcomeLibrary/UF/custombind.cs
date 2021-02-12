@@ -3889,6 +3889,8 @@ namespace WelcomeLibrary.UF
                                         //GENERAZIONE DIRETTA HTML PER I COORDINATORI
                                         //puoi aggiungere direttamente qui con lo stringbuider i controllo da mettere in pagina che sono i link alle schede coordinatori con iconcina tonda 
                                         //<a class=\"link-coord\" href=\"\"><img class=\"img-small-rounded\" src=\"\"></a>
+
+                                        sb.Append("<ul class=\"coordliststyle\">");
                                         foreach (string idcoordinatore in idlistcoordinatori)
                                         {
 #if false
@@ -3900,12 +3902,17 @@ namespace WelcomeLibrary.UF
                                             sb.Append("\"></a>");
 
 #endif
-                                            sb.Append("<a data-toggle=\"tooltip\" title=\"" + coordinfos[idcoordinatore + "name"] + "\" class=\"link-coord\" href=\"");
+                                            sb.Append("<li>");
+                                            //sb.Append("<li style=\"float:left;\">");
+                                            sb.Append("<a target=\"_blank\" data-toggle=\"tooltip\" title=\"" + coordinfos[idcoordinatore + "name"] + "\" class=\"link-coord\" href=\"");
                                             sb.Append(coordinfos[idcoordinatore]);
                                             sb.Append("\"><div  class=\"coordid-" + idcoordinatore + " container-small-rounded\" ");
                                             sb.Append(" style=\"background-image:url('" + coordinfos[idcoordinatore + "img"] + "')");
                                             sb.Append("\"></div></a>");
+                                            sb.Append("<li>");
                                         }
+                                        sb.Append("</ul>");
+
                                     }
                                 }
                                 catch { }

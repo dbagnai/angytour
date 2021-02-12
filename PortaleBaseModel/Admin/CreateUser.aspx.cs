@@ -20,8 +20,8 @@ public partial class admin_create : System.Web.UI.Page
     /// <returns></returns>
     protected MembershipUserCollection GetListaUtentiFiltrata()
     {
-  
-       
+
+
         ////CONTROLLIAMO SE L'UTENTE E' UN GESTORE MULTIAGENZIE
         //bool generale = false;
         //foreach (string role in Roles.GetRolesForUser(User.Identity.Name))
@@ -43,7 +43,7 @@ public partial class admin_create : System.Web.UI.Page
         //    }
         //}
         //else
-            MUColl_filtrata = MUColl;
+        MUColl_filtrata = MUColl;
 
         return MUColl_filtrata;
 
@@ -99,7 +99,7 @@ public partial class admin_create : System.Web.UI.Page
     //        }
 
     //    }
-        
+
     //    return ruoli;
     //}
 
@@ -130,13 +130,14 @@ public partial class admin_create : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
+        if (UsersList.SelectedValue.ToLower() != "webmaster" && UsersList.SelectedValue.ToLower() != "danieleb")
+        {
+            Membership.DeleteUser(UsersList.SelectedValue);
+            lbl_results.Text = "Utente eliminato!";
 
-        Membership.DeleteUser(UsersList.SelectedValue);
-        lbl_results.Text = "Utente eliminato!";
-
-        UsersList.DataSource = this.GetListaUtentiFiltrata();
-        UsersList.DataBind();
-
+            UsersList.DataSource = this.GetListaUtentiFiltrata();
+            UsersList.DataBind();
+        }
     }
     protected void CreateUserWizard1_CreatingUser(object sender, LoginCancelEventArgs e)
     {
@@ -204,5 +205,5 @@ public partial class admin_create : System.Web.UI.Page
     }
 
 
-    
+
 }

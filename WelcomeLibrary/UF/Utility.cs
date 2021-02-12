@@ -2839,7 +2839,7 @@ ZW	Zimbabwe
                 {
                     if (reader == null) { return false; };
                     if (reader.HasRows == false)
-                        return false;
+                    { ElencoProdotti = list; return false; }
 
                     while (reader.Read())
                     {
@@ -2880,7 +2880,7 @@ ZW	Zimbabwe
                 {
                     if (reader == null) { return false; };
                     if (reader.HasRows == false)
-                        return false;
+                    { ElencoSottoProdotti = list; return false; }
 
                     while (reader.Read())
                     {

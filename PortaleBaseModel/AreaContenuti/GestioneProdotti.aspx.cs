@@ -2546,12 +2546,15 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         Utility.Caratteristiche[0].ForEach(c => ultimoprogressivo = (int.TryParse(c.Codice, out _i)) ? ((_i > ultimoprogressivo) ? _i : ultimoprogressivo) : (ultimoprogressivo));
         ultimoprogressivo += 1;
 
+        string _tmpcodice = "";
         Tabrif item = new Tabrif();
         if (string.IsNullOrWhiteSpace(ddlCaratteristica1_gest.SelectedValue) || ddlCaratteristica1_gest.SelectedValue == "0")
             item.Codice = ultimoprogressivo.ToString();
         else
         {
             item = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "I");
+            if (item != null && !string.IsNullOrEmpty(item.Codice))
+                _tmpcodice = item.Codice;
         }
         item.Campo1 = txtCar1I.Text;
         item.Lingua = "I";
@@ -2563,6 +2566,9 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         else
         {
             item = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "GB");
+            if (item == null || string.IsNullOrEmpty(item.Codice))
+            { item = new Tabrif(); item.Codice = _tmpcodice; }
+           
         }
         item.Campo1 = txtCar1GB.Text;
         item.Lingua = "GB";
@@ -2575,6 +2581,8 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         else
         {
             item = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "RU");
+            if (item == null || string.IsNullOrEmpty(item.Codice))
+            { item = new Tabrif(); item.Codice = _tmpcodice; }
         }
         item.Campo1 = txtCar1RU.Text;
         item.Lingua = "RU";
@@ -2586,6 +2594,8 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         else
         {
             item = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "FR");
+            if (item == null || string.IsNullOrEmpty(item.Codice))
+            { item = new Tabrif(); item.Codice = _tmpcodice; }
         }
         item.Campo1 = txtCar1FR.Text;
         item.Lingua = "FR";
