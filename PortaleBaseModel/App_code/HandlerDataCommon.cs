@@ -155,9 +155,9 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
 
                                     string linkurlidhtml = "<a target=\"_self\" href =\"" + WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, r.UrltextforlinkbyLingua(lingua), r.Id.ToString(), r.CodiceTipologia.ToString()) + "\" >" + htmltext + "</a>";
 
-                                    string linkurlsimple =  WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, r.UrltextforlinkbyLingua(lingua), r.Id.ToString(), r.CodiceTipologia.ToString()) ;
+                                    string linkurlsimple = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, r.UrltextforlinkbyLingua(lingua), r.Id.ToString(), r.CodiceTipologia.ToString());
 
-                                    ra1 = new ResultAutocomplete() { id = r.Id.ToString(),  label = shorttext, link = linkurlsimple, linktext = htmltext };
+                                    ra1 = new ResultAutocomplete() { id = r.Id.ToString(), label = shorttext, link = linkurlsimple, linktext = htmltext };
                                     if (id == null || id == "") lra.Add(ra1);
                                     else if (id != "" && r.Id.ToString() == id) lra.Add(ra1);
                                     count++;
@@ -1019,6 +1019,9 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     break;
                 case "recuperapass":
                     result = USM.SendAccessData(lingua, pars.ContainsKey("username") ? pars["username"] : "", ConfigManagement.ReadKey("Email"), ConfigManagement.ReadKey("Nome"));
+                    break;
+                case "changename":
+                    result = usermanager.setFirstName(pars.ContainsKey("username") ? pars["username"] : "", pars.ContainsKey("nome") ? pars["nome"] : "");
                     break;
                 case "logoffuser":
                     System.Web.Security.FormsAuthentication.SignOut();

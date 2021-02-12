@@ -322,6 +322,27 @@ namespace WelcomeLibrary.UF
             return nome;
 
         }
+        public static string setFirstName(string utente, string nome)
+        {
+            //  save UserLastActivityDate so it can be reassigned later
+            MembershipUser _user = Membership.GetUser(utente, false); //Prendo i dati utente senza modificare la lastactivitydate
+            DateTime UserLastActivityDate = new DateTime(1900, 1, 1);
+            if (_user != null)
+                UserLastActivityDate = _user.LastActivityDate;
+
+            ProfileBase profile = ProfileBase.Create(utente);
+            profile["FirstName"] = nome;
+            profile.Save();
+
+            // need to reset the UserLastActivityDate that has just been updated by above two lines
+            if (_user != null)
+            {
+                _user.LastActivityDate = UserLastActivityDate;
+                Membership.UpdateUser(_user);
+            }
+            return nome;
+
+        }
         /// <summary>
         /// torna l'dicliente associato all'utente nel profilo
         /// </summary>
