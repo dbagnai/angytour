@@ -7,11 +7,11 @@ using System.Security;
 // insieme di attributi. Per modificare le informazioni associate a un assembly
 // occorre quindi modificare i valori di questi attributi.
 [assembly: AssemblyTitle("WelcomeLibrary")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Libreria di classe base progetto CMS siti web")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Web Mouse Consulting Srl")]
 [assembly: AssemblyProduct("WelcomeLibrary")]
-[assembly: AssemblyCopyright("Copyright ©  2009")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
