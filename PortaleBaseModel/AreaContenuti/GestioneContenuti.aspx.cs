@@ -1028,10 +1028,10 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             //-------------------------------------
             if (fileupload.HasFile)
             {
-                if (fileupload.PostedFile.ContentLength > 25000000)
+                if (fileupload.PostedFile.ContentLength > 35000000)
                 {
 
-                    error += "La foto non può essere caricata perché supera 25MB!";
+                    error += "La foto non può essere caricata perché supera 35MB!";
                 }
                 else
                 {
@@ -1163,10 +1163,10 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             //-------------------------------------
             if (UploadFoto.HasFile)
             {
-                if (UploadFoto.PostedFile.ContentLength > 25000000)
+                if (UploadFoto.PostedFile.ContentLength > 35000000)
                 {
 
-                    output.Text += "La foto non può essere caricata perché supera 25MB!";
+                    output.Text += "La foto non può essere caricata perché supera 35MB!";
                 }
                 else
                 {

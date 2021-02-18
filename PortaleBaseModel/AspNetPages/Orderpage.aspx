@@ -30,13 +30,12 @@
                 <div class="row py-2 my-2 d-none">
                     <div class="col-12">
                         <div class=" border-tipo1 p-2 bg-light-color w-100">
-                            <%= references.ResMan("Common",Lingua,"testologinacquisto") %><br /><br />
+                            <%= references.ResMan("Common",Lingua,"testologinacquisto") %><br />
+                            <br />
                             <script>
-                                //function verificalogin(btn, args) { __doPostBack('verificalogin', args); }
-                                function verificalogin(callcontrol)
-                                {
+                                function verificalogin(callcontrol) {
                                     Loginuser($("[id*='inputName']").val(), $("[id*='inputPassword']").val(), function (ret) {
-                                        if (ret == '') { 
+                                        if (ret == '') {
                                             refreshcarrello();
                                         }
                                         $("[id*='outputlogin']").html(ret)
@@ -52,24 +51,31 @@
                                     })
                                 }
                                 //function recuperapass(btn, args) { __doPostBack('recuperapass', args); }
-                                function recuperapass(callcontrol)
-                                {
-                                    RecuperoPassword($("[id*='inputName']").val() , function (ret) {
-                                        $("[id*='outputlogin']").html(ret)
+                                function recuperapass(callcontrol) {
+                                    var onclicktxt = $(callcontrol).attr("onclick");
+                                    $(callcontrol).removeAttr("onclick");
+                                    var tastotxt = $(callcontrol).html();
+                                    $(callcontrol).html("Wait ..");
+                                    RecuperoPassword($("[id*='inputName']").val(), function (ret) {
+                                        $(callcontrol).attr("onclick", onclicktxt);
+                                        $(callcontrol).html(tastotxt);
+                                        $("[id*='outputlogin']").html(ret);
                                     })
                                 }
                             </script>
                             <div runat="server" visible='<%# ControlloLogin() %>'>
-                                <input type="text" class="form-control" placeholder="Username" style="display: inline-block; width: 180px;background-color:#fff" runat="server" id="inputName" value="" />
-                                <input type="password" class="form-control" placeholder="Pasword" style="display: inline-block; width: 180px;background-color:#fff" runat="server" id="inputPassword" value="" />
+                                <input type="text" class="form-control" placeholder="Username" style="display: inline-block; width: 180px; background-color: #fff" runat="server" id="inputName" value="" />
+                                <input type="password" class="form-control" placeholder="Password" style="display: inline-block; width: 180px; background-color: #fff" runat="server" id="inputPassword" value="" />
                                 <input type="button" id="btnlogin" class="btn btn-small" onclick="verificalogin(this)" value="<%= references.ResMan("Common",Lingua,"testoLoginAccedi") %>" />
                                 <br />
-                                <a id="linkpassrecover"  href="#" onclick="recuperapass(this)" class="secondary-color pt-2" style="display:block"> <%= references.ResMan("Common",Lingua,"forgetrequest0") %> </a>
+                                <a id="linkpassrecover" href="javascript:void(0)" onclick="recuperapass(this)" class="secondary-color pt-2" style="display: block"><%= references.ResMan("Common",Lingua,"forgetrequest0") %> </a>
                             </div>
                             <div runat="server" visible='<%# !ControlloLogin() %>'>
                                 <input type="button" id="btnlogoff" class="btn btn-small" onclick="logoffuser(this)" value="<%= references.ResMan("Common",Lingua,"testologindisconnetti") + " " + Page.User.Identity.Name %>" />
-                            </div> 
-                             <div class="pt-2" style="font-weight:bold"><asp:Label ID="outputlogin" ClientIDMode="Static" Text="" runat="server" /></div>
+                            </div>
+                            <div class="pt-2" style="font-weight: bold; color: red">
+                                <asp:Label ID="outputlogin" ClientIDMode="Static" Text="" runat="server" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -433,7 +439,7 @@
                                                         <%= references.ResMan("Common", Lingua,"CarrelloTotaleOrdine") %></span>
                                                 </th>
                                                 <td class="cart-total" style="text-align: right !important;">
-                                                    <span> 
+                                                    <span>
                                                         <asp:Literal ID="Literal5" runat="server"
                                                             Text='<%#   String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"),"{0:N2}",
                                                                   new object[] { (Double)Eval("TotaleAcconto") + (Double)Eval("TotaleSaldo") }  ) + " €" %>'></asp:Literal>

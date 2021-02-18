@@ -4800,8 +4800,11 @@ namespace WelcomeLibrary.UF
                         if (controllo == "true")
                         {
                             if (valore[0] != "" && valore[0] != "0")
-
-                                ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { valore[0] }) + ' ' + unit;
+                            {
+                                double _tmppz = 0;
+                                double.TryParse(valore[0] , out _tmppz);
+                                ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { _tmppz  }) + ' ' + unit;
+                            }
                         }
                     }
                     catch { }

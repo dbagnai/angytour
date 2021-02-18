@@ -6880,7 +6880,8 @@ namespace WelcomeLibrary.DAL
                     if (!nolink)
                     {
                         if (string.IsNullOrWhiteSpace(url))
-                            strIn = strIn.Replace(origtext, "<span>" + testourl + "</span>");
+                            //strIn = strIn.Replace(origtext, "<span>" + testourl + "</span>");
+                            strIn = strIn.Replace(origtext, "" + testourl + "");
                         else
                             //strIn = strIn.Replace(origtext, "<strong><a  onclick=\"javascript:JsSvuotaSession()\"   href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
                             strIn = strIn.Replace(origtext, "<strong><a href=\"" + urlcorretto + "\" target=\"" + target + "\">" + testourl + "</a></strong>");
