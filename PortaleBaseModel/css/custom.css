@@ -3735,11 +3735,11 @@ textarea {
   position: relative;
   /*z-index: 0;*/
   width: 100%;
-  /*OCCHIO PER PER TUTTI I COMPONENTI POSITION:STICKY  SE CAMBI QUESTE NON FUNZiona DEVE ESSERE OVERFLOW-X: VISIBLE E OVERFLOW-Y:visible
-        TUTTI GLI ANCESTOR DELL'ELEMENTO STICKY NON POSSONO AVERE OVERFLO HIDDEN...
+  /*OCCHIO PER PER TUTTI I COMPONENTI POSITION:STICKY DEVE ESSERE OVERFLOW-X: VISIBLE E OVERFLOW-Y:visible
+        TUTTI GLI ANCESTOR DELL'ELEMENTO STICKY NON POSSONO AVERE OVERFLOW HIDDEN...
     */
-  /*overflow-x: hidden;*/
   overflow-x: inherit;
+  /*overflow-x: hidden;*/
   /* overflow-y: unset;*/
 }
 @media (max-width: 1179px) {

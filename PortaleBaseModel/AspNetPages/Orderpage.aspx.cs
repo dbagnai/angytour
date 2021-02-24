@@ -255,6 +255,7 @@ public partial class AspNetPages_Orderpage : CommonPage
     }
     private void CaricaCarrello()
     {
+        CaricaDatiCliente();
         if (Session["codicesconto"] != null)
             txtCodiceSconto.Text = Session["codicesconto"].ToString();
 
@@ -295,7 +296,6 @@ public partial class AspNetPages_Orderpage : CommonPage
         //SelezionaClientePerAffitti(carrello);//Dedicato alla gestione affitti
         AggiornaDatiUtenteSuCarrello(carrello); //Aggiorno code sconto e idcliente attuale
         VisualizzaTotaliCarrello(codicenazione, "");
-        CaricaDatiCliente();
 
     }
 

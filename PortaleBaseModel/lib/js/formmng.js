@@ -156,16 +156,19 @@ function getcontactdataformgeneral(serveroperation, contactdatas, btnid, callbac
         contactdatas.provincias = $("[id$='provincias" + (btnid).id + "']")[0].value;
     if ($("[id$='comunes" + (btnid).id + "']").length != 0)
         contactdatas.comunes = $("[id$='comunes" + (btnid).id + "']")[0].value;
-    contactdatas.tipologia = localmessagegeneral.tipologia;
-    contactdatas.generautente = localmessagegeneral.generautente;
+
     if ($("[id$='chkprivacy" + (btnid).id + "']").length != 0)
         contactdatas.consenso = $("[id$='chkprivacy" + (btnid).id + "']")[0].checked;
     if ($("[id$='chkprivacy1" + (btnid).id + "']").length != 0)
         contactdatas.consenso1 = $("[id$='chkprivacy1" + (btnid).id + "']")[0].checked;
     if ($("[id$='chkprivacy2" + (btnid).id + "']").length != 0)
         contactdatas.consenso2 = $("[id$='chkprivacy2" + (btnid).id + "']")[0].checked;
+
+    contactdatas.tipologia = localmessagegeneral.tipologia;
+    contactdatas.generautente = localmessagegeneral.generautente;
     contactdatas.lingua = lng;
     contactdatas.tipocontenuto = "iscrizione"; //campionatura o altro che voglio specificare
+    if (localmessagegeneral.tipocontenuto != '') contactdatas.tipocontenuto = localmessagegeneral.tipocontenuto;
     contactdatas.tipo = "post";
 
     var validated = true;

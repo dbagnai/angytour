@@ -1,5 +1,5 @@
 ﻿
-"use strict"; 
+"use strict";
 
 
 
@@ -11,7 +11,7 @@ function RecuperoPassword(username, callback) {
         cache: false,
         dataType: "text",
         type: "POST",
-        data: { 'q': 'recuperapass', 'username': username, 'Lingua': lng },
+        data: { 'q': 'recuperapass', 'username': username, 'lng': lng },
         success: function (result) {
             callback(result);
         },
@@ -30,7 +30,7 @@ function Logoff(callback) {
         cache: false,
         dataType: "text",
         type: "POST",
-        data: { 'q': 'logoffuser',  'Lingua': lng },
+        data: { 'q': 'logoffuser', 'lng': lng },
         success: function (result) {
             callback(result);
         },
@@ -42,7 +42,7 @@ function Logoff(callback) {
 }
 
 
-function Loginuser(username,password, callback) {
+function Loginuser(username, password, callback) {
     $.ajax({
         url: pathAbs + commonhandlerpath,
         contentType: "application/json; charset=utf-8",
@@ -50,7 +50,7 @@ function Loginuser(username,password, callback) {
         cache: false,
         dataType: "text",
         type: "POST",
-        data: { 'q': 'verificalogin', 'username': username, 'password': password, 'Lingua': lng },
+        data: { 'q': 'verificalogin', 'username': username, 'password': password, 'lng': lng },
         success: function (result) {
             callback(result);
         },
@@ -60,4 +60,3 @@ function Loginuser(username,password, callback) {
         }
     });
 }
- 

@@ -436,6 +436,14 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     cliente.Codicisconto = cliente.Id_cliente + "-sconto;0";
                     clidm.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref cliente); 
 #endif
+#if false  //Aggiorn il cliente inserndo il codice sconto se richiesto
+                    if (tipocontenuto1.ToLower() == "iscrizione wineclub") //
+                    {
+                        //Impostiamo  il codice sconto con valore zero per nuovo cliente inserito
+                        cliente.Codicisconto = "wineclub-" + cliente.Id_cliente + ";0";
+                        clidm.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref cliente);
+                    }
+#endif
                     //------------------------------------------------
                     //Invio mail avviso al gestore  ( inseriamo tutti i dati dei form )
                     //------------------------------------------------
@@ -468,6 +476,21 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         Descrizione1 += " <br/> Il cliente ha richiesto l'invio newsletter. " + references.ResMan("Common", lingua, "titolonewsletter1").ToString() + "<br/>";
                     }
                     Utility.invioMailGenerico(nomedestinatario1, maildestinatario1, SoggettoMail1, Descrizione1, maildestinatario1, nomedestinatario1);
+
+                    // Registro la statistica di contatto
+                    Statistiche stat1 = new Statistiche();
+                    stat1.Data = DateTime.Now;
+                    stat1.EmailDestinatario = maildestinatario1;
+                    stat1.EmailMittente = cliente.Email;
+                    // stat.Idattivita = idperstatistiche;
+                    stat1.Testomail = SoggettoMail1 + " <br/>- " + Descrizione1;
+                    stat1.TipoContatto = enumclass.TipoContatto.invioemail.ToString();
+                    stat1.Url = "";
+                    statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat1);
+                    //questo da vedere per abilitare il redirect alla thankyou page!!! (DA ULTIMARE ... SENNO NON TRACCIABILE DA GOOGLE )
+                    //result = CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", lingua, "LinkContatti"));
+                    //if (idofferta != "") result += "&idOfferta=" + idofferta.ToString();
+                    //result += "&conversione=true";
 
 #if false //abilitare per generazione utente ecommerce dopo invio del form
                     //////////////////////////////////////////////////////////////////////////////////////////////
