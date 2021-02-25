@@ -395,6 +395,7 @@ var carrellotool = new function () {
     function Visualizzatasti(abilita) {
         var abilita = abilita || false;
         var optiontype = $('#' + controlid + "qty").attr('optiontype');
+        if (optiontype == undefined) optiontype = ""; 
 
         if (configview == 1 || configview == 3) { //versione con calendari di selezione
             $('#' + controlid + "messages").html('');

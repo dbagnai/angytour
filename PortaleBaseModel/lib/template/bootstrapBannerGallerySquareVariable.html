@@ -1,97 +1,7 @@
 ﻿<style>
 
-    .squarevariable .card {
-        border: none !important;
-        border-radius: 0 !important;
-        padding-left: 2px;
-        padding-right: 2px;
-        padding-top: 2px;
-        padding-bottom: 2px;
-    }
-    /* TAGLIA LE IMMAGINI IN BASE ALL'ALTEZZA DELLO SCHERMO - può essere disabilitato */
-    .squarevariable item:nth-of-type(1) .work-image img {
-        height: calc(100vh - 100px) !important;
-        width: auto !important;
-    }
-    .squarevariable item:not(:nth-of-type(1)) .work-image img {
-        height: calc(50vh - 52px) !important;
-        width: auto !important;
-    }
-    @media screen and (min-width: 992px) and (max-width: 1200px) {
-        .squarevariable item:nth-of-type(1) .work-image img {
-            height: calc(50vh) !important;
-            width: auto !important;
-        }
-
-        .squarevariable item:not(:nth-of-type(1)) .work-image img {
-            height: calc(25vh - 2px) !important;
-            width: auto !important;
-        }
-    }
-    /*FINE TAGLIO IMMAGINI*/
-
-    .squarevariable .imgovercontainer.work-image > img, squarevariable .imgovercontainer > img {
-        -webkit-transition: all .35s ease;
-        transition: all .35s ease;
-    }
-    .squarevariable .imgovercontainer:hover.work-image > img, squarevariable .imgovercontainer:hover > img {
-        -webkit-transform: scale(1.2) rotate(5deg);
-        -moz-transform: scale(1.2) rotate(5deg);
-        -ms-transform: scale(1.2) rotate(5deg);
-        -o-transform: scale(1.2) rotate(5deg);
-        transform: scale(1.2) rotate(5deg);
-        -webkit-transition: all 1.0s ease;
-        transition: all 1.0s ease;
-    }
-    .squarevariable .work-image:hover:after, .squarevariable .imgovercontainer:hover:after {
-        z-index: 2 !important;
-        background: url(/images/link1.png) center center no-repeat !important;
-        background-size: 80px 80px !important;
-        background-color: rgba(0,0,0,.0) !important;
-        opacity: 1 !important;
-        -webkit-transition: all .35s ease;
-        transition: all .35s ease;
-        background: none !important;
-    }
-    /* fluid 4 columns */
-    .grid-sizer,
     .grid-item {
         width: 100%;
-    }
-    @media (max-width: 576px) {
-        .squarevariable .work-image img {
-            height: calc(100vh - 100px) !important;
-            width: auto !important;
-        }
-
-        .squarevariable .card-img-overlay {
-            position: absolute;
-        }
-    }
-
-    @media screen and (min-width: 577px) and (max-width: 767px) {
-        .squarevariable .work-image img {
-            height: auto !important;
-            width: 100% !important;
-        }
-    }
-
-    @media screen and (min-width: 768px) and (max-width: 992px) {
-        .squarevariable .work-image img {
-            height: calc(100vh - 100px) !important;
-            width: auto !important;
-        }
-    }
-
-    @media (max-width: 992px) {
-        .squarevariable item:not(:nth-of-type(1)) .work-image img {
-            display: none !important;
-        }
-
-        .squarevariable .card-img-overlay {
-            height: 100% !important;
-            width: 100% !important;
-        }
     }
 
     @media (min-width: 992px) {
@@ -109,10 +19,153 @@
         }
     }
 
+    .squarevariable .card {
+        border: none !important;
+        border-radius: 0 !important;
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+    /* TAGLIA LE IMMAGINI IN BASE ALL'ALTEZZA DELLO SCHERMO - può essere disabilitato */
+    .squarevariable item:nth-of-type(1) .work-image img {
+        height: calc(100vh - 100px) !important;
+        width: auto !important;
+    }
+
+    .squarevariable item:not(:nth-of-type(1)) .work-image img {
+        height: calc(50vh - 52px) !important;
+        width: auto !important;
+    }
+
+    .squarevariable item:not(:nth-of-type(1)) .card-img-overlay {
+        padding: 1rem !important;
+    }
+
+        .squarevariable item:not(:nth-of-type(1)) .card-img-overlay .card-body {
+            margin: 0 !important;
+        }
+
+            .squarevariable item:not(:nth-of-type(1)) .card-img-overlay .card-body h3 {
+                margin: 0 !important;
+                /*  line-height: 100% !important;*/
+                font-size: 2rem !important;
+            }
+
+    @media screen and (min-width: 992px) and (max-width: 1200px) {
+        .squarevariable item:nth-of-type(1) .work-image img {
+            height: calc(50vh) !important;
+            width: auto !important;
+        }
+
+        .squarevariable item:not(:nth-of-type(1)) .work-image img {
+            height: calc(25vh - 2px) !important;
+            width: auto !important;
+        }
+    }
+   
+  
+
+    /*FINE TAGLIO IMMAGINI*/
+
+    /* @media (max-width: 576px) {
+        .squarevariable .work-image img {
+            height: calc(100vh - 100px) !important;
+            width: auto !important;
+        }
+        .squarevariable .card-img-overlay {
+            position: absolute;
+        }
+    }
+    @media screen and (min-width: 577px) and (max-width: 767px) {
+        .squarevariable .work-image img {
+            height: auto !important;
+            width: 100% !important;
+        }
+    }
+    @media screen and (min-width: 768px) and (max-width: 992px) {
+        .squarevariable .work-image img {
+            height: calc(100vh - 100px) !important;
+            width: auto !important;
+        }
+    }*/
+
+
+    @media (max-width: 992px) {
+        .squarevariable .work-image img {
+            height: auto !important;
+            width: 100% !important;
+        }
+
+        .squarevariable item:not(:nth-of-type(1)) .work-image img {
+            display: none !important;
+        }
+
+        .squarevariable item:not(:nth-of-type(1)) .card-img-overlay {
+            display: none !important;
+        }
+
+        .squarevariable .card-img-overlay {
+            height: 100% !important;
+            width: 100% !important;
+        }
+    }
+
+
+
+    /* .squarevariable .imgovercontainer.work-image > img, squarevariable .imgovercontainer > img {
+        -webkit-transition: all .35s ease;
+        transition: all .35s ease;
+    }*/
+
+    /*.squarevariable .work-image:hover:after, .squarevariable .imgovercontainer:hover:after {
+        z-index: 2 !important;
+        background: url(/images/link1.png) center center no-repeat !important;
+        background-size: 80px 80px !important;
+        background-color: rgba(0,0,0,.0) !important;
+        opacity: 1 !important;
+        -webkit-transition: all .35s ease;
+        transition: all .35s ease;
+        background: none !important;
+    }*/
+
+    /*.squarevariable .imgovercontainer:hover.work-image > img, squarevariable .imgovercontainer:hover > img {
+        -webkit-transform: scale(1.2) rotate(5deg);
+        -moz-transform: scale(1.2) rotate(5deg);
+        -ms-transform: scale(1.2) rotate(5deg);
+        -o-transform: scale(1.2) rotate(5deg);
+        transform: scale(1.2) rotate(5deg);
+        -webkit-transition: all 1.0s ease;
+        transition: all 1.0s ease;
+    }*/
+
     /*d-flex justify-content-center align-content-center flex-wrap h-100 w-100*/
 
-</style>
+    /*For Iphone 11 pro*/
+    /*@media only screen and (max-width: 450px) and (-webkit-device-pixel-ratio: 3) {
+        .squarevariable .work-image img {
+            height: auto !important;
+            width: 100% !important;
+        }
 
+        .squarevariable item:not(:nth-of-type(1)) .work-image img {
+            display: none !important;
+        }
+
+        .squarevariable item:not(:nth-of-type(1)) .card-img-overlay {
+            display: none !important;
+        }
+
+        .squarevariable .card-img-overlay {
+            height: 100% !important;
+            width: 100% !important;
+        }
+    }*/
+    /* *** For Iphone 11 pro*/
+
+
+</style>
 <div class="grid squarevariable" id="replaceid">
     <div class="grid-sizer"></div>
     <item class="grid-item">

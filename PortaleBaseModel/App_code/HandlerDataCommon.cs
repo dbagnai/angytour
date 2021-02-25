@@ -444,32 +444,46 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         clidm.InserisciAggiornaCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ref cliente);
                     }
 #endif
+
                     //------------------------------------------------
                     //Invio mail avviso al gestore  ( inseriamo tutti i dati dei form )
                     //------------------------------------------------
                     string SoggettoMail1 = "Richiesta " + tipocontenuto1 + " da " + cliente.Cognome + " tramite il sito " + ConfigManagement.ReadKey("Nome");
                     string Descrizione1 = descrizione1.Replace("\r", "<br/>") + " <br/> ";
                     Descrizione1 += " <br/> Il cliente ha richiesto : " + tipocontenuto1;
-                    Descrizione1 += " <br/> Azienda:" + cliente.Ragsoc;
+                    if (!string.IsNullOrEmpty(cliente.Ragsoc))
+                        Descrizione1 += " <br/> Azienda:" + cliente.Ragsoc;
                     Descrizione1 += " <br/> Cognome cliente:" + cliente.Cognome + "<br/>Nome: " + cliente.Nome;
                     Descrizione1 += " <br/> Id anagrafica:" + cliente.Id_cliente;
                     Descrizione1 += " <br/> Telefono : " + cliente.Telefono + "  <br/>Email : " + cliente.Email;
-                    Descrizione1 += " <br/> Piva : " + cliente.Pivacf + "  <br/>SDI/Pec : " + cliente.Emailpec + " <br/>Lingua : " + lingua;
+                    if (!string.IsNullOrEmpty(cliente.Pivacf) || !string.IsNullOrEmpty(cliente.Emailpec))
+                        Descrizione1 += " <br/> Piva : " + cliente.Pivacf + "  <br/>SDI/Pec : " + cliente.Emailpec + " <br/>Lingua : " + lingua;
 
-                    string indirizzofatt = cliente.Indirizzo + "<br/>";
-                    indirizzofatt += cliente.Cap + " " + cliente.CodiceCOMUNE + "  (" + references.NomeProvincia(cliente.CodicePROVINCIA, lingua) + ")<br/>";
-                    indirizzofatt += "Nazione: " + cliente.CodiceNAZIONE + "<br/>";
-                    Descrizione1 += " <br/><br/>Dati Fatturazione: <br/>" + indirizzofatt;
-
+                    string indirizzofatt = "";
+                    if (!string.IsNullOrEmpty(cliente.Indirizzo)
+                        || !string.IsNullOrEmpty(cliente.Cap)
+                        || !string.IsNullOrEmpty(cliente.CodiceCOMUNE)
+                        || !string.IsNullOrEmpty(cliente.CodicePROVINCIA)
+                        || !string.IsNullOrEmpty(cliente.CodiceNAZIONE)
+                        )
+                    {
+                        indirizzofatt = cliente.Indirizzo + "<br/>";
+                        indirizzofatt += cliente.Cap + " " + cliente.CodiceCOMUNE + "  (" + references.NomeProvincia(cliente.CodicePROVINCIA, lingua) + ")<br/>";
+                        indirizzofatt += "Nazione: " + cliente.CodiceNAZIONE + "<br/>";
+                        Descrizione1 += " <br/><br/>Dati Fatturazione: <br/>" + indirizzofatt;
+                    }
                     string indirizzosped = indirizzofatt;
                     if (!string.IsNullOrEmpty(clispediz.Indirizzo))
                     {
                         indirizzosped = clispediz.Indirizzo + "<br/>";
                         indirizzosped += clispediz.Cap + " " + clispediz.CodiceCOMUNE + "  (" + references.NomeProvincia(clispediz.CodicePROVINCIA, lingua) + ")<br/>";
                         indirizzosped += "Nazione: " + clispediz.CodiceNAZIONE + "<br/>";
+                        Descrizione1 += " <br/>Dati Spedizione: <br/>" + indirizzosped;
                     }
-                    Descrizione1 += " <br/>Dati Spedizione: <br/>" + indirizzosped;
-                    Descrizione1 += " <br/> Info Aggiuntive:" + datiaggiuntivi;
+
+
+                    if (!string.IsNullOrEmpty(datiaggiuntivi))
+                        Descrizione1 += " <br/> Info Aggiuntive:" + datiaggiuntivi;
                     Descrizione1 += " <br/> Il cliente ha Confermato l'autorizzazione al trattamento dei dati personali. ";
                     if (spuntanewsletter1 == true)
                     {
