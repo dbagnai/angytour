@@ -2192,10 +2192,13 @@ function inviamessaggiomail(lng, data, callback) {
         //async: false,
         data: { 'q': 'inviamessaggiomail', 'data': JSON.stringify(data), 'lng': lng },
         success: function (result) {
-            //if (callback)
-            //    callback(result);
-            //location.replace(result);//reindirizzo alla destinazione indicata dall'handler
-            location.assign(result);//reindirizzo alla destinazione indicata dall'handler
+            if (result != null && !result.toLowerCase().startsWith('http')) {
+                //torno esito al chiamante
+                if (callback)
+                    callback(result);
+            } else
+                //faccio redirect a thank you
+                location.assign(result);//reindirizzo alla destinazione indicata dall'handler
         },
         error: function (result) {
             if (callback)
@@ -2218,9 +2221,13 @@ function inseriscianagraficaenotifica(lng, data, callback) {
         //async: false,
         data: { 'q': 'insertanagraficaeinviamail', 'data': JSON.stringify(data), 'lng': lng },
         success: function (result) {
-            if (callback)
-                callback(result);
-            //location.replace(result);//reindirizzo alla destinazione indicata dall'handler
+            if (result != null && !result.toLowerCase().startsWith('http')) {
+                //torno esito al chiamante
+                if (callback)
+                    callback(result);
+            } else
+                //faccio redirect a thank you
+                location.assign(result);//reindirizzo alla destinazione indicata dall'handler
         },
         error: function (result) {
             if (callback)

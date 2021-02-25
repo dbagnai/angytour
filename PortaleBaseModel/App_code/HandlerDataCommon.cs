@@ -477,20 +477,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     }
                     Utility.invioMailGenerico(nomedestinatario1, maildestinatario1, SoggettoMail1, Descrizione1, maildestinatario1, nomedestinatario1);
 
-                    // Registro la statistica di contatto
-                    Statistiche stat1 = new Statistiche();
-                    stat1.Data = DateTime.Now;
-                    stat1.EmailDestinatario = maildestinatario1;
-                    stat1.EmailMittente = cliente.Email;
-                    // stat.Idattivita = idperstatistiche;
-                    stat1.Testomail = SoggettoMail1 + " <br/>- " + Descrizione1;
-                    stat1.TipoContatto = enumclass.TipoContatto.invioemail.ToString();
-                    stat1.Url = "";
-                    statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat1);
-                    //questo da vedere per abilitare il redirect alla thankyou page!!! (DA ULTIMARE ... SENNO NON TRACCIABILE DA GOOGLE )
-                    //result = CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", lingua, "LinkContatti"));
-                    //if (idofferta != "") result += "&idOfferta=" + idofferta.ToString();
-                    //result += "&conversione=true";
+
 
 #if false //abilitare per generazione utente ecommerce dopo invio del form
                     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -523,6 +510,22 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         }
                     } 
 #endif
+                    // Registro la statistica di contatto
+                    Statistiche stat1 = new Statistiche();
+                    stat1.Data = DateTime.Now;
+                    stat1.EmailDestinatario = maildestinatario1;
+                    stat1.EmailMittente = cliente.Email;
+                    // stat.Idattivita = idperstatistiche;
+                    stat1.Testomail = SoggettoMail1 + " <br/>- " + Descrizione1;
+                    stat1.TipoContatto = enumclass.TipoContatto.invioemail.ToString();
+                    stat1.Url = "";
+                    statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat1);
+                    if (string.IsNullOrEmpty(result))
+                    {
+                        result = CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", lingua, "LinkContatti"));
+                        // if (idofferta != "") result += "&idOfferta=" + idofferta.ToString();
+                        result += "&conversione=true";
+                    }
 
                     break;
                 case "putinsession":
