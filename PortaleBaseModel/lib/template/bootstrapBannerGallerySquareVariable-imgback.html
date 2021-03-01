@@ -37,38 +37,42 @@
                 font-size: 2rem !important;
             }
 
-    .squarevariable item:nth-of-type(1) .work-image img {
-        height: calc(100vh - 100px) !important;
+
+    .squarevariable item .work-image img {
+        height: 100% !important;
         width: auto !important;
     }
 
-    .squarevariable item:not(:nth-of-type(1)) .work-image img {
+    .squarevariable item .work-image {
+        overflow: hidden;
+    }
+
+    .squarevariable item:nth-of-type(1) .work-image {
+        height: calc(100vh - 100px) !important;
+    }
+
+    .squarevariable item:not(:nth-of-type(1)) .work-image {
         height: calc(50vh - 50px) !important;
-        width: auto !important;
     }
 
     @media screen and (min-width: 992px) and (max-width: 1200px) {
-        .squarevariable item:nth-of-type(1) .work-image img {
+        .squarevariable item:nth-of-type(1) .work-image {
             height: calc(50vh - 1px) !important;
-            width: auto !important;
         }
 
-        .squarevariable item:not(:nth-of-type(1)) .work-image img {
+        .squarevariable item:not(:nth-of-type(1)) .work-image {
             height: calc(25vh - 1px) !important;
-            width: auto !important;
         }
     }
 
     @media (max-width: 992px) {
 
-        .squarevariable item:nth-of-type(1) .work-image img {
+        .squarevariable item:nth-of-type(1) .work-image {
             height: calc(100vh - 100px) !important;
-            width: auto !important;
         }
 
-        .squarevariable item:not(:nth-of-type(1)) .work-image img {
+        .squarevariable item:not(:nth-of-type(1)) .work-image {
             height: calc(50vh - 50px) !important;
-            width: auto !important;
         }
 
         .squarevariable .card-img-overlay {
@@ -83,9 +87,8 @@
             overflow: hidden;
         }
 
-            .squarevariable item:nth-of-type(1) .work-image img {
-                height: calc(98vh) !important;
-                width: auto !important;
+            .squarevariable item:nth-of-type(1) .work-image {
+                height: calc(100vh) !important;
             }
 
 
@@ -147,9 +150,11 @@
                 </div>
             </div>
             <a class="bind primary-color" rel="prettyPhoto[pp_gal]" href="link" mybind="Id" style="overflow:hidden;">
-                <div class="position-relative imgovercontainer work-image d-flex justify-content-center">
+                <!--<div class="position-relative imgovercontainer work-image d-flex justify-content-center">
                     <img src="/images/dummylogo.png" alt="" class="bind" mybind="Id" style="padding: 0px;" />
-                </div>
+                </div>-->
+                <div class=" d-flex justify-content-center  m-0  work-image  position-relative imgbackstyle imgback bind   align-items-center" mybind="Id">
+                 </div>
             </a>
         </div>
     </item>
