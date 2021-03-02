@@ -474,8 +474,10 @@ public partial class AspNetPages_Orderpage : CommonPage
                 string indirizzospedizione = "";
                 if (!chkSpedizione.Checked)
                 {
+                    if (!string.IsNullOrEmpty(inpCognomeS.Value ) || !string.IsNullOrEmpty(inpNomeS.Value))
+                        indirizzospedizione = inpCognomeS.Value + " " + inpNomeS.Value + "<br/>";
                     if (!string.IsNullOrEmpty(inpIndirizzoS.Value))
-                        indirizzospedizione = inpIndirizzoS.Value + "<br/>";
+                        indirizzospedizione += inpIndirizzoS.Value + "<br/>";
                     if (!string.IsNullOrEmpty(inpCaps.Value) && !string.IsNullOrEmpty(inpComuneS.Value) && !string.IsNullOrEmpty(inpProvinciaS.Value))
                     {
                         indirizzospedizione += inpCaps.Value + " " + inpComuneS.Value + "  (" + ((!(string.IsNullOrWhiteSpace(NomeProvincia(inpProvinciaS.Value, Lingua)))) ? NomeProvincia(inpProvinciaS.Value, Lingua) : inpProvinciaS.Value) + ")<br/>";
@@ -490,7 +492,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                 if (string.IsNullOrWhiteSpace(indirizzospedizione))
                 {
                     totali.Indirizzospedizione = totali.Indirizzofatturazione;
-                } 
+                }
 #endif
                 totali.Note = inpNote.Value;
                 totali.Modalitapagamento = modalita;
@@ -1265,6 +1267,11 @@ public partial class AspNetPages_Orderpage : CommonPage
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Cliente clispediz = new Cliente();
         clispediz.CodiceNAZIONE = ddlNazione.SelectedValue.Trim();
+
+        if(!string.IsNullOrEmpty(inpNomeS.Value.Trim()))
+            clispediz.Nome = inpNomeS.Value.Trim();
+        if (!string.IsNullOrEmpty(inpCognomeS.Value.Trim()))
+            clispediz.Cognome = inpCognomeS.Value.Trim();
         if (!string.IsNullOrEmpty(inpCaps.Value.Trim()))
             clispediz.Cap = inpCaps.Value.Trim();
         if (!string.IsNullOrEmpty(inpComuneS.Value.Trim()))
@@ -1592,6 +1599,10 @@ public partial class AspNetPages_Orderpage : CommonPage
             Cliente clispediz = Newtonsoft.Json.JsonConvert.DeserializeObject<Cliente>(c.Serialized);
             if (clispediz != null)
             {
+                if (string.IsNullOrWhiteSpace(inpNomeS.Value))
+                    inpNomeS.Value = clispediz.Nome;
+                if (string.IsNullOrWhiteSpace(inpCognomeS.Value))
+                    inpCognomeS.Value = clispediz.Cognome;
                 if (string.IsNullOrWhiteSpace(inpCaps.Value))
                     inpCaps.Value = clispediz.Cap;
                 if (string.IsNullOrWhiteSpace(inpComuneS.Value))
@@ -1607,7 +1618,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             }
 
             //Abilita i dati spedizione se presenti
-            if (!string.IsNullOrEmpty(inpCaps.Value) || !string.IsNullOrEmpty(inpComuneS.Value) || !string.IsNullOrEmpty(inpProvinciaS.Value)
+            if (!string.IsNullOrEmpty(inpNomeS.Value) || !string.IsNullOrEmpty(inpCognomeS.Value) || !string.IsNullOrEmpty(inpCaps.Value) || !string.IsNullOrEmpty(inpComuneS.Value) || !string.IsNullOrEmpty(inpProvinciaS.Value)
             || !string.IsNullOrEmpty(inpIndirizzoS.Value) || !string.IsNullOrEmpty(inpTelS.Value))
             {
                 chkSpedizione.Checked = false; plhShipping.Visible = true;

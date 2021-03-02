@@ -84,6 +84,7 @@
                     <div class="col-12 col-lg-7">
                         <div class="widget bill-address">
                             <div class="form-vertical">
+                              
                                 <div class="form-row row">
                                     <div class="col-6 form-group">
                                         <label>
@@ -100,6 +101,7 @@
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpCognome" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' />
                                     </div>
                                 </div>
+
                                 <div class="form-row row">
                                     <div class="col-6 form-group">
                                         <label>
@@ -200,6 +202,22 @@
 
 
                             <asp:PlaceHolder ID="plhShipping" runat="server" Visible="false">
+
+                                 <div class="form-row row">
+                                    <div class="col-6 form-group">
+                                        <label>
+                                            <%= references.ResMan("Common", Lingua,"FormTesto2") %>
+                                        </label>
+                                        <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpNomeS" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' />
+                                    </div>
+                                    <div class="col-6 form-group">
+                                        <label>
+                                            <%= references.ResMan("Common", Lingua,"FormTesto3") %>
+                                        </label>
+                                        <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpCognomeS" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' />
+                                    </div>
+                                </div>
+
                                 <div class="form-row row">
                                     <div class="col-12 col-sm-6 form-group">
                                         <label>
