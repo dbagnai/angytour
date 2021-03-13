@@ -49,33 +49,42 @@
     background-color: #d08166 !important;
 }
 
+.ui-259 .bg-petrol {
+    background-color: #3bafbf !important;
+}
+
 /* General CSS */
 .ui-259 {
     position: fixed;
-    bottom: 10px;
-    right: 80px;
-    z-index: 99;
+    bottom: 110px;
+    right: -15px;
+    z-index: 96;
 }
     /* List */
     .ui-259 .ui-list {
         position: absolute;
         bottom: 39px;
-        right: 45px;
+        right: 40px;
         height: 0px;
         opacity: 0;
+        overflow: hidden;
     }
         /* Icons */
         .ui-259 .ui-list a {
             display: block;
-            width: 34px;
-            height: 34px;
-            line-height: 34px;
-            font-size: 13px;
+            /* width: 34px;
+        height: 34px;
+        line-height: 34px;*/
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            font-size: 28px;
             border-radius: 100%;
             text-align: center;
             color: #fff;
             margin: 8px auto;
             box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+            display: block;
         }
     /* Button */
     .ui-259 a.ui-btn {
@@ -95,6 +104,7 @@
         -moz-transition: all 0.2s;
         -o-transition: all 0.2s;
         transition: all 0.2s;
+        display: block;
     }
 
     .ui-259 a.active {

@@ -280,8 +280,13 @@
 @media (max-width: 1179px) {
     .menuzord.white .menuzord-menu > li > a {
         background-color: #fff;
-        border-bottom: solid 1px #ccc;
-        border: none;
+        border-bottom: solid 1px #555;
+        border-left: solid 1px #555;
+        border-right: solid 1px #555;
+    }
+
+    .menuzord.white .menuzord-menu > li:first-child > a:first-child {
+        border-top: solid 1px #555;
     }
 }
 
@@ -354,17 +359,23 @@
     }
 
 .menuzord-menu > li {
-    margin-top: 50px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     padding-left: 5px;
     padding-right: 5px;
 }
 
+.menuzord-menu > li {
+    margin-top: 50px;
+}
+
+.logotop .menuzord-menu > li {
+    margin-top: 0px;
+}
+
 .menuzord-menu.scrolled > li {
-    margin-top: 15px;
-    padding-bottom: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
+    /*margin-top: 15px;*/
+    margin-top: 0px;
 }
 
 .menuzord-menu > li > a {

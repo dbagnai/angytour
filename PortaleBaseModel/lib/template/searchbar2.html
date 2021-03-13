@@ -1,24 +1,11 @@
-﻿
-
-<!--replaceid-->
-<div class="col-12 col-md-2 col-lg  py-1">
+﻿<!--replaceid-->
+<div class="col-12 col-md-auto  py-1">
     <select id="categoria" class="form-control searchdropdown" style="width:100%"
             mybind="categoria" onchange="javascript:combinedselect('categoria','cascade',lng,this.value,'','','','','categoria','categoria2Liv','','','')"></select>
 </div>
-<!--<div class="col-12 col-md-2 col-lg  py-1">
+<div class="col-12 col-md-2 col-lg  py-1">
     <select id="categoria2Liv" class="form-control searchdropdown" style="width:100%"
             mybind="categoria2Liv"></select>
-</div>-->
-<div class="col-12 col-md-2 col-lg  py-1">
-    <select id="Caratteristica1" class="form-control searchdropdown" style="width: 100%" mybind="Caratteristica1"></select>
-</div>
-<div class="col-12 col-auto col-lg py-1">
-    <select id="nazione" class="form-control searchgeo"
-            onchange="javascript:GestioneDdlGeo('nazione,cascade',lng,this.value,'','','','nazione','regione','provincia','comune')"></select>
-</div>
-<div class="col-12   col-auto  col-lg py-1">
-    <select id="regione" class="form-control searchgeo"
-            onchange="javascript:GestioneDdlGeo('regione,cascade',lng,$('#nazione')[0].value,this.value,'','','nazione','regione','provincia','comune')"></select>
 </div>
 <!--<li>
     <select id="ddlRegione" name="ddlRegione" class="form-control searchdropdown" style="width: 160px"
@@ -53,11 +40,13 @@
         <input type="hidden" id="hidricercaid" class="searchval" />
     </div>
 </div>-->
-
-<!--<div class="col-12 col-md-2 col-lg  py-1">
+<div class="col-12 col-md-auto  py-1">
+    <select id="Caratteristica1" class="form-control searchdropdown" style="width: 100%" mybind="Caratteristica1"></select>
+</div>
+<div class="col-12 col-md-auto  py-1">
     <select id="Caratteristica2" class="form-control searchdropdown" style="width: 100%" mybind="Caratteristica2"></select>
-</div>-->
-<!--<div class="col-12 col-md-2 col-lg  py-1">
+</div>
+<!--<div class="col-12 col-md-auto  py-1">
     <select id="Caratteristica3" class="form-control searchdropdown" style="width: 100%" mybind="Caratteristica3"></select>
 </div>-->
 <!--<li>
@@ -74,8 +63,8 @@
 </li>-->
 
 
-<div class="col-12  mt-4 pt-2 text-center" style="border-top:1px solid #ccc">
-    <button type="button" onclick="javascript:Visualizzalistadati()" class="form-control btn-black-outline  w-auto" style="padding: .55rem 2rem !important;">Cerca</button>
+<div class="col-12 col-md-auto  py-1">
+    <button type="button" onclick="javascript:Visualizzalistadati()" class="form-control btn-black-outline  w-100" style="padding: .55rem 2rem !important;">Cerca</button>
 </div>
 <!--<li>
     <button type="button"  class="form-control divbuttonstyle" style="max-width:180px;padding:2px 15px 2px 15px">svuota</button>

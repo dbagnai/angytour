@@ -694,6 +694,17 @@
                                 <div class="col-sm-12 item-text text-left">
                                    <h4><strong>Indirizzo spedizione ( opzionale )</strong></h4>
                                 </div>
+                              <div class="col-sm-3 item-text text-left">
+                                        <strong>Nome</strong><br />
+                                        <input class="form-control" type="text" v-model="vm.itemselected.addvalues.Nome"    />
+                                    </div>
+                                     <div class="col-sm-3 item-text  text-left">
+                                           <strong>Cognome</strong><br />
+                                        <input class="form-control" type="text" v-model="vm.itemselected.addvalues.Cognome"    />
+                                    </div>
+                                    <div class="col-sm-3 item-text  text-left">
+                                    </div>
+                                </div>
                                 <div class="row" style="padding-bottom: 10px">
                                     <div class="col-sm-3 item-text text-left">
                                         <strong>Cap</strong><br />

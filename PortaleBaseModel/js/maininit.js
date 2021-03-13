@@ -4,7 +4,6 @@
 jQuery(document).ready(function ($) {
     //$(".sticker").sticky({ topSpacing: 120 });
     //setInterval(function () { if ($('#divnavigazioneJs0').isOnScreen()) { $(".sticker").unstick() } }, 1000);
-
     //https://github.com/tombigel/detect-zoom
     setInterval(function () {
         //var zoom = detectZoom.zoom();
@@ -85,10 +84,12 @@ jQuery(document).ready(function ($) {
     /*--------GESTIONE MODIFICA MENUZORD CON SCORRIMENTO---------------*/
     $(window).scroll(function () {
         if ($(window).scrollTop() > 0) {
-            //        $('#mainnav').addClass('bckColor1');
-            $('#divlogo').removeClass();
+            $('#divMessage').hide();
+            //  $('#mainnav').addClass('bckColor1');
+            //$('#divlogo').removeClass();
+
             $('.menuzord-menu').addClass('scrolled');
-            $('#divlogoBrand').addClass('shrinklogo');
+            $('.divlogoBrand').addClass('shrinklogo');
             //$('#mainnav').addClass('fixednav-scroll');
             //$('#divlogoBrand').removeClass('fulllogobckdark-pwa-start');
 
@@ -98,7 +99,6 @@ jQuery(document).ready(function ($) {
             //            $('#menuzord').addClass('dark');
             //            $('#menuzord').removeClass('white');
             //        }
-            $('#divMessage').hide();
 
             ///////AFFIX MANAGER       //////////////////////////////////////////////////////////////////
             //remove affix per una colonna in base alla posizione della barra laterale
@@ -111,13 +111,11 @@ jQuery(document).ready(function ($) {
         }
         else {
             //        $('#mainnav').removeClass('bckColor1');
-            $('#divlogo').removeClass();
-
-            $('#divlogo').addClass('fulllogobckdark');
             $('#divMessage').show();
-
+            //$('#divlogo').removeClass();
+            //$('#divlogo').addClass('fulllogobckdark');
             $('.menuzord-menu').removeClass('scrolled');
-            $('#divlogoBrand').removeClass('shrinklogo');
+            $('.divlogoBrand').removeClass('shrinklogo');
             //$('#mainnav').removeClass('fixednav-scroll');
             //$('#divlogoBrand').addClass('fulllogobckdark-pwa-start');
 
@@ -132,6 +130,9 @@ jQuery(document).ready(function ($) {
 
 
     $('.loader').hide();
+
+    //$('.fixednav').addClass('logotop');//versione con logo centrato
+
 
     /*--------GESTIONE MODIFICA MENUZORD CON SCORRIMENTO Home fullscrean ---------------*/
     if (true) {
@@ -148,56 +149,73 @@ jQuery(document).ready(function ($) {
 
         //if (true) {
         if (ishome || fulliimageheader) {
+
+            //$('.fixedtop').addClass('fixedtop-home-logotop');
+            //$('.fixednav').addClass('fixednav-home-logotop');
             $('.fixedtop').addClass('fixedtop-home');
             $('.fixednav').addClass('fixednav-home');
-            $('.fulllogobckdark').addClass('fulllogobckdark-home');
-            $('.menuzord.white .menuzord-menu > li > a, .menuzord.white .menuzord-menu > li > a span').addClass('menu-home');
-            $('.menuzord.white .menuzord-menu > li > a.buttonmenu span').addClass('buttonmenu-span-home');
-            $('.buttonmenu, a .buttonmenu').addClass('buttonmenu-home');
+
             $('.bckColor2').addClass('bckColor2-home');
-            $('.catalogo-menu ul').addClass('catalogo-menu-ul-home');
-            $('.catalogo-menu ul').removeClass('visible-ok');
-            $('.catalogo-menu ul.dropdown li').addClass('catalogo-menu-ul-li-home');
-            /*$('.menuzord-menu li.catalogo-menu .indicator').addClass('indicator-home')*/;
+            $('.fulllogobckdark').addClass('fulllogobckdark-home');
             $('.menuzord-menu .indicator').addClass('indicator-home');
             $('.headerspacer').addClass('headerspacer-home');
             $('.menuzord-menu ul.dropdown').addClass('dropdown-home');
             $('.megamenu').addClass('dropdown-home');
+
+            $('.menuzord.white .menuzord-menu > li > a, .menuzord.white .menuzord-menu > li > a span').addClass('menu-home');
+            $('.menuzord.white .menuzord-menu > li > a.buttonmenu span').addClass('buttonmenu-span-home');
+            $('.buttonmenu, a .buttonmenu').addClass('buttonmenu-home');
+            $('.catalogo-menu ul').addClass('catalogo-menu-ul-home');
+            $('.catalogo-menu ul').removeClass('visible-ok');
+            $('.catalogo-menu ul.dropdown li').addClass('catalogo-menu-ul-li-home');
+            /*$('.menuzord-menu li.catalogo-menu .indicator').addClass('indicator-home')*/;
+
             $(window).scroll(function () {
                 if ($(window).scrollTop() > 0) {
+                    //$('.fixedtop').removeClass('fixedtop-home-logotop');
+                    //$('.fixednav').removeClass('fixednav-home-logotop');
                     $('.fixedtop').removeClass('fixedtop-home');
                     $('.fixednav').removeClass('fixednav-home');
-                    $('.fulllogobckdark').removeClass('fulllogobckdark-home');
-                    $('.menuzord.white .menuzord-menu > li > a, .menuzord.white .menuzord-menu > li > a span').removeClass('menu-home');
-                    $('.menuzord.white .menuzord-menu > li > a.buttonmenu span').removeClass('buttonmenu-span-home');
-                    $('.buttonmenu, a .buttonmenu').removeClass('buttonmenu-home');
+
                     $('.bckColor2').removeClass('bckColor2-home');
-                    $('.catalogo-menu ul').removeClass('catalogo-menu-ul-home');
-                    $('.catalogo-menu ul').addClass('visible-ok');
-                    $('.catalogo-menu ul ul').removeClass('visible-ok');
-                    $('.headerspacer').removeClass('headerspacer-home');
-                    $('.catalogo-menu ul.dropdown li').removeClass('catalogo-menu-ul-li-home');
-                    //$('.menuzord-menu li.catalogo-menu .indicator').removeClass('indicator-home');
+                    $('.fulllogobckdark').removeClass('fulllogobckdark-home');
                     $('.menuzord-menu .indicator').removeClass('indicator-home');
                     $('.menuzord-menu ul.dropdown').removeClass('dropdown-home');
                     $('.megamenu').removeClass('dropdown-home');
+                    $('.headerspacer').removeClass('headerspacer-home');
+
+                    $('.menuzord.white .menuzord-menu > li > a, .menuzord.white .menuzord-menu > li > a span').removeClass('menu-home');
+                    $('.menuzord.white .menuzord-menu > li > a.buttonmenu span').removeClass('buttonmenu-span-home');
+                    $('.buttonmenu, a .buttonmenu').removeClass('buttonmenu-home');
+
+                    $('.catalogo-menu ul').removeClass('catalogo-menu-ul-home');
+                    $('.catalogo-menu ul').addClass('visible-ok');
+                    $('.catalogo-menu ul ul').removeClass('visible-ok');
+                    $('.catalogo-menu ul.dropdown li').removeClass('catalogo-menu-ul-li-home');
+                    //$('.menuzord-menu li.catalogo-menu .indicator').removeClass('indicator-home');
+
                 }
                 else {
+                    //$('.fixedtop').addClass('fixedtop-home-logotop');
+                    //$('.fixednav').addClass('fixednav-home-logotop');
                     $('.fixedtop').addClass('fixedtop-home');
                     $('.fixednav').addClass('fixednav-home');
+
+                    $('.bckColor2').addClass('bckColor2-home');
                     $('.fulllogobckdark').addClass('fulllogobckdark-home');
+                    $('.menuzord-menu .indicator').addClass('indicator-home');
+                    $('.headerspacer').addClass('headerspacer-home');
+                    $('.megamenu').addClass('dropdown-home');
+                    $('.menuzord-menu ul.dropdown').addClass('dropdown-home');
+
                     $('.menuzord.white .menuzord-menu > li > a, .menuzord.white .menuzord-menu > li > a span').addClass('menu-home');
                     $('.menuzord.white .menuzord-menu > li > a.buttonmenu span').addClass('buttonmenu-span-home');
                     $('.buttonmenu, a .buttonmenu').addClass('buttonmenu-home');
-                    $('.bckColor2').addClass('bckColor2-home');
+
                     $('.catalogo-menu ul').addClass('catalogo-menu-ul-home');
                     $('.catalogo-menu ul').removeClass('visible-ok');
                     $('.catalogo-menu ul.dropdown li').addClass('catalogo-menu-ul-li-home');
                     //$('.menuzord-menu li.catalogo-menu .indicator').addClass('indicator-home');
-                    $('.menuzord-menu .indicator').addClass('indicator-home');
-                    $('.headerspacer').addClass('headerspacer-home');
-                    $('.menuzord-menu ul.dropdown').addClass('dropdown-home');
-                    $('.megamenu').addClass('dropdown-home');
                 }
             });
         }
@@ -273,8 +291,8 @@ jQuery(document).ready(function ($) {
     centeringBullets();
 
     /* ---------------------------------------------- /*
-		 * Youtube video background from RIval
-	/* ---------------------------------------------- */
+         * Youtube video background from RIval
+    /* ---------------------------------------------- */
     //$(function () {
     //    $(".video-player").mb_YTPlayer();
     //});
@@ -414,7 +432,7 @@ $(window).load(function () {
 });
 
 /*DropDown Menu Hover effect*/
-function addhovereffecttobootstrapnav() {      
+function addhovereffecttobootstrapnav() {
     //Add Hover effect to menus OF BOOTSTRAP
     $('ul.nav li.dropdown').hover(function () {
         $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn();

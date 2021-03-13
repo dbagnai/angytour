@@ -474,7 +474,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                 string indirizzospedizione = "";
                 if (!chkSpedizione.Checked)
                 {
-                    if (!string.IsNullOrEmpty(inpCognomeS.Value ) || !string.IsNullOrEmpty(inpNomeS.Value))
+                    if (!string.IsNullOrEmpty(inpCognomeS.Value) || !string.IsNullOrEmpty(inpNomeS.Value))
                         indirizzospedizione = inpCognomeS.Value + " " + inpNomeS.Value + "<br/>";
                     if (!string.IsNullOrEmpty(inpIndirizzoS.Value))
                         indirizzospedizione += inpIndirizzoS.Value + "<br/>";
@@ -1268,7 +1268,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         Cliente clispediz = new Cliente();
         clispediz.CodiceNAZIONE = ddlNazione.SelectedValue.Trim();
 
-        if(!string.IsNullOrEmpty(inpNomeS.Value.Trim()))
+        if (!string.IsNullOrEmpty(inpNomeS.Value.Trim()))
             clispediz.Nome = inpNomeS.Value.Trim();
         if (!string.IsNullOrEmpty(inpCognomeS.Value.Trim()))
             clispediz.Cognome = inpCognomeS.Value.Trim();
@@ -1323,8 +1323,18 @@ public partial class AspNetPages_Orderpage : CommonPage
         string tipologiaclientiecommece = "0"; //LA TIPOLOGIA USATA PER I CLIENTI ECOMMERCE
         clitmp.Email = cliente.Email;
         clitmp.id_tipi_clienti = tipologiaclientiecommece; //ricerco per email SOLO SULLA TIPOLOGIA CLIENTI SPECIFICATA  
-        //clitmp.id_tipi_clienti = ""; //ricerco su tutte le tipologie non su una sola
+                                                           //clitmp.id_tipi_clienti = ""; //ricerco su tutte le tipologie non su una sola
 
+        ////////////////////////////////////////////////////
+        //CHECK CORRETTZZA DELLA MAIL INSERITA ( USARE VALIDATORE DELLE MAIL )
+        ////////////////////////////////////////////////////
+        bool validemail = ActiveUp.Net.Mail.Validator.ValidateSyntax(clitmp.Email);
+        if (!validemail)
+        {
+            output.CssClass = "alert alert-danger"; output.Text = "Email errata|Invalid Email!"; //output.Text = references.ResMan("Common", Lingua, "txtPagamento").ToString();
+            return false;
+
+        }
         ////////////////////////////////////////////////////
         // cerco in anagrafica cliente con la mail/tipologia inserita
         ////////////////////////////////////////////////////

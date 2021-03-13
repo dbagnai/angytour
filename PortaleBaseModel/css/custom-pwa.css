@@ -3806,6 +3806,18 @@ select.form-control:not([size]):not([multiple]) {
 /*----------------------------------
 --------------- FORM ---------------
 ----------------------------------*/
+.formbackground {
+  border-width: 0px;
+  border-color: #eaeaea;
+  border-style: solid;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: rgba(61, 61, 61, 0.1) 0px 25px 20px 0px;
+  padding: 0px 40px 40px;
+  min-height: 0px;
+  /*    top: -50px;
+    left:30px;*/
+}
 .ui-15 .ui-form .form-control {
   background-color: #ffffff;
 }
@@ -5102,6 +5114,7 @@ button.js-roundedpush:hover {
     background-color: transparent;
     height: calc(100vh - 98px - 40px) !important;
   }
+  /*Top bar normale senza logo*/
   .fixedtop-home {
     display: none !important;
   }
@@ -5109,6 +5122,19 @@ button.js-roundedpush:hover {
     top: 0;
     background-color: transparent;
   }
+  /*Alternativa a vista per logo centrato*/
+  .fixedtop-home-logotop {
+    background-color: transparent;
+    display: none;
+  }
+  /* .fixedtop-home-logotop .simplemenu {
+        display: none !important;
+    }*/
+  .fixednav-home-logotop {
+    background-color: transparent;
+    top: 0px;
+  }
+  /*Alternativa a vista per logo centrato*/
   .bckColor2-home {
     -webkit-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
     -moz-box-shadow: 0 4px 6px -6px rgba(34, 34, 34, 0);
@@ -5320,29 +5346,35 @@ button.js-roundedpush:hover {
     font-family: 'Font Awesome 5 Free';
   }
   /* modifica meuzord per megamenu grande con molti link*/
-  .menuzord-menu > li > .megamenu {
-    padding: 30px 50px;
-    left: unset;
-    border: 1px solid #032f2f;
-    /*-----*/
-    margin: 10px -20px 0;
-    width: calc(100% + 40px);
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-    -webkit-box-shadow: 0 4px 6px -6px #222;
-    -moz-box-shadow: 0 4px 6px -6px #222;
-    box-shadow: 0 4px 6px -6px #222;
-  }
-  /* modifica meuzord per megamenu grande con molti link*/
   .menuzord-menu > li > .megamenu.megamenu-full-text {
-    padding: 0 30px 30px;
+    padding: 10px 30px;
     left: unset !important;
     /*  right: 0px !important;*/
     right: unset !important;
     border: 1px dashed #032f2f;
-    margin: 10px 0px 0px 0px;
+    margin: 5px 10px 5px 10px;
     width: auto;
+    max-height: 78vh !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    -webkit-box-shadow: 0 4px 6px -6px #222;
+    -moz-box-shadow: 0 4px 6px -6px #222;
+    box-shadow: 0 4px 6px -6px #222;
+  }
+  .menuzord-menu > li > .megamenu.megamenu-full-width {
+    padding: 10px 30px;
+    left: unset !important;
+    /*  right: 0px !important;*/
+    right: unset !important;
+    border: 1px dashed #032f2f;
+    margin: 5px 10px 5px 10px;
+    width: calc(95% + 40px);
+    max-height: 78vh !important;
+    overflow-y: auto;
+    overflow-x: hidden;
     border-left-style: solid;
     border-right-style: solid;
     border-bottom-style: solid;
@@ -5351,7 +5383,7 @@ button.js-roundedpush:hover {
     box-shadow: 0 4px 6px -6px #222;
   }
   .menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist a {
-    margin-top: 30px;
+    margin-top: 0px;
   }
   .menuzord-menu > li > .megamenu.megamenu-full-text .megamenu-menulist ul li a {
     color: #032f2f;
@@ -5796,7 +5828,7 @@ button.js-roundedpush:hover {
     max-height: none !important;
     margin-bottom: 20px;
     margin-top: 5px;
-    border: 1px solid;
+    /*        border: 1px solid;*/
     /*        background: @bg-figura-menu;*/
     background-repeat: no-repeat;
     background-position: center bottom;
@@ -5807,7 +5839,7 @@ button.js-roundedpush:hover {
   }
   .menuzord.white .menuzord-menu > li > a {
     background-color: #fff;
-    border-bottom: 1px solid;
+    /*    border-bottom: 1px solid;*/
     text-align: left;
     background-color: #ebf6f6;
   }

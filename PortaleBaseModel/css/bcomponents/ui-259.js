@@ -7,7 +7,7 @@ $(document).ready(function () {
 		e.preventDefault();
 		if (!($(this).hasClass("active"))) {
 			$(".ui-list").animate({
-				height: "260px",
+				height: "210px",
 				opacity: "1"
 			});
 			$(this).addClass("active");
