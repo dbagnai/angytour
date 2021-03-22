@@ -62,11 +62,11 @@
         <%--<%= references.ResMan("Common", Lingua,"pulsantecontattipopup") %>--%>
         <!-- MENU -->
         <div class="fixedtop" id="divTop" runat="server" visible="true">
-            <div class="row text-center" style="padding: 5px 0px;">
-                <div class="col-3 col-sm-6">
+            <div class="row d-flex justify-content-between " style="padding: 5px 0px;">
+                <div class="col-auto  d-flex justify-content-start">
                     <%-- SOCIAL --%>
-                    <div class="social-icons-small float-left d-block px-2 px-lg-4 border-right bd-secondary-color" runat="server" visible="true">
-                        <ul style="float: right">
+                    <div class="social-icons-small  d-block px-2 px-lg-4 border-right bd-secondary-color" runat="server" visible="true">
+                        <ul>
                             <li style="float: right">
                                 <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon-small facebook-icon-small" data-original-title="facebook"></a>
                             </li>
@@ -92,9 +92,8 @@
                             </a>--%>
                     </div>
                     <%-- MENU TOP LEFT (after social) --%>
-                    <div class="simplemenu float-left d-block">
+                    <div class="simplemenu">
                         <ul>
-
                             <!-- DOVE SIAMO --->
                             <%--  <li runat="server" class="px-2 px-lg-4 d-block">
                             <a id="googlemap" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"googleurl1")) %>' target='_blank'>
@@ -120,11 +119,11 @@
                                 </a>
                             </li>
                             <!-- TELEFONO --->
-                            <li runat="server" class="px-2 px-lg-4 d-none d-sm-block">
+                            <%--   <li runat="server" class="px-2 px-lg-4 d-none d-sm-block">
                                 <a href="<%= "tel:" + references.ResMan("Common", Lingua,"testoTelfisso") %>">
                                     <i class="fas fa-phone fa-flip-horizontal mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"testoTelfisso") %>
                                     </span></a>
-                            </li>
+                            </li>--%>
                         </ul>
                     </div>
                 </div>
@@ -136,34 +135,28 @@
                         <div class="divlogoBrand fulllogobckdark"></div>
                     </a>
                 </div>--%>
-                  <div class="col-9 col-sm-6">
-                    <!-- LINGUE --->
-                    <div runat="server" visible="false">
-                        <div id="divCambioLingua1" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                        </div>
-                        <div id="divCambioLinguadef1" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                            <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio1")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio1") %>'><%= references.ResMan("Common", Lingua,"testoCambio1").ToUpper() %></a>
-                        </div>
-                        <div id="divCambioLingua2" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                        </div>
-                        <div id="divCambioLinguadef2" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                            <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio2")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio2") %>'><%= references.ResMan("Common", Lingua,"testoCambio2").ToUpper() %></a>
-                        </div>
-                        <div id="divCambioLingua3" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                        </div>
-                        <div id="divCambioLinguadef3" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                            <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio3")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio3") %>'><%= references.ResMan("Common", Lingua,"testoCambio3").ToUpper() %></a>
+                <div class="col-auto d-flex justify-content-end">
+                    <div class="position-relative">
+                        <div class="input-group flex-nowrap px-2 px-lg-4 bd-secondary-color" style="width: 100%; padding-top: 3px; padding-bottom: 3px; border-left: 1px solid">
+                            <%-- <input enableviewstate="true" type="text" id="txtSearchTop" class="form-control" style="height: 24px; font-family: 'Fira Sans', sans-serif; font-size: 0.8rem;" runat="server" placeholder="Cerca ...." />
+                        <div class="input-group-append" style="border: none; padding: 0px;">
+                            <button type="button" onserverclick="btnsearch1_Click" id="BtnCercaTop" class="" style="border: none; background-color: rgba(255, 255, 255, 0.6); border-top-right-radius: 5px; border-bottom-right-radius: 5px;" runat="server"><i class="fa fa-search"></i></button>
+                        </div>--%>
+                            <input class="form-control blog-search-input" name="txtSearchTop" id="txtSearchTop" type="text" placeholder='<%= references.ResMan("Common", Lingua,"TestoCerca") %>' style="height: 24px; font-size: 0.8rem;" onkeydown="if (event.keyCode == 13)  document.getElementById('btncercatop1').click()" />
+                            <span class="input-group-append" style="border: none; padding: 0px;">
+                                <button type="button" onclick="cerca('txtSearchTop','rif000001',true)" id="btncercatop1" class="" style="border: none; background-color: rgba(255, 255, 255, 0.6); border-top-right-radius: 5px; border-bottom-right-radius: 5px;"><i class="fa fa-search"></i></button>
+                            </span>
                         </div>
                     </div>
-                    <div class="float-right" style="padding-left: 3px; padding-top: 0px;" runat="server" visible="true">
+                    <div class="position-relative  d-none d-sm-block" runat="server" visible="true" style="min-width: 60px">
                         <%--CARRELLO--%>
                         <asp:PlaceHolder runat="server" Visible="true">
-                            <div class="carrellomaincontainer float-right d-block position-relative pt-0 px-1 pr-lg-4 pl-lg-3 py-0 d-xl-none">
+                            <div class="carrellomaincontainer d-block position-relative pt-0 px-1 pr-lg-4 pl-lg-3 py-0 d-xl-none">
                                 <a class="float-right" style="color: #fff !important; border: none"
                                     href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkShoppingcart")) %>'>
-                                    <asp:Label Text="" runat="server" ClientIDMode="Static" CssClass="carrellototalvalue totalItems d-none d-sm-block" />
+                                    <asp:Label Text="" runat="server" ClientIDMode="Static" CssClass="carrellototalvalue totalItems d-none d-lg-block" />
                                 </a>
-                                <ul class="dropdown-menu dropdown-cart">
+                                <ul class="dropdown-menu dropdown-cart float-right">
                                     <li>
                                         <ul class="carrelloelemslist products-list-mini"
                                             runat="server" title="" style="height: 400px; width: 100%; overflow-y: auto; overflow-x: hidden">
@@ -190,26 +183,27 @@
                         </asp:PlaceHolder>
                         <%-- CARRELLO END --%>
                     </div>
-
-                    <!-- CERCA --->
-                    <div class="float-right">
-                        <div class="input-group flex-nowrap px-2 px-lg-4 bd-secondary-color" style="width: 200px; padding-top: 3px; padding-bottom: 3px; border-left: 1px solid;">
-                            <%-- <input enableviewstate="true" type="text" id="txtSearchTop" class="form-control" style="height: 24px; font-family: 'Fira Sans', sans-serif; font-size: 0.8rem;" runat="server" placeholder="Cerca ...." />
-                        <div class="input-group-append" style="border: none; padding: 0px;">
-                            <button type="button" onserverclick="btnsearch1_Click" id="BtnCercaTop" class="" style="border: none; background-color: rgba(255, 255, 255, 0.6); border-top-right-radius: 5px; border-bottom-right-radius: 5px;" runat="server"><i class="fa fa-search"></i></button>
-                        </div>--%>
-                            <input class="form-control blog-search-input" name="txtSearchTop" id="txtSearchTop" type="text" placeholder='<%= references.ResMan("Common", Lingua,"TestoCerca") %>' style="height: 24px; font-size: 0.8rem;" onkeydown="if (event.keyCode == 13)  document.getElementById('btncercatop1').click()" />
-                            <span class="input-group-append" style="border: none; padding: 0px;">
-                                <button type="button" onclick="cerca('txtSearchTop','rif000001',true)" id="btncercatop1" class="" style="border: none; background-color: rgba(255, 255, 255, 0.6); border-top-right-radius: 5px; border-bottom-right-radius: 5px;"><i class="fa fa-search"></i></button>
-                            </span>
+                    <!-- LINGUE --->
+                    <div class="position-relative" runat="server" visible="false">
+                        <div id="divCambioLingua1" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
+                        </div>
+                        <div id="divCambioLinguadef1" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
+                            <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio1")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio1") %>'><%= references.ResMan("Common", Lingua,"testoCambio1").ToUpper() %></a>
+                        </div>
+                        <div id="divCambioLingua2" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
+                        </div>
+                        <div id="divCambioLinguadef2" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
+                            <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio2")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio2") %>'><%= references.ResMan("Common", Lingua,"testoCambio2").ToUpper() %></a>
+                        </div>
+                        <div id="divCambioLingua3" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
+                        </div>
+                        <div id="divCambioLinguadef3" class="float-right px-2 px-lg-4 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
+                            <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio3")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio3") %>'><%= references.ResMan("Common", Lingua,"testoCambio3").ToUpper() %></a>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
-
         <div class="fixednav bckColor2" id="mainnav" style="padding-left: 20px; padding-right: 20px">
 
             <!-- ICONA CALL RESPONSIVE -->
@@ -232,7 +226,7 @@
             </div>
             <div id="menuzord" class="menuzord menuzord-responsive white pb-0 pb-sm-0">
                 <a class="menuzord-brand " href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHome") ) %>'>
-                    <div   class="fulllogobckdark divlogoBrand"></div>
+                    <div class="fulllogobckdark divlogoBrand"></div>
                     <%-- <img id="imgLogo" src='<%=CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome") %>" />--%>
                 </a>
                 <ul class="menuzord-menu menuzord-indented scrollable menuzord-right outofsight">

@@ -6562,9 +6562,9 @@ namespace WelcomeLibrary.DAL
 
 
                         if (!string.IsNullOrWhiteSpace(url))
-                            strIn = strIn.Replace(origtext, "<img class=\"\"  style=\"max-width:100%\" src=\"\" data-src=\"" + urlcorretto + "\" alt=\"" + testourl + "\"  />");
+                            strIn = strIn.Replace(origtext, "<img class=\"lazy\"  style=\"max-width:100%\" src=\"\" data-src=\"" + urlcorretto + "\" alt=\"" + testourl + "\"  />");
                         else if (!url.ToLower().StartsWith("http"))
-                            strIn = strIn.Replace(origtext, "<img class=\"\"  style=\"max-width:100%\" src=\"\"   data-src=\"" + urlcorretto + "\" alt=\"" + testourl + "\"  />");
+                            strIn = strIn.Replace(origtext, "<img class=\"lazy\"  style=\"max-width:100%\" src=\"\"   data-src=\"" + urlcorretto + "\" alt=\"" + testourl + "\"  />");
 
                     }
                     else
@@ -6632,7 +6632,7 @@ namespace WelcomeLibrary.DAL
                         if (!string.IsNullOrWhiteSpace(url))
                         {
                             string texthtml = "<div class=\"responsive-video\" style=\"display:block;\">";
-                            texthtml += " <iframe frameborder=\"0\" allowfullscreen=\"\" class=\"\" src=\"\" data-src=\"" + urlcorretto + "\"></iframe>";
+                            texthtml += " <iframe frameborder=\"0\" allowfullscreen=\"\" class=\"lazy\" src=\"\" data-src=\"" + urlcorretto + "\"></iframe>";
                             texthtml += "</div>";
                             strIn = strIn.Replace(origtext, texthtml);
                         }
