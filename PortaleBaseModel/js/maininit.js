@@ -416,20 +416,20 @@ setTimeout(function () {
     }
 }, timeout);
 
-$(window).load(function () {
-    loaded = true;
-    centeringBullets();
-    hideLoading();
-    var $masonryElement = $('#masonry-elements');
-    $masonryElement.isotope({
-        transformsEnabled: false,
-        masonry: {
-            columnWidth: 270,
-            gutterWidth: 25
-        }
-    });
+//$(window).load(function () {
+//    loaded = true;
+//    centeringBullets();
+//    hideLoading();
+//    var $masonryElement = $('#masonry-elements');
+//    $masonryElement.isotope({
+//        transformsEnabled: false,
+//        masonry: {
+//            columnWidth: 270,
+//            gutterWidth: 25
+//        }
+//    });
 
-});
+//});
 
 /*DropDown Menu Hover effect*/
 function addhovereffecttobootstrapnav() {
@@ -645,6 +645,8 @@ function zeinaAccordion(selector) {
         }
     });
 }
+
+
 function relayoutIsotope() {
 
     var worksgrid = $('.works-grid');

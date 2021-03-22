@@ -2477,22 +2477,6 @@ ul.footer-category-list {
   height: 100%;
 }
 /*CSS per video responsive*/
-.titolo1videohome {
-  -moz-animation: titolo1 20s;
-  -o-animation: titolo1 20s;
-  animation: titolo1 20s;
-  animation-iteration-count: 1;
-  opacity: 0;
-}
-.titolo2videohome {
-  -webkit-animation: titolo2 25s;
-  -moz-animation: titolo2 25s;
-  -o-animation: titolo2 25s;
-  animation: titolo2 25s;
-  animation-iteration-count: 1;
-  font-size: 20px;
-  opacity: 0;
-}
 /*.sfondovideohome {
     -webkit-animation: sfondo 30s;
     -moz-animation: sfondo 30s;
@@ -2501,9 +2485,32 @@ ul.footer-category-list {
     animation-iteration-count: 1;
     background-color: rgba(0, 0, 0, 0);
 }*/
+.titolo1videohome {
+  animation: titolo1 50s;
+  -webkit-animation: titolo1 50s;
+  -moz-animation: titolo1 50s;
+  -o-animation: titolo1 50s;
+  /*    animation-duration: 70s;*/
+  animation-iteration-count: infinite;
+  opacity: 0;
+  font-size: calc(28px + 1vw + 1vh + 1vmin) !important;
+}
+.titolo2videohome {
+  animation: titolo2 50s;
+  -webkit-animation: titolo2 50s;
+  -moz-animation: titolo2 50s;
+  -o-animation: titolo2 50s;
+  /*   animation-duration: 70s;*/
+  animation-iteration-count: infinite;
+  opacity: 0;
+  font-size: calc(24px + 0.6vw + 0.6vh + 0.3vmin) !important;
+}
 @keyframes titolo1 {
-  20% {
+  1% {
     opacity: 0;
+  }
+  20% {
+    opacity: 1;
   }
   30% {
     opacity: 1;
@@ -2516,8 +2523,11 @@ ul.footer-category-list {
   }
 }
 @keyframes titolo2 {
-  25% {
+  3% {
     opacity: 0;
+  }
+  20% {
+    opacity: 1;
   }
   35% {
     opacity: 1;
@@ -2601,7 +2611,7 @@ ul.footer-category-list {
 }
 .bckvideostyle {
   width: 100%;
-  height: calc(90vh - 70px) !important;
+  height: calc(100vh) !important;
   position: relative;
   top: 0;
   left: 0;
@@ -2683,7 +2693,7 @@ ul.footer-category-list {
 @media (min-width: 450px) and (max-width: 800px) {
   .bckvideostyle {
     width: 100%;
-    height: calc(100vh - 70px) !important;
+    height: calc(50vh) !important;
     position: relative;
     top: 0;
     left: 0;
@@ -2721,7 +2731,7 @@ ul.footer-category-list {
 @media (max-width: 450px) {
   .bckvideostyle {
     width: 100%;
-    height: calc(45vh - 70px) !important;
+    height: calc(50vh) !important;
     position: relative;
     top: 0;
     left: 0;

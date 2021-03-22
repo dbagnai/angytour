@@ -120,16 +120,18 @@ function bindgenericbanner(controlid, localObjects) {
     console.log('video inject');
 
     InitVideo(controlid, container); //inzializzo il video
-}; 
+};
 
-function InitVideo(controlid, container)
-{
+function InitVideo(controlid, container) {
 
     $('#' + container).show();
     $('#' + container + 'Title').show();
     $(function () {
-        var muteval = false;
+        //var muteval = false;
+        //jQuery("#" + controlid + "togglevol").addClass('btn-vol-on');
+        var muteval = true;
         jQuery("#" + controlid + "togglevol").addClass('btn-vol-on');
+        jQuery("#" + controlid + "togglevol").toggleClass('btn-vol-on');
         var autoplay = false;
         jQuery("#" + controlid + "toggleplay").addClass('btn-play-on');
 

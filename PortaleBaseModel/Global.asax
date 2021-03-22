@@ -515,7 +515,7 @@
 
         BundleEngine.AddBundleJS("bundlejslib1",
             "~/js/imagesloaded.pkgd.js",
-            "~/js/isotope304/isotope.pkgd.min.js",
+            //"~/js/isotope304/isotope.pkgd.min.js",
             "~/js/jquery.cycle.js",
             "~/js/jquery.cycle2.carousel.js",
              "~/js/owl-carousel.js",
