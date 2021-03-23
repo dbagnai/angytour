@@ -1818,6 +1818,10 @@ h1 span .mbr-section-subtitle {
   margin-top: 0.25rem !important;
   display: block;
 }
+b,
+strong {
+  font-weight: 600;
+}
 .base-set,
 body,
 html,
