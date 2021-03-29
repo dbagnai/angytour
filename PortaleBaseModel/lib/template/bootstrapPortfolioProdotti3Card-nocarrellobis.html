@@ -1,7 +1,7 @@
 ﻿<div style="margin-bottom: 35px; margin-top: 20px; display: none">
     <div>
         <div class="row no-gutters" id="replaceid" style="margin-right:15px">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
                 <div class="card m-2 border-tipo2" style="overflow:hidden">
                     <a class="bind primary-color" preload target="_self" href="link" title="titolo" mybind="Id">
                         <div class="position-relative imgovercontainer">
@@ -32,7 +32,7 @@
                         </div>-->
                         <div class="float-right pt-sm-2">  <i><span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata1" style="font-size:0.8rem"></span></i></div>
                     </div>
-                    <div class="card-body text-center">
+                    <div class="card-body text-center" style="min-height:150px">
                         <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
                             <h3 class="card-title titolo-offerta mb-2">
                                 <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
@@ -48,8 +48,8 @@
                             <div class="row align-items-center">
                                 <div class="w-100 text-center prezzo-responsive">
                                     <div style="font-size:1.7rem;margin-top:0px;text-align:center;color:#66483b">
-                                        <span class="bind" style="font-size:1.1rem;font-weight:400" mybind="Id" myvalue="textprezzofornace" format="formatlabelresource"></span><br />
-                                        <span class="bind" style="font-weight:400" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span><span class="bind" style="font-size:1.1rem;font-weight:400" mybind="Id" myvalue="txtprezzoivaml" format="formatlabelresource"></span><br />
+                                        <span class="bind" style="font-size:1.1rem;font-weight:400" mybind="Id" myvalue="textprezzofornace" format="formatlabelresource"></span> 
+                                        <span class="bind" style="font-weight:400" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span><span class="bind" style="font-size:1.1rem;font-weight:400" mybind="Id" myvalue="txtprezzoivaml" format="formatlabelresource"></span> 
                                         <span style="font-size:0.6em;text-decoration:line-through;color:#ccc" class="bind" mybind="Id" myvalue="txtprezzolistino" format="formatlabelresource"></span>
                                         <span style="font-size:0.6em;text-decoration:line-through;" class="bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                                     </div>
@@ -58,10 +58,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <div class="float-right">
+                    <div class="card-footer text-center">
+                        <div>
                             <a class="bind btn btn-primary" target="_self" href="link" title="titolo" mybind="Id">
-                                <div class="float-right bind" mybind="Id" myvalue="vedi" format="formatlabelresource"></div>
+                                <div class=" bind"  mybind="Id" myvalue="testovedischeda" myvalue2="common" format="formatlabelresource" ></div>
                             </a>
                         </div>
 

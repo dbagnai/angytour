@@ -7710,8 +7710,10 @@ namespace WelcomeLibrary.DAL
                                     }
                                 }
                             }
+#if false //i vincoli di generazione obbligatori li sblocco
                             if (string.IsNullOrEmpty(brand)) continue;
-                            if (string.IsNullOrEmpty(gtinean) && string.IsNullOrEmpty(gtinmpn)) continue;
+                            if (string.IsNullOrEmpty(gtinean) && string.IsNullOrEmpty(gtinmpn)) continue; 
+#endif
                             if (_new == null || _new.Prezzo == 0) continue;
 
                         }
@@ -7730,6 +7732,7 @@ namespace WelcomeLibrary.DAL
 
                         if (!gmerchant)
                         {
+
                             writer.WriteStartElement("guid");
                             writer.WriteAttributeString("isPermaLink", "true");
                             writer.WriteValue(UrlCompleto);
@@ -7753,10 +7756,26 @@ namespace WelcomeLibrary.DAL
                         //DESCRIZIONE
                         string linkimmagine = filemanage.ComponiUrlAnteprima(_new.FotoCollection_M.FotoAnteprima, _new.CodiceTipologia, _new.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
-                        ///////////////////////////////////////////PER FEED MERCHANT GOOGLE //////////////////////////////////////
-
+                        ///////////////////////////////////////////
+                        ///PER FEED MERCHANT GOOGLE //////////////////////////////////////
+                        ///////////////////////////////////////////
                         if (gmerchant)
                         {
+#if false
+                            //store code per i feed locali
+                            writer.WriteStartElement("g:store_code");
+                            writer.WriteValue(WelcomeLibrary.UF.ResourceManagement.ReadKey("Common", Lingua, "storecode")); //va messo lo store code nelle risorse
+                            writer.WriteEndElement();
+#endif
+
+                            if (string.IsNullOrEmpty(brand) && string.IsNullOrEmpty(gtinean) && string.IsNullOrEmpty(gtinmpn))
+                            {
+                                //Identifier_exists ( indica che non sono presenti brand,mpn o gtin ( occhio a non inserirli se metti a false il default è true )
+                                writer.WriteStartElement("g:identifier_exists");
+                                writer.WriteValue("false");
+                                writer.WriteEndElement();
+                            }
+
                             writer.WriteStartElement("g:image_link");
                             writer.WriteValue(linkimmagine);
                             writer.WriteEndElement();
@@ -7779,9 +7798,12 @@ namespace WelcomeLibrary.DAL
                             //    }
                             //}
                             //BRAND
-                            writer.WriteStartElement("g:brand");
-                            writer.WriteValue(brand);
-                            writer.WriteEndElement();
+                            if (!string.IsNullOrEmpty(brand))
+                            {
+                                writer.WriteStartElement("g:brand");
+                                writer.WriteValue(brand);
+                                writer.WriteEndElement();
+                            }
                             //CODIE  EAN / ISBN / UPC / JAN / ITF-14
                             if (!string.IsNullOrEmpty(gtinean))
                             {

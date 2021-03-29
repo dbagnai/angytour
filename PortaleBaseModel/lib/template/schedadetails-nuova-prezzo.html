@@ -1,6 +1,11 @@
-﻿<div id="replaceid" class="blog-post mt-4 p-2 text-left" itemscope="" itemtype="http://schema.org/Article">
+﻿<!--<style>
+    .slide-content {
+        background-color: #cccccc
+    }
+</style>-->
+<div id="replaceid" class="blog-post mt-4 p-0 text-left" itemscope="" itemtype="http://schema.org/Article">
 
-    <div class="row mx-1 mx-sm-0">
+    <div class="row mx-0 mx-sm-0">
         <!------------------------------
         ------ COLONNA 1 IMMAGINE ------
         ------------------------------->
@@ -10,6 +15,9 @@
             <div class="responsive-video" style="display: none">
                 <iframe frameborder="0" allowfullscreen class="bind" mybind="Id" myvalue="video" src=""></iframe>
             </div>
+
+            <div mybind="Id" class="bind files-list" style="display:none"></div>
+
             <div class="blog-post-body text-center text-md-left m-0 pb-0 border-0 d-none d-md-block" style="line-height: 1.6rem;" itemprop="description">
 
                 <!--
@@ -17,7 +25,7 @@
                     <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
                 </div>-->
 
-                <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
+                <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="16000" format="formatdescrizione"></span>
             </div>
         </div>
 
@@ -36,12 +44,12 @@
                 <!----------------------------------------------
                 ------ COLONNA 2 PREZZO E DATI AGGIUNTIVI ------
                 ----------------------------------------------->
-                <div class="blog-post-details d-block" runat="server" id="divPostDetails">
+                <div class="blog-post-details">
 
-                    <div class="blog-post-details-item  blog-post-details-item-right pl-0 pb-2">
-                        <div class="text-center text-sm-left tx-primary-color mb-2" style="font-weight: 800; font-size: 1.9em; line-height: normal">
+                    <div class="blog-post-details-item blog-post-details-item-right pl-0 pb-2">
+                        <div class="text-center text-sm-left tx-primary-color mb-2" style="font-weight: 600; font-size: 1.9em; line-height: normal">
                             <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
-                            <span style="text-decoration: line-through;font-weight: 200;" class="pl-3 bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                            <span style="text-decoration: line-through;font-weight: 300;font-size:80%" class="pl-3 bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                         </div>
                         <!--<div class="float-left px-2 tx-secondary-color mb-2" style="font-weight: 200; font-size: 1.4em; line-height: normal; text-decoration: line-through;">
                             <span style="font-size: 1.4em;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
@@ -63,33 +71,22 @@
                         <span class="bind" mybind="CodiceComune" format="formatvalue"></span>
                     </div>-->
                 </div>
-                <!----------------------------
-                ------ COLONNA 2 SOCIAL ------
-                ----------------------------->
-                <p>
-                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                    <div class="addthis_inline_share_toolbox text-md-left text-xs-center"></div>
-                </p>
-                <div mybind="Id" class="bind files-list" style="display:none"></div>
 
                 <!---------------------------------
                 ------ COLONNA 2 DESCRIZIONE ------
                 ---------------------------------->
                 <div class="blog-post-body text-center text-md-left py-3 border-top border-bottom-0 bd-secondary-color" style="line-height: 1.6rem;" itemprop="description">
-                    <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span>
+                    <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="600" format="formatdescrizione"></span>
                 </div>
 
-                <!------------------------------
-                ------ COLONNA 2 PULSANTI ------
-                ------------------------------->
-                <div class="clearfix"></div>
                 <div class="row">
-                    <div class="col-sm-12 col-xs-12 my-2 mx0">
+                    <!--<div class="col-sm-12 col-xs-12 my-2 mx0">
                         <a rel="nofollow, noindex" class="bind btn w-100" target="_self" href="contactlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testorichiedi1" format="formatlabelresource"></span></a>
-                    </div>
-                    <!--<div class="col-sm-6" style="margin: 5px 0;">
-                        <a rel="nofollow, noindex" class="bind btn" style="width: 100%;background-color: #e19f3f;border-color: #e19f3f;" target="_blank" href="prenotalink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testoid2" format="formatlabelresource"></span><i class="fa fa-calendar"></i>Prenota</a>
                     </div>-->
+
+                    <div class="col-12" style="margin: 5px 0;">
+                        <a rel="nofollow, noindex" class="bind btn w-100" target="_blank" href="prenotalink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testoprenota" format="formatlabelresource"></span></a>
+                    </div>
                     <!--<div class="col-sm-6">
                         <a rel="nofollow, noindex" class="btn" style="width: 100%;" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
                     </div>-->
@@ -97,13 +94,38 @@
                         <a class="btn" style="width: 100%;" target="_self" href="bcklink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testoindietro" format="formatlabelresource"></span></a>
                     </div>-->
                 </div>
+                <div mybind="Id" class="bind files-list" style="display:none"></div>
+                <!---------------------------------
+                ------ COLONNA 2 CALL TO ACTION ------
+                ---------------------------------->
+                <div class="formbackground  bg-light-color-pattern-1 my-3 p-3" style="background-size: 140px">
+                    <div class="w-100 p-1" style="border:1px solid #ccc;border-radius: 10px;">
+                        <div class="bind" mybind="Id" myvalue="testocall1" format="formatlabelresource"></div>
+                    </div>
+                    <!--<div class="bind mb-3 text-center" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>-->
+                </div>
+                <!----------------------------
+                ------ COLONNA 2 SOCIAL ------
+                ----------------------------->
+                <p>
+                    <div class="bind" mybind="Id" myvalue="common" myvalue1="social_condividi" format="formatstringfromresource"></div>
+
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <div class="addthis_inline_share_toolbox text-md-left text-center"></div>
+                </p>
+
+                <!------------------------------
+                ------ COLONNA 2 PULSANTI ------
+                ------------------------------->
+                <div class="clearfix"></div>
+
             </div>
         </div>
 
         <!----------------------------------
         ------ COLONNA 1 DATI TECNICI ------
         ----------------------------------->
-        <div class="col12 col-md-8 d-block d-md-none">
+        <div class="col-12 col-md-8 d-block d-md-none">
             <div class="blog-post-body text-center text-md-left m-0 pb-0 border-0" style="line-height: 1.6rem;" itemprop="description">
 
                 <!--<nav id="navbar-example2" class="navbar navbar-light bg-light">
@@ -131,7 +153,7 @@
                     <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
                 </div>-->
 
-                <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
+                <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="16000" format="formatdescrizione"></span>
             </div>
         </div>
 
@@ -149,7 +171,7 @@
 
             <div class="clearfix"></div>
 
-            <div class="float-none mr-0 mb-3 float-sm-left mr-sm-3 mb-sm-0">
+            <div class="float-none mr-0 mb-3 float-sm-left mr-sm-3 mb-sm-0 d-none d-md-block">
                 <a rel="nofollow, noindex" class="btn-black-outline bind w-100" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
             </div>
 
@@ -157,14 +179,14 @@
             <div class="d-flex justify-content-between my-3 float-none d-sm-block float-sm-right my-sm-0">
                 <div class="float-sm-left">
                     <a rel="nofollow" class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
-                        <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span>
+                        <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource" style="min-width: calc(176px - 0.6rem);"></span>
                         <div class="d-inline-block">
                         </div>
                     </a>
                 </div>
                 <div class="float-sm-right">
                     <a rel="nofollow" class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
-                        <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span>
+                        <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource" style="min-width: calc(176px - 0.6rem);"></span>
                         <div class="d-inline-block align-top">
                         </div>
                     </a>

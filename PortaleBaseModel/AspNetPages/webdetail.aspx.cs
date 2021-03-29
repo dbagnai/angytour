@@ -402,53 +402,49 @@ public partial class _webdetail : CommonPage
                 }
 
                 break;
-            case "rif000008":
-                column1.Visible = false;
-                column2.Visible = true;
-                /*column3.Attributes["class"] = "col-12 col-sm-3";*/
-                column2.Attributes["class"] = "col-12 col-sm-10";
+            //case "rif000008":
+            //    column1.Visible = false;
+            //    column2.Visible = true;
+            //    /*column3.Attributes["class"] = "col-12 col-sm-3";*/
+            //    column2.Attributes["class"] = "col-12 col-sm-10";
 
-                column3.Visible = false;
+            //    column3.Visible = false;
 
-                divSearch.Visible = true;
-                ContaArticoliPerperiodo(CodiceTipologia);
-                //  Caricalinksrubriche(CodiceTipologia);
-                divContact.Visible = false;
-                divContactBelow.Visible = false;
-                if (!JavaInjection)
-                {
-                    //controlsuggeriti = "injectScrollerAndLoad(\"owlscrollerOfferte.html\",\"divScrollerSuggeritiJs\", \"carSuggeriti\",\"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", true, false, 12,2);";
-                    //string controllatest = "injectPortfolioAndLoad(\"isotopeOfferte2.html\",\"divLatestpostContainer\", \"portlats\", 1, 12, false, \"\", \"" + CodiceTipologia + "\", \"" + Categoria + "\", true, false, 12);";
-                    //cbandestra1 = "injectPortfolioAndLoadBanner('IsotopeBanner1.html','divContainerBannerslat1', 'isotBannDestra1', 1, 1, false, '','10','','TBL_BANNERS_GENERALE','banner-destra',false);";
+            //    divSearch.Visible = true;
+            //    ContaArticoliPerperiodo(CodiceTipologia);
+            //    //  Caricalinksrubriche(CodiceTipologia);
+            //    divContact.Visible = false;
+            //    divContactBelow.Visible = false;
+            //    if (!JavaInjection)
+            //    {
+            //        //SUGGERITI
+            //        sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+            //        sb.Append("injectScrollerAndLoad,owlscrollerBlog-no-image.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,''\"");
+            //        sb.Append("\"></div>");
+            //        plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
-                    //SUGGERITI
-                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerBlog-no-image.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 12,''\"");
-                    sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+            //        sb.Clear();
 
-                    sb.Clear();
+            //        //ULTIMI ARTICOLI
+            //        //sb.Append("<div class=\"sfondo-contenitore\">");
+            //        //sb.Append("<div id=\"divLatest1Title\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
+            //        //sb.Append("<div id=\"divLatest1\" class=\"inject\" params=\"");
+            //        //sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divLatest1, latestposts1, 1, 6, false, '', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 6,'','','',''," + Categoria2liv + "");
+            //        //sb.Append("\"></div>");
+            //        //sb.Append("<div id=\"divLatest1Pager\">&nbsp;</div>");
+            //        //sb.Append("</div>");
+            //        //placeholderlateral.Text = sb.ToString();
 
-                    //ULTIMI ARTICOLI
-                    //sb.Append("<div class=\"sfondo-contenitore\">");
-                    //sb.Append("<div id=\"divLatest1Title\" class=\"title-style1\">" + references.ResMan("basetext", Lingua, "testopanel1") + "</div>");
-                    //sb.Append("<div id=\"divLatest1\" class=\"inject\" params=\"");
-                    //sb.Append("injectPortfolioAndLoad,isotopePortfolioSingleRowSmall.html,divLatest1, latestposts1, 1, 6, false, '', '" + CodiceTipologia + "', '" + Categoria + "', true, false, 6,'','','',''," + Categoria2liv + "");
-                    //sb.Append("\"></div>");
-                    //sb.Append("<div id=\"divLatest1Pager\">&nbsp;</div>");
-                    //sb.Append("</div>");
-                    //placeholderlateral.Text = sb.ToString();
+            //        sb.Clear();
 
-                    sb.Clear();
+            //        //BIND PER LA SCHEDA!!!!
+            //        sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+            //        sb.Append("injectandloadgenericcontent,schedadetailsBlog-no-image.html,divItemContainter2, divitem,true,true, " + idOfferta + "");
+            //        sb.Append("\"></div>");
+            //        placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+            //    }
 
-                    //BIND PER LA SCHEDA!!!!
-                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetailsBlog-no-image.html,divItemContainter2, divitem,true,true, " + idOfferta + "");
-                    sb.Append("\"></div>");
-                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
-                }
-
-                break;
+            //break;
 
             case "rif000009":
                 column1.Visible = false;
@@ -501,15 +497,15 @@ public partial class _webdetail : CommonPage
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetails-nuova-calltoaction.html,divItemContainter2, divitem,false,true, " + idOfferta + "");
+                    sb.Append("injectandloadgenericcontent,schedadetails-nuova.html,divItemContainter2, divitem,false,true, " + idOfferta + "");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
                 }
                 break;
-
             case "rif000005":
+            case "rif000006":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
                 column2.Attributes["class"] = "col-12 col-sm-10";
@@ -519,52 +515,27 @@ public partial class _webdetail : CommonPage
                 divContact.Visible = false;
                 divContactBelow.Visible = true;
 
+                HtmlGenericControl divc1 = ((HtmlGenericControl)Master.FindControl("divContattiMaster"));
+                divc1.Visible = false;
                 if (!JavaInjection)
                 {
-                    sb.Clear();
-                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo-ombra.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
-                    sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);
+                    //sb.Clear();
+                    //sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                    //sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo-ombra.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
+                    //sb.Append("\"></div>");
+                    //plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetails-nuova-gallerymasonry1.html,divItemContainter2, divitem,false,true, " + idOfferta + "");
+                    sb.Append("injectandloadgenericcontent,schedadetails-nuova.html,divItemContainter2, divitem,false,true, " + idOfferta + "");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
                 }
                 break;
-
-            case "rif000006":
-                column1.Visible = false;
-                column1.Attributes["class"] = "col-md-1 col-sm-1";
-                column2.Attributes["class"] = "col-12 col-sm-10";
-                column2.Visible = true;
-                column3.Visible = false;
-                divSearch.Visible = false;
-                divContact.Visible = false;
-
-                if (!JavaInjection)
-                {
-                    sb.Clear();
-                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
-                    sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
-
-                    sb.Clear();
-                    sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetailsGallery.html,divItemContainter2, divitem,false,true, " + idOfferta + "");
-                    sb.Append("\"></div>");
-                    placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
-
-                    //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
-                }
-                break;
-
             case "rif000007":
+            case "rif000008":
                 column1.Visible = false;
                 column1.Attributes["class"] = "col-md-1 col-sm-1";
                 column2.Attributes["class"] = "col-12 col-sm-10";
@@ -572,24 +543,82 @@ public partial class _webdetail : CommonPage
                 column3.Visible = false;
                 divSearch.Visible = false;
                 divContact.Visible = false;
+                divContactBelow.Visible = true;
 
+                HtmlGenericControl divc2 = ((HtmlGenericControl)Master.FindControl("divContattiMaster"));
+                divc2.Visible = false;
                 if (!JavaInjection)
                 {
-                    sb.Clear();
-                    sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
-                    sb.Append("\"></div>");
-                    plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+                    //sb.Clear();
+                    //sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+                    //sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo-ombra.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
+                    //sb.Append("\"></div>");
+                    //plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
-                    sb.Append("injectandloadgenericcontent,schedadetails-staff.html,divItemContainter2, divitem,false,true, " + idOfferta + "");
+                    sb.Append("injectandloadgenericcontent,schedadetails-nuova-prezzo.html,divItemContainter2, divitem,false,true, " + idOfferta + "");
                     sb.Append("\"></div>");
                     placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
 
                     //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
                 }
                 break;
+            //case "rif000008":
+            //    column1.Visible = false;
+            //    column1.Attributes["class"] = "col-md-1 col-sm-1";
+            //    column2.Attributes["class"] = "col-12 col-sm-10";
+            //    column2.Visible = true;
+            //    column3.Visible = false;
+            //    divSearch.Visible = false;
+            //    divContact.Visible = false;
+            //    divContactBelow.Visible = true;
+
+            //    if (!JavaInjection)
+            //    {
+            //        sb.Clear();
+            //        sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+            //        sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo-ombra.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
+            //        sb.Append("\"></div>");
+            //        plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);
+
+            //        sb.Clear();
+            //        sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+            //        sb.Append("injectandloadgenericcontent,schedadetails-nuova-gallerymasonry1.html,divItemContainter2, divitem,false,true, " + idOfferta + "");
+            //        sb.Append("\"></div>");
+            //        placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+
+            //        //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
+            //    }
+            //    break;
+
+
+            //case "rif000007":
+            //    column1.Visible = false;
+            //    column1.Attributes["class"] = "col-md-1 col-sm-1";
+            //    column2.Attributes["class"] = "col-12 col-sm-10";
+            //    column2.Visible = true;
+            //    column3.Visible = false;
+            //    divSearch.Visible = false;
+            //    divContact.Visible = false;
+
+            //    if (!JavaInjection)
+            //    {
+            //        sb.Clear();
+            //        sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
+            //        sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
+            //        sb.Append("\"></div>");
+            //        plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+
+            //        sb.Clear();
+            //        sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
+            //        sb.Append("injectandloadgenericcontent,schedadetails-staff.html,divItemContainter2, divitem,false,true, " + idOfferta + "");
+            //        sb.Append("\"></div>");
+            //        placeholderrisultati.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+
+            //        //this.AssociaDati(item); //Visualizzo i dati e aggiorno eventualmente la categoria
+            //    }
+            //    break;
             case "rif000012":
                 column1.Visible = false;
                 column2.Visible = true;

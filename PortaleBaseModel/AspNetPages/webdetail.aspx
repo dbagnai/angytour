@@ -42,7 +42,7 @@
                     <div class="sidebar-content tags blog-search ">
                         <div class="input-group flex-nowrap">
                             <%-- <input enableviewstate="true" class="form-control blog-search-input" name="q" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' runat="server" id="inputCerca" /> --%>
-                            <input class="form-control blog-search-input"  onkeydown = "if (event.keyCode == 13)  document.getElementById('btncerca1').click()"  name="searchtext" id="searchtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' />
+                            <input class="form-control blog-search-input" onkeydown="if (event.keyCode == 13)  document.getElementById('btncerca1').click()" name="searchtext" id="searchtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCercaBlog") %>' />
                             <span class="input-group-addon">
                                 <button type="button" onclick="cerca('searchtext')" id="btncerca1" class="blog-search-button fa fa-search" />
                                 <%-- <button onserverclick="Cerca_Click" id="BtnCerca" class="blog-search-button fa fa-search" runat="server" clientidmode="Static" /> --%>
@@ -232,6 +232,31 @@
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
+    <%--ALTRI ARTICOLI--%>
+    <%--<div class="bd-light-color" style="position: relative; border-top: 10px dotted; background-color:#fff;" id="divSuggeritiContainer">--%>
+    <div class="bg-light-color" id="divSuggeritiContainer">
+        <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 30px 25px;">
+            <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-4" style="display: none; margin-left: 30px; margin-right: 30px">
+                <div class="row">
+                    <div class="col-sm-12 col-12">
+                        <div class="subtitle-block clearfix">
+
+                            <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 0px; margin-bottom: 0px; line-height: 40px; color: #33332e;">
+                                <div class="pull-left lead">
+                                    <h2 class="mbr-section-title" style="margin-bottom: 3px">
+                                        <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
+                                        <%= (!string.IsNullOrEmpty(references.ResMan("Common", Lingua, "titoloCollegati" + CodiceTipologia).ToString())) ? references.ResMan("Common", Lingua, "titoloCollegati" + CodiceTipologia).ToString() : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati").ToString() %>     </h2>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <asp:Literal Text="" ID="plhSuggeritiJs" runat="server" />
+        </div>
+    </div>
+
     <div id="richiedilinkpoint" style="padding-top: 176px; margin-top: -176px;"></div>
 
     <%--CONTATTI--%>
@@ -371,36 +396,12 @@
             </div>
         </div>
     </div>
-     <%--RECENSIONI CLIENTI--%>
+    <%--RECENSIONI CLIENTI--%>
     <div runat="server" visible="false">
         <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
             <div id="divCommenti" class="inject py-5 commenti-details-page bg-white" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
         </asp:Panel>
     </div>
-    <%--ALTRI ARTICOLI--%>
-    <%--<div class="bd-light-color" style="position: relative; border-top: 10px dotted; background-color:#fff;" id="divSuggeritiContainer">--%>
-    <div class="bg-light-color" id="divSuggeritiContainer">
-        <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 30px 25px;">
-            <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-4" style="display: none; margin-left: 30px; margin-right: 30px">
-                <div class="row">
-                    <div class="col-sm-12 col-12">
-                        <div class="subtitle-block clearfix">
 
-                            <div class="row" style="text-align: left; padding-bottom: 0px; padding-top: 0px; margin-bottom: 0px; line-height: 40px; color: #33332e;">
-                                <div class="pull-left lead">
-                                    <h2 class="mbr-section-title" style="margin-bottom: 3px">
-                                        <%--<%= (CodiceTipologia=="rif000100" || CodiceTipologia=="rif000101" || CodiceTipologia=="rif000003") ?  references.ResMan("Common",Lingua,"titoloCollegati").ToString(): references.ResMan("Common",Lingua,"titoloCatalogoConsigliati").ToString() %>--%>
-                                        <%= (!string.IsNullOrEmpty(references.ResMan("Common", Lingua, "titoloCollegati" + CodiceTipologia).ToString())) ? references.ResMan("Common", Lingua, "titoloCollegati" + CodiceTipologia).ToString() : references.ResMan("Common", Lingua, "titoloCatalogoConsigliati").ToString() %>     </h2>
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
-                </div>
-            </div>
-            <asp:Literal Text="" ID="plhSuggeritiJs" runat="server" />
-        </div>
-    </div>
-
-   
 </asp:Content>
