@@ -145,6 +145,8 @@ public partial class AspNetPages_OrdineOk : CommonPage
                     output.Text = references.ResMan("Common", Lingua, "risposta_7").ToString() + " Error" + errcode + "<br/>";
                     output.Text += desc + "<br/>";
                     output.Text += desc2 + "<br/>";
+                    pnlbtnretry.Visible = true;
+
                 }
 #endif
             }
@@ -158,6 +160,8 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 output.Text = references.ResMan("Common", Lingua, "risposta_6").ToString() + " Error" + errcode + "<br/>";
                 output.Text += desc + "<br/>";
                 output.Text += desc2 + "<br/>";
+                pnlbtnretry.Visible = true;
+
             }
         }
 #endif

@@ -1,0 +1,251 @@
+﻿<script>
+    //Muoviamo i breadcrum spostandoli sotto il banner
+    jQuery(document).ready(function ($) {
+        $("#breadcrumbContainer1").html($("#breadcrumbContainer").html());
+        $("#breadcrumbContainer").html('')
+    });
+</script>
+<div id="replaceid" style="text-align: left" itemscope="" itemtype="http://schema.org/Product">
+    <div class="container" style="height:60vh;max-height:500px;overflow:hidden">
+        <div class="row imgbackstyle imgback bind " mybind="Id">
+            <div class="col-12 text-left d-flex align-items-start flex-column ">
+                <div class="position-relative my-auto">&nbsp;</div>
+                <div class="position-relative my-auto">&nbsp;</div>
+                <div class="position-relative my-auto">&nbsp;</div>
+                <div class="position-relative my-auto">&nbsp;</div>
+                <div class="position-relative my-auto">
+                    <h1 itemprop="name" class="scalablefont-big text-left mb-1 pl-5 ">
+                        <a class="bind  text-white" target="_self" href="link" title="titolo" mybind="Id">
+                            <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span><br />
+                            <!--<span class="w-100 mt-1 mb-1" style="border-bottom: 1px solid;display:block"></span>-->
+                            <span style="font-size: 70%" class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle">
+                            </span>
+                        </a>
+                    </h1>
+                </div>
+                <!--<a class="btn btn-banner d-none d-lg-block" style="min-width: 30px; " href="#start-content"><i class="fas fa-arrow-down scalablefont-medium"></i></a>
+                <a class="btn btn-banner d-block d-lg-none" style="min-width: 30px;" href="#start-content"><i class="fas fa-arrow-down scalablefont-medium"></i></a>-->
+                <!------------------ RIGA RECENZIONI STELLINE --------------->
+                <div id="divCommentstotals" class="my-auto bind commenttool onlytotals text-left mb-2 p-2 pl-5 text-white" mybind="Id" instance="commenttool1" style="line-height: 1.0;">
+                </div>
+                <div class="position-relative align-self-end flex-row my-auto">
+                    <a href="#start-content">
+                        <img src="keyfromresource" class="bind imgfromresource" mybind="Id" attrdest="src" style="position:absolute;right:10px;bottom:10px;max-width:100px" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--<div class="row">
+            <div class="col-12 text-center h-100 align-items-baseline">
+                <div class="">
+                    <a class="btn btn-banner d-none d-lg-block" style="min-width: 30px; " href="#start-content"><i class="fas fa-arrow-down scalablefont-medium"></i></a>
+                    <a class="btn btn-banner d-block d-lg-none" style="min-width: 30px;" href="#start-content"><i class="fas fa-arrow-down scalablefont-medium"></i></a>-->
+        <!--</div>
+            </div>
+        </div>-->
+    </div>
+    <div class="container">
+        <div class="row">
+            <!--<div id="divCommentstotals" class="bind commenttool onlytotals d-flex justify-content-center justify-content-lg-start w-100 px-3 px-lg-0" mybind="Id" instance="commenttool1" style="line-height: 1.0;">
+            </div>-->
+            <div class="col-12 position-relative" style="z-index:10" id="breadcrumbContainer1"></div>
+        </div>
+
+        <div class="row">
+            <!------------------------------
+            ------ COLONNA 1 LEFT IMMAGINE ------
+            ------------------------------->
+            <div class="col-12 col-lg-8 order-last  order-lg-1">
+
+
+
+                <!---------------------------------
+                ------ COLONNA 2 LEFT CONTENUTI ------
+                ---------------------------------->
+                <div class="mx-0 text-left" style="line-height: 1.6rem;">
+                    <div class="blog-post-body mb-3" itemprop="description">
+                        <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="60000" format="formatdescrizione"></span>
+
+                        <div id="plhGallery" class="bind py-3" mybind="Id" myvalue="video" myvalue1="skip" format="frmvisibility"></div>
+                        <div class="responsive-video" style="display: none">
+                            <iframe frameborder="0" allowfullscreen class="bind" mybind="Id" myvalue="video" frameborder="0" allowfullscreen src=""></iframe>
+                        </div>
+                        <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="60000" format="formatdescrizione"></span>
+
+                    </div>
+                    <div>
+                        <div class="bind" mybind="Id" myvalue="common" myvalue1="linkinfoviaggi" format="formatstringfromresource"></div>
+
+
+                        <div class="bind mb-3 text-center" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>
+                    </div>
+                </div>
+
+            </div>
+            <!----------------------------
+            ------ COLONNA 3 RIGTH CONTATTO ------
+            ----------------------------->
+            <div class="col-12 col-lg-4 order-first order-lg-9 ">
+                <div class="position-sticky styckystart1" style="margin-bottom:15px">
+                    <!--<h1 itemprop="name" class="scalablefont-medium-big text-left mb-2 ">-->
+                    <!--<a class="bind" target="_self" href="link" title="titolo" mybind="Id">-->
+                    <!--<span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span><br />
+                    <span style="font-size: 70%" class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle">
+                    </span>
+                    <span class="w-100 mt-1 mb-1" style="border-bottom: 1px solid;display:block"></span>-->
+                    <!--</a>-->
+                    <!--</h1>-->
+                    <!----------------------------------------------
+                    ------ RIGA PREZZO E DATI AGGIUNTIVI ------
+                    ----------------------------------------------->
+                    <div>
+                        <meta itemprop="price" class="bind" mybind="Prezzo" format="formatvalue">
+                        <meta itemprop="priceCurrency" content="EUR">
+                        <meta itemprop="availability" content="https://schema.org/InStock">
+                        <!--<div class="tx-primary-color" style="font-weight: 500; font-size: 2rem; line-height: normal;">
+                            <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                        </div>
+                        <div class="px-2 tx-secondary-color" style="font-weight: 300; font-size: 1.4rem; text-decoration: line-through;">
+                            <span style="padding-left:10px; padding-right:5px; font-weight: 200;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                        </div>-->
+                        <!--<div class="clearfix"></div>
+                        <div class="blog-post-details-item blog-post-details-item-left" style="display:none;">
+                            <span class="bind" mybind="CodiceTipologia" format="frmtipologia"></span>
+                            <span class="bind" mybind="CodiceCategoria" format="frmcategoria"></span>
+                             <span class="bind" mybind="CodiceCategoria2Liv" format="frmcategoria2liv"></span>
+                            <span class="bind" mybind="CodiceCategoria2liv" format="frmcategoria2liv"></span>
+                            <meta itemprop="datePublished" class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata" />
+                            <span class="bind" mybind="DataInserimento" myvalue="TestoPubblicatodata" myvalue1="visualData" format="formatlabelresource"></span>
+                            <span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata"></span>
+                        </div> -->
+                    </div>
+                    <div class="d-flex justify-content-center d-lg-block mx-lg-0">
+                        <div id="start-content" style="position:relative;z-index:0;padding-top: 50px; margin-top: -50px;"></div>
+                        <!------------------ COLONNA RIGTH SOCIAL ----------------->
+                        <div mybind="Id" class="bind files-list" style="display:none"></div>
+                        <!-- SEZIONE GESTIONE CARRELLO PRENOTAZIONI -->
+                        <!--<div id="prenotalinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>-->
+                        <!-- SEZIONE GESTIONE CARRELLO -->
+                        <div id="carrellos1" class="bind carellotool w-100 mt-3 mt-lg-0 px-1 px-lg-0" mybind="Id">
+                            <!--<div class="float-right table-col ecomctr" id="carrellos1messages"></div>
+                            <div class="float-right table-col ecomctr" id="carrellos1selectdate" style="display:none">
+                                <div style="display:table;margin: 10px auto 0px auto;position:relative">
+                                    <div class="ecomctr-group">
+                                        <input class="form-control bind" style="min-width:160px" placeholder="testoordineform1" mybind="fake" id="carrellos1price" />
+                                        <label class="ecomctr-icon"><i class="fa fa-calendar"></i></label>
+                                        <div id="carrellos1calendar" style="position:absolute;left:0px;top:35px;display:none;z-index:9999"></div>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="formbackground  bg-light-color my-3 p-3" style="background-size: 140px">
+                                <div class="w-100 p-3" style="border:1px solid #ccc;border-radius: 10px;">
+                                    <p class="scalablefont-medium text-left mb-2" style=" line-height: 1.15 !important">
+                                        <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span><br />
+                                        <span style="font-size: 70%;" class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle">
+                                        </span>
+                                    </p>
+                                    <div class="clearfix">
+                                        <!--PREZZO A SCAGLIONE-->
+                                        <div class="bind scaglionitoolminprice tx-primary-color float-left" mybind="Id" mybind1="Scaglioni" style="display:none;font-weight: 400; font-size: 1.1rem; line-height: normal;">
+                                            <span class="bind" mybind="Id" myvalue="common" myvalue1="titoloprezzoapartire" format="formatstringfromresource" style="font-weight: 300; font-size: 1rem;"></span>
+                                        </div>
+                                        <!-- ETA -->
+                                        <div class="bind scaglionitooleta white-color buttonmenu float-right" mybind="Id" mybind1="Scaglioni" style="display:none;font-weight: 300; font-size: 0.8rem !important;padding:3px;width:auto;border-radius:5px"></div>
+                                    </div>
+                                    <!-- DURATA -->
+                                    <div class="bind scaglionitoolmindurata tx-primary-color " mybind="Id" mybind1="Scaglioni" style="display:none;font-weight: 400; font-size: 1.2rem; line-height: normal">
+                                        <span class="bind" mybind="Id" myvalue="common" myvalue1="testogiorni" format="formatstringfromresource" style="font-weight: 300; font-size: 1rem;"></span>
+                                    </div>
+                                    <!-- COORDINATORE (  mette le iconcine per tutti )-->
+                                    <div class="bind scaglionitoolcrd tx-primary-color px-0 pt-2 col-12" subidselected="idscaglione"  mybind="Id" mybind1="Scaglioni" style="display:none;font-weight: 300; font-size: 1rem; line-height: normal">
+                                        <div class="bind" mybind="Id" myvalue="common" myvalue1="testocoordinatore" format="formatstringfromresource" style="font-weight: 300; font-size: 1rem;"></div>
+                                        <span class="coordstylecontainer"></span>
+                                    </div>
+
+
+                                    <span class="w-100 mt-1 mb-2 clearfix" style="border-bottom: 1px solid;display:block;"></span>
+                                    <!--GESTIIONE SELEZIONE TURNI/scaglioni PARTENZE-->
+                                    <div class="bind mb-1  scaglionitool py-1" mybind="Id" mybind1="Scaglioni" myvalue="carrellos1" controloption1="true" controltype="select" needed="true" subidselected="idscaglione" style="display:none"></div>
+                                    <div class="w-100 pt-1 d-flex justify-content-center align-items-center ">
+                                        <div class="bind" mybind="Id" myvalue="common" myvalue1="carrelloinserisciqta" format="formatstringfromresource"></div>
+                                    </div>
+                                    <div class="w-100 d-flex justify-content-center align-items-center ">
+                                        <div id="carrellos1minus"></div>
+                                        <div class="px-1" id="carrellos1qty" optiontype=""></div>
+                                        <div id="carrellos1plus"></div>
+                                        <!--<div class="pl-2" id="carrellos1addsingle"></div>-->
+                                    </div>
+                                    <!--<div class="w-100 pt-3 d-flex justify-content-center align-items-center ">
+                                        <div class="ml-3 bind" mybind="Id" myvalue="vaialcarrello" format="formatlabelresource"></div>
+                                    </div>-->
+                                    <div class="pt-3 pb-1 w-100 px-3 px-md-0 bind" mybind="Id" myvalue="vaialcarrello1" format="formatlabelresource"></div>
+
+
+                                    <div class="w-100 d-flex justify-content-center align-items-center ">
+                                        <div class="clearfix" id="carrellos1messages" style="color:red"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--SEZIONE PER LA GESTIONE CARATTERISTICHE CON RIFERIMENTO ALLE QUANITA' -->
+                            <div id="carrellos1cars" class="px-2 pt-3 bg-light-color border bd-primary-color" style="display:none">
+                                <div class="w-100 d-flex justify-content-center align-items-center ">
+                                    <select id="carrellos1car1" bindingprop="Caratteristica1" class="mx-auto form-control ddlcaratteristiche  w-100" style="background-color:#fff"></select>
+                                    <select id="carrellos1car2" bindingprop="Caratteristica2" class="mx-auto form-control ddlcaratteristiche  w-100" style="background-color:#fff"></select>
+                                </div>
+                            </div>
+                            <div class="formbackground  bg-light-color-pattern-1 my-3 p-3" style="background-size: 140px">
+                                <div class="w-100 p-1" style="border:1px solid #ccc;border-radius: 10px;">
+                                    <div class="bind" mybind="Id" myvalue="testocall" format="formatlabelresource"></div>
+                                </div>
+                                <!--<div class="bind mb-3 text-center" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>-->
+                            </div>
+                            <!-- FINE SEZIONE GESTIONE CARRELLO -->
+                            <p>
+                                <div class="bind" mybind="Id" myvalue="common" myvalue1="social_condividi" format="formatstringfromresource"></div>
+                                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                                <div class="addthis_inline_share_toolbox"></div>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!---------------------------------------------------
+            ------ COLONNA 4 COMANDI NAVIGAZIONE ------
+            ---------------------------------------------------->
+            <div class="col-12">
+                <div class="row justify-content-between mx-0 pt-3 pt-lg-4 pb-3 pb-lg-5 border-top bd-primary-color">
+
+                    <div class="col-12 col-lg-auto mr-0 mb-3 mb-lg-0">
+                        <div class="row">
+                            <a rel="nofollow, noindex" class="btn-black-outline w-100 bind" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-auto mb-3 my-lg-0">
+                        <div class="row justify-content-between">
+                            <div class="row">
+                                <div class="col mr-3">
+                                    <a rel="nofollow" class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
+                                        <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span><div style="display:inline-block;">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <a rel="nofollow" class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
+                                        <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span><div style="display:inline-block;vertical-align:top">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

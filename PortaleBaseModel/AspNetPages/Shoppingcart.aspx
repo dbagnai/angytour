@@ -186,25 +186,6 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="widget shop-shipping d-none">
-                    <h3><%= references.ResMan("Common", Lingua,"CarrelloCalcolaTotaleSpedizione") %></h3>
-                    <div class="form-group">
-                        <asp:DropDownList ID="ddlNazione" CssClass="form-control" Width="100%" runat="server">
-                            <asp:ListItem Text="" Value=""></asp:ListItem>
-                        </asp:DropDownList>
-                    </div>
-                    <div class="form-row row">
-                        <span class="col-lg-4">
-                            <%--    <input type="text" class="form-control" placeholder="State / county">--%>
-                        </span>
-                        <span class="col-lg-4">
-                            <%--<input type="text" class="form-control" placeholder="Postcode / Zip">--%>
-                        </span>
-                        <span class="col-lg-3">
-                            <asp:LinkButton class="btn btn-default btn-block" OnClick="lnkUpdateCart_Click" ID="lnkUpdateCart" runat="server"><%= references.ResMan("Common", Lingua,"CarrelloRicalcolaTotaleSpedizione") %></asp:LinkButton>
-                        </span>
-                    </div>
-                </div>
 
             </div>
             <div class="col-lg-3">
@@ -269,6 +250,25 @@
                         <%= references.ResMan("Common", Lingua,"TestoProcediOrdineNoregistrazione") %>
                     </a>
 
+                </div>
+                <div class="widget shop-shipping pt-4 d-none">
+                    <h3><%= references.ResMan("Common", Lingua,"CarrelloCalcolaTotaleSpedizione") %></h3>
+                    <div class="form-group">
+                        <asp:DropDownList ID="ddlNazione" CssClass="form-control" Width="100%" runat="server">
+                            <asp:ListItem Text="" Value=""></asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                    <div class="form-row row">
+                      <%--  <span class="col-lg-4">
+                               <input type="text" class="form-control" placeholder="State / county"> 
+                        </span>
+                        <span class="col-lg-4">
+                            <input type="text" class="form-control" placeholder="Postcode / Zip"> 
+                        </span>--%>
+                        <span class="col-auto">
+                            <asp:LinkButton class="btn btn-default btn-block" OnClick="lnkUpdateCart_Click" ID="lnkUpdateCart" runat="server"><%= references.ResMan("Common", Lingua,"CarrelloRicalcolaTotaleSpedizione") %></asp:LinkButton>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

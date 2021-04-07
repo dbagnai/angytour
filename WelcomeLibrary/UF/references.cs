@@ -1017,6 +1017,49 @@ public class references
         //}
 
     }
+    /// <summary>
+    /// Ricerca i codici geografici dal testo inserito nel campi cliente in caso di italia
+    /// </summary>
+    /// <param name="item"></param>
+    public static void SearchGeoCodesByText(Cliente item, string Lingua = "I")
+    {
+        //Se codice nazione = it Fare la ricerca per comune / provincia -> inserire codice regione 
+        if (item.CodiceNAZIONE.ToLower() == "it")
+        {
+            // cerchiamo la provincia prima per codice
+            string nomeprovincia = references.NomeProvincia(item.CodicePROVINCIA, Lingua);
+            if (string.IsNullOrEmpty(nomeprovincia)) //non trovata per codice
+            {
+                //Cerco per nome della provincia  
+                string codiceprovincia = references.TrovaCodiceProvincia(item.CodicePROVINCIA, Lingua);
+                //Cerco per sigla della provincia
+                if (string.IsNullOrEmpty(codiceprovincia)) codiceprovincia = references.TrovaCodiceProvinciaPerSigla(item.CodicePROVINCIA, Lingua);
+                //se trovato il codice lo setto 
+                if (!string.IsNullOrEmpty(codiceprovincia)) item.CodicePROVINCIA = codiceprovincia;
+            }
+            Province provincia = Utility.ElencoProvince.Find(p => p.Lingua == Lingua && p.Codice == item.CodicePROVINCIA);
+
+            //Cerco il comune per nome e da li setto la provincia se non trovata sopra
+            Comune comune = Utility.ElencoComuni.Find(delegate (WelcomeLibrary.DOM.Comune tmp) { return (tmp.Nome.ToLower().Trim() == item.CodiceCOMUNE.ToLower().Trim()); });
+            if (comune != null && !string.IsNullOrEmpty(comune.Nome))
+            {
+                if (provincia == null) //se non trovata la provincia provo a settarla in base al comune
+                {
+                    item.CodicePROVINCIA = comune.CodiceIncrocio;
+                    provincia = Utility.ElencoProvince.Find(p => p.Lingua == Lingua && p.Codice == item.CodicePROVINCIA);
+                }
+            }
+            //Riempiamo il valore della regione se trovata la corretta provincia
+            //Lista completa regioni
+            ProvinceCollection regioni = references.ListaRegioni(Lingua);
+            if (regioni != null && provincia != null)
+            {
+                Province regione = regioni.Find(r => r.Lingua == Lingua && r.CodiceRegione == provincia.CodiceRegione);
+                if (regione != null) item.CodiceREGIONE = regione.Codice;
+            }
+        }
+        return;
+    }
 
     public static string NomeRegione(string codiceprovincia, string Lingua)
     {

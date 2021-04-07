@@ -61,12 +61,10 @@ public partial class AspNetPages_Orderpage : CommonPage
                 if (registrazione != "false") // da abilita se non si vuole far far acquisti senza login ..... di registrazione utente!!!
                     VerificaStatoLoginUtente();
                 RiempiDdlNazione("IT", ddlNazione);
-                CaricaCarrello();
+                CaricaCarrello(true);
             }
             else
             {
-
-
 
                 if (Request["__EVENTTARGET"] == "recuperapass")
                 {
@@ -82,7 +80,10 @@ public partial class AspNetPages_Orderpage : CommonPage
                 }
                 if (Request["__EVENTTARGET"] == "refreshcarrello")
                 {
-                    CaricaCarrello();
+                    string parameter = Request["__EVENTARGUMENT"];
+                    bool referesformcliente = false;
+                    if (parameter == "loginuser") referesformcliente = true;
+                    CaricaCarrello(referesformcliente);
                 }
                 output.CssClass = "";
                 output.Text = "";
@@ -253,9 +254,11 @@ public partial class AspNetPages_Orderpage : CommonPage
         return ret;
 
     }
-    private void CaricaCarrello()
+    private void CaricaCarrello(bool forcerefreshformcliente = false)
     {
-        CaricaDatiCliente();
+        if (forcerefreshformcliente)
+            CaricaDatiCliente();
+
         if (Session["codicesconto"] != null)
             txtCodiceSconto.Text = Session["codicesconto"].ToString();
 
@@ -463,7 +466,11 @@ public partial class AspNetPages_Orderpage : CommonPage
                 totali.Mailcliente = cliente.Email;
                 totali.Dataordine = System.DateTime.Now;
                 totali.CodiceOrdine = CodiceOrdine;
-                totali.Indirizzofatturazione = cliente.Indirizzo + "<br/>";
+
+                totali.Indirizzofatturazione = cliente.Cognome + " " + cliente.Nome + "<br/>";
+                if (!string.IsNullOrEmpty(cliente.Ragsoc))
+                    totali.Denominazionecliente += cliente.Ragsoc + "<br/>";
+                totali.Indirizzofatturazione += cliente.Indirizzo + "<br/>";
                 totali.Indirizzofatturazione += cliente.Cap + " " + cliente.CodiceCOMUNE + "  (" + ((!(string.IsNullOrWhiteSpace(NomeProvincia(cliente.CodicePROVINCIA, Lingua)))) ? NomeProvincia(cliente.CodicePROVINCIA, Lingua) : cliente.CodicePROVINCIA) + ")<br/>";
                 totali.Indirizzofatturazione += "Nazione: " + cliente.CodiceNAZIONE + "<br/>";
                 totali.Indirizzofatturazione += "Telefono: " + cliente.Telefono + "<br/>";
@@ -474,8 +481,12 @@ public partial class AspNetPages_Orderpage : CommonPage
                 string indirizzospedizione = "";
                 if (!chkSpedizione.Checked)
                 {
-                    if (!string.IsNullOrEmpty(inpCognomeS.Value) || !string.IsNullOrEmpty(inpNomeS.Value))
-                        indirizzospedizione = inpCognomeS.Value + " " + inpNomeS.Value + "<br/>";
+                    if (!string.IsNullOrWhiteSpace(inpCognomeS.Value) || !string.IsNullOrWhiteSpace(inpNomeS.Value))
+                        indirizzospedizione += inpCognomeS.Value + " " + inpNomeS.Value + "<br/>";
+                    else
+                        indirizzospedizione += cliente.Cognome + " " + cliente.Nome + "<br/>";
+
+
                     if (!string.IsNullOrEmpty(inpIndirizzoS.Value))
                         indirizzospedizione += inpIndirizzoS.Value + "<br/>";
                     if (!string.IsNullOrEmpty(inpCaps.Value) && !string.IsNullOrEmpty(inpComuneS.Value) && !string.IsNullOrEmpty(inpProvinciaS.Value))
@@ -1283,7 +1294,8 @@ public partial class AspNetPages_Orderpage : CommonPage
         if (!string.IsNullOrEmpty(inpTelS.Value.Trim()))
             clispediz.Telefono = inpTelS.Value.Trim();
         //Proviamo a cercare i codici geografici e settarli in base al testo
-        SearchGeoCodesByText(clispediz);
+        references.SearchGeoCodesByText(cliente, Lingua);
+
 
         string datispedizione = Newtonsoft.Json.JsonConvert.SerializeObject(clispediz);
         cliente.Serialized = datispedizione; //Appoggio i dati di spedizione in Serialized del cliente !!!
@@ -1309,7 +1321,8 @@ public partial class AspNetPages_Orderpage : CommonPage
         cliente.CodicePROVINCIA = inpProvincia.Value.Trim();
         cliente.Cap = inpCap.Value.Trim();
         cliente.Telefono = inpTel.Value.Trim();
-        SearchGeoCodesByText(cliente);
+        references.SearchGeoCodesByText(cliente, Lingua);
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //////////////////////////////////////////////////////////////////////////////////////////////
@@ -1456,49 +1469,6 @@ public partial class AspNetPages_Orderpage : CommonPage
         return ret;
     }
 
-    /// <summary>
-    /// Ricerca i codici geografici dal testo inserito nel campi cliente in caso di italia
-    /// </summary>
-    /// <param name="item"></param>
-    private void SearchGeoCodesByText(Cliente item)
-    {
-        //Se codice nazione = it Fare la ricerca per comune / provincia -> inserire codice regione 
-        if (item.CodiceNAZIONE.ToLower() == "it")
-        {
-            // cerchiamo la provincia prima per codice
-            string nomeprovincia = references.NomeProvincia(item.CodicePROVINCIA, Lingua);
-            if (string.IsNullOrEmpty(nomeprovincia)) //non trovata per codice
-            {
-                //Cerco per nome della provincia  
-                string codiceprovincia = references.TrovaCodiceProvincia(item.CodicePROVINCIA, Lingua);
-                //Cerco per sigla della provincia
-                if (string.IsNullOrEmpty(codiceprovincia)) codiceprovincia = references.TrovaCodiceProvinciaPerSigla(item.CodicePROVINCIA, Lingua);
-                //se trovato il codice lo setto 
-                if (!string.IsNullOrEmpty(codiceprovincia)) item.CodicePROVINCIA = codiceprovincia;
-            }
-            Province provincia = Utility.ElencoProvince.Find(p => p.Lingua == Lingua && p.Codice == item.CodicePROVINCIA);
-
-            //Cerco il comune per nome e da li setto la provincia se non trovata sopra
-            Comune comune = Utility.ElencoComuni.Find(delegate (WelcomeLibrary.DOM.Comune tmp) { return (tmp.Nome.ToLower().Trim() == item.CodiceCOMUNE.ToLower().Trim()); });
-            if (comune != null && !string.IsNullOrEmpty(comune.Nome))
-            {
-                if (provincia == null) //se non trovata la provincia provo a settarla in base al comune
-                {
-                    item.CodicePROVINCIA = comune.CodiceIncrocio;
-                    provincia = Utility.ElencoProvince.Find(p => p.Lingua == Lingua && p.Codice == item.CodicePROVINCIA);
-                }
-            }
-            //Riempiamo il valore della regione se trovata la corretta provincia
-            //Lista completa regioni
-            ProvinceCollection regioni = references.ListaRegioni(Lingua);
-            if (regioni != null && provincia != null)
-            {
-                Province regione = regioni.Find(r => r.Lingua == Lingua && r.CodiceRegione == provincia.CodiceRegione);
-                if (regione != null) item.CodiceREGIONE = regione.Codice;
-            }
-        }
-        return;
-    }
 
     protected bool ControlloLogin()
     {
@@ -1533,7 +1503,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             FormsAuthentication.SetAuthCookie(username, false);
             Response.Redirect(System.Web.HttpContext.Current.Request.Url.ToString());
             outputlogin.Text = "Accesso riuscito.";
-            CaricaCarrello();
+            CaricaCarrello(true);
         }
         else
         {
@@ -1972,21 +1942,19 @@ public partial class AspNetPages_Orderpage : CommonPage
 
 
 
-    protected void inpContanti_ServerChange(object sender, EventArgs e)
-    {
-        CaricaCarrello();
-    }
+    //protected void inpContanti_ServerChange(object sender, EventArgs e)
+    //{
+    //    CaricaCarrello();
+    //}
 
-    protected void inpBonifico_ServerChange(object sender, EventArgs e)
-    {
-        CaricaCarrello();
+    //protected void inpBonifico_ServerChange(object sender, EventArgs e)
+    //{
+    //    CaricaCarrello();
 
-    }
-
-    protected void inpPaypal_ServerChange(object sender, EventArgs e)
-    {
-        CaricaCarrello();
-
-    }
+    //}
+    //protected void inpPaypal_ServerChange(object sender, EventArgs e)
+    //{
+    //    CaricaCarrello();
+    //}
 
 }

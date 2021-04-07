@@ -41,18 +41,15 @@ public partial class AspNetPages_Shoppingcart : CommonPage
                 PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
                 PercorsoFiles = WelcomeLibrary.STATIC.Global.PercorsoContenuti;
                 PercorsoAssolutoApplicazione = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
-
                 //Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "vuoto", false, Lingua);
                 //Prendiamo i dati dalla querystring
                 Lingua = CaricaValoreMaster(Request, Session, "Lingua");
-
-                RiempiDdlNazione("IT", ddlNazione);
+                string defaultnazione = "IT";
+                RiempiDdlNazione(defaultnazione, ddlNazione);
                 CaricaCarrello();
-
                 string urlcanonico = Request.Url.AbsoluteUri.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, "");
                 Contenuti content = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, urlcanonico);
                 InzializzaTestoPagina(content);
-
                 //  DataBind();
             }
             else
@@ -78,7 +75,8 @@ public partial class AspNetPages_Shoppingcart : CommonPage
             //if (content.Id != 9 && content.Id != 10) //Non metto il titolo pagina in questo caso
             litNomeContenuti.Text = DescrizioneContenuto.ToString();
             //EvidenziaSelezione(content.TitoloI.Replace(" ", "").Replace("-", "").Replace("&", "e").Replace("'", "").Replace("?", ""));
-           try {
+            try
+            {
                 custombind cb = new custombind();
                 litMainContent.Text =
                   cb.bind(ReplaceAbsoluteLinks(ReplaceLinks(TestoContenuto).ToString()), Lingua, Page.User.Identity.Name, Session, null, null, Request);// ReplaceAbsoluteLinks(ReplaceLinks(TestoContenuto).ToString());
@@ -142,23 +140,50 @@ public partial class AspNetPages_Shoppingcart : CommonPage
         {
             trueIP = Request.ServerVariables["REMOTE_ADDR"].Trim();
         }
-        CarrelloCollection carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Session.SessionID, trueIP);
-        string codicenazione = SelezionaNazione(carrello);
-        VisualizzaTotaliCarrello(codicenazione, "");
 
+        //testiamo se presente articoli a carrello prendo la nazione dal carrello  per calcolo spese sped!
+        CarrelloCollection carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Session.SessionID, trueIP);
+        string codicenazione = SelezionaNazione(carrello, "");
+
+        //testiamo se presente cliente logggato prendo la nazione dal cliente per calcolo spese sped!
+        string idcliente = getidcliente(User.Identity.Name); //prendo l'id associato al cliente se loggato
+        if (!string.IsNullOrEmpty(idcliente))
+        {
+            string codicenazionecliente = "";
+            ClientiDM cliDM = new ClientiDM();
+            Cliente c = cliDM.CaricaClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idcliente);
+            if (c != null && !string.IsNullOrEmpty(c.CodiceNAZIONE)) codicenazionecliente = c.CodiceNAZIONE;
+            codicenazione = SelezionaNazione(carrello, codicenazionecliente);
+        }
+
+
+        VisualizzaTotaliCarrello(codicenazione, "");
         //aggiorno il carrello in quanto se erano presenti articoli esauriti vengono rimossi
         carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Session.SessionID, trueIP);
-
-
-        //carrello[0].Dataend.Value.
-
         rptProdotti.DataSource = carrello;
         rptProdotti.DataBind();
     }
 
-  
 
-    private string SelezionaNazione(CarrelloCollection carrello)
+
+    //private string SelezionaNazione(CarrelloCollection carrello)
+    //{
+    //    string codicenazione = "IT";
+    //    if (carrello != null)
+    //    {
+    //        Carrello c = carrello.Find(_c => !string.IsNullOrWhiteSpace(_c.Codicenazione));
+    //        if (c != null)
+    //            codicenazione = c.Codicenazione;
+    //    }
+    //    try
+    //    {
+    //        ddlNazione.SelectedValue = codicenazione;
+    //    }
+    //    catch
+    //    { }
+    //    return codicenazione;
+    //}
+    private string SelezionaNazione(CarrelloCollection carrello, string selcodicenazione = "")
     {
         string codicenazione = "IT";
         if (carrello != null)
@@ -166,6 +191,7 @@ public partial class AspNetPages_Shoppingcart : CommonPage
             Carrello c = carrello.Find(_c => !string.IsNullOrWhiteSpace(_c.Codicenazione));
             if (c != null)
                 codicenazione = c.Codicenazione;
+            if (!string.IsNullOrEmpty(selcodicenazione)) codicenazione = selcodicenazione;
         }
         try
         {
@@ -182,7 +208,7 @@ public partial class AspNetPages_Shoppingcart : CommonPage
         list.Add(totali);
         rptTotali.DataSource = list;
         rptTotali.DataBind();
-      //  this.Master.VisualizzaTotaliCarrello();
+        //  this.Master.VisualizzaTotaliCarrello();
 
     }
 

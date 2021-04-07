@@ -34,7 +34,7 @@ var carrellotool = new function () {
             configview = cfgvista;
             //initcalendarrange();
 
-            (function wait() { //Aspettiamo che il controllo sia iniettato
+            (function wait() { //Aspettiamo che il controllo sia iniettato e inzializziamo i tati
                 if ($("#" + controlid).length) {
                     initcalendarrange();
                 } else {
@@ -143,6 +143,7 @@ var carrellotool = new function () {
             var operatingtype = operatingtype || '';
 
             getjsonfield(function (jsondetails) { //Leggiamo eventuali proprieta dell'articolo e aggiungiamole all'elemento del carrello attuale
+
                 if (jsondetails != null && jsondetails.hasOwnProperty("notvalidmsg")) //controllo della validazione dei dati dettaglio dal form
                 {
                     $('#' + controlid + "messages").html(jsondetails["notvalidmsg"]);
@@ -154,8 +155,8 @@ var carrellotool = new function () {
                 if (jsondetails != null && jsondetails.hasOwnProperty("prezzo") && jsondetails.hasOwnProperty("idscaglione"))
                     prezzo = jsondetails['prezzo'];
                 ////////////////////////////
-
                 var Jsonfield1 = JSON.stringify(jsondetails);
+
                 if (operatingtype == '') {
                     //VERSIONE CHE NON PERMETTE DI INSERIRE PIù RIGHICARRELLO CON STESSO PRODOTTO
                     AddCurrentCarrelloNopostback('', idprodotto, lng, username, idcombined, '', prezzo, null, null, Jsonfield1, '', false, function (data) {
@@ -371,10 +372,26 @@ var carrellotool = new function () {
                                 var durata = scaglioni[j]["durata"];
                                 jsondetails["dataritorno"] = moment(new Date(scaglioni[j]['datapartenza'])).add(durata - 1, 'days').format("YYYY-MM-DD HH:mm:ss");
                             }
+
+                            /////////////////////
+                            if ($("#" + controlid + "ddlassicurazioni").length) {
+                                var assdropdown = $("#" + controlid + "ddlassicurazioni");
+                                var nassicurazioni = assdropdown.val();
+                                if (scaglioni[j].addedvalues["costoassicurazione"] != undefined && scaglioni[j].addedvalues["costoassicurazione"] != '') {
+                                    $("#" + controlid + "option1group").show()
+                                    jsondetails["costoassicurazione"] = scaglioni[j].addedvalues["costoassicurazione"];// il valore addedvalues è caricato nella gestione dello scaglione
+                                }
+                                else { delete jsondetails['costoassicurazione']; $("#" + controlid + "option1group").hide() }
+                                if (nassicurazioni != '0') {
+                                    jsondetails["nassicurazioni"] = nassicurazioni;
+                                } else delete jsondetails['nassicurazioni'];
+
+                            }
+                            /////////////////////
+
                             //Con la seguente metto nel record del carrello tutti i dati completi dello scaglione selezionato serializzato in jsonfield1
                             //jsondetails["scaglione"] = JSON.stringify(scaglioni[j]);
                             jsondetails["scaglione"] = scaglioni[j];
-
 
                         }
                     }
@@ -395,9 +412,9 @@ var carrellotool = new function () {
     function Visualizzatasti(abilita) {
         var abilita = abilita || false;
         var optiontype = $('#' + controlid + "qty").attr('optiontype');
-        if (optiontype == undefined) optiontype = ""; 
 
-        if (configview == 1 || configview == 3) { //versione con calendari di selezione
+        //versione con calendari di selezione
+        if (configview == 1 || configview == 3) {
             $('#' + controlid + "messages").html('');
             var onclickevent = "style=\"width:160px;cursor:pointer;margin-top:10px\" onclick =\"carrellotool.inserisciacarrelloquantita()\"";
             if (!abilita) onclickevent = "style=\"width:160px;cursor:pointer;margin-top:10px\"";
@@ -406,6 +423,7 @@ var carrellotool = new function () {
             carrellotool.calcolatotale();
         }
 
+        //versione standard carrello
         if (configview == 2 || configview == 3) {
             $('#' + controlid + "addsingle").html('');
             $('#' + controlid + "plus").html('');
@@ -459,6 +477,7 @@ var carrellotool = new function () {
             });
 
 
+
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //Riempio le selectbox con i valori delle caratteristiche ( i valori da bindare li devo predendere in base a idprodotto)
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -505,43 +524,133 @@ var carrellotool = new function () {
             //////////GESTIONE VISUALIZZAZIONE PER SCADENZE PARTENZE
             ///////////////////////////////////////////////////////////////////////////////////////////
             if ($("#" + controlid + "dllscaglione").length) {
-                $("#" + controlid + "dllscaglione").change(setscaglionedetail);//impostiamo i valori di dettaglio nella visualizzazione se necessario
+                //impostiamo i valori di dettaglio nella visualizzazione se necessario al change della ddl
+                //imposto la funzione di change
+                $("#" + controlid + "dllscaglione").change(setscaglionedetail);
+                $("#" + controlid + "ddlassicurazioni").change(aggiornaassicurazione); //aggiorna il carrello al cambio assicurazione
+
+                /*RICARICAMENTO CARRELLO E SELEZIONE IN DDL*/
+                //Caricando i prodotti a carrello cerco se esiste un elemento con idprodotto uguale a quello della scheda aperta,
+                //se questo ha un idscaglione setto il valore nella ddlscaglione  
+                //stessa cosa setto la  ddlassicurazioni col n.assicurazioni
+                ////carica il serializzato di tutti gli elementi presenti nel carrello attuale
+                if (idprodotto != '')
+                    GetCarrelloItems('', function (data) { //carico tutto il carrello come elemento json serializzato per impostare la visualizzazione nella scheda
+                        var carrellocompleto = {};
+                        //facendo il parse hai l'oggetto carrello completo!!!
+                        if (Object.prototype.toString.call(data) === "[object String]" && testJSON(data)) {
+                            carrellocompleto = JSON.parse(data);
+                            //Cerco l'elemento con l'idprodotto voluto
+                            for (var j = 0; j < carrellocompleto.length; j++) {
+                                var idcarrelloact = carrellocompleto[j].ID;
+                                var idprodottoincarello = carrellocompleto[j].id_prodotto;
+                                if (idprodotto == idprodottoincarello && idprodotto != '') {
+                                    if (Object.prototype.toString.call(carrellocompleto[j].jsonfield1) === "[object String]" && testJSON(carrellocompleto[j].jsonfield1)) {
+                                        var parsedjson = JSON.parse(carrellocompleto[j].jsonfield1);
+                                        var idscaglione = parsedjson.idscaglione;
+                                        var costoassicurazione = parsedjson.costoassicurazione;
+                                        var nassicurazioni = parsedjson.nassicurazioni;
+                                        if ($("#" + controlid + "dllscaglione").length && idscaglione != undefined)
+                                            $("#" + controlid + "dllscaglione").val(idscaglione);
+                                        if ($("#" + controlid + "ddlassicurazioni").length && nassicurazioni != undefined) {
+                                            $("#" + controlid + "ddlassicurazioni").val(nassicurazioni);
+                                        }
+
+                                        idcarrello = idcarrelloact;//Imposto la selezione dell'elemento a carello nel caso presenza scaglioni
+                                        $("#" + controlid + "dllscaglione").trigger('change', ['notemptycart']); //Chiama il click per aggiornare le variabili javascript senza vuotare il carrello
+                                        break;
+
+                                    }
+                                }
+                            }
+                        }
+                    });
+                /* FINE RICARICAMENTO CARRELLO*/
             }
 
             carrellotool.caricaquantita(optiontype);
         }
 
     }
-
-    function setscaglionedetail() {
+    function aggiornaassicurazione(evt, param) {
+        carrellotool.aggiornacarrello();
+    }
+    function setscaglionedetail(evt, param) {
+        var param = param || '';
         console.log('inserire qui le modifiche al form da visualizzare al cambio scaglione!!!' + ' idcarrello: ' + idcarrello);
-        //id ddl per la selizione scaglione
-        //var idcontrollo = $(event.target).attr('id');
-        //var valore = $("#" + idcontrollo + " option:selected").val(); //qyest è l'id database dello scaglione
-        //var testo = $("#" + idcontrollo + " option:selected").text();
 
-        //Prendiamo lo scaglione selezionato e visualizziamo i valori
-        //getjsonfield(function (jsondetails) { //Leggiamo eventuali proprieta dell'articolo
-        //    if (jsondetails != null && jsondetails.hasOwnProperty("prezzo") && jsondetails.hasOwnProperty("idscaglione"))
-        //        prezzo = jsondetails['prezzo'];
-        //    //controlli da valorizzare ( da vedere dove serve all'interno di jsondetails ho i valori per la visualizzazione)
-        //    // mettendoli nel template posso trovarli e modificarli di seguito
-        //    //$("#" + controlid + "testodadecidere")
-        //});
-
-        //Eliminiamo l'elemento dal carrello al cambio scaglione
-        if (idcarrello != '') {
+        //Eliminiamo l'elemento dal carrello al cambio scaglione 
+        //(funziona solo se aggiungo o tolgo qualcosa a carrello! in quanto viene valorizzato idcarrello, 
+        //altrimenti dovrei alla selezione scaglione valorizare l'idcarrelo corrispondente .. facendo un caricamento del carrello dal server
+        if (idcarrello != '' && param != 'notemptycart') {
             CancellaCurrentCarrellobyid(idcarrello, function (ret) {
+
+                //svuoto casella assicurazione
+                if ($("#" + controlid + "ddlassicurazioni").length)
+                    $("#" + controlid + "ddlassicurazioni").val('0');
+
                 //da vedere se mandare un messaggio
                 console.log('eliminato voce' + ret);
                 carrellotool.caricaquantita();
             });
         }
 
+        //id ddl per la selizione scaglione
+        //var idcontrollo = $(event.target).attr('id');
+        //var valore = $("#" + idcontrollo + " option:selected").val(); //qyest è l'id database dello scaglione
+        //var testo = $("#" + idcontrollo + " option:selected").text();
+
+        //Prendiamo lo scaglione selezionato e visualizziamo i valori
+        getjsonfield(function (jsondetails) { //Leggiamo eventuali proprieta dell'articolo
+
+            //////////////////////////////////////////////
+            //Visualizzo alcuni dati dello scaglioone selezionato
+            if (jsondetails != null && jsondetails.hasOwnProperty("costoassicurazione") && jsondetails["costoassicurazione"] != undefined && jsondetails.hasOwnProperty("idscaglione")) {
+                $("#" + controlid + "option1infos").html(GetResourcesValue("lblcostoass") + ' ' + jsondetails["costoassicurazione"] + "€" + "/" + GetResourcesValue("lblpersona"));
+            } else $("#" + controlid + "option1infos").html("");
+            //////////////////////////////////////////////
+
+            //////////////////////////////////////////////
+            //Evidenziamo il coordinatore se presente
+            //////////////////////////////////////////////
+            $(".coordstylecontainer").html('');//cancello lo stile inserito per la visualizzazione coordinatori
+            if (jsondetails != null && jsondetails.hasOwnProperty("idscaglione")) {
+                //cerchiamo nell'hiddenfield id coordinatore per lo scaglione e inseriamo la classe per evidenziare in pagina
+                var coordserialized = $("#" + controlid + "hiddencoordlist").val();
+                coordserialized = b64ToUtf8(coordserialized);
+                if (coordserialized != null && coordserialized != '') {
+                    var coordbyscaglione = JSON.parse(coordserialized);
+                    if (coordbyscaglione != null && coordbyscaglione.hasOwnProperty(jsondetails["idscaglione"]) && coordbyscaglione[jsondetails["idscaglione"]] != undefined) {
+                        var idcoordscaglione = coordbyscaglione[jsondetails["idscaglione"]]["id"];
+                        if (idcoordscaglione != undefined) {
+                            //potresti inserire in pagina lo stile per evidenziare del tipo
+                            //<style>.coordid-idcoord{ border-color:red;  } </style>
+                            var strigstyle = "<style>.coordid-" + idcoordscaglione + "{ border-color:#e18d0c;  } [class*='coordid-']:not(.coordid-" + idcoordscaglione + ") {  display:none; } </style>";
+                            //var strigstyle = "<style>.coordid-" + idcoordscaglione + "{ border-color:#e18d0c;  }  </style>";
+                            $(".coordstylecontainer").html(strigstyle);
+                        }
+                    }
+                }
+            }
+            //////////////////////////////////////////////
+
+
+            //if (jsondetails != null && jsondetails.hasOwnProperty("prezzo") && jsondetails.hasOwnProperty("idscaglione"))
+            //prezzo = jsondetails['prezzo'];
+
+            //controlli da valorizzare ( da vedere dove serve all'interno di jsondetails ho i valori per la visualizzazione)
+            // mettendoli nel template posso trovarli e modificarli di seguito
+            //$("#" + controlid + "testodadecidere")
+
+            //QUI POTREI CARICARE O LEGGERE DA CAMPO HIDDEN VALORI DEL COORDINATORE E VISUALIZZARLI IN BASE ALL'IDSCAGLIONE SELEZIONATO
+            //.....
+        });
+
+
 
     }
 
-    //Visualizza in nase alla selezione della selectbox l'immagine giusta
+    //Visualizza in base alla selezione della selectbox l'immagine giusta
     function setviewfield() {
         var idcontrollo = $(event.target).attr('id');
         var valore = $("#" + idcontrollo + " option:selected").val();
@@ -556,12 +665,13 @@ var carrellotool = new function () {
         }
     }
 
-
+    /* Funzione di startup per il carrello */
     function initcalendarrange() {
 
+        /* Funzione di visualizzazione tasti gestione carrello */
         Visualizzatasti(false);
 
-        // casistica con selezione di periodo calendario per booking
+        //Casistica particolare con selezione di periodo calendario per booking
         if (configview == 1 || configview == 3) {
             //console.log('called init initcalendarrange id: ' + controlid);
             //console.log($("#" + controlid + "calendar"));

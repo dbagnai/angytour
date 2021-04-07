@@ -3831,6 +3831,12 @@ namespace WelcomeLibrary.UF
                             if (nodetobind.Attributes.Contains("mybind1"))
                                 proprieta = nodetobind.Attributes["mybind1"].Value;
 
+                            string idscaglioneselected = "";
+                            if (nodetobind.Attributes.Contains("subidselected"))
+                                idscaglioneselected = nodetobind.Attributes["subidselected"].Value;
+
+
+
                             Dictionary<string, string> idcoordbyidscaglione = new Dictionary<string, string>();
                             List<string> idlistcoordinatori = new List<string>();
                             string coordname = "";
@@ -3862,6 +3868,7 @@ namespace WelcomeLibrary.UF
                                         }
                                         coordname = coordinatore; 
 #endif
+                                        string idcoordinatoreselected = "";
                                         foreach (Scaglioni el in scaglioni)
                                         {
                                             ////////////COORDINATORI
@@ -3870,6 +3877,8 @@ namespace WelcomeLibrary.UF
                                             if (!idlistcoordinatori.Contains(el.idcoordinatore.ToString()))
                                                 idlistcoordinatori.Add(el.idcoordinatore.ToString());
                                             //////////////////////////////////////////////
+                                            if (el.id.ToString() == idscaglioneselected) idcoordinatoreselected = el.idcoordinatore.ToString();
+                                            ///
                                         }
 
                                         //Creaiamo i link alle schede coordinatori ( a partire dall'id coordinatore devo caricare i dati del coordinatore )
@@ -3910,6 +3919,9 @@ namespace WelcomeLibrary.UF
                                             sb.Append(" style=\"background-image:url('" + coordinfos[idcoordinatore + "img"] + "')");
                                             sb.Append("\"></div></a>");
                                             sb.Append("<li>");
+                                            //evidenzia il coordinatore selezionato e spenge gli altri
+                                            if (idcoordinatoreselected == idcoordinatore) sb.Append("<style>.coordid-" + idcoordinatore + "{ border-color:#e18d0c;  } [class*='coordid-']:not(.coordid-" + idcoordinatore + ") {  display:none; } </style>");
+
                                         }
                                         sb.Append("</ul>");
 
@@ -4187,93 +4199,24 @@ namespace WelcomeLibrary.UF
 
                             sb.Append(WelcomeLibrary.UF.ResourceManagement.ReadKey("common", Lingua, "txtintroscaglione").Valore);
 
+
+                            //COORDINATORI
                             Dictionary<string, string> idcoordbyidscaglione = new Dictionary<string, string>();
                             List<string> idlistcoordinatori = new List<string>();
-
-                            //Renderizziamo la lista degli scaglioni con l'elemento che viene specificato in controltype, dropdown, lista o altro 
-                            //in base al valore dell'attributo controltype 
-                            //creazione controllo select
-                            if (controltype == "select")
-                            {
-                                sb.Append("<select id=\"" + idcontrolcarrello + "dllscaglione\" needed=\"" + mustvalidate + "\" class=\"mx-auto form-control w-100 bg-white\"  >");
-                                //aggiungiamo l'elemento vuoto
-                                sb.Append("<option value=\"\" >");
-                                sb.Append(WelcomeLibrary.UF.ResourceManagement.ReadKey("common", Lingua, "txtselectscaglione").Valore); // da prendere dalle risorse txtselectscaglione
-                                sb.Append("</option>");
-
-                                if (scaglioni != null)
-                                    foreach (Scaglioni el in scaglioni)
-                                    {
-                                        //STATO VIAGGIO DISABILITATO SE STATO MAGGIORE DI COMPLETO //////////////////////////////
-                                        string disabled = "";
-                                        string stato = "";
-                                        if (el.stato != null)
-                                        {
-                                            if (el.stato.Value >= 4) disabled = "disabled";
-                                            OrderedDictionary statuslist = Newtonsoft.Json.JsonConvert.DeserializeObject<OrderedDictionary>(serializestatuslist);
-                                            if (statuslist != null)
-                                                stato = (string)statuslist[el.stato.Value.ToString()];
-                                        }
-                                        //////////////////////////////////////////////
-
-                                        /////FASCIA DI ETA///////////
-                                        string fasciaeta = "";
-                                        if (el.fasciaeta != null)
-                                        {
-                                            OrderedDictionary etalist = Newtonsoft.Json.JsonConvert.DeserializeObject<OrderedDictionary>(serializeetalist);
-                                            if (etalist != null)
-                                                fasciaeta = (string)etalist[el.fasciaeta.Value.ToString()];
-                                        }
-                                        //////////////////////////////////////////////
-
-                                        ////////////COORDINATORI
-                                        if (!idcoordbyidscaglione.ContainsKey(el.id.ToString().ToString()))
-                                            idcoordbyidscaglione.Add(el.id.ToString(), el.idcoordinatore.ToString());
-                                        if (!idlistcoordinatori.Contains(el.idcoordinatore.ToString()))
-                                            idlistcoordinatori.Add(el.idcoordinatore.ToString());
-                                        //////////////////////////////////////////////
-
-                                        string datapartenza = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:dd MMM yyyy}", new object[] { el.datapartenza });
-                                        string dataritorno = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:dd MMM yyyy}", new object[] { el.datapartenza.Value.AddDays(el.durata - 1) });
-
-                                        string selected = "";
-                                        if (idscaglioneselected == el.id.ToString()) selected = "selected";
-
-                                        sb.Append("<option " + disabled + " value=\"" + el.id + "\" " + selected + " >");
-                                        sb.Append(datapartenza + "/" + dataritorno + " - " + el.prezzo + "€" + " - " + stato);
-                                        sb.Append("</option>");
-                                    }
-                                sb.Append("</select>");
-
-                            }
-                            //Controllo solo lista di testo
-                            if (controltype == "")
-                            {
-                                if (scaglioni != null)
-                                    foreach (Scaglioni el in scaglioni)
-                                    {
-                                        sb.Append(String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:dd MMM yyyy}", new object[] { el.datapartenza }));
-                                        sb.Append("  - ");
-                                        sb.Append(el.durata);
-                                        sb.Append(" gg ");
-                                        sb.Append(" ");
-                                        sb.Append(el.prezzo);
-                                        sb.Append(" € ");
-                                        sb.Append("<br/>");
-                                        ////////////COORDINATORI
-                                        if (!idcoordbyidscaglione.ContainsKey(el.id.ToString().ToString()))
-                                            idcoordbyidscaglione.Add(el.id.ToString(), el.idcoordinatore.ToString());
-                                        if (!idlistcoordinatori.Contains(el.idcoordinatore.ToString()))
-                                            idlistcoordinatori.Add(el.idcoordinatore.ToString());
-                                        //////////////////////////////////////////////
-
-                                    }
-
-                            }
-
+                            if (scaglioni != null)
+                                foreach (Scaglioni el in scaglioni)
+                                {
+                                    ////////////COORDINATORI
+                                    if (!idcoordbyidscaglione.ContainsKey(el.id.ToString().ToString()))
+                                        idcoordbyidscaglione.Add(el.id.ToString(), el.idcoordinatore.ToString());
+                                    if (!idlistcoordinatori.Contains(el.idcoordinatore.ToString()))
+                                        idlistcoordinatori.Add(el.idcoordinatore.ToString());
+                                    //////////////////////////////////////////////
+                                }
 #if true
                             ///////////////////////////////////////////////////////////////
                             ////////////////GESTIONE COORDINATORI /////////////////////
+                            ///////////////////////////////////////////////////////////////
                             /////////////METTO IN PAGINA LE INFO PER I COORDINATORI ////////////////
                             //Creaiamo i link alle schede coordinatori ( a partire dall'id coordinatore devo caricare i dati del coordinatore )
                             //scorro dictionary idcoordbyidscaglione dove per ogni idscglione ho idcoordinatore
@@ -4310,6 +4253,92 @@ namespace WelcomeLibrary.UF
                             ///////////////////////////////////////////////////////////////
 
 #endif
+
+
+                            //Renderizziamo la lista degli scaglioni con l'elemento che viene specificato in controltype, dropdown, lista o altro 
+                            //in base al valore dell'attributo controltype 
+                            //creazione controllo select
+                            if (controltype == "select")
+                            {
+                                sb.Append("<select id=\"" + idcontrolcarrello + "dllscaglione\" needed=\"" + mustvalidate + "\" class=\"mx-auto form-control w-100 bg-white\"  >");
+                                //aggiungiamo l'elemento vuoto
+                                sb.Append("<option value=\"\" >");
+                                sb.Append(WelcomeLibrary.UF.ResourceManagement.ReadKey("common", Lingua, "txtselectscaglione").Valore); // da prendere dalle risorse txtselectscaglione
+                                sb.Append("</option>");
+
+                                if (scaglioni != null)
+                                    foreach (Scaglioni el in scaglioni)
+                                    {
+                                        //STATO VIAGGIO DISABILITATO SE STATO MAGGIORE DI COMPLETO //////////////////////////////
+                                        string disabled = "";
+                                        string stato = "";
+                                        if (el.stato != null)
+                                        {
+                                            if (el.stato.Value >= 4) disabled = "disabled";
+                                            OrderedDictionary statuslist = Newtonsoft.Json.JsonConvert.DeserializeObject<OrderedDictionary>(serializestatuslist);
+                                            if (statuslist != null)
+                                                stato = (string)statuslist[el.stato.Value.ToString()];
+                                        }
+                                        //////////////////////////////////////////////
+
+                                        /////FASCIA DI ETA///////////
+                                        string fasciaeta = "";
+                                        if (el.fasciaeta != null)
+                                        {
+                                            OrderedDictionary etalist = Newtonsoft.Json.JsonConvert.DeserializeObject<OrderedDictionary>(serializeetalist);
+                                            if (etalist != null)
+                                                fasciaeta = (string)etalist[el.fasciaeta.Value.ToString()];
+                                        }
+                                        //////////////////////////////////////////////
+                                        //////////////COORDINATORI////////////////////
+                                        //if (!idcoordbyidscaglione.ContainsKey(el.id.ToString().ToString()))
+                                        //    idcoordbyidscaglione.Add(el.id.ToString(), el.idcoordinatore.ToString());
+                                        //if (!idlistcoordinatori.Contains(el.idcoordinatore.ToString()))
+                                        //    idlistcoordinatori.Add(el.idcoordinatore.ToString());
+                                        ////////////////////////////////////////////////
+                                        string nomecoordinatore = "";
+                                        if (coordadatabyidscaglione.ContainsKey(el.id.ToString()) && coordadatabyidscaglione[el.id.ToString()] != null && coordadatabyidscaglione[el.id.ToString()].ContainsKey("name"))
+                                        {
+                                            nomecoordinatore = coordadatabyidscaglione[el.id.ToString()]["name"];
+                                        }
+                                        string datapartenza = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:dd MMM yyyy}", new object[] { el.datapartenza });
+                                        string dataritorno = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:dd MMM yyyy}", new object[] { el.datapartenza.Value.AddDays(el.durata - 1) });
+
+                                        string selected = "";
+                                        if (idscaglioneselected == el.id.ToString()) selected = "selected";
+
+                                        sb.Append("<option " + disabled + " value=\"" + el.id + "\" " + selected + " >");
+                                        sb.Append(datapartenza + "/" + dataritorno + " - " + el.prezzo + "€" + " - " + stato + " (" + nomecoordinatore + ")");
+                                        sb.Append("</option>");
+                                    }
+                                sb.Append("</select>");
+
+                            }
+                            //Controllo solo lista di testo
+                            if (controltype == "")
+                            {
+                                if (scaglioni != null)
+                                    foreach (Scaglioni el in scaglioni)
+                                    {
+                                        sb.Append(String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:dd MMM yyyy}", new object[] { el.datapartenza }));
+                                        sb.Append("  - ");
+                                        sb.Append(el.durata);
+                                        sb.Append(" gg ");
+                                        sb.Append(" ");
+                                        sb.Append(el.prezzo);
+                                        sb.Append(" € ");
+                                        sb.Append("<br/>");
+                                        //////////////COORDINATORI
+                                        //if (!idcoordbyidscaglione.ContainsKey(el.id.ToString().ToString()))
+                                        //    idcoordbyidscaglione.Add(el.id.ToString(), el.idcoordinatore.ToString());
+                                        //if (!idlistcoordinatori.Contains(el.idcoordinatore.ToString()))
+                                        //    idlistcoordinatori.Add(el.idcoordinatore.ToString());
+                                        ////////////////////////////////////////////////
+
+                                    }
+
+                            }
+
                             //per la selezione assicurazioni
                             if (controlopt1 == "true")
                             {

@@ -36,7 +36,7 @@
                                 function verificalogin(callcontrol) {
                                     Loginuser($("[id*='inputName']").val(), $("[id*='inputPassword']").val(), function (ret) {
                                         if (ret == '') {
-                                            refreshcarrello();
+                                            refreshcarrello('', 'loginuser');
                                         }
                                         $("[id*='outputlogin']").html(ret)
                                     })
@@ -45,7 +45,7 @@
                                 function logoffuser(callcontrol) {
                                     Logoff(function (ret) {
                                         if (ret == '') {
-                                            refreshcarrello();
+                                            refreshcarrello('', 'logoffuser');
                                         }
                                         $("[id*='outputlogin']").html(ret)
                                     })

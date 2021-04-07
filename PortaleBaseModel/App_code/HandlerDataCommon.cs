@@ -387,7 +387,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     cliente.CodicePROVINCIA = (data.GetValueOrDefault("provincia") ?? "");
                     cliente.CodiceCOMUNE = (data.GetValueOrDefault("comune") ?? "");
 
-
+                    references.SearchGeoCodesByText(cliente, lingua);
 
                     string datiaggiuntivi = "";
                     //datiaggiuntivi += "Orario aperuta: " + (data.GetValueOrDefault("orario") ?? "");
@@ -448,7 +448,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     //------------------------------------------------
                     //Invio mail avviso al gestore  ( inseriamo tutti i dati dei form )
                     //------------------------------------------------
-                    string SoggettoMail1 = "Richiesta " + tipocontenuto1 + " da " + cliente.Cognome + " tramite il sito " + ConfigManagement.ReadKey("Nome");
+                    string SoggettoMail1 = "Richiesta " + tipocontenuto1 + " da " + cliente.Cognome + " " + cliente.Nome + " tramite il sito " + ConfigManagement.ReadKey("Nome");
                     string Descrizione1 = descrizione1.Replace("\r", "<br/>") + " <br/> ";
                     Descrizione1 += " <br/> Il cliente ha richiesto : " + tipocontenuto1;
                     if (!string.IsNullOrEmpty(cliente.Ragsoc))
@@ -468,15 +468,18 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         )
                     {
                         indirizzofatt = cliente.Indirizzo + "<br/>";
-                        indirizzofatt += cliente.Cap + " " + cliente.CodiceCOMUNE + "  (" + references.NomeProvincia(cliente.CodicePROVINCIA, lingua) + ")<br/>";
+                        string nomeprovincia = references.NomeProvincia(cliente.CodicePROVINCIA, lingua);
+                        indirizzofatt += cliente.Cap + " " + cliente.CodiceCOMUNE + "  (" + (nomeprovincia != "" ? nomeprovincia : cliente.CodicePROVINCIA) + ")<br/>";
                         indirizzofatt += "Nazione: " + cliente.CodiceNAZIONE + "<br/>";
                         Descrizione1 += " <br/><br/>Dati Fatturazione: <br/>" + indirizzofatt;
                     }
                     string indirizzosped = indirizzofatt;
                     if (!string.IsNullOrEmpty(clispediz.Indirizzo))
                     {
+                        references.SearchGeoCodesByText(clispediz, lingua);
                         indirizzosped = clispediz.Indirizzo + "<br/>";
-                        indirizzosped += clispediz.Cap + " " + clispediz.CodiceCOMUNE + "  (" + references.NomeProvincia(clispediz.CodicePROVINCIA, lingua) + ")<br/>";
+                        string nomeprovincias = references.NomeProvincia(clispediz.CodicePROVINCIA, lingua);
+                        indirizzosped += clispediz.Cap + " " + clispediz.CodiceCOMUNE + "  (" + (nomeprovincias != "" ? nomeprovincias : clispediz.CodicePROVINCIA) + ")<br/>";
                         indirizzosped += "Nazione: " + clispediz.CodiceNAZIONE + "<br/>";
                         Descrizione1 += " <br/>Dati Spedizione: <br/>" + indirizzosped;
                     }
@@ -516,7 +519,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                             oggetto += " " + ConfigManagement.ReadKey("Nome");
                             string testo = references.ResMan("Common", lingua, "txttestocreateuser").ToString();
                             testo = testo.Replace("|NOME|", ConfigManagement.ReadKey("Nome"));
-                            testo = testo.Replace("|CREDENZIALI|", "User: " + username + " Pass: " + password);
+                            testo = testo.Replace("|CREDENZIALI|", "User: " + username + " <br/>Pass: " + password);
                             testo = testo.Replace("|LOGINPAGE|", "<a href=" + CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", lingua, "linklogin")) + ">" + CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", lingua, "linklogin")) + "</a>");
                             testo += references.ResMan("Common", lingua, "txtFooter").ToString();
                             Utility.invioMailGenerico(ConfigManagement.ReadKey("Nome"), ConfigManagement.ReadKey("Email"), oggetto, testo, cliente.Email, cliente.Cognome, null, "", true);
