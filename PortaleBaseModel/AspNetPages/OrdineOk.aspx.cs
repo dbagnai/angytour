@@ -100,6 +100,10 @@ public partial class AspNetPages_OrdineOk : CommonPage
 
     private void GetShippingDetails(string idordine, string Encodedidordine)
     {
+        //Creo una variabile per la scrittura dei messaggi nel file di log
+        System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
+        Messaggi.Add("Messaggio", "");
+
 #if true
         //CON UNA CHIAMATA GetExpressCheckoutDetails col token originale HttpContext.Current.Session["token"]  
         //prendo i dettagli del pagante da memorizzare o utilizzare per le email
@@ -121,10 +125,13 @@ public partial class AspNetPages_OrdineOk : CommonPage
         bool authandcapturemode = Convert.ToBoolean(ConfigManagement.ReadKey("authandcapturePaypal"));
         if (HttpContext.Current.Session["token"] != null)
         {
+            Messaggi["Messaggio"] += "Before calling GetShippingDetails, ordine: " + idordine + " " + System.DateTime.Now.ToString() + "\r\n";
+
             //Chiamo paypal GetExpressCheckoutDetails per avere il payerid e procedere
             bool ret = test.GetShippingDetails(HttpContext.Current.Session["token"].ToString(), ref payerid, ref email, ref firstname, ref lastname, ref amount, ref shipaddress, ref retMsg);
             if (ret)
             {
+                Messaggi["Messaggio"] += "GetShippingDetails ok Paypal, ordine: " + idordine + " " + System.DateTime.Now.ToString() + "\r\n";
                 // output.Text += "Payerid:" + payerid + " " + shipaddress;
 #if true
                 //Per eseguire la transazione finale qui
@@ -132,50 +139,61 @@ public partial class AspNetPages_OrdineOk : CommonPage
                 //setExpressCheckout e GetShippingDetails -> 
                 if (test.ConfirmPayment(amount, HttpContext.Current.Session["token"].ToString(), payerid, ref retMsg, authandcapturemode))
                 {
+                    Messaggi["Messaggio"] += "ConfirmPayment ok Paypal, ordine:  " + idordine + " " + System.DateTime.Now.ToString() + "\r\n";
                     //Se ok, registro la transazione e mando le email di conferma
                     RegistrazioneOrdinePaypal(idordine, Encodedidordine);
                 }
                 else
                 {
+                    Messaggi["Messaggio"] += "ConfirmPayment error Paypal, ordine:  " + idordine + " " + System.DateTime.Now.ToString() + "\r\n";
                     //Response.Redirect("Paypal/APIError.aspx?" + retMsg);
                     string[] retCol = retMsg.Split('&');
                     string errcode = retCol.FirstOrDefault(c => c.Contains("ErrorCode")).Replace("ErrorCode=", ""); ;
                     string desc = retCol.FirstOrDefault(c => c.Contains("Desc")).Replace("Desc=", ""); ;
                     string desc2 = retCol.FirstOrDefault(c => c.Contains("Desc2")).Replace("Desc2=", ""); ;
-                    output.Text = references.ResMan("Common", Lingua, "risposta_7").ToString() + " Error" + errcode + "<br/>";
+                    output.Text = references.ResMan("Common", Lingua, "risposta_7").ToString() + " Errorcode " + errcode + "<br/>";
                     output.Text += desc + "<br/>";
                     output.Text += desc2 + "<br/>";
                     pnlbtnretry.Visible = true;
+                    Messaggi["Messaggio"] += "ConfirmPayment error Paypal:  " + idordine + " " + output.Text + "\r\n";
 
                 }
 #endif
             }
             else
             {
+                Messaggi["Messaggio"] += "GetShippingDetails error Paypal, ordine: " + idordine + " " + System.DateTime.Now.ToString() + "\r\n";
                 //Response.Redirect("Paypal/APIError.aspx?" + retMsg);
                 string[] retCol = retMsg.Split('&');
                 string errcode = retCol.FirstOrDefault(c => c.Contains("ErrorCode")).Replace("ErrorCode=", ""); ;
                 string desc = retCol.FirstOrDefault(c => c.Contains("Desc")).Replace("Desc=", ""); ;
                 string desc2 = retCol.FirstOrDefault(c => c.Contains("Desc2")).Replace("Desc2=", ""); ;
-                output.Text = references.ResMan("Common", Lingua, "risposta_6").ToString() + " Error" + errcode + "<br/>";
+                output.Text = references.ResMan("Common", Lingua, "risposta_6").ToString() + " Errorcode " + errcode + "<br/>";
                 output.Text += desc + "<br/>";
                 output.Text += desc2 + "<br/>";
                 pnlbtnretry.Visible = true;
+                Messaggi["Messaggio"] += "GetShippingDetails error Paypal, ordine: " + idordine + " " + output.Text + "\r\n";
 
             }
         }
 #endif
 
+        WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune);
     }
 
     private void RegistrazioneOrdinePaypal(string CodiceOrdine, string Encodedidordine)
     {
+        //Creo una variabile per la scrittura dei messaggi nel file di log
+        System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
+        Messaggi.Add("Messaggio", "");
+
+        Messaggi["Messaggio"] += "RegistrazioneOrdinePaypal ok, da registrare ordine : " + CodiceOrdine + " " + System.DateTime.Now.ToString() + "\r\n";
+
         eCommerceDM ecom = new eCommerceDM();
         //Completiamo l'ordine registrando nel carrello e inviamo le email!! 
         Cliente cliente = new Cliente();
         CarrelloCollection prodotti = new CarrelloCollection();
         TotaliCarrello totali = new TotaliCarrello();
-
         if (Session["totali_" + CodiceOrdine] != null || Session["cliente_" + CodiceOrdine] != null || Session["prodotti_" + CodiceOrdine] != null)
         {
             cliente = (Cliente)Session["cliente_" + CodiceOrdine];
@@ -203,8 +221,6 @@ public partial class AspNetPages_OrdineOk : CommonPage
         { totali.Pagatoacconto = true; totali.Pagato = true; }
         else
             totali.Pagatoacconto = true;
-
-
         ecom.InsertOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, totali);
         //AGGIORNO  I PRODOTTI NEL CARRELLO INSERENDO IL CODICE DI ORDINE
         //E GLI ALTRI DATI ACCESSORI ( TBL_CARRELLO )
@@ -282,9 +298,9 @@ public partial class AspNetPages_OrdineOk : CommonPage
         parametri["idprodotto"] = listcod;
         ecom.AggiornaStatoscaglioni(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parametri);
         ////////////////////////////////////////
+        Messaggi["Messaggio"] += "RegistrazioneOrdinePaypal ok, registrato ordine : " + CodiceOrdine + " " + System.DateTime.Now.ToString() + "\r\n";
 
         InsertEventoBooking(prodotti, totali, "rif000001");
-
         //Creiamo il file per export degli ordini...
         try
         {
@@ -328,8 +344,10 @@ public partial class AspNetPages_OrdineOk : CommonPage
 
 
 #endif
+        WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune);
 
     }
+
     private void InsertEventoBooking(CarrelloCollection prodotti, TotaliCarrello totali, string filtrotipologia)
     {
         foreach (Carrello c in prodotti)

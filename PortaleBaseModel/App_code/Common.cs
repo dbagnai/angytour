@@ -1639,7 +1639,7 @@ public class CommonPage : Page
             WelcomeLibrary.DOM.jsongtagitem purchaseitem = new jsongtagitem();
             jtagpurchaseevent.transaction_id = totali.CodiceOrdine;
             jtagpurchaseevent.affiliation = ConfigManagement.ReadKey("Nome");
-            jtagpurchaseevent.value = totali.TotaleOrdine - totali.TotaleSconto;
+            jtagpurchaseevent.value = totali.TotaleAcconto + totali.TotaleSaldo;// totali.TotaleOrdine - totali.TotaleSconto;
             jtagpurchaseevent.tax = 0;// qui dovresti scorporare l'iva
             jtagpurchaseevent.shipping = totali.TotaleSpedizione;
             jtagpurchaseevent.items = new List<jsongtagitem>();
@@ -1656,7 +1656,7 @@ public class CommonPage : Page
                 purchaseitem.brand = text;
                 purchaseitem.category = references.TestoCategoria(c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, "I"); ; //Categoria di catalogo del prodotto
                 purchaseitem.variant = ""; //eventuale caratteristica del prodotto
-                purchaseitem.price = c.Prezzo;
+                purchaseitem.price = c.Prezzo; //prezzo non scontato
                 purchaseitem.quantity = c.Numero;
                 purchaseitem.coupon = c.Codicesconto;
                 purchaseitem.list_position = 0;
