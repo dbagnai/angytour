@@ -84,7 +84,7 @@
                     <div class="col-12 col-lg-7">
                         <div class="widget bill-address">
                             <div class="form-vertical">
-                              
+
                                 <div class="form-row row">
                                     <div class="col-6 form-group">
                                         <label>
@@ -157,8 +157,15 @@
                                             CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" />
                                     </div>
                                 </div>
-
-                                <div class="form-row row">
+                                <div class="form-row row d-none">
+                                    <div class="col-12 form-group">
+                                        <label class="checkbox" style="margin: 5px 0 0 -2.5px;">
+                                            <asp:CheckBox EnableViewState="true" Text='<%# references.ResMan("Common", Lingua,"TestoSupplementoSpedizioni") %>' runat="server"
+                                                ID="chkSupplemento" ForeColor="Red" Font-Bold="true" Checked="false" AutoPostBack="true" OnCheckedChanged="chkSupplemento_CheckedChanged" />
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-row row d-none">
                                     <div class="col-6 form-group">
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"FormTesto4") %>
@@ -203,7 +210,7 @@
 
                             <asp:PlaceHolder ID="plhShipping" runat="server" Visible="false">
 
-                                 <div class="form-row row">
+                                <div class="form-row row">
                                     <div class="col-6 form-group">
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"FormTesto2") %>
@@ -500,6 +507,7 @@
                     <div class="col-12 col-lg-5">
                         <div class="position-sticky" style="top: 120px" id="divColumnsticky">
                             <div class="mb-0 mb-sm-3 px-3 py-4 bg-light-color">
+                                 <asp:Literal Text="" ID="litMessage" runat="server" />
                                 <%--<div class="widget bill-payment" style="text-align: left; display: none">
                                     <span class="TitlePrezzo"><%= references.ResMan("Common", Lingua,"TitleCodiceSconto") %></span>
                                     <asp:TextBox runat="server" ID="txtCodiceSconto" />
@@ -507,7 +515,7 @@
                                     <span style="color: red">
                                         <asp:Literal Text="" ID="lblCodiceSconto" runat="server" /></span>
                                 </div>--%>
-                                <div class="widget bill-payment p-2">
+                                <div class="widget bill-payment p-2" id="divPayment" runat="server">
                                     <h3><%= references.ResMan("Common", Lingua,"testoMetodopagamento") %></h3>
                                     <script>
                                         function refreshcarrello(btn, args) {
@@ -589,11 +597,25 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <div class="col-12 col-sm-8 mx-auto px-0">
-                                        <asp:CheckBox ID="chkSupplemento" runat="server" Font-Bold="true" ForeColor="Red" Checked="false" AutoPostBack="true" Text='<%# references.ResMan("Common", Lingua,"TestoSupplementoSpedizioni") %>'
-                                            OnCheckedChanged="chkSupplemento_CheckedChanged" /><br />
-                                        <br />
+
+                                    <div class="widget bill-payment p-2" id="divOrderrequest" runat="server" visible="false">
+                                        <ul class="unstyled m-0 p-0">
+                                            <li>
+                                                <div class="clearfix" style="margin-bottom: 20px">
+                                                    <div class="float-left mt-1 mr-2" style="width: 25px">
+                                                        <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" disabled="false" checked="false" name="payment_method" value="richiesta" onclick="refreshcarrello(this, 'inpRichiesta')"
+                                                            runat="server" id="inpRichiesta" />
+                                                    </div>
+                                                    <div class="float-left" style="width: calc(100% - 30px - .5rem);">
+                                                        <b><%= references.ResMan("Common", Lingua,"txtrichiesta") %></b>
+                                                        <br />
+                                                        <%= references.ResMan("Common", Lingua,"chkrichiesta") %>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
+
                                     <div class="col-12 col-sm-8 mx-auto px-0">
                                         <asp:Button ID="btnConvalida" runat="server" Text='<%# references.ResMan("Common", Lingua,"OrdineEsegui") %>' class="btn w-100" OnClick="btnConvalidaOrdine" />
                                     </div>

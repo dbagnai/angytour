@@ -351,11 +351,33 @@ public partial class AspNetPages_Orderpage : CommonPage
         bool supplementoisole = chkSupplemento.Checked;
         bool supplementocontrassegno = inpContanti.Checked;
         TotaliCarrello totali = CalcolaTotaliCarrello(Request, Session, codicenazione, codiceprovincia, supplementoisole, supplementocontrassegno);
+      
         //Dal calcolo dei totali e delle spedizioni viene indicato di bloccare l'acquisto diretto
         if (totali.Bloccaacquisto)
             liPaypal.Visible = false;
         else
             liPaypal.Visible = true;
+#if false //metodo alternativo di blocco pagamento e invio solo ordine
+
+        if (totali.Bloccaacquisto)
+        {
+            litMessage.Text = references.ResMan("Common", Lingua, "testoBloccoacquisto");
+            divPayment.Visible = false;
+            inpPaypal.Checked = false;
+            inpRichiesta.Checked = true;
+            divOrderrequest.Visible = true;
+        }
+        else
+        {
+            litMessage.Text = "";
+            liPaypal.Visible = true;
+            divPayment.Visible = true;
+            inpPaypal.Checked = true;
+            inpRichiesta.Checked = false;
+            divOrderrequest.Visible = false;
+        } 
+#endif
+
 
         List<TotaliCarrello> list = new List<TotaliCarrello>();
         list.Add(totali);
@@ -433,6 +455,11 @@ public partial class AspNetPages_Orderpage : CommonPage
                 string modalita = "";
                 string descrizionepagamento = "";
 
+                //if (inpRichiesta.Checked)
+                //{
+                //    modalita = inpRichiesta.Value;
+                //    descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
+                //}
                 if (inpContanti.Checked)
                 {
                     modalita = inpContanti.Value;
@@ -707,6 +734,87 @@ public partial class AspNetPages_Orderpage : CommonPage
                     }
 
                 }
+                if (modalita == "richiesta") //SOLO INVIO RICHIESTA non ordine
+                {
+                    try
+                    {
+                        //Inviamo le email di conferma al portale ed al cliente
+                        //Invio la mail per il fornitore
+                        string SoggettoMailFornitore = references.ResMan("Common", Lingua, "OrdineSoggettomailRichiesta") + Nome;
+                        TestoMail = CreaMailPerFornitore(totali, prodotti);
+                        Utility.invioMailGenerico(Nome, Email, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
+                        //Utility.invioMailGenerico(totali.Denominazionecliente, totali.Mailcliente, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
+
+                        //Invia la mail per il cliente
+                        string SoggettoMailCliente = references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + Nome;
+                        TestoMail = CreaMailCliente(totali, prodotti);
+                        Utility.invioMailGenerico(Nome, Email, SoggettoMailCliente, TestoMail, totali.Mailcliente, totali.Denominazionecliente, null, "", true, Server);
+                    }
+                    catch { }
+#if true
+
+                    try
+                    {
+                        //Qui devo scrivere nella tabella ordini i dati qui memorizzati ( TBL_CARRELLO_ORDINI )
+                        ecom.InsertOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, totali);
+                    }
+                    catch (Exception eins)
+                    {
+                        switch (Lingua)
+                        {
+                            case "I":
+                                output.Text += "Errore inserimento db ordine " + eins.Message;
+                                break;
+                            default:
+                                output.Text += "Error inserting db order " + eins.Message;
+                                break;
+                        }
+                    }
+                    //AGGIORNO  I PRODOTTI NEL CARRELLO INSERENDO IL CODICE DI ORDINE
+                    //E GLI ALTRI DATI ACCESSORI ( TBL_CARRELLO )
+                    int jj = 1;
+                    foreach (Carrello item in prodotti)
+                    {
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        //Prepariamo le richieste di feeback per gli articoli in ordine!!
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        //if (jj <= 2)
+                        //    try
+                        //    {
+                        //        Mail mailfeedback = new Mail();
+
+                        //        mailfeedback.Sparedict["linkfeedback"] = "";//default preso dalle risorse feedbacksdefaultform
+                        //        mailfeedback.Sparedict["idnewsletter"] = "";//default dalle risorse feedbackdefaultnewsletter
+                        //        mailfeedback.Sparedict["deltagiorniperinvio"] = "";//default dalle risorse feedbacksdefaultdeltagg
+                        //        mailfeedback.Sparedict["idclienti"] = cliente.Id_cliente.ToString();
+                        //        mailfeedback.Id_card = item.id_prodotto;
+                        //        HandlerNewsletter.preparamail(mailfeedback, Lingua); //Preparo le mail nello scheduler!!
+
+                        //    }
+                        //    catch { }
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        item.CodiceOrdine = CodiceOrdine;
+                        SalvaCodiceOrdine(item);
+                        jj++;
+                    }
+                    InsertEventoBooking(prodotti, totali, "rif000001");
+#endif
+
+                    pnlFormOrdine.Visible = false;
+                    output.Text += references.ResMan("Common", Lingua, "GoogleConversione");
+                    switch (Lingua)
+                    {
+                        case "I":
+                            output.Text += "<div><br/>Richiesta inviata correttamente. <br/>Sarete contattati a breve dal nostro personale.</div>";
+
+                            break;
+                        default:
+                            output.Text += "<br/>Richiesta Correctly Sent. <br/>You'll be contacted as soon as possible.";
+                            break;
+                    }
+                }
+
+
             }
             else
             {
