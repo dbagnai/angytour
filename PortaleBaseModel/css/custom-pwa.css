@@ -130,6 +130,7 @@ li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
   -webkit-transition: color 0.25s 0.08333333s;
   transition: color 0.25s 0.08333333s;
   border-radius: 0;
+  text-transform: uppercase;
 }
 a.divbuttonstyle::after,
 .divbuttonstyle::after,
@@ -371,6 +372,7 @@ li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
   box-shadow: inset 0 0 0 1px #098f8f;
   -webkit-transition: color 0.25s 0.08333333s;
   transition: color 0.25s 0.08333333s;
+  text-transform: uppercase !Important;
   /*
     -webkit-border-radius: 1.4rem;
     -moz-border-radius: 1.4rem;
@@ -453,7 +455,7 @@ li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
   display: inline-block;
   text-align: center;
   margin: 0 auto;
-  /*   text-transform: lowercase !important;*/
+  text-transform: uppercase !important;
   white-space: normal;
   border-radius: 0px;
 }
@@ -681,6 +683,7 @@ a.btn-black-outline:hover::after {
   border: none;
   border-radius: 0px;
   white-space: normal;
+  text-transform: uppercase !Important;
 }
 .btn-white-outline::after,
 .btn-white-outline:active::after,
@@ -782,6 +785,7 @@ button.btn-white-outline:hover::after {
   border: none;
   border-radius: 0px;
   white-space: normal;
+  text-transform: uppercase;
 }
 .btn-primary-color::after,
 .btn-primary-color:active::after,
@@ -857,6 +861,7 @@ button.btn-primary-color:hover::after {
 /* PULSANTI TONDI CARRELLO DARK (@primary-color)*/
 .carrello-primary-color {
   background-color: #032f2f !important;
+  text-transform: uppercase !Important;
 }
 .carrello-primary-color:hover {
   background-color: #fff !important;
@@ -902,6 +907,7 @@ span.restaurant-menu {
   background-repeat: no-repeat !important;
   padding-left: 60px !important;
   background-image: url(/images/icon-generic-menu.png) !important;
+  text-transform: uppercase !Important;
 }
 a.btn-black-outline:hover.restaurant-menu,
 a.btn-black-outline:active.restaurant-menu,
@@ -1041,6 +1047,7 @@ a.btn-black-outline.restaurant-menu:nth-child(5):focus {
   border: 2px solid rgba(255, 255, 255, 0.5) !important;
   color: rgba(255, 255, 255, 0.5) !important;
   background-color: transparent !important;
+  text-transform: uppercase !Important;
 }
 .btn-banner i {
   animation: arrowdown 1.7s ease-in-out infinite;
@@ -1051,6 +1058,7 @@ a.btn-black-outline.restaurant-menu:nth-child(5):focus {
 .btn .btn-banner:hover {
   box-shadow: inset 0 0 0 0 #f3c649;
   border-radius: 50%;
+  text-transform: uppercase !Important;
 }
 .btn-banner::after,
 .btn-banner::before {
@@ -5177,7 +5185,8 @@ button.js-roundedpush:hover {
     color: #f3c649 !important;
   }
   .buttonmenu-home {
-    box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
+    /*box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);*/
+    box-shadow: -1px 2px 5px rgba(0, 0, 0, 0);
   }
   .buttonmenu-span-home {
     text-shadow: none !important;
@@ -5284,7 +5293,8 @@ button.js-roundedpush:hover {
   }
   .menuzord.white .menuzord-menu > li > a,
   .menuzord.white .menuzord-menu > li > a span {
-    color: #032f2f;
+    /*color: @menu-color;*/
+    color: #fff !important;
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     font-weight: 600;
@@ -5817,7 +5827,8 @@ button.js-roundedpush:hover {
   .menuzord.white .menuzord-menu > li > a.buttonmenu {
     color: #fff !important;
     border-color: transparent !important;
-    margin-top: -2px;
+    /*margin-top: -2px;*/
+    margin-top: 0px;
   }
   .menuzord.white .menuzord-menu > li > a.buttonmenu:hover,
   .menuzord.white .menuzord-menu > li > a.buttonmenu span:hover {
