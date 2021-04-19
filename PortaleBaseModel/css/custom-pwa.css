@@ -5289,6 +5289,9 @@ button.js-roundedpush:hover {
     font-size: 1rem;
     font-weight: 600;
   }
+  .menuzord.white .menuzord-menu > li > a.buttonmenu span {
+    color: #fff;
+  }
   .menuzord.white .menuzord-menu > li.active > a,
   .menuzord.white .menuzord-menu > li:hover > a,
   .menuzord.white .menuzord-menu > li:hover > a span,
