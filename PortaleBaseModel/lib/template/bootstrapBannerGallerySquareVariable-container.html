@@ -1,0 +1,129 @@
+﻿<style>
+
+    .squarevariable .card {
+        border: none !important;
+        border-radius: 0 !important;
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+    /* TAGLIA LE IMMAGINI IN BASE ALL'ALTEZZA DELLO SCHERMO - può essere disabilitato */
+    @media screen and (min-width: 992px) and (max-width: 1200px) {
+        .squarevariable item:nth-of-type(1) .work-image img {
+            height: calc(50vh) !important;
+            width: auto !important;
+        }
+
+        .squarevariable item:not(:nth-of-type(1)) .work-image img {
+            height: calc(25vh - 2px) !important;
+            width: auto !important;
+        }
+    }
+    /*FINE TAGLIO IMMAGINI*/
+
+    .squarevariable .imgovercontainer.work-image > img, squarevariable .imgovercontainer > img {
+        -webkit-transition: all .35s ease;
+        transition: all .35s ease;
+    }
+    .squarevariable .imgovercontainer:hover.work-image > img, squarevariable .imgovercontainer:hover > img {
+        -webkit-transform: scale(1.2) rotate(5deg);
+        -moz-transform: scale(1.2) rotate(5deg);
+        -ms-transform: scale(1.2) rotate(5deg);
+        -o-transform: scale(1.2) rotate(5deg);
+        transform: scale(1.2) rotate(5deg);
+        -webkit-transition: all 1.0s ease;
+        transition: all 1.0s ease;
+    }
+    .squarevariable .work-image:hover:after, .squarevariable .imgovercontainer:hover:after {
+        z-index: 2 !important;
+        background: url(/images/link1.png) center center no-repeat !important;
+        background-size: 80px 80px !important;
+        background-color: rgba(0,0,0,.0) !important;
+        opacity: 1 !important;
+        -webkit-transition: all .35s ease;
+        transition: all .35s ease;
+        background: none !important;
+    }
+    /* fluid 4 columns */
+    .grid-sizer,
+    .grid-item {
+        width: 100%;
+    }
+    
+
+    @media screen and (min-width: 577px) and (max-width: 767px) {
+        .squarevariable .work-image img {
+            height: auto !important;
+            width: 100% !important;
+        }
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 992px) {
+        .squarevariable .work-image img {
+            height: auto !important;
+            width: 100% !important;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .squarevariable item:not(:nth-of-type(1)):not(:nth-of-type(2)):not(:nth-of-type(3)) {
+            display: none !important;
+            width: 100% !important;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .squarevariable {
+            margin: 0 -2px;
+        }
+
+            .squarevariable item:nth-of-type(1) .work-image img {
+                height: auto !important;
+                width: 600px !important;
+            }
+
+            .squarevariable item:not(:nth-of-type(1)) .work-image img {
+                height: auto !important;
+                width: 297px !important;
+            }
+        .grid-sizer,
+        .grid-item {
+            width: 25%;
+        }
+        .squarevariable item:nth-of-type(1) {
+            width: 50%;
+        }
+    }
+        
+
+        @media (max-width: 576px) {
+            .squarevariable .work-image img {
+                height: auto !important;
+                width: 100% !important;
+            }
+            .squarevariable .card {
+                height: auto !important;
+                width: auto !important;
+                padding-left: 0px !Important;
+                padding-right: 0px !Important;
+                padding-top: 2px;
+                padding-bottom: 2px;
+            }
+        }
+    
+</style>
+
+<div class="grid squarevariable" id="replaceid">
+    <div class="grid-sizer"></div>
+    <item class="grid-item">
+        <div class="card m-0">
+            <a class="bind primary-color" rel="prettyPhoto[pp_gal]" href="link" mybind="Id" style="overflow:hidden;">
+                <div class="position-relative imgovercontainer work-image d-flex justify-content-center">
+                    <img src="/images/dummylogo.png" alt="" class="bind" mybind="Id" style="padding: 0px;" />
+                </div>
+            </a>
+
+        </div>
+    </item>
+</div>

@@ -555,11 +555,19 @@ a {
     height: 94px;
     webkit-transition: all .35s ease;
     transition: all .35s ease;
+    /*AGGIUNTI PER LOGO DOPPIA POSIZIONE*/
+    background: url(/images/main_logo_d.png) left bottom;
+    background-size: 75%;
+    background-repeat: no-repeat;
 }
 
 .shrinklogo {
     width: @larghezza-logo-smart;
     height: 61px;
+    /*AGGIUNTI PER LOGO DOPPIA POSIZIONE*/
+    background: url(/images/main_logo_d.png) center center;
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
 .fulllogo {
@@ -572,6 +580,10 @@ a {
         width: @larghezza-logo-smart;
         height: 61px;
         margin-left: calc(100% - ((170 * @larghezza-logo-smart) / 206));
+        /*AGGIUNTI PER LOGO DOPPIA POSIZIONEE*/
+        background: url(/images/main_logo_d.png) center center;
+        background-size: 100%;
+        background-repeat: no-repeat;
     }
 
     .shrinklogo {
@@ -957,7 +969,7 @@ h1 span .mbr-section-subtitle {
 /*---------- TTITOLETTI VIRGOLETTAI -----------*/
 .quote-marks {
     font-size: 2.4rem !important;
-    line-height: 3rem !important;
+    line-height: 125% !important;
     color: @primary-color !important;
     font-family: @body-font !important;
 }
@@ -1377,7 +1389,7 @@ ul.footer-category-list {
 .logo-payment:nth-child(4) {
     background: url(/images/logos-payment/paypal.png) center center no-repeat !important;
     /*background-size: 60px !important;*/
-    background-size: 60% !important;
+    background-size: 90% !important;
 }
 
 .logo-payment:nth-child(5) {

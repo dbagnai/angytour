@@ -1534,12 +1534,12 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   font-family: 'Raleway', sans-serif !important;
 }
 .prezzo-responsive {
-  font-size: 1.7rem;
+  font-size: 1.8vw;
   line-height: 1vw !important;
 }
 @media (max-width: 1200px) {
   .prezzo-responsive {
-    font-size: 1.7rem;
+    font-size: 2rem;
     line-height: 2rem !important;
   }
 }
@@ -1567,14 +1567,14 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .button-carrello-animate {
   /*&:extend(.btn-primary);*/
   font-family: 'Raleway', sans-serif;
-  font-size: 1.3rem !important;
+  font-size: 0.8rem !important;
   font-weight: 600;
   color: #fff !important;
   background-color: #f3c649;
   /*font-size: 1rem;*/
   margin: 0px !important;
   padding: 1px 0 0 0;
-  line-height: 38px !important;
+  line-height: 1.3 !important;
   width: 38px;
   height: 38px;
   border-radius: 50%;
@@ -3544,10 +3544,18 @@ a:hover {
   height: 94px;
   webkit-transition: all 0.35s ease;
   transition: all 0.35s ease;
+  /*AGGIUNTI PER LOGO DOPPIA POSIZIONE*/
+  background: url(/images/main_logo_d.png) left bottom;
+  background-size: 75%;
+  background-repeat: no-repeat;
 }
 .shrinklogo {
   width: calc((400px * 61) / 119);
   height: 61px;
+  /*AGGIUNTI PER LOGO DOPPIA POSIZIONE*/
+  background: url(/images/main_logo_d.png) center center;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 .fulllogo {
   width: 90%;
@@ -3558,6 +3566,10 @@ a:hover {
     width: calc((400px * 61) / 119);
     height: 61px;
     margin-left: calc(100% - ((170 * calc((400px * 61) / 119)) / 206));
+    /*AGGIUNTI PER LOGO DOPPIA POSIZIONEE*/
+    background: url(/images/main_logo_d.png) center center;
+    background-size: 100%;
+    background-repeat: no-repeat;
   }
   .shrinklogo {
     width: calc((400px * 61) / 119);
@@ -3911,7 +3923,7 @@ h1 span {
 /*---------- TTITOLETTI VIRGOLETTAI -----------*/
 .quote-marks {
   font-size: 2.4rem !important;
-  line-height: 3rem !important;
+  line-height: 125% !important;
   color: #032f2f !important;
   font-family: 'Raleway', sans-serif !important;
 }
@@ -4273,7 +4285,7 @@ ul.footer-category-list {
 .logo-payment:nth-child(4) {
   background: url(/images/logos-payment/paypal.png) center center no-repeat !important;
   /*background-size: 60px !important;*/
-  background-size: 60% !important;
+  background-size: 90% !important;
 }
 .logo-payment:nth-child(5) {
   background: url(/images/logos-payment/discover.png) center center no-repeat !important;
