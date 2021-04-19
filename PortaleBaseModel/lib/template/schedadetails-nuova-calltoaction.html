@@ -29,14 +29,8 @@
                         ------ COLONNA 2 LEFT DESCRIZIONE ------
                         ---------------------------------->
                     <div class="d-none d-lg-block mx-0 text-left" style="line-height: 1.6rem; flex: 0 0 100%;">
-
-
-                        <div class="card-body px-3 py-3" itemprop="description">
-                            <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="16000" format="formatdescrizione"></span>
-                        </div>
-
                         <!------- DESCRIZIONE PRODOTTO ------>
-                        <!--<div id="accordion" class="mb-4 w-100 faq-section">
+                        <div id="accordion" class="mb-4 w-100 faq-section">
                             <div class="card">
                                 <div class="card-header" id="headingOne">
                                     <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -50,9 +44,9 @@
                                         <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span>
                                     </div>
                                 </div>
-                            </div>-->
-                        <!--ULTERIORI INFORMAZIONI-->
-                        <!--<div class="card">
+                            </div>
+                            <!--ULTERIORI INFORMAZIONI-->
+                            <div class="card">
                                 <div class="card-header" id="headingTwo">
                                     <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                         <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
@@ -66,8 +60,22 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>-->
-
+                            <!--INFORMAZIONI PER ACQUISTO-->
+                            <!--<div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                            <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="informazioniperacquisto" format="formatlabelresource"></span>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                    <div class="card-body px-3 pt-3 pb-0">
+                                        <span class="bind" mybind="Id" myvalue="testoordine2" format="formatlabelresource"></span>
+                                    </div>
+                                </div>
+                            </div>-->
+                        </div>
                     </div>
 
                 </div>
@@ -77,122 +85,132 @@
             ---------------------------------------------->
             <div class="col-12 col-lg-4 mt-3 mb-0 mt-lg-0 mb-lg-3">
                 <div class="position-sticky" style="top:120px">
-                    <div itemprop="name" class="w-100 text-center text-lg-left" style="margin-bottom:4px">
+                    <div itemprop="name" class="w-100 text-center text-lg-left mb-0 mb-lg-3">
                         <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
                             <h1 itemprop="name" class="bind mb-2 tx-primary-color" mybind="Id" myvalue="titolo" format="formattitle"></h1>
                             <h2 class="bind tx-sottomenu-color" mybind="Id" myvalue="titolo" format="formatsubtitle"></h2>
                         </a>
                     </div>
-                    <div class="col align-self-center prezzo-responsive my-2">
-                        <span class="bind tx-primary-color" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta" style="line-height: 2vw;"></span>
-                        <span style="font-size:0.6em;text-decoration:line-through;" class="bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
-                    </div>
-                    <div class="w-100 my-2">
-                        <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="400" format="formatdescrizione"></span>
-                    </div>
-
-                    <div class="w-100 my-4">
-                        <a rel="nofollow, noindex" class="bind btn w-100" target="_blank" href="prenotalink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="testoprenota" format="formatlabelresource"></span></a>
-                    </div>
-                    <!--riquadro hai bisogno di aiuto-->
-                    <!---------------------------------
-                    ------ COLONNA 2 CALL TO ACTION ------
-                    ---------------------------------->
-                    <div class="formbackground  bg-light-color-pattern-2 my-3 p-3" style="background-size: 140px">
-                        <div class="w-100 p-1" style="border:1px solid #ccc;border-radius: 10px;">
-                            <div class="bind" mybind="Id" myvalue="testocall1" format="formatlabelresource"></div>
+                    <div class="d-none d-lg-block mb-4">
+                        <!-- RIQUADRO INFO SOTTO TITOLO -->
+                        <div class="w-100 mt-3"></div>
+                        <!--riquadro hai bisogno di aiuto-->
+                        <div class="w-100 mb-1 px-2 py-3 text-center card card-header bg-light-color border-tipo2">
+                            <div class="bind" mybind="Id" myvalue="testocall" format="formatlabelresource"></div>
                         </div>
-                        <!--<div class="bind mb-3 text-center" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>-->
+                        <!-- pulsanti info utili 1 -->
+                        <div class="bind w-100 mx-3 mx-md-0 mb-3 text-center d-none" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>
                     </div>
-                </div>
-                <!-- pulsanti social -->
-                <p>
-                    <div class="bind" mybind="Id" myvalue="common" myvalue1="social_condividi" format="formatstringfromresource"></div>
+                    <!-- pulsanti social -->
                     <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                    <div class="addthis_inline_share_toolbox py-3 py-md-0 mx-auto"></div>
-                </p>
-            </div>
-        </div>
-    </div>
-    <!---------------------------------
-    ------ COLONNA 1 DESCRIZIONE MOBILE ------
-    ---------------------------------->
-    <div class="col-12 col-lg-8 d-block d-lg-none px-0">
-        <div class="row mx-0 text-left" style="line-height: 1.6rem;">
-
-
-            <div class="card-body px-3 py-3" itemprop="description">
-                <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="16000" format="formatdescrizione"></span>
-            </div>
-
-            <!------- DESCRIZIONE PRODOTTO ------>
-            <!--<div id="accordion1" class="mb-4 w-100 faq-section">
-                <div class="card">
-                    <div class="card-header" id="headingOne1">
-                        <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
-                            <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
-                                <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i>  <span class="bind" mybind="Id" myvalue="descrizionedelprodotto" format="formatlabelresource"></span>
-                            </h4>
-                        </a>
-                    </div>
-                    <div id="collapseOne1" class="collapse show" aria-labelledby="headingOne1" data-parent="#accordion1">
-                        <div class="card-body px-3 py-3" itemprop="description">
-                            <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span>
-                        </div>
-                    </div>
-                </div>-->
-            <!--ULTERIORI INFORMAZIONI-->
-            <!--<div class="card">
-                    <div class="card-header" id="headingTwo1">
-                        <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
-                            <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
-                                <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="ulterioriinformazioni" format="formatlabelresource"></span>
-                            </h4>
-                        </a>
-                    </div>
-                    <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo1" data-parent="#accordion1">
-                        <div class="card-body px-3 py-3">
-                            <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>-->
-
-
-        </div>
-    </div>
-
-
-    <!---------------------------------------------------
-    ------ RIGA - COMANDI NAVIGAZIONE ------
-    ---------------------------------------------------->
-    <div class="w-100">
-        <div class="row justify-content-between mx-0 pt-3 pt-lg-4 pb-3 pb-lg-5 border-top bd-primary-color">
-
-            <div class="col-12 col-lg-auto mr-0 mb-3 mb-lg-0">
-                <div class="row">
-                    <a rel="nofollow, noindex" class="btn-black-outline w-100 bind" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
+                    <div class="addthis_inline_share_toolbox py-3 py-md-0 mx-auto text-center text-lg-left"></div>
                 </div>
             </div>
-            <div class="col-12 col-lg-auto mb-3 my-lg-0">
-                <div class="row justify-content-between">
-                    <div class="row">
-                        <div class="col">
-                            <a rel="nofollow" class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
-                                <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span><div style="display:inline-block;">
-                                </div>
+        </div>
+        <!---------------------------------
+        ------ COLONNA 1 DESCRIZIONE MOBILE ------
+        ---------------------------------->
+        <div class="col-12 col-lg-8 d-block d-lg-none px-0">
+            <div class="row mx-0 text-left" style="line-height: 1.6rem;">
+
+                <!------- DESCRIZIONE PRODOTTO ------>
+                <div id="accordion1" class="mb-4 w-100 faq-section">
+                    <div class="card">
+                        <div class="card-header" id="headingOne1">
+                            <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
+                                <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                    <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i>  <span class="bind" mybind="Id" myvalue="descrizionedelprodotto" format="formatlabelresource"></span>
+                                </h4>
                             </a>
+                        </div>
+                        <div id="collapseOne1" class="collapse show" aria-labelledby="headingOne1" data-parent="#accordion1">
+                            <div class="card-body px-3 py-3" itemprop="description">
+                                <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <a rel="nofollow" class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
-                                <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span><div style="display:inline-block;vertical-align:top">
-                                </div>
+                    <!--ULTERIORI INFORMAZIONI-->
+                    <div class="card">
+                        <div class="card-header" id="headingTwo1">
+                            <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
+                                <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                    <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="ulterioriinformazioni" format="formatlabelresource"></span>
+                                </h4>
                             </a>
                         </div>
+                        <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo1" data-parent="#accordion1">
+                            <div class="card-body px-3 py-3">
+                                <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--INFORMAZIONI PER ACQUISTO-->
+                    <!--<div class="card">
+                        <div class="card-header" id="headingThree1">
+                            <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseThree1" aria-expanded="false" aria-controls="collapseThree1">
+                                <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                    <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="informazioniperacquisto" format="formatlabelresource"></span>
+                                </h4>
+                            </a>
+                        </div>
+                        <div id="collapseThree1" class="collapse" aria-labelledby="headingThree1" data-parent="#accordion1">
+                            <div class="card-body px-3 pt-3 pb-0">
+                                <span class="bind" mybind="Id" myvalue="testoordine2" format="formatlabelresource"></span>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+
+
+                <!---------------------------------------------
+                ------ COLONNA 2 TITOLO + CALL TO ACTION MOBILE ------
+                ---------------------------------------------->
+                <div class="col-12 d-block d-lg-none px-0 mb-4 mt-0">
+                    <!-- RIQUADRO INFO SOTTO TITOLO -->
+                    <div class="w-100"></div>
+                    <!--riquadro hai bisogno di aiuto-->
+                    <div class="w-100 mb-1 px-2 py-3 text-center card card-header bg-light-color border-tipo2">
+                        <div class="bind" mybind="Id" myvalue="testocall" format="formatlabelresource"></div>
+                    </div>
+                    <!-- pulsanti info utili 1 -->
+                    <div class="bind w-100 mx-3 mx-md-0 mb-3 text-center d-none" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!---------------------------------------------------
+        ------ RIGA - COMANDI NAVIGAZIONE ------
+        ---------------------------------------------------->
+        <div class="w-100">
+            <div class="row justify-content-between mx-0 pt-3 pt-lg-4 pb-3 pb-lg-5 border-top bd-primary-color">
+
+                <div class="col-12 col-lg-auto mr-0 mb-3 mb-lg-0">
+                    <div class="row">
+                        <a rel="nofollow, noindex" class="btn-black-outline w-100 bind" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-auto mb-3 my-lg-0">
+                    <div class="row justify-content-between">
+                        <div class="row">
+                            <div class="col mr-1">
+                                <a rel="nofollow" class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
+                                    <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span><div style="display:inline-block;">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col ml-1">
+                                <a rel="nofollow" class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
+                                    <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span><div style="display:inline-block;vertical-align:top">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

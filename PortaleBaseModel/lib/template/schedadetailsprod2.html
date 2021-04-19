@@ -12,6 +12,35 @@
         font-size: 0.8rem;
         font-weight: 400;
     }
+
+    #carrellos1plus .button-carrello {
+        /*padding-right: 2px !Important;*/
+        font-size: 1.8rem !Important;
+        line-height: 130% !Important;
+    }
+
+    #carrellos1minus .button-carrello {
+        /*padding-right: 2px !Important;*/
+        font-size: 1.8rem !Important;
+        line-height: 120% !Important;
+    }
+
+    #carrellos1addsingle .divbuttonstyle {
+        width: 100%;
+    }
+
+    #carrellos1messages .btn-black-outline {
+        line-height: 120% !Important;
+    }
+
+    a.btn.vaialcarrello-ok {
+        background-color: #41ad49 !important;
+        color: #fff !important;
+    }
+
+    .carrellos1messages-visible {
+        display: block !important;
+    }
 </style>
 
 
@@ -91,8 +120,8 @@
             <!----------------------------
             ------ COLONNA 3 RIGTH TITOLO ------
             ----------------------------->
-            <div class="col-12 col-lg-4 mt-3 mt-lg-0">
-                <div class="row d-flex justify-content-center d-lg-block mx-lg-0">
+            <div class="col-12 col-lg-4 mt-3 mt-lg-0 mb-0 mb-lg-3">
+                <div class="row d-flex justify-content-center d-lg-block mx-lg-0 position-sticky" style="top:130px;">
                     <div itemprop="name" class="w-100 text-center text-lg-left" style="margin-bottom:4px">
                         <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
                             <h1 itemprop="name" class="bind mb-2 tx-primary-color" mybind="Id" myvalue="titolo" format="formattitle"></h1>
@@ -101,8 +130,8 @@
                     </div>
 
                     <!----------------------------------------------
-    ------ COLONNA RIGTH PREZZO E DATI AGGIUNTIVI ------
-    ----------------------------------------------->
+                    ------ COLONNA RIGTH PREZZO E DATI AGGIUNTIVI ------
+                    ----------------------------------------------->
                     <!--<div class="w-100 d-flex justify-content-center justify-content-lg-start mx-3 mx-lg-0 py-3 border-top bd-primary-color" >-->
                     <div class="w-100 d-flex justify-content-center justify-content-lg-start mx-3 mx-lg-0 py-3">
                         <meta itemprop="price" class="bind" mybind="Prezzo" format="formatvalue">
@@ -134,13 +163,14 @@
                                 <div id="carrellos1minus"></div>
                                 <div class="px-1" id="carrellos1qty" optiontype=""></div>
                                 <div id="carrellos1plus"></div>
-                                <div class="pl-2" id="carrellos1addsingle"></div>
+                                <div class="pl-2 w-100" id="carrellos1addsingle"></div>
+                                <div class="clearfix position-absolute d-none" style="right: 2rem;" id="carrellos1messages"></div>
                             </div>
                             <!--<div class="ml-3 ml-lg-0 mt-0 mt-lg-3 mt-xl-0 text-center bind" mybind="Id" myvalue="vaialcarrello" format="formatlabelresource"></div>-->
                         </div>
-                        <div class="w-100 d-flex justify-content-center align-items-center ">
+                        <!--<div class="w-100 d-flex justify-content-center align-items-center ">
                             <div class="clearfix" id="carrellos1messages"></div>
-                        </div>
+                        </div>-->
                     </div>
                     <!--SEZIONE PER LA GESTIONE CARATTERISTICHE CON RIFERIMENTO ALLE QUANITA' -->
                     <div id="carrellos1cars" class="px-2 py-3 bg-light-color border bd-primary-color" style="display:none">
@@ -154,9 +184,9 @@
                     <!--<div class="w-100 mt-3 p-1 bg-primary-color text-white text-center"></div>-->
                     <div class="w-100 mt-3"></div>
                     <!--pulsante apri il carrello-->
-                    <div class="pt-0 pb-3 w-100 px-3 px-md-0 bind" mybind="Id" myvalue="vaialcarrello1" format="formatlabelresource"></div>
+                    <div class="pt-0 pb-3 w-100 px-3 px-md-0 bind vaialcarrello" mybind="Id" myvalue="vaialcarrello1" format="formatlabelresource"></div>
                     <!--riquadro hai bisogno di aiuto-->
-                    <div class="w-100 mx-3 mx-md-0 mb-1 px-2 py-3 text-center card card-header bg-color-sottomeu-tenue">
+                    <div class="w-100 mx-3 mx-md-0 mb-1 px-2 py-3 text-center card card-header bg-light-color border-tipo2">
                         <div class="bind" mybind="Id" myvalue="testocall" format="formatlabelresource"></div>
                     </div>
                     <!-- pulsanti info utili 1 -->
@@ -268,3 +298,28 @@
         </div>
     </div>
 </div>
+<script>
+    jQuery(document).ready(function ($) {
+        //controllo pulsante aggiungi
+        $('#carrellos1addsingle .divbuttonstyle').addClass('button-carrello')
+        $('#carrellos1addsingle .divbuttonstyle').addClass('btn-primary-color')
+        $('#carrellos1minus .button-carrello').addClass('carrello-primary-color')
+        $('#carrellos1plus .button-carrello').addClass('carrello-primary-color')
+        //controllo pulsante apri il carrello
+        //var length = document.getElementById("carrellos1qtyi").value;
+        //if (typeof length > 0) {
+        $(".button-carrello:not(#carrellos1minus .button-carrello), .button-carrello1").click(function () {
+            $('.vaialcarrello a').addClass('vaialcarrello-ok');
+            setTimeout(RemoveClass, 3000);
+            $('#carrellos1messages').addClass('carrellos1messages-visible');
+            setTimeout(RemoveClass1, 1000);
+        });
+        function RemoveClass() {
+            $('.vaialcarrello a').removeClass('vaialcarrello-ok');
+        }
+        function RemoveClass1() {
+            $('#carrellos1messages').removeClass('carrellos1messages-visible');
+            }
+        //}
+    });
+</script>
