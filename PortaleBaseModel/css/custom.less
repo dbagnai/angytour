@@ -555,11 +555,19 @@ a {
     height: 94px;
     webkit-transition: all .35s ease;
     transition: all .35s ease;
+    /*AGGIUNTI PER LOGO DOPPIA POSIZIONE*/
+    background: url(/images/main_logo_d.png) left bottom;
+    background-size: 75%;
+    background-repeat: no-repeat;
 }
 
 .shrinklogo {
     width: @larghezza-logo-smart;
     height: 61px;
+    /*AGGIUNTI PER LOGO DOPPIA POSIZIONE*/
+    background: url(/images/main_logo_d.png) center center;
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
 .fulllogo {
@@ -572,6 +580,10 @@ a {
         width: @larghezza-logo-smart;
         height: 61px;
         margin-left: calc(100% - ((170 * @larghezza-logo-smart) / 206));
+        /*AGGIUNTI PER LOGO DOPPIA POSIZIONEE*/
+        background: url(/images/main_logo_d.png) center center;
+        background-size: 100%;
+        background-repeat: no-repeat;
     }
 
     .shrinklogo {
@@ -957,8 +969,9 @@ h1 span .mbr-section-subtitle {
 /*---------- TTITOLETTI VIRGOLETTAI -----------*/
 .quote-marks {
     font-size: 2.4rem !important;
-    line-height: 3rem !important;
+    line-height: 125% !important;
     color: @primary-color !important;
+    font-family: @body-font !important;
 }
 
 .quote-marks::before {
@@ -1376,7 +1389,7 @@ ul.footer-category-list {
 .logo-payment:nth-child(4) {
     background: url(/images/logos-payment/paypal.png) center center no-repeat !important;
     /*background-size: 60px !important;*/
-    background-size: 60% !important;
+    background-size: 90% !important;
 }
 
 .logo-payment:nth-child(5) {
@@ -4532,8 +4545,10 @@ button.js-roundedpush:hover {
     }
 
     .menu-home {
-        color: #fff !important;
-        text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
+        /*color: #fff !important;*/
+        color: @menu-color;
+        /*text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);*/
+        text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.0);
 
         &:hover {
             color: @color-sottomeu !important;
@@ -4545,7 +4560,8 @@ button.js-roundedpush:hover {
     }
 
     .buttonmenu-home {
-        box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
+        /*box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);*/
+        box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.0);
     }
 
     .buttonmenu-span-home {
@@ -4553,7 +4569,8 @@ button.js-roundedpush:hover {
     }
 
     .menu-home.buttonmenu-span-home {
-        color: @menu-color !important;
+        /*color: @menu-color !important;*/
+        color: #fff !important;
     }
 
     .catalogo-menu-ul-home {
@@ -4599,7 +4616,7 @@ button.js-roundedpush:hover {
         border: none !important;
         box-shadow: 2px 4px 6px 3px rgba(34, 34, 34, 0.50) !important;
         margin-left: 10px !important;
-        min-width: 270px !important;
+        min-width: 200px !important;
     }
 
     .dropdown-home::before {
@@ -4663,6 +4680,9 @@ button.js-roundedpush:hover {
 
 /*---------------------------*/
 /*------gestione menu stili-------*/
+.menuzord {
+    padding: 0 0px;
+}
 /*---------------------------*/
 @media (min-width: 1179px) {
     .menuzord, .menuzord *, .menuzord:not(i) {
@@ -4672,10 +4692,14 @@ button.js-roundedpush:hover {
     }
 
     .menuzord.white .menuzord-menu > li > a, .menuzord.white .menuzord-menu > li > a span {
-        color: @menu-color;
+        /*color: @menu-color;*/
+        color: #fff !important;
         font-family: @menu-font;
         font-size: @menu-size;
         font-weight: @menu-weight;
+    }
+    .menuzord.white .menuzord-menu > li > a.buttonmenu span {
+        color: #fff;
     }
 
     .menuzord.white .menuzord-menu > li.active > a,
@@ -5274,7 +5298,8 @@ button.js-roundedpush:hover {
     .menuzord.white .menuzord-menu > li > a.buttonmenu {
         color: @white-color !important;
         border-color: transparent !important;
-        margin-top: -2px;
+        /*margin-top: -2px;*/
+        margin-top: 0px;
 
         &:hover {
             color: @button-hover-color !important;
@@ -6186,32 +6211,32 @@ Modify  class per jqxcalendar
 /* classi per scalatura forzata dei caratteri */
 .scalable-extrime, .scalablefont-extrim, .scalable-extrime:hover, .scalablefont-extrim:hover {
     font-size: @scalable-extrime-font-size !important;
-    line-height: normal !important;
+    line-height: 125% !important;
 }
 
 .scalablefont-testata-extrime, .scalablefont-testata-extrime:hover {
     font-size: @scalable-testata-extrime-font-size !important;
-    line-height: normal !important;
+    line-height: 125% !important;
 }
 
 .scalablefont-medium-extrime, .scalablefont-medium-extrime:hover {
     font-size: @scalable-medium-extrime-font-size !important;
-    line-height: normal !important;
+    line-height: 125% !important;
 }
 
 .scalablefont-big, .scalablefont-big:hover {
     font-size: @scalable-big-font-size !important;
-    line-height: normal !important;
+    line-height: 125% !important;
 }
 
 .scalablefont-big.testo-banner-offerta {
-    line-height: normal !important;
+    line-height: 125% !important;
     /*line-height: 150% !important;*/
 }
 
 .scalablefont-medium-big, .scalablefont-medium-big:hover {
     font-size: @scalable-medium-big-font-size !important;
-    line-height: normal !important;
+    line-height: 125% !important;
 }
 
 .scalablefont-medium, .scalablefont-medium:hover {

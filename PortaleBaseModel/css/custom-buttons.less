@@ -15,16 +15,16 @@
     }*/
     /*PULSANTI menu STILE PULSANTE BORDER*/
     .menuzord.white .menuzord-menu > li > a {
-        min-width: 110px !important;
+        min-width: 140px !important;
         height: 37px !important;
         line-height: 20px;
         border-radius: 2px !important;
-        font-size: 0.9rem !important;
-         background-color: rgba(255, 255, 255, 0.5);
+        font-size: 0.8rem !important;
+        background-color: rgba(255, 255, 255, 0.5)
     }
 
     #menuzord.menuzord.white .menuzord-menu > li > a {
-         border: 1px solid rgba(0, 0, 0, 0.32) !important;
+        border: 1px solid rgba(0, 0, 0, 0.32) !important;
     }
 
     #menuzord.menuzord.white .menuzord-menu > li > a:not(:hover) {
@@ -32,8 +32,13 @@
         text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.0);
     }
 
+    #menuzord.menuzord.white .menuzord-menu > li > a.buttonmenu:not(:hover) {
+        color: #fff !important;
+        text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.0);
+    }
+
     #menuzord.menuzord.white .menuzord-menu > li > a:active, #menuzord.menuzord.white .menuzord-menu > li > a:active span, #menuzord.menuzord.white .menuzord-menu > li > a:hover, #menuzord.menuzord.white .menuzord-menu > li > a:hover span {
-          background-color: rgba(255, 255, 255, 0.0) !important;
+        background-color: rgba(255, 255, 255, 0.0) !important;
         border: 1px solid rgba(0, 0, 0, 0.0) !important;
     }
 }
@@ -83,6 +88,7 @@ a.divbuttonstyle:visited, .divbuttonstyle:visited, btn:visited, input:visited[ty
     -webkit-transition: color 0.25s 0.0833333333s;
     transition: color 0.25s 0.0833333333s;
     border-radius: 0;
+    text-transform: uppercase !important;
 }
 
 
@@ -154,10 +160,6 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     border-radius: 0 !important;
 }
 
-.btn-small {
-    padding: 0.75rem 0.5rem !important;
-}
-
 .btn-black-outline, .btn-black-outline:active, .btn-black-outline:visited, .btn-black-outline:focus .btn .btn-black, .btn .btn-black:active, .btn .btn-black:visited, .btn .btn-black:focus {
     font-family: @button-font;
     font-size: @button-size;
@@ -182,6 +184,7 @@ footer button.divbuttonstyle, footer button.divbuttonstyle:visited, footer butto
     box-shadow: inset 0 0 0 @bd-bottom2-width @bg-primary-color;
     -webkit-transition: color 0.25s 0.0833333333s;
     transition: color 0.25s 0.0833333333s;
+    text-transform: uppercase !important;
     /*
     -webkit-border-radius: 1.4rem;
     -moz-border-radius: 1.4rem;
@@ -230,11 +233,12 @@ a.btn-black-outline, a.btn-black-outline:active, a.btn-black-outline:visited, a.
     display: inline-block;
     text-align: center;
     margin: 0 auto;
-    /*   text-transform: lowercase !important;*/
+    text-transform: uppercase !important;
     white-space: normal;
     border-radius: 0px;
 }
 
+.carrellocustom .button-carrello::after, .carrellocustom .button-carrello:active::after, .carrellocustom .button-carrello:visited::after, .carrellocustom .button-carrello:focus::after,
 .btn .btn-black::after, .btn .btn-black:active::after, .btn .btn-black:visited::after, .btn .btn-black:focus::after, .btn .btn-black:focus::after,
 .btn-black-outline::after, .btn-black-outline:active::after, .btn-black-outline:visited::after, .btn-black-outline:focus::after, .btn-black-outline:focus::after,
 a.btn-black-outline::after, a.btn-black-outline:active::after, a.btn-black-outline:visited::after, a.btn-black-outline:focus::after, a.btn-black-outline:focus::after {
@@ -251,6 +255,7 @@ a.btn-black-outline::after, a.btn-black-outline:active::after, a.btn-black-outli
     border-right-width: @bd-bottom2-width !important;
 }
 
+.carrellocustom .button-carrello::before, .carrellocustom .button-carrello:active::before, .carrellocustom .button-carrello:visited::before, .carrellocustom .button-carrello:focus::before,
 .btn-black-outline::before, .btn-black-outline:active::before, .btn-black-outline:visited::before, .btn-black-outline:focus::before,
 .btn .btn-black::before, .btn .btn-black:active::before, .btn .btn-black:visited::before, .btn .btn-black:focus::before,
 a.btn-black-outline::before, a.btn-black-outline:active::before, a.btn-black-outline:visited::before, a.btn-black-outline:focus::before {
@@ -267,7 +272,7 @@ a.btn-black-outline::before, a.btn-black-outline:active::before, a.btn-black-out
     border-left-width: @bd-bottom2-width !important;
 }
 
-.btn-black-outline:hover, .btn .btn-black:hover, a.btn-black-outline:hover {
+.carrellocustom .button-carrello:hover, .btn-black-outline:hover, .btn .btn-black:hover, a.btn-black-outline:hover {
     color: @color-sottomeu !important;
     background-color: #fff !important;
     box-shadow: inset 0 0 0 @bd-bottom2-width @color-sottomeu-tenue;
@@ -275,8 +280,8 @@ a.btn-black-outline::before, a.btn-black-outline:active::before, a.btn-black-out
     border-radius: 0 !Important;
 }
 
-.btn-black-outline:hover::before, .btn .btn-black:hover::before, a.btn-black-outline:hover::before,
-.btn-black-outline:hover::after, .btn .btn-black:hover::after, a.btn-black-outline:hover::after {
+.carrellocustom .button-carrello:hover::before, .btn-black-outline:hover::before, .btn .btn-black:hover::before, a.btn-black-outline:hover::before,
+.carrellocustom .button-carrello:hover::after, .btn-black-outline:hover::after, .btn .btn-black:hover::after, a.btn-black-outline:hover::after {
     border-color: @color-sottomeu !important;
     -webkit-transition: border-color 0s, width 0.25s, height 0.25s;
     transition: border-color 0s, width 0.25s, height 0.25s;
@@ -284,97 +289,30 @@ a.btn-black-outline::before, a.btn-black-outline:active::before, a.btn-black-out
     height: 100% !important;
 }
 
+.carrellocustom .button-carrello:hover::before, .btn-black-outline:hover::before, .btn .btn-black:hover::before, a.btn-black-outline:hover::before {
+    -webkit-transition-delay: 0s, 0s, 0.25s;
+    transition-delay: 0s, 0s, 0.25s;
+}
 
-
-
-.btn .btn-black, .btn .btn-black:active, .btn .btn-black:visited, .btn .btn-black:focus,
-.btn-black-outline, .btn-black-outline:active, .btn-black-outline:visited, .btn-black-outline:focus,
-a.btn-black-outline, a.btn-black-outline:active, a.btn-black-outline:visited, a.btn-black-outline:focus {
-    box-shadow: inset 0 0 0 @bd-bottom2-width @bg-primary-color;
-    color: @button-outline-color !important;
-    -webkit-transition: color 0.25s 0.0833333333s;
-    transition: color 0.25s 0.0833333333s;
-    position: relative;
-    background-color: rgba(255, 255, 255, 0.75) !important;
-    border: none;
-    cursor: pointer;
-    line-height: 1.3;
-    font-family: @button-font;
-    letter-spacing: 2px;
-    font-size: @button-size;
-    font-weight: 700;
-    letter-spacing: 2px;
-    padding: 1rem 2rem;
-    display: inline-block;
-    text-align: center;
-    margin: 0 auto;
-    /*text-transform: lowercase !important;*/
-    white-space: normal;
-    border-radius: 0px;
+.carrellocustom .button-carrello:hover::after, .btn-black-outline:hover::after, .btn .btn-black:hover::after, a.btn-black-outline:hover::after {
+    -webkit-transition-delay: 0s, 0.25s, 0s;
+    transition-delay: 0s, 0.25s, 0s;
 }
 
 
-
-
-.btn .btn-black::after, .btn .btn-black:active::after, .btn .btn-black:visited::after, .btn .btn-black:focus::after, .btn .btn-black:focus::after,
-.btn-black-outline::after, .btn-black-outline:active::after, .btn-black-outline:visited::after, .btn-black-outline:focus::after, .btn-black-outline:focus::after,
-a.btn-black-outline::after, a.btn-black-outline:active::after, a.btn-black-outline:visited::after, a.btn-black-outline:focus::after, a.btn-black-outline:focus::after {
-    border: 0 solid transparent;
-    box-sizing: border-box;
-    content: '';
-    pointer-events: none;
-    position: absolute;
-    width: 0;
-    height: 0;
-    bottom: 0;
-    right: 0;
-    border-top-width: @bd-bottom2-width !important;
-    border-right-width: @bd-bottom2-width !important;
+.carrellocustom .button-carrello {
+    width: 100%;
 }
 
-.btn-black-outline::before, .btn-black-outline:active::before, .btn-black-outline:visited::before, .btn-black-outline:focus::before,
-.btn .btn-black::before, .btn .btn-black:active::before, .btn .btn-black:visited::before, .btn .btn-black:focus::before,
-a.btn-black-outline::before, a.btn-black-outline:active::before, a.btn-black-outline:visited::before, a.btn-black-outline:focus::before {
-    border: 0 solid transparent;
-    box-sizing: border-box;
-    content: '';
-    pointer-events: none;
-    position: absolute;
-    width: 0;
-    height: 0;
-    bottom: 0;
-    right: 0;
-    border-bottom-width: @bd-bottom2-width !important;
-    border-left-width: @bd-bottom2-width !important;
+#carrellos1minus .button-carrello, #carrellos1plus .button-carrello {
+    font-size: 1.7rem !important;
 }
-
-.btn-black-outline:hover, .btn .btn-black:hover, a.btn-black-outline:hover {
-    color: @color-sottomeu !important;
-    background-color: #fff !important;
-    box-shadow: inset 0 0 0 @bd-bottom2-width @color-sottomeu-tenue;
-    opacity: 1;
-    border-radius: 0 !Important;
-}
-
-
-.btn-black-outline:hover::before, .btn .btn-black:hover::before, a.btn-black-outline:hover::before,
-.btn-black-outline:hover::after, .btn .btn-black:hover::after, a.btn-black-outline:hover::after {
-    border-color: @color-sottomeu !important;
-    -webkit-transition: border-color 0s, width 0.25s, height 0.25s;
-    transition: border-color 0s, width 0.25s, height 0.25s;
-    width: 100% !important;
-    height: 100% !important;
-}
-
-
-
 
 /*STILE PULSANTE white OUTLINE*/
 .btn-white-outline, .btn-white-outline:active, .btn-white-outline:visited, .btn-white-outline:focus .btn .btn-white, .btn .btn-white:active, .btn .btn-white:visited, .btn .btn-white:focus {
     &:extend(.divbuttonstyle);
     color: @button-outline-color !important;
-    /*background-color: rgba(255, 255, 255, 1) !important;*/
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 1) !important;
     box-shadow: inset 0 0 0 @bd-bottom2-width #fff;
     border: none;
     border-radius: 0px;
@@ -405,8 +343,7 @@ a.btn-black-outline::before, a.btn-black-outline:active::before, a.btn-black-out
 
 a.btn-white-outline:hover, .btn-white-outline:hover, .btn .btn-white:hover {
     color: #fff !important;
-    /*    background-color: rgba(255, 255, 255, 0) !important;*/
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0) !important;
     box-shadow: inset 0 0 0 @bd-bottom2-width rgba(255, 255, 255, 0) !important;
     opacity: 1;
 }
@@ -503,7 +440,8 @@ a.btn-primary-color:hover::after, div.btn-primary-color:hover::after, .btn-prima
 
 .button-carrello-animate {
     border: 0px solid @primary-color !important;
-    background-color: @primary-color !important;
+    /*background-color: @primary-color !important;*/
+    background-color: @color-sottomeu !important;
     box-shadow: inset 0 0 0 @bd-bottom2-width @primary-color;
 }
 

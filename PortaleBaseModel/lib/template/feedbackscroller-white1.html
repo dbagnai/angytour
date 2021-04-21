@@ -1,5 +1,5 @@
 ﻿<style>
-    .quote-marks::before {
+    .owl-carousel-v1 .quote-marks::before {
         content: "“";
         font-family: Georgia,serif;
         margin-top: -100px;
@@ -12,17 +12,19 @@
         line-height: 200px;
         padding: 0 10px;
     }
-    .quote-marks::after {
+
+    .owl-carousel-v1 .quote-marks::after {
         content: "";
     }
-    .arrow-1 {
+
+    .owl-carousel-v1 .arrow-1 {
         height: 15px;
         width: 15px;
         border: 1px solid;
         border-width: 1px 1px 0 0;
         transform: rotate(135deg);
         background-color: #fff;
-        margin-bottom:-9.55px;
+        margin-bottom: -9.55px;
     }
 </style>
 
@@ -41,8 +43,8 @@
                                     <div class="quote-marks float-left primary-color d-none d-sm-block"></div>
                                     <div class="pb-3">
                                         <div class="rating bind pb-2" style="font-size:1.6rem; color: gold !important;" mybind="stelle" idbind="Id" disabled data-default-rating="2.5"></div><br />
-                                        <div class="bind pb-2" style="font-weight:400;font-size:1.6rem" mybind="Titolo" idbind="Id"></div>
-                                        <div class="bind noborders" style="overflow: visible; font-size:1.4rem" mybind="Testo" idbind="Id"></div>
+                                        <p class="bind pb-2" style="font-weight:600;" mybind="Titolo" idbind="Id"></p>
+                                        <p class="bind noborders" style="overflow: visible;" mybind="Testo" idbind="Id"></p>
                                     </div>
 
                                     <div class="w-50 pt-4 mb-4 bd-secondary-color mx-auto" style="border-bottom:1px solid;">
@@ -50,7 +52,7 @@
                                     </div>
 
                                     <div class="pt-3">
-                                        <h3 class="h3-body-title-1 mb-0 pb-2" style="font-size:1.6rem">
+                                        <h3 class="h3-body-title-1 mb-0 pb-2 scalablefont-small">
                                             <span class="bind" mybind="Nome"></span>
                                         </h3>
                                         <div class="bind noborders tx-sottomenu-color" style="font-size:0.9rem;margin-bottom:3px" mybind="Data" myvalue="" format="formatdata" />
@@ -59,7 +61,7 @@
 
                             </div>
 
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

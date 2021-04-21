@@ -1534,12 +1534,12 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   font-family: 'Raleway', sans-serif !important;
 }
 .prezzo-responsive {
-  font-size: 1.7rem;
+  font-size: 1.8vw;
   line-height: 1vw !important;
 }
 @media (max-width: 1200px) {
   .prezzo-responsive {
-    font-size: 1.7rem;
+    font-size: 2rem;
     line-height: 2rem !important;
   }
 }
@@ -1567,14 +1567,14 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .button-carrello-animate {
   /*&:extend(.btn-primary);*/
   font-family: 'Raleway', sans-serif;
-  font-size: 1.3rem !important;
+  font-size: 0.8rem !important;
   font-weight: 600;
   color: #fff !important;
   background-color: #f3c649;
   /*font-size: 1rem;*/
   margin: 0px !important;
   padding: 1px 0 0 0;
-  line-height: 38px !important;
+  line-height: 1.3 !important;
   width: 38px;
   height: 38px;
   border-radius: 50%;
@@ -2090,11 +2090,11 @@ ol.unstyled {
     }*/
   /*PULSANTI menu STILE PULSANTE BORDER*/
   .menuzord.white .menuzord-menu > li > a {
-    min-width: 110px !important;
+    min-width: 140px !important;
     height: 37px !important;
     line-height: 20px;
     border-radius: 2px !important;
-    font-size: 0.9rem !important;
+    font-size: 0.8rem !important;
     background-color: rgba(255, 255, 255, 0.5);
   }
   #menuzord.menuzord.white .menuzord-menu > li > a {
@@ -2102,6 +2102,10 @@ ol.unstyled {
   }
   #menuzord.menuzord.white .menuzord-menu > li > a:not(:hover) {
     color: #032f2f !important;
+    text-shadow: -1px 2px 5px rgba(0, 0, 0, 0);
+  }
+  #menuzord.menuzord.white .menuzord-menu > li > a.buttonmenu:not(:hover) {
+    color: #fff !important;
     text-shadow: -1px 2px 5px rgba(0, 0, 0, 0);
   }
   #menuzord.menuzord.white .menuzord-menu > li > a:active,
@@ -2198,6 +2202,7 @@ li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
   -webkit-transition: color 0.25s 0.08333333s;
   transition: color 0.25s 0.08333333s;
   border-radius: 0;
+  text-transform: uppercase !important;
 }
 a.divbuttonstyle::after,
 .divbuttonstyle::after,
@@ -2388,9 +2393,6 @@ footer .divbuttonstyle:hover {
   padding: 0.63rem 0.5rem !important;
   border-radius: 0 !important;
 }
-.btn-small {
-  padding: 0.75rem 0.5rem !important;
-}
 .btn-black-outline,
 .btn-black-outline:active,
 .btn-black-outline:visited,
@@ -2439,6 +2441,7 @@ li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
   box-shadow: inset 0 0 0 1px #098f8f;
   -webkit-transition: color 0.25s 0.08333333s;
   transition: color 0.25s 0.08333333s;
+  text-transform: uppercase !important;
   /*
     -webkit-border-radius: 1.4rem;
     -moz-border-radius: 1.4rem;
@@ -2521,10 +2524,14 @@ li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
   display: inline-block;
   text-align: center;
   margin: 0 auto;
-  /*   text-transform: lowercase !important;*/
+  text-transform: uppercase !important;
   white-space: normal;
   border-radius: 0px;
 }
+.carrellocustom .button-carrello::after,
+.carrellocustom .button-carrello:active::after,
+.carrellocustom .button-carrello:visited::after,
+.carrellocustom .button-carrello:focus::after,
 .btn .btn-black::after,
 .btn .btn-black:active::after,
 .btn .btn-black:visited::after,
@@ -2552,6 +2559,10 @@ a.btn-black-outline:focus::after {
   border-top-width: 1px !important;
   border-right-width: 1px !important;
 }
+.carrellocustom .button-carrello::before,
+.carrellocustom .button-carrello:active::before,
+.carrellocustom .button-carrello:visited::before,
+.carrellocustom .button-carrello:focus::before,
 .btn-black-outline::before,
 .btn-black-outline:active::before,
 .btn-black-outline:visited::before,
@@ -2576,6 +2587,7 @@ a.btn-black-outline:focus::before {
   border-bottom-width: 1px !important;
   border-left-width: 1px !important;
 }
+.carrellocustom .button-carrello:hover,
 .btn-black-outline:hover,
 .btn .btn-black:hover,
 a.btn-black-outline:hover,
@@ -2592,9 +2604,11 @@ a.btn-black-outline:hover,
   opacity: 1;
   border-radius: 0 !Important;
 }
+.carrellocustom .button-carrello:hover::before,
 .btn-black-outline:hover::before,
 .btn .btn-black:hover::before,
 a.btn-black-outline:hover::before,
+.carrellocustom .button-carrello:hover::after,
 .btn-black-outline:hover::after,
 .btn .btn-black:hover::after,
 a.btn-black-outline:hover::after {
@@ -2604,135 +2618,26 @@ a.btn-black-outline:hover::after {
   width: 100% !important;
   height: 100% !important;
 }
-.btn .btn-black,
-.btn .btn-black:active,
-.btn .btn-black:visited,
-.btn .btn-black:focus,
-.btn-black-outline,
-.btn-black-outline:active,
-.btn-black-outline:visited,
-.btn-black-outline:focus,
-a.btn-black-outline,
-a.btn-black-outline:active,
-a.btn-black-outline:visited,
-a.btn-black-outline:focus,
-a.btn-black-outline:active,
-a.btn-black-outline:focus,
-a.btn-transparent-outline:hover,
-.btn-transparent-outline:hover,
-.btn .btn-transparent:hover,
-.btn-banner,
-.btn-banner:active,
-.btn-banner:visited,
-.btn-banner:focus .btn .btn-banner,
-.btn .btn-banner:active,
-.btn .btn-banner:visited,
-.btn .btn-banner:focus,
-li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore,
-.polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore,
-li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
-.polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
-.btn-banner:hover,
-.btn .btn-banner:hover {
-  box-shadow: inset 0 0 0 1px #098f8f;
-  color: #032f2f !important;
-  -webkit-transition: color 0.25s 0.08333333s;
-  transition: color 0.25s 0.08333333s;
-  position: relative;
-  background-color: rgba(255, 255, 255, 0.75) !important;
-  border: none;
-  cursor: pointer;
-  line-height: 1.3;
-  font-family: 'Raleway', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  padding: 1rem 2rem;
-  display: inline-block;
-  text-align: center;
-  margin: 0 auto;
-  /*text-transform: lowercase !important;*/
-  white-space: normal;
-  border-radius: 0px;
-}
-.btn .btn-black::after,
-.btn .btn-black:active::after,
-.btn .btn-black:visited::after,
-.btn .btn-black:focus::after,
-.btn .btn-black:focus::after,
-.btn-black-outline::after,
-.btn-black-outline:active::after,
-.btn-black-outline:visited::after,
-.btn-black-outline:focus::after,
-.btn-black-outline:focus::after,
-a.btn-black-outline::after,
-a.btn-black-outline:active::after,
-a.btn-black-outline:visited::after,
-a.btn-black-outline:focus::after,
-a.btn-black-outline:focus::after {
-  border: 0 solid transparent;
-  box-sizing: border-box;
-  content: '';
-  pointer-events: none;
-  position: absolute;
-  width: 0;
-  height: 0;
-  bottom: 0;
-  right: 0;
-  border-top-width: 1px !important;
-  border-right-width: 1px !important;
-}
-.btn-black-outline::before,
-.btn-black-outline:active::before,
-.btn-black-outline:visited::before,
-.btn-black-outline:focus::before,
-.btn .btn-black::before,
-.btn .btn-black:active::before,
-.btn .btn-black:visited::before,
-.btn .btn-black:focus::before,
-a.btn-black-outline::before,
-a.btn-black-outline:active::before,
-a.btn-black-outline:visited::before,
-a.btn-black-outline:focus::before {
-  border: 0 solid transparent;
-  box-sizing: border-box;
-  content: '';
-  pointer-events: none;
-  position: absolute;
-  width: 0;
-  height: 0;
-  bottom: 0;
-  right: 0;
-  border-bottom-width: 1px !important;
-  border-left-width: 1px !important;
-}
-.btn-black-outline:hover,
-.btn .btn-black:hover,
-a.btn-black-outline:hover,
-.btn-transparent-outline,
-.btn-transparentoutline:active,
-.btn-transparent-outline:visited,
-.btn-transparent-outline:focus .btn .btn-transparent,
-.btn .btn-transparent:active,
-.btn .btn-transparentk:visited,
-.btn .btn-transparent:focus {
-  color: #f3c649 !important;
-  background-color: #fff !important;
-  box-shadow: inset 0 0 0 1px #fcefcc;
-  opacity: 1;
-  border-radius: 0 !Important;
-}
+.carrellocustom .button-carrello:hover::before,
 .btn-black-outline:hover::before,
 .btn .btn-black:hover::before,
-a.btn-black-outline:hover::before,
+a.btn-black-outline:hover::before {
+  -webkit-transition-delay: 0s, 0s, 0.25s;
+  transition-delay: 0s, 0s, 0.25s;
+}
+.carrellocustom .button-carrello:hover::after,
 .btn-black-outline:hover::after,
 .btn .btn-black:hover::after,
 a.btn-black-outline:hover::after {
-  border-color: #f3c649 !important;
-  -webkit-transition: border-color 0s, width 0.25s, height 0.25s;
-  transition: border-color 0s, width 0.25s, height 0.25s;
-  width: 100% !important;
-  height: 100% !important;
+  -webkit-transition-delay: 0s, 0.25s, 0s;
+  transition-delay: 0s, 0.25s, 0s;
+}
+.carrellocustom .button-carrello {
+  width: 100%;
+}
+#carrellos1minus .button-carrello,
+#carrellos1plus .button-carrello {
+  font-size: 1.7rem !important;
 }
 /*STILE PULSANTE white OUTLINE*/
 .btn-white-outline,
@@ -2743,8 +2648,7 @@ a.btn-black-outline:hover::after {
 .btn .btn-white:visited,
 .btn .btn-white:focus {
   color: #032f2f !important;
-  /*background-color: rgba(255, 255, 255, 1) !important;*/
-  background-color: transparent;
+  background-color: #ffffff !important;
   box-shadow: inset 0 0 0 1px #fff;
   border: none;
   border-radius: 0px;
@@ -2799,8 +2703,7 @@ a.btn-white-outline:hover,
 .btn-white-outline:hover,
 .btn .btn-white:hover {
   color: #fff !important;
-  /*    background-color: rgba(255, 255, 255, 0) !important;*/
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0) !important;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0) !important;
   opacity: 1;
 }
@@ -2933,7 +2836,8 @@ button.btn-primary-color:hover::after {
 }
 .button-carrello-animate {
   border: 0px solid #032f2f !important;
-  background-color: #032f2f !important;
+  /*background-color: @primary-color !important;*/
+  background-color: #f3c649 !important;
   box-shadow: inset 0 0 0 1px #032f2f;
 }
 .button-carrello-animate:hover {
@@ -3640,10 +3544,18 @@ a:hover {
   height: 94px;
   webkit-transition: all 0.35s ease;
   transition: all 0.35s ease;
+  /*AGGIUNTI PER LOGO DOPPIA POSIZIONE*/
+  background: url(/images/main_logo_d.png) left bottom;
+  background-size: 75%;
+  background-repeat: no-repeat;
 }
 .shrinklogo {
   width: calc((400px * 61) / 119);
   height: 61px;
+  /*AGGIUNTI PER LOGO DOPPIA POSIZIONE*/
+  background: url(/images/main_logo_d.png) center center;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 .fulllogo {
   width: 90%;
@@ -3654,6 +3566,10 @@ a:hover {
     width: calc((400px * 61) / 119);
     height: 61px;
     margin-left: calc(100% - ((170 * calc((400px * 61) / 119)) / 206));
+    /*AGGIUNTI PER LOGO DOPPIA POSIZIONEE*/
+    background: url(/images/main_logo_d.png) center center;
+    background-size: 100%;
+    background-repeat: no-repeat;
   }
   .shrinklogo {
     width: calc((400px * 61) / 119);
@@ -4007,8 +3923,9 @@ h1 span {
 /*---------- TTITOLETTI VIRGOLETTAI -----------*/
 .quote-marks {
   font-size: 2.4rem !important;
-  line-height: 3rem !important;
+  line-height: 125% !important;
   color: #032f2f !important;
+  font-family: 'Raleway', sans-serif !important;
 }
 .quote-marks::before {
   content: "“";
@@ -4368,7 +4285,7 @@ ul.footer-category-list {
 .logo-payment:nth-child(4) {
   background: url(/images/logos-payment/paypal.png) center center no-repeat !important;
   /*background-size: 60px !important;*/
-  background-size: 60% !important;
+  background-size: 90% !important;
 }
 .logo-payment:nth-child(5) {
   background: url(/images/logos-payment/discover.png) center center no-repeat !important;
@@ -7235,8 +7152,10 @@ button.js-roundedpush:hover {
     margin: 0 auto;
   }
   .menu-home {
-    color: #fff !important;
-    text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
+    /*color: #fff !important;*/
+    color: #032f2f;
+    /*text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);*/
+    text-shadow: -1px 2px 5px rgba(0, 0, 0, 0);
   }
   .menu-home:hover {
     color: #f3c649 !important;
@@ -7245,13 +7164,15 @@ button.js-roundedpush:hover {
     color: #f3c649 !important;
   }
   .buttonmenu-home {
-    box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);
+    /*box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.5);*/
+    box-shadow: -1px 2px 5px rgba(0, 0, 0, 0);
   }
   .buttonmenu-span-home {
     text-shadow: none !important;
   }
   .menu-home.buttonmenu-span-home {
-    color: #032f2f !important;
+    /*color: @menu-color !important;*/
+    color: #fff !important;
   }
   .catalogo-menu-ul-home {
     right: auto !important;
@@ -7288,7 +7209,7 @@ button.js-roundedpush:hover {
     border: none !important;
     box-shadow: 2px 4px 6px 3px rgba(34, 34, 34, 0.5) !important;
     margin-left: 10px !important;
-    min-width: 270px !important;
+    min-width: 200px !important;
   }
   .dropdown-home::before {
     content: "";
@@ -7341,6 +7262,9 @@ button.js-roundedpush:hover {
 --------------------------------- */
 /*---------------------------*/
 /*------gestione menu stili-------*/
+.menuzord {
+  padding: 0 0px;
+}
 /*---------------------------*/
 @media (min-width: 1179px) {
   .menuzord,
@@ -7352,10 +7276,14 @@ button.js-roundedpush:hover {
   }
   .menuzord.white .menuzord-menu > li > a,
   .menuzord.white .menuzord-menu > li > a span {
-    color: #032f2f;
+    /*color: @menu-color;*/
+    color: #fff !important;
     font-family: 'Raleway', sans-serif;
     font-size: 1rem;
     font-weight: 600;
+  }
+  .menuzord.white .menuzord-menu > li > a.buttonmenu span {
+    color: #fff;
   }
   .menuzord.white .menuzord-menu > li.active > a,
   .menuzord.white .menuzord-menu > li:hover > a,
@@ -7882,7 +7810,8 @@ button.js-roundedpush:hover {
   .menuzord.white .menuzord-menu > li > a.buttonmenu {
     color: #fff !important;
     border-color: transparent !important;
-    margin-top: -2px;
+    /*margin-top: -2px;*/
+    margin-top: 0px;
   }
   .menuzord.white .menuzord-menu > li > a.buttonmenu:hover,
   .menuzord.white .menuzord-menu > li > a.buttonmenu span:hover {
@@ -8675,31 +8604,31 @@ Modify  class per jqxcalendar
 .scalable-extrime:hover,
 .scalablefont-extrim:hover {
   font-size: calc(30px + 2vw + 2vh + 2vmin) !important;
-  line-height: normal !important;
+  line-height: 125% !important;
 }
 .scalablefont-testata-extrime,
 .scalablefont-testata-extrime:hover {
   font-size: calc(30px + 2vw + 1vh + 1vmin) !important;
-  line-height: normal !important;
+  line-height: 125% !important;
 }
 .scalablefont-medium-extrime,
 .scalablefont-medium-extrime:hover {
   font-size: calc(28px + 1vw + 1vh + 1vmin) !important;
-  line-height: normal !important;
+  line-height: 125% !important;
 }
 .scalablefont-big,
 .scalablefont-big:hover {
   font-size: calc(24px + 0.6vw + 0.6vh + 0.3vmin) !important;
-  line-height: normal !important;
+  line-height: 125% !important;
 }
 .scalablefont-big.testo-banner-offerta {
-  line-height: normal !important;
+  line-height: 125% !important;
   /*line-height: 150% !important;*/
 }
 .scalablefont-medium-big,
 .scalablefont-medium-big:hover {
   font-size: calc(22px + 0.4vw + 0.4vh + 0.2vmin) !important;
-  line-height: normal !important;
+  line-height: 125% !important;
 }
 .scalablefont-medium,
 .scalablefont-medium:hover {

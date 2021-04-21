@@ -9,30 +9,6 @@
         padding-bottom: 2px;
     }
     /* TAGLIA LE IMMAGINI IN BASE ALL'ALTEZZA DELLO SCHERMO - può essere disabilitato */
-    .squarevariable item:nth-of-type(1) .work-image img {
-        height: calc(100vh - 100px) !important;
-        width: auto !important;
-    }
-
-    .squarevariable item:not(:nth-of-type(1)) .card-img-overlay {
-        padding: 1rem !important;
-    }
-
-        .squarevariable item:not(:nth-of-type(1)) .card-img-overlay .card-body {
-            margin: 0 !important;
-        }
-
-            .squarevariable item:not(:nth-of-type(1)) .card-img-overlay .card-body h3 {
-                margin: 0 !important;
-                line-height: 100% !important;
-                font-size: 2rem !important;
-            }
-
-    .squarevariable item:not(:nth-of-type(1)) .work-image img {
-        height: calc(50vh - 52px) !important;
-        width: auto !important;
-    }
-
     @media screen and (min-width: 992px) and (max-width: 1200px) {
         .squarevariable item:nth-of-type(1) .work-image img {
             height: calc(50vh) !important;
@@ -50,7 +26,6 @@
         -webkit-transition: all .35s ease;
         transition: all .35s ease;
     }
-
     .squarevariable .imgovercontainer:hover.work-image > img, squarevariable .imgovercontainer:hover > img {
         -webkit-transform: scale(1.2) rotate(5deg);
         -moz-transform: scale(1.2) rotate(5deg);
@@ -60,7 +35,6 @@
         -webkit-transition: all 1.0s ease;
         transition: all 1.0s ease;
     }
-
     .squarevariable .work-image:hover:after, .squarevariable .imgovercontainer:hover:after {
         z-index: 2 !important;
         background: url(/images/link1.png) center center no-repeat !important;
@@ -76,17 +50,7 @@
     .grid-item {
         width: 100%;
     }
-
-    @media (max-width: 576px) {
-        .squarevariable .work-image img {
-            height: calc(100vh - 100px) !important;
-            width: auto !important;
-        }
-
-        .squarevariable .card-img-overlay {
-            position: absolute;
-        }
-    }
+    
 
     @media screen and (min-width: 577px) and (max-width: 767px) {
         .squarevariable .work-image img {
@@ -97,63 +61,63 @@
 
     @media screen and (min-width: 768px) and (max-width: 992px) {
         .squarevariable .work-image img {
-            height: calc(100vh - 100px) !important;
-            width: auto !important;
+            height: auto !important;
+            width: 100% !important;
         }
     }
 
     @media (max-width: 992px) {
-        .squarevariable item:not(:nth-of-type(1)) .work-image img {
+        .squarevariable item:not(:nth-of-type(1)):not(:nth-of-type(2)):not(:nth-of-type(3)) {
             display: none !important;
-        }
-
-        .squarevariable item:not(:nth-of-type(1)) .card-img-overlay {
-            display: none !important;
-        }
-
-        .squarevariable .card-img-overlay {
-            height: 100% !important;
             width: 100% !important;
         }
     }
 
     @media (min-width: 992px) {
+        .squarevariable {
+            margin: 0 -2px;
+        }
+
+            .squarevariable item:nth-of-type(1) .work-image img {
+                height: auto !important;
+                width: 600px !important;
+            }
+
+            .squarevariable item:not(:nth-of-type(1)) .work-image img {
+                height: auto !important;
+                width: 297px !important;
+            }
         .grid-sizer,
         .grid-item {
             width: 25%;
         }
-
         .squarevariable item:nth-of-type(1) {
             width: 50%;
         }
-
-        .squarevariable {
-            margin: 0 -2px;
-        }
     }
+        
 
-
-
-    /*d-flex justify-content-center align-content-center flex-wrap h-100 w-100*/
-
+        @media (max-width: 576px) {
+            .squarevariable .work-image img {
+                height: auto !important;
+                width: 100% !important;
+            }
+            .squarevariable .card {
+                height: auto !important;
+                width: auto !important;
+                padding-left: 0px !Important;
+                padding-right: 0px !Important;
+                padding-top: 2px;
+                padding-bottom: 2px;
+            }
+        }
+    
 </style>
 
 <div class="grid squarevariable" id="replaceid">
     <div class="grid-sizer"></div>
     <item class="grid-item">
         <div class="card m-0">
-
-            <div class="card-img-overlay p-0 p-lg-5 d-flex align-content-center flex-wrap" style="top:auto; z-index: 9; width:fit-content;">
-                <div class="card-body text-center text-lg-left mx-4 mx-lg-5 mb-0 mb-lg-5 pt-0">
-                    <h3 class="card-title titolo-offerta mb-3 text-white scalablefont-medium-extrime" style="font-weight: 600;">
-                        <span class="bind" mybind="Id" myvalue="titolo" format="formattitle" style="text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.75);"></span>
-                    </h3>
-                    <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-0">
-                        <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
-                    </h4>
-                </div>
-            </div>
-
             <a class="bind primary-color" rel="prettyPhoto[pp_gal]" href="link" mybind="Id" style="overflow:hidden;">
                 <div class="position-relative imgovercontainer work-image d-flex justify-content-center">
                     <img src="/images/dummylogo.png" alt="" class="bind" mybind="Id" style="padding: 0px;" />

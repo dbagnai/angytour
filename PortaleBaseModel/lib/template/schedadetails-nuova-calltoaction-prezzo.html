@@ -13,26 +13,21 @@
         font-weight: 400;
     }
 </style>
-
-
-<div id="replaceid" style="text-align: left" itemscope="" itemtype="http://schema.org/Product">
-    <div class="container pt-0 pt-sm-4 no-plygon">
+<div id="replaceid" style="text-align: left" itemscope="" itemtype="http://schema.org/Article">
+    <div class="container pt-0 pt-sm-4">
         <div class="row">
-
             <!------------------------------
-            ------ COLONNA 1 LEFT IMMAGINE ------
+            ------ COLONNA 1 LEFT IMG E TESTO DESKTOP ------
             ------------------------------->
-            <!-- Placeholder per la owl gallery -->
             <div class="col-12 col-lg-8">
                 <div class="row mx-lg-0">
                     <div id="plhGallery" class="bind col-12 float-none p-0 float-lg-left pl-lg-0 pb-lg-3" mybind="Id" myvalue="video" format="frmvisibility"></div>
                     <div class="responsive-video" style="display: none">
                         <iframe frameborder="0" allowfullscreen class="bind" mybind="Id" myvalue="video" frameborder="0" allowfullscreen src=""></iframe>
                     </div>
-
                     <!---------------------------------
-                    ------ COLONNA 2 LEFT DESCRIZIONE ------
-                    ---------------------------------->
+                        ------ COLONNA 2 LEFT DESCRIZIONE ------
+                        ---------------------------------->
                     <div class="d-none d-lg-block mx-0 text-left" style="line-height: 1.6rem; flex: 0 0 100%;">
                         <!------- DESCRIZIONE PRODOTTO ------>
                         <div id="accordion" class="mb-4 w-100 faq-section">
@@ -66,7 +61,7 @@
                                 </div>
                             </div>
                             <!--INFORMAZIONI PER ACQUISTO-->
-                            <div class="card">
+                            <!--<div class="card">
                                 <div class="card-header" id="headingThree">
                                     <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                         <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
@@ -79,86 +74,51 @@
                                         <span class="bind" mybind="Id" myvalue="testoordine2" format="formatlabelresource"></span>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
 
                 </div>
             </div>
-
-
-
-            <!----------------------------
-            ------ COLONNA 3 RIGTH TITOLO ------
-            ----------------------------->
-            <div class="col-12 col-lg-4 mt-3 mt-lg-0">
-                <div class="row d-flex justify-content-center d-lg-block mx-lg-0">
+            <!---------------------------------------------
+            ------ COLONNA 2 TITOLO + CALL TO ACTION ------
+            ---------------------------------------------->
+            <div class="col-12 col-lg-4 mt-3 mb-0 mt-lg-0 mb-lg-3">
+                <div class="position-sticky" style="top:120px">
                     <div itemprop="name" class="w-100 text-center text-lg-left" style="margin-bottom:4px">
                         <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
                             <h1 itemprop="name" class="bind mb-2 tx-primary-color" mybind="Id" myvalue="titolo" format="formattitle"></h1>
                             <h2 class="bind tx-sottomenu-color" mybind="Id" myvalue="titolo" format="formatsubtitle"></h2>
                         </a>
                     </div>
-
                     <!----------------------------------------------
-                    ------ COLONNA RIGTH PREZZO E DATI AGGIUNTIVI ------
-                    ----------------------------------------------->
-                    <!--<div class="w-100 d-flex justify-content-center justify-content-lg-start mx-3 mx-lg-0 py-3 border-top bd-primary-color" >-->
-                    <div class="w-100 d-flex justify-content-center justify-content-lg-start mx-3 mx-lg-0 py-3">
+    ------ RIGA PREZZO E DATI AGGIUNTIVI ------
+    ----------------------------------------------->
+                    <div class="w-100 d-flex justify-content-center justify-content-lg-start align-items-center mx-3 mx-lg-0">
                         <meta itemprop="price" class="bind" mybind="Prezzo" format="formatvalue">
                         <meta itemprop="priceCurrency" content="EUR">
                         <meta itemprop="availability" content="https://schema.org/InStock">
-                        <div class="tx-primary-color" style="font-weight: 800; font-size: 1.9em; line-height: normal;">
+                        <div class="tx-primary-color" style="font-weight: 500; font-size: 2rem; line-height: normal;">
                             <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                         </div>
-                        <div class="px-2 tx-secondary-color" style="font-weight: 200; font-size: 1.4em; text-decoration: line-through; line-height: normal">
-                            <span style="text-decoration: line-through; font-size: 1.3em; padding-left:10px; padding-right:5px; font-weight: 200;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                        <div class="px-2 tx-secondary-color" style="font-weight: 300; font-size: 1.4rem; text-decoration: line-through;">
+                            <span style="padding-left:10px; padding-right:5px; font-weight: 200;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                         </div>
+                        <!--<div class="clearfix"></div>
+        <div class="blog-post-details-item blog-post-details-item-left" style="display:none;">
+            <span class="bind" mybind="CodiceTipologia" format="frmtipologia"></span>
+            <span class="bind" mybind="CodiceCategoria" format="frmcategoria"></span>
+             <span class="bind" mybind="CodiceCategoria2Liv" format="frmcategoria2liv"></span>
+            <span class="bind" mybind="CodiceCategoria2liv" format="frmcategoria2liv"></span>
+            <meta itemprop="datePublished" class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata" />
+            <span class="bind" mybind="DataInserimento" myvalue="TestoPubblicatodata" myvalue1="visualData" format="formatlabelresource"></span>
+            <span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata"></span>
+        </div> -->
                     </div>
-                    <!------------------ COLONNA RIGTH STELLINE --------------->
-                    <div id="divCommentstotals" class="bind commenttool onlytotals d-flex justify-content-center justify-content-lg-start w-100 px-3 px-lg-0" mybind="Id" instance="commenttool1" style="line-height: 1.0;">
-                    </div>
-
-                    <!------------------ COLONNA RIGTH SOCIAL ----------------->
-                    <div mybind="Id" class="bind files-list" style="display:none"></div>
-
-                    <!-- SEZIONE GESTIONE CARRELLO -->
-                    <div id="carrellos1" class="bind carellotool w-100 mt-3 mt-lg-0 px-3 px-md-0 px-lg-0" mybind="Id">
-
-                        <!--SEZIONE AGGIUNGI AL CARRELLO-->
-                        <!--<div class="w-100 p-1 bg-primary-color text-white text-center"></div>-->
-                        <!--<div class="w-100 px-2 py-3 bg-light-color border bd-primary-color">-->
-                        <div class="w-100 d-flex d-lg-block d-xl-flex justify-content-between justify-content-sm-center justify-content-xl-between align-items-center">
-                            <div class="d-flex justify-content-center">
-                                <div id="carrellos1minus"></div>
-                                <div class="px-1" id="carrellos1qty"></div>
-                                <div id="carrellos1plus"></div>
-                            </div>
-                            <div id="carrello-click" class="my-0 bind carrello-stop carrellocustom col pr-0 pr-lg-0 pl-lg-0 mt-0 mt-lg-3 mt-xl-0 pl-xl-3" style="z-index:1" mybind="Id" mybind1="Qta_vendita" mybind2="Xmlvalue" mybind3="Prezzo" format="formatbtncarrello">
-                            </div>
-                            <!--<div class="ml-3 ml-lg-0 mt-0 mt-lg-3 mt-xl-0 text-center bind" mybind="Id" myvalue="vaialcarrello" format="formatlabelresource"></div>-->
-                        </div>
-                        <div class="w-100 d-flex justify-content-center align-items-center ">
-                            <div class="clearfix" id="carrellos1messages"></div>
-                        </div>
-                    </div>
-                    <!--SESIONE PER LA GESTIONE CARATTERISTICHE TIPO TAGLIA/COLORE-->
-                    <div id="carrellos1cars" class="px-2 py-3 bg-light-color border bd-primary-color" style="display:none">
-                        <div class="w-100 d-flex justify-content-center align-items-center ">
-                            <select id="carrellos1Caratteristica1" name="carrellos1Caratteristica1" class="mx-auto form-control ddlcaratteristiche  w-100" style="background-color:#fff"></select>
-                            <select id="carrellos1Caratteristica2" name="carrellos1Caratteristica2" class="mx-auto form-control ddlcaratteristiche  w-100" style="background-color:#fff"></select>
-                        </div>
-                    </div>
-
-                    <!--RIQUADRO INFO SOTTO AGGIUNGI AL CARRELLO-->
-                    <!--<div class="w-100 mt-3 p-1 bg-primary-color text-white text-center"></div>-->
+                    <!-- RIQUADRO INFO SOTTO TITOLO -->
                     <div class="w-100 mt-3"></div>
-                    <!--pulsante apri il carrello-->
-                    <div class="pt-0 pb-3 w-100 px-3 px-md-0 bind" mybind="Id" myvalue="vaialcarrello1" format="formatlabelresource"></div>
-                    <!--DESCRIZIONE BREVE-->
-                    <span class="bind d-block pb-3 px-3 px-md-0" mybind="Id" myvalue="descrizione" myvalue1="290" format="formatdescrizione"></span>
                     <!--riquadro hai bisogno di aiuto-->
-                    <div class="w-100 mx-3 mx-md-0 mb-1 px-2 py-3 text-center card card-header bg-color-sottomeu-tenue">
+                    <div class="w-100 mb-1 px-2 py-3 text-center card card-header bg-color-sottomeu-tenue">
                         <div class="bind" mybind="Id" myvalue="testocall" format="formatlabelresource"></div>
                     </div>
                     <!-- pulsanti info utili 1 -->
@@ -166,18 +126,13 @@
                     <!-- pulsanti social -->
                     <p>
                         <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                        <div class="addthis_inline_share_toolbox py-3 py-lg-0 mx-auto" style="width: fit-content;"></div>
+                        <div class="addthis_inline_share_toolbox py-3 py-md-0 mx-auto"></div>
                     </p>
-                    <!-- info utili 2 -->
-                    <!--<div class="bind w-100 mx-3 mx-md-0 mb-3 text-left d-none d-lg-block" mybind="Id" myvalue="testoordine2" format="formatlabelresource"></div>-->
-
                 </div>
             </div>
         </div>
-
-
         <!---------------------------------
-        ------ COLONNA 1 DESCRIZIONE ------
+        ------ COLONNA 1 DESCRIZIONE MOBILE ------
         ---------------------------------->
         <div class="col-12 col-lg-8 d-block d-lg-none px-0">
             <div class="row mx-0 text-left" style="line-height: 1.6rem;">
@@ -214,7 +169,7 @@
                         </div>
                     </div>
                     <!--INFORMAZIONI PER ACQUISTO-->
-                    <div class="card">
+                    <!--<div class="card">
                         <div class="card-header" id="headingThree1">
                             <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseThree1" aria-expanded="false" aria-controls="collapseThree1">
                                 <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
@@ -227,7 +182,7 @@
                                 <span class="bind" mybind="Id" myvalue="testoordine2" format="formatlabelresource"></span>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
 
 
@@ -235,59 +190,8 @@
         </div>
 
 
-
-
         <!---------------------------------------------------
-        ------ PROVA ------
-        ---------------------------------------------------->
-        <!--<div id="accordion" class="mb-4 w-100 faq-section">
-            <div class="card">
-                <div class="card-header" id="headingOne">
-                    <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
-                            <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i>  <span class="bind" mybind="Id" myvalue="descrizionedelprodotto" format="formatlabelresource"></span>
-                        </h4>
-                    </a>
-                </div>
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body px-3 py-3" itemprop="description">
-                            <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
-                            <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="ulterioriinformazioni" format="formatlabelresource"></span>
-                        </h4>
-                    </a>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                    <div class="card-body px-3 py-3">
-                        <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
-                            <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="informazioniperacquisto" format="formatlabelresource"></span>
-                        </h4>
-                    </a>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                    <div class="card-body px-3 pt-3 pb-0">
-                        <span class="bind" mybind="Id" myvalue="testoordine2" format="formatlabelresource"></span>
-                    </div>
-                </div>
-            </div>
-        </div>-->
-        <!---------------------------------------------------
-        ------ LONNA 4 LEFT - COMANDI NAVIGAZIONE ------
+        ------ RIGA - COMANDI NAVIGAZIONE ------
         ---------------------------------------------------->
         <div class="w-100">
             <div class="row justify-content-between mx-0 pt-3 pt-lg-4 pb-3 pb-lg-5 border-top bd-primary-color">
@@ -297,12 +201,10 @@
                         <a rel="nofollow, noindex" class="btn-black-outline w-100 bind" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
                     </div>
                 </div>
-
                 <div class="col-12 col-lg-auto mb-3 my-lg-0">
                     <div class="row justify-content-between">
-
                         <div class="row">
-                            <div class="col mr-3">
+                            <div class="col">
                                 <a rel="nofollow" class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
                                     <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span><div style="display:inline-block;">
                                     </div>
@@ -318,9 +220,7 @@
                                 </a>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
