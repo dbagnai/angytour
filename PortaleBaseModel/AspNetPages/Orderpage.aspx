@@ -105,22 +105,6 @@
                                 <div class="form-row row">
                                     <div class="col-6 form-group">
                                         <label>
-                                            <%= references.ResMan("Common", Lingua,"FormTesto16s") %>
-                                        </label>
-                                        <%--    <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="*" ErrorMessage="*" ControlToValidate="inpRagsoc" runat="server" />--%>
-                                        <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpRagsoc" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto16s") %>' />
-                                    </div>
-                                    <div class="col-6 form-group">
-                                        <label>
-                                            <%= references.ResMan("Common", Lingua,"FormTesto17s") %>
-                                        </label>
-                                        <%--   <asp:RequiredFieldValidator  CssClass="errorvalidateclass" Text="*"  ErrorMessage="*" ControlToValidate="inpPiva" runat="server" />--%>
-                                        <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpPiva" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17s") %>' />
-                                    </div>
-                                </div>
-                                <div class="form-row row">
-                                    <div class="col-6 form-group">
-                                        <label>
                                             <%= references.ResMan("Common", Lingua,"FormTesto10") %>
                                         </label>
                                         <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="* Error" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto10Err") %>' ControlToValidate="inpIndirizzo" runat="server" />
@@ -179,6 +163,23 @@
                                         </label>
                                         <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="* Error" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto11Err") %>' ControlToValidate="inpTel" runat="server" />
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpTel" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto11") %>' />
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row row">
+                                    <div class="col-6 form-group">
+                                        <label>
+                                            <%= references.ResMan("Common", Lingua,"FormTesto16s") %>
+                                        </label>
+                                        <%--    <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="*" ErrorMessage="*" ControlToValidate="inpRagsoc" runat="server" />--%>
+                                        <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpRagsoc" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto16s") %>' />
+                                    </div>
+                                    <div class="col-6 form-group">
+                                        <label>
+                                            <%= references.ResMan("Common", Lingua,"FormTesto17s") %>
+                                        </label>
+                                        <%--   <asp:RequiredFieldValidator  CssClass="errorvalidateclass" Text="*"  ErrorMessage="*" ControlToValidate="inpPiva" runat="server" />--%>
+                                        <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpPiva" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17s") %>' />
                                     </div>
                                 </div>
                                 <div class="form-row row">
@@ -281,7 +282,23 @@
                             </div>
                         </div>
 
-
+                             <%-- CODICE SCONTO --%>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="widget bill-payment text-center text-sm-left bg-light-color p-3" style="text-align: left; display: block">
+                                    <div class="TitlePrezzo mb-2"><%= references.ResMan("Common", Lingua,"TitleCodiceSconto") %></div>
+                                    <div class="d-inline float-none float-sm-left my-2" style="width: calc(100% - 219px); background: white;">
+                                        <asp:TextBox runat="server" CssClass="w-100 px-2" ID="txtCodiceSconto" />
+                                    </div>
+                                    <div class="d-block d-sm-inline ml-0 ml-sm-3 my-2">
+                                        <asp:Button Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="btnCodiceSconto" OnClick="btnCodiceSconto_Click" />
+                                    </div>
+                                    <div style="color: red">
+                                        <asp:Literal Text="" ID="lblCodiceSconto" runat="server" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <%-- TABELLA RIEPILOGO ORDINE --%>
                         <div class="row">
@@ -477,23 +494,7 @@
                             </table>
                         </div>
 
-                        <%-- CODICE SCONTO --%>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="widget bill-payment text-center text-sm-left bg-light-color p-3" style="text-align: left; display: block">
-                                    <div class="TitlePrezzo mb-2"><%= references.ResMan("Common", Lingua,"TitleCodiceSconto") %></div>
-                                    <div class="d-inline float-none float-sm-left my-2" style="width: calc(100% - 219px); background: white;">
-                                        <asp:TextBox runat="server" CssClass="w-100 px-2" ID="txtCodiceSconto" />
-                                    </div>
-                                    <div class="d-block d-sm-inline ml-0 ml-sm-3 my-2">
-                                        <asp:Button Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="btnCodiceSconto" OnClick="btnCodiceSconto_Click" />
-                                    </div>
-                                    <div style="color: red">
-                                        <asp:Literal Text="" ID="lblCodiceSconto" runat="server" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                   
 
                         <%-- NORME GENERALI DI ACQUISTO --%>
                         <div class="row">
