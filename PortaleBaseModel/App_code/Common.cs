@@ -1395,7 +1395,7 @@ public class CommonPage : Page
             idlist += c.ID.ToString() + ",";
             idclienteincarrello = c.ID_cliente;//Ogni articolo nel carrello ha lo stesso codice id cliente
 
-            codicesconto = c.Codicesconto; //E' il codice sconto inserito nel carrello da validare (prevalidato nella pagina ordine )
+            codicesconto = c.Codicesconto; //E' il codice sconto inserito nel carrello da validare ( prevalidato e inserito nella pagina ordine )
         }
         if (idlist.Length > 1)
         {
@@ -1409,7 +1409,7 @@ public class CommonPage : Page
         }
 
         //  totali.TotaleSmaltimento = CalcolaTotaliSmaltimento(ColItem);
-        totali.Codicesconto = codicesconto;
+        totali.Codicesconto = codicesconto; //memorizzo nel totale ordine temporaneo il codicesconto preso dal carrello ( a chiusura ordine lo salvo nel riepilogo ordine da qui ) 
 
         //Metto il riferimento all' id cliente commerciale se presente associato al codice sconto
         ClientiDM cDM = new ClientiDM();

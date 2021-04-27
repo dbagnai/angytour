@@ -765,6 +765,10 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                     sb.Append(" style=\"font-weight:600 !important\"  ");
                 //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
                 sb.Append(" >");
+
+                string testoforced = references.ResMan("Common", Lingua, "testo" + o.CodiceProdotto);
+                if (!string.IsNullOrEmpty(testoforced)) testo = testoforced;
+
                 sb.Append(testo);
                 sb.Append("</a>");
                 if (!noli)
