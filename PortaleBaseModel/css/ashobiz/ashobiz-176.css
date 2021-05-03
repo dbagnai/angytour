@@ -4,7 +4,7 @@
   /*max-width: 800px;*/
   margin: 15px auto;
   padding: 20px;
-  padding-left: 80px;
+  padding-left: 80px !important;
   text-align: left;
   position: relative;
   overflow: hidden;
