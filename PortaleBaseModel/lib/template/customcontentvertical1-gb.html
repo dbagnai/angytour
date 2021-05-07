@@ -1,0 +1,76 @@
+﻿   <script>
+        var visiblebook = true;
+        var altezzablocco = "0px";
+        setTimeout(function () { visiblebook = false; altezzablocco = $("#_baror_").outerHeight(); $("#full-sb-container").css("bottom", "-" + altezzablocco + "px") }, 3000);
+        //$("#_baror_").toggle();
+      
+        jQuery(document).ready(function () {
+            $("#title-sb-container").click(function () {
+                if (visiblebook) {
+                    var altezzablocco = $("#_baror_").outerHeight();
+                    //$("#full-sb-container").css("bottom", -altezzablocco); $("#topcontrol").css("visibility", "visible"); visiblebook = false;
+                    $("#full-sb-container").stop().animate({ bottom: "-" + altezzablocco + "px" }, 30); $("#topcontrol").css("visibility", "visible"); visiblebook = false;
+                    console.log(visiblebook);
+                }
+                //else { $("#full-sb-container").css("bottom", "0px"); $("#topcontrol").css("visibility", "hidden"); visiblebook = true; }
+                else {
+                    $("#full-sb-container").stop().animate({ bottom: "0" }, 300); $("#topcontrol").css("visibility", "hidden"); visiblebook = true;
+                    console.log(visiblebook);
+                }
+            });
+        });
+    </script>
+    <div style="position: fixed; bottom: -500px; width: 100%; z-index: 99;" id="full-sb-container">
+        <div id="title-sb-container" style="width: 200px; height: 200px; border-radius: 100%; background-color: rgb(225, 159, 63); text-align: center; color: #fff; padding: 10px; margin: 0 auto -120px; line-height: 40px; cursor: pointer;"><i class="fa fa-calendar" style="display: block; margin-top: 10px;"></i>BOOK</div>
+        <div style="width: 100%; border-top: 6px solid #e19f3f;"></div>
+        <!-- ATTENZIONE CREA UN FORM CHE WRAPPA IL DIV, QUINDI SE QUESTO DIV VIENE MESSO DENTRO IL FORM ASP.NET  QUESTO
+            VIENE RIMOSSO E NON FUNZIONA. TIPS: se PRECEDI IL DIV CON <form action=""></form> ASP.NET rimuove il fake form e lascia quello di simplebookin quindi và-->
+        <div id="_baror_">
+            <a href="http://wubook.net/services/booking-engine/" style="display: block; margin-top: 5px; text-decoration: none; border: none; background: rgb(186, 196, 163); margin-top: 0; z-index: 98;" target="_blank">
+                <img alt="Online reception per siti di hotel wubook" src="https://wubook.net/imgs/default/booking_by_wu.gif" style="border: none; text-decoration: none; padding: 2px; background: #fff;" title="Soluzioni per la gestione Hotel" />
+            </a>
+        </div>
+    </div>
+    <!-- 
+     Initialize the WuBook Object.
+     Collect params settings.
+     Call WuBook.design_bwidget().
+     Notice WuBook Object provides a
+     lot of interesting features.
+ -->
+    <script>
+        var WuBook = new _WuBook(1538569495);
+        var langset = 'en';
+        var wbparams = {
+            textcolorpk: '#988454',
+            /* fixedPosition: 1,*/
+            ditextcolor: '#ffffff',
+            textcolorbb: '#ffffff',
+            plusperc: 5,
+            listtypebb: '#ffffff',
+            buttoncoloras: '#1c375b',
+            iconcoloras: '#ffffff',
+            rpkgs: '',
+            avgcolor: '#988454',
+            labelcoloras: '#ffffff',
+            barbackground: 'rgb(186, 196, 163)',
+            default_nights: 3,
+            textcolorcalendarbe: '#000000',
+            bordercolor: '#000000',
+            blocks: 'be',
+            failback_lang: 'en',
+            hdcode: '',
+            textcolorbuttonbe: '#ffffff',
+            avgtextcolor: '#ffffff',
+            diinputcolor: '#ffffff',
+            lang: langset,
+            buttoncolorbe: '#1c375b',
+            dibuttoncolor: '#008000',
+            wbgoogle: 1,
+            bgblocks: '#bac4a3',
+            cmsgs: '',
+            textcolornightspk: '#ffffff',
+            adchi: 1
+        };
+        WuBook.design_bwidget("_baror_", wbparams);
+    </script>

@@ -101,6 +101,25 @@
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpCognome" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' />
                                     </div>
                                 </div>
+                                       <div class="form-row row  ">
+                                    <div class="col-6 form-group">
+                                        <label>
+                                            <%= references.ResMan("Common", Lingua,"FormTesto4") %>
+                                        </label>
+                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="* Error" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ControlToValidate="inpEmail" runat="server" />
+                                        <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpEmail" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto4") %>' />
+                                    </div>
+                                    <div class="col-6 form-group">
+                                        <label>
+                                            <%= references.ResMan("Common", Lingua,"FormTesto11") %>
+                                        </label>
+                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="* Error" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto11Err") %>' ControlToValidate="inpTel" runat="server" />
+                                        <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpTel" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto11") %>' />
+                                    </div>
+                                </div>
+
+
+
 
                                 <div class="form-row row">
                                     <div class="col-6 form-group">
@@ -149,23 +168,8 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="form-row row d-none">
-                                    <div class="col-6 form-group">
-                                        <label>
-                                            <%= references.ResMan("Common", Lingua,"FormTesto4") %>
-                                        </label>
-                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="* Error" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ControlToValidate="inpEmail" runat="server" />
-                                        <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpEmail" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto4") %>' />
-                                    </div>
-                                    <div class="col-6 form-group">
-                                        <label>
-                                            <%= references.ResMan("Common", Lingua,"FormTesto11") %>
-                                        </label>
-                                        <asp:RequiredFieldValidator CssClass="errorvalidateclass" Text="* Error" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto11Err") %>' ControlToValidate="inpTel" runat="server" />
-                                        <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpTel" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto11") %>' />
-                                    </div>
-                                </div>
-                                
+                          
+
                                 <div class="form-row row">
                                     <div class="col-6 form-group">
                                         <label>
@@ -282,7 +286,7 @@
                             </div>
                         </div>
 
-                             <%-- CODICE SCONTO --%>
+                        <%-- CODICE SCONTO --%>
                         <div class="row">
                             <div class="col-12">
                                 <div class="widget bill-payment text-center text-sm-left bg-light-color p-3" style="text-align: left; display: block">
@@ -494,7 +498,7 @@
                             </table>
                         </div>
 
-                   
+
 
                         <%-- NORME GENERALI DI ACQUISTO --%>
                         <div class="row">
@@ -508,7 +512,7 @@
                     <div class="col-12 col-lg-5">
                         <div class="position-sticky" style="top: 120px" id="divColumnsticky">
                             <div class="mb-0 mb-sm-3 px-3 py-4 bg-light-color">
-                                 <asp:Literal Text="" ID="litMessage" runat="server" />
+                                <asp:Literal Text="" ID="litMessage" runat="server" />
                                 <%--<div class="widget bill-payment" style="text-align: left; display: none">
                                     <span class="TitlePrezzo"><%= references.ResMan("Common", Lingua,"TitleCodiceSconto") %></span>
                                     <asp:TextBox runat="server" ID="txtCodiceSconto" />

@@ -166,6 +166,17 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     }
 
     /// <summary>
+    /// esegue il binding tramite un template e inetta il renderizzato in pagina anche fuori da aspnet form
+    /// </summary>
+    /// <returns></returns>
+    public string InjectDirectrenderinPage()
+    {
+        //return CommonPage.CustomContentRender( "customcontentvertical1-" + Lingua + ".html", Lingua, Page.User.Identity.Name, Session);
+        return CommonPage.HtmlfromteplateInject("customcontentvertical2-" + Lingua + ".html", Lingua, Page.User.Identity.Name, Session);
+
+    }
+
+    /// <summary>
     /// Carico le chiamate di inizializzazione dalla memoria di binding del server in custombind
     /// </summary>
     /// <returns></returns>

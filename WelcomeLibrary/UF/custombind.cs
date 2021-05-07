@@ -5020,7 +5020,10 @@ namespace WelcomeLibrary.UF
                 case "formatlabelresource":
                     try
                     {
-                        string testodarisorsa = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, prop[0]).Valore;
+                        string gruppo = "basetext";
+                        if (prop[2] != null && prop[2] != "")
+                        { gruppo = prop[2]; }
+                        string testodarisorsa = WelcomeLibrary.UF.ResourceManagement.ReadKey(gruppo, Lingua, prop[0]).Valore;
                         bool attiva = true;
                         if (prop.Count > 1)
                         {

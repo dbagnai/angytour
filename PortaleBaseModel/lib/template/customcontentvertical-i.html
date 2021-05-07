@@ -1,0 +1,226 @@
+﻿<!-- Button trigger modal -->
+<section id="sectionfilters">
+    <!--<div class="container searchbar-container py-3 text-center"><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal"> Filtra risultati </button></div>-->
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg  " role="document">
+            <div class="modal-content position-relative">
+                <div class="modal-header" style="background-color:#ccc">
+                       <div class="float:left" style="background: url('/images/logo-dark.png') center bottom no-repeat !important; height: 100px;width:100px; background-size: 110px !important;"></div> 
+                   
+                    <h3 class="mbr-section-subtitle modal-title" id="exampleModalLabel">Disponibilità e prenotazioni</h3>
+                    <button class="close" type="button" data-dismiss="modal"> <span aria-hidden="true">&times;</span> </button>
+                </div>
+                <div class="modal-body  " style="background-color:#ddd">
+                    <div class=" ui-15">
+                        <div class="row ui-form d-flex justify-content-between" id="vertical-data">
+                            <!-- ISIDORO BOOKING -->
+                            <!--<div class="bind" mybind="Id" myvalue="common" myvalue1="social_condividi" format="formatstringfromresource"></div>-->
+                            <!--<div class="ui-front py-3" style="position:relative;margin:0px auto">
+                                <div class="ui-input">  <input id="txtresults" type="text" class="form-control w-100 autocompletesearch" placeholder="Ricerca veloce, dove vuoi andare ? es. andalusia " /><label class="ui-icon"><i class="fa fa-map-marker-alt"></i></label></div>
+                            </div>-->
+                            <div class="col-auto py-1 d-none">
+                                <input type="hidden" name="IDCOMPANY" value="1" />
+                                <input name="IN" id="IN" value="" type="hidden" />
+                                <input name="OUT" id="OUT" value="" type="hidden" />
+                                <input type="hidden" value="1" name="ROOMS_NUM" id="ROOMS_NUM" />
+                                <input type="hidden" value="2" name="R1_ADULT" id="R1_ADULT" />
+                                <input type="hidden" value="0" name="R1_CHILD" id="R1_CHILD" />
+                                <input type="hidden" value="0" name="R1_INFANT" id="R1_INFANT" />
+                                <input type="hidden" value="IT" name="lang" id="lang" />
+                            </div>
+                            <div class="col-auto py-1">
+                                <span style="font-size: 0.8em">Data Arrivo</span><br />
+                                <input id="datepickCheckin" class="form-control datepicker inputdate" placeholder='Data Arrivo' type="text" style="font-size: 0.8em; line-height: 17px; width: 100px" value="" onchange="javascript:CalcEndDate()" />
+                            </div>
+                            <div class="col-auto py-1">
+                                <span style="font-size: 0.8em">Data Partenza</span><br />
+                                <input id="datepickCheckout" class="form-control datepicker inputdate" placeholder='Data Partenza' type="text" style="font-size: 0.8em; line-height: 17px; width: 100px" value="" />
+                            </div>
+                            <div class="col-auto d-none">
+                                <span style="font-size: 0.8em">Camere</span><br />
+                                <select style="font-size: 0.8em; width: 100px; height: 34px; padding: 6px 12px; background-color: #f7f7f7" class="form-select" id="ddlRooms" onchange="javascript:javascript:addroomscontros()">
+                                    <option value="1" selected="selected"></option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                            <div class="col-auto py-1">
+                                <span style="font-size: 0.8em">Adulti</span><br />
+                                <select style="font-size: 0.8em; width: 100px; height: 34px; padding: 6px 12px; background-color: #f7f7f7" class="form-select" id="ddlAdult1">
+                                    <option value="1">1</option>
+                                    <option value="2" selected="selected">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                </select>
+                            </div>
+                            <div class="col-auto py-1">
+                                <span style="font-size: 0.8em">Bambini(2-21)</span><br />
+                                <select style="font-size: 0.8em; width: 100px; height: 34px; padding: 6px 12px; background-color: #f7f7f7" class="form-select" id="ddlChild1">
+                                    <option value="0" selected="selected">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                </select>
+                            </div>
+                            <div class="col-auto py-1">
+                                <span style="font-size: 0.8em">Infanti(0-2)</span><br />
+                                <select style="font-size: 0.8em; width: 100px; height: 34px; padding: 6px 12px; background-color: #f7f7f7" class="form-select" id="ddlInfan1">
+                                    <option value="0" selected="selected">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                </select>
+                            </div>
+                            <!-- ISIDORO BOOKING -->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer position-relative" style="background-color:#ddd">
+                    <div class="w-100">
+                        <div class="row justify-content-center">
+                            <div class="col-auto py-1">
+                                <input onmouseover="this.style.cursor='pointer'" onclick="javascript: SubmitThisForm(); return false;" value="Invia"
+                                       class="btn btn-small" style="padding-left:10px;padding-right:10px" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    Date.prototype.addDays = function (days) {
+        var dat = new Date(this.valueOf())
+        var hour1 = dat.getHours()
+        dat.setTime(dat.getTime() + days * 86400000) // 24*60*60*1000 = 24 hours
+        var hour2 = dat.getHours()
+        if (hour1 != hour2) // summertime occured +/- a WHOLE number of hours thank god!
+            dat.setTime(dat.getTime() + (hour1 - hour2) * 3600000) // 60*60*1000 = 1 hour
+        return dat
+    }
+
+    //   //fixing scroll issue on datepicker
+    $(".inputdate").on("click", function () {
+        var offsetModal = $('#exampleModal').offset().top;
+        var offsetInput = $(this).offset().top;
+        var inputHeight = $(this).height();
+        var customPadding = 17; //custom modal padding (bootstrap modal)!
+        var topDatepicker = (offsetInput + inputHeight + customPadding) - offsetModal;
+        $("#ui-datepicker-div").css({ top: topDatepicker });
+    }); 
+
+    function CalcEndDate() {
+        try {
+            var selval = $("#datepickCheckin").val();
+            console.log(selval);
+
+            data = selval.split('-');
+            var datastring = data[2] + '-' + data[1] + '-' + data[0];
+            var data1 = new Date(datastring);
+            var calcdate = data1.addDays(1);
+            var calcdateformat = calcdate.getDate() + '-' + (calcdate.getMonth() + 1) + '-' + calcdate.getFullYear();
+            console.log(calcdateformat);
+
+            $('#datepickCheckout').val(calcdateformat);
+        } catch (e) { }
+    }
+
+    $(document).ready(function () {
+        var now = new Date();
+        var today = now.getDate() + '-' + (now.getMonth() + 1) + '-' + now.getFullYear();
+        $('#datepickCheckin').val(today);
+        var enddate = now.addDays(1);
+        var enddateformat = enddate.getDate() + '-' + (enddate.getMonth() + 1) + '-' + enddate.getFullYear();
+        $('#datepickCheckout').val(enddateformat);
+    });
+    //$(function () {
+    //    $("#datepickCheckin").datepicker({
+    //        minDate: "0", showOtherMonths: true, selectOtherMonths: true, altFormat: "dd", dateFormat: "dd/m/yy", regional: "it",
+    //        //comment the beforeShow handler if you want to see the ugly overlay
+    //        beforeShow: function () {
+    //            setTimeout(function () {
+    //                $('.ui-datepicker').css('z-index', 99999999999999);
+    //            }, 0);
+    //        }
+    //    });
+    //    $("#datepickCheckout").datepicker({
+    //        minDate: "0", showOtherMonths: true, selectOtherMonths: true, altFormat: "dd", dateFormat: "dd/m/yy", regional: "it",
+    //        //comment the beforeShow handler if you want to see the ugly overlay
+    //        beforeShow: function () {
+    //            setTimeout(function () {
+    //                $('.ui-datepicker').css('z-index', 99999999999999);
+    //            }, 0);
+    //        }
+    //    });
+    //    //$("#datepicker").datepicker($.datepicker.regional["it"]);
+    //});
+
+    function addroomscontros() {
+        try {
+            var selval = $("#ddlRoomgroup").attr('value');
+            //qui in base al numero dovresti generare tanti controlli di selezione e input box in base al numero di stanze
+            // da fare se necessario .a gruppi di 3 incrementando il progessivo sia per gli input box che per le ddl per l'inserimento utente
+            //<input type="hidden" value="2" name="R1_ADULT" id="R1_ADULT" />
+            //    <input type="hidden" value="0" name="R1_CHILD" id="R1_CHILD" />
+            //    <input type="hidden" value="0" name="R1_INFANT" id="R1_INFANT" />
+        } catch (e) { }
+    }
+    function SubmitThisForm() {
+        // here I copy (doublicate) the content of the data that I like to post  in the form at the end of the page and outside the asp.net
+        imposta_parametri_form();//Metto i valori selezionati nel posto giusto
+        var testodelform = jQuery("#vertical-data").html();
+        console.log(testodelform);
+        jQuery("#DuplicateForSubmit").html(testodelform);
+        jQuery("#formVertical").submit();
+        jQuery("#DuplicateForSubmit").html("")
+    }
+    function imposta_parametri_form() {
+        // alert($("#ROOM1ADULT option:selected").text());
+        //alert($( "#ROOM1_ADULT" ).val());
+        $('#ROOMS_NUM').attr({ value: $("ROOMS_NUM").val() });
+        var datacheckin = $("#datepickCheckin").val().replace(/-/g, "/");
+        $('#IN').attr({ value: datacheckin });
+        var datacheckout = $("#datepickCheckout").val().replace(/-/g, "/");
+        $('#OUT').attr({ value: datacheckout });
+        //var valroomgroup = $("#ddlRoomgroup option:selected").val()
+        //$('#ROOMGROUP').attr({ value: valroomgroup });
+        var valnrooms = $("#ddlRooms option:selected").val()
+        $('#ROOMS').attr({ value: valnrooms });
+        //if (valroomgroup == "1")
+        //    $('#ARRANGEMENT').attr({ value: "2349" }); //Camere
+        //else
+        //    $('#ARRANGEMENT').attr({ value: "2625" }); //Appartamenti
+        var valadult1 = $("#ddlAdult1 option:selected").text()
+        $('#R1_ADULT').attr({ value: valadult1 });
+        var valchild1 = $("#ddlChild1 option:selected").text()
+        $('#R1_CHILD').attr({ value: valchild1 });
+        var valinfant1 = $("#ddlInfan1 option:selected").text()
+        $('#R1_INFANT').attr({ value: valinfant1 });
+        //data = data.split('/');
+        //$('#giorno_inizio').attr({ value: data[0] });
+        //$('#mese_inizio').attr({ value: data[1] });
+        //$('#anno_inizio').attr({ value: data[2] });
+        // alert($("#IN").val());
+    }
+
+</script>

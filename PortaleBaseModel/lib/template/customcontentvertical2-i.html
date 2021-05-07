@@ -1,0 +1,78 @@
+﻿<!-- Button trigger modal -->
+<section id="sectionfilters">
+    <!--<div class="container searchbar-container py-3 text-center"><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal"> Filtra risultati </button></div>-->
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg  " role="document">
+            <div class="modal-content position-relative">
+                <div class="modal-header" style="background-color:#ccc">
+                    <div class="float:left" style="background: url('/images/logo-dark.png') center bottom no-repeat !important; height: 50px;width:50px; background-size: 110px !important;"></div>
+                    <h3 class="mbr-section-subtitle modal-title" id="exampleModalLabel">Disponibilità e prenotazioni</h3>
+                    <button class="close" type="button" data-dismiss="modal"> <span aria-hidden="true">&times;</span> </button>
+                </div>
+                <div class="modal-body  " style="background-color:#ddd;min-height:220px">
+                    <div id="_baror_">
+                        <a href="http://wubook.net/services/booking-engine/" style="display: block; margin-top: 5px; text-decoration: none; border: none; background: rgb(186, 196, 163); margin-top: 0; z-index: 98;" target="_blank">
+                            <img alt="Online reception per siti di hotel wubook" src="https://wubook.net/imgs/default/booking_by_wu.gif" style="border: none; text-decoration: none; padding: 2px; background: #fff;" title="Soluzioni per la gestione Hotel" />
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-footer position-relative" style="background-color:#ddd">
+                    <!--<div class="w-100">
+                        <div class="row justify-content-center">
+                            <div class="col-auto py-1">
+                                <input onmouseover="this.style.cursor='pointer'" onclick="javascript: SubmitThisForm(); return false;" value="Invia"
+                                       class="btn btn-small" style="padding-left:10px;padding-right:10px" />
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+  <!-- 
+     Initialize the WuBook Object.
+     Collect params settings.
+     Call WuBook.design_bwidget().
+     Notice WuBook Object provides a
+     lot of interesting features.
+      Requires in head : 
+        <script src="https://wubook.net/js/wblib.jgz"></script>
+ -->
+    <script>
+        var WuBook = new _WuBook(1538569495);
+        var langset = 'it';
+        var wbparams = {
+            textcolorpk: '#988454',
+            /* fixedPosition: 1,*/
+            ditextcolor: '#ffffff',
+            textcolorbb: '#ffffff',
+            plusperc: 5,
+            listtypebb: '#ffffff',
+            buttoncoloras: '#1c375b',
+            iconcoloras: '#ffffff',
+            rpkgs: '',
+            avgcolor: '#988454',
+            labelcoloras: '#ffffff',
+            barbackground: 'rgb(186, 196, 163)',
+            default_nights: 3,
+            textcolorcalendarbe: '#000000',
+            bordercolor: '#000000',
+            blocks: 'be',
+            failback_lang: 'en',
+            hdcode: '',
+            textcolorbuttonbe: '#ffffff',
+            avgtextcolor: '#ffffff',
+            diinputcolor: '#ffffff',
+            lang: langset,
+            buttoncolorbe: '#1c375b',
+            dibuttoncolor: '#008000',
+            wbgoogle: 1,
+            bgblocks: '#bac4a3',
+            cmsgs: '',
+            textcolornightspk: '#ffffff',
+            adchi: 1
+        };
+        WuBook.design_bwidget("_baror_", wbparams);
+    </script>
