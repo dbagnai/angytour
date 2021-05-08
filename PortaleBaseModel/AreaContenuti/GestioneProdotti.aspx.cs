@@ -2524,11 +2524,11 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             if (t != null)
                 txtCar1FR.Text = t.Campo1;
 
-            litCodp.Text = "cod: " + ddlCaratteristica1_gest.SelectedValue;
+            litCodp1.Text = "cod: " + ddlCaratteristica1_gest.SelectedValue;
         }
         else
         {
-            litCodp.Text = "";
+            litCodp1.Text = "";
             txtCar1I.Text = "";
             txtCar1GB.Text = "";
             txtCar1RU.Text = "";
@@ -2546,19 +2546,19 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         Utility.Caratteristiche[0].ForEach(c => ultimoprogressivo = (int.TryParse(c.Codice, out _i)) ? ((_i > ultimoprogressivo) ? _i : ultimoprogressivo) : (ultimoprogressivo));
         ultimoprogressivo += 1;
 
-        string _tmpcodice = "";
         Tabrif item = new Tabrif();
         if (string.IsNullOrWhiteSpace(ddlCaratteristica1_gest.SelectedValue) || ddlCaratteristica1_gest.SelectedValue == "0")
             item.Codice = ultimoprogressivo.ToString();
         else
         {
             item = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "I");
-            if (item != null && !string.IsNullOrEmpty(item.Codice))
-                _tmpcodice = item.Codice;
         }
-        item.Campo1 = txtCar1I.Text;
-        item.Lingua = "I";
-        DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica1");
+        if (item != null)
+        {
+            item.Campo1 = txtCar1I.Text;
+            item.Lingua = "I";
+            DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica1");
+        }
 
         item = new Tabrif();
         if (string.IsNullOrWhiteSpace(ddlCaratteristica1_gest.SelectedValue) || ddlCaratteristica1_gest.SelectedValue == "0")
@@ -2566,14 +2566,13 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         else
         {
             item = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "GB");
-            if (item == null || string.IsNullOrEmpty(item.Codice))
-            { item = new Tabrif(); item.Codice = _tmpcodice; }
-           
         }
-        item.Campo1 = txtCar1GB.Text;
-        item.Lingua = "GB";
-        DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica1");
-
+        if (item != null)
+        {
+            item.Campo1 = txtCar1GB.Text;
+            item.Lingua = "GB";
+            DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica1");
+        }
 
         item = new Tabrif();
         if (string.IsNullOrWhiteSpace(ddlCaratteristica1_gest.SelectedValue) || ddlCaratteristica1_gest.SelectedValue == "0")
@@ -2581,12 +2580,13 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         else
         {
             item = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "RU");
-            if (item == null || string.IsNullOrEmpty(item.Codice))
-            { item = new Tabrif(); item.Codice = _tmpcodice; }
         }
-        item.Campo1 = txtCar1RU.Text;
-        item.Lingua = "RU";
-        DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica1");
+        if (item != null)
+        {
+            item.Campo1 = txtCar1RU.Text;
+            item.Lingua = "RU";
+            DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica1");
+        }
 
         item = new Tabrif();
         if (string.IsNullOrWhiteSpace(ddlCaratteristica1_gest.SelectedValue) || ddlCaratteristica1_gest.SelectedValue == "0")
@@ -2594,13 +2594,13 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         else
         {
             item = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "FR");
-            if (item == null || string.IsNullOrEmpty(item.Codice))
-            { item = new Tabrif(); item.Codice = _tmpcodice; }
         }
-        item.Campo1 = txtCar1FR.Text;
-        item.Lingua = "FR";
-        DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica1");
-
+        if (item != null)
+        {
+            item.Campo1 = txtCar1FR.Text;
+            item.Lingua = "FR";
+            DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica1");
+        }
 
         txtCar1I.Text = "";
         txtCar1GB.Text = "";
@@ -2613,6 +2613,27 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
 
         CaricaDati();
 
+    }
+    protected void btnDeleteCaratteristica1_Click(object sender, EventArgs e)
+    {
+        offerteDM DM = new offerteDM();
+
+        Tabrif item = new Tabrif();
+        item = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue);
+        string err = DM.DeleteCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica1"); //cancella verificando la presenza in tabella attivita di riferimenti!
+        litCodp1.Text = err;
+        if (string.IsNullOrEmpty(err))
+        {
+            txtCar1I.Text = "";
+            txtCar1GB.Text = "";
+            txtCar1RU.Text = "";
+            txtCar1FR.Text = "";
+        }
+
+        //Aggiorno la visualizzazione
+        WelcomeLibrary.UF.Utility.Caratteristiche[0] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica1");
+        CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
+        CaricaDati();
     }
     protected void caratteristica2update(object sender, EventArgs e)
     {
@@ -2632,10 +2653,12 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             t = Utility.Caratteristiche[1].Find(c => c.Codice == ddlCaratteristica2_gest.SelectedValue && c.Lingua == "FR");
             if (t != null)
                 txtCar2FR.Text = t.Campo1;
+            litCodp2.Text = "cod: " + ddlCaratteristica2_gest.SelectedValue;
 
         }
         else
         {
+            litCodp2.Text = "";
             txtCar2I.Text = "";
             txtCar2GB.Text = "";
             txtCar2RU.Text = "";
@@ -2710,7 +2733,25 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         CaricaDati();
 
     }
-
+    protected void btnDeleteCaratteristica2_Click(object sender, EventArgs e)
+    {
+        offerteDM DM = new offerteDM();
+        Tabrif item = new Tabrif();
+        item = Utility.Caratteristiche[1].Find(c => c.Codice == ddlCaratteristica2_gest.SelectedValue);
+        string err = DM.DeleteCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica2"); //cancella verificando la presenza in tabella attivita di riferimenti!
+        litCodp2.Text = err;
+        if (string.IsNullOrEmpty(err))
+        {
+            txtCar2I.Text = "";
+            txtCar2GB.Text = "";
+            txtCar2RU.Text = "";
+            txtCar2FR.Text = "";
+        }
+        //Aggiorno la visualizzazione
+        WelcomeLibrary.UF.Utility.Caratteristiche[1] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica2");
+        CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
+        CaricaDati();
+    }
     //Caratteristica 3
     protected void caratteristica3update(object sender, EventArgs e)
     {
@@ -2730,9 +2771,12 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             t = Utility.Caratteristiche[2].Find(c => c.Codice == ddlCaratteristica3_gest.SelectedValue && c.Lingua == "FR");
             if (t != null)
                 txtCar3FR.Text = t.Campo1;
+            litCodp2.Text = "cod: " + ddlCaratteristica3_gest.SelectedValue;
+
         }
         else
         {
+            litCodp3.Text = "";
             txtCar3I.Text = "";
             txtCar3GB.Text = "";
             txtCar3RU.Text = "";
@@ -2813,7 +2857,25 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         CaricaDati();
 
     }
-
+    protected void btnDeleteCaratteristica3_Click(object sender, EventArgs e)
+    {
+        offerteDM DM = new offerteDM();
+        Tabrif item = new Tabrif();
+        item = Utility.Caratteristiche[2].Find(c => c.Codice == ddlCaratteristica3_gest.SelectedValue);
+        string err = DM.DeleteCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica3"); //cancella verificando la presenza in tabella attivita di riferimenti!
+        litCodp3.Text = err;
+        if (string.IsNullOrEmpty(err))
+        {
+            txtCar3I.Text = "";
+            txtCar3GB.Text = "";
+            txtCar3RU.Text = "";
+            txtCar3FR.Text = "";
+        }
+        //Aggiorno la visualizzazione
+        WelcomeLibrary.UF.Utility.Caratteristiche[2] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica3");
+        CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
+        CaricaDati();
+    }
     //Caratteristica 4
     protected void caratteristica4update(object sender, EventArgs e)
     {
@@ -2831,9 +2893,11 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             t = Utility.Caratteristiche[3].Find(c => c.Codice == ddlCaratteristica4_gest.SelectedValue && c.Lingua == "FR");
             if (t != null)
                 txtCar4FR.Text = t.Campo1;
+            litCodp2.Text = "cod: " + ddlCaratteristica4_gest.SelectedValue;
         }
         else
         {
+            litCodp4.Text = "";
             txtCar4I.Text = "";
             txtCar4GB.Text = "";
             txtCar4RU.Text = "";
@@ -2909,7 +2973,25 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         CaricaDati();
 
     }
-
+    protected void btnDeleteCaratteristica4_Click(object sender, EventArgs e)
+    {
+        offerteDM DM = new offerteDM();
+        Tabrif item = new Tabrif();
+        item = Utility.Caratteristiche[3].Find(c => c.Codice == ddlCaratteristica4_gest.SelectedValue);
+        string err = DM.DeleteCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica4"); //cancella verificando la presenza in tabella attivita di riferimenti!
+        litCodp4.Text = err;
+        if (string.IsNullOrEmpty(err))
+        {
+            txtCar4I.Text = "";
+            txtCar4GB.Text = "";
+            txtCar4RU.Text = "";
+            txtCar4FR.Text = "";
+        }
+        //Aggiorno la visualizzazione
+        WelcomeLibrary.UF.Utility.Caratteristiche[3] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica4");
+        CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
+        CaricaDati();
+    }
     //Caratteristica 5
     protected void caratteristica5update(object sender, EventArgs e)
     {
@@ -2927,9 +3009,13 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             t = Utility.Caratteristiche[4].Find(c => c.Codice == ddlCaratteristica5_gest.SelectedValue && c.Lingua == "FR");
             if (t != null)
                 txtCar5FR.Text = t.Campo1;
+            litCodp2.Text = "cod: " + ddlCaratteristica5_gest.SelectedValue;
+
         }
         else
         {
+            litCodp5.Text = "";
+
             txtCar5I.Text = "";
             txtCar5GB.Text = "";
             txtCar5RU.Text = "";
@@ -3004,7 +3090,25 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         CaricaDati();
 
     }
-
+    protected void btnDeleteCaratteristica5_Click(object sender, EventArgs e)
+    {
+        offerteDM DM = new offerteDM();
+        Tabrif item = new Tabrif();
+        item = Utility.Caratteristiche[4].Find(c => c.Codice == ddlCaratteristica5_gest.SelectedValue);
+        string err = DM.DeleteCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica5"); //cancella verificando la presenza in tabella attivita di riferimenti!
+        litCodp5.Text = err;
+        if (string.IsNullOrEmpty(err))
+        {
+            txtCar5I.Text = "";
+            txtCar5GB.Text = "";
+            txtCar5RU.Text = "";
+            txtCar5FR.Text = "";
+        }
+        //Aggiorno la visualizzazione
+        WelcomeLibrary.UF.Utility.Caratteristiche[4] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica5");
+        CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
+        CaricaDati();
+    }
 
     //Caratteristica 6
     protected void caratteristica6update(object sender, EventArgs e)
@@ -3023,9 +3127,13 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
             t = Utility.Caratteristiche[5].Find(c => c.Codice == ddlCaratteristica6_gest.SelectedValue && c.Lingua == "FR");
             if (t != null)
                 txtCar6FR.Text = t.Campo1;
+            litCodp2.Text = "cod: " + ddlCaratteristica6_gest.SelectedValue;
+
         }
         else
         {
+            litCodp6.Text = "";
+
             txtCar6I.Text = "";
             txtCar6GB.Text = "";
             txtCar6RU.Text = "";
@@ -3099,7 +3207,25 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         CaricaDati();
 
     }
-
+    protected void btnDeleteCaratteristica6_Click(object sender, EventArgs e)
+    {
+        offerteDM DM = new offerteDM();
+        Tabrif item = new Tabrif();
+        item = Utility.Caratteristiche[5].Find(c => c.Codice == ddlCaratteristica6_gest.SelectedValue);
+        string err = DM.DeleteCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica6"); //cancella verificando la presenza in tabella attivita di riferimenti!
+        litCodp6.Text = err;
+        if (string.IsNullOrEmpty(err))
+        {
+            txtCar6I.Text = "";
+            txtCar6GB.Text = "";
+            txtCar6RU.Text = "";
+            txtCar6FR.Text = "";
+        }
+        //Aggiorno la visualizzazione
+        WelcomeLibrary.UF.Utility.Caratteristiche[5] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica6");
+        CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
+        CaricaDati();
+    }
 
     #endregion
 }

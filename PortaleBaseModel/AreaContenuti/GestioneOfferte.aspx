@@ -1269,19 +1269,20 @@
 
                 <hr />
 
+                
                 <asp:Panel runat="server" ID="pnlGestioneCaratteristiche" Visible="false">
                     <h2>
                         <asp:Label runat="server" ID="Label25" Text="Gestione tabelle riferimento"></asp:Label>
                     </h2>
                     <hr />
-
-                    <div style="background-color: #fafafa">
-                        <h3>Tabella Caratteristica 1</h3>
+                    <div style="background-color: #fafafa; position: relative; z-index: 1;">
+                        <div id="divBlockOverlay1" style="position: absolute; top: 0; bottom: 0; z-index: 2"></div>
+                        <h3>Tabella Caratteristica 1 / Formato</h3>
                         <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica1_gest" AutoPostBack="true"
                             AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica1update">
-                        </asp:DropDownList>
+                        </asp:DropDownList><br />
+                        <asp:Literal Text="" ID="litCodp1" runat="server" />
                         <br />
-
                         Descrizione italiano:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar1I" Text="" Width="300" /><br />
@@ -1295,22 +1296,27 @@
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar1FR" Text="" Width="300" /><br />
 
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="w1" WatermarkText="Inserire tipo (Italiano)" TargetControlID="txtCar1I">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="w1" WatermarkText="Inserire  (Italiano)" TargetControlID="txtCar1I">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="w2" WatermarkText="Inserire tipo (Inglese)" TargetControlID="txtCar1GB">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="w2" WatermarkText="Inserire  (Inglese)" TargetControlID="txtCar1GB">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="w3" WatermarkText="Inserire tipo (Russo)" TargetControlID="txtCar1RU">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="w3" WatermarkText="Inserire  (Russo)" TargetControlID="txtCar1RU">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="w4" WatermarkText="Inserire tipo (Francese)" TargetControlID="txtCar1FR">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="w4" WatermarkText="Inserire  (Francese)" TargetControlID="txtCar1FR">
                         </Ajax:TextBoxWatermarkExtender>
-                        <asp:Button Text="Aggiorna/Inserisci" ID="btnAggiornaCaratteristica1" runat="server" OnClick="btnAggiornaCaratteristica1_Click" />
+                        <asp:Button Text="Aggiorna/Inserisci" ID="Button5" runat="server" OnClick="btnAggiornaCaratteristica1_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
+                        <asp:Button Text="Cancella" ID="btnDeleteCaratteristica1" runat="server" OnClick="btnDeleteCaratteristica1_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
                         <br />
                     </div>
-                    <div style="background-color: #fafafa">
-                        <h3>Tabella Caratteristica 2</h3>
+
+                    <div style="background-color: #fafafa; position: relative; z-index: 1;">
+                        <div id="divBlockOverlay2" style="position: absolute; top: 0; bottom: 0; z-index: 2"></div>
+                        <h3>Tabella Caratteristica 2 / Colore</h3>
                         <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica2_gest" AutoPostBack="true"
                             AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica2update">
                         </asp:DropDownList><br />
+                        <asp:Literal Text="" ID="litCodp2" runat="server" />
+                        <br />
                         Descrizione italiano:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar2I" Text="" Width="300" /><br />
@@ -1324,23 +1330,27 @@
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar2FR" Text="" Width="300" /><br />
 
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender4" WatermarkText="Inserire indice (Italiano)" TargetControlID="txtCar2I">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender4" WatermarkText="Inserire  (Italiano)" TargetControlID="txtCar2I">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender5" WatermarkText="Inserire indice (Inglese)" TargetControlID="txtCar2GB">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender5" WatermarkText="Inserire  (Inglese)" TargetControlID="txtCar2GB">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender14" WatermarkText="Inserire indice (Russo)" TargetControlID="txtCar2RU">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender14" WatermarkText="Inserire  (Russo)" TargetControlID="txtCar2RU">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender19" WatermarkText="Inserire indice (Francese)" TargetControlID="txtCar2FR">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender6" WatermarkText="Inserire  (Francese)" TargetControlID="txtCar2FR">
                         </Ajax:TextBoxWatermarkExtender>
-                        <asp:Button Text="Aggiorna/Inserisci" ID="btnAggiornaCaratteristica2" runat="server" OnClick="btnAggiornaCaratteristica2_Click" />
+                        <asp:Button Text="Aggiorna/Inserisci" ID="btnAggiornaCaratteristica2" runat="server" OnClick="btnAggiornaCaratteristica2_Click" OnClientClick="bloccaSblocca('divBlockOverlay2')" />
+                        <asp:Button Text="Cancella" ID="Button6" runat="server" OnClick="btnDeleteCaratteristica2_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
                         <br />
                     </div>
 
-                    <div style="background-color: #fafafa">
+
+                    <div style="background-color: #fafafa; display: none">
                         <h3>Tabella Caratteristica 3</h3>
                         <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica3_gest" AutoPostBack="true"
                             AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica3update">
                         </asp:DropDownList><br />
+                        <asp:Literal Text="" ID="litCodp3" runat="server" />
+                        <br />
                         Descrizione italiano:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar3I" Text="" Width="300" /><br />
@@ -1353,24 +1363,30 @@
                         Descrizione Francese:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar3FR" Text="" Width="300" /><br />
-
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender6" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar3I">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender7" WatermarkText="Inserire Provenienza (Italiano)" TargetControlID="txtCar3I">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender7" WatermarkText="Inserire valore (Inglese)" TargetControlID="txtCar3GB">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender8" WatermarkText="Inserire Provenienza (Inglese)" TargetControlID="txtCar3GB">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender15" WatermarkText="Inserire valore (Russo)" TargetControlID="txtCar3RU">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender15" WatermarkText="Inserire Provenienza (Russo)" TargetControlID="txtCar3RU">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender20" WatermarkText="Inserire valore (Francese)" TargetControlID="txtCar3FR">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender9" WatermarkText="Inserire Provenienza (Francese)" TargetControlID="txtCar3FR">
                         </Ajax:TextBoxWatermarkExtender>
                         <asp:Button Text="Aggiorna/Inserisci" ID="Button1" runat="server" OnClick="btnAggiornaCaratteristica3_Click" />
+                        <asp:Button Text="Cancella" ID="Button7" runat="server" OnClick="btnDeleteCaratteristica3_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
                         <br />
                     </div>
+
+
+
+
 
                     <div style="background-color: #fafafa">
                         <h3>Tabella Caratteristica 4</h3>
                         <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica4_gest" AutoPostBack="true"
                             AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica4update">
                         </asp:DropDownList><br />
+                        <asp:Literal Text="" ID="litCodp4" runat="server" />
+                        <br />
                         Descrizione italiano:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar4I" Text="" Width="300" /><br />
@@ -1383,15 +1399,16 @@
                         Descrizione Francese:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar4FR" Text="" Width="300" /><br />
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender8" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar4I">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender10" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar4I">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender9" WatermarkText="Inserire valore (Inglese)" TargetControlID="txtCar4GB">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender11" WatermarkText="Inserire valore (Inglese)" TargetControlID="txtCar4GB">
                         </Ajax:TextBoxWatermarkExtender>
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender16" WatermarkText="Inserire valore (Russo)" TargetControlID="txtCar4RU">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender21" WatermarkText="Inserire valore (Francese)" TargetControlID="txtCar4FR">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender12" WatermarkText="Inserire valore (Francese)" TargetControlID="txtCar4FR">
                         </Ajax:TextBoxWatermarkExtender>
                         <asp:Button Text="Aggiorna/Inserisci" ID="Button2" runat="server" OnClick="btnAggiornaCaratteristica4_Click" />
+                        <asp:Button Text="Cancella" ID="Button8" runat="server" OnClick="btnDeleteCaratteristica4_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
                         <br />
                     </div>
 
@@ -1400,6 +1417,8 @@
                         <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica5_gest" AutoPostBack="true"
                             AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica5update">
                         </asp:DropDownList><br />
+                        <asp:Literal Text="" ID="litCodp5" runat="server" />
+                        <br />
                         Descrizione italiano:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar5I" Text="" Width="300" /><br />
@@ -1412,15 +1431,16 @@
                         Descrizione Francese:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar5FR" Text="" Width="300" /><br />
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender10" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar5I">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender13" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar5I">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender11" WatermarkText="Inserire valore (Inglese)" TargetControlID="txtCar5GB">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender17" WatermarkText="Inserire valore (Inglese)" TargetControlID="txtCar5GB">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender17" WatermarkText="Inserire valore (Russo)" TargetControlID="txtCar5RU">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender18" WatermarkText="Inserire valore (Russo)" TargetControlID="txtCar5RU">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender22" WatermarkText="Inserire valore (Russo)" TargetControlID="txtCar5FR">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender19" WatermarkText="Inserire valore (Francese)" TargetControlID="txtCar5FR">
                         </Ajax:TextBoxWatermarkExtender>
                         <asp:Button Text="Aggiorna/Inserisci" ID="Button3" runat="server" OnClick="btnAggiornaCaratteristica5_Click" />
+                        <asp:Button Text="Cancella" ID="Button9" runat="server" OnClick="btnDeleteCaratteristica5_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
                         <br />
                     </div>
 
@@ -1429,6 +1449,8 @@
                         <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica6_gest" AutoPostBack="true"
                             AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica6update">
                         </asp:DropDownList><br />
+                        <asp:Literal Text="" ID="litCodp6" runat="server" />
+                        <br />
                         Descrizione italiano:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar6I" Text="" Width="300" /><br />
@@ -1441,15 +1463,16 @@
                         Descrizione Francese:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar6FR" Text="" Width="300" /><br />
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender12" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar6I">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender20" WatermarkText="Inserire valore (Italiano)" TargetControlID="txtCar6I">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender13" WatermarkText="Inserire valore (Inglese)" TargetControlID="txtCar6GB">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender21" WatermarkText="Inserire valore (Inglese)" TargetControlID="txtCar6GB">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender18" WatermarkText="Inserire valore (Russo)" TargetControlID="txtCar6RU">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender22" WatermarkText="Inserire valore (Russo)" TargetControlID="txtCar6RU">
                         </Ajax:TextBoxWatermarkExtender>
-                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender23" WatermarkText="Inserire valore (Russo)" TargetControlID="txtCar6FR">
+                        <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender23" WatermarkText="Inserire valore (Francese)" TargetControlID="txtCar6FR">
                         </Ajax:TextBoxWatermarkExtender>
                         <asp:Button Text="Aggiorna/Inserisci" ID="Button4" runat="server" OnClick="btnAggiornaCaratteristica6_Click" />
+                        <asp:Button Text="Cancella" ID="Button10" runat="server" OnClick="btnDeleteCaratteristica6_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
                         <br />
                     </div>
                 </asp:Panel>

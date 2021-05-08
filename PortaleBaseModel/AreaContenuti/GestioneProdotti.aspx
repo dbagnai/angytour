@@ -1577,7 +1577,7 @@
                     <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica1_gest" AutoPostBack="true"
                         AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica1update">
                     </asp:DropDownList><br />
-                    <asp:Literal Text="" ID="litCodp" runat="server" />
+                    <asp:Literal Text="" ID="litCodp1" runat="server" />
                     <br />
                     Descrizione italiano:
                        
@@ -1588,7 +1588,7 @@
                     Descrizione Russo:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar1RU" Text="" Width="300" /><br />
-                    Descrizione Russo:
+                    Descrizione Francese:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar1FR" Text="" Width="300" /><br />
 
@@ -1600,7 +1600,8 @@
                     </Ajax:TextBoxWatermarkExtender>
                     <Ajax:TextBoxWatermarkExtender runat="server" ID="w4" WatermarkText="Inserire  (Francese)" TargetControlID="txtCar1FR">
                     </Ajax:TextBoxWatermarkExtender>
-                    <asp:Button Text="Aggiorna/Inserisci" ID="btnAggiornaCaratteristica1" runat="server" OnClick="btnAggiornaCaratteristica1_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
+                    <asp:Button Text="Aggiorna/Inserisci" ID="Button5" runat="server" OnClick="btnAggiornaCaratteristica1_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
+                    <asp:Button Text="Cancella" ID="btnDeleteCaratteristica1" runat="server" OnClick="btnDeleteCaratteristica1_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
                     <br />
                 </div>
 
@@ -1610,6 +1611,8 @@
                     <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica2_gest" AutoPostBack="true"
                         AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica2update">
                     </asp:DropDownList><br />
+                    <asp:Literal Text="" ID="litCodp2" runat="server" />
+                    <br />
                     Descrizione italiano:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar2I" Text="" Width="300" /><br />
@@ -1632,15 +1635,18 @@
                     <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender1" WatermarkText="Inserire  (Francese)" TargetControlID="txtCar2FR">
                     </Ajax:TextBoxWatermarkExtender>
                     <asp:Button Text="Aggiorna/Inserisci" ID="btnAggiornaCaratteristica2" runat="server" OnClick="btnAggiornaCaratteristica2_Click" OnClientClick="bloccaSblocca('divBlockOverlay2')" />
+                    <asp:Button Text="Cancella" ID="Button6" runat="server" OnClick="btnDeleteCaratteristica2_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
                     <br />
                 </div>
 
 
-                <div style="background-color: #fafafa">
+                <div style="background-color: #fafafa;display:none">
                     <h3>Tabella Caratteristica 3</h3>
                     <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica3_gest" AutoPostBack="true"
                         AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica3update">
                     </asp:DropDownList><br />
+                    <asp:Literal Text="" ID="litCodp3" runat="server" />
+                    <br />
                     Descrizione italiano:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar3I" Text="" Width="300" /><br />
@@ -1662,6 +1668,7 @@
                     <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender2" WatermarkText="Inserire Provenienza (Francese)" TargetControlID="txtCar3FR">
                     </Ajax:TextBoxWatermarkExtender>
                     <asp:Button Text="Aggiorna/Inserisci" ID="Button1" runat="server" OnClick="btnAggiornaCaratteristica3_Click" />
+                    <asp:Button Text="Cancella" ID="Button7" runat="server" OnClick="btnDeleteCaratteristica3_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
                     <br />
                 </div>
 
@@ -1674,6 +1681,8 @@
                         <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica4_gest" AutoPostBack="true"
                             AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica4update">
                         </asp:DropDownList><br />
+                    <asp:Literal Text="" ID="litCodp4" runat="server" />
+                    <br />
                         Descrizione italiano:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar4I" Text="" Width="300" /><br />
@@ -1695,6 +1704,7 @@
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender3" WatermarkText="Inserire valore (Francese)" TargetControlID="txtCar4FR">
                         </Ajax:TextBoxWatermarkExtender>
                         <asp:Button Text="Aggiorna/Inserisci" ID="Button2" runat="server" OnClick="btnAggiornaCaratteristica4_Click" />
+                    <asp:Button Text="Cancella" ID="Button8" runat="server" OnClick="btnDeleteCaratteristica4_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
                         <br />
                     </div>
 
@@ -1703,6 +1713,8 @@
                         <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica5_gest" AutoPostBack="true"
                             AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica5update">
                         </asp:DropDownList><br />
+                    <asp:Literal Text="" ID="litCodp5" runat="server" />
+                    <br />
                         Descrizione italiano:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar5I" Text="" Width="300" /><br />
@@ -1724,7 +1736,8 @@
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender19" WatermarkText="Inserire valore (Francese)" TargetControlID="txtCar5FR">
                         </Ajax:TextBoxWatermarkExtender>
                         <asp:Button Text="Aggiorna/Inserisci" ID="Button3" runat="server" OnClick="btnAggiornaCaratteristica5_Click" />
-                        <br />
+                                           <asp:Button Text="Cancella" ID="Button9" runat="server" OnClick="btnDeleteCaratteristica5_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
+<br />
                     </div>
 
                     <div style="background-color: #fafafa">
@@ -1732,6 +1745,8 @@
                         <asp:DropDownList runat="server" Width="310px" ID="ddlCaratteristica6_gest" AutoPostBack="true"
                             AppendDataBoundItems="true" OnSelectedIndexChanged="caratteristica6update">
                         </asp:DropDownList><br />
+                    <asp:Literal Text="" ID="litCodp6" runat="server" />
+                        <br />
                         Descrizione italiano:
                        
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtCar6I" Text="" Width="300" /><br />
@@ -1753,6 +1768,7 @@
                         <Ajax:TextBoxWatermarkExtender runat="server" ID="TextBoxWatermarkExtender20" WatermarkText="Inserire valore (Francese)" TargetControlID="txtCar6FR">
                         </Ajax:TextBoxWatermarkExtender>
                         <asp:Button Text="Aggiorna/Inserisci" ID="Button4" runat="server" OnClick="btnAggiornaCaratteristica6_Click" />
+                    <asp:Button Text="Cancella" ID="Button10" runat="server" OnClick="btnDeleteCaratteristica6_Click" OnClientClick="bloccaSblocca('divBlockOverlay1')" />
                         <br />
                     </div>
                 </asp:Panel>

@@ -5052,21 +5052,20 @@ namespace WelcomeLibrary.DAL
             return;
         }
 
-
         //Cancella una caratteristica controllando se utilizzata o meno
         public string DeleteCaratteristica(string connessione, Tabrif item, string tablename)
         {
+            if (item == null || item.Codice == "") return "";
             string ret = "";
             string testocaratteristica = tablename.Replace("dbo_TBLRIF_", "");
-            List<string> idused = CaricaListaIdCaratteristiche(connessione, "", testocaratteristica);
-            if (item == null || item.Codice == "") return "";
 
+            List<string> idused = CaricaListaIdCaratteristiche(connessione, "", testocaratteristica);
             if (idused.Exists(i => i == item.Codice)) return "Codice utilizzato, rimovere i riferimenti prima della cancellazione.";
 
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
-            SQLiteParameter pcod = new SQLiteParameter("@Codice", item.Codice);//OleDbType.VarChar
+            SQLiteParameter pcod = new SQLiteParameter("@CodiceTipo", item.Codice);//OleDbType.VarChar
             parColl.Add(pcod);
-            string query = "DELETE FROM " + tablename + " WHERE Codice=@Codice";
+            string query = "DELETE FROM " + tablename + " WHERE CodiceTipo=@CodiceTipo";
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -5079,7 +5078,7 @@ namespace WelcomeLibrary.DAL
         }
 
         /// <summary>
-        /// Carica la lista delle caratteristiche distinte presenti in base ai valori dei record presenti nella tabella articoli
+        /// Carica la lista delle caratteristiche distinte presenti in base ai valori dei record presenti nella tabella articoli  e nel campo xmlvalue della stessa tabella per le caratteristiche combinate
         /// </summary>
         /// <param name="connection"></param>
         /// <returns></returns>
@@ -5091,7 +5090,6 @@ namespace WelcomeLibrary.DAL
             try
             {
                 string query = "SELECT DISTINCT " + Campocaratteristica + " FROM " + Tblarchivio;
-
                 //if (!string.IsNullOrEmpty(codiceTipologia))
                 //{
                 //    SQLiteParameter ptip = new SQLiteParameter("@CodiceTIPOLOGIA", codiceTipologia);
@@ -5102,7 +5100,6 @@ namespace WelcomeLibrary.DAL
                 //        query += " AND CodiceTIPOLOGIA like @CodiceTIPOLOGIA  ";
                 //}
                 query += " order BY " + Campocaratteristica + " COLLATE NOCASE asc ";
-
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
                 using (reader)
@@ -5110,7 +5107,6 @@ namespace WelcomeLibrary.DAL
                     if (reader == null) { return list; };
                     if (reader.HasRows == false)
                         return list;
-
                     while (reader.Read())
                     {
                         // item = new Offerte();
@@ -5121,16 +5117,46 @@ namespace WelcomeLibrary.DAL
                         {
                             list.Add(caratteristica);
                         }
-
                     }
                 }
+
+                //check presenza caratteristiche su valore carattaereistiche combinate xmlvalue tabella attivita
+                string query1 = "SELECT DISTINCT TBL_ATTIVITA.ID as id, TBL_ATTIVITA.Xmlvalue,  fullkey, value  FROM  TBL_ATTIVITA, json_tree(TBL_ATTIVITA.XmlValue) ";
+                query1 += " WHERE JSON_VALID(TBL_ATTIVITA.XmlValue) ";
+                query1 += "  and json_tree.fullkey like ('%." + Campocaratteristica + ".codice') ";
+                _parUsed = new List<SQLiteParameter>();
+                SQLiteDataReader reader1 = dbDataAccess.GetReaderListOle(query1, _parUsed, connection, true);
+                using (reader1)
+                {
+                    if (reader1 == null) { return list; };
+                    if (reader1.HasRows == false)
+                        return list;
+                    while (reader1.Read())
+                    {
+                        string id = "";
+                        if (!reader1["id"].Equals(DBNull.Value))
+                            id = reader1.GetInt64(reader1.GetOrdinal("id")).ToString();
+
+                        string fullkey = "";
+                        if (!reader1["fullkey"].Equals(DBNull.Value))
+                            fullkey = reader1.GetString(reader1.GetOrdinal("fullkey")).ToString();
+
+                        string caratteristicavalue = "";
+                        if (!reader1["value"].Equals(DBNull.Value))
+                            caratteristicavalue = reader1.GetString(reader1.GetOrdinal("value")).ToString();
+                        if (!list.Exists(c => c.ToString().ToLower() == caratteristicavalue.ToLower()))
+                        {
+                            list.Add(caratteristicavalue);
+                        }
+                    }
+                }
+
 
             }
             catch (Exception error)
             {
                 throw new ApplicationException("Errore Lettura tabella articoli :" + error.Message, error);
             }
-
             return list;
         }
 
