@@ -390,10 +390,26 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     references.SearchGeoCodesByText(cliente, lingua);
 
                     string datiaggiuntivi = "";
-                    //datiaggiuntivi += "Orario aperuta: " + (data.GetValueOrDefault("orario") ?? "");
-                    //datiaggiuntivi += " Giorno chiusura: " + (data.GetValueOrDefault("chiusura") ?? "");
-                    //datiaggiuntivi += " Quantità giornaliera caffè: " + (data.GetValueOrDefault("chiusura") ?? "");
-                    //datiaggiuntivi += " Pranzi veloci: " + (data.GetValueOrDefault("chkpveloci") ?? "");
+                    string orarioapertura = (data.GetValueOrDefault("orario") ?? "");
+                    if (!string.IsNullOrEmpty(orarioapertura))
+                        datiaggiuntivi += "Orario apertua: " + orarioapertura;
+                    string chiusura = (data.GetValueOrDefault("chiusura") ?? "");
+                    if (!string.IsNullOrEmpty(chiusura))
+                        datiaggiuntivi += " Giorno chiusura: " + chiusura;
+                    string qcoffe = (data.GetValueOrDefault("qcoffe") ?? "");
+                    if (!string.IsNullOrEmpty(qcoffe))
+                        datiaggiuntivi += " Quantità giornaliera caffè: " + (data.GetValueOrDefault("qcoffe") ?? "");
+                    string chkpveloci = (data.GetValueOrDefault("chkpveloci") ?? "");
+                    if (!string.IsNullOrEmpty(chkpveloci))
+                        datiaggiuntivi += " Pranzi veloci: " + (data.GetValueOrDefault("chkpveloci") ?? "");
+                    string codicesconto = (data.GetValueOrDefault("codicesconto") ?? "");
+                    if (!string.IsNullOrEmpty(codicesconto))
+                        datiaggiuntivi += " Codice sconto: " + (data.GetValueOrDefault("codicesconto") ?? "");
+                    string locationpref = (data.GetValueOrDefault("location") ?? "");
+                    if (!string.IsNullOrEmpty(locationpref))
+                        datiaggiuntivi += " Preferenza sede: " + locationpref;
+
+
                     string generautente = (data.GetValueOrDefault("generautente") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
                     string descrizione1 = (data.GetValueOrDefault("descrizione") ?? "");
                     string tipocontenuto1 = (data.GetValueOrDefault("tipocontenuto") ?? "");

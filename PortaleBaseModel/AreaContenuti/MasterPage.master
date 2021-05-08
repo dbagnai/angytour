@@ -1009,7 +1009,61 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                           <div style="display: block">
+                                            <ul class="submenu display-active">
+                                                <li id="toggle-landing" class="newLi hover" role="tab">
+                                                    <a id="chevron-toggle-landing" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" data-core="" href="#menu-landing" aria-expanded="false"><i class="fa fa-chevron-down" aria-hidden="true"></i>Landing Page</a>
+                                                </li>
+                                            </ul>
+                                            <div id="menu-landing" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
+                                                <div class="panel-body" style="padding: 0 0 0 15px;">
+                                                    <ul class="submenu display-active">
+                                                         <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-feeds">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Land Feedbacks  1</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
+                                                        <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-land1">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Land Testata  1</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
+                                                        <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-land2">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Land Fascia 1</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
+                                                        <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-land3">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Land Fascia 2</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
+                                                        <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-land4">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Land Fascia 3</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
+                                                        <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-land5">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Land Fascia 4</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
+                                                        <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-land6">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Land Fascia 5</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div style="display: block">
                                             <hr style="margin: 2px 0" />
                                             <ul class="submenu display-active">

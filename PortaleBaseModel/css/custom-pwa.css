@@ -3749,6 +3749,29 @@ select.form-control:not([size]):not([multiple]) {
   /*    top: -50px;
     left:30px;*/
 }
+.formbackground.topright {
+  top: -50px;
+  left: 30px;
+}
+@media (max-width: 1024px) {
+  .formbackground {
+    top: initial;
+    left: initial;
+  }
+}
+.formtextbackground {
+  background-color: #f3c649;
+  color: #000 !important;
+  border-width: 10px;
+  border-color: #888;
+  border-style: dotted;
+  border-radius: 10px;
+  overflow: hidden;
+  /*  padding: 40px 20px 40px 20px;*/
+  min-height: 0px;
+  /*    top: -50px;
+    left:30px;*/
+}
 .ui-15 .ui-form .form-control {
   background-color: #ffffff;
 }
@@ -8375,6 +8398,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .btn-carrello-esaurito,
 .btn-carrello-esaurito:hover {
   opacity: 0;
+  width: initial;
 }
 .button-carrello-animate {
   color: #fff !important;

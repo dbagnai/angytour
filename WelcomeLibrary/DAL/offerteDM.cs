@@ -6864,9 +6864,6 @@ namespace WelcomeLibrary.DAL
                 a = strIn.ToLower().IndexOf("cnfg:(");
             }
             ret = strIn;
-
-
-
             a = strIn.ToLower().IndexOf("rsrc:(");
             while (a != -1)
             {
