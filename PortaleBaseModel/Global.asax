@@ -572,6 +572,7 @@
             "~/lib/js/videoBanner.js",
             "~/lib/js/feedbacks.js",
             "~/lib/js/formmng.js",
+             "~/lib/js/paymentmng.js",
             "~/js/aos/aos.js",
             "~/js/maininit.js"
         );

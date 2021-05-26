@@ -92,11 +92,78 @@ public partial class AspNetPages_OrdineOk : CommonPage
             }
             /////////////////////////////////////////////////////////////////
 
+            /////////////////////////////////////////////////////////////////
+            //CODICI PER TRANSAZIONE STRIPE!!!
+            /////////////////////////////////////////////////////////////////
+            string idordine_stripe = CaricaValoreMaster(Request, Session, "stripetran");
+            string Encodedidordine_stripe = idordine_stripe;
+            error = string.Empty;
+            idordine_stripe = dataManagement.DecodeFromBase64(idordine_stripe);
+            //Fare chiamata per stripe per visualizzare l'accaduto stripe
+            if (!string.IsNullOrEmpty(idordine_stripe)) //PAGAMENTO stripe
+            {
+                error = CaricaValoreMaster(Request, Session, "error");
+                if (error == "true")
+                {
+                    //errore stripe operazione...da visualizzare
+                    VisualizzaErrorstripe(idordine_stripe, Encodedidordine_stripe); //da completare
+                    return;
+                }
+                else
+                {
+                    /// successo operazione stripe .. da visualizzare
+                    Visualizzasuccestripe(idordine_stripe, Encodedidordine_stripe); //da completare
+                    return;
+                }
+            }
             DataBind();
 
         }
     }
 
+    private void Visualizzasuccestripe(string idordine_stripe, string encodedidordine_stripe)
+    {
+        string CodiceOrdine = idordine_stripe;
+        //output.Text += references.ResMan("Common", Lingua, "risposta_5");
+        if (Session["thankyoumessages"] != null)
+            output.Text += Session["thankyoumessages"].ToString();// references.ResMan("Common", Lingua, "thankyoumessages");
+        Session.Remove("thankyoumessages");
+
+        //Queste attività le ho fatte prima nell handler prima di chiamare la thankyoupage
+#if false
+        Cliente cliente = new Cliente();
+        CarrelloCollection prodotti = new CarrelloCollection();
+        TotaliCarrello totali = new TotaliCarrello();
+        if (Session["totali_" + CodiceOrdine] != null && Session["cliente_" + CodiceOrdine] != null && Session["prodotti_" + CodiceOrdine] != null)
+        {
+            cliente = (Cliente)Session["cliente_" + CodiceOrdine];
+            Session.Remove("cliente_" + CodiceOrdine);
+            totali = (TotaliCarrello)Session["totali_" + CodiceOrdine];
+            Session.Remove("totali_" + CodiceOrdine);
+            prodotti = (CarrelloCollection)Session["prodotti_" + CodiceOrdine];
+            Session.Remove("prodotti_" + CodiceOrdine);
+
+            string jscodetoinject = CommonPage.Creaeventopurchaseagooglegtag(totali, prodotti);
+            output.Text = jscodetoinject;
+            output.Text += references.ResMan("Common", Lingua, "risposta_5");
+            output.Text += " Order: " + idordine_stripe;
+            output.Text += references.ResMan("Common", Lingua, "GoogleConversione");
+        }
+#endif
+
+    }
+
+    private void VisualizzaErrorstripe(string idordine_stripe, string encodedidordine_stripe)
+    {
+        // throw new NotImplementedException();
+        output.Text = references.ResMan("Common", Lingua, "risposta_4").ToString() + " Order: " + idordine_stripe + "<br/>";
+
+        if (Session["thankyoumessages"] != null)
+            output.Text += Session["thankyoumessages"].ToString();// references.ResMan("Common", Lingua, "thankyoumessages");
+        Session.Remove("thankyoumessages");
+
+        pnlbtnretry.Visible = true;
+    }
 
     private void GetShippingDetails(string idordine, string Encodedidordine)
     {
@@ -186,7 +253,6 @@ public partial class AspNetPages_OrdineOk : CommonPage
         //Creo una variabile per la scrittura dei messaggi nel file di log
         System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
         Messaggi.Add("Messaggio", "");
-
         Messaggi["Messaggio"] += "RegistrazioneOrdinePaypal ok, da registrare ordine : " + CodiceOrdine + " " + System.DateTime.Now.ToString() + "\r\n";
 
         eCommerceDM ecom = new eCommerceDM();
@@ -232,22 +298,22 @@ public partial class AspNetPages_OrdineOk : CommonPage
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //Prepariamo le richieste di feeback per gli articoli in ordine!!
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            try
-            {
-                int J = 0;
-                Mail mailfeedback = new Mail();
-                J++;
-                if (J <= 2)
-                {
-                    mailfeedback.Sparedict["linkfeedback"] = "";//default preso dalle risorse feedbacksdefaultform
-                    mailfeedback.Sparedict["idnewsletter"] = "";//default dalle risorse feedbackdefaultnewsletter
-                    mailfeedback.Sparedict["deltagiorniperinvio"] = "";//default dalle risorse feedbacksdefaultdeltagg
-                    mailfeedback.Sparedict["idclienti"] = cliente.Id_cliente.ToString();
-                    mailfeedback.Id_card = item.id_prodotto;
-                    HandlerNewsletter.preparamail(mailfeedback, Lingua); //Preparo le mail nello scheduler!!
-                }
-            }
-            catch { }
+            //try
+            //{
+            //    int J = 0;
+            //    Mail mailfeedback = new Mail();
+            //    J++;
+            //    if (J <= 2)
+            //    {
+            //        mailfeedback.Sparedict["linkfeedback"] = "";//default preso dalle risorse feedbacksdefaultform
+            //        mailfeedback.Sparedict["idnewsletter"] = "";//default dalle risorse feedbackdefaultnewsletter
+            //        mailfeedback.Sparedict["deltagiorniperinvio"] = "";//default dalle risorse feedbacksdefaultdeltagg
+            //        mailfeedback.Sparedict["idclienti"] = cliente.Id_cliente.ToString();
+            //        mailfeedback.Id_card = item.id_prodotto;
+            //        HandlerNewsletter.preparamail(mailfeedback, Lingua); //Preparo le mail nello scheduler!!
+            //    }
+            //}
+            //catch { }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #if true // da abilitare per decrementare le quantià vendute
@@ -635,6 +701,10 @@ public partial class AspNetPages_OrdineOk : CommonPage
             TestoMail += "<br/>Spese di spedizione " + totali.TotaleSpedizione + " €<br/>";
         if (totali.TotaleSmaltimento != 0)
             TestoMail += "<br/>Spese smaltimento(PFU) " + totali.TotaleSmaltimento + " €<br/>";
+        if (totali.TotaleAssicurazione != 0)
+            TestoMail += "Totale Assicurazione " + totali.TotaleAssicurazione + "  €<br/>";
+        if (totali.Nassicurazioni != 0)
+            TestoMail += "( Assicurazione per " + totali.Nassicurazioni + "  Persone )<br/>";
         TestoMail += "<b>Totale ordine complessivo:</b> " + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
 
         if (totali.Percacconto != 100)
@@ -781,6 +851,10 @@ public partial class AspNetPages_OrdineOk : CommonPage
             TestoMail += "<br/>Spese di spedizione " + totali.TotaleSpedizione + " €<br/>";
         if (totali.TotaleSmaltimento != 0)
             TestoMail += "<br/>Spese smaltimento(PFU) " + totali.TotaleSmaltimento + " €<br/>";
+        if (totali.TotaleAssicurazione != 0)
+            TestoMail += "Totale Assicurazione " + totali.TotaleAssicurazione + "  €<br/>";
+        if (totali.Nassicurazioni != 0)
+            TestoMail += "( Assicurazione per " + totali.Nassicurazioni + "  Persone )<br/>";
         TestoMail += "<b>Totale ordine complessivo:</b> " + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
 
         if (totali.Percacconto != 100)

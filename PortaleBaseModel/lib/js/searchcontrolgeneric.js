@@ -39,6 +39,8 @@ function initAutocompleteRicercaCaratteristiche() {
                 $('.ui-autocomplete').css('z-index', 99999999999999);
                 $('.ui-autocomplete').css('top', '0px');
                 $('.ui-autocomplete').css('left', '0px');
+                $('.ui-autocomplete').css('height', '300px');
+                $('.ui-autocomplete').css('overflow-y', 'scroll');
                 setTimeout(function () {
                     $('.ui-autocomplete').css('z-index', 99999999999999);
                 }, 1);

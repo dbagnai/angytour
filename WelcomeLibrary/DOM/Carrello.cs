@@ -115,7 +115,19 @@ namespace WelcomeLibrary.DOM
             get { return _TotaleSmaltimento; }
             set { _TotaleSmaltimento = value; }
         }
+        private long _Nassicurazioni;
+        public long Nassicurazioni
+        {
+            get { return _Nassicurazioni; }
+            set { _Nassicurazioni = value; }
+        }
 
+        private double _TotaleAssicurazione;
+        public double TotaleAssicurazione
+        {
+            get { return _TotaleAssicurazione; }
+            set { _TotaleAssicurazione = value; }
+        }
         private double _TotaleSconto;
         public double TotaleSconto
         {
@@ -271,6 +283,8 @@ namespace WelcomeLibrary.DOM
             TotaleOrdine = 0;
             TotaleSconto = 0;
             TotalePeso = 0;
+            TotaleAssicurazione = 0;
+            Nassicurazioni = 0;
             TotaleSpedizione = 0;
             Indirizzofatturazione = "";
             Indirizzospedizione = "";
@@ -301,6 +315,8 @@ namespace WelcomeLibrary.DOM
             TotalePeso = tmp.TotalePeso;
             Bloccaacquisto = tmp.Bloccaacquisto;
             TotaleSpedizione = tmp.TotaleSpedizione;
+            TotaleAssicurazione = tmp.TotaleAssicurazione;
+            Nassicurazioni = tmp.Nassicurazioni;
             Indirizzofatturazione = tmp.Indirizzofatturazione;
             Indirizzospedizione = tmp.Indirizzospedizione;
             Note = tmp.Note;

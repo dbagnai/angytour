@@ -111,6 +111,10 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 metaTitle.Text += references.ResMan("Common", Lingua, "titleMain").ToString().Replace("<br/>", " ").Trim();
             if (string.IsNullOrWhiteSpace(metaDesc.Content))
                 metaDesc.Content += references.ResMan("Common", Lingua, "descMain").ToString().Replace("<br/>", " ").Trim();
+            if (string.IsNullOrEmpty(((HtmlMeta)metafbimage).Content))
+                ((HtmlMeta)metafbimage).Content = references.ResMan("Common", Lingua, "mainfbimage");
+
+
             //Prendiamo i dati dalla querystring
             Lingua = CommonPage.CaricaValoreMaster(Request, Session, "Lingua", false, CommonPage.deflanguage);
 
@@ -208,6 +212,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         scriptRegVariables += ";\r\n" + string.Format("var categoria = '" + Categoria + "'");
         scriptRegVariables += ";\r\n" + string.Format("var categoria2liv = '" + Categoria2liv + "'");
         scriptRegVariables += ";\r\n" + string.Format("var GoogleMapsKey = '" + WelcomeLibrary.UF.ConfigManagement.ReadKey("GoogleMapsKey") + "'");
+        scriptRegVariables += ";\r\n" + string.Format("var stripe_publishableKey = '{0}'", ConfigManagement.ReadKey("stripe_publishableKey"));
 
         scriptRegVariables += ";\r\n";
 

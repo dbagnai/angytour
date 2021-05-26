@@ -741,6 +741,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                         //    if (Details.FotoCollection_M != null && Details.FotoCollection_M.Count > 0)
                         //    {
                         //        imgFoto.ImageUrl = PercorsoFiles + "/" + TipologiaOfferte + "/" + OffertaIDSelected + "/" + Details.FotoCollection_M[0].NomeFile;
+                        //        imgFoto.ImageUrl = PercorsoFiles + "/" + TipologiaOfferte + "/" + OffertaIDSelected + "/" + Details.FotoCollection_M[0].NomeFile;
                         //        NomeFotoSelezionata = Details.FotoCollection_M[0].NomeFile;
                         //    }
                         //    else

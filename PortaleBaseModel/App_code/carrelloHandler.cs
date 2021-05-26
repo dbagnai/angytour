@@ -77,19 +77,10 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
             //inputParameters objPar = Deserialize<inputParameters>(strJson);
             // inputParameters objPar = Newtonsoft.Json.JsonConvert.DeserializeObject<inputParameters>(strJson); //Se un campo dei parametri è un json v+ in crisi
             ///////////////////////////////////////////////// PRENDO I RIFERIMENTI DEL CLIENT PER IL CARRELLO
-            //string ip = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-            //if (string.IsNullOrEmpty(ip.Trim()))
-            //    ip = context.Request.ServerVariables["REMOTE_ADDR"].Trim();
-
-            //if (!string.IsNullOrEmpty(ip))
-            //{
-            //    string[] ipRange = ip.Split(',');
-            //    ip = ipRange[0].Trim();
-            //}
-            //else
-            //    ip = context.Request.ServerVariables["REMOTE_ADDR"].Trim();
-            //string sessionid = context.Session.SessionID;
-            ////////////////////////////////////////////////////////////////////////////////////////////////
+            // string sessionid = "";
+            // string trueIP = "";
+            //CommonPage.CaricaRiferimentiCarrello(context.Request, context.Session, ref sessionid, ref trueIP);
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             long idprodotto = 0;
             long idcarrello = 0;

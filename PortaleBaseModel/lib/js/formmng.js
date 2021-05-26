@@ -399,7 +399,7 @@ function imgdeletegeneral(file, out1) {
                 console.log(result.responseText);
             }
         });
-}
+};
 
     //$(document).ready(function () {
     //    validateinitgeneral();

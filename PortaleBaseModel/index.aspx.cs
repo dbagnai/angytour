@@ -95,6 +95,13 @@ public partial class index : CommonPage
                 ((HtmlTitle)Master.FindControl("metaTitle")).Text = (customtitle).Replace("<br/>", "\r\n");
             if (!string.IsNullOrEmpty(customdesc))
                 ((HtmlMeta)Master.FindControl("metaDesc")).Content = customdesc.Replace("<br/>", "\r\n");
+
+            /////////////////////////////////////////////////
+            ////Opengraph per facebook //////////////////////
+            /////////////////////////////////////////////////
+            ((HtmlMeta)Master.FindControl("metafbTitle")).Content = (customtitle).Replace("<br/>", "\r\n"); ;
+            ((HtmlMeta)Master.FindControl("metafbdescription")).Content = customdesc.Replace("<br/>", "\r\n");
+
         }
 
         /////////////////////////////////////////////

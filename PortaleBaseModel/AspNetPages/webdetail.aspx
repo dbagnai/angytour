@@ -93,7 +93,7 @@
                                                 <!-- UI Input -->
                                                 <div class="ui-input">
                                                     <!-- Input Box -->
-                                                    <input class="form-control" type="text" name="uname" validationgroup="contattilateral" placeholder="Nome" runat="server" id="txtContactName1" />
+                                                    <input class="form-control" type="text" name="uname"  validationgroup="contattilateral" placeholder="Nome" runat="server" id="txtContactName1" />
                                                     <label class="ui-icon"><i class="fa fa-user"></i></label>
                                                 </div>
                                                 <div class="ui-input">

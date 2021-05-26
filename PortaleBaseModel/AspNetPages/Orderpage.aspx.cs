@@ -20,16 +20,6 @@ public partial class AspNetPages_Orderpage : CommonPage
         get { return ViewState["Lingua"] != null ? (string)(ViewState["Lingua"]) : deflanguage; }
         set { ViewState["Lingua"] = value; }
     }
-    public string PercorsoComune
-    {
-        get { return ViewState["PercorsoComune"] != null ? (string)(ViewState["PercorsoComune"]) : ""; }
-        set { ViewState["PercorsoComune"] = value; }
-    }
-    public string PercorsoFiles
-    {
-        get { return ViewState["PercorsoFiles"] != null ? (string)(ViewState["PercorsoFiles"]) : ""; }
-        set { ViewState["PercorsoFiles"] = value; }
-    }
     public string PercorsoAssolutoApplicazione
     {
         get { return ViewState["PercorsoAssolutoApplicazione"] != null ? (string)(ViewState["PercorsoAssolutoApplicazione"]) : ""; }
@@ -41,15 +31,12 @@ public partial class AspNetPages_Orderpage : CommonPage
         {
             if (!IsPostBack)
             {
-                PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
-                PercorsoFiles = WelcomeLibrary.STATIC.Global.PercorsoContenuti;
                 PercorsoAssolutoApplicazione = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
                 //Prendiamo i dati dalla querystring
                 Lingua = CaricaValoreMaster(Request, Session, "Lingua", false, deflanguage);
                 string registrazione = CaricaValoreMaster(Request, Session, "reg");
                 HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                 metarobots.Attributes["Content"] = "noindex,follow";
-                DataBind();
 
                 string conversione = CaricaValoreMaster(Request, Session, "conversione");
                 if (conversione == "true")
@@ -65,6 +52,13 @@ public partial class AspNetPages_Orderpage : CommonPage
             }
             else
             {
+                if (Request["__EVENTTARGET"] == "refreshcarrello")
+                {
+                    string parameter = Request["__EVENTARGUMENT"];
+                    bool referesformcliente = false;
+                    if (parameter == "loginuser") referesformcliente = true;
+                    CaricaCarrello(referesformcliente);
+                }
 
                 if (Request["__EVENTTARGET"] == "recuperapass")
                 {
@@ -78,17 +72,11 @@ public partial class AspNetPages_Orderpage : CommonPage
                 {
                     loginbtn_Click();
                 }
-                if (Request["__EVENTTARGET"] == "refreshcarrello")
-                {
-                    string parameter = Request["__EVENTARGUMENT"];
-                    bool referesformcliente = false;
-                    if (parameter == "loginuser") referesformcliente = true;
-                    CaricaCarrello(referesformcliente);
-                }
+
                 output.CssClass = "";
                 output.Text = "";
-                DataBind();
             }
+            DataBind();
 
 
         }
@@ -98,7 +86,6 @@ public partial class AspNetPages_Orderpage : CommonPage
             output.Text = err.Message;
         }
     }
-
 
     protected void Visualizzarisposta()
     {
@@ -120,163 +107,18 @@ public partial class AspNetPages_Orderpage : CommonPage
                 break;
         }
     }
-    protected void btnCodiceSconto_Click(object sender, EventArgs e)
-    {
-        string insertedcode = txtCodiceSconto.Text;
-        string validcode = ConfigManagement.ReadKey("codicesconto"); //Codicesconto in tabella configurazione
-
-        //Carichiamo i codici sconto dello scaglione
-        Dictionary<string, double> codiciscontoscaglione = CercaCodiceScontoSuCarrello(Request, Session);
-
-        //sconto presente su cliente anagrafica
-        ClientiDM cDM = new ClientiDM();
-        Cliente cli = cDM.CaricaClientePerCodicesconto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, insertedcode);
-        if (cli != null && cli.Id_cliente != 0)
-        {
-            Session.Add("codicesconto", insertedcode);
-            lblCodiceSconto.Text = "";
-            // int idcommercialeassociato = cli.Id_cliente;
-            //double percscontocommerciale = 0;
-            //Dictionary<string, double> dict = ClientiDM.SplitCodiciSconto(cli.Codicisconto);
-            //if (dict != null && dict.ContainsKey(insertedcode))
-            //{
-            //    percscontocommerciale = dict[insertedcode];
-            //}
-        }
-        ////facciamo il check dei codici presenti negli scagioni a carrello e verifichiamo se  valido in caso lo inserisco a carrello
-        else if (codiciscontoscaglione != null && codiciscontoscaglione.Count > 0)
-        {
-            //Vediamo se lo sconto è presente tra quelli dello scaglione inserito a carrello
-            if (codiciscontoscaglione.ContainsKey(insertedcode))
-            {
-                Session.Add("codicesconto", insertedcode);
-                lblCodiceSconto.Text = "";
-            }
-        }
-        //vediamo se corrisponde al codice sconto presente in configurazione
-        else if (insertedcode == validcode)
-        {
-            Session.Add("codicesconto", validcode);
-            lblCodiceSconto.Text = "";
-        }
-        //Testo Se presente una percentuale tra quelle associate ai commerciali e nel caso prendo quella (PRIORITA')
-        else
-        {
-            Session.Remove("codicesconto");
-            txtCodiceSconto.Text = "";
-            lblCodiceSconto.Text = references.ResMan("Common", Lingua, "testoErrCodiceSconto").ToString();
-        }
-        CaricaCarrello();
-    }
-
-    protected void chkSupplemento_CheckedChanged(object sender, EventArgs e)
-    {
-        CaricaCarrello();
-    }
-    private void VerificaStatoLoginUtente()
-    {
-        if (!(User.Identity != null && !string.IsNullOrWhiteSpace(User.Identity.Name)))
-        {
-            Session.Add("Errororder", references.ResMan("Common", Lingua, "testoRichiestalogin").ToString());
-            Response.Redirect(references.ResMan("Common", Lingua, "linkLogin").ToString());
-        }
-        ///////////////////////VERIFICA PER DISTRIBUTORI OBBLIGO DI LOGIN E PRESENZA ID CLIENTE ANAGRAFICA
-        usermanager USM = new usermanager();
-        string idcliente = getidcliente(User.Identity.Name); //id cliente associato all'utente
-        if (string.IsNullOrEmpty(idcliente) && !(USM.ControllaRuolo(Page.User.Identity.Name, "GestorePortale")) && !(USM.ControllaRuolo(Page.User.Identity.Name, "WebMaster")))
-        {
-            Response.Redirect("~/Error.aspx?Error=Utente non registrato, contattare il supporto per iscriversi al sistema di acquisto.");
-        }
-        else CaricaDatiCliente();
-    }
-
-    /// <summary>
-    /// Aggiorna l'associazione del carrello ai dati dell'utente loggato ed eventuale codice sconto in sessione!!
-    /// </summary>
-    /// <param name="carrello"></param>
-    private void AggiornaDatiUtenteSuCarrello(CarrelloCollection carrello, long idcliente = 0)
-    {
-        string codicesconto = "";
-        if (Session["codicesconto"] != null)
-        {
-            codicesconto = Session["codicesconto"].ToString();
-        }
-        foreach (Carrello c in carrello)
-        {
-            // if (User.Identity != null && User.Identity.Name != "")
-            c.ID_cliente = idcliente;
-            c.Codicesconto = codicesconto; //metto il codice sconto nella lista prodotti nel carrello
-            AggiornaProdottoCarrello(Request, Session, c.id_prodotto, c.Numero, User.Identity.Name, c.Campo2, c.ID, idcliente, c.Prezzo, c.Datastart, c.Dataend, c.jsonfield1);
-        }
-    }
-    private void RiempiDdlNazione(string valore, DropDownList ddlNazione)
-    {
-        List<Tabrif> nazioni = WelcomeLibrary.UF.Utility.Nazioni.FindAll(delegate (Tabrif _nz) { return _nz.Lingua == Lingua; });
-        nazioni.Sort(new GenericComparer<Tabrif>("Campo1", System.ComponentModel.ListSortDirection.Ascending));
-        ddlNazione.Items.Clear();
-        foreach (Tabrif n in nazioni)
-        {
-            ListItem i = new ListItem(n.Campo1, n.Codice);
-            ddlNazione.Items.Add(i);
-        }
-        try
-        {
-            ddlNazione.SelectedValue = valore.ToUpper();
-        }
-        catch { valore = "IT"; ddlNazione.SelectedValue = valore.ToUpper(); }
-    }
-
-
-    protected void ddlNazione_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        CaricaCarrello();
-    }
-    protected string TestoSezione(string codicetipologia)
-    {
-        string ret = "";
-        WelcomeLibrary.DOM.TipologiaOfferte sezione =
-              WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
-        if (sezione != null)
-        {
-            ret += " " + references.ResMan("Common", Lingua, "testoSezione").ToString() + " \"" + CommonPage.ReplaceAbsoluteLinks(CrealinkElencotipologia(codicetipologia, Lingua, Session)) + "\"";
-        }
-        return ret;
-    }
-    protected string TotaleArticolo(object Numero, object Prezzo)
-    {
-        string ret = "";
-        double n = 0;
-        double p = 0;
-        double.TryParse(Numero.ToString(), out n);
-        double.TryParse(Prezzo.ToString(), out p);
-        System.Globalization.CultureInfo ci = System.Globalization.CultureInfo.CreateSpecificCulture("it-IT");
-        ret = string.Format("{0:N2}", p * n, ci);
-        return ret;
-
-    }
     private void CaricaCarrello(bool forcerefreshformcliente = false)
     {
+        //DATI DEL CLIENTE PRESI DAL DATABASE INZIALMENTE
         if (forcerefreshformcliente)
             CaricaDatiCliente();
-
         if (Session["codicesconto"] != null)
             txtCodiceSconto.Text = Session["codicesconto"].ToString();
 
-        eCommerceDM ecmDM = new eCommerceDM();
-        //////////////////////////////////////////////////////////////////////////////
-        //Prendiamo l'ip del client
-        /////////////////////////////////////////////////////////////////////////////
+        string sessionid = "";
         string trueIP = "";
-        string ip = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-        if (!string.IsNullOrEmpty(ip))
-        {
-            string[] ipRange = ip.Split(',');
-            trueIP = ipRange[0].Trim();
-        }
-        else
-        {
-            trueIP = Request.ServerVariables["REMOTE_ADDR"].Trim();
-        }
+        CaricaRiferimentiCarrello(Request, Session, ref sessionid, ref trueIP); //leggio i riferimenti per il caricamento del carrello
+        eCommerceDM ecmDM = new eCommerceDM();
         CarrelloCollection carrello = ecmDM.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Session.SessionID, trueIP);
         rptProdotti.DataSource = carrello;
         rptProdotti.DataBind();
@@ -303,98 +145,6 @@ public partial class AspNetPages_Orderpage : CommonPage
     }
 
 
-    private void SelezionaClientePerAffitti(CarrelloCollection carrello)
-    {
-        if (carrello != null)
-        {
-            Carrello c = carrello.Find(_c => _c.Offerta != null && !string.IsNullOrWhiteSpace(_c.Offerta.Email));
-            if (c != null)
-            {
-                Offerte o = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, c.Offerta.Id.ToString());
-                if (o != null)
-                {
-                    if (string.IsNullOrWhiteSpace(inpNome.Value))
-                        inpNome.Value = o.Nome_dts;
-                    if (string.IsNullOrWhiteSpace(inpCognome.Value))
-                        inpCognome.Value = o.Cognome_dts;
-                    if (string.IsNullOrWhiteSpace(inpEmail.Value))
-                        inpEmail.Value = o.Email;
-                    if (string.IsNullOrWhiteSpace(inpTel.Value))
-                        inpTel.Value = o.Telefono;
-                }
-            }
-        }
-
-    }
-
-    private string SelezionaNazione(CarrelloCollection carrello, string selcodicenazione = "")
-    {
-        string codicenazione = "";
-        if (carrello != null)
-        {
-            Carrello c = carrello.Find(_c => !string.IsNullOrWhiteSpace(_c.Codicenazione));
-            if (c != null)
-                codicenazione = c.Codicenazione;
-            if (!string.IsNullOrEmpty(selcodicenazione)) codicenazione = selcodicenazione;
-        }
-        try
-        {
-            ddlNazione.SelectedValue = codicenazione;
-        }
-        catch
-        { }
-        return codicenazione;
-    }
-    private void VisualizzaTotaliCarrello(string codicenazione, string codiceprovincia)
-    {
-
-        bool supplementoisole = chkSupplemento.Checked;
-        bool supplementocontrassegno = inpContanti.Checked;
-        TotaliCarrello totali = CalcolaTotaliCarrello(Request, Session, codicenazione, codiceprovincia, supplementoisole, supplementocontrassegno);
-      
-        //Dal calcolo dei totali e delle spedizioni viene indicato di bloccare l'acquisto diretto
-        if (totali.Bloccaacquisto)
-            liPaypal.Visible = false;
-        else
-            liPaypal.Visible = true;
-#if false //metodo alternativo di blocco pagamento e invio solo ordine
-
-        if (totali.Bloccaacquisto)
-        {
-            litMessage.Text = references.ResMan("Common", Lingua, "testoBloccoacquisto");
-            divPayment.Visible = false;
-            inpPaypal.Checked = false;
-            inpRichiesta.Checked = true;
-            divOrderrequest.Visible = true;
-        }
-        else
-        {
-            litMessage.Text = "";
-            liPaypal.Visible = true;
-            divPayment.Visible = true;
-            inpPaypal.Checked = true;
-            inpRichiesta.Checked = false;
-            divOrderrequest.Visible = false;
-        } 
-#endif
-
-
-        List<TotaliCarrello> list = new List<TotaliCarrello>();
-        list.Add(totali);
-        rptTotali.DataSource = list;
-        rptTotali.DataBind();
-    }
-
-
-    protected void checkbox_click(object sender, EventArgs e)
-    {
-        plhShipping.Visible = !((CheckBox)sender).Checked;
-        CaricaCarrello();
-
-    }
-
-
-
     /// <summary>
     /// Invia la mail d'ordine finale
     /// </summary>
@@ -404,153 +154,78 @@ public partial class AspNetPages_Orderpage : CommonPage
     {
         try
         {
-            string TestoMail = "";
-            string CodiceOrdine = "";
-            //////////////////////////////////////////////////////////////////////////////
-            //Prendiamo l'ip del client
-            /////////////////////////////////////////////////////////////////////////////
-            string trueIP = "";
-            string ip = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-            if (!string.IsNullOrEmpty(ip))
-            {
-                string[] ipRange = ip.Split(',');
-                trueIP = ipRange[0].Trim();
-            }
-            else
-            {
-                trueIP = Request.ServerVariables["REMOTE_ADDR"].Trim();
-            }
+            //////////////////////////////////////////////////////////////////
+            //Valori BASE da aggiornare PER procedere all'ordine
+            //////////////////////////////////////////////////////////////////
             eCommerceDM ecom = new eCommerceDM();
-
-            //DATI DEL CLIENTE PRESI DAL FORM
             Cliente cliente = new Cliente();
-            if (!CaricaDatiClienteDaForm(cliente)) return; //se la verifica cliente fallisce stoppo tutto
-
-            //per prima cosa mi riprendo i dati del carrello in base alla sessione per completare l'ordine
+            TotaliCarrello totali = new TotaliCarrello();
             CarrelloCollection prodotti = new CarrelloCollection();
-            prodotti = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Session.SessionID, trueIP);
-            AggiornaDatiUtenteSuCarrello(prodotti, cliente.Id_cliente); ; //Verifico per un ultima volta che tutto sia a posto che le quantità non superino la disponibilità
-
-            if (prodotti != null && prodotti.Count > 0)
+            string CodiceOrdine = "";
+            string modalita = "";
+            Session.Add("Lingua", Lingua); //Memorizzo in session  pure la lingua per mantenerla nelle chiamate di risposta dal sistema di pagamento
+            //string descrizionepagamento = "";
+            if (inpContanti.Checked)
             {
-                //vERIFICA finale PER IL BOOKING PRIMA DI ORDINARE!!!
-                if (!VerificaDisponibilitaEventoBooking(prodotti, "rif000001"))
-                {
-                    output.CssClass = "alert alert-danger";
-                    output.Text = references.ResMan("basetext", Lingua, "testoprenotaerr1").ToString();
-                    return;
-                }
-                ////////////////////////////////////
-                ///
+                modalita = inpContanti.Value;
+                // descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
+            }
+            if (inpBonifico.Checked)
+            {
+                modalita = inpBonifico.Value;
+                //  descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
+            }
+            if (inpPaypal.Checked)
+            {
+                modalita = inpPaypal.Value;
+                // descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
+            }
+            if (inpstripe.Checked)
+            {
+                modalita = inpstripe.Value;
+                //  descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
+            }
+            if (inpPayway.Checked)
+            {
+                modalita = inpPayway.Value;
+                // descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
+            }
+            //if (inpRichiesta.Checked)
+            //{
+            //    modalita = inpRichiesta.Value;
+            //   // descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
+            //}
+            if (string.IsNullOrEmpty(modalita))
+            {
+                output.CssClass = "alert alert-danger"; output.Text = references.ResMan("Common", Lingua, "txtPagamento").ToString();
+                return;
+            }
+
+            //////////////////////////////////////////////////////////////////
+            //DATI DEL CLIENTE PRESI DAL FORM
+            //////////////////////////////////////////////////////////////////
+            if (!CaricaDatiClienteDaForm(cliente)) return; //se la verifica cliente fallisce stoppo L'ORDINE
+                                                           /////////////////////////////////////////////////////////////////
 
 
-                prodotti.Sort(new GenericComparer<Carrello>("Data", System.ComponentModel.ListSortDirection.Descending));
-                //Genero il codice ordine dato che il cliente me lo ha confermato e me lo salvo in tabella per tutti i prodotti del carrello attuale
-                //In modo da associarli ad un ordine preciso in caso di successo dell'invio del pagamento o della  mail
-                CodiceOrdine = GeneraCodiceOrdine();
-                bool supplementoisole = chkSupplemento.Checked;
-                bool supplementocontrassegno = inpContanti.Checked;
-                TotaliCarrello totali = CalcolaTotaliCarrello(Request, Session, cliente.CodiceNAZIONE, "", supplementoisole, supplementocontrassegno);
+            //////////////////////////////////////////////////////////////////
+            //STEP 1 ORDINE AGGIORNAMENTO DATI CLIENTE E CARRRELLO IN BASE ALLE SELEZIONI SUL FORM
+            //////////////////////////////////////////////////////////////////
+            Dictionary<string, object> parametriordine = new Dictionary<string, object>();
+            parametriordine.Add("modalita", modalita);
+            parametriordine.Add("supplementoisole", chkSupplemento.Checked);
+            parametriordine.Add("supplementocontrassegno", inpContanti.Checked);
+            parametriordine.Add("note", inpNote.Value);
+            string reterr = AggiornaDatiPerOrdine(parametriordine, ref CodiceOrdine, ref cliente, ref totali, ref prodotti);
+            output.Text += reterr;
+            if (!string.IsNullOrEmpty(reterr)) return; //se errore preparazione dati non procedo
+                                                       //////////////////////////////////////////////////////////////////
 
-                string modalita = "";
-                string descrizionepagamento = "";
-
-                //if (inpRichiesta.Checked)
-                //{
-                //    modalita = inpRichiesta.Value;
-                //    descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
-                //}
-                if (inpContanti.Checked)
-                {
-                    modalita = inpContanti.Value;
-                    descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
-                }
-                if (inpBonifico.Checked)
-                {
-                    modalita = inpBonifico.Value;
-                    descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
-                }
-                if (inpPaypal.Checked)
-                {
-                    modalita = inpPaypal.Value;
-                    descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
-                }
-
-                if (inpPayway.Checked)
-                {
-                    modalita = inpPayway.Value;
-                    descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
-                }
-                if (string.IsNullOrEmpty(modalita))
-                {
-                    output.CssClass = "alert alert-danger"; output.Text = references.ResMan("Common", Lingua, "txtPagamento").ToString();
-                    return;
-                }
-                Session.Add("Lingua", Lingua); //Memorizzo in session  pure la lingua per mantenerla nelle chiamate di risposta dal sistema di pagamento
-
-                //PRENDIAMO I DATI DAL FORM PER LA PREPARAZIONE ORDINE //////////////////////////////////////////////////////////////////
-                totali.Denominazionecliente = cliente.Cognome + " " + cliente.Nome;
-                totali.Mailcliente = cliente.Email;
-                totali.Dataordine = System.DateTime.Now;
-                totali.CodiceOrdine = CodiceOrdine;
-
-                totali.Indirizzofatturazione = cliente.Cognome + " " + cliente.Nome + "<br/>";
-                if (!string.IsNullOrEmpty(cliente.Ragsoc))
-                    totali.Denominazionecliente += cliente.Ragsoc + "<br/>";
-                totali.Indirizzofatturazione += cliente.Indirizzo + "<br/>";
-                totali.Indirizzofatturazione += cliente.Cap + " " + cliente.CodiceCOMUNE + "  (" + ((!(string.IsNullOrWhiteSpace(NomeProvincia(cliente.CodicePROVINCIA, Lingua)))) ? NomeProvincia(cliente.CodicePROVINCIA, Lingua) : cliente.CodicePROVINCIA) + ")<br/>";
-                totali.Indirizzofatturazione += "Nazione: " + cliente.CodiceNAZIONE + "<br/>";
-                totali.Indirizzofatturazione += "Telefono: " + cliente.Telefono + "<br/>";
-                totali.Indirizzofatturazione += "P.Iva: " + cliente.Pivacf + "<br/>";
-                totali.Indirizzofatturazione += "CodiceDestinatario/Pec: " + cliente.Emailpec + "<br/>";
-
-                //SE INDIRIZZO SPEDIIZONE DIVERSO -> LO MEMORIZZO NEI TOTALI ( E serializzo il dettaglio nel cliente nel campo serialized )
-                string indirizzospedizione = "";
-                if (!chkSpedizione.Checked)
-                {
-                    if (!string.IsNullOrWhiteSpace(inpCognomeS.Value) || !string.IsNullOrWhiteSpace(inpNomeS.Value))
-                        indirizzospedizione += inpCognomeS.Value + " " + inpNomeS.Value + "<br/>";
-                    else
-                        indirizzospedizione += cliente.Cognome + " " + cliente.Nome + "<br/>";
-
-
-                    if (!string.IsNullOrEmpty(inpIndirizzoS.Value))
-                        indirizzospedizione += inpIndirizzoS.Value + "<br/>";
-                    if (!string.IsNullOrEmpty(inpCaps.Value) && !string.IsNullOrEmpty(inpComuneS.Value) && !string.IsNullOrEmpty(inpProvinciaS.Value))
-                    {
-                        indirizzospedizione += inpCaps.Value + " " + inpComuneS.Value + "  (" + ((!(string.IsNullOrWhiteSpace(NomeProvincia(inpProvinciaS.Value, Lingua)))) ? NomeProvincia(inpProvinciaS.Value, Lingua) : inpProvinciaS.Value) + ")<br/>";
-                        indirizzospedizione += "Nazione: " + cliente.CodiceNAZIONE + "<br/>";
-                    }
-                    if (!string.IsNullOrEmpty(inpTelS.Value))
-                        indirizzospedizione += "Telefono: " + inpTelS.Value + "<br/>";
-
-                    totali.Indirizzospedizione = indirizzospedizione;
-                }
-#if true   // con questa visualizza sempre la spedizione
-                if (string.IsNullOrWhiteSpace(indirizzospedizione))
-                {
-                    totali.Indirizzospedizione = totali.Indirizzofatturazione;
-                }
-#endif
-                totali.Note = inpNote.Value;
-                totali.Modalitapagamento = modalita;
-
-                //Valorizzato solo alla ricezione del pagamento prima della spedizione o tramite la procedura con pagamento anticipato
-                //totali.Pagato = false;
-                if (totali.Percacconto == 100)
-                { totali.Pagato = false; totali.Pagatoacconto = false; } // da capire se acconto è zero se vogliamo spuntare pagato acconto!
-                else
-                { totali.Pagato = false; totali.Pagatoacconto = false; }
-
-
-                totali.Urlpagamento = "";
-
-                //Prepariamo i valori per la chiamata a Paypal
-                Session.Add("cliente_" + CodiceOrdine, cliente); //Mettiamo tutto in sessione per riaverlo alla conferma dell'esito positivo della transazione
-                Session.Add("totali_" + CodiceOrdine, totali); //Mettiamo tutto in sessione per riaverlo alla conferma dell'esito positivo della transazione
-                Session.Add("prodotti_" + CodiceOrdine, prodotti); //Mettiamo tutto in sessione per riaverlo alla conferma dell'esito positivo della transazione
-
-                // / END // PRENDIAMO I DATI DAL FORM PER LA PREPARAZIONE ORDINE //////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////
+            //SETP 2 ESECUZIONE VERA E PROPRIA DELL'ORDINE A SECONDA DELLA MODALITA
+            //////////////////////////////////////////////////////////////////
+            if (prodotti != null && prodotti.Count > 0 && !string.IsNullOrEmpty(CodiceOrdine))
+            {
 
                 /////EFFETTUIAMO LA PROCEDURA CORRETTA IN BASE ALLA MODALITA' DI PAGAMENTO
                 if (modalita == "payway") //PAGAMENTO CON CARTA DI CREDITO  
@@ -614,6 +289,13 @@ public partial class AspNetPages_Orderpage : CommonPage
                     bool authandcapturemode = Convert.ToBoolean(ConfigManagement.ReadKey("authandcapturePaypal"));
                     EseguiCheckOutPaypal(returl, cancelurl, paypaldatas, authandcapturemode); // da traspormare in auth and capture true succesivamente
                 }
+                if (modalita == "stripe")
+                {
+                    //qui potrei aggiornare i dati per la chiamata al paymentint .... 
+                    // da capire se serve qui ( ho trasferito le funzioni nell'handler dei pagamenti
+                    // Non viene fatto il postback per il pagamento stripe
+                    //....
+                }
                 if (modalita == "bacs" || modalita == "contanti") //PAGAMENTO CON BONIFICO
                 {
                     //try
@@ -637,6 +319,7 @@ public partial class AspNetPages_Orderpage : CommonPage
 
                     try
                     {
+                        string TestoMail = "";
                         //Inviamo le email di conferma al portale ed al cliente
                         //Invio la mail per il fornitore
                         string SoggettoMailFornitore = references.ResMan("Common", Lingua, "OrdineSoggettomailRichiesta") + Nome;
@@ -718,6 +401,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                     Session.Remove("cliente_" + CodiceOrdine);
                     Session.Remove("totali_" + CodiceOrdine);
                     Session.Remove("prodotti_" + CodiceOrdine);
+                    Session.Remove("tmpCodiceOrdine");
                     //CreaNuovaSessione(Session, Request); //Svuota la session per un nuovo ordine!!
                     output.Text += jscodetoinject;
                     output.Text += references.ResMan("Common", Lingua, "GoogleConversione");
@@ -738,6 +422,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                 {
                     try
                     {
+                        string TestoMail = "";
                         //Inviamo le email di conferma al portale ed al cliente
                         //Invio la mail per il fornitore
                         string SoggettoMailFornitore = references.ResMan("Common", Lingua, "OrdineSoggettomailRichiesta") + Nome;
@@ -835,6 +520,372 @@ public partial class AspNetPages_Orderpage : CommonPage
             }
         }
     }
+    private string AggiornaDatiPerOrdine(Dictionary<string, object> parametri, ref string CodiceOrdine, ref Cliente cliente, ref TotaliCarrello totali, ref CarrelloCollection prodotti)
+    {
+
+        #region aggiornamento carrello  e dati cliente prima dell'ordine
+        string ret = "";
+        //////////////////////////////////////////////////////////////////
+        //PROCEDURA AGGIORNAMENTO TOTALI E ORDINE
+        //////////////////////////////////////////////////////////////////
+        //se Ho gia generato un codice ordine svuoto la session  totali, prodotti e cliente prima di ricalcolarli
+        if (HttpContext.Current.Session["tmpCodiceOrdine"] != null)
+        {
+            string tmpcodiceordine = Session["tmpCodiceOrdine"].ToString();
+            Session.Remove("cliente_" + tmpcodiceordine);
+            Session.Remove("totali_" + tmpcodiceordine);
+            Session.Remove("prodotti_" + tmpcodiceordine);
+            Session.Remove("tmpCodiceOrdine");
+        }
+
+
+        //Per prima cosa mi riprendo i dati del carrello in base alla sessione per completare l'ordine
+        //Verifico per un ultima volta che tutto sia a posto che le quantità non superino la disponibilità
+        prodotti = new CarrelloCollection();
+        eCommerceDM ecom = new eCommerceDM();
+        string sessionid = "";
+        string trueIP = "";
+        CaricaRiferimentiCarrello(Request, Session, ref sessionid, ref trueIP); //leggio i riferimenti per il caricamento del carrello
+        prodotti = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Session.SessionID, trueIP);
+        AggiornaDatiUtenteSuCarrello(prodotti, cliente.Id_cliente);  //aggiorno il codice cliente e sconto nel carrello
+        if (prodotti != null && prodotti.Count > 0)
+        {
+            //vERIFICA finale PER IL BOOKING PRIMA DI ORDINARE!!!
+            if (!VerificaDisponibilitaEventoBooking(prodotti, "rif000001"))
+            {
+                ret = references.ResMan("basetext", Lingua, "testoprenotaerr1").ToString();
+                return ret;
+            }
+            ////////////////////////////////////
+            prodotti.Sort(new GenericComparer<Carrello>("Data", System.ComponentModel.ListSortDirection.Descending));
+
+            //Genero il codice ordine dato che il cliente me lo ha confermato e me lo salvo in tabella per tutti i prodotti del carrello attuale
+            //In modo da associarli ad un ordine preciso in caso di successo dell'invio del pagamento o della  mail
+            CodiceOrdine = GeneraCodiceOrdine();
+            bool supplementoisole = (bool)parametri["supplementoisole"];// chkSupplemento.Checked;
+            bool supplementocontrassegno = (bool)parametri["supplementocontrassegno"];// inpContanti.Checked;
+            totali = CalcolaTotaliCarrello(Request, Session, cliente.CodiceNAZIONE, "", supplementoisole, supplementocontrassegno);
+
+            //PRENDIAMO I DATI DAL FORM PER LA PREPARAZIONE ORDINE //////////////////////////////////////////////////////////////////
+            totali.Denominazionecliente = cliente.Cognome + " " + cliente.Nome;
+            totali.Mailcliente = cliente.Email;
+            totali.Dataordine = System.DateTime.Now;
+            totali.CodiceOrdine = CodiceOrdine;
+            if (!string.IsNullOrEmpty(cliente.Ragsoc))
+                totali.Denominazionecliente += cliente.Ragsoc + "<br/>";
+            totali.Indirizzofatturazione = cliente.Cognome + " " + cliente.Nome + "<br/>";
+            totali.Indirizzofatturazione += cliente.Indirizzo + "<br/>";
+            totali.Indirizzofatturazione += cliente.Cap + " " + cliente.CodiceCOMUNE + "  (" + ((!(string.IsNullOrWhiteSpace(NomeProvincia(cliente.CodicePROVINCIA, Lingua)))) ? NomeProvincia(cliente.CodicePROVINCIA, Lingua) : cliente.CodicePROVINCIA) + ")<br/>";
+            totali.Indirizzofatturazione += "Nazione: " + cliente.CodiceNAZIONE + "<br/>";
+            totali.Indirizzofatturazione += "Telefono: " + cliente.Telefono + "<br/>";
+            totali.Indirizzofatturazione += "P.Iva: " + cliente.Pivacf + "<br/>";
+            totali.Indirizzofatturazione += "CodiceDestinatario/Pec: " + cliente.Emailpec + "<br/>";
+            //SE INDIRIZZO SPEDIIZONE DIVERSO -> LO MEMORIZZO NEI TOTALI ( E serializzo il dettaglio nel cliente nel campo serialized )
+            string indirizzospedizione = "";
+            if (!chkSpedizione.Checked)
+            {
+                /////////////////////////////////////
+                //prendiamO dati spedizione dal cliente serializzato .... in accordo col metodo usato per fatturazione anziche dal form
+                Cliente clispediz = Newtonsoft.Json.JsonConvert.DeserializeObject<Cliente>(cliente.Serialized);
+                /////////////////////////////////////
+                if (clispediz != null)
+                {
+                    //  inpProvinciaS.Value = (!(string.IsNullOrWhiteSpace(NomeProvincia(clispediz.CodicePROVINCIA, Lingua)))) ? NomeProvincia(clispediz.CodicePROVINCIA, Lingua) : clispediz.CodicePROVINCIA;
+                    if (!string.IsNullOrWhiteSpace(clispediz.Cognome) || !string.IsNullOrWhiteSpace(clispediz.Nome))
+                        indirizzospedizione += clispediz.Cognome + " " + clispediz.Nome + "<br/>";
+                    else
+                        indirizzospedizione += cliente.Cognome + " " + cliente.Nome + "<br/>";
+                    if (!string.IsNullOrEmpty(clispediz.Indirizzo))
+                        indirizzospedizione += clispediz.Indirizzo + "<br/>";
+                    if (!string.IsNullOrEmpty(clispediz.Cap) && !string.IsNullOrEmpty(clispediz.CodiceCOMUNE) && !string.IsNullOrEmpty(clispediz.CodicePROVINCIA))
+                    {
+                        indirizzospedizione += clispediz.Cap + " " + clispediz.CodiceCOMUNE + "  (" + ((!(string.IsNullOrWhiteSpace(NomeProvincia(clispediz.CodicePROVINCIA, Lingua)))) ? NomeProvincia(clispediz.CodicePROVINCIA, Lingua) : clispediz.CodicePROVINCIA) + ")<br/>";
+                        indirizzospedizione += "Nazione: " + clispediz.CodiceNAZIONE + "<br/>";
+                    }
+                    if (!string.IsNullOrEmpty(clispediz.Telefono))
+                        indirizzospedizione += "Telefono: " + clispediz.Telefono + "<br/>";
+                }
+#if false
+                /////////////////////////////////////
+                /// INDIRIZZO SPEDIZIONE DALLE CASELLE SUL FORM ////////////////
+                if (!string.IsNullOrWhiteSpace(inpCognomeS.Value) || !string.IsNullOrWhiteSpace(inpNomeS.Value))
+                    indirizzospedizione += inpCognomeS.Value + " " + inpNomeS.Value + "<br/>";
+                else
+                    indirizzospedizione += cliente.Cognome + " " + cliente.Nome + "<br/>";
+
+                if (!string.IsNullOrEmpty(inpIndirizzoS.Value))
+                    indirizzospedizione = inpIndirizzoS.Value + "<br/>";
+                if (!string.IsNullOrEmpty(inpCaps.Value) && !string.IsNullOrEmpty(inpComuneS.Value) && !string.IsNullOrEmpty(inpProvinciaS.Value))
+                {
+                    indirizzospedizione += inpCaps.Value + " " + inpComuneS.Value + "  (" + ((!(string.IsNullOrWhiteSpace(NomeProvincia(inpProvinciaS.Value, Lingua)))) ? NomeProvincia(inpProvinciaS.Value, Lingua) : inpProvinciaS.Value) + ")<br/>";
+                    indirizzospedizione += "Nazione: " + cliente.CodiceNAZIONE + "<br/>";
+                }
+                if (!string.IsNullOrEmpty(inpTelS.Value))
+                    indirizzospedizione += "Telefono: " + inpTelS.Value + "<br/>";
+                /////////////////////////////////////  
+#endif
+
+                totali.Indirizzospedizione = indirizzospedizione;
+            }
+#if false   // con questa visualizza sempre la spedizione
+                if (string.IsNullOrWhiteSpace(indirizzospedizione))
+                {
+                    totali.Indirizzospedizione = totali.Indirizzofatturazione;
+                } 
+#endif
+            totali.Note = (string)parametri["note"];
+            totali.Modalitapagamento = (string)parametri["modalita"];
+
+            //Valorizzato solo alla ricezione del pagamento prima della spedizione o tramite la procedura con pagamento anticipato
+            if (totali.Percacconto == 100)
+            { totali.Pagato = false; totali.Pagatoacconto = false; } // da capire se acconto è zero se vogliamo spuntare pagato acconto!
+            else
+            { totali.Pagato = false; totali.Pagatoacconto = false; }
+            totali.Urlpagamento = "";
+
+            //Prepariamo i valori per la chiamata a Paypal
+            Session.Add("tmpCodiceOrdine", CodiceOrdine); //appoggio il codiceordine generato in sessione
+            Session.Add("cliente_" + CodiceOrdine, cliente); //Mettiamo tutto in sessione per riaverlo alla conferma dell'esito positivo della transazione
+            Session.Add("totali_" + CodiceOrdine, totali); //Mettiamo tutto in sessione per riaverlo alla conferma dell'esito positivo della transazione
+            Session.Add("prodotti_" + CodiceOrdine, prodotti); //Mettiamo tutto in sessione per riaverlo alla conferma dell'esito positivo della transazione
+        }
+        else
+        {
+            ret = " Carrello vuoto / Empty order list. <br/> ";
+
+        }
+        return ret;
+        #endregion
+    }
+    protected void chkSupplemento_CheckedChanged(object sender, EventArgs e)
+    {
+        CaricaCarrello();
+    }
+
+
+    protected void btnCodiceSconto_Click(object sender, EventArgs e)
+    {
+        string insertedcode = txtCodiceSconto.Text;
+        string validcode = ConfigManagement.ReadKey("codicesconto"); //Codicesconto in tabella configurazione
+
+        //Carichiamo i codici sconto dello scaglione
+        Dictionary<string, double> codiciscontoscaglione = CercaCodiceScontoSuCarrello(Request, Session);
+
+        //sconto presente su cliente anagrafica
+        ClientiDM cDM = new ClientiDM();
+        Cliente cli = cDM.CaricaClientePerCodicesconto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, insertedcode);
+        if (cli != null && cli.Id_cliente != 0)
+        {
+            Session.Add("codicesconto", insertedcode);
+            lblCodiceSconto.Text = "";
+            // int idcommercialeassociato = cli.Id_cliente;
+            //double percscontocommerciale = 0;
+            //Dictionary<string, double> dict = ClientiDM.SplitCodiciSconto(cli.Codicisconto);
+            //if (dict != null && dict.ContainsKey(insertedcode))
+            //{
+            //    percscontocommerciale = dict[insertedcode];
+            //}
+        }
+        ////facciamo il check dei codici presenti negli scagioni a carrello e verifichiamo se  valido in caso lo inserisco a carrello
+        else if (codiciscontoscaglione != null && codiciscontoscaglione.Count > 0)
+        {
+            //Vediamo se lo sconto è presente tra quelli dello scaglione inserito a carrello
+            if (codiciscontoscaglione.ContainsKey(insertedcode))
+            {
+                Session.Add("codicesconto", insertedcode);
+                lblCodiceSconto.Text = "";
+            }
+        }
+        //vediamo se corrisponde al codice sconto presente in configurazione
+        else if (insertedcode == validcode)
+        {
+            Session.Add("codicesconto", validcode);
+            lblCodiceSconto.Text = "";
+        }
+        //Testo Se presente una percentuale tra quelle associate ai commerciali e nel caso prendo quella (PRIORITA')
+        else
+        {
+            Session.Remove("codicesconto");
+            txtCodiceSconto.Text = "";
+            lblCodiceSconto.Text = references.ResMan("Common", Lingua, "testoErrCodiceSconto").ToString();
+        }
+        CaricaCarrello();
+    }
+
+
+    private void VerificaStatoLoginUtente()
+    {
+        if (!(User.Identity != null && !string.IsNullOrWhiteSpace(User.Identity.Name)))
+        {
+            Session.Add("Errororder", references.ResMan("Common", Lingua, "testoRichiestalogin").ToString());
+            Response.Redirect(references.ResMan("Common", Lingua, "linkLogin").ToString());
+        }
+        ///////////////////////VERIFICA PER DISTRIBUTORI OBBLIGO DI LOGIN E PRESENZA ID CLIENTE ANAGRAFICA
+        usermanager USM = new usermanager();
+        string idcliente = getidcliente(User.Identity.Name); //id cliente associato all'utente
+        if (string.IsNullOrEmpty(idcliente) && !(USM.ControllaRuolo(Page.User.Identity.Name, "GestorePortale")) && !(USM.ControllaRuolo(Page.User.Identity.Name, "WebMaster")))
+        {
+            Response.Redirect("~/Error.aspx?Error=Utente non registrato, contattare il supporto per iscriversi al sistema di acquisto.");
+        }
+        else CaricaDatiCliente();
+    }
+
+    /// <summary>
+    /// Aggiorna l'associazione del carrello ai dati dell'utente loggato ed eventuale codice sconto in sessione!!
+    /// </summary>
+    /// <param name="carrello"></param>
+    private void AggiornaDatiUtenteSuCarrello(CarrelloCollection carrello, long idcliente = 0)
+    {
+        string codicesconto = "";
+        if (Session["codicesconto"] != null)
+        {
+            codicesconto = Session["codicesconto"].ToString();
+        }
+        foreach (Carrello c in carrello)
+        {
+            // if (User.Identity != null && User.Identity.Name != "")
+            c.ID_cliente = idcliente;
+            c.Codicesconto = codicesconto; //metto il codice sconto nella lista prodotti nel carrello
+            AggiornaProdottoCarrello(Request, Session, c.id_prodotto, c.Numero, User.Identity.Name, c.Campo2, c.ID, idcliente, c.Prezzo, c.Datastart, c.Dataend, c.jsonfield1);
+        }
+    }
+    private void RiempiDdlNazione(string valore, DropDownList ddlNazione)
+    {
+        List<Tabrif> nazioni = WelcomeLibrary.UF.Utility.Nazioni.FindAll(delegate (Tabrif _nz) { return _nz.Lingua == Lingua; });
+        nazioni.Sort(new GenericComparer<Tabrif>("Campo1", System.ComponentModel.ListSortDirection.Ascending));
+        ddlNazione.Items.Clear();
+        foreach (Tabrif n in nazioni)
+        {
+            ListItem i = new ListItem(n.Campo1, n.Codice);
+            ddlNazione.Items.Add(i);
+        }
+        try
+        {
+            ddlNazione.SelectedValue = valore.ToUpper();
+        }
+        catch { valore = "IT"; ddlNazione.SelectedValue = valore.ToUpper(); }
+    }
+
+
+    protected void ddlNazione_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        CaricaCarrello();
+    }
+    protected string TestoSezione(string codicetipologia)
+    {
+        string ret = "";
+        WelcomeLibrary.DOM.TipologiaOfferte sezione =
+              WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == codicetipologia); });
+        if (sezione != null)
+        {
+            ret += " " + references.ResMan("Common", Lingua, "testoSezione").ToString() + " \"" + CommonPage.ReplaceAbsoluteLinks(CrealinkElencotipologia(codicetipologia, Lingua, Session)) + "\"";
+        }
+        return ret;
+    }
+    protected string TotaleArticolo(object Numero, object Prezzo)
+    {
+        string ret = "";
+        double n = 0;
+        double p = 0;
+        double.TryParse(Numero.ToString(), out n);
+        double.TryParse(Prezzo.ToString(), out p);
+        System.Globalization.CultureInfo ci = System.Globalization.CultureInfo.CreateSpecificCulture("it-IT");
+        ret = string.Format("{0:N2}", p * n, ci);
+        return ret;
+
+    }
+
+    private void SelezionaClientePerAffitti(CarrelloCollection carrello)
+    {
+        if (carrello != null)
+        {
+            Carrello c = carrello.Find(_c => _c.Offerta != null && !string.IsNullOrWhiteSpace(_c.Offerta.Email));
+            if (c != null)
+            {
+                Offerte o = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, c.Offerta.Id.ToString());
+                if (o != null)
+                {
+                    if (string.IsNullOrWhiteSpace(inpNome.Value))
+                        inpNome.Value = o.Nome_dts;
+                    if (string.IsNullOrWhiteSpace(inpCognome.Value))
+                        inpCognome.Value = o.Cognome_dts;
+                    if (string.IsNullOrWhiteSpace(inpEmail.Value))
+                        inpEmail.Value = o.Email;
+                    if (string.IsNullOrWhiteSpace(inpTel.Value))
+                        inpTel.Value = o.Telefono;
+                }
+            }
+        }
+
+    }
+
+    private string SelezionaNazione(CarrelloCollection carrello, string selcodicenazione = "")
+    {
+        string codicenazione = "";
+        if (carrello != null)
+        {
+            Carrello c = carrello.Find(_c => !string.IsNullOrWhiteSpace(_c.Codicenazione));
+            if (c != null)
+                codicenazione = c.Codicenazione;
+            if (!string.IsNullOrEmpty(selcodicenazione)) codicenazione = selcodicenazione;
+        }
+        try
+        {
+            ddlNazione.SelectedValue = codicenazione;
+        }
+        catch
+        { }
+        return codicenazione;
+    }
+    private void VisualizzaTotaliCarrello(string codicenazione, string codiceprovincia)
+    {
+
+        bool supplementoisole = chkSupplemento.Checked;
+        bool supplementocontrassegno = inpContanti.Checked;
+        TotaliCarrello totali = CalcolaTotaliCarrello(Request, Session, codicenazione, codiceprovincia, supplementoisole, supplementocontrassegno);
+
+        //Dal calcolo dei totali e delle spedizioni viene indicato di bloccare l'acquisto diretto
+        if (totali.Bloccaacquisto)
+            liPaypal.Visible = false;
+        else
+            liPaypal.Visible = true;
+#if false //metodo alternativo di blocco pagamento e invio solo ordine
+
+        if (totali.Bloccaacquisto)
+        {
+            litMessage.Text = references.ResMan("Common", Lingua, "testoBloccoacquisto");
+            divPayment.Visible = false;
+            inpPaypal.Checked = false;
+            inpRichiesta.Checked = true;
+            divOrderrequest.Visible = true;
+        }
+        else
+        {
+            litMessage.Text = "";
+            liPaypal.Visible = true;
+            divPayment.Visible = true;
+            inpPaypal.Checked = true;
+            inpRichiesta.Checked = false;
+            divOrderrequest.Visible = false;
+        } 
+#endif
+
+
+        List<TotaliCarrello> list = new List<TotaliCarrello>();
+        list.Add(totali);
+        rptTotali.DataSource = list;
+        rptTotali.DataBind();
+    }
+
+
+    protected void checkbox_click(object sender, EventArgs e)
+    {
+        plhShipping.Visible = !((CheckBox)sender).Checked;
+        CaricaCarrello();
+
+    }
+
+
 
     private void InsertEventoBooking(CarrelloCollection prodotti, TotaliCarrello totali, string filtrotipologia)
     {
@@ -1577,7 +1628,6 @@ public partial class AspNetPages_Orderpage : CommonPage
         return ret;
     }
 
-
     protected bool ControlloLogin()
     {
         bool ret = true;
@@ -1586,6 +1636,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         return ret;
     }
 
+#if true
     protected void recuperapass()
     {
         usermanager USM = new usermanager();
@@ -1619,6 +1670,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         }
     }
 
+#endif
     /// <summary>
     /// Aggiorna i dati del cliente nel form visualizzato in base ai dati presenti nell'archivio clienti
     /// ( Per i clienti loggati che quindi hanno un utente associato per lo login )
@@ -1722,16 +1774,16 @@ public partial class AspNetPages_Orderpage : CommonPage
         bool esito = true;
         while (esito)
         {
+            System.Threading.Thread.Sleep(1000);
             //creo un Codice Ordine Univoco
             CodiceOrdine = WelcomeLibrary.UF.RandomPassword.Generate(9, 9, new char[][]
-        {
-         WelcomeLibrary.UF.RandomPassword.PASSWORD_CHARS_NUMERIC.ToCharArray()
-        });
+                {
+                WelcomeLibrary.UF.RandomPassword.PASSWORD_CHARS_NUMERIC.ToCharArray()
+                });
             //CodiceOrdine = "ord_" + CodiceOrdine;
 
             eCommerceDM ecom = new eCommerceDM();
             esito = ecom.VerificaPresenzaCodiceOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, CodiceOrdine);
-            System.Threading.Thread.Sleep(2000);
         }
 #endif
 
@@ -1880,6 +1932,10 @@ public partial class AspNetPages_Orderpage : CommonPage
             TestoMail += "Spese di spedizione " + totali.TotaleSpedizione + "  €<br/>";
         if (totali.TotaleSmaltimento != 0)
             TestoMail += "<br/>Spese di smaltimeto(PFU) " + totali.TotaleSmaltimento + "  €<br/>";
+        if (totali.TotaleAssicurazione != 0)
+            TestoMail += "Totale Assicurazione " + totali.TotaleAssicurazione + "  €<br/>";
+        if (totali.Nassicurazioni != 0)
+            TestoMail += "( Assicurazione per " + totali.Nassicurazioni + "  Persone )<br/>";
         TestoMail += "<br/><b>TOTALE ORDINE COMPLESSIVO: </b>" + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
         if (totali.Percacconto != 100)
         {
@@ -2024,6 +2080,10 @@ public partial class AspNetPages_Orderpage : CommonPage
             TestoMail += "Spese di spedizione " + totali.TotaleSpedizione + "  €<br/>";
         if (totali.TotaleSmaltimento != 0)
             TestoMail += "<br/>Spese di smaltimeto(PFU) " + totali.TotaleSmaltimento + "  €<br/>";
+        if (totali.TotaleAssicurazione != 0)
+            TestoMail += "Totale Assicurazione " + totali.TotaleAssicurazione + "  €<br/>";
+        if (totali.Nassicurazioni != 0)
+            TestoMail += "( Assicurazione per " + totali.Nassicurazioni + "  Persone )<br/>";
         TestoMail += "<br/><b>TOTALE ORDINE COMPLESSIVO: </b>" + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
         if (totali.Percacconto != 100)
         {

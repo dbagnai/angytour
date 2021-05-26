@@ -4,6 +4,8 @@
 
 <%@ MasterType VirtualPath="~/AspNetPages/MasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <!--Stripe.js injects the Card Element DA ABILITARE PER USARE STRIPE -->
+    <%--<script src="https://js.stripe.com/v3/"></script>--%>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container">
@@ -16,8 +18,7 @@
                 <%= references.ResMan("basetext", Lingua,"testoordine1") %>
                 <h4>
                     <asp:Label Style="font-size: 2em" Text="" ID="output" runat="server" /></h4>
-                <asp:ValidationSummary runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium"
-                    ShowValidationErrors="true" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<br/><style> span.errorvalidateclass + * {  border: 2px solid red; }  </style>" %>' />
+                <asp:ValidationSummary ID="validsummary" runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="true" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<br/><style> span.errorvalidateclass + * {  border: 2px solid red; }  </style>" %>' />
                 <%--      <asp:ValidationSummary runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium"  
                             ShowValidationErrors="true"  HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError")  %>' />--%>
             </div>
@@ -101,7 +102,7 @@
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpCognome" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' />
                                     </div>
                                 </div>
-                                       <div class="form-row row  ">
+                                <div class="form-row row  ">
                                     <div class="col-6 form-group">
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"FormTesto4") %>
@@ -160,7 +161,7 @@
                                             CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" />
                                     </div>
                                 </div>
-                                <div class="form-row row d-none">
+                                <div class="form-row row d-block">
                                     <div class="col-12 form-group">
                                         <label class="checkbox" style="margin: 5px 0 0 -2.5px;">
                                             <asp:CheckBox EnableViewState="true" Text='<%# references.ResMan("Common", Lingua,"TestoSupplementoSpedizioni") %>' runat="server"
@@ -168,7 +169,7 @@
                                         </label>
                                     </div>
                                 </div>
-                          
+
 
                                 <div class="form-row row">
                                     <div class="col-6 form-group">
@@ -198,23 +199,24 @@
                         </div>
 
                         <%-- FORM INDIRIZZO SPEDIZIONE --%>
-                        <div class="widget shop-shipping" runat="server" visible="true">
-                            <h3>
-                                <%= references.ResMan("Common", Lingua,"IndirizzoSpedizione") %> </h3>
+                        <div class="widget shop-shipping d-block">
+                            <h3><%= references.ResMan("Common", Lingua,"IndirizzoSpedizione") %> </h3>
                             <div class="form-row row">
-                                <div class="col-12 col-sm-6 form-group">
-
+                                <div class="col-12">
                                     <label class="checkbox" style="margin: 5px 0 0 -2.5px;">
-                                        <asp:CheckBox EnableViewState="true" Text='<%# references.ResMan("Common", Lingua,"testochkSpedizione") %>' runat="server"
-                                            ID="chkSpedizione" Checked="true" AutoPostBack="true" OnCheckedChanged="checkbox_click" />
+                                        <input type="checkbox" enableviewstate="true" class="form-control" runat="server" clientidmode="Static" id="chkSpedizione" checked="true" />
+                                        <%=  references.ResMan("Common", Lingua,"testochkSpedizione") %><br />
                                     </label>
-
+                                    <script>
+                                        $("[id$='chkSpedizione']").on('change', function () {
+                                            if ($("[id$='chkSpedizione']")[0].checked)
+                                                $("[id$='plhShipping']").hide();
+                                            else $("[id$='plhShipping']").show();
+                                        });
+                                    </script>
                                 </div>
                             </div>
-
-
-                            <asp:PlaceHolder ID="plhShipping" runat="server" Visible="false">
-
+                            <div id="plhShipping" style="display: none" runat="server" clientidmode="Static">
                                 <div class="form-row row">
                                     <div class="col-6 form-group">
                                         <label>
@@ -272,7 +274,7 @@
                                     <div class="col-12 col-sm-6 form-group">
                                     </div>
                                 </div>
-                            </asp:PlaceHolder>
+                            </div>
                         </div>
 
                         <%-- FORM NOTE --%>
@@ -304,6 +306,13 @@
                             </div>
                         </div>
 
+
+                        <%-- NORME GENERALI DI ACQUISTO --%>
+                        <div class="row">
+                            <div class="col-lg-10 mt-4">
+                                <%= references.ResMan("basetext", Lingua,"testoordine2") %>
+                            </div>
+                        </div>
                         <%-- TABELLA RIEPILOGO ORDINE --%>
                         <div class="row">
                             <div class="col-12 mt-4">
@@ -499,13 +508,6 @@
                         </div>
 
 
-
-                        <%-- NORME GENERALI DI ACQUISTO --%>
-                        <div class="row">
-                            <div class="col-lg-10 mt-4">
-                                <%= references.ResMan("basetext", Lingua,"testoordine2") %>
-                            </div>
-                        </div>
                     </div>
 
                     <%-- COLONNA METODO PAGAMENTO E ACQUISTO --%>
@@ -525,90 +527,112 @@
                                     <script>
                                         function refreshcarrello(btn, args) {
                                             bloccaSblocca('divOrderformOverlay');
+                                            resetValidationState();
                                             __doPostBack('refreshcarrello', args);
                                         }
                                         function bloccaSblocca(idDiv) {
-
                                             $('#' + idDiv).attr('style', 'position: absolute; top: 0; bottom: 0; z-index: 2; height:100%; width:100%; background-color:rgba(0,0,0,0.2);');
                                         }
                                     </script>
-                                    <ul class="unstyled m-0 p-0">
-                                        <li style="display: block">
-                                            <div class="clearfix" style="margin-bottom: 20px">
-                                                <div class="float-left mt-1 mr-2" style="width: 25px">
-                                                    <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" disabled="false" checked="false" name="payment_method" value="contanti" onclick="refreshcarrello(this, 'inpContanti')"
-                                                        runat="server" id="inpContanti" />
+                                    <div class="col-12 mx-auto px-0 py-2">
+                                        <ul class="unstyled m-0 p-0">
+                                            <li style="display: block">
+                                                <div class="clearfix" style="margin-bottom: 20px">
+                                                    <div class="float-left mt-1 mr-2" style="width: 25px">
+                                                        <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" disabled="false" checked="false" name="payment_method" value="contanti"  validationgroup="none"  autopostback="true"  onclick="refreshcarrello(this, 'inpContanti')"
+                                                            runat="server" id="inpContanti"  />
+                                                    </div>
+                                                    <div class="float-left" style="width: calc(100% - 30px - .5rem);">
+                                                        <b><%= references.ResMan("Common", Lingua,"txtcontanti") %></b>
+                                                        <br />
+                                                        <%= references.ResMan("Common", Lingua,"chkcontanti") %>
+                                                    </div>
                                                 </div>
-                                                <div class="float-left" style="width: calc(100% - 30px - .5rem);">
-                                                    <b><%= references.ResMan("Common", Lingua,"txtcontanti") %></b>
-                                                    <br />
-                                                    <%= references.ResMan("Common", Lingua,"chkcontanti") %>
+                                            </li>
+                                            <li style="display: block">
+                                                <div class="clearfix" style="margin-bottom: 20px">
+                                                    <div class="float-left mt-0 mr-2" style="width: 25px">
+                                                        <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" name="payment_method" value="bacs" checked="false" onclick="refreshcarrello(this, 'inpBonifico')" validationgroup="none" autopostback="true" runat="server" id="inpBonifico"  />
+                                                    </div>
+                                                    <div class="float-left" style="width: calc(100% - 30px - .5rem); margin-top: 6px;">
+                                                        <b><%= references.ResMan("Common", Lingua,"txtbacs") %></b><br />
+                                                        <%= references.ResMan("Common", Lingua,"chkbacs") %>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                        <li style="display: block">
-                                            <div class="clearfix" style="margin-bottom: 20px">
-                                                <div class="float-left mt-0 mr-2" style="width: 25px">
-                                                    <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" name="payment_method" value="bacs" checked="false" onclick="refreshcarrello(this, 'inpBonifico')" autopostback="true" runat="server" id="inpBonifico" />
-                                                </div>
-                                                <div class="float-left" style="width: calc(100% - 30px - .5rem); margin-top: 6px;">
-                                                    <b><%= references.ResMan("Common", Lingua,"txtbacs") %></b><br />
-                                                    <%= references.ResMan("Common", Lingua,"chkbacs") %>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <%--<li>
-                                    <input type="radio" id="payment_method_cheque" class="input-radio" name="payment_method" value="cheque">
-                                    <label for="payment_method_cheque">
-                                        <b>Cheque Payment</b>
-                                        Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.
-                                    </label>
-                                </li>--%>
+                                            </li>
+                                            <%--<li>
+                                                <input type="radio" id="payment_method_cheque" class="input-radio" name="payment_method" value="cheque">
+                                                <label for="payment_method_cheque">
+                                                    <b>Cheque Payment</b>
+                                                    Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.
+                                                </label>
+                                            </li>--%>
 
-                                        <li style="display: none">
-                                            <div class="clearfix" style="margin-bottom: 20px">
-                                                <div class="float-left mt-1 mr-2" style="width: 25px;">
-                                                    <input type="radio" class="form-control" style="background-color: transparent" value="payway" runat="server" id="inpPayway" autopostback="true" />
+                                            <li style="display: none">
+                                                <div class="clearfix" style="margin-bottom: 20px">
+                                                    <div class="float-left mt-1 mr-2" style="width: 25px;">
+                                                        <input type="radio" class="form-control" style="background-color: transparent" value="payway" runat="server" id="inpPayway" autopostback="true" validationgroup="none"/>
+                                                    </div>
+                                                    <div class="float-left" style="width: calc(100% - 30px - .5rem);">
+                                                        <b><%= references.ResMan("Common", Lingua,"txtpayway") %></b><br />
+                                                        <%= references.ResMan("Common", Lingua,"chkpayway") %>
+                                                    </div>
                                                 </div>
-                                                <div class="float-left" style="width: calc(100% - 30px - .5rem);">
-                                                    <b><%= references.ResMan("Common", Lingua,"txtpayway") %></b><br />
-                                                    <%= references.ResMan("Common", Lingua,"chkpayway") %>
-                                                </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                            <li style="display: block" id="liPaypal" runat="server">
+                                                <div class="clearfix" style="margin-bottom: 25px">
+                                                    <div class="float-left mt-0 mr-2" style="width: 25px;">
+                                                        <input type="radio" class="form-control" style="background-color: transparent" disabled="false" checked="false" name="payment_method" value="paypal" runat="server" validationgroup="none" autopostback="true" id="inpPaypal" onclick="refreshcarrello(this, 'inpPaypal')"  />
+                                                    </div>
 
-                                        <li style="display: block" id="liPaypal" runat="server">
-                                            <div class="clearfix" style="margin-bottom: 25px">
-                                                <div class="float-left mt-0 mr-2" style="width: 25px;">
-                                                    <input type="radio" class="form-control" style="background-color: transparent" disabled="false" checked="false" name="payment_method" value="paypal" runat="server" autopostback="true" id="inpPaypal" onclick="refreshcarrello(this, 'inpPaypal')" />
+                                                    <div class="float-left" style="width: calc(100% - 30px - .5rem); margin-top: 6px;">
+                                                        <b><%= references.ResMan("Common", Lingua,"txtpaypal") %></b>
+                                                        <%--icone-carte di credito--%>
+                                                        <div class="container" style="">
+                                                            <div class="row justify-content-between d-flex justify-content-center my-2" style="height: 40px;">
+                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <%= references.ResMan("Common", Lingua,"chkpaypal") %>
+                                                    </div>
                                                 </div>
-
-                                                <div class="float-left" style="width: calc(100% - 30px - .5rem); margin-top: 6px;">
-                                                    <b><%= references.ResMan("Common", Lingua,"txtpaypal") %></b>
-                                                    <%--icone-carte di credito--%>
-                                                    <div class="container" style="">
-                                                        <div class="row justify-content-between d-flex justify-content-center my-2" style="height: 40px;">
-                                                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
-                                                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
-                                                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
-                                                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
-                                                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
-                                                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
-                                                            <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                            </li>
+                                            <li style="display: none" id="listripe" runat="server">
+                                                <div class="clearfix" style="margin-bottom: 20px">
+                                                    <div class="float-left mt-0 mr-2" style="width: 25px;">
+                                                        <input type="radio" class="form-control" style="background-color: transparent" disabled="false" checked="false" name="payment_method" value="stripe" runat="server" validationgroup="none" autopostback="true" id="inpstripe" onclick="refreshcarrello(this, 'inpstripe')" />
+                                                    </div>
+                                                    <div class="float-left" style="width: calc(100% - 30px - .5rem);">
+                                                        <%= references.ResMan("Common", Lingua,"chkstripe") %>
+                                                        <%--icone-carte di credito--%>
+                                                        <div>
+                                                            <div class="row justify-content-between d-flex justify-content-center my-2" style="height: 40px;">
+                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <%= references.ResMan("Common", Lingua,"chkpaypal") %>
                                                 </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-
+                                            </li>
+                                        </ul>
+                                    </div>
                                     <div class="widget bill-payment p-2" id="divOrderrequest" runat="server" visible="false">
                                         <ul class="unstyled m-0 p-0">
                                             <li>
                                                 <div class="clearfix" style="margin-bottom: 20px">
                                                     <div class="float-left mt-1 mr-2" style="width: 25px">
-                                                        <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" disabled="false" checked="false" name="payment_method" value="richiesta" onclick="refreshcarrello(this, 'inpRichiesta')"
+                                                        <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" disabled="false" checked="false" name="payment_method" value="richiesta" validationgroup="none"  onclick="refreshcarrello(this, 'inpRichiesta')"
                                                             runat="server" id="inpRichiesta" />
                                                     </div>
                                                     <div class="float-left" style="width: calc(100% - 30px - .5rem);">
@@ -620,10 +644,74 @@
                                             </li>
                                         </ul>
                                     </div>
-
-                                    <div class="col-12 col-sm-8 mx-auto px-0">
-                                        <asp:Button ID="btnConvalida" runat="server" Text='<%# references.ResMan("Common", Lingua,"OrdineEsegui") %>' class="btn w-100" OnClick="btnConvalidaOrdine" />
+                                    <%--  BLOCCO ACCETTAZIONE CONDIZIONI DI VENDITA--%>
+                                    <div class="form-row row d-none">
+                                        <div class="col-12">
+                                            <label class="checkbox" style="margin: 5px 0 0 -2.5px;">
+                                                <input type="checkbox" enableviewstate="true" class="form-control" runat="server" clientidmode="static" id="chkcondizioni" />
+                                                <%= references.ResMan("Common", Lingua,"chkcondizioni") %><br />
+                                            </label>
+                                            <div class="pt-2" style="font-weight: bold; color: red">
+                                                <asp:Label ID="outputcondizioni" ClientIDMode="Static" Text="" runat="server" />
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div class="col-12 col-sm-8 mx-auto px-0 py-1" id="stdbutton">
+                                        <!- Normal button -->
+                                        <button id="btnConvalida" type="button" class="btn w-100" runat="server" onclick="ConfirmValidationOrder(this);"><%= references.ResMan("Common", Lingua,"OrdineEsegui") %> </button>
+                                        <asp:Button ID="btnConvalidaSrv" ClientIDMode="Static" Style="display: none" runat="server" OnClick="btnConvalidaOrdine" />
+                                    </div>
+                                    <div class="col-12 col-sm-8 mx-auto px-0 py-1" id="stripebutton">
+                                        <!- Stripe button -->
+                                        <button type="button" class="btn w-100" id="stripeproceedbtn" onclick="javascript:executeorder(this)">
+                                            <%= references.ResMan("Common", Lingua,"OrdineEsegui") %> Stripe
+                                        </button>
+                                        <p id="card-error-pre" class="py-1" role="alert" style="color: red"></p>
+                                    </div>
+                                    <script>
+                                        var stripechk = false;
+                                        if ($("[id$='inpstripe']").length != 0)
+                                            stripechk = $("[id$='inpstripe']")[0].checked; //chkSpedizione
+                                        if (stripechk == true) { $("[id$='stripebutton']").show(); $("[id$='stdbutton']").hide(); }
+                                        else { $("[id$='stripebutton']").hide(); $("[id$='stdbutton']").show(); }
+                                    </script>
+                                    <script>
+                                        function ConfirmValidationOrder(elembtn) {
+                                          <%--  var chkorder = document.getElementById("<%= chkcondizioni.ClientID  %>");
+                                            var outorder = document.getElementById("<%= outputcondizioni.ClientID  %>");
+
+                                            if (!chkorder.checked) {
+                                                outorder.innerHTML = '<%= references.ResMan("Common", Lingua,"errchkcondizioni")%>';
+                                                $('html,body').animate({
+                                                    scrollTop: $("#" + "<%= outputcondizioni.ClientID  %>").offset().top - 190
+                                                }, 'fast');
+                                                return false;
+                                            } else { outorder.innerHTML = ''; }--%>
+
+                                            if (Page_ClientValidate("")) {
+                                                /*do work and go for postback*/
+                                                console.log('ok validated');
+                                                $(elembtn).attr("disabled", "")
+                                                ///////////////////////////////////////////////////////////////////////
+                                                //Invio con post back (metodo originale)
+                                                var buttpost = document.getElementById("<%= btnConvalidaSrv.ClientID  %>");
+                                                //$(elembtn).html("Wait ..");
+                                                document.getElementById("<%= btnConvalidaSrv.ClientID  %>").click();
+                                                ////////////////////////////////////////////////////////////////////////
+                                            } else {
+                                                $('html,body').animate({
+                                                    scrollTop: $("#" + "<%= validsummary.ClientID  %>").offset().top - 160
+                                                }, 'fast');
+                                                console.log('not  validated');
+                                                //return false;
+                                            }
+                                        }
+                                        function resetValidationState() {
+                                            // clear any postback blocks from client validation of asp.net validators, which occur after validation fails:
+                                            window.Page_BlockSubmit = false;
+                                        }
+                                    </script>
+
                                     <div>
                                         <%= references.ResMan("Common", Lingua,"notespedizioni1") %>
                                     </div>
@@ -637,4 +725,68 @@
             </div>
         </asp:Panel>
     </div>
+    <%--SEZIONE CONTROLLO STRIPE MODAL--%>
+    <!-- Modal stripe payments-->
+    <section id="sectionfilters">
+        <!--<div class="container searchbar-container py-3 text-center"><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#stripeModal"> Apri stripe </button></div>-->
+        <div class="modal fade bd-example-modal-lg" id="stripeModal" tabindex="-1" role="dialog" aria-labelledby="stripeModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-lg  " role="document">
+                <div class="modal-content position-relative">
+                    <div class="modal-header" style="background-color: #ccc">
+                        <%--     <div class="float:left" style="background: url('/images/logo-dark.png') center bottom no-repeat !important; height: 50px; width: 50px; background-size: 110px !important;"></div>--%>
+                        <h3 class="mbr-section-subtitle modal-title" id="stripeModalLabel">Pagamento ordine</h3>
+                        <br />
+
+                        <button class="close" type="button" data-dismiss="modal"><span aria-hidden="true">&times;</span> </button>
+                    </div>
+                    <div class="modal-body " style="background-color: #ddd; min-height: 220px; text-align: center">
+                        <!-- Modal stripe card and buttot for payment -->
+                        <p class="lead d-block">Inserisci i dati della carta per procedere al pagamento</p>
+                        <!-- Display a payment form -->
+                        <div id="payment-form-div">
+                            <%--  <input type="text" id="email" placeholder="Email address" />--%>
+                            <div id="card-element">
+                            </div>
+                            <button type="button" id="submit-payment-button">
+                                <div class="spinnerstripe hidden" id="spinnerstripe"></div>
+                                <span id="button-text">Paga adesso</span>
+                            </button>
+                            <p id="card-error" role="alert"></p>
+                            <p id="card-completecode"></p>
+                            <p class="result-message hidden">
+                                <br />
+                                <a href="" target="_blank">Link per verifica sul Stripe dashboard (solo per sviluppo).</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="modal-footer position-relative" style="background-color: #ddd">
+                        <!--<div class="w-100">
+                        <div class="row justify-content-center">
+                            <div class="col-auto py-1">
+                            </div>
+                        </div>
+                    </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+    </section>
+    <script>
+        //PREPARO I MESSAGGI DI VALIDAZIONE PER LA FUNZIONE paymentmng.js
+        var contactdatasgeneral = {};
+        contactdatasgeneral.msgnome = '<%= references.ResMan("Common", Lingua, "FormTesto2Err") %>';
+        contactdatasgeneral.msgcognome =  '<%= references.ResMan("Common", Lingua, "FormTesto3Err") %>';
+        contactdatasgeneral.msgindirizzo =  '<%= references.ResMan("Common", Lingua, "FormTesto10Err") %>';
+        contactdatasgeneral.msgcomune =  '<%= references.ResMan("Common", Lingua, "FormTesto8Err") %>';
+        contactdatasgeneral.msgprovincia =  '<%= references.ResMan("Common", Lingua, "FormTesto7Err") %>';
+        contactdatasgeneral.masgcap =  '<%= references.ResMan("Common", Lingua, "FormTesto9Err") %>';
+        contactdatasgeneral.msgemail =  '<%= references.ResMan("Common", Lingua, "FormTesto4Err") %>';
+        contactdatasgeneral.msgtel =  '<%= references.ResMan("Common", Lingua, "FormTesto11Err") %>';
+        contactdatasgeneral.msgcondizioni =  '<%= references.ResMan("Common", Lingua, "chkcondizioni") %>';
+        function showModalStripe() {
+            $('#stripeModal').modal().show();  //modal per il pagamento stripe
+        }
+    </script>
+    <%-- FINE SEZIONE CONTROLLO STRIPE MODAL--%>
 </asp:Content>

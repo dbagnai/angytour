@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PortaleBaseModel", "PortaleBaseModel\", "{AC1B770D-C9BF-4A87-9A82-00A6A93B7FD5}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PortaleBaseModel(2)", "PortaleBaseModel\", "{AC1B770D-C9BF-4A87-9A82-00A6A93B7FD5}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = ""
 		SccAuxPath = ""
 		SccLocalPath = ""
 		SccProvider = ""
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
 		ProjectReferences = "{2fa43dec-c17c-4616-b3cd-d6e0c12f938a}|TechInfoSystems.Data.SQLiteProvider.dll;{83832bbc-64ad-4f93-9726-9678c027ea80}|WelcomeLibrary.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/PortaleBaseModel"
 		Debug.AspNetCompiler.PhysicalPath = "PortaleBaseModel\"

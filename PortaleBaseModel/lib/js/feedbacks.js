@@ -99,171 +99,179 @@ function commentclosure(varname) {
             else
                 idpost = 0;
         }
+
+        //se presente un id  bloccare l'avanzamento sotto e attendere la callback 
         var idcliente = $.getQueryString("idcliente"); //Se in querystring c'è un cliente lo carico per la preselezione nei campi di inserimento
-        if (idcliente != null && idcliente != undefined && idcliente.length != 0) {
-            //Caricare nome cognome email cliente e inseririli nel form preinserimento
-            getcliente(idcliente, function (ret) {
-                if (ret != null && ret.length > 0) { mainscope.emailcliente = ret[0]["email"]; mainscope.nomecliente = ret[0]["nome"]; mainscope.cognomecliente = ret[0]["cognome"]; }
-            });
-        }
+        //Caricare nome cognome email cliente e inseririli nel form preinserimento
+        getcliente(idcliente, function (ret) {
 
-        mainscope.objfiltro['id'] = idpost;
-        mainscope.idpost = idpost;
-        mainscope.idcontainer = idcontainer;
-
-        var tmpfilter = "";
-        if (username != null && username != '' && mainscope.viewmode == 0) {
-            mainscope.templatehtml = 'feedbacklist-admin.html';
-            mainscope.objfiltro['logged'] = true;
-            tmpfilter = mainscope.objfiltro;
-        }
-        if (mainscope.commentsvisible) tmpfilter = mainscope.objfiltro;
-
-        caricacommentsbyidpost(lng, tmpfilter, function (ret, mainscope) {
-            if (mainscope.onlytotals) {
-                if (mainscope.localcontainer.totaleapprovati > 0) {
-
-                    $("#" + mainscope.idcontainer).prepend("<span class='feedTotals'  id='" + mainscope.idcontainer + "-totals'></span>");
-                    $("#" + mainscope.idcontainer + "-totals").prepend(" (" + mainscope.localcontainer.totaleapprovati + ") <span class=\"rating\" disabled data-default-rating=" + mainscope.localcontainer.totalemediastars + "></span><br/><br/>");
-                    $("#" + mainscope.idcontainer + "-totals").prepend(GetResourcesValue('feedbacks1'));
-                    $("#" + mainscope.idcontainer + "-totals").prepend(GetResourcesValue('feedbackstitle1'));
-                    inizializzastars();
-
-                    //inseriamo i microdati per aggregaterating  
-                    //<div itemprop="aggregateRating" itemtype="http://schema.org/AggregateRating" itemscope><meta itemprop="reviewCount" content="89" /> <meta itemprop="ratingValue" content="4.4" /></div>
-                    $("#" + mainscope.idcontainer + "-totals").prepend('<div itemprop="aggregateRating" itemtype="http://schema.org/AggregateRating" itemscope><meta itemprop="reviewCount" content="' + mainscope.localcontainer.totaleapprovati + '" /> <meta itemprop="ratingValue" content="' + mainscope.localcontainer.totalemediastars + '" /></div>');
-
-                }
+            if (ret != null && ret.length > 0) {
+                mainscope.emailcliente = ret[0]["email"];
+                mainscope.nomecliente = ret[0]["nome"];
+                mainscope.cognomecliente = ret[0]["cognome"];
             }
-            else
-                ShowList(mainscope.templatehtml, mainscope.idcontainer, mainscope.idcontainer + '-ctrl', mainscope.localcontainer.list,
-                    function () {
-                        switch (mainscope.viewmode) {
-                            case 1:     //Visualizzazione tipo scroller
-                                //inizializzaiomo lo scroller
-                                inizializzastars();
-                                //Inizializzo lo scroller
-                                jQuery(document).ready(function () {
-                                    var owl = jQuery("#" + mainscope.idcontainer + '-ctrl');
-                                    owl.owlCarousel({
-                                        items: [1],
-                                        autoPlay: 5000,
-                                        itemsDesktop: [1199, 1], // i/tems between 1000px and 601px
-                                        itemsTablet: [979, 1], // items between 600 and 0;
-                                        itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
-                                        slideSpeed: 1000,
-                                        afterInit: lazyLoad,
-                                        afterMove: lazyLoad
-                                    });
-                                    // Custom Navigation Events
-                                    jQuery("#" + mainscope.idcontainer + '-ctrl' + "next").click(function () {
-                                        owl.trigger('owl.next');
-                                    });
-                                    jQuery("#" + mainscope.idcontainer + '-ctrl' + "prev").click(function () {
-                                        owl.trigger('owl.prev');
-                                    });
-                                });
-                                break;
-                            //case 2: //Visualizzazione tipo lista senza form inserimento
-                            //    var aperto = $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').hasClass('show');
 
-                            //    //////////////////////////////////////////////////////////////////////
-                            //    //TOTALI Visualizziamo il riepilogo e la media totale delle recenzioni
-                            //    //////////////////////////////////////////////////////////////////////
-                            //    if ((mainscope.commentsvisible) || (username != null && username != '')) {
-                            //        $("#" + mainscope.idcontainer + '-ctrl').prepend(" (" + mainscope.localcontainer.totaleapprovati + ") <span class=\"rating\" disabled data-default-rating=" + mainscope.localcontainer.totalemediastars + "></span><br/><br/>");
-                            //        $("#" + mainscope.idcontainer + '-ctrl').prepend(GetResourcesValue('feedbacks'));
-                            //        //  $("#" + mainscope.idcontainer+ '-ctrl').prepend(GetResourcesValue('feedbackstitle'));
-                            //        inizializzastars();
-                            //    }
-                            //    /////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////
+            mainscope.objfiltro['id'] = idpost;
+            mainscope.idpost = idpost;
+            mainscope.idcontainer = idcontainer;
+            var tmpfilter = "";
+            if (username != null && username != '' && mainscope.viewmode == 0) {
+                mainscope.templatehtml = 'feedbacklist-admin.html';
+                mainscope.objfiltro['logged'] = true;
+                tmpfilter = mainscope.objfiltro;
+            }
+            if (mainscope.commentsvisible) tmpfilter = mainscope.objfiltro;
+            caricacommentsbyidpost(lng, tmpfilter, function (ret, mainscope) {
+                if (mainscope.onlytotals) {
+                    if (mainscope.localcontainer.totaleapprovati > 0) {
 
-                            //    ///////////////////////////
-                            //    //GESTIONE PAGINAZIONE/////
-                            //    ///////////////////////////
-                            //    if (mainscope.enablepager && $("#" + mainscope.idcontainer + '-ctrl').length > 0) {
-                            //        $("#" + mainscope.idcontainer + '-ctrl').append("<li><div  id='" + mainscope.idcontainer + "-pager'></div></li>");
-                            //        inizializzapager(mainscope.idcontainer + '-pager');
-                            //    }
-                            //    ////////////////////////////////////
-                            //    inizializzastars();
-                            //    $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').addClass('show');//Apro l'accordion per regolare le altezze delle textarea 
-                            //    $('textarea').autoHeight();
-                            //    if (!aperto)
-                            //        $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').removeClass('show');//Chiudo l'accordion dopo aver ricalcolato le altezze se necessario
-                            //    ///////////////////////////////////
+                        $("#" + mainscope.idcontainer).prepend("<span class='feedTotals'  id='" + mainscope.idcontainer + "-totals'></span>");
+                        $("#" + mainscope.idcontainer + "-totals").prepend(" (" + mainscope.localcontainer.totaleapprovati + ") <span class=\"rating\" disabled data-default-rating=" + mainscope.localcontainer.totalemediastars + "></span><br/><br/>");
+                        $("#" + mainscope.idcontainer + "-totals").prepend(GetResourcesValue('feedbacks1'));
+                        $("#" + mainscope.idcontainer + "-totals").prepend(GetResourcesValue('feedbackstitle1'));
+                        inizializzastars();
 
-                            //    break;
+                        //inseriamo i microdati per aggregaterating  
+                        //<div itemprop="aggregateRating" itemtype="http://schema.org/AggregateRating" itemscope><meta itemprop="reviewCount" content="89" /> <meta itemprop="ratingValue" content="4.4" /></div>
+                        $("#" + mainscope.idcontainer + "-totals").prepend('<div itemprop="aggregateRating" itemtype="http://schema.org/AggregateRating" itemscope><meta itemprop="reviewCount" content="' + mainscope.localcontainer.totaleapprovati + '" /> <meta itemprop="ratingValue" content="' + mainscope.localcontainer.totalemediastars + '" /></div>');
 
-                            default:
-                                /////////////////////////////////////////////////////////////////
-                                //TOTALI Visualizziamo il riepilogo e la media totale delle recenzioni
-                                /////////////////////////////////////////////////////////////////
-                                if ((mainscope.commentsvisible) || (username != null && username != '')) {
-                                    $("#" + mainscope.idcontainer).prepend("<div class='feedTotals container pt-1'  id='" + mainscope.idcontainer + "-totals'></div>");
-                                    $("#" + mainscope.idcontainer + "-totals").prepend(" (" + mainscope.localcontainer.totaleapprovati + ") <span class=\"rating\" disabled data-default-rating=" + mainscope.localcontainer.totalemediastars + "></span><br/><br/>");
-                                    $("#" + mainscope.idcontainer + "-totals").prepend(GetResourcesValue('feedbacks'));
-                                    $("#" + mainscope.idcontainer + "-totals").prepend(GetResourcesValue('feedbackstitle'));
+                    }
+                }
+                else
+                    ShowList(mainscope.templatehtml, mainscope.idcontainer, mainscope.idcontainer + '-ctrl', mainscope.localcontainer.list,
+                        function () {
+                            switch (mainscope.viewmode) {
+                                case 1:     //Visualizzazione tipo scroller
+                                    //inizializzaiomo lo scroller
                                     inizializzastars();
-                                }
-                                /////////////////////////////////////////////////////////////////
+                                    //Inizializzo lo scroller
+                                    jQuery(document).ready(function () {
+                                        var owl = jQuery("#" + mainscope.idcontainer + '-ctrl');
+                                        owl.owlCarousel({
+                                            items: [1],
+                                            autoPlay: 5000,
+                                            itemsDesktop: [1199, 1], // i/tems between 1000px and 601px
+                                            itemsTablet: [979, 1], // items between 600 and 0;
+                                            itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
+                                            slideSpeed: 1000,
+                                            afterInit: lazyLoad,
+                                            afterMove: lazyLoad
+                                        });
+                                        // Custom Navigation Events
+                                        jQuery("#" + mainscope.idcontainer + '-ctrl' + "next").click(function () {
+                                            owl.trigger('owl.next');
+                                        });
+                                        jQuery("#" + mainscope.idcontainer + '-ctrl' + "prev").click(function () {
+                                            owl.trigger('owl.prev');
+                                        });
+                                    });
+                                    break;
+                                //case 2: //Visualizzazione tipo lista senza form inserimento
+                                //    var aperto = $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').hasClass('show');
 
-                                ///////////////////////////
-                                //GESTIONE PAGINAZIONE//
-                                ///////////////////////////
-                                if (mainscope.enablepager && $("#" + mainscope.idcontainer + '-ctrl').length > 0) {
-                                    $("#" + mainscope.idcontainer + '-ctrl').append("<li><div  id='" + mainscope.idcontainer + "-pager'></div></li>");
-                                    inizializzapager(mainscope.idcontainer + '-pager');
-                                }
-                                ///////////////////////////
+                                //    //////////////////////////////////////////////////////////////////////
+                                //    //TOTALI Visualizziamo il riepilogo e la media totale delle recenzioni
+                                //    //////////////////////////////////////////////////////////////////////
+                                //    if ((mainscope.commentsvisible) || (username != null && username != '')) {
+                                //        $("#" + mainscope.idcontainer + '-ctrl').prepend(" (" + mainscope.localcontainer.totaleapprovati + ") <span class=\"rating\" disabled data-default-rating=" + mainscope.localcontainer.totalemediastars + "></span><br/><br/>");
+                                //        $("#" + mainscope.idcontainer + '-ctrl').prepend(GetResourcesValue('feedbacks'));
+                                //        //  $("#" + mainscope.idcontainer+ '-ctrl').prepend(GetResourcesValue('feedbackstitle'));
+                                //        inizializzastars();
+                                //    }
+                                //    /////////////////////////////////////////////////////////////////
 
-                                /////////////////////////////////////////////////////////////////
-                                //Inseriamo il tool per permettere l'inserimento di un comment
-                                /////////////////////////////////////////////////////////////////
-                                if (!mainscope.noinsertform) {
-                                    if (mainscope.insertformup)
-                                        $("#" + mainscope.idcontainer).prepend("<div  id='" + mainscope.idcontainer + "-head'></div>");
-                                    else
-                                        $("#" + mainscope.idcontainer).append("<div  id='" + mainscope.idcontainer + "-head'></div>");
+                                //    ///////////////////////////
+                                //    //GESTIONE PAGINAZIONE/////
+                                //    ///////////////////////////
+                                //    if (mainscope.enablepager && $("#" + mainscope.idcontainer + '-ctrl').length > 0) {
+                                //        $("#" + mainscope.idcontainer + '-ctrl').append("<li><div  id='" + mainscope.idcontainer + "-pager'></div></li>");
+                                //        inizializzapager(mainscope.idcontainer + '-pager');
+                                //    }
+                                //    ////////////////////////////////////
+                                //    inizializzastars();
+                                //    $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').addClass('show');//Apro l'accordion per regolare le altezze delle textarea 
+                                //    $('textarea').autoHeight();
+                                //    if (!aperto)
+                                //        $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').removeClass('show');//Chiudo l'accordion dopo aver ricalcolato le altezze se necessario
+                                //    ///////////////////////////////////
 
-                                    var dummyarray = [];
-                                    //Precompliamo i campi necessari per il form di inserimento
-                                    var testonome = mainscope.nomecliente + ' ' + mainscope.cognomecliente;
-                                    if (mainscope.localcontainer.item.hasOwnProperty('Nome'))
-                                        mainscope.localcontainer.item['Nome'] = testonome.trim();
-                                    if (mainscope.localcontainer.item.hasOwnProperty('Email'))
-                                        mainscope.localcontainer.item['Email'] = mainscope.emailcliente;
-                                    dummyarray.push(mainscope.localcontainer.item);
+                                //    break;
 
-                                    var aperto1 = $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').hasClass('show');
+                                default:
+                                    /////////////////////////////////////////////////////////////////
+                                    //TOTALI Visualizziamo il riepilogo e la media totale delle recenzioni
+                                    /////////////////////////////////////////////////////////////////
+                                    if ((mainscope.commentsvisible) || (username != null && username != '')) {
+                                        $("#" + mainscope.idcontainer).prepend("<div class='feedTotals container pt-1'  id='" + mainscope.idcontainer + "-totals'></div>");
+                                        $("#" + mainscope.idcontainer + "-totals").prepend(" (" + mainscope.localcontainer.totaleapprovati + ") <span class=\"rating\" disabled data-default-rating=" + mainscope.localcontainer.totalemediastars + "></span><br/><br/>");
+                                        $("#" + mainscope.idcontainer + "-totals").prepend(GetResourcesValue('feedbacks'));
+                                        $("#" + mainscope.idcontainer + "-totals").prepend(GetResourcesValue('feedbackstitle'));
+                                        inizializzastars();
+                                    }
+                                    /////////////////////////////////////////////////////////////////
 
-                                    if (mainscope.localcontainer.item != '')
-                                        ShowList(mainscope.templatehtmlinsert, mainscope.idcontainer + '-head', mainscope.idcontainer + '-head-ctrl', dummyarray,
-                                            function () {
-                                                $('#' + mainscope.idcontainer + '-head-ctrl' + 'tresponse').html(mainscope.message);
-                                                //window.scroll(0, document.querySelector("#' + mainscope.idcontainer + 'tresponse").offsetTop - 0);
-                                                if (mainscope.message.length > 0)
-                                                    $('html, body').animate({ scrollTop: $("#" + mainscope.idcontainer + '-head-ctrl' + "tresponse").offset().top - 150 }, 100);
-                                                mainscope.message = "";
+                                    ///////////////////////////
+                                    //GESTIONE PAGINAZIONE//
+                                    ///////////////////////////
+                                    if (mainscope.enablepager && $("#" + mainscope.idcontainer + '-ctrl').length > 0) {
+                                        $("#" + mainscope.idcontainer + '-ctrl').append("<li><div  id='" + mainscope.idcontainer + "-pager'></div></li>");
+                                        inizializzapager(mainscope.idcontainer + '-pager');
+                                    }
+                                    ///////////////////////////
 
-                                                inizializzastars();
-                                                $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').addClass('show');//Apro l'accordion per regolare le altezze delle textarea 
-                                                $('textarea').autoHeight();
-                                                if (!aperto1)
-                                                    $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').removeClass('show');//Chiudo l'accordion dopo aver ricalcolato le altezze se necessario
-                                            });
-                                } else {
-                                    inizializzastars();
-                                    $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').addClass('show');//Apro l'accordion per regolare le altezze delle textarea 
-                                    $('textarea').autoHeight();
-                                    if (!aperto1)
-                                        $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').removeClass('show');//Chiudo l'accordion dopo aver ricalcolato le altezze se necessario
-                                }
-                                /////////////////////////////////////////////////////////////////
-                                break;
-                        }
-                    });
+                                    /////////////////////////////////////////////////////////////////
+                                    //Inseriamo il tool per permettere l'inserimento di un comment
+                                    /////////////////////////////////////////////////////////////////
+                                    if (!mainscope.noinsertform) {
+
+
+                                        if (mainscope.insertformup)
+                                            $("#" + mainscope.idcontainer).prepend("<div  id='" + mainscope.idcontainer + "-head'></div>");
+                                        else
+                                            $("#" + mainscope.idcontainer).append("<div  id='" + mainscope.idcontainer + "-head'></div>");
+                                        var dummyarray = [];
+                                        //Precompliamo i campi necessari per il form di inserimento
+                                        var testonome = mainscope.nomecliente + ' ' + mainscope.cognomecliente;
+                                        if (mainscope.localcontainer.item.hasOwnProperty('Nome'))
+                                            mainscope.localcontainer.item['Nome'] = testonome.trim();
+                                        if (mainscope.localcontainer.item.hasOwnProperty('Email'))
+                                            mainscope.localcontainer.item['Email'] = mainscope.emailcliente;
+                                        dummyarray.push(mainscope.localcontainer.item);
+                                        var aperto1 = $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').hasClass('show');
+                                        if (mainscope.localcontainer.item != '')
+                                            ShowList(mainscope.templatehtmlinsert, mainscope.idcontainer + '-head', mainscope.idcontainer + '-head-ctrl', dummyarray,
+                                                function () {
+                                                    $('#' + mainscope.idcontainer + '-head-ctrl' + 'tresponse').html(mainscope.message);
+                                                    //window.scroll(0, document.querySelector("#' + mainscope.idcontainer + 'tresponse").offsetTop - 0);
+                                                    if (mainscope.message.length > 0)
+                                                        $('html, body').animate({ scrollTop: $("#" + mainscope.idcontainer + '-head-ctrl' + "tresponse").offset().top - 150 }, 100);
+                                                    mainscope.message = "";
+
+                                                    inizializzastars();
+                                                    $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').addClass('show');//Apro l'accordion per regolare le altezze delle textarea 
+                                                    $('textarea').autoHeight();
+                                                    if (!aperto1)
+                                                        $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').removeClass('show');//Chiudo l'accordion dopo aver ricalcolato le altezze se necessario
+                                                });
+
+
+                                    } else {
+                                        inizializzastars();
+                                        $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').addClass('show');//Apro l'accordion per regolare le altezze delle textarea 
+                                        $('textarea').autoHeight();
+                                        if (!aperto1)
+                                            $('#' + mainscope.idcontainer + '-ctrl' + 'collapseOne').removeClass('show');//Chiudo l'accordion dopo aver ricalcolato le altezze se necessario
+                                    }
+                                    /////////////////////////////////////////////////////////////////
+                                    break;
+                            }
+                        });
+            });
+            ///////////////////////////////////////////////////////////
+
         });
+
         return;
     };
     function inizializzapager(idpager) {
@@ -314,7 +322,6 @@ function commentclosure(varname) {
                 }
             });
     }
-
     function inizializzastars() {
         var ratings = document.getElementsByClassName('rating');
         for (var i = 0; i < ratings.length; i++) {
@@ -351,7 +358,6 @@ function commentclosure(varname) {
             });
         }
     }
-
     this.initautocompleteclienti = function (idcontrollo) {
         $("#" + idcontrollo).autocomplete({
             source: pathAbs + commonhandlerpath + '?q=autocompleteclienti&r=20',
@@ -383,31 +389,32 @@ function commentclosure(varname) {
         });
 
     }
-
     function getcliente(id, callback) {
-        var lng = lng || "I";
-        $.ajax({
-            url: pathAbs + commonhandlerpath,
-            contentType: "application/json; charset=utf-8",
-            global: false,
-            cache: false,
-            dataType: "text",
-            type: "POST",
-            //async: false,
-            data: { 'q': 'autocompleteclienti', 'term': id },
-            success: function (result) {
-                var parseditem = '';
-                if (result.length > 0)
-                    parseditem = JSON.parse(result);
-                callback(parseditem);
-            },
-            error: function (result) {
-                callback('');
-            },
-            falilure: function (result) {
-                callback('');
-            }
-        });
+        if (id != null && id != undefined && id.length != 0) {
+            var lng = lng || "I";
+            $.ajax({
+                url: pathAbs + commonhandlerpath,
+                contentType: "application/json; charset=utf-8",
+                global: false,
+                cache: false,
+                dataType: "text",
+                type: "POST",
+                //async: false,
+                data: { 'q': 'autocompleteclienti', 'term': id },
+                success: function (result) {
+                    var parseditem = '';
+                    if (result.length > 0)
+                        parseditem = JSON.parse(result);
+                    callback(parseditem);
+                },
+                error: function (result) {
+                    callback('');
+                },
+                falilure: function (result) {
+                    callback('');
+                }
+            });
+        } else callback('');
     }
 
 
@@ -463,8 +470,6 @@ function commentclosure(varname) {
             console.log(mainscope.localcontainer.item[property]);
         }
     };
-
-
     this.selectitem = function (elem) {
         // console.log(elem);
         //var found = false;
@@ -510,7 +515,6 @@ function commentclosure(varname) {
             });
         }
     };
-
     this.updateitem = function (id) {
         //console.log(elem);
         var found = false;
@@ -537,7 +541,6 @@ function commentclosure(varname) {
             }
         }
     };
-
     this.deleteitem = function (id) {
         //console.log(elem);
         var found = false;
@@ -564,7 +567,6 @@ function commentclosure(varname) {
             }
         }
     };
-
     function caricacommentsbyidpost(lng, objfiltro, callback) {
         var lng = lng || "I";
         var objfiltro = objfiltro || {};
@@ -572,7 +574,7 @@ function commentclosure(varname) {
         //Svuoto il contenitore dei commenti
         mainscope.localcontainer = {};
         mainscope.localcontainer["item"] = '';
-        mainscope.localcontainer["list"] = ''; 
+        mainscope.localcontainer["list"] = '';
         mainscope.localcontainer["objfiltro"] = '';
         mainscope.localcontainer["totaleapprovati"] = '';
         mainscope.localcontainer["totalemediastars"] = '';
@@ -609,7 +611,6 @@ function commentclosure(varname) {
             }
         });
     };
-
     function Validazionedati(item, callback) {
 
         if (item.stelle == 0) {
@@ -630,7 +631,6 @@ function commentclosure(varname) {
 
         callback('');
     }
-
     function inviamail(lng, mail, callback) {
         var lng = lng || "I";
         var mail = mail || {};
@@ -662,7 +662,6 @@ function commentclosure(varname) {
             }
         });
     }
-
     function updatecomments(lng, item, callback) {
         var lng = lng || "I";
         var item = item || {};
@@ -699,7 +698,6 @@ function commentclosure(varname) {
                 });
             });
     }
-
     function insertcomments(lng, item, callback) {
         var lng = lng || "I";
         var item = item || {};
@@ -740,8 +738,6 @@ function commentclosure(varname) {
             });
 
     }
-
-
     function deletecomments(lng, item, callback) {
         var lng = lng || "I";
         var item = item || {};

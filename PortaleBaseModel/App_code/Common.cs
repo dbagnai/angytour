@@ -917,6 +917,7 @@ public class CommonPage : Page
                 //string dataritorno = string.Format("{0:dd/MM/yyyy}", eCommerceDM.Selezionadajson(c.jsonfield1, "dataritorno", Lingua));
                 string datapartenza = Utility.reformatdatetimestring((string)eCommerceDM.Selezionadajson(c.jsonfield1, "datapartenza", Lingua));
                 string dataritorno = Utility.reformatdatetimestring((string)eCommerceDM.Selezionadajson(c.jsonfield1, "dataritorno", Lingua));
+                string nassicurazioni = (String)eCommerceDM.Selezionadajson(c.jsonfield1, "nassicurazioni", Lingua);
                 string idscaglione = (String)eCommerceDM.Selezionadajson(c.jsonfield1, "idscaglione", Lingua);
                 try
                 {
@@ -932,6 +933,8 @@ public class CommonPage : Page
                         sb.Append("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglionedataritorno") + " </b>" + dataritorno + "<br/>");
                     if (!string.IsNullOrEmpty(idscaglione))
                         sb.Append("<b>" + references.ResMan("basetext", Lingua, "formtesto" + "scaglioneid") + " </b>" + idscaglione);
+                    if (!string.IsNullOrEmpty(nassicurazioni))
+                        sb.Append("<b>" + references.ResMan("basetext", Lingua, "lblnumass") + " </b>" + nassicurazioni + "<br/>");
                     sb.Append(" </p>");
                 }
 
@@ -1256,8 +1259,7 @@ public class CommonPage : Page
             }
 
             //Aggiungo l'id anagrafica del cliente ( configurato nel profilo utente ) all'articolo nel carrello
-            //In modo da avre l'associazione degli ordini con i clienti
-
+            //In modo da avre l'associazione degli ordini con i clienti 
             if (idcliente != 0) //SE passato un idcliente lo memorizzo nel rigo di carrello prodotti
             {
                 Item.ID_cliente = idcliente;
@@ -1376,16 +1378,41 @@ public class CommonPage : Page
             else foundzeropeso = true;
             //////////////////////////////////////////////////////////
 
+
             //////////////////////////////////////////////////////////
             ////CONTROLLO RICHIESTA DEL SALDO A CARRELLO PER SCAGLIONI
             //////////////////////////////////////////////////////////
             try
             {
+
                 Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>((String)eCommerceDM.Selezionadajson(c.jsonfield1, "scaglione", "I"));
                 if (scaglionedacarrello != null)
                 {
+
+                    //scaglionedacarrello.addedvalues.ContainsKey("niscritti") // per vedere i campi secondari memorizzati al momento dell'inserimento a carrello!!
                     if (scaglionedacarrello.datapartenza != null && ((TimeSpan)(scaglionedacarrello.datapartenza.Value - DateTime.Now)).Days < 30)
                         richiestasaldo = true;
+
+                    /////////////////////////////////////////////////
+                    //calcoliamo il totale assicurazioni ed il numero richiesto
+                    /////////////////////////////////////////////////
+                    long nassicurazioni = 0;
+                    string snassicurazioni = (String)eCommerceDM.Selezionadajson(c.jsonfield1, "nassicurazioni", "");
+                    long.TryParse(snassicurazioni, out nassicurazioni);
+                    totali.Nassicurazioni = nassicurazioni;
+                    double costoassicurazione = 0;
+                    string scostoassicurazione = "";
+                    //valorizzato costoassicurazione in carrello.js
+                    //scostoassicurazione = (String)eCommerceDM.Selezionadajson(c.jsonfield1, "costoassicurazione", ""); 
+                    //alternativamente il costo lo prendo da  scaglione.addedvalues["costoassicurazione"]
+                    if (scaglionedacarrello.addedvalues.ContainsKey("costoassicurazione"))
+                    {
+                        scostoassicurazione = scaglionedacarrello.addedvalues["costoassicurazione"];
+                    }
+                    double.TryParse(scostoassicurazione, out costoassicurazione);
+                    totali.TotaleAssicurazione += nassicurazioni * costoassicurazione;
+                    /////////////////////////////////////////////////
+
                 }
             }
             catch { }
@@ -1580,6 +1607,7 @@ public class CommonPage : Page
             double tmp = 0;
             double.TryParse(percentualesconto, out tmp);
             valoresconto = Math.Round(((double)totalecarrello * tmp / 100), 2, MidpointRounding.ToEven);
+             
         }
 
         if (Session["codicesconto"] != null && !string.IsNullOrEmpty(Session["codicesconto"].ToString()))

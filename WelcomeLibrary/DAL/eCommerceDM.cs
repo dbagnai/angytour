@@ -1529,6 +1529,12 @@ namespace WelcomeLibrary.DAL
                             item.TotaleSconto = reader.GetDouble(reader.GetOrdinal("TotaleSconto"));
                         if (!reader["TotaleSpedizione"].Equals(DBNull.Value))
                             item.TotaleSpedizione = reader.GetDouble(reader.GetOrdinal("TotaleSpedizione"));
+
+                        if (!reader["TotaleAssicurazione"].Equals(DBNull.Value))
+                            item.TotaleAssicurazione = reader.GetDouble(reader.GetOrdinal("TotaleAssicurazione"));
+                        if (!reader["Nassicurazioni"].Equals(DBNull.Value))
+                            item.Nassicurazioni = reader.GetInt64(reader.GetOrdinal("Nassicurazioni"));
+
                         if (!reader["TotaleSmaltimento"].Equals(DBNull.Value))
                             item.TotaleSmaltimento = reader.GetDouble(reader.GetOrdinal("TotaleSmaltimento"));
                         if (!reader["Supplementospedizione"].Equals(DBNull.Value))
@@ -1873,6 +1879,11 @@ namespace WelcomeLibrary.DAL
                             item.TotaleSpedizione = reader.GetDouble(reader.GetOrdinal("TotaleSpedizione"));
 
 
+                        if (!reader["TotaleAssicurazione"].Equals(DBNull.Value))
+                            item.TotaleAssicurazione = reader.GetDouble(reader.GetOrdinal("TotaleAssicurazione"));
+                        if (!reader["Nassicurazioni"].Equals(DBNull.Value))
+                            item.Nassicurazioni = reader.GetInt64(reader.GetOrdinal("Nassicurazioni"));
+
                         if (!reader["TotaleSmaltimento"].Equals(DBNull.Value))
                             item.TotaleSmaltimento = reader.GetDouble(reader.GetOrdinal("TotaleSmaltimento"));
                         if (!reader["Supplementospedizione"].Equals(DBNull.Value))
@@ -1946,6 +1957,13 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pptotspedizione = new SQLiteParameter("@TotaleSpedizione", item.TotaleSpedizione);// 
             parColl.Add(pptotspedizione);
 
+            // TotaleAssicurazione Nassicurazioni
+            SQLiteParameter pptotassicurazione = new SQLiteParameter("@TotaleAssicurazione", item.TotaleAssicurazione);// 
+            parColl.Add(pptotassicurazione);
+            SQLiteParameter pnassicurazioni = new SQLiteParameter("@Nassicurazioni", item.Nassicurazioni);// 
+            parColl.Add(pnassicurazioni);
+
+
             //valutare se aggiungere il peso
 
             SQLiteParameter pptotsmaltimento = new SQLiteParameter("@TotaleSmaltimento", item.TotaleSmaltimento);// 
@@ -1963,7 +1981,7 @@ namespace WelcomeLibrary.DAL
             parColl.Add(pacconto);
 
 
-            string query = "INSERT INTO TBL_CARRELLO_ORDINI([Indirizzofatturazione],[Indirizzospedizione],[Dataordine],[Id_cliente],[Mailcliente],[Modalitapagamento],[Note],[Urlpagamento],[CodiceOrdine],[Denominazionecliente],[Pagato],[Pagatoacconto],[TotaleOrdine],[TotaleSconto],[TotaleSpedizione],TotaleSmaltimento,Supplementospedizione,Id_commerciale,Codicesconto,Percacconto) VALUES (@Indirizzofatturazione,@Indirizzospedizione,@Dataordine,@Id_cliente,@Mailcliente,@Modalitapagamento,@Note,@Urlpagamento,@CodiceOrdine,@Denominazionecliente,@Pagato,@Pagatoacconto,@TotaleOrdine,@TotaleSconto,@TotaleSpedizione,@TotaleSmaltimento,@Supplementospedizione,@Id_commerciale,@Codicesconto,@Percacconto)";
+            string query = "INSERT INTO TBL_CARRELLO_ORDINI([Indirizzofatturazione],[Indirizzospedizione],[Dataordine],[Id_cliente],[Mailcliente],[Modalitapagamento],[Note],[Urlpagamento],[CodiceOrdine],[Denominazionecliente],[Pagato],[Pagatoacconto],[TotaleOrdine],[TotaleSconto],[TotaleSpedizione],TotaleAssicurazione,Nassicurazioni,TotaleSmaltimento,Supplementospedizione,Id_commerciale,Codicesconto,Percacconto) VALUES (@Indirizzofatturazione,@Indirizzospedizione,@Dataordine,@Id_cliente,@Mailcliente,@Modalitapagamento,@Note,@Urlpagamento,@CodiceOrdine,@Denominazionecliente,@Pagato,@Pagatoacconto,@TotaleOrdine,@TotaleSconto,@TotaleSpedizione,@TotaleAssicurazione,@Nassicurazioni,@TotaleSmaltimento,@Supplementospedizione,@Id_commerciale,@Codicesconto,@Percacconto)";
             try
             {
                 long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -2022,6 +2040,11 @@ namespace WelcomeLibrary.DAL
             parColl.Add(ptotsconto);
             SQLiteParameter pptotspedizione = new SQLiteParameter("@TotaleSpedizione", item.TotaleSpedizione);// 
             parColl.Add(pptotspedizione);
+            // TotaleAssicurazione Nassicurazioni
+            SQLiteParameter pptotassicurazione = new SQLiteParameter("@TotaleAssicurazione", item.TotaleAssicurazione);// 
+            parColl.Add(pptotassicurazione);
+            SQLiteParameter pnassicurazioni = new SQLiteParameter("@Nassicurazioni", item.Nassicurazioni);// 
+            parColl.Add(pnassicurazioni);
 
             SQLiteParameter pptotsmaltimento = new SQLiteParameter("@TotaleSmaltimento", item.TotaleSmaltimento);// 
             parColl.Add(pptotsmaltimento);
@@ -2039,7 +2062,8 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pid = new SQLiteParameter("@Id", item.Id);//OleDbType.VarChar
             parColl.Add(pid);
 
-            string query = "UPDATE [TBL_CARRELLO_ORDINI] SET [Indirizzofatturazione]=@Indirizzofatturazione,[Indirizzospedizione]=@Indirizzospedizione,[Dataordine]=@Dataordine,[Id_cliente]=@Id_cliente,[Mailcliente]=@Mailcliente,[Modalitapagamento]=@Modalitapagamento,[Note]=@Note,[Urlpagamento]=@Urlpagamento,[CodiceOrdine]=@CodiceOrdine,[Denominazionecliente]=@Denominazionecliente,[Pagato]=@Pagato,[Pagatoacconto]=@Pagatoacconto,[TotaleOrdine]=@TotaleOrdine,[TotaleSconto]=@TotaleSconto,[TotaleSpedizione]=@TotaleSpedizione,TotaleSmaltimento=@TotaleSmaltimento,Supplementospedizione=@Supplementospedizione,Id_commerciale=@Id_commerciale,Codicesconto=@Codicesconto,Percacconto=@Percacconto WHERE ([ID]=@Id)";
+            string query = "UPDATE [TBL_CARRELLO_ORDINI] SET [Indirizzofatturazione]=@Indirizzofatturazione,[Indirizzospedizione]=@Indirizzospedizione,[Dataordine]=@Dataordine,[Id_cliente]=@Id_cliente,[Mailcliente]=@Mailcliente,[Modalitapagamento]=@Modalitapagamento,[Note]=@Note,[Urlpagamento]=@Urlpagamento,[CodiceOrdine]=@CodiceOrdine,[Denominazionecliente]=@Denominazionecliente,[Pagato]=@Pagato,[Pagatoacconto]=@Pagatoacconto,[TotaleOrdine]=@TotaleOrdine,[TotaleSconto]=@TotaleSconto,[TotaleSpedizione]=@TotaleSpedizione,[TotaleAssicurazione]=@TotaleAssicurazione,[Nassicurazioni]=@Nassicurazioni,TotaleSmaltimento=@TotaleSmaltimento,Supplementospedizione=@Supplementospedizione,Id_commerciale=@Id_commerciale,Codicesconto=@Codicesconto,Percacconto=@Percacconto WHERE ([ID]=@Id)";
+
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -2154,7 +2178,7 @@ namespace WelcomeLibrary.DAL
                         sb.Append(WelcomeLibrary.UF.Csv.Escape(t.Denominazionecliente.Replace("<br/>", "\r\n")));
                         sb.Append(";");
                         sb.Append(WelcomeLibrary.UF.Csv.Escape(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
-                      new object[] { t.TotaleSmaltimento + t.TotaleOrdine + t.TotaleSpedizione - t.TotaleSconto }) + " €"));
+                    new object[] { t.TotaleSmaltimento + t.TotaleOrdine + t.TotaleSpedizione + t.TotaleAssicurazione - t.TotaleSconto }) + " €"));
                         sb.Append(";");
                         sb.Append(t.Modalitapagamento);
                         sb.Append(";");
