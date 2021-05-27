@@ -1,3 +1,332 @@
-﻿<div id="smart-button-container">      <div style="text-align: center;">        <div style="margin-bottom: 1.25rem;"><select style="background-color:#fff;" class="form-control" id="item-options"><option value="Prezzo a coppia" price="30">Prezzo a coppia - 30 EUR</option></select>          <select class="form-controlo" style="background-color:#fff;visibility: hidden" id="quantitySelect"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>        </div>      <div id="paypal-button-container"></div>      </div>    </div>
-<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR" data-sdk-integration-source="button-factory"></script>
-<script>function initPayPalButton() { var shipping = 0; var itemOptions = document.querySelector("#smart-button-container #item-options"); var quantity = parseInt(10); var quantitySelect = document.querySelector("#smart-button-container #quantitySelect"); if (!isNaN(quantity)) { quantitySelect.style.visibility = "visible"; } var orderDescription = 'Menù galletti con patate'; if (orderDescription === '') { orderDescription = 'Item'; } paypal.Buttons({ style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'pay', }, createOrder: function (data, actions) { var selectedItemDescription = itemOptions.options[itemOptions.selectedIndex].value; var selectedItemPrice = parseFloat(itemOptions.options[itemOptions.selectedIndex].getAttribute("price")); var tax = (0 === 0) ? 0 : (selectedItemPrice * (parseFloat(0) / 100)); if (quantitySelect.options.length > 0) { quantity = parseInt(quantitySelect.options[quantitySelect.selectedIndex].value); } else { quantity = 1; } tax *= quantity; tax = Math.round(tax * 100) / 100; var priceTotal = quantity * selectedItemPrice + parseFloat(shipping) + tax; priceTotal = Math.round(priceTotal * 100) / 100; var itemTotalValue = Math.round((selectedItemPrice * quantity) * 100) / 100; return actions.order.create({ purchase_units: [{ description: orderDescription, amount: { currency_code: 'EUR', value: priceTotal, breakdown: { item_total: { currency_code: 'EUR', value: itemTotalValue, }, shipping: { currency_code: 'EUR', value: shipping, }, tax_total: { currency_code: 'EUR', value: tax, } } }, items: [{ name: selectedItemDescription, unit_amount: { currency_code: 'EUR', value: selectedItemPrice, }, quantity: quantity }] }] }); }, onApprove: function (data, actions) { return actions.order.capture().then(function (details) { alert('Transaction completed by ' + details.payer.name.given_name + '!'); }); }, onError: function (err) { console.log(err); }, }).render('#paypal-button-container'); } initPayPalButton();</script>
+﻿<style type="text/css">
+    <!--
+    body, .mainTable {
+        height: 100% !important;
+        width: 100% !important;
+        margin: 0;
+        padding: 0;
+    }
+
+    img, a img {
+        border: 0;
+        outline: none;
+        text-decoration: none;
+    }
+
+    .imageFix {
+        display: block;
+    }
+
+    table, td {
+        border-collapse: collapse;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+    }
+
+    p {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 0;
+    }
+
+    .ReadMsgBody {
+        width: 100%;
+    }
+
+    .ExternalClass {
+        width: 100%;
+    }
+
+        .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
+            line-height: 100%;
+        }
+
+    img {
+        -ms-interpolation-mode: bicubic;
+    }
+
+    body, table, td, p, a, li, blockquote {
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+    }
+    -->
+</style>
+<style>
+    <!--
+    table {
+        border-collapse: collapse;
+    }
+
+    @media only screen and (max-width: 600px) {
+        body[yahoo] .rimg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        body[yahoo] .rtable {
+            width: 100% !important;
+            table-layout: fixed;
+        }
+
+            body[yahoo] .rtable tr {
+                height: auto !important;
+            }
+    }
+    -->
+</style>
+<!-- [if gte mso 9]>
+<xml>
+  <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+  </o:OfficeDocumentSettings>
+</xml>
+<![endif]-->
+<table class="rtable mainTable" width="100%" cellspacing="0" cellpadding="0" bgcolor="#f3f3f3">
+    <tbody>
+        <tr>
+            <td style="font-size: 0px; height: 20px; line-height: 0;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <table class="rtable" style="width: 600px; margin: 0px auto;" border="0" width="600" cellspacing="0" cellpadding="0" align="center">
+                    <tbody>
+                        <tr>
+                            <td style="background-color: transparent; padding: 1px 0px 1px 0px;">
+                                <table class="rtable" style="width: 100%;" cellspacing="0" cellpadding="0" align="left">
+                                    <tbody>
+                                        <tr style="height: 1px;">
+                                            <td style="width: 100%; vertical-align: top; text-align: center; background-color: transparent; padding: 1px 15px 1px 15px;">
+                                                <p style="font-size: 14px; margin-bottom: 1em; font-family: Arial, Helvetica, sans-serif; margin-top: 0px; color: #7c7c7c; line-height: 125%; background-color: transparent; mso-line-height-rule: exactly;" align="center">Se non leggi correttamente il messaggio, <a style="color: #7c7d7c;" title="" href="|feedbackfrm|">clicca per vederlo online</a></p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #feffff; border: #dbdbdb 1px solid; padding: 0px;">
+                                <table class="rtable" style="width: 100%;" cellspacing="0" cellpadding="0" align="left">
+                                    <tbody>
+                                        <tr style="height: 10px;">
+                                            <td style="width: 100%; vertical-align: bottom; text-align: center; background-color: #feffff; padding: 35px 15px 35px 15px;">
+                                                <table class="rtable" style="width: 45%; border: transparent 1px solid;" cellspacing="0" cellpadding="0" align="right">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="padding-bottom: 10px;" nowrap="nowrap">
+                                                                <div style="mso-table-lspace: 0; mso-table-rspace: 0;">
+                                                                    <table class="rtable" style="width: auto !important;" border="0" cellspacing="0" cellpadding="0" align="right">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <table border="0" cellspacing="0" cellpadding="0" align="center">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td style="padding: 2px 5px 2px 2px;" align="center">
+                                                                                                    <table border="0" cellspacing="0" cellpadding="0">
+                                                                                                        <tbody>
+                                                                                                            <tr>
+                                                                                                                <td style="background-color: transparent;"><a href="https://www.facebook.com/GrandiMaiolicheFicola/"><img class="rimg" style="display: block; background-color: transparent;" src="http://localhost:52646/public/UserContent/images/Image_1.png" alt="" width="24" height="24" border="0" hspace="0" vspace="0" /></a></td>
+                                                                                                            </tr>
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>
+                                                                                <td>&nbsp;</td>
+                                                                                <td>&nbsp;</td>
+                                                                                <td>&nbsp;</td>
+                                                                                <td>&nbsp;</td>
+                                                                                <td>&nbsp;</td>
+                                                                                <td>&nbsp;</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <table class="rtable" style="width: 53%; border: transparent 1px solid;" cellspacing="0" cellpadding="0" align="left">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div style="mso-table-lspace: 0; mso-table-rspace: 0;">
+                                                                    <table border="0" cellspacing="0" cellpadding="0" align="left">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="padding: 2px;" align="center">
+                                                                                    <table border="0" cellspacing="0" cellpadding="0">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td style="background-color: transparent;"><a href="https://www.ficola.it/"><img class="rimg" style="display: block; background-color: transparent;" src="http://localhost:52646/public/UserContent/images/Image_2.png" alt="" width="280" height="70" border="0" hspace="0" vspace="0" /></a></td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: transparent; padding: 0px;">
+                                <table class="rtable" style="width: 100%;" cellspacing="0" cellpadding="0" align="left">
+                                    <tbody>
+                                        <tr style="height: 20px;">
+                                            <td style="width: 100%; vertical-align: top; text-align: center; background-color: transparent; padding: 0px;">&nbsp;</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #feffff; border: #dbdbdb 1px solid; padding: 0px;">
+                                <table class="rtable" style="width: 100%;" cellspacing="0" cellpadding="0" align="left">
+                                    <tbody>
+                                        <tr style="height: 20px;">
+                                            <td style="width: 100%; vertical-align: top; text-align: center; background-color: #feffff; padding: 35px 15px 5px 15px;">
+                                                <p style="font-size: 18px; margin-bottom: 1em; font-family: Arial, Helvetica, sans-serif; margin-top: 0px; color: #232323; line-height: 155%; background-color: transparent; mso-line-height-rule: exactly;" align="left"><strong>Richiesta feedback</strong></p>
+                                                <p style="font-size: 12px; margin-bottom: 1em; font-family: Arial, Helvetica, sans-serif; margin-top: 0px; color: #a7a7a7; line-height: 155%; background-color: transparent; mso-line-height-rule: exactly;" align="left"><span style="font-size: 14px;"><span style="color: #232323;">Salve, |cliente| puoi dedicarci qualche minuto per condividere la tua esperienza ?<br /><br />Hai acquistato il seguente prodotto <br />|feedbacknme|<br /> da Grandi Maioliche Ficola :</span><br /></span></p>
+                                            </td>
+                                        </tr>
+                                            <tr style="height: 20px;">
+                                            <td style="vertical-align: top; text-align: center; background-color: #feffff; padding: 5px 15px 35px 15px;">
+                                                <table border="0" cellspacing="0" cellpadding="0" align="left">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="padding: 2px 10px 2px 2px;" align="center">
+                                                                <table border="0" cellspacing="0" cellpadding="0">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td style="background-color: transparent;"><a href="|feedbacklnk|"><img class="rimg" style="display: block; background-color: transparent;" src="|feedbackimg|" alt="" width="300" height="190" border="0" hspace="0" vspace="0" /></a></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <p style="font-size: 12px; margin-bottom: 1em; font-family: Arial, Helvetica, sans-serif; margin-top: 0px; color: #a7a7a7; line-height: 155%; background-color: transparent; mso-line-height-rule: exactly;" align="left">&nbsp;</p>
+                                                <div style="text-align: center; margin: 10px;"><a href="|feedbacklnk|"><img class="rimg" title="" src="https://www.tempodiviaggi.it/public/UserContent/images/Image_4.png" alt="Vedi Pacchetto" border="none" /> </a></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-top: medium none; border-right: #dbdbdb 1px solid; border-bottom: medium none; border-left: #dbdbdb 1px solid; background-color: #feffff; padding: 0px;">
+                                <table class="rtable" style="width: 100%;" cellspacing="0" cellpadding="0" align="left">
+                                    <tbody>
+                                        <tr style="height: 1px;">
+                                            <td style="width: 100%; vertical-align: middle; text-align: center; background-color: #feffff; padding: 5px 15px 5px 15px;">
+                                                <table class="rtable" style="margin-bottom: 0px; margin-top: 0px;" border="0" width="100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="font-size: 1px; border-top: #999999 1px solid; height: 1px; border-right: medium none; background: none transparent scroll repeat 0% 0%; border-bottom: medium none; padding-bottom: 0px; padding-top: 0px; border-left: medium none; line-height: 1px; mso-line-height-rule: exactly;">&nbsp;</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #feffff; border: #dbdbdb 1px solid; padding: 0px;">
+                                <table class="rtable" style="width: 100%;" cellspacing="0" cellpadding="0" align="left">
+                                    <tbody>
+                                        <tr style="height: 20px;">
+                                            <td style="width: 100%; vertical-align: top; text-align: center; background-color: #feffff; padding: 35px 15px 35px 15px;">
+                                                <p style="font-size: 14px; margin-bottom: 1em; font-family: Arial, Helvetica, sans-serif; margin-top: 0px; color: #232323; line-height: 155%; background-color: transparent; mso-line-height-rule: exactly;" align="left">Valuta e scrivi una breve recensione sul prodotto e sul nostro servizio di vendita.<br />Clicca sul bottone per inserire adesso la tua valutazione</p>
+                                                <div style="text-align: right;"><a href="|feedbackfrm|"><img class="rimg" title="" src="http://localhost:52646/public/UserContent/images/Image_5.png" alt="Inserisci Feedback" border="none" /> </a></div>
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 20px;">
+                                            <td style="vertical-align: top; text-align: center; background-color: #feffff; padding: 5px 15px 5px 15px;">
+                                                <p style="font-size: 12px; margin-bottom: 1em; font-family: Arial, Helvetica, sans-serif; margin-top: 0px; color: #585858; line-height: 155%; background-color: transparent; mso-line-height-rule: exactly;" align="left">Se hai problemi con i link nella mail copia ed incolla il seguente indirizzo sul tuo browser web |feedbackfrm|</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: transparent; padding: 0px;">
+                                <table class="rtable" style="width: 100%;" cellspacing="0" cellpadding="0" align="left">
+                                    <tbody>
+                                        <tr style="height: 10px;">
+                                            <td style="width: 100%; vertical-align: top; text-align: center; background-color: transparent; padding: 35px 15px 35px 15px;">
+                                                <p style="font-size: 10px; margin-bottom: 1em; font-family: Arial, Helvetica, sans-serif; margin-top: 0px; color: #7c7c7c; line-height: 125%; background-color: transparent; mso-line-height-rule: exactly;" align="left"><strong>Grandi Maioliche Ficola</strong><br />Via della nave vecchia, zona artigianale<br />06053 Deruta (PG)<br />Tel.+39 0579724042 Tel.+39 0579724044 <br /><a style="color: #7c7d7c;" href="https://www.ficola.it/">www.ficola.it</a></p>
+                                            </td>
+                                            <td style="width: 50%; vertical-align: top; text-align: center; background-color: transparent; padding: 35px 15px 35px 15px;">
+                                                <table class="rtable" border="0" cellspacing="0" cellpadding="0" align="center">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <table border="0" cellspacing="0" cellpadding="0" align="center">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td style="padding: 2px 5px 2px 2px;" align="center">
+                                                                                <table border="0" cellspacing="0" cellpadding="0">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td style="background-color: transparent;"><a href="https://www.facebook.com/GrandiMaiolicheFicola/"><img class="rimg" style="display: block; background-color: transparent;" src="http://localhost:52646/public/UserContent/images/Image_6.png" alt="" width="24" height="24" border="0" hspace="0" vspace="0" /></a></td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: transparent; padding: 1px 0px 1px 0px;">
+                                <table class="rtable" style="width: 100%;" cellspacing="0" cellpadding="0" align="left">
+                                    <tbody>
+                                        <tr style="height: 10px;">
+                                            <td style="width: 100%; vertical-align: top; text-align: center; background-color: transparent; padding: 1px 15px 1px 15px;">
+                                                <p style="font-size: 10px; margin-bottom: 1em; font-family: Arial, Helvetica, sans-serif; margin-top: 0px; color: #7c7c7c; line-height: 125%; background-color: transparent; mso-line-height-rule: exactly;" align="left">Se vuoi informazioni sulla gestione della privacy e dei dati degli utenti, vistitate la seguente <a style="color: #7c7d7c;" href="/Cookiepolicy.aspx">pagina</a>.</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 0px; height: 8px; line-height: 0;">&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
