@@ -49,34 +49,37 @@ jQuery(document).ready(function ($) {
     //    mobilebuttontext:"CERCA"
     //});
 
-    /* ---------------------------------------------- /*
-  * SEZIONE AOS E SHOW ON SCROLL TOOL
-  /* ---------------------------------------------- */
-    /*-------- INIZIALIZZATORE AOS ---------------*/
-    //AOS.init();
-    //AOS.init({
-    //    disable: 'mobile'
-    //});
-    AOS.init({
-        disable: function () {
-            var maxWidth = 800;
-            return window.innerWidth < maxWidth;
-        }
-    });
-    const sectionEls = document.querySelectorAll(".show-on-scroll");
-    const options = {
-        rootMargin: "0% 0% -70% 0%"
-    };
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
-            } else {
-                entry.target.classList.remove("is-visible");
+    try {
+        /* ---------------------------------------------- /*
+      * SEZIONE AOS E SHOW ON SCROLL TOOL
+      /* ---------------------------------------------- */
+        /*-------- INIZIALIZZATORE AOS ---------------*/
+        //AOS.init();
+        //AOS.init({
+        //    disable: 'mobile'
+        //});
+        AOS.init({
+            disable: function () {
+                var maxWidth = 800;
+                return window.innerWidth < maxWidth;
             }
         });
-    }, options);
-    sectionEls.forEach(el => observer.observe(el));
+        const sectionEls = document.querySelectorAll(".show-on-scroll");
+        const options = {
+            rootMargin: "0% 0% -70% 0%"
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                } else {
+                    entry.target.classList.remove("is-visible");
+                }
+            });
+        }, options);
+        sectionEls.forEach(el => observer.observe(el));
+    } catch (e) { };
     /* ---------------------------------------------- /*
 * fine SEZIONE AOS E SHOW ON SCROLL TOOL
 /* ---------------------------------------------- */
@@ -961,7 +964,7 @@ $(function () {
 
 //sectionEls.forEach(el => observer.observe(el));
 
-
+try { 
 /* ---------------------------------------------- /*
      * ANIMA ELEMENTO SCROLL TEXT CON OBSERVER ELEMENT 1 => scritte
     /* ---------------------------------------------- */
@@ -1025,4 +1028,5 @@ function io_callback3(entries, observer) {
     entries.forEach(entry => {
         entry.target.classList.toggle('is-visible-text', entry.isIntersecting);
     });
-}
+    }
+} catch (e) { };
