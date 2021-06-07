@@ -308,6 +308,10 @@ path.bg-light-color-path {
     border-color: @bg-secondary-color !important;
 }
 
+.bg-custom-color1 {
+    background-color: @bg-custom-color1 !important;
+}
+
 .bd-light-color {
     border-color: @bg-light-color !important;
 }
@@ -3120,8 +3124,22 @@ select.form-control:not([size]):not([multiple]) {
     border-style: solid;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: rgba(61, 61, 61, 0.1) 0px 25px 20px 0px;
+    /*box-shadow: rgba(61, 61, 61, 0.1) 0px 25px 20px 0px;*/
     padding: 0px 40px 40px;
+    min-height: 0px;
+    /*    top: -50px;
+    left:30px;*/
+}
+
+.formtextbackground {
+    background-color: #222;
+    color: #fff !important;
+    border-width: 10px;
+    border-color: @color-sottomeu;
+    border-style: dashed;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 40px 40px 40px;
     min-height: 0px;
     /*    top: -50px;
     left:30px;*/

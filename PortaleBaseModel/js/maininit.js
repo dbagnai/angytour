@@ -89,10 +89,11 @@ jQuery(document).ready(function ($) {
         if ($(window).scrollTop() > 0) {
             $('#divMessage').hide();
             //  $('#mainnav').addClass('bckColor1');
-            //$('#divlogo').removeClass();
+            $('#divlogo').removeClass();
 
             $('.menuzord-menu').addClass('scrolled');
             $('.divlogoBrand').addClass('shrinklogo');
+            $('#divlogoBrand').addClass('shrinklogo');
             //$('#mainnav').addClass('fixednav-scroll');
             //$('#divlogoBrand').removeClass('fulllogobckdark-pwa-start');
 
@@ -119,6 +120,7 @@ jQuery(document).ready(function ($) {
             //$('#divlogo').addClass('fulllogobckdark');
             $('.menuzord-menu').removeClass('scrolled');
             $('.divlogoBrand').removeClass('shrinklogo');
+            $('#divlogoBrand').removeClass('shrinklogo');
             //$('#mainnav').removeClass('fixednav-scroll');
             //$('#divlogoBrand').addClass('fulllogobckdark-pwa-start');
 
