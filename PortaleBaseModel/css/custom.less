@@ -572,7 +572,7 @@ a {
 
 .shrinklogo {
     width: @larghezza-logo-smart;
-    height: 61px;
+    height: 59px;
     /*AGGIUNTI PER LOGO DOPPIA POSIZIONE*/
     background: url(/images/main_logo_d.png) center center;
     background-size: 100%;
@@ -587,7 +587,7 @@ a {
 @media (max-width: 1179px) {
     .fulllogobckdark {
         width: @larghezza-logo-smart;
-        height: 61px;
+        height: 59px;
         margin-left: calc(100% - ((170 * @larghezza-logo-smart) / 206));
         /*AGGIUNTI PER LOGO DOPPIA POSIZIONEE*/
         background: url(/images/main_logo_d.png) center center;
@@ -597,7 +597,7 @@ a {
 
     .shrinklogo {
         width: @larghezza-logo-smart;
-        height: 61px;
+        height: 59px;
     }
 }
 
@@ -5394,7 +5394,7 @@ button.js-roundedpush:hover {
 
     .menuzord.white .menuzord-menu > li > a {
         background-color: #fff;
-    /*    border-bottom: 1px solid;*/
+        border-bottom: 1px solid;
         text-align: left;
         background-color: @bg-light-color;
     }
@@ -6545,3 +6545,12 @@ svg path {
 }
 
 /*************************************************************************************************/
+.mbr-overlay-white1 {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 576px) {
+    .mbr-parallax-background.bg-light-color-pattern-1 {
+        background-image: none !important
+    }
+}
