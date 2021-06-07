@@ -1398,6 +1398,9 @@ path.bg-light-color-path {
 .tx-light-color {
   color: #ebf6f6 !important;
 }
+.tx-lighten-color {
+  color: #0ed7d7 !important;
+}
 .tx-dark-color {
   color: #032f2f !important;
 }
@@ -2001,7 +2004,8 @@ h1 span {
 .quote-marks {
   font-size: 2.4rem !important;
   line-height: 125% !important;
-  color: #032f2f !important;
+  color: #077777 !important;
+  /*@primary-color*/
   font-family: 'Roboto', sans-serif !important;
 }
 .quote-marks::before {

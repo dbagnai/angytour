@@ -7,7 +7,7 @@
 <style>
     .titolo-brand {
         font-size: 1.8rem;
-        font-weight: 600;
+        font-weight: 400;
     }
 
     .border-query img {
@@ -18,6 +18,11 @@
         .border-query {
             border: none !important;
             background-color: transparent;
+        }
+
+        .border-tipo2, .border-tipo2:hover {
+            box-shadow: rgba(0,0,0,0.0) 0px 0px 0px;
+            border: none !important;
         }
     }
 
@@ -33,13 +38,13 @@
 
         <!-- se sono più di due banner togliere le classi "order-last order-md-first" -->
         <div class="col-12 col-md-6 even">
-            <div class="card my-2 border-query" style="overflow:hidden;">
-                <a class="bind primary-color"  preload target="_self" href="link" title="titolo" mybind="Id">
-                <div class="position-relative imgovercontainer work-image" data-aos="fade-up" data-aos-duration="">
-                    <img src="/images/dummylogo.png" alt="" class="bind card-img-top lazy" mybind="Id" />
-                    <div class="card-img-overlay">
+            <div class="card my-2 border-query border-tipo2 pr-0 pr-md-3" style="overflow:hidden;">
+                <a class="bind primary-color" preload target="_self" href="link" title="titolo" mybind="Id">
+                    <div class="position-relative imgovercontainer work-image" data-aos="fade-up" data-aos-duration="">
+                        <img src="/images/dummylogo.png" alt="" class="bind card-img-top lazy" mybind="Id" />
+                        <div class="card-img-overlay">
+                        </div>
                     </div>
-                </div>
                 </a>
                 <div class="card-body text-left p-3 px-md-0 py-md-0 mt-0 mt-md-3" data-aos="fade-right" data-aos-duration="500" data-aos-delay="400">
                     <!--<a class="bind" target="_self" href="link" title="titolo" mybind="Id">-->
@@ -47,7 +52,7 @@
                         <span class="bind alternative-font" mybind="Id" myvalue="titolo" format="formattitle"></span>
                     </h3>
                     <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-0 mb-md-4" style="font-size: 1.3rem;">
-                        <span class="bind tx-dark-color scalablefont-smallest" style="line-height: inherit !important;" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                        <span class="bind tx-lighten-color scalablefont-smallest" style="line-height: 135% !important;" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
                     </h4>
                     <!--</a>-->
                 </div>
@@ -56,15 +61,15 @@
 
         <!-- se sono più di due banner togliere le classi "order-first order-md-last" -->
         <div class="col-12 col-md-6 odd ">
-            <div class="card my-2 border-query" style="overflow:hidden;">
+            <div class="card my-2 border-query border-tipo2 pl-0 pl-md-3" style="overflow:hidden;">
                 <div class="row">
                     <div class="col-12 order-first order-md-last" data-aos="fade-up" data-aos-duration="500">
                         <a class="bind primary-color" preload target="_self" href="link" title="titolo" mybind="Id">
-                        <div class="position-relative imgovercontainer work-image">
-                            <img src="/images/dummylogo.png" alt="" class="bind card-img-top lazy" mybind="Id" />
-                            <div class="card-img-overlay">
+                            <div class="position-relative imgovercontainer work-image">
+                                <img src="/images/dummylogo.png" alt="" class="bind card-img-top lazy" mybind="Id" />
+                                <div class="card-img-overlay">
+                                </div>
                             </div>
-                        </div>
                         </a>
                     </div>
                     <div class="col-12 order-last order-md-first" data-aos="fade-left">
@@ -74,7 +79,7 @@
                                 <span class="bind alternative-font" mybind="Id" myvalue="titolo" format="formattitle"></span>
                             </h3>
                             <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-0 mb-md-4" style="font-size: 1.3rem;">
-                                <span class="bind tx-dark-color scalablefont-smallest" style="line-height: inherit !important;" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                                <span class="bind tx-lighten-color scalablefont-smallest" style="line-height: 135% !important;" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
                             </h4>
                             <!--</a>-->
                         </div>
