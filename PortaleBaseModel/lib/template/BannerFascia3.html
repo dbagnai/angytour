@@ -3,9 +3,10 @@
         display: none
     }
 
-    .slidercycle > div:nth-child(1) {
-        display: block
-    }
+        .slidercycle > div:nth-child(1) {
+            display: block
+        }
+
     div.cycle-pager {
         position: absolute;
         display: inline-block;
@@ -13,6 +14,7 @@
         z-index: 101;
         bottom: 10px;
     }
+
     .cycle-pager span {
         display: block;
         float: left;
@@ -27,6 +29,7 @@
         margin-right: 10px;
         cursor: pointer;
     }
+
     .cycle-pager-active {
         background: #000 !important;
     }
@@ -35,7 +38,7 @@
     <div class="w-100">
         <!-- ~ Contenitore con w-100 tiene a tutta larghezza ic ontenui della slide-->
         <div class="row align-items-center">
-            <div class="col-md-5 col-sm-5 col-12 order-last order-sm-first text-right textBanner animated" data-animtype="bounceInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s">
+            <div class="col-md-5 col-sm-5 col-12 order-last order-sm-first text-center text-md-right textBanner animated" data-animtype="bounceInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s">
                 <div style="color:#303030 !important; font-weight:400" class="pull-center divTesto">
                     <div class="bind" mybind="Id" myvalue="titolo" format="formattestoreplace"></div>
                 </div>
@@ -46,7 +49,7 @@
                 <div class="w-100 text-right" style="overflow:hidden;">
                     <img src="/images/dummylogo.png" alt="" class="bind imgBanner w-100" mybind="Id" />
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
 </div>

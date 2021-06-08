@@ -2,16 +2,25 @@
     .border-impagination img {
         border-radius: calc(.25rem - 1px);
     }
+
     @media (max-width: 576px) {
-    .border-impagination {
-        overflow: hidden;
-        margin: 0 15px 15px;
-        border-radius: .25rem!important;
-        border: 1px solid #dee2e6!important;
-    }
-    .border-impagination img {
-        border-radius: calc(.25rem - 1px) 0 0;
-    }
+        .border-impagination {
+            overflow: hidden;
+            margin: 0 0 15px !important;
+            /*margin: 0 !important;*/
+            border-radius: .25rem !important;
+            /*border: 1px solid #dee2e6 !important;*/
+            -webkit-box-shadow: 0px 0px 1px 1px rgba(200, 200, 200, 0.24);
+            -moz-box-shadow: 0px 0px 1px 1px rgba(200, 200, 200, 0.24);
+            box-shadow: 0px 0px 1px 1px rgba(200, 200, 200, 0.24);
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+            .border-impagination img {
+                border-radius: calc(.25rem - 1px) 0 0;
+                padding: 0 !important;
+            }
     }
 </style>
 <div style="display: none">
@@ -19,50 +28,68 @@
         <div class="alternatecolor" id="replaceid">
             <item>
                 <div class="bg-white">
-                    <div class="position-relative my-0 mx-auto bg-white" style="max-width: 1179px;">
-                            <div class="row no-gutters align-items-center even pb-0 pt-0 pb-md-5 justify-content-center border-impagination">
-                                <div class="col-12 col-md-6 text-right pl-0 pl-md-5">
-                                    <!--<div class="animated w-100 text-center" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" style="overflow:hidden;">--> <!--IMMAGINE ANIMATA-->
-                                        <div class="w-100 text-right" style="overflow:hidden;">
-                                            <img src="/images/dummylogo.png" alt="" class="bind imgBanner w-100 lazy" mybind="Id" />
-                                            <!--<div class="arrow-down-even d-block d-sm-none"></div>-->
-                                        </div>
+                    <div class="position-relative my-0 mx-auto bg-white" style="max-width: 1140px;">
+                        <div class="row no-gutters align-items-center even pb-0 pt-0 pb-md-5 justify-content-center border-impagination">
+                            <div class="col-12 col-md-6 text-right pl-0">
+                                <!--<div class="animated w-100 text-center" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" style="overflow:hidden;">--> <!--IMMAGINE ANIMATA-->
+                                <!--<a class="bind" target="_self" href="link" title="titolo" mybind="Id">-->
+                                <div class="w-100 text-right" style="overflow:hidden;">
+                                    <img src="/images/dummylogo.png" alt="" class="bind imgBanner w-100 lazy" mybind="Id" />
+                                    <!--<div class="arrow-down-even d-block d-sm-none"></div>-->
                                 </div>
-                                <div class="col-md-6 col-12 side-image-content text-left textBanner animated px-3 px-md-5 py-4 py-md-0" data-animtype="bounceInRight" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s">
-                                        <h3 class="card-title title-isotope display-3 text-left mb-2">
-                                            <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
-                                        </h3>
-                                    <h4 class="card-subtitle mbr-section-subtitle display-5 text-left mt-0 mb-3">
-                                        <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
-                                    </h4>
-                                    <p class="bind d-block d-md-none d-lg-block m-0" mybind="Id" myvalue="descrizione" myvalue1="1250" myvalue2="nobreak" myvalue3="filtertags" format="formatdescrizione"></p>
-                                </div>
+                                <!--</a>-->
+                            </div>
+                            <div class="col-md-6 col-12 side-image-content text-left textBanner animated px-3 px-md-5 pb-4 pb-md-0 pt-3 pt-md-0" data-animtype="bounceInRight" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s">
+                                <!--<a class="bind" target="_self" href="link" title="titolo" mybind="Id">-->
+                                <h3 class="card-title title-isotope display-3 text-left mb-1">
+                                    <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                                </h3>
+                                <!--</a>-->
+                                <h4 class="card-subtitle mbr-section-subtitle display-5 text-left mt-0 mb-2 py-0 py-md-2">
+                                    <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                                </h4>
+                                <p class="bind d-block d-md-none d-lg-block m-0" mybind="Id" myvalue="descrizione" myvalue1="1250" myvalue2="nobreak" myvalue3="filtertags" format="formatdescrizione"></p><br />
+                                <!--<div class="text-left tx-primary-color mb-2" style="font-weight: 800; font-size: 1.9em; line-height: normal">
+                                    <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                                    <span style="text-decoration: line-through;font-weight: 200;" class="pl-3 bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                                </div><br />-->
+                                <!--<a class="bind divbuttonstyle mt-0 mt-md-1" target="_self" href="link" title="titolo" mybind="Id"><span class="bind" mybind="Id" myvalue="txtscopri" format="formatlabelresource"></span></a>-->
                             </div>
                         </div>
                     </div>
+                </div>
             </item>
             <item>
                 <div class="bg-white">
-                    <div class="position-relative my-0 mx-auto bg-white" style="        max-width: 1179px;">
-                            <div class="row no-gutters align-items-center odd pb-0 pt-0 pb-md-5 justify-content-center border-impagination">
-                                <div class="col-12 col-md-6 order-1 order-md-12 pr-0 pr-md-5">
-                                    <!--<div class="animated w-100 text-center" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" style="overflow:hidden;">--> <!--IMMAGINE ANIMATA-->
-                                        <div class="w-100 text-left" style="overflow:hidden;">
-                                            <img src="/images/dummylogo.png" alt="" class="bind imgBanner w-100 lazy" mybind="Id" />
-                                            <!--<div class="arrow-down-odd d-block d-sm-none"></div>-->
-                                        </div>
+                    <div class="position-relative my-0 mx-auto bg-white" style="max-width: 1140px;">
+                        <div class="row no-gutters align-items-center odd pb-0 pt-0 pb-md-5 justify-content-center border-impagination">
+                            <div class="col-12 col-md-6 order-1 order-md-12 pr-0">
+                                <!--<div class="animated w-100 text-center" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" style="overflow:hidden;">--> <!--IMMAGINE ANIMATA-->
+                                <!--<a class="bind" target="_self" href="link" title="titolo" mybind="Id">-->
+                                <div class="w-100 text-left" style="overflow:hidden;">
+                                    <img src="/images/dummylogo.png" alt="" class="bind imgBanner w-100 lazy" mybind="Id" />
+                                    <!--<div class="arrow-down-odd d-block d-sm-none"></div>-->
                                 </div>
-                                <div class="col-md-6 col-12 order-12 order-md-1 side-image-content text-left text-md-right textBanner animated px-3 px-md-5 py-4 py-md-0" data-animtype="bounceInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s">
-                                        <h3 class="card-title  mb-2 title-isotope display-3 text-left text-md-right ">
-                                            <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
-                                        </h3>
-                                    <h4 class="card-subtitle  mt-0 mb-3 mbr-section-subtitle display-5 text-left text-md-right">
-                                        <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
-                                    </h4>
-                                    <p class="bind d-block d-md-none d-lg-block m-0" mybind="Id" myvalue="descrizione" myvalue1="1250" myvalue2="nobreak" myvalue3="filtertags" format="formatdescrizione"></p>
-                                </div>
+                                <!--</a>-->
+                            </div>
+                            <div class="col-md-6 col-12 order-12 order-md-1 side-image-content text-left text-md-right textBanner animated px-3 px-md-5 pb-4 pb-md-0 pt-3 pt-md-0" data-animtype="bounceInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s">
+                                <!--<a class="bind" target="_self" href="link" title="titolo" mybind="Id">-->
+                                <h3 class="card-title mb-1 title-isotope display-3 text-left text-md-right ">
+                                    <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                                </h3>
+                                <!--</a>-->
+                                <h4 class="card-subtitle  mt-0 mb-2 py-0 py-md-2 mbr-section-subtitle display-5 text-left text-md-right">
+                                    <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                                </h4>
+                                <p class="bind d-block d-md-none d-lg-block m-0" mybind="Id" myvalue="descrizione" myvalue1="10000" myvalue2="nobreak" myvalue3="filtertags" format="formatdescrizione"></p><br />
+                                <!--<div class="text-left tx-primary-color mb-2" style="font-weight: 800; font-size: 1.9em; line-height: normal">
+                                    <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                                    <span style="text-decoration: line-through;font-weight: 200;" class="pl-3 bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                                </div><br />-->
+                                <!--<a class="bind divbuttonstyle mt-0 mt-md-1" target="_self" href="link" title="titolo" mybind="Id"><span class="bind" mybind="Id" myvalue="txtscopri" format="formatlabelresource"></span></a>-->
                             </div>
                         </div>
+                    </div>
                 </div>
             </item>
         </div>

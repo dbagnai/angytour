@@ -1,0 +1,290 @@
+﻿<style>
+    .haibisognodiaiuto {
+        display: block;
+    }
+
+    .titolo-condizioni-ordini {
+        display: none;
+    }
+
+    .collapsed.panel-title h4 {
+        font-weight: normal;
+        font-size: 1rem !important;
+        font-weight: 400;
+    }
+
+    .slides {
+        width: 100% !important;
+    }
+
+    .flexslider {
+        margin: 0 !important;
+    }
+
+    .slide-content {
+        padding: 0 !important;
+    }
+
+    .flexslider .slides img {
+        width: 100% !important;
+        max-height: 100% !important;
+        max-width: 100% !important;
+        height: auto !important
+    }
+
+    /*CARD*/
+    .scheda-bottiglie .faq-section b {
+        font-weight: 800 !Important;
+    }
+    .scheda-bottiglie .faq-section .card {
+        border: none;
+    }
+
+        .scheda-bottiglie .faq-section .card .card-header {
+            background-color: transparent !Important;
+        }
+
+            .scheda-bottiglie .faq-section .card .card-header a.panel-title h4 {
+                padding-top: 0.5rem !Important;
+                padding-bottom: 0.5rem !Important;
+                padding-left: 2.15rem !Important;
+            }
+
+    /*breadcrumbs*/
+    .breadcrumbs {
+        max-width: calc(58.333333% + 25%) !important;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(58.333333% + 25%) !important;
+        flex: 0 0 calc(58.333333% + 25%) !important;
+        margin: 0 auto;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+        .breadcrumbs ul {
+            float: left !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important
+        }
+
+        .breadcrumbs li:last-child {
+            display: none;
+        }
+
+    @media screen and (max-width: 1366px) {
+        .breadcrumbs {
+            padding-right: 0.5rem;
+            padding-left: 0.5rem;
+        }
+    }
+
+    @media screen and (max-width: 575px) {
+        .breadcrumbs {
+            max-width: 100% !important;
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 100% !important;
+            flex: 0 0 100% !important;
+            margin: 0 auto;
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+    /*grigli foto caso 2*/
+    .scheda-bottiglie .imagesgalllerysimple div:nth-child(2) {
+        width: 100%;
+    }
+
+    .scheda-bottiglie .grid {
+        margin: -0.25rem;
+    }
+
+    .scheda-bottiglie .grid-sizer, .scheda-bottiglie .grid-item {
+        padding: 0.25rem;
+        width: 33.333%;
+    }
+
+    @media (min-width: 992px) {
+        .scheda-bottiglie .grid-sizer, .scheda-bottiglie .grid-item {
+            width: 33.333%;
+        }
+    }
+
+    @media (min-width: 576px) {
+        .scheda-bottiglie .grid-sizer, .scheda-bottiglie .grid-item {
+            width: 33.333%;
+        }
+    }
+</style>
+
+
+<div id="replaceid" class="scheda-bottiglie" style="text-align: left" itemscope="" itemtype="http://schema.org/Product">
+    <div class="container pt-0 pt-sm-4 no-plygon">
+        <div class="row">
+
+            <!---------------------------------------------
+            ------ COLONNA 1 IMMAGINE ------
+            ---------------------------------------------->
+            <div class="col-12 col-lg-3 mt-0 mb-4 mt-lg-0 mb-lg-5">
+                <div class="position-sticky d-flex" style="top:120px;">
+                    <!--<div id="plhGallery" class="bind col-7 col-lg-12 float-none p-0 float-lg-left mx-auto" mybind="Id" myvalue="video" format="frmvisibility"></div>-->
+                    <div class="grid mb-0 imagesgalllerysimple bind col-12 col-lg-12 float-none p-0 float-lg-left mx-auto" mybind="Id" myvalue="" myvalue1="grid-item" myvalue2="prettyphoto" style="max-height:1200px"></div>
+                    <!-- pulsanti social -->
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <!--<div class="addthis_inline_share_toolbox py-3 py-lg-0 pt-lg-3 mx-auto" style="width: fit-content;"></div>-->
+                </div>
+            </div>
+
+            <!------------------------------
+            ------ COLONNA 2 CENTER TITOLO E DESCRIZIONE   ------
+            ------------------------------->
+            <div class="col-12 col-lg-6">
+                <!------- TITOLO ------>
+                <div itemprop="name" class="w-100 text-center text-lg-left mb-4 mx-0 mx-sm-3">
+                    <h1 itemprop="name" class="bind mb-2 tx-primary-color mt-0" style="line-height: 1.2;" mybind="Id" myvalue="titolo" format="formattitle"></h1>
+                    <h2 class="bind tx-sottomenu-color" style="font-weight:300" mybind="Id" myvalue="titolo" format="formatsubtitle"></h2>
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <div class="addthis_inline_share_toolbox pb-0 pt-3"></div>
+                </div>
+
+                <div class="d-block mx-0 text-left" style="line-height: 1.6rem; flex: 0 0 100%;">
+                    <!------- DESCRIZIONE PRODOTTO ------>
+                    <div id="accordion" class="mb-0 mb-lg-4 w-100 faq-section">
+                        <!--<div class="card" style="border:none;">
+                            <div class="card-header" id="headingOne">
+                                <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <h4 class="mb-0 tx-sottomenu-color" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                        <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i>  <span class="bind" mybind="Id" myvalue="descrizionedelprodotto" format="formatlabelresource"></span>
+                                    </h4>
+                                </a>
+                            </div>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body px-3 pb-3 pt-2" itemprop="description">
+                                    <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="card" style="border:none;">
+                            <!--<div class="card-header" id="headingOne">
+                                <a class="collapsed panel-title text-black">
+                                    <h4 class="mb-0 tx-sottomenu-color" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer; padding-left:1.55rem !important;">
+                                        <i class=""></i>  <span class="bind" mybind="Id" myvalue="descrizionedelprodotto" format="formatlabelresource"></span>
+                                    </h4>
+                                </a>
+                            </div>-->
+                            <div id="collapseOne" class="collapse show">
+                                <div class="card-body px-3 pb-3 pt-0" itemprop="description">
+                                    <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--ULTERIORI INFORMAZIONI-->
+                        <!--<div class="card" style="border:none;">
+                            <div class="card-header" id="headingTwo">
+                                <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                    <h4 class="mb-0 tx-sottomenu-color" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                        <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="ulterioriinformazioni" format="formatlabelresource"></span>
+                                    </h4>
+                                </a>
+                            </div>
+                            <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="card-body px-3 pb-3 pt-2">
+                                    <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
+                                </div>
+                            </div>
+                        </div>-->
+                        <!--SCHEDA TECNICA-->
+                        
+
+                    </div>
+                </div>
+            </div>
+
+            <!---------------------------------------------
+            ------ COLONNA 3 CALL TO ACTION ------
+            ---------------------------------------------->
+            <div class="col-12 col-lg-3 mt-3 mt-lg-0 mb-2 mb-lg-5 pb-1 pb-lg-2">
+                <div class="position-sticky" style="top:120px">
+
+                    <!--riquadro hai bisogno di aiuto-->
+                    <div class="w-100 mb-1 px-2 py-3 text-center card card-header bg-color-sottomeu-tenue">
+                        <div class="bind" mybind="Id" myvalue="testocall" format="formatlabelresource"></div>
+                    </div>
+                    <!-- pulsanti info utili 1 -->
+                    <div class="bind w-100 mx-3 mx-md-0 mb-3 text-center d-none" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>
+                </div>
+            </div>
+        </div>
+
+        <!---------------------------------------------------
+         ------ LONNA 4 LEFT - COMANDI NAVIGAZIONE ------
+         ---------------------------------------------------->
+        <div class="w-100">
+            <div class="row justify-content-between mx-0 pt-3 pt-lg-4 pb-3 pb-lg-5 border-top bd-primary-color">
+
+                <div class="col-12 col-lg-auto mr-0 mb-3 mb-lg-0">
+                    <div class="row">
+                        <a rel="nofollow, noindex" class="btn-black-outline w-100 bind" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-auto mb-3 my-lg-0">
+                    <div class="row justify-content-between">
+
+                        <div class="row">
+                            <div class="col mr-3">
+                                <a rel="nofollow" class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
+                                    <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span><div style="display:inline-block;">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <a rel="nofollow" class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
+                                    <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span><div style="display:inline-block;vertical-align:top">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // <![CDATA[
+    $("a[role=button]").click(function () {
+        $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
+    });
+    $("#headingTwo a[role=button]").click(function () {
+        $('#headingThree').find('i').removeClass('fa-chevron-down')
+        $('#headingThree').find('i').addClass('fa-chevron-up')
+        $('#headingFour').find('i').removeClass('fa-chevron-down')
+        $('#headingFour').find('i').addClass('ffa-chevron-up')
+    });
+    $("#headingThree a[role=button]").click(function () {
+        $('#headingTwo').find('i').removeClass('fa-chevron-down')
+        $('#headingTwo').find('i').addClass('fa-chevron-up')
+        $('#headingFour').find('i').removeClass('fa-chevron-down')
+        $('#headingFour').find('i').addClass('ffa-chevron-up')
+    });
+    $("#headingFour a[role=button]").click(function () {
+        $('#headingTwo').find('i').removeClass('fa-chevron-down')
+        $('#headingTwo').find('i').addClass('fa-chevron-up')
+        $('#headingThree').find('i').removeClass('fa-chevron-down')
+        $('#headingThree').find('i').addClass('ffa-chevron-up')
+    });
+    //$('a').click(function () {
+    //    $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
+    //});
+    //$("#chevron-toggle").click(function () {
+    //    $(this).find("i").toggleClass("fa-chevron-up");
+    //});
+// ]]></script>
+

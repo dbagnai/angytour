@@ -1,0 +1,172 @@
+﻿<style>
+    .haibisognodiaiuto {
+        display: block;
+    }
+
+    .titolo-condizioni-ordini {
+        display: none;
+    }
+
+    .collapsed.panel-title {
+        font-weight: normal;
+        font-size: 0.8rem;
+        font-weight: 400;
+    }
+    .slide-content {
+        border: 1px solid #ddd;
+    }
+
+    /*gestione foto*/
+    .imagesgalllerysimple div:nth-child(2) {
+        width: 100%;
+    }
+
+    .grid {
+        margin: -0.25rem;
+    }
+
+    .grid-sizer, .grid-item {
+        padding: 0.25rem;
+    }
+    
+    @media (max-width: 992px) {
+        .grid {
+            margin: 0rem;
+        }
+        .grid-sizer, .grid-item {
+            padding: 0.25rem 0;
+        }
+        .imagesgalllerysimple div, .imagesgalllerysimple div:nth-child(2) {
+            width: 100%;
+            margin: 0 auto
+        }
+    }
+    @media (max-width: 576px) {
+        .grid {
+            margin: -0.5rem;
+        }
+        .grid-sizer, .grid-item {
+            padding: 0.25rem;
+        }
+        .imagesgalllerysimple div, .imagesgalllerysimple div:nth-child(2) {
+            width: calc(100% - 1rem);
+        }
+    }
+    @media (min-width: 992px) {
+        .grid-sizer, .grid-item {
+            width: 33.333%;
+        }
+    }
+</style>
+<div id="replaceid" style="text-align: left" itemscope="" itemtype="http://schema.org/Article">
+    <div class="container pt-0 pt-sm-4">
+        <div class="row">
+            <!------------------------------
+    ------ COLONNA 1 LEFT IMG E TESTO DESKTOP ------
+    ------------------------------->
+            <div class="col-12 col-lg-8 mb-3 order-2 order-lg-first">
+                <div class="row mx-sm-auto mx-lg-0">
+                    <!--<div id="plhGallery" class="bind col-12 float-none p-0 float-lg-left pl-lg-0 pb-lg-3 px-3 px-sm-0" mybind="Id" myvalue="video" format="frmvisibility"></div>-->
+                    <div class="grid imagesgalllerysimple bind col-12 float-none p-0 float-lg-left pl-lg-0 pb-lg-3 px-3 px-sm-0" mybind="Id" myvalue="" myvalue1="grid-item" myvalue2="prettyphoto" style="max-height:1200px"></div>
+                    <!--<div class="responsive-video" style="display: none">
+                <iframe frameborder="0" allowfullscreen class="bind" mybind="Id" myvalue="video" frameborder="0" allowfullscreen src=""></iframe>
+            </div>-->
+                    <!---------------------------------
+            ------ COLONNA 2 LEFT DESCRIZIONE ------
+            ---------------------------------->
+                    <div class="d-none d-lg-block mx-0 text-left" style="line-height: 1.6rem; flex: 0 0 100%;">
+                        <!------- DESCRIZIONE PRODOTTO ------>
+                        <p class="bind mb-0" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></p>
+                    </div>
+                </div>
+            </div>
+            <!---------------------------------------------
+    ------ COLONNA 2 TITOLO + CALL TO ACTION ------
+    ---------------------------------------------->
+            <div class="col-12 col-lg-4 mt-9 mb-0 mb-lg-3 order-first order-lg-1">
+                    <div class="position-sticky" style="top:120px">
+                        <div itemprop="name" class="w-100 text-center text-lg-left mb-0 mb-lg-3">
+                            <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                                <h1 itemprop="name" class="bind mb-2 tx-primary-color" mybind="Id" myvalue="titolo" format="formattitle"></h1>
+                                <h2 class="bind tx-sottomenu-color" mybind="Id" myvalue="titolo" format="formatsubtitle"></h2>
+                            </a>
+                        </div>
+                        <div class="d-none d-lg-block mb-4">
+                            <!-- RIQUADRO INFO SOTTO TITOLO -->
+                            <div class="w-100 mt-3"></div>
+                            <!--riquadro hai bisogno di aiuto-->
+                            <div class="w-100 mb-1 px-2 py-3 text-center card card-header bg-light-color border-tipo2">
+                                <div class="bind" mybind="Id" myvalue="testocall" format="formatlabelresource"></div>
+                            </div>
+                            <!-- pulsanti info utili 1 -->
+                            <div class="bind w-100 mx-3 mx-md-0 mb-3 text-center d-none" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>
+                        </div>
+                        <!-- pulsanti social -->
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                        <div class="addthis_inline_share_toolbox py-3 py-lg-0 mx-auto text-center text-lg-left"></div>
+                    </div>
+                </div>
+                <!---------------------------------
+    ------ COLONNA 1 DESCRIZIONE MOBILE ------
+    ---------------------------------->
+            <div class="col-12 col-lg-8 d-block d-lg-none px-3 px-lg-0 pb-3 pb-lg-0 order-1 order-lg-1">
+                <div class="row mx-0 text-left" style="line-height: 1.6rem;">
+                <!------- DESCRIZIONE PRODOTTO ------>
+                <span class="bind mb-0" mybind="Id" myvalue="descrizione" myvalue1="6000" format="formatdescrizione"></span>
+            </div>
+                </div>
+                <!---------------------------------------------
+    ------ COLONNA 2 TITOLO + CALL TO ACTION MOBILE ------
+    ---------------------------------------------->
+                <div class="col-12 col-lg-8 d-block d-lg-none mb-4 mt-0 order-last">
+                        <!-- RIQUADRO INFO SOTTO TITOLO -->
+                        <div class="w-100"></div>
+                        <!--riquadro hai bisogno di aiuto-->
+                        <div class="w-100 mb-1 px-2 py-3 text-center card card-header bg-light-color border-tipo2">
+                            <div class="bind" mybind="Id" myvalue="testocall" format="formatlabelresource"></div>
+                        </div>
+                        <!-- pulsanti info utili 1 -->
+                        <div class="bind w-100 mx-3 mx-md-0 mb-0 mb-lg-3 text-center d-none" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>
+                    </div>
+                </div>
+
+        
+
+
+        <!---------------------------------------------------
+        ------ RIGA - COMANDI NAVIGAZIONE ------
+        ---------------------------------------------------->
+        <div class="w-100">
+            <div class="row justify-content-between mx-0 pt-3 pt-lg-4 pb-3 pb-lg-5 border-top bd-primary-color">
+
+                <div class="col-12 col-lg-auto mr-0 mb-3 mb-lg-0">
+                    <div class="row">
+                        <a rel="nofollow, noindex" class="btn-black-outline w-100 bind" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-auto mb-3 my-lg-0">
+                    <div class="row justify-content-between">
+                        <div class="row">
+                            <div class="col mr-1">
+                                <a rel="nofollow" class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
+                                    <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span><div style="display:inline-block;">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col ml-1">
+                                <a rel="nofollow" class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
+                                    <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span><div style="display:inline-block;vertical-align:top">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

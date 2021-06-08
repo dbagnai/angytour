@@ -2,16 +2,19 @@
     .slidercycle > div {
         display: none
     }
-    .slidercycle > div:nth-child(1) {
-        display: block
-    }
+
+        .slidercycle > div:nth-child(1) {
+            display: block
+        }
+
     div.cycle-pager {
         position: absolute;
         display: inline-block;
         height: 20px;
-        z-index: 96;
+        z-index: 101;
         bottom: 10px;
     }
+
     .cycle-pager span {
         display: block;
         float: left;
@@ -26,6 +29,7 @@
         margin-right: 10px;
         cursor: pointer;
     }
+
     .cycle-pager-active {
         background: #000 !important;
     }
@@ -38,7 +42,7 @@
             <div class="col-12">
                 <div class="mbr-overlay-gradient"></div>
                 <div class="w-100 text-right" style="overflow:hidden;">
-                    <img src="/images/dummylogo.png"  alt="" class="bind imgBanner w-100" mybind="Id" />
+                    <img src="/images/dummylogo.png" alt="" class="bind imgBanner w-100" mybind="Id" />
                 </div>
             </div>
             <div class="col-12 text-center position-absolute d-none d-md-block" style="z-index:96">
