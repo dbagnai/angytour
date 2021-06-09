@@ -4835,7 +4835,7 @@ namespace WelcomeLibrary.UF
                             {
                                 double _tmppz = 0;
                                 double.TryParse(valore[0] , out _tmppz);
-                                ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { _tmppz  }) + ' ' + unit;
+                                ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,##0.00}", new object[] { _tmppz  }) + ' ' + unit;
                             }
                         }
                     }
