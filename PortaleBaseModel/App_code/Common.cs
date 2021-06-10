@@ -1374,6 +1374,30 @@ public class CommonPage : Page
             if (c.Offerta.Peso != null && c.Offerta.Peso.Value != 0) //Calcolo il peso totale della merce.. da capire che succede quando hai dei pesi nullo o a zero ....
             {
                 totali.TotalePeso += c.Offerta.Peso.Value * (double)c.Numero;
+
+                ////////////////////////////////////////////////////////////////////////////////////////////
+                //se presenti sottocategorie calcolo i pesi suddivisi per categoria ( attenzione se la sottocategoria non è assegnata non somma il peso articolo
+                ////////////////////////////////////////////////////////////////////////////////////////////
+                if (!string.IsNullOrEmpty(c.Offerta.CodiceCategoria2Liv))
+                {
+                    if (totali.TotaliPesoPerCodice.ContainsKey(c.Offerta.CodiceCategoria2Liv))
+                    {
+                        totali.TotaliPesoPerCodice[c.Offerta.CodiceCategoria2Liv] += c.Offerta.Peso.Value * (double)c.Numero;
+                    }
+                    else
+                        totali.TotaliPesoPerCodice.Add(c.Offerta.CodiceCategoria2Liv, c.Offerta.Peso.Value * (double)c.Numero);
+                }
+                else //sommo i pasi se la categoria2liv non è specificata per l'articolo un una voce specifica a key string.empty
+                {
+                    if (totali.TotaliPesoPerCodice.ContainsKey(string.Empty))
+                    {
+                        totali.TotaliPesoPerCodice[string.Empty] += c.Offerta.Peso.Value * (double)c.Numero;
+                    }
+                    else
+                        totali.TotaliPesoPerCodice.Add(string.Empty, c.Offerta.Peso.Value * (double)c.Numero);
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////
+
             }
             else foundzeropeso = true;
             //////////////////////////////////////////////////////////
@@ -1802,8 +1826,77 @@ public class CommonPage : Page
         jsonspedizioni js = references.TrovaFascespedizioneNazione(codicenazione);
         if (js != null && js.fascespedizioni != null)
         {
-            fascespedizioni fascia = js.fascespedizioni.Find(e => e.PesoMin <= totali.TotalePeso && e.PesoMax > totali.TotalePeso);
-            if (fascia != null) ret = fascia.Costo;
+#if false
+            ///////////////////////////////////////////////////
+            //Calcolo spedizioni per fascia  unificata per prodotto
+            ///////////////////////////////////////////////////
+            fascespedizioni fascia = js.fascespedizioni.Find(e => e.PesoMin < totali.TotalePeso && e.PesoMax >= totali.TotalePeso && string.IsNullOrEmpty(e.Codice));
+            if (fascia != null) ret = fascia.Costo; //costo a fascia di peso unificata ( commentare viene sostituito dal sistema sotto !! )
+
+#endif
+            double totalepesosenzacodice = totali.TotalePeso; //peso complessivo
+
+
+            ///////////////////////////////////////////////////
+            //Calcolo spedizioni per fascia diversificata per codice categoria ( 2liv ).
+            ///////////////////////////////////////////////////
+            // !!! attenzione se non ci sono le fasce di peso nelle tabelle spedizioni per la categoria non deve calcolare una doppia spedizione ( NO SEPDIZIONI SEPARATE PER CATEGORIA  ) !!!! 
+            // Calcolo spedizioni separate per le categorie che hanno fascia di codice nelle tabelle di spedizione x fascia, le altre vanno cumulate in un'unica spedizione prendendo le fasce senza categoria!!
+            //Vengono prima calcolati i pesi dei codici che rientrano in una data fascia ( codici per la fascia sono separati da | ) e poi sommati i pesi dei gruppi di codici trovati
+            //NELLE FASCE DI PESO POSSO AVERE PIU CODICI CHE COSTITUISCONO UNA SINGOLA SPEDIZIONE I CUI PESI SONO DA SOMMARE
+            //ES ... "Codice": "sprod000003|sprod000007",
+            ///////////////////////////////////////////////////
+            if (totali.TotaliPesoPerCodice.Count != 0)
+            {
+                totalepesosenzacodice = 0;
+                Dictionary<string, double> totalepesogruppicodici = new Dictionary<string, double>();
+                //CALCOLO I PESI TOTALI PER I GRUPPI DI CODICI A SECONDA DELLE FASCE IN CUI RIENTRANO in base al campo codice delle fasce stesse ( che puo contenere piu codici separati da | )
+                foreach (KeyValuePair<string, double> kv in totali.TotaliPesoPerCodice) //calcolo la spesa di spedizione ( come spedizioni separate per gruppi di peso per categorie !!! ) 
+                {
+                    // Calcolare spedizioni diverse per le categorie che hanno fascia di codice nelle tabelle di spedizione x fascia (in base al codice della fascia)!!
+                    fascespedizioni fasciapercodice = null;
+                    if (!string.IsNullOrEmpty(kv.Key))
+                        fasciapercodice = js.fascespedizioni.Find(e => e.PesoMin < kv.Value && e.PesoMax >= kv.Value && e.Codice.Trim().Contains(kv.Key));
+                    if (fasciapercodice == null) totalepesosenzacodice += kv.Value; //sommo i pesi che non hanno fascia di codice corrispondente 
+                    else
+                    {
+                        if (totalepesogruppicodici.ContainsKey(fasciapercodice.Codice))
+                        {
+                            totalepesogruppicodici[fasciapercodice.Codice] += kv.Value;
+                        }
+                        else
+                            totalepesogruppicodici.Add(fasciapercodice.Codice, kv.Value);
+                    }
+                }
+                ///////////////////////////////////////////////////
+
+                double speseconcodice = 0;
+                //Calcolo le spese per i gruppi di codice in base ai totali di peso del gruppo
+                foreach (KeyValuePair<string, double> kv in totalepesogruppicodici)
+                {
+                    fascespedizioni fasciapergruppocodici = js.fascespedizioni.Find(e => e.PesoMin < kv.Value && e.PesoMax >= kv.Value && e.Codice == (kv.Key));
+                    if (fasciapergruppocodici != null)
+                        speseconcodice += fasciapergruppocodici.Costo;
+
+                    //Controllo superamento  fascia peso massimo con codice per il gruppo
+                    double pesomassimoconcodice = 0;
+                    if (js.keyValuePairs.ContainsKey("sogliapesocodice"))
+                        double.TryParse(js.keyValuePairs["sogliapesocodice"].ToString(), out pesomassimoconcodice);
+                    if (pesomassimoconcodice != 0 && kv.Value >= pesomassimoconcodice)
+                    {
+                        ret = 999999; // comunicare di bloccare paypal e ordine
+                        return ret;
+                    }
+                }
+
+                //Calcolo le spese per le categorie senza fascia con codice corrispondente come un'unica spedizione !!!
+                double spesenocodice = 0;
+                fascespedizioni fasciasenzacodice = js.fascespedizioni.Find(e => e.PesoMin < totalepesosenzacodice && e.PesoMax >= totalepesosenzacodice && e.Codice == "");
+                if (fasciasenzacodice != null) spesenocodice = fasciasenzacodice.Costo;
+
+                ret = speseconcodice + spesenocodice; //sommo le spedizioni raggruppate
+            }
+
 
             // logiche aggiuntive di calcolo
             //verifica soglie azzeramenti e superamento di peso
@@ -1817,16 +1910,19 @@ public class CommonPage : Page
             if (js.keyValuePairs.ContainsKey("supplementosp"))
                 double.TryParse(js.keyValuePairs["supplementosp"].ToString(), out daziaggiunta);
             ret += daziaggiunta;
-            // controllo con valore totali.TotalePeso
+
+            // controllo con valore totali.TotalePeso / totalepesosenzacodice
             double pesomassimo = 0;
             if (js.keyValuePairs.ContainsKey("sogliapeso"))
                 double.TryParse(js.keyValuePairs["sogliapeso"].ToString(), out pesomassimo);
-            if (pesomassimo != 0 && totali.TotalePeso >= pesomassimo)
+            if (pesomassimo != 0 && totalepesosenzacodice >= pesomassimo)
                 ret = 999999; // comunicare di bloccare paypal e ordine
 
         }
         return ret;
     }
+
+
 
     public static string CaricaQuantitaNelCarrello(HttpRequest Request, System.Web.SessionState.HttpSessionState Session, string idprodotto, string codcar, string idcarrello = "")
     {

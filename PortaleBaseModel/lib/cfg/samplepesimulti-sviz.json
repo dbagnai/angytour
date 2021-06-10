@@ -1,0 +1,213 @@
+{
+  "fascespedizioni": [
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 52.0,
+      "PesoMin": 0.0,
+      "PesoMax": 1.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 59.0,
+      "PesoMin": 1.0,
+      "PesoMax": 2.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 64.0,
+      "PesoMin": 2.0,
+      "PesoMax": 3.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 67.0,
+      "PesoMin": 3.0,
+      "PesoMax": 4.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 70.0,
+      "PesoMin": 4.0,
+      "PesoMax": 5.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 72.0,
+      "PesoMin": 5.0,
+      "PesoMax": 6.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 75.0,
+      "PesoMin": 6.0,
+      "PesoMax": 7.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 79.0,
+      "PesoMin": 7.0,
+      "PesoMax": 8.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 82.0,
+      "PesoMin": 8.0,
+      "PesoMax": 9.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 95.0,
+      "PesoMin": 9.0,
+      "PesoMax": 10.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 107.0,
+      "PesoMin": 10.0,
+      "PesoMax": 12.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 122.0,
+      "PesoMin": 12.0,
+      "PesoMax": 14.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 137.0,
+      "PesoMin": 14.0,
+      "PesoMax": 16.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 152.0,
+      "PesoMin": 16.0,
+      "PesoMax": 18.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 170.0,
+      "PesoMin": 18.0,
+      "PesoMax": 20.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 182.0,
+      "PesoMin": 20.0,
+      "PesoMax": 22.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 192.0,
+      "PesoMin": 22.0,
+      "PesoMax": 24.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 200.0,
+      "PesoMin": 24.0,
+      "PesoMax": 26.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 207.0,
+      "PesoMin": 26.0,
+      "PesoMax": 28.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 230.5,
+      "PesoMin": 28.0,
+      "PesoMax": 30.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 247.0,
+      "PesoMin": 30.0,
+      "PesoMax": 35.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 267.0,
+      "PesoMin": 35.0,
+      "PesoMax": 40.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 275.0,
+      "PesoMin": 40.0,
+      "PesoMax": 45.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 275.0,
+      "PesoMin": 45.0,
+      "PesoMax": 9999.0
+    },
+    {
+      "Codice": "sprod000003|sprod000007",
+      "Descrizione": "",
+      "Costo": 47.0,
+      "PesoMin": 0.0,
+      "PesoMax": 5.0
+    },
+    {
+      "Codice": "sprod000003|sprod000007",
+      "Descrizione": "",
+      "Costo": 49.0,
+      "PesoMin": 5.0,
+      "PesoMax": 10.0
+    },
+    {
+      "Codice": "sprod000003|sprod000007",
+      "Descrizione": "",
+      "Costo": 55.0,
+      "PesoMin": 10.0,
+      "PesoMax": 20.0
+    },
+    {
+      "Codice": "sprod000003|sprod000007",
+      "Descrizione": "",
+      "Costo": 65.0,
+      "PesoMin": 20.0,
+      "PesoMax": 30.0
+    },
+    {
+      "Codice": "sprod000003|sprod000007",
+      "Descrizione": "",
+      "Costo": 65.0,
+      "PesoMin": 30.0,
+      "PesoMax": 9999.0
+    } 
+  ],
+  "keyValuePairs": {
+    "sogliaazzeramento": "0",
+    "supplementosp": "0",
+    "sogliapesocodice": "30",
+    "sogliapeso": "45"
+  }
+}

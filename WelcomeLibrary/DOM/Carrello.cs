@@ -152,6 +152,9 @@ namespace WelcomeLibrary.DOM
             set { _Totalepeso = value; }
 
         }
+        private Dictionary<string, double> _TotaliPesoPerCodice;
+        public Dictionary<string, double> TotaliPesoPerCodice { get => _TotaliPesoPerCodice; set => _TotaliPesoPerCodice = value; }
+
         private double _precacconto;
         public double Percacconto
         {
@@ -283,6 +286,7 @@ namespace WelcomeLibrary.DOM
             TotaleOrdine = 0;
             TotaleSconto = 0;
             TotalePeso = 0;
+            TotaliPesoPerCodice = new Dictionary<string, double>();
             TotaleAssicurazione = 0;
             Nassicurazioni = 0;
             TotaleSpedizione = 0;
@@ -313,6 +317,7 @@ namespace WelcomeLibrary.DOM
             TotaleOrdine = tmp.TotaleOrdine;
             TotaleSconto = tmp.TotaleSconto;
             TotalePeso = tmp.TotalePeso;
+            TotaliPesoPerCodice = tmp.TotaliPesoPerCodice;
             Bloccaacquisto = tmp.Bloccaacquisto;
             TotaleSpedizione = tmp.TotaleSpedizione;
             TotaleAssicurazione = tmp.TotaleAssicurazione;

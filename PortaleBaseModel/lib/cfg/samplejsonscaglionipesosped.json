@@ -1,449 +1,420 @@
-italia
+italia 
 {
-	  "fascespedizioni": [
+	"fascespedizioni": [
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 8.9,
-		  "PesoMin": 0.0,
-		  "PesoMax": 2.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 8.9,
+			"PesoMin": 0.0,
+			"PesoMax": 2.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 8.9,
-		  "PesoMin": 2.0,
-		  "PesoMax": 3.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 8.9,
+			"PesoMin": 2.0,
+			"PesoMax": 3.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 8.9,
-		  "PesoMin": 3.0,
-		  "PesoMax": 5.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 8.9,
+			"PesoMin": 3.0,
+			"PesoMax": 5.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 11.9,
-		  "PesoMin": 5.0,
-		  "PesoMax": 7.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 11.9,
+			"PesoMin": 5.0,
+			"PesoMax": 7.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-          "Costo": 11.9,
-		  "PesoMin": 7.0,
-		  "PesoMax": 10.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 11.9,
+			"PesoMin": 7.0,
+			"PesoMax": 10.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 11.9,
-		  "PesoMin": 10.0,
-		  "PesoMax": 14.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 11.9,
+			"PesoMin": 10.0,
+			"PesoMax": 14.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 14.9,
-		  "PesoMin": 14.0,
-		  "PesoMax": 20.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 14.9,
+			"PesoMin": 14.0,
+			"PesoMax": 20.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		 "Costo": 14.9,
-		  "PesoMin": 20.0,
-		  "PesoMax": 25.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 14.9,
+			"PesoMin": 20.0,
+			"PesoMax": 25.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		 "Costo": 14.9,
-		  "PesoMin": 25.0,
-		  "PesoMax": 30.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 14.9,
+			"PesoMin": 25.0,
+			"PesoMax": 30.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 21.90,
-		  "PesoMin": 30.0,
-		  "PesoMax": 35.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 21.90,
+			"PesoMin": 30.0,
+			"PesoMax": 35.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		 	  "Costo": 21.90,
-		  "PesoMin": 35.0,
-		  "PesoMax": 40.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 21.90,
+			"PesoMin": 35.0,
+			"PesoMax": 40.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 21.90,
-		  "PesoMin": 40.0,
-		  "PesoMax": 45.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 21.90,
+			"PesoMin": 40.0,
+			"PesoMax": 45.0
 		}
-	  ],
-    "keyValuePairs": {
-    "sogliaazzeramento": "100",
-    "supplementosp": "0",
-    "sogliapeso": "45"
-  }
-}
-
--------------------------- europa
-
-{
-	  "fascespedizioni": [
+	],
+	"keyValuePairs": {
+		"sogliaazzeramento": "100",
+		"supplementosp": "0",
+		"sogliapeso": "45"
+	}
+} -------------------------- europa {
+	"fascespedizioni": [
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 12.9,
-		  "PesoMin": 0.0,
-		  "PesoMax": 2.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 12.9,
+			"PesoMin": 0.0,
+			"PesoMax": 2.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		   "Costo": 12.9,
-		  "PesoMin": 2.0,
-		  "PesoMax": 3.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 12.9,
+			"PesoMin": 2.0,
+			"PesoMax": 3.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 14.9,
-		  "PesoMin": 3.0,
-		  "PesoMax": 5.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 14.9,
+			"PesoMin": 3.0,
+			"PesoMax": 5.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 18.9,
-		  "PesoMin": 5.0,
-		  "PesoMax": 7.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 18.9,
+			"PesoMin": 5.0,
+			"PesoMax": 7.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-        "Costo": 18.9,
-		  "PesoMin": 7.0,
-		  "PesoMax": 10.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 18.9,
+			"PesoMin": 7.0,
+			"PesoMax": 10.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 21.9,
-		  "PesoMin": 10.0,
-		  "PesoMax": 14.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 21.9,
+			"PesoMin": 10.0,
+			"PesoMax": 14.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		   "Costo": 24.9,
-		  "PesoMin": 14.0,
-		  "PesoMax": 20.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 24.9,
+			"PesoMin": 14.0,
+			"PesoMax": 20.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		 "Costo": 28.9,
-		  "PesoMin": 20.0,
-		  "PesoMax": 25.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 28.9,
+			"PesoMin": 20.0,
+			"PesoMax": 25.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		 "Costo": 30.0,
-		  "PesoMin": 25.0,
-		  "PesoMax": 30.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 30.0,
+			"PesoMin": 25.0,
+			"PesoMax": 30.0
 		}
-	  ],
-    "keyValuePairs": {
-    "sogliaazzeramento": "150",
-    "supplementosp": "0",
-    "sogliapeso": "30"
-  }
-}
-
-
--------------------------- europa ( dazi svizzera e turchia )
-
-{
-	  "fascespedizioni": [
+	],
+	"keyValuePairs": {
+		"sogliaazzeramento": "150",
+		"supplementosp": "0",
+		"sogliapeso": "30"
+	}
+} -------------------------- europa ( dazi svizzera e turchia ) {
+	"fascespedizioni": [
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 12.9,
-		  "PesoMin": 0.0,
-		  "PesoMax": 2.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 12.9,
+			"PesoMin": 0.0,
+			"PesoMax": 2.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		   "Costo": 12.9,
-		  "PesoMin": 2.0,
-		  "PesoMax": 3.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 12.9,
+			"PesoMin": 2.0,
+			"PesoMax": 3.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 14.9,
-		  "PesoMin": 3.0,
-		  "PesoMax": 5.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 14.9,
+			"PesoMin": 3.0,
+			"PesoMax": 5.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 18.9,
-		  "PesoMin": 5.0,
-		  "PesoMax": 7.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 18.9,
+			"PesoMin": 5.0,
+			"PesoMax": 7.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-        "Costo": 18.9,
-		  "PesoMin": 7.0,
-		  "PesoMax": 10.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 18.9,
+			"PesoMin": 7.0,
+			"PesoMax": 10.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 21.9,
-		  "PesoMin": 10.0,
-		  "PesoMax": 14.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 21.9,
+			"PesoMin": 10.0,
+			"PesoMax": 14.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		   "Costo": 24.9,
-		  "PesoMin": 14.0,
-		  "PesoMax": 20.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 24.9,
+			"PesoMin": 14.0,
+			"PesoMax": 20.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		 "Costo": 28.9,
-		  "PesoMin": 20.0,
-		  "PesoMax": 25.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 28.9,
+			"PesoMin": 20.0,
+			"PesoMax": 25.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		 "Costo": 30.0,
-		  "PesoMin": 25.0,
-		  "PesoMax": 30.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 30.0,
+			"PesoMin": 25.0,
+			"PesoMax": 30.0
 		}
-	  ],
-    "keyValuePairs": {
-    "sogliaazzeramento": "150",
-    "supplementosp": "30",
-    "sogliapeso": "30"
-  }
-}
-
-
-----------------------  stati uniti, canada
-
-
-{
-	  "fascespedizioni": [
+	],
+	"keyValuePairs": {
+		"sogliaazzeramento": "150",
+		"supplementosp": "30",
+		"sogliapeso": "30"
+	}
+} ---------------------- stati uniti, canada {
+	"fascespedizioni": [
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 30.0,
-		  "PesoMin": 0.0,
-		  "PesoMax": 2.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 30.0,
+			"PesoMin": 0.0,
+			"PesoMax": 2.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 38.0,
-		  "PesoMin": 2.0,
-		  "PesoMax": 3.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 38.0,
+			"PesoMin": 2.0,
+			"PesoMax": 3.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 48.0,
-		  "PesoMin": 3.0,
-		  "PesoMax": 5.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 48.0,
+			"PesoMin": 3.0,
+			"PesoMax": 5.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 55.0,
-		  "PesoMin": 5.0,
-		  "PesoMax": 7.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 55.0,
+			"PesoMin": 5.0,
+			"PesoMax": 7.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-          "Costo": 60.0,
-		  "PesoMin": 7.0,
-		  "PesoMax": 10.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 60.0,
+			"PesoMin": 7.0,
+			"PesoMax": 10.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 82.0,
-		  "PesoMin": 10.0,
-		  "PesoMax": 14.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 82.0,
+			"PesoMin": 10.0,
+			"PesoMax": 14.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 100.0,
-		  "PesoMin": 14.0,
-		  "PesoMax": 20.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 100.0,
+			"PesoMin": 14.0,
+			"PesoMax": 20.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		 "Costo": 125.0,
-		  "PesoMin": 20.0,
-		  "PesoMax": 25.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 125.0,
+			"PesoMin": 20.0,
+			"PesoMax": 25.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		 "Costo": 140.0,
-		  "PesoMin": 25.0,
-		  "PesoMax": 30.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 140.0,
+			"PesoMin": 25.0,
+			"PesoMax": 30.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 160.0,
-		  "PesoMin": 30.0,
-		  "PesoMax": 35.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 160.0,
+			"PesoMin": 30.0,
+			"PesoMax": 35.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		 	  "Costo": 175.0,
-		  "PesoMin": 35.0,
-		  "PesoMax": 40.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 175.0,
+			"PesoMin": 35.0,
+			"PesoMax": 40.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 185.0,
-		  "PesoMin": 40.0,
-		  "PesoMax": 45.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 185.0,
+			"PesoMin": 40.0,
+			"PesoMax": 45.0
 		}
-	  ],
-    "keyValuePairs": {
-    "sogliaazzeramento": "0",
-    "supplementosp": "0",
-    "sogliapeso": "45"
-  }
-}
-
------------------------------------   
-Australia-Corea del Sud-
-Filippine-Giappone-Hong kong-
-Indonesia-Macau-Malesia
-Messico-Nuova Zelanda-
-Singapore-Thailandia-Taiwan
-
-
-{
-	  "fascespedizioni": [
+	],
+	"keyValuePairs": {
+		"sogliaazzeramento": "0",
+		"supplementosp": "0",
+		"sogliapeso": "45"
+	}
+} ----------------------------------- Australia-Corea del Sud- Filippine-Giappone-Hong kong- Indonesia-Macau-Malesia Messico-Nuova Zelanda- Singapore-Thailandia-Taiwan {
+	"fascespedizioni": [
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 40.0,
-		  "PesoMin": 0.0,
-		  "PesoMax": 2.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 40.0,
+			"PesoMin": 0.0,
+			"PesoMax": 2.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 50.0,
-		  "PesoMin": 2.0,
-		  "PesoMax": 3.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 50.0,
+			"PesoMin": 2.0,
+			"PesoMax": 3.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 70.0,
-		  "PesoMin": 3.0,
-		  "PesoMax": 5.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 70.0,
+			"PesoMin": 3.0,
+			"PesoMax": 5.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 78.0,
-		  "PesoMin": 5.0,
-		  "PesoMax": 7.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 78.0,
+			"PesoMin": 5.0,
+			"PesoMax": 7.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-          "Costo": 100.0,
-		  "PesoMin": 7.0,
-		  "PesoMax": 10.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 100.0,
+			"PesoMin": 7.0,
+			"PesoMax": 10.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 120.0,
-		  "PesoMin": 10.0,
-		  "PesoMax": 14.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 120.0,
+			"PesoMin": 10.0,
+			"PesoMax": 14.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 150.0,
-		  "PesoMin": 14.0,
-		  "PesoMax": 20.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 150.0,
+			"PesoMin": 14.0,
+			"PesoMax": 20.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		 "Costo": 160.0,
-		  "PesoMin": 20.0,
-		  "PesoMax": 25.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 160.0,
+			"PesoMin": 20.0,
+			"PesoMax": 25.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		 "Costo": 180.0,
-		  "PesoMin": 25.0,
-		  "PesoMax": 30.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 180.0,
+			"PesoMin": 25.0,
+			"PesoMax": 30.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 200.0,
-		  "PesoMin": 30.0,
-		  "PesoMax": 35.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 200.0,
+			"PesoMin": 30.0,
+			"PesoMax": 35.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		 	  "Costo": 215.0,
-		  "PesoMin": 35.0,
-		  "PesoMax": 40.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 215.0,
+			"PesoMin": 35.0,
+			"PesoMax": 40.0
 		},
 		{
-		  "Codice": "",
-		  "Descrizione": "",
-		  "Costo": 235.0,
-		  "PesoMin": 40.0,
-		  "PesoMax": 45.0
+			"Codice": "",
+			"Descrizione": "",
+			"Costo": 235.0,
+			"PesoMin": 40.0,
+			"PesoMax": 45.0
 		}
-	  ],
-    "keyValuePairs": {
-    "sogliaazzeramento": "0",
-    "supplementosp": "0",
-    "sogliapeso": "45"
-  }
-}
-
-
----------------------------
-resto del mondo fisso 200 euro per ogni peso
+	],
+	"keyValuePairs": {
+		"sogliaazzeramento": "0",
+		"supplementosp": "0",
+		"sogliapeso": "45"
+	}
+} --------------------------- resto del mondo fisso 200 euro per ogni peso

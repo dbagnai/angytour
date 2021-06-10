@@ -190,11 +190,11 @@ public partial class AspNetPages_Orderpage : CommonPage
                 modalita = inpPayway.Value;
                 // descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
             }
-            //if (inpRichiesta.Checked)
-            //{
-            //    modalita = inpRichiesta.Value;
-            //   // descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
-            //}
+            if (inpRichiesta.Checked)
+            {
+                modalita = inpRichiesta.Value;
+                // descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
+            }
             if (string.IsNullOrEmpty(modalita))
             {
                 output.CssClass = "alert alert-danger"; output.Text = references.ResMan("Common", Lingua, "txtPagamento").ToString();
@@ -864,7 +864,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             litMessage.Text = "";
             liPaypal.Visible = true;
             divPayment.Visible = true;
-            inpPaypal.Checked = true;
+           // inpPaypal.Checked = true;
             inpRichiesta.Checked = false;
             divOrderrequest.Visible = false;
         } 

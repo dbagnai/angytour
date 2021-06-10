@@ -1,0 +1,206 @@
+{
+  "fascespedizioni": [
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 42.5,
+      "PesoMin": 0.0,
+      "PesoMax": 1.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 50.0,
+      "PesoMin": 1.0,
+      "PesoMax": 2.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 57.0,
+      "PesoMin": 2.0,
+      "PesoMax": 3.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 64.0,
+      "PesoMin": 3.0,
+      "PesoMax": 4.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 72.0,
+      "PesoMin": 4.0,
+      "PesoMax": 5.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 80.0,
+      "PesoMin": 5.0,
+      "PesoMax": 6.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 87.0,
+      "PesoMin": 6.0,
+      "PesoMax": 7.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 94.0,
+      "PesoMin": 7.0,
+      "PesoMax": 8.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 104.0,
+      "PesoMin": 8.0,
+      "PesoMax": 9.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 116.0,
+      "PesoMin": 9.0,
+      "PesoMax": 10.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 126.0,
+      "PesoMin": 10.0,
+      "PesoMax": 12.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 137.0,
+      "PesoMin": 12.0,
+      "PesoMax": 14.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 148.0,
+      "PesoMin": 14.0,
+      "PesoMax": 16.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 160.0,
+      "PesoMin": 16.0,
+      "PesoMax": 18.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 165.0,
+      "PesoMin": 18.0,
+      "PesoMax": 20.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 169.0,
+      "PesoMin": 20.0,
+      "PesoMax": 22.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 175.0,
+      "PesoMin": 22.0,
+      "PesoMax": 24.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 180.0,
+      "PesoMin": 24.0,
+      "PesoMax": 26.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 185.0,
+      "PesoMin": 26.0,
+      "PesoMax": 28.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 207.0,
+      "PesoMin": 28.0,
+      "PesoMax": 30.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 227.0,
+      "PesoMin": 30.0,
+      "PesoMax": 35.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 265.0,
+      "PesoMin": 35.0,
+      "PesoMax": 40.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 275.0,
+      "PesoMin": 40.0,
+      "PesoMax": 45.0
+    },
+    {
+      "Codice": "",
+      "Descrizione": "",
+      "Costo": 275.0,
+      "PesoMin": 45.0,
+      "PesoMax": 9999.0
+    },
+    {
+      "Codice": "sprod000003|sprod000007",
+      "Descrizione": "",
+      "Costo": 129.0,
+      "PesoMin": 0.0,
+      "PesoMax": 5.0
+    },
+    {
+      "Codice": "sprod000003|sprod000007",
+      "Descrizione": "",
+      "Costo": 170.0,
+      "PesoMin": 5.0,
+      "PesoMax": 10.0
+    },
+    {
+      "Codice": "sprod000003|sprod000007",
+      "Descrizione": "",
+      "Costo": 269.0,
+      "PesoMin": 10.0,
+      "PesoMax": 20.0
+    },
+    {
+      "Codice": "sprod000003|sprod000007",
+      "Descrizione": "",
+      "Costo": 269.0,
+      "PesoMin": 20.0,
+      "PesoMax": 9999.0
+    } 
+  ],
+  "keyValuePairs": {
+    "sogliaazzeramento": "0",
+    "supplementosp": "0",
+    "sogliapesocodice": "30",
+    "sogliapeso": "45"
+  }
+}
