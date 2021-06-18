@@ -45,7 +45,7 @@
                         </select></div>
                 <div class="col-xs-12 col-sm-3" ><input type="button" class="btn btn-info" value="Filtra clienti"   v-on:click="filtraDati()"/> </div>
 
-                    </div>
+                </div>
                 </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12">

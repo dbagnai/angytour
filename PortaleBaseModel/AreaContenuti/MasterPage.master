@@ -282,9 +282,6 @@
     </style>
     <style>
 
-     
-
-
         /* STILI PER TABELLE a TESTATA FISSA*/
         .table-fixed tbody {
             height: 300px;
