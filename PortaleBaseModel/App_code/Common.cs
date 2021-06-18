@@ -16,6 +16,7 @@ using System.Text;
 using System.Drawing.Imaging;
 using Newtonsoft.Json;
 using System.Globalization;
+using System.Linq;
 
 
 public class simpleidname
@@ -1344,7 +1345,7 @@ public class CommonPage : Page
         CarrelloCollection ColItem = ecom.CaricaCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, sessionid, trueIP);
 
         string idlist = "";
-        string codicesconto = "";
+        //string codicesconto = "";
         TotaliCarrello totali = new TotaliCarrello();
         totali.Supplementospedizione = supplementospedizione;
         totali.Supplementocontrassegno = supplementocontanti;
@@ -1446,7 +1447,7 @@ public class CommonPage : Page
             idlist += c.ID.ToString() + ",";
             idclienteincarrello = c.ID_cliente;//Ogni articolo nel carrello ha lo stesso codice id cliente
 
-            codicesconto = c.Codicesconto; //E' il codice sconto inserito nel carrello da validare ( prevalidato e inserito nella pagina ordine )
+            //codicesconto = c.Codicesconto; //E' il codice sconto inserito nel carrello da validare ( prevalidato e inserito nella pagina ordine )
         }
         if (idlist.Length > 1)
         {
@@ -1457,17 +1458,12 @@ public class CommonPage : Page
         foreach (long l in idtodelete) //Elimino dal carrello gli elementi non più disponibili
         {
             ecom.DeleteCarrelloPerID(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, l);
+            ColItem.RemoveAll(c => c.ID == l); //loi elimino anche dalla lista articoli a carrello
         }
 
         //  totali.TotaleSmaltimento = CalcolaTotaliSmaltimento(ColItem);
-        totali.Codicesconto = codicesconto; //memorizzo nel totale ordine temporaneo il codicesconto preso dal carrello ( a chiusura ordine lo salvo nel riepilogo ordine da qui ) 
+        totali.TotaleSconto = CalcolaSconto(Session, ColItem, totali);
 
-        //Metto il riferimento all' id cliente commerciale se presente associato al codice sconto
-        ClientiDM cDM = new ClientiDM();
-        Cliente cli = cDM.CaricaClientePerCodicesconto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codicesconto);
-        if (cli != null && cli.Id_cliente != 0) totali.Id_commerciale = cli.Id_cliente;
-
-        totali.TotaleSconto = CalcolaSconto(Session, ColItem, totali.TotaleOrdine, cli);
         totali.TotaleSpedizione = CalcolaSpeseSpedizione(ColItem, codicenazione, codiceprovincia, totali);
 
         totali.Id_cliente = (long)idclienteincarrello;
@@ -1621,57 +1617,134 @@ public class CommonPage : Page
         return codiciscontosuscaglioni;
     }
 
-    private static double CalcolaSconto(System.Web.SessionState.HttpSessionState Session, CarrelloCollection ColItem, double totalecarrello, Cliente cli = null) // da modificare per gestione sconti commerciali!!!!
+    private static double CalcolaSconto(System.Web.SessionState.HttpSessionState Session, CarrelloCollection ColItem, TotaliCarrello totali)
     {
         double valoresconto = 0;
-        //Prendo la percentuale da quella in configurazione
-        if (Session["codicesconto"] != null && Session["codicesconto"].ToString().ToLower() == ConfigManagement.ReadKey("codicesconto").ToLower())
+        bool scontocalcolato = false;
+
+        ////////////////////////////////////////////////////
+        //Sconto percentuale in tabella configurazione
+        ////////////////////////////////////////////////////
+        string percentualesconto = ConfigManagement.ReadKey("percentualesconto");
+        if (!scontocalcolato && Session["codicesconto"] != null && Session["codicesconto"].ToString().ToLower() == ConfigManagement.ReadKey("codicesconto").ToLower())
         {
-            string percentualesconto = ConfigManagement.ReadKey("percentualesconto");
+            totali.Codicesconto = Session["codicesconto"].ToString().ToLower();
             double tmp = 0;
             double.TryParse(percentualesconto, out tmp);
-            valoresconto = Math.Round(((double)totalecarrello * tmp / 100), 2, MidpointRounding.ToEven);
-             
+            valoresconto = Math.Round(((double)totali.TotaleOrdine * tmp / 100), 2, MidpointRounding.ToEven);
+            scontocalcolato = true;
         }
 
-        if (Session["codicesconto"] != null && !string.IsNullOrEmpty(Session["codicesconto"].ToString()))
+        ////////////////////////////////////////////////////
+        //  Se presente una percentuale tra quelle associate ai clienti commerciali e nel caso prendo quella (PRIORITA')
+        ////////////////////////////////////////////////////
+        if (!scontocalcolato && Session["codicesconto"] != null && !string.IsNullOrEmpty(Session["codicesconto"].ToString()))
         {
-            double percentualesconto = 0;
+            double percscontocommerciale = 0;
             //Se presente un codice sconto
             string codicesconto = Session["codicesconto"].ToString().ToLower();
-
-            //ASSOCIAZIONE SCONTO AD ANAGRAFICA COMMERCIALE
-            //Testo Se presente una percentuale tra quelle associate ai commerciali 
-            //Promviamo a vedere se il codice sconto ha associato un'anagrafica commerciale
+            //Promviamo a vedere se il codice sconto ha associato un0anagrafica commerciale
+            //Metto il riferimento all' id cliente commerciale se presente associato al codice sconto
+            ClientiDM cDM = new ClientiDM();
+            Cliente cli = cDM.CaricaClientePerCodicesconto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, codicesconto);
             //Metto il riferimento all' id cliente commerciale se presente associato al codice sconto
             if (cli != null && cli.Id_cliente != 0)
             {
+                totali.Id_commerciale = cli.Id_cliente;
                 Dictionary<string, double> dict = ClientiDM.SplitCodiciSconto(cli.Codicisconto);
                 if (dict != null && dict.ContainsKey(codicesconto))
                 {
-                    percentualesconto = dict[codicesconto];
-                    valoresconto = Math.Round(((double)totalecarrello * percentualesconto / 100), 2, MidpointRounding.ToEven);
+                    totali.Codicesconto = codicesconto;
+                    percscontocommerciale = dict[codicesconto];
+                    valoresconto = Math.Round(((double)totali.TotaleOrdine * percscontocommerciale / 100), 2, MidpointRounding.ToEven);
+                    scontocalcolato = true;
                 }
             }
-
-            //SCONTO DA SCAGLIONI
-            //cerchiamo il codice sconto tra quelli dello scaglione ( supponendo sempre un solo scaglione nel carrello ) se coincide lo applico
-            //Carichiamo i codici sconto dello scaglione
-            Dictionary<string, double> codiciscontoscaglione = CercaCodiceScontoSuCarrello(null, Session, ColItem);
-            if (codiciscontoscaglione != null && codiciscontoscaglione.Count > 0)
-            {
-                //Vediamo se lo sconto è presente tra quelli dello scaglione inserito a carrello
-                if (codiciscontoscaglione.ContainsKey(codicesconto))
-                {
-                    percentualesconto = codiciscontoscaglione[codicesconto];
-                    valoresconto = Math.Round(((double)totalecarrello * percentualesconto / 100), 2, MidpointRounding.ToEven);
-                }
-            }
-
         }
+
+        ////////////////////////////////////////////////////
+        //check codici sconto come da tabella sconti apposita!!! 
+        ////////////////////////////////////////////////////
+        if (!scontocalcolato && Session["codicesconto"] != null && !string.IsNullOrEmpty(Session["codicesconto"].ToString()))
+        {
+            //intanto lo split dei codici ( ce ne possono essere max 2 ) col carattere di split |
+            // calcolo valore di sconto in base alla lsita codici
+            eCommerceDM ecmDM = new eCommerceDM();
+            Codicesconto _params = new Codicesconto();
+            CodicescontoList listcodetoapply = new CodicescontoList(); //codici da applicare
+            string[] codiciinsessione = Session["codicesconto"].ToString().Split('|');
+            if (codiciinsessione != null)
+                foreach (string p in codiciinsessione)
+                {
+                    if (!string.IsNullOrEmpty(p.Trim()))
+                    {
+                        _params.Testocodicesconto = p;
+                        CodicescontoList _tmpcode = ecmDM.CaricaListaSconti(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _params);
+                        if (_tmpcode != null && _tmpcode.Count == 1)
+                            listcodetoapply.Add(_tmpcode[0]);
+                    }
+                }
+
+            totali.Codicesconto = Session["codicesconto"].ToString().Trim(); // memorizzo i codici che vengono applicati nel totale !!!
+            foreach (Codicesconto codattuale in listcodetoapply)
+            {
+                //ATTENZIONE Memorizzo nei totali il commerciale associato( possibile uno solo, se presenti due , prendo l'ultimo codice )
+                if (codattuale.Idcliente != null)
+                    totali.Id_commerciale = codattuale.Idcliente.Value;
+
+                //Vediamo il tipo di codice ( se numerico o percentuale ) e prendiamo i valori di sconto da applicare
+                double scontonum = (codattuale.Scontonum != null) ? codattuale.Scontonum.Value : 0;
+                double scontoper = (codattuale.Scontoperc != null) ? codattuale.Scontoperc.Value : 0;
+
+                //applicahiamo lo sconto nel modo giusto !!! in base alle caratteristiche dello stesso
+
+                //vediamo se ci sono riferimenti a prodotto o categoria/sottocategoria di prodotto che limitano l'applicazione degli sconti
+                long idprodottodascontare = (codattuale.Idprodotto != null) ? codattuale.Idprodotto.Value : 0;
+                string codicifiltrodascontare = (!string.IsNullOrEmpty(codattuale.Codicifiltro)) ? codattuale.Codicifiltro : "";
+                if (idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare))
+                {
+                    //sconto percentuale sul totale generale carrello
+                    if (scontoper != 0)
+                        valoresconto += Math.Round(((double)totali.TotaleOrdine * scontoper / 100), 2, MidpointRounding.ToEven);
+                    //sconto numerico sul totale generale carrello ( alternativo  )
+                    else if (scontonum != 0)
+                        valoresconto += scontonum;
+                }
+                else
+                {
+                    string[] _tmplist = codicifiltrodascontare.Split(',');
+                    List<string> listcodicifiltro = (_tmplist != null) ? _tmplist.ToList() : new List<string>();
+
+                    //Calcolare valore da scontare su (ColItem) elementi a carrello per applicare gli sconti riguardanti idposdotto o categorie
+                    //calcoliamo il valore su cui applicare lo sconto sulla base dell'idprodotto del codice sconto e/o sul codice categoria o sottocategoria del codice sconto
+                    double importodascontare = 0;
+                    //sconto su prodotto
+                    if (idprodottodascontare != 0)
+                        ColItem.ForEach(c => importodascontare += (c.id_prodotto == idprodottodascontare) ? (c.Numero * c.Prezzo) : 0);
+                    //sconto su categoria/sottocategoria articolo (alternativa)
+                    else if (listcodicifiltro.Count > 0)
+                        ColItem.ForEach(c => importodascontare += (listcodicifiltro.Contains(c.Offerta.CodiceCategoria) || listcodicifiltro.Contains(c.Offerta.CodiceCategoria2Liv)) ? (c.Numero * c.Prezzo) : 0);
+
+                    //sconto percentuale sull'importo calcolato
+                    if (scontoper != 0)
+                        valoresconto += Math.Round(((double)importodascontare * scontoper / 100), 2, MidpointRounding.ToEven);
+                    //sconto numerico  sull'importo calcolato ( alternativo  )
+                    else if (scontonum != 0)
+                        valoresconto += scontonum;
+
+                }
+                //codattuale.Usosingolo //serve solo nella registrazione ordine per eliminare i codici una tantum dalla tabella 
+            }
+
+            //controllo massimo sconto per sconti con importo fisso
+            if (valoresconto >= totali.TotaleOrdine) valoresconto = totali.TotaleOrdine;//lo sconto non deve mai superare il totale ordine ( introdotto per sconti numerici )
+
+            scontocalcolato = true;
+        }
+
+
         return valoresconto;
     }
-
 
     public static string Creaeventopurchaseagooglegtag(TotaliCarrello totali, CarrelloCollection prodotti)
     {

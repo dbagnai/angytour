@@ -316,6 +316,64 @@ public partial class AspNetPages_OrdineOk : CommonPage
             //catch { }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+            /////////////////////////////////////////////////////////////////////////////
+            //controllo se presenti CODICISCONTO con uso una tantum e li cancello dalla tabella sconti in modo da impedire riutilizzo
+            /////////////////////////////////////////////////////////////////////////////
+            try
+            {
+                string codiciscontousati = totali.Codicesconto;
+                eCommerceDM ecmDM = new eCommerceDM();
+                Codicesconto _params = new Codicesconto();
+                CodicescontoList listcode = new CodicescontoList(); //codici da applicare
+                string[] codiciinsessione = codiciscontousati.Split('|');
+                if (codiciinsessione != null)
+                    foreach (string p in codiciinsessione)
+                    {
+                        if (!string.IsNullOrEmpty(p.Trim()))
+                        {
+                            _params.Testocodicesconto = p;
+                            CodicescontoList _tmpcode = ecmDM.CaricaListaSconti(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _params);
+                            if (_tmpcode != null && _tmpcode.Count == 1)
+                            {
+                                //eliminiamo gli sconti uso singolo (  condizionato alla presenza del prodotto o categoria nel carrello )
+                                if (_tmpcode[0].Usosingolo)
+                                {
+                                    //Vediamo se il codicesconto ha riferimenti a prodotto o categoria/sottocategoria presenti nel carrello
+                                    long idprodottodascontare = (_tmpcode[0].Idprodotto != null) ? _tmpcode[0].Idprodotto.Value : 0;
+                                    string codicifiltrodascontare = (!string.IsNullOrEmpty(_tmpcode[0].Codicifiltro)) ? _tmpcode[0].Codicifiltro : "";
+                                    string[] _tmplist = codicifiltrodascontare.Split(',');
+                                    List<string> listcodicifiltro = (_tmplist != null) ? _tmplist.ToList() : new List<string>();
+                                    bool bruciacodiceusosingolo = false;
+
+                                    //codice senza riferimento a prodotto o categoria -> da bruciare
+                                    if (!bruciacodiceusosingolo && idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare)) bruciacodiceusosingolo = true;
+
+                                    //ALTRIMENTI controllo presenza prodotto in carrello associato al codice sconto caso id -> da bruciare
+                                    if (!bruciacodiceusosingolo && idprodottodascontare != 0)
+                                        bruciacodiceusosingolo = prodotti.Exists(c => c.id_prodotto == idprodottodascontare);
+                                    //oppure presenza prodotto in carrello associato al codice sconto caso categorie -> da bruciare
+                                    if (!bruciacodiceusosingolo && listcodicifiltro.Count > 0)
+                                        bruciacodiceusosingolo = prodotti.Exists(c => listcodicifiltro.Contains(c.Offerta.CodiceCategoria) || listcodicifiltro.Contains(c.Offerta.CodiceCategoria2Liv));
+
+
+                                    if (bruciacodiceusosingolo)
+                                    {    //cancellazione codice
+                                         // ecmDM.CancellaSconto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _tmpcode[0].Id);
+                                         //inlaternativa posso settare la data di questi a un giorno passato ( per impedire che venga riusato )
+                                        _tmpcode[0].Datascadenza = System.DateTime.Now.AddDays(-1);
+                                        if (_tmpcode[0].Usosingolo) ecmDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _tmpcode[0]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+            }
+            catch { }
+            /////////////////////////////////////////////////////////////////////////////
+
+
 #if true // da abilitare per decrementare le quantià vendute
             //Decrementiamo anche le quantità per i prodotti che sono a disponibilità limitata
             // togliendo dal catalogo la quantità venduta dell'articolo presente a carrello

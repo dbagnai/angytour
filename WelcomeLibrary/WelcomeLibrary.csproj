@@ -168,6 +168,7 @@
     <Compile Include="DOM\Allegato.cs" />
     <Compile Include="DOM\Carrello.cs" />
     <Compile Include="DOM\CarrelloCollection.cs" />
+    <Compile Include="DOM\codicesconto.cs" />
     <Compile Include="DOM\DevicesCollection.cs" />
     <Compile Include="DOM\Devices.cs" />
     <Compile Include="DOM\comment.cs" />

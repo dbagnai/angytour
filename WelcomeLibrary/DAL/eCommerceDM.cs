@@ -2615,5 +2615,287 @@ namespace WelcomeLibrary.DAL
             }
             return sb.ToString();
         }
+
+
+        /// <summary>
+        /// CArica l'intera lista codici sconto 
+        /// opp
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <returns></returns>
+        public CodicescontoList CaricaListaSconti(string connection, Codicesconto _params, long page = 1, long pagesize = 0)
+        {
+            CodicescontoList list = new CodicescontoList();
+
+            if (connection == null || connection == "") return list;
+            Codicesconto item = null;
+            try
+            {
+                string query = "";
+                string queryfilter = "";
+                List<SQLiteParameter> _parUsed = new List<SQLiteParameter>();
+
+                query = "SELECT * FROM TBL_SCONTI  ";
+
+                //if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@id"; }))
+                if (_params.Id != 0)
+                {
+                    //SQLiteParameter pidvalue = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@id"; });
+                    SQLiteParameter pidvalue = new SQLiteParameter("@id", _params.Id);
+                    _parUsed.Add(pidvalue);
+
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE id like @id ";
+                    else
+                        queryfilter += " AND id like @id  ";
+                }
+
+                //if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@idprodotto"; }))
+                if (_params.Idprodotto != null)
+                {
+                    //SQLiteParameter pidcliente = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@idprodotto"; });
+                    SQLiteParameter pidprodotto = new SQLiteParameter("@idprodotto", _params.Idprodotto);
+                    _parUsed.Add(pidprodotto);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE idprodotto = @idprodotto ";
+                    else
+                        queryfilter += " AND idprodotto = @idprodotto  ";
+                }
+
+                if (_params.Idcliente != null)
+                {
+                    //SQLiteParameter pidcliente = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@idcliente"; });
+                    SQLiteParameter pidcliente = new SQLiteParameter("@idcliente", _params.Idcliente);
+                    _parUsed.Add(pidcliente);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE idcliente = @idcliente ";
+                    else
+                        queryfilter += " AND idcliente = @idcliente  ";
+                }
+
+                if (!string.IsNullOrEmpty(_params.Testocodicesconto))
+                {
+                    //SQLiteParameter pCodiceordine = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@codicifiltro"; });
+                    SQLiteParameter pCodicesconto = new SQLiteParameter("@testocodicesconto", _params.Testocodicesconto);
+                    _parUsed.Add(pCodicesconto);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE testocodicesconto like @testocodicesconto ";
+                    else
+                        queryfilter += " AND testocodicesconto like @testocodicesconto  ";
+                }
+
+                if (!string.IsNullOrEmpty(_params.Codicifiltro))
+                {
+                    //SQLiteParameter pCodiceordine = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@codicifiltro"; });
+                    SQLiteParameter pCodicefiltro = new SQLiteParameter("@codicifiltro", _params.Codicifiltro);
+                    _parUsed.Add(pCodicefiltro);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE codicifiltro like @codicifiltro ";
+                    else
+                        queryfilter += " AND codicifiltro like @codicifiltro  ";
+                }
+
+                //if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@datascadenza"; }))
+                if (_params.Datascadenza != null)
+                {
+                    //SQLiteParameter pDataMin = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@datascadenza"; });
+                    SQLiteParameter pDataMin = new SQLiteParameter("@datascadenza", _params.Datascadenza);
+                    _parUsed.Add(pDataMin);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE ( datascadenza <= @datascadenza and datascadenza is not null )";
+                    else
+                        queryfilter += " AND ( datascadenza <= @datascadenza  and datascadenza is not null ) ";
+                }
+                else
+                {
+                    SQLiteParameter dataattuale = new SQLiteParameter("@dataattuale", dbDataAccess.CorrectDatenow(System.DateTime.Now.Date));
+                    _parUsed.Add(dataattuale);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE (datascadenza >= @dataattuale or datascadenza is null)  ";
+                    else
+                        queryfilter += " AND (datascadenza >= @dataattuale or datascadenza is null)  ";
+                }
+                //SQL
+                query += queryfilter;
+                query += " order by Id desc ";
+                if (pagesize != 0)
+                {
+                    query += " limit " + (page - 1) * pagesize + "," + pagesize;
+                }
+
+                /*CALCOLO IL NUMERO DI RIGHE FILTRATE TOTALI*/
+                long totalrecords = dbDataAccess.ExecuteScalar<long>("SELECT count(*) FROM  TBL_SCONTI  " + queryfilter, _parUsed, connection);
+                list.Totrecs = totalrecords;
+
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, _parUsed, connection);
+                using (reader)
+                {
+                    if (reader == null) { return list; };
+                    if (reader.HasRows == false)
+                        return list;
+
+                    while (reader.Read())
+                    {
+                        item = new Codicesconto();
+                        item.Id = reader.GetInt64(reader.GetOrdinal("id"));
+                        if (!reader["usosingolo"].Equals(DBNull.Value))
+                            item.Usosingolo = reader.GetBoolean(reader.GetOrdinal("usosingolo"));
+                        if (!reader["datascadenza"].Equals(DBNull.Value))
+                            item.Datascadenza = reader.GetDateTime(reader.GetOrdinal("datascadenza"));
+                        if (!reader["idcliente"].Equals(DBNull.Value))
+                            item.Idcliente = reader.GetInt64(reader.GetOrdinal("idcliente"));
+                        if (!reader["idprodotto"].Equals(DBNull.Value))
+                            item.Idprodotto = reader.GetInt64(reader.GetOrdinal("idprodotto"));
+                        if (!reader["codicifiltro"].Equals(DBNull.Value))
+                            item.Codicifiltro = reader.GetString(reader.GetOrdinal("codicifiltro"));
+                        if (!reader["testocodicesconto"].Equals(DBNull.Value))
+                            item.Testocodicesconto = reader.GetString(reader.GetOrdinal("testocodicesconto"));
+                        if (!reader["scontonum"].Equals(DBNull.Value))
+                            item.Scontonum = reader.GetDouble(reader.GetOrdinal("scontonum"));
+                        if (!reader["scontoperc"].Equals(DBNull.Value))
+                            item.Scontoperc = reader.GetDouble(reader.GetOrdinal("scontoperc"));
+
+                        list.Add(item);
+                    }
+                }
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Caricamento Lista Sconti :" + error.Message, error);
+            }
+
+            return list;
+        }
+
+        public Codicesconto CaricaPerId(string connection, long Id)
+        {
+            if (connection == null || connection == "") return null;
+            if (Id == 0) return null;
+            Codicesconto item = new Codicesconto();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+
+            SQLiteParameter p1 = new SQLiteParameter("@id", Id); //OleDbType.VarChar
+            parColl.Add(p1);
+            try
+            {
+                string query = "SELECT  * FROM TBL_SCONTI  WHERE id = @id ";
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                using (reader)
+                {
+                    if (reader == null) { return null; };
+                    if (reader.HasRows == false)
+                        return null;
+                    while (reader.Read())
+                    {
+                        item = new Codicesconto();
+                        item.Id = reader.GetInt64(reader.GetOrdinal("id"));
+                        if (!reader["usosingolo"].Equals(DBNull.Value))
+                            item.Usosingolo = reader.GetBoolean(reader.GetOrdinal("usosingolo"));
+                        if (!reader["datascadenza"].Equals(DBNull.Value))
+                            item.Datascadenza = reader.GetDateTime(reader.GetOrdinal("datascadenza"));
+                        if (!reader["idcliente"].Equals(DBNull.Value))
+                            item.Idcliente = reader.GetInt64(reader.GetOrdinal("idcliente"));
+                        if (!reader["idprodotto"].Equals(DBNull.Value))
+                            item.Idprodotto = reader.GetInt64(reader.GetOrdinal("idprodotto"));
+                        if (!reader["codicifiltro"].Equals(DBNull.Value))
+                            item.Codicifiltro = reader.GetString(reader.GetOrdinal("codicifiltro"));
+                        if (!reader["testocodicesconto"].Equals(DBNull.Value))
+                            item.Testocodicesconto = reader.GetString(reader.GetOrdinal("testocodicesconto"));
+                        if (!reader["scontonum"].Equals(DBNull.Value))
+                            item.Scontonum = reader.GetDouble(reader.GetOrdinal("scontonum"));
+                        if (!reader["scontoperc"].Equals(DBNull.Value))
+                            item.Scontoperc = reader.GetDouble(reader.GetOrdinal("scontoperc"));
+
+                        break;
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Caricamento sconto per id :" + error.Message, error);
+            }
+            return item;
+        }
+        public string CancellaSconto(string connection, long Id)
+        {
+            string ret = "";
+            if (connection == null || connection == "") return "connection not specified";
+            if (Id == 0) return "id non specificato";
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter p1 = new SQLiteParameter("@id", Id);//OleDbType.VarChar
+            parColl.Add(p1);
+            string query = "DELETE FROM TBL_SCONTI WHERE ([id]=@id)";
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connection);
+            }
+            catch (Exception error)
+            {
+                ret = "Errore, cancellazione  :" + error.Message;
+                //throw new ApplicationException("Errore, cancellazione  :" + error.Message, error);
+            }
+            return ret;
+        }
+        /// <summary>
+        /// Inserisce o aggiorna una email nel db.
+        /// Aggiorna se passato id diverso da zero altrimenti inserisce
+        /// </summary>
+        /// <param name="connessione"></param>
+        /// <param name="item"></param>
+        public void InserisciAggiorna(string connessione, Codicesconto item)
+        {
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            if (connessione == null || connessione == "") return;
+
+            SQLiteParameter p1 = new SQLiteParameter("@usosingolo", item.Usosingolo);//OleDbType.VarChar
+            parColl.Add(p1);
+            SQLiteParameter p2 = null;
+            //p4 = new SQLiteParameter("@datascadenza", ((item.Datascadenza) == null) ? item.Datascadenza : dbDataAccess.CorrectDatenow(item.Datascadenza.Value));
+            p2 = new SQLiteParameter("@datascadenza", item.Datascadenza);
+            parColl.Add(p2);
+
+            SQLiteParameter p3 = new SQLiteParameter("@idcliente", item.Idcliente);
+            parColl.Add(p3);
+            SQLiteParameter p4 = new SQLiteParameter("@idprodotto", item.Idprodotto);
+            parColl.Add(p4);
+            SQLiteParameter p5 = new SQLiteParameter("@codicifiltro", item.Codicifiltro);
+            parColl.Add(p5);
+            SQLiteParameter p6 = new SQLiteParameter("@scontonum", item.Scontonum);
+            parColl.Add(p6);
+            SQLiteParameter p7 = new SQLiteParameter("@scontoperc", item.Scontoperc);
+            parColl.Add(p7);
+            SQLiteParameter p8 = new SQLiteParameter("@testocodicesconto", item.Testocodicesconto);
+            parColl.Add(p8);
+
+            string query = "";
+            if (item.Id != 0)
+            {
+                //Update
+                query = "UPDATE [TBL_SCONTI] SET usosingolo=@usosingolo,datascadenza=@datascadenza,idcliente=@idcliente,idprodotto=@idprodotto,codicifiltro=@codicifiltro,scontonum=@scontonum,scontoperc=@scontoperc,testocodicesconto=@testocodicesconto";
+                query += " WHERE [Id] = " + item.Id;
+            }
+            else
+            {
+                //Insert
+                query = "INSERT INTO TBL_SCONTI (usosingolo,datascadenza,idcliente,idprodotto,codicifiltro,scontonum,scontoperc,testocodicesconto)";
+                query += " values ( ";
+                query += " @usosingolo,@datascadenza,@idcliente,@idprodotto,@codicifiltro,@scontonum,@scontoperc,@testocodicesconto )";
+            }
+
+            try
+            {
+                long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
+                if (item.Id == 0) item.Id = lastidentity;  //Inserisco nell'id dell'elemento inseito l'id generato dal db   
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, inserimento/aggiornamento  :" + error.Message, error);
+            }
+            return;
+        }
+
+
+
     }
 }

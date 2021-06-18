@@ -1161,6 +1161,13 @@
                                     </span></a>
                                 <b class="arrow"></b>
                             </li>
+                               <li class="hover">
+                                <a href="gestionesconti.aspx">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    <span class="menu-text">Gestione Sconti
+                                    </span></a>
+                                <b class="arrow"></b>
+                            </li>
                             <li class="hover">
                                 <a href="GestionePushnotify.aspx">
                                     <i class="menu-icon fa fa-caret-right"></i>

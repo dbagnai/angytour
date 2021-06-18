@@ -112,8 +112,15 @@ public partial class AspNetPages_Orderpage : CommonPage
         //DATI DEL CLIENTE PRESI DAL DATABASE INZIALMENTE
         if (forcerefreshformcliente)
             CaricaDatiCliente();
+
         if (Session["codicesconto"] != null)
-            txtCodiceSconto.Text = Session["codicesconto"].ToString();
+        {
+            litCodiceSconto.Text = "<b>Codici sconto attivi / Active codes :</b> " + Session["codicesconto"].ToString().Replace("|", " - ");
+            //txtCodiceSconto.Text = Session["codicesconto"].ToString();
+        }
+        else
+            litCodiceSconto.Text = "<b>Nessuno sconto attivo. / No discount applied </b>";
+
 
         string sessionid = "";
         string trueIP = "";
@@ -382,6 +389,64 @@ public partial class AspNetPages_Orderpage : CommonPage
                         item.CodiceOrdine = CodiceOrdine;
                         SalvaCodiceOrdine(item);
                     }
+
+                    /////////////////////////////////////////////////////////////////////////////
+                    //controllo se presenti CODICISCONTO con uso una tantum e li cancello dalla tabella sconti in modo da impedire riutilizzo
+                    /////////////////////////////////////////////////////////////////////////////
+                    try
+                    {
+                        string codiciscontousati = totali.Codicesconto;
+                        eCommerceDM ecmDM = new eCommerceDM();
+                        Codicesconto _params = new Codicesconto();
+                        CodicescontoList listcode = new CodicescontoList(); //codici da applicare
+                        string[] codiciinsessione = codiciscontousati.Split('|');
+                        if (codiciinsessione != null)
+                            foreach (string p in codiciinsessione)
+                            {
+                                if (!string.IsNullOrEmpty(p.Trim()))
+                                {
+                                    _params.Testocodicesconto = p;
+                                    CodicescontoList _tmpcode = ecmDM.CaricaListaSconti(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _params);
+                                    if (_tmpcode != null && _tmpcode.Count == 1)
+                                    {
+                                        //eliminiamo gli sconti uso singolo (  condizionato alla presenza del prodotto o categoria nel carrello )
+                                        if (_tmpcode[0].Usosingolo)
+                                        {
+                                            //Vediamo se il codicesconto ha riferimenti a prodotto o categoria/sottocategoria presenti nel carrello
+                                            long idprodottodascontare = (_tmpcode[0].Idprodotto != null) ? _tmpcode[0].Idprodotto.Value : 0;
+                                            string codicifiltrodascontare = (!string.IsNullOrEmpty(_tmpcode[0].Codicifiltro)) ? _tmpcode[0].Codicifiltro : "";
+                                            string[] _tmplist = codicifiltrodascontare.Split(',');
+                                            List<string> listcodicifiltro = (_tmplist != null) ? _tmplist.ToList() : new List<string>();
+                                            bool bruciacodiceusosingolo = false;
+
+                                            //codice senza riferimento a prodotto o categoria -> da bruciare
+                                            if (!bruciacodiceusosingolo && idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare)) bruciacodiceusosingolo = true;
+
+                                            //ALTRIMENTI controllo presenza prodotto in carrello associato al codice sconto caso id -> da bruciare
+                                            if (!bruciacodiceusosingolo && idprodottodascontare != 0)
+                                                bruciacodiceusosingolo = prodotti.Exists(c => c.id_prodotto == idprodottodascontare);
+                                            //oppure presenza prodotto in carrello associato al codice sconto caso categorie -> da bruciare
+                                            if (!bruciacodiceusosingolo && listcodicifiltro.Count > 0)
+                                                bruciacodiceusosingolo = prodotti.Exists(c => listcodicifiltro.Contains(c.Offerta.CodiceCategoria) || listcodicifiltro.Contains(c.Offerta.CodiceCategoria2Liv));
+
+
+                                            if (bruciacodiceusosingolo)
+                                            {    //cancellazione codice
+                                                 // ecmDM.CancellaSconto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _tmpcode[0].Id);
+                                                 //inlaternativa posso settare la data di questi a un giorno passato ( per impedire che venga riusato )
+                                                _tmpcode[0].Datascadenza = System.DateTime.Now.AddDays(-1);
+                                                if (_tmpcode[0].Usosingolo) ecmDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _tmpcode[0]);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                    }
+                    catch { }
+                    /////////////////////////////////////////////////////////////////////////////
+
+
+
                     ////////////////////////////////////////
                     //Aggiorniamo lo stato degli scaglioni caricati per i prodotti se presenti
                     ////////////////////////////////////////
@@ -391,7 +456,6 @@ public partial class AspNetPages_Orderpage : CommonPage
                     parametri["idprodotto"] = listcod;
                     ecom.AggiornaStatoscaglioni(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parametri);
                     ////////////////////////////////////////
-
                     InsertEventoBooking(prodotti, totali, "rif000001");
 
                     pnlFormOrdine.Visible = false;
@@ -662,53 +726,140 @@ public partial class AspNetPages_Orderpage : CommonPage
         CaricaCarrello();
     }
 
+    protected void btnResetCodiceSconto_Click(object sender, EventArgs e)
+    {
+        Session.Remove("codicesconto");
+        CaricaCarrello();
+    }
 
     protected void btnCodiceSconto_Click(object sender, EventArgs e)
     {
         string insertedcode = txtCodiceSconto.Text;
-        string validcode = ConfigManagement.ReadKey("codicesconto"); //Codicesconto in tabella configurazione
+        insertedcode = insertedcode.ToLower().Trim();
+        bool validcode = false;
+        outputCodiceSconto.Text = "";
 
-        //Carichiamo i codici sconto dello scaglione
-        Dictionary<string, double> codiciscontoscaglione = CercaCodiceScontoSuCarrello(Request, Session);
-
-        //sconto presente su cliente anagrafica
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////CHECK CODICE CON SCONTO CLIENTE COMMERCIALE ///////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Testo Se presente una percentuale tra quelle associate ai commerciali e nel caso prendo quella (PRIORITA')
         ClientiDM cDM = new ClientiDM();
         Cliente cli = cDM.CaricaClientePerCodicesconto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, insertedcode);
-        if (cli != null && cli.Id_cliente != 0)
+        if (cli != null && cli.Id_cliente != 0 && !validcode)
         {
             Session.Add("codicesconto", insertedcode);
-            lblCodiceSconto.Text = "";
-            // int idcommercialeassociato = cli.Id_cliente;
-            //double percscontocommerciale = 0;
-            //Dictionary<string, double> dict = ClientiDM.SplitCodiciSconto(cli.Codicisconto);
-            //if (dict != null && dict.ContainsKey(insertedcode))
-            //{
-            //    percscontocommerciale = dict[insertedcode];
-            //}
+            txtCodiceSconto.Text = "";
+            outputCodiceSconto.Text = "Sconto Applicato Correttamente / Discount applied";
+            validcode = true;
         }
-        ////facciamo il check dei codici presenti negli scagioni a carrello e verifichiamo se  valido in caso lo inserisco a carrello
-        else if (codiciscontoscaglione != null && codiciscontoscaglione.Count > 0)
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////CHECK CODICE CON SCONTO TBL CONFIG ///////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        string codefromconfig = ConfigManagement.ReadKey("codicesconto");
+        if (insertedcode == codefromconfig && !validcode)
         {
-            //Vediamo se lo sconto è presente tra quelli dello scaglione inserito a carrello
-            if (codiciscontoscaglione.ContainsKey(insertedcode))
-            {
-                Session.Add("codicesconto", insertedcode);
-                lblCodiceSconto.Text = "";
+            Session.Add("codicesconto", insertedcode);
+            txtCodiceSconto.Text = "";
+            outputCodiceSconto.Text = "Sconto Applicato Correttamente / Discount applied";
+            validcode = true;
+        }
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////CHECK UP TABELLA SCONTI!! ///////////////////////////////////
+        ///// Possibilità di cumulare massimo 1 codice percentuale ed 1 voucher in sede  di acquisto carrello.
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (!validcode)
+        {
+            eCommerceDM ecmDM = new eCommerceDM();
+            Codicesconto _params = new Codicesconto();
+            CodicescontoList codicisconto = new CodicescontoList();
+            //insertedcode//codice inserito da verificare
+            _params.Testocodicesconto = insertedcode;
+            //verifichiamo la validita del codice
+            if (!string.IsNullOrEmpty(insertedcode.Trim()))
+                codicisconto = ecmDM.CaricaListaSconti(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _params);
+
+            if (codicisconto != null && codicisconto.Count > 0)
+            { //si suppone che ce ne sia uno solo con il codice inserito
+                Codicesconto codicedainserire = codicisconto[0];
+
+                //devo vedere la lista codici in sessione se presenti ed agire di conseguenza!!
+                string codicigiasettati = "";
+                if (Session["codicesconto"] != null && !string.IsNullOrEmpty(Session["codicesconto"].ToString()))
+                    codicigiasettati = Session["codicesconto"].ToString().ToLower().Trim();
+
+                //////////////////////////////////////
+                //check vincoli per inserimento codici multipli contemporanei
+                //////////////////////////////////////
+                if (string.IsNullOrEmpty(codicigiasettati)) { Session.Add("codicesconto", insertedcode); txtCodiceSconto.Text = ""; outputCodiceSconto.Text = "Sconto Applicato Correttamente"; validcode = true; }
+                else //presenti codici in sessione-> devo controllare il numero e se compatibili con quello richiesto
+                {
+                    /// Possibilità di cumulare massimo 1 codice percentuale ed 1 voucher in sede  di acquisto carrello.
+                    CodicescontoList listcode = new CodicescontoList();
+                    string[] codiciinsessione = codicigiasettati.Split('|');
+                    if (codiciinsessione != null)
+                    {
+                        //Se presenti codici controlliamo di non averlo gia inserito o che non sia in conflitto con gli altri
+                        if (codiciinsessione.Contains(codicedainserire.Testocodicesconto.ToLower()))
+                        {
+                            outputCodiceSconto.Text = "Codice già presente / Discount code already present"; validcode = true; //non svuoto la lista codici in sessione
+                        }
+                        else if (codiciinsessione.Length < 2)  /////se codice non presente verifico che non sia in conflitto con quelli inseriti e controllo  
+                        {
+                            foreach (string p in codiciinsessione)
+                            {
+                                if (!string.IsNullOrEmpty(p.Trim()))
+                                {
+                                    _params.Testocodicesconto = p;
+                                    CodicescontoList _tmpcode = ecmDM.CaricaListaSconti(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _params);
+                                    if (_tmpcode != null && _tmpcode.Count == 1)
+                                    {
+                                        listcode.Add(_tmpcode[0]);
+                                    }
+                                }
+                            }
+
+                            //check eventuale conflitto di codice ->  massimo 1 codice percentuale ed 1 voucher in sede  di acquisto carrello.
+                            bool insertcodicenumerico = (codicedainserire.Scontonum != null) ? true : false;
+                            bool insertcodiceperc = (codicedainserire.Scontoperc != null) ? true : false;
+                            bool chkcompatibility = true;
+                            foreach (Codicesconto codpresente in listcode)
+                            {
+                                // controlo di compatibilià dei codici ...
+                                bool codnum = (codpresente.Scontonum != null) ? true : false;
+                                bool codper = (codpresente.Scontoperc != null) ? true : false;
+
+                                if (codnum == insertcodicenumerico) { chkcompatibility = false; }
+                                if (codper == insertcodiceperc) { chkcompatibility = false; }
+                            }
+                            if (chkcompatibility)
+                            {
+                                Session["codicesconto"] += "|" + insertedcode;
+                                txtCodiceSconto.Text = "";
+                                outputCodiceSconto.Text = "Sconto Aggiunto Correttamente / Discount applied";
+                            }
+                            else
+                            { outputCodiceSconto.Text = "Impossibile inserire massimo 1 codice percentuale ed 1 voucher in sede  di acquisto carrello. / Only 1 voucher and 1 % discount allowed "; }
+                            validcode = true; //comunque non cacello il codice inserito in quesot caso
+                        }
+                        else { outputCodiceSconto.Text = "Consentiti Massimo due codici contemporanei. / Max 2 codes at once "; validcode = true; }
+                    }
+                }
             }
+            //////////////////////////////////////
         }
-        //vediamo se corrisponde al codice sconto presente in configurazione
-        else if (insertedcode == validcode)
-        {
-            Session.Add("codicesconto", validcode);
-            lblCodiceSconto.Text = "";
-        }
-        //Testo Se presente una percentuale tra quelle associate ai commerciali e nel caso prendo quella (PRIORITA')
-        else
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////// SCONTO NON valido ///////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (!validcode) //se codice non valido svuoto la sessione dai codici presenti
         {
             Session.Remove("codicesconto");
-            txtCodiceSconto.Text = "";
-            lblCodiceSconto.Text = references.ResMan("Common", Lingua, "testoErrCodiceSconto").ToString();
+            outputCodiceSconto.Text = references.ResMan("Common", Lingua, "testoErrCodiceSconto").ToString();
         }
+
         CaricaCarrello();
     }
 
@@ -1691,8 +1842,9 @@ public partial class AspNetPages_Orderpage : CommonPage
             {
                 foreach (KeyValuePair<string, double> kv in dict)
                 {
-                    txtCodiceSconto.Text = kv.Key;
-                    Session.Add("codicesconto", kv.Key);
+                    //txtCodiceSconto.Text = kv.Key;
+                    Session.Add("codicesconto", kv.Key); //metto in sessione lo sconto settato del cliente
+                    litCodiceSconto.Text = "<b>Codici sconto attivi / Active codes :</b> " + Session["codicesconto"].ToString().Replace("|", " - ");
                     txtCodiceSconto.Enabled = false;
                     break;
                 }

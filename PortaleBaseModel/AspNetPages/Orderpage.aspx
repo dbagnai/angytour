@@ -289,19 +289,30 @@
                         </div>
 
                         <%-- CODICE SCONTO --%>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="widget bill-payment text-center text-sm-left bg-light-color p-3" style="text-align: left; display: block">
+                        <div class=" bg-light-color p-3">
+                            <div class="row">
+                                <div class="col-12">
                                     <div class="TitlePrezzo mb-2"><%= references.ResMan("Common", Lingua,"TitleCodiceSconto") %></div>
-                                    <div class="d-inline float-none float-sm-left my-2" style="width: calc(100% - 219px); background: white;">
-                                        <asp:TextBox runat="server" CssClass="w-100 px-2" ID="txtCodiceSconto" />
+
+                                </div>
+                            </div>
+                            <div class="row d-flex align-items-center">
+                                <div class="col-12 col-sm-8">
+                                    <asp:TextBox runat="server" CssClass="w-100 px-2 form-control bg-white" ID="txtCodiceSconto" /><br />
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <asp:Button style="width:180px" Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="Button1" OnClick="btnCodiceSconto_Click" />
+                                </div>
+                            </div>
+                            <div class="row d-flex align-items-center my-2">
+                                <div class="col-12 col-sm-8">
+                                    <asp:Literal runat="server" ID="litCodiceSconto"></asp:Literal><br />
+                                    <div style="color: red; width: 100%">
+                                        <asp:Literal Text="" ID="outputCodiceSconto" runat="server" />
                                     </div>
-                                    <div class="d-block d-sm-inline ml-0 ml-sm-3 my-2">
-                                        <asp:Button Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="btnCodiceSconto" OnClick="btnCodiceSconto_Click" />
-                                    </div>
-                                    <div style="color: red">
-                                        <asp:Literal Text="" ID="lblCodiceSconto" runat="server" />
-                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <asp:Button style="width:180px" Text='<%# references.ResMan("Common", Lingua,"testoBtnResetCodiceSconto") %>' runat="server" ID="btnCodiceSconto" OnClick="btnResetCodiceSconto_Click" />
                                 </div>
                             </div>
                         </div>
