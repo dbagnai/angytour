@@ -430,21 +430,26 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
                             {
                                 //Vediamo se il codicesconto ha riferimenti a prodotto o categoria/sottocategoria presenti nel carrello
                                 long idprodottodascontare = (_tmpcode[0].Idprodotto != null) ? _tmpcode[0].Idprodotto.Value : 0;
+                                long idscaglionedascontare = (_tmpcode[0].Idscaglione != null) ? _tmpcode[0].Idscaglione.Value : 0;
                                 string codicifiltrodascontare = (!string.IsNullOrEmpty(_tmpcode[0].Codicifiltro)) ? _tmpcode[0].Codicifiltro : "";
                                 string[] _tmplist = codicifiltrodascontare.Split(',');
                                 List<string> listcodicifiltro = (_tmplist != null) ? _tmplist.ToList() : new List<string>();
+                                
                                 bool bruciacodiceusosingolo = false;
+                                //codice senza riferimento a prodotto o categoria -> da bruciare SEMPRE
+                                if (!bruciacodiceusosingolo && idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare) && idscaglionedascontare == 0) bruciacodiceusosingolo = true;
 
-                                //codice senza riferimento a prodotto o categoria -> da bruciare
-                                if (!bruciacodiceusosingolo && idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare)) bruciacodiceusosingolo = true;
-
-                                //ALTRIMENTI controllo presenza prodotto in carrello associato al codice sconto caso id -> da bruciare
+                                //controllo presenza prodotto in carrello associato al codice sconto caso id -> da bruciare
                                 if (!bruciacodiceusosingolo && idprodottodascontare != 0)
                                     bruciacodiceusosingolo = prodotti.Exists(c => c.id_prodotto == idprodottodascontare);
+
+                                ///CONTROLLO presenza scaglione a carrello associato al codice sconto caso idscaglione -> da bruciare
+                                if (!bruciacodiceusosingolo && idscaglionedascontare != 0)
+                                    bruciacodiceusosingolo = prodotti.Exists(c => (((String)eCommerceDM.Selezionadajson(c.jsonfield1, "idscaglione", "I")) == idscaglionedascontare.ToString()));
+
                                 //oppure presenza prodotto in carrello associato al codice sconto caso categorie -> da bruciare
                                 if (!bruciacodiceusosingolo && listcodicifiltro.Count > 0)
                                     bruciacodiceusosingolo = prodotti.Exists(c => listcodicifiltro.Contains(c.Offerta.CodiceCategoria) || listcodicifiltro.Contains(c.Offerta.CodiceCategoria2Liv));
-
 
                                 if (bruciacodiceusosingolo)
                                 {    //cancellazione codice

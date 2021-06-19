@@ -414,21 +414,26 @@ public partial class AspNetPages_Orderpage : CommonPage
                                         {
                                             //Vediamo se il codicesconto ha riferimenti a prodotto o categoria/sottocategoria presenti nel carrello
                                             long idprodottodascontare = (_tmpcode[0].Idprodotto != null) ? _tmpcode[0].Idprodotto.Value : 0;
+                                            long idscaglionedascontare = (_tmpcode[0].Idscaglione != null) ? _tmpcode[0].Idscaglione.Value : 0;
                                             string codicifiltrodascontare = (!string.IsNullOrEmpty(_tmpcode[0].Codicifiltro)) ? _tmpcode[0].Codicifiltro : "";
                                             string[] _tmplist = codicifiltrodascontare.Split(',');
                                             List<string> listcodicifiltro = (_tmplist != null) ? _tmplist.ToList() : new List<string>();
+
                                             bool bruciacodiceusosingolo = false;
+                                            //codice senza riferimento a prodotto o categoria -> da bruciare SEMPRE
+                                            if (!bruciacodiceusosingolo && idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare) && idscaglionedascontare == 0) bruciacodiceusosingolo = true;
 
-                                            //codice senza riferimento a prodotto o categoria -> da bruciare
-                                            if (!bruciacodiceusosingolo && idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare)) bruciacodiceusosingolo = true;
-
-                                            //ALTRIMENTI controllo presenza prodotto in carrello associato al codice sconto caso id -> da bruciare
+                                            //controllo presenza prodotto in carrello associato al codice sconto caso id -> da bruciare
                                             if (!bruciacodiceusosingolo && idprodottodascontare != 0)
                                                 bruciacodiceusosingolo = prodotti.Exists(c => c.id_prodotto == idprodottodascontare);
+
+                                            ///CONTROLLO presenza scaglione a carrello associato al codice sconto caso idscaglione -> da bruciare
+                                            if (!bruciacodiceusosingolo && idscaglionedascontare != 0)
+                                                bruciacodiceusosingolo = prodotti.Exists(c => (((String)eCommerceDM.Selezionadajson(c.jsonfield1, "idscaglione", "I")) == idscaglionedascontare.ToString()));
+
                                             //oppure presenza prodotto in carrello associato al codice sconto caso categorie -> da bruciare
                                             if (!bruciacodiceusosingolo && listcodicifiltro.Count > 0)
                                                 bruciacodiceusosingolo = prodotti.Exists(c => listcodicifiltro.Contains(c.Offerta.CodiceCategoria) || listcodicifiltro.Contains(c.Offerta.CodiceCategoria2Liv));
-
 
                                             if (bruciacodiceusosingolo)
                                             {    //cancellazione codice
@@ -444,8 +449,6 @@ public partial class AspNetPages_Orderpage : CommonPage
                     }
                     catch { }
                     /////////////////////////////////////////////////////////////////////////////
-
-
 
                     ////////////////////////////////////////
                     //Aggiorniamo lo stato degli scaglioni caricati per i prodotti se presenti
@@ -752,6 +755,21 @@ public partial class AspNetPages_Orderpage : CommonPage
             outputCodiceSconto.Text = "Sconto Applicato Correttamente / Discount applied";
             validcode = true;
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////CHECK CODICE CON SCONTO SCAGLIONI ///////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        Dictionary<string, double> codiciscontoscaglione = CercaCodiceScontoSuCarrello(Request, Session);
+        if (codiciscontoscaglione != null && codiciscontoscaglione.Count > 0 && !validcode)
+        {
+            //Vediamo se lo sconto è presente tra quelli dello scaglione inserito a carrello
+            if (codiciscontoscaglione.ContainsKey(insertedcode))
+            {
+                Session.Add("codicesconto", insertedcode);
+                validcode = true;
+                outputCodiceSconto.Text = "Sconto Applicato Correttamente / Discount applied";
+                txtCodiceSconto.Text = "";
+            }
+        }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////CHECK CODICE CON SCONTO TBL CONFIG ///////////////////////////////////
@@ -781,7 +799,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                 codicisconto = ecmDM.CaricaListaSconti(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _params);
 
             if (codicisconto != null && codicisconto.Count > 0)
-            { //si suppone che ce ne sia uno solo con il codice inserito
+            { //si suppone che ce ne sia uno solo con il codice inserito in tabella ( e' unique key in tabella tale codicesconto )
                 Codicesconto codicedainserire = codicisconto[0];
 
                 //devo vedere la lista codici in sessione se presenti ed agire di conseguenza!!

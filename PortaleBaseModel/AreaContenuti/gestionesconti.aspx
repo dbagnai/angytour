@@ -16,16 +16,28 @@
     <%= WelcomeLibrary.DAL.dbDataAccess.CorrectDatenow(System.DateTime.Now).ToString() %>
     <div id="vueContainer">
         <asp:HiddenField runat="server" ID="hididselected" Value="" ClientIDMode="Static" />
-        <div class="row" style="background-color:#ccc;padding:10px">
+        <div style="background-color:#ccc;padding:10px">
+              <div class="row">
               <div class="col-xs-12" >  <h3>Filtri Sconti</h3>  </div>
-             <div class="col-xs-12 item-text  text-left" style="padding-bottom:10px">
+              </div>
+              <div class="row">
+              <div class="col-xs-12 item-text  text-left" style="padding-bottom:10px">
                     <strong>Vedi scaduti</strong> <input type="checkbox" v-model:checked="im.chkvediscaduti"    />
                </div>
-              <div class="col-xs-12 col-sm-3" > <input class="form-control" placeholder="filtro codicesconto .." type="text" v-model="vm.filterparams.Testocodicesconto"   />  </div>
-              <div class="col-xs-12 col-sm-3" > <input class="form-control" placeholder="filtro prodotti .." type="text" v-model="vm.filterparams.Idprodotto"   />  </div>
-              <div class="col-xs-12 col-sm-3" > <input class="form-control" placeholder="filtro clienti .." type="text" v-model="vm.filterparams.Idcliente"   />  </div>
-              <div class="col-xs-12 col-sm-3" > <input class="form-control" placeholder="filtro codici categorie .." type="text" v-model="vm.filterparams.Codicifiltro"   />  </div>
-              <div class="col-xs-12 col-sm-3" ><input type="button" class="btn btn-info" value="Filtra Sconti"   v-on:click="filtraDati()"/> </div>
+               </div>
+              <div class="row">
+              <div class="col-xs-12 col-sm-4" > <input class="form-control" placeholder="filtro codicesconto .." type="text" v-model="vm.filterparams.Testocodicesconto"   />  </div>
+              <div class="col-xs-12 col-sm-4" > <input class="form-control" placeholder="filtro clienti .." type="text" v-model="vm.filterparams.Idcliente"   />  </div>
+              <div class="col-xs-12 col-sm-4" > &nbsp;</div>
+               </div>
+              <div class="row">
+              <div class="col-xs-12 col-sm-4" > <input class="form-control" placeholder="filtro codici categorie .." type="text" v-model="vm.filterparams.Codicifiltro"   />  </div>
+              <div class="col-xs-12 col-sm-4" > <input class="form-control" placeholder="filtro prodotti .." type="text" v-model="vm.filterparams.Idprodotto"   />  </div>
+              <div class="col-xs-12 col-sm-4" > <input class="form-control" placeholder="filtro scaglioni .." type="text" v-model="vm.filterparams.Idscaglione"   />  </div>
+               </div>
+              <div class="row">
+              <div class="col-xs-12 col-sm-4" ><input type="button" class="btn btn-info" value="Filtra Sconti"   v-on:click="filtraDati()"/> </div>
+               </div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-6">
@@ -150,7 +162,7 @@
                     </div>
                     <div class="row" style="padding-bottom: 10px">
 
-                          <div class="col-sm-4 item-text text-left">
+                          <div class="col-sm-3 item-text text-left">
                               <strong>Commerciale associato<br />(facoltativo)</strong>
                         <div class="autocomplete">
                         <input type="text" id="inpCliente" class="form-control autocompleteinput" v-model="vm.itemselected.Idcliente"
@@ -167,7 +179,7 @@
 
                         </div>
                         
-                           <div class="col-sm-4 item-text">
+                           <div class="col-sm-3 item-text">
                             <strong>Id Prodotto Sconto<br />(facoltativo) </strong>
                             <br />
                           <%--  <input type="text" class="form-control"
@@ -188,10 +200,19 @@
                         </ul>
                         </div>
 
-
+                        </div>
+                            <div class="col-sm-3 item-text">
+                            <strong>Id Scaglione Sconto<br />(facoltativo) </strong>
+                            <br />
+                             <input type="text" class="form-control"
+                                    @keypress="isNumber($event)"
+                                    v-bind:value="vm.itemselected.Idscaglione | formatNumber"
+                                    v-on:blur="vm.itemselected.Idscaglione = formatNumberforvue($event.target.value)" /> 
                         </div>
 
-                          <div class="col-sm-4 item-text text-left">
+
+
+                          <div class="col-sm-3 item-text text-left">
                             <strong>Filtro Categorie prod.<br />(facoltativo)</strong><br />
                             <input type="text" class="form-control" v-model="vm.itemselected.Codicifiltro" />
 

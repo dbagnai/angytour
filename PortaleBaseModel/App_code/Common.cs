@@ -998,7 +998,7 @@ public class CommonPage : Page
                     usermanager USM = new usermanager();
                     if (USM.ControllaRuolo(username, "GestorePortale") || USM.ControllaRuolo(username, "WebMaster"))
                     {
-                        
+
                         sb.Append("<a target=\"_blank\"   href=\"" +
                                linkoffertaadmin
                                   + "\"  class=\"product-thumb pull-left\" style=\"margin:0; border:none;\"  >");
@@ -1413,11 +1413,9 @@ public class CommonPage : Page
                 Scaglioni scaglionedacarrello = Newtonsoft.Json.JsonConvert.DeserializeObject<Scaglioni>((String)eCommerceDM.Selezionadajson(c.jsonfield1, "scaglione", "I"));
                 if (scaglionedacarrello != null)
                 {
-
                     //scaglionedacarrello.addedvalues.ContainsKey("niscritti") // per vedere i campi secondari memorizzati al momento dell'inserimento a carrello!!
                     if (scaglionedacarrello.datapartenza != null && ((TimeSpan)(scaglionedacarrello.datapartenza.Value - DateTime.Now)).Days < 30)
                         richiestasaldo = true;
-
                     /////////////////////////////////////////////////
                     //calcoliamo il totale assicurazioni ed il numero richiesto
                     /////////////////////////////////////////////////
@@ -1625,12 +1623,12 @@ public class CommonPage : Page
         ////////////////////////////////////////////////////
         //Sconto percentuale in tabella configurazione
         ////////////////////////////////////////////////////
-        string percentualesconto = ConfigManagement.ReadKey("percentualesconto");
+        string percentualescontoconfig = ConfigManagement.ReadKey("percentualesconto");
         if (!scontocalcolato && Session["codicesconto"] != null && Session["codicesconto"].ToString().ToLower() == ConfigManagement.ReadKey("codicesconto").ToLower())
         {
             totali.Codicesconto = Session["codicesconto"].ToString().ToLower();
             double tmp = 0;
-            double.TryParse(percentualesconto, out tmp);
+            double.TryParse(percentualescontoconfig, out tmp);
             valoresconto = Math.Round(((double)totali.TotaleOrdine * tmp / 100), 2, MidpointRounding.ToEven);
             scontocalcolato = true;
         }
@@ -1640,7 +1638,7 @@ public class CommonPage : Page
         ////////////////////////////////////////////////////
         if (!scontocalcolato && Session["codicesconto"] != null && !string.IsNullOrEmpty(Session["codicesconto"].ToString()))
         {
-            double percscontocommerciale = 0;
+            double percentualesconto = 0;
             //Se presente un codice sconto
             string codicesconto = Session["codicesconto"].ToString().ToLower();
             //Promviamo a vedere se il codice sconto ha associato un0anagrafica commerciale
@@ -1655,11 +1653,27 @@ public class CommonPage : Page
                 if (dict != null && dict.ContainsKey(codicesconto))
                 {
                     totali.Codicesconto = codicesconto;
-                    percscontocommerciale = dict[codicesconto];
-                    valoresconto = Math.Round(((double)totali.TotaleOrdine * percscontocommerciale / 100), 2, MidpointRounding.ToEven);
+                    percentualesconto = dict[codicesconto];
+                    valoresconto = Math.Round(((double)totali.TotaleOrdine * percentualesconto / 100), 2, MidpointRounding.ToEven);
                     scontocalcolato = true;
                 }
             }
+
+            //SCONTO DA SCAGLIONI
+            //cerchiamo il codice sconto tra quelli dello scaglione ( supponendo sempre un solo scaglione nel carrello ) se coincide lo applico
+            //Carichiamo i codici sconto dello scaglione
+            Dictionary<string, double> codiciscontoscaglione = CercaCodiceScontoSuCarrello(null, Session, ColItem);
+            if (codiciscontoscaglione != null && codiciscontoscaglione.Count > 0)
+            {
+                //Vediamo se lo sconto è presente tra quelli dello scaglione inserito a carrello
+                if (codiciscontoscaglione.ContainsKey(codicesconto))
+                {
+                    percentualesconto = codiciscontoscaglione[codicesconto];
+                    valoresconto = Math.Round(((double)totali.TotaleOrdine * percentualesconto / 100), 2, MidpointRounding.ToEven);
+                    scontocalcolato = true;
+                }
+            }
+
         }
 
         ////////////////////////////////////////////////////
@@ -1696,12 +1710,14 @@ public class CommonPage : Page
                 double scontonum = (codattuale.Scontonum != null) ? codattuale.Scontonum.Value : 0;
                 double scontoper = (codattuale.Scontoperc != null) ? codattuale.Scontoperc.Value : 0;
 
-                //applicahiamo lo sconto nel modo giusto !!! in base alle caratteristiche dello stesso
 
                 //vediamo se ci sono riferimenti a prodotto o categoria/sottocategoria di prodotto che limitano l'applicazione degli sconti
                 long idprodottodascontare = (codattuale.Idprodotto != null) ? codattuale.Idprodotto.Value : 0;
                 string codicifiltrodascontare = (!string.IsNullOrEmpty(codattuale.Codicifiltro)) ? codattuale.Codicifiltro : "";
-                if (idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare))
+                //qui potri aggiungere un campo nel codice sconto per associazione a idscaglione per associazione di sconto a scaglioni!!! .. da vedere
+                //long idscaglionedascontare = 0;
+                long idscaglionedascontare =  (codattuale.Idscaglione != null) ? codattuale.Idscaglione.Value : 0; // aggiungere il campo in tabella scaglioni ...
+                if (idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare) && idscaglionedascontare == 0)  
                 {
                     //sconto percentuale sul totale generale carrello
                     if (scontoper != 0)
@@ -1724,12 +1740,15 @@ public class CommonPage : Page
                     //sconto su categoria/sottocategoria articolo (alternativa)
                     else if (listcodicifiltro.Count > 0)
                         ColItem.ForEach(c => importodascontare += (listcodicifiltro.Contains(c.Offerta.CodiceCategoria) || listcodicifiltro.Contains(c.Offerta.CodiceCategoria2Liv)) ? (c.Numero * c.Prezzo) : 0);
+                    //sconto su scaglione , verifico la presenza nel carrello dello scaglione specificato nello sconto ( ce ne dovrebbe essere sempre solo 1 ) per tirare fuori l'importo da scontare per gli scaglioni!
+                    else if (idscaglionedascontare != 0)
+                        ColItem.ForEach(c => importodascontare += (((String)eCommerceDM.Selezionadajson(c.jsonfield1, "idscaglione", "I")) == idscaglionedascontare.ToString()) ? (c.Numero * c.Prezzo) : 0);
 
                     //sconto percentuale sull'importo calcolato
                     if (scontoper != 0)
                         valoresconto += Math.Round(((double)importodascontare * scontoper / 100), 2, MidpointRounding.ToEven);
                     //sconto numerico  sull'importo calcolato ( alternativo  )
-                    else if (scontonum != 0)
+                    else if (scontonum != 0 && importodascontare != 0) //lo sconto numerico lo devo applicare solo se ho travato elementi a carrello a costo diverso da zero
                         valoresconto += scontonum;
 
                 }

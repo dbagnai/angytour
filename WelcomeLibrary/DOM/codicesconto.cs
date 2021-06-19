@@ -11,6 +11,7 @@ namespace WelcomeLibrary.DOM
         DateTime? _datascadenza;
         long? _idcliente;
         long? _idprodotto;
+        long? _idscaglione;
         string _codicifiltro;
         double? _scontonum;
         double? _scontoperc;
@@ -21,6 +22,7 @@ namespace WelcomeLibrary.DOM
         public DateTime? Datascadenza { get => _datascadenza; set => _datascadenza = value; }
         public long? Idcliente { get => _idcliente; set => _idcliente = value; }
         public long? Idprodotto { get => _idprodotto; set => _idprodotto = value; }
+        public long? Idscaglione { get => _idscaglione; set => _idscaglione = value; }
         public string Codicifiltro { get => _codicifiltro; set => _codicifiltro = value; }
         public double? Scontonum { get => _scontonum; set => _scontonum = value; }
         public double? Scontoperc { get => _scontoperc; set => _scontoperc = value; }
@@ -33,6 +35,7 @@ namespace WelcomeLibrary.DOM
             _datascadenza = null;
             _idcliente = null;
             _idprodotto = null;
+            _idscaglione = null;
             _scontonum = null;
             _scontoperc = null;
             _testocodicesconto = "";
@@ -46,6 +49,7 @@ namespace WelcomeLibrary.DOM
             _datascadenza = tmp.Datascadenza;
             _idcliente = tmp.Idcliente;
             _idprodotto = tmp.Idprodotto;
+            _idscaglione = tmp.Idscaglione;
             _codicifiltro = tmp.Codicifiltro;
             _scontonum = tmp.Scontonum;
             _scontoperc = tmp.Scontoperc;

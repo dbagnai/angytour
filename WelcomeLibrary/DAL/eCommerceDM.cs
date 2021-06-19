@@ -2661,7 +2661,15 @@ namespace WelcomeLibrary.DAL
                     else
                         queryfilter += " AND idprodotto = @idprodotto  ";
                 }
-
+                if (_params.Idscaglione != null)
+                {
+                    SQLiteParameter pidscaglione = new SQLiteParameter("@idscaglione", _params.Idscaglione);
+                    _parUsed.Add(pidscaglione);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE idscaglione = @idscaglione ";
+                    else
+                        queryfilter += " AND idscaglione = @idscaglione  ";
+                }
                 if (_params.Idcliente != null)
                 {
                     //SQLiteParameter pidcliente = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@idcliente"; });
@@ -2746,6 +2754,8 @@ namespace WelcomeLibrary.DAL
                             item.Idcliente = reader.GetInt64(reader.GetOrdinal("idcliente"));
                         if (!reader["idprodotto"].Equals(DBNull.Value))
                             item.Idprodotto = reader.GetInt64(reader.GetOrdinal("idprodotto"));
+                        if (!reader["idscaglione"].Equals(DBNull.Value))
+                            item.Idscaglione = reader.GetInt64(reader.GetOrdinal("idscaglione"));
                         if (!reader["codicifiltro"].Equals(DBNull.Value))
                             item.Codicifiltro = reader.GetString(reader.GetOrdinal("codicifiltro"));
                         if (!reader["testocodicesconto"].Equals(DBNull.Value))
@@ -2798,6 +2808,8 @@ namespace WelcomeLibrary.DAL
                             item.Idcliente = reader.GetInt64(reader.GetOrdinal("idcliente"));
                         if (!reader["idprodotto"].Equals(DBNull.Value))
                             item.Idprodotto = reader.GetInt64(reader.GetOrdinal("idprodotto"));
+                        if (!reader["idscaglione"].Equals(DBNull.Value))
+                            item.Idscaglione = reader.GetInt64(reader.GetOrdinal("idscaglione")); 
                         if (!reader["codicifiltro"].Equals(DBNull.Value))
                             item.Codicifiltro = reader.GetString(reader.GetOrdinal("codicifiltro"));
                         if (!reader["testocodicesconto"].Equals(DBNull.Value))
@@ -2859,6 +2871,8 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p3);
             SQLiteParameter p4 = new SQLiteParameter("@idprodotto", item.Idprodotto);
             parColl.Add(p4);
+            SQLiteParameter p4b = new SQLiteParameter("@idscaglione", item.Idscaglione);
+            parColl.Add(p4b);
             SQLiteParameter p5 = new SQLiteParameter("@codicifiltro", item.Codicifiltro);
             parColl.Add(p5);
             SQLiteParameter p6 = new SQLiteParameter("@scontonum", item.Scontonum);
@@ -2872,15 +2886,15 @@ namespace WelcomeLibrary.DAL
             if (item.Id != 0)
             {
                 //Update
-                query = "UPDATE [TBL_SCONTI] SET usosingolo=@usosingolo,datascadenza=@datascadenza,idcliente=@idcliente,idprodotto=@idprodotto,codicifiltro=@codicifiltro,scontonum=@scontonum,scontoperc=@scontoperc,testocodicesconto=@testocodicesconto";
+                query = "UPDATE [TBL_SCONTI] SET usosingolo=@usosingolo,datascadenza=@datascadenza,idcliente=@idcliente,idprodotto=@idprodotto,idscaglione=@idscaglione,codicifiltro=@codicifiltro,scontonum=@scontonum,scontoperc=@scontoperc,testocodicesconto=@testocodicesconto";
                 query += " WHERE [Id] = " + item.Id;
             }
             else
             {
                 //Insert
-                query = "INSERT INTO TBL_SCONTI (usosingolo,datascadenza,idcliente,idprodotto,codicifiltro,scontonum,scontoperc,testocodicesconto)";
+                query = "INSERT INTO TBL_SCONTI (usosingolo,datascadenza,idcliente,idprodotto,idscaglione,codicifiltro,scontonum,scontoperc,testocodicesconto)";
                 query += " values ( ";
-                query += " @usosingolo,@datascadenza,@idcliente,@idprodotto,@codicifiltro,@scontonum,@scontoperc,@testocodicesconto )";
+                query += " @usosingolo,@datascadenza,@idcliente,@idprodotto,@idscaglione,@codicifiltro,@scontonum,@scontoperc,@testocodicesconto )";
             }
 
             try
