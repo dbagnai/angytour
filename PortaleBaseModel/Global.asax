@@ -574,6 +574,13 @@
             "~/lib/js/formmng.js",
              "~/lib/js/paymentmng.js",
             "~/js/aos/aos.js",
+
+             "~/js/slick181/slick/slick.js",
+             "~/js/lightGallery-master/dist/lightgallery.umd.js",
+             "~/js/lightGallery-master/dist/plugins/thumbnail/lg-thumbnail.umd.js",
+             "~/js/lightGallery-master/dist/plugins/zoom/lg-zoom.umd.js",
+             "~/js/lightGallery-master/dist/plugins/justifiedgallery/jquery.justifiedGallery.js",
+           
             "~/js/maininit.js"
         );
 
@@ -607,6 +614,13 @@
             "~/css/ui-personalization.css",
              //"~/js/odometer/themes/odometer-theme-custom.css",
              "~/js/aos/aos.css",
+
+              "~/js/slick181/slick/slick.css",
+              "~/js/slick181/slick/slick-theme.css",
+              "~/js/lightGallery-master/dist/css/lightgallery-bundle.css",
+              "~/js/lightGallery-master/dist/plugins/justifiedgallery/justifiedGallery.css", 
+
+
              "~/css/custom.css"
           );
 
