@@ -42,6 +42,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
         context.Response.ContentType = "text/plain";
         Dictionary<string, string> pars = parseparams(context);
         eCommerceDM ecDM = new eCommerceDM();
+        ClientiDM cliDM = new ClientiDM();
         //Opzionale si possono ricevere parametri anche via querystring
         //string Lingua = "";
         //if (context.Request.QueryString["Lingua"] != null)
