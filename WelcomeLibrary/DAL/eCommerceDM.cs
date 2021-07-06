@@ -399,6 +399,8 @@ namespace WelcomeLibrary.DAL
                                 offerta.PrezzoListino = reader.GetDouble(reader.GetOrdinal("PrezzoListino"));
                             if (!reader["Vetrina"].Equals(DBNull.Value))
                                 offerta.Vetrina = reader.GetBoolean(reader.GetOrdinal("Vetrina"));
+                            if (!reader["Peso"].Equals(DBNull.Value))
+                                offerta.Peso = reader.GetDouble(reader.GetOrdinal("Peso"));
 
                             if (!(reader["FotoSchema"]).Equals(DBNull.Value))
                                 offerta.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("FotoSchema"));

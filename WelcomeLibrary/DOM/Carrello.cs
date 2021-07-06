@@ -242,6 +242,11 @@ namespace WelcomeLibrary.DOM
             get { return _modalitapagamento; }
             set { _modalitapagamento = value; }
         }
+
+        private Cliente _cliente;
+        public Cliente Cliente { get => _cliente; set => _cliente = value; }
+
+
         private CarrelloCollection _CarrelloItems;
         public CarrelloCollection CarrelloItems
         {
@@ -302,6 +307,7 @@ namespace WelcomeLibrary.DOM
             Denominazionecliente = "";
             Dataordine = null;
             CarrelloItems = new CarrelloCollection();
+            Cliente = new Cliente();
             Supplementospedizione = false;
             Supplementocontrassegno = false;
             TotaleSmaltimento = 0;
@@ -334,6 +340,7 @@ namespace WelcomeLibrary.DOM
             Dataordine = tmp.Dataordine;
 
             CarrelloItems = new CarrelloCollection(tmp.CarrelloItems);
+            Cliente = new Cliente(tmp.Cliente);
 
             Supplementospedizione = tmp.Supplementospedizione;
             Supplementocontrassegno = tmp.Supplementocontrassegno;

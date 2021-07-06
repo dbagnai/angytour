@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 using WelcomeLibrary.UF;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.DAL;
+using System.Data.SQLite;
 
 public class CarrelloHandler : IHttpHandler, IRequiresSessionState
 {
@@ -95,6 +96,58 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
 
             switch (sazione)
             {
+                case "getorders":
+                    // carichiamo i totali, gli elementi a carrello e le offerte associate serializziamo il tutto e torniamolo
+                    //TotaliCarrello c = ecDM.CaricaOrdinePerCodiceOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, scodiceordine);
+
+                    List<SQLiteParameter> parcoll = new List<SQLiteParameter>();
+                    if (!string.IsNullOrWhiteSpace(scodiceordine))
+                    {
+                        SQLiteParameter parcod = new SQLiteParameter("@Codiceordine", scodiceordine);
+                        parcoll.Add(parcod);
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(sdatastart))
+                    {
+                        DateTime _dt;
+                        if (DateTime.TryParseExact(sdatastart, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _dt))
+                        {
+                            SQLiteParameter pardmin = new SQLiteParameter("@DataMin", dbDataAccess.CorrectDatenow(_dt));
+                            parcoll.Add(pardmin);
+                        }
+                    }
+                    if (!string.IsNullOrWhiteSpace(sdataend))
+                    {
+                        DateTime _dt;
+                        if (DateTime.TryParseExact(sdataend, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _dt))
+                        {
+                            SQLiteParameter pardmax = new SQLiteParameter("@DataMax", dbDataAccess.CorrectDatenow(_dt));
+                            parcoll.Add(pardmax);
+                        }
+                    }
+                    TotaliCarrelloCollection ordini = ecDM.CaricaListaOrdini(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parcoll, "", false);
+
+                    //caricamento elementi a carrelo per gli ordini filtrati
+                    if (ordini != null)
+                        foreach (TotaliCarrello ordine in ordini)
+                        {
+                            CarrelloCollection carrellolist = ecDM.CaricaCarrelloPerCodiceOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ordine.CodiceOrdine);
+                            ordine.CarrelloItems = carrellolist;
+
+                            string idcliente = string.Format(ordine.Id_cliente.ToString()); //Caricando i dati del cliente per id  
+                            Cliente cli = cliDM.CaricaClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idcliente);//Dati completi del cliente
+                            ordine.Cliente = cli;
+                        }
+
+                    string resultorders = Newtonsoft.Json.JsonConvert.SerializeObject(ordini, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None,
+                    });
+                    context.Response.Write((resultorders));
+                    break;
                 case "add":
                     double.TryParse(sprezzo.Replace(".", ","), out prezzo);
                     if (DateTime.TryParseExact(sdatastart, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out tmp)) datastart = tmp;
