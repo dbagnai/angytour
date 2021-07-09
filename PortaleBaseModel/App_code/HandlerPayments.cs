@@ -504,7 +504,6 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
             string SoggettoMailFornitore = references.ResMan("Common", Lingua, "OrdineSoggettomailRichiesta") + Nome;
             TestoMail = CreaMailPerFornitore(totali, prodotti, Lingua);
             Utility.invioMailGenerico(Nome, Email, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, context.Server);
-            //Utility.invioMailGenerico(totali.Denominazionecliente, totali.Mailcliente, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
             //Invia la mail per il cliente
             string SoggettoMailCliente = references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + Nome;
             TestoMail = CreaMailCliente(totali, prodotti, Lingua);
@@ -826,7 +825,23 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
 
             bool supplementoisole = (bool)parametri["supplementoisole"];// chkSupplemento.Checked;
             bool supplementocontrassegno = (bool)parametri["supplementocontrassegno"];// inpContanti.Checked;
-            totali = CommonPage.CalcolaTotaliCarrello(context.Request, context.Session, cliente.CodiceNAZIONE, "", supplementoisole, supplementocontrassegno);
+
+
+            // totali = CommonPage.CalcolaTotaliCarrello(context.Request, context.Session, cliente.CodiceNAZIONE, "", supplementoisole, supplementocontrassegno);
+            //Prendo la nazione giusta dal cliente per il calcolo delle spese di spedizione
+            string codicenazione = "";
+            Carrello c = prodotti.Find(_c => !string.IsNullOrWhiteSpace(_c.Codicenazione)); //nazione dal carrello
+            if (c != null) codicenazione = c.Codicenazione;
+            if (cliente != null && !string.IsNullOrEmpty(cliente.CodiceNAZIONE)) codicenazione = cliente.CodiceNAZIONE;
+            if (cliente != null && parametri.ContainsKey("chkspedizione") && !(bool)parametri["chkspedizione"]) //nazione spedizione impostata nel cliente se specificata diversa da quella di fatturazione e deselezionata spunta per diversificare spedizione
+            {
+                Cliente clispediz = Newtonsoft.Json.JsonConvert.DeserializeObject<Cliente>(cliente.Serialized);
+                if (clispediz != null && !string.IsNullOrEmpty(clispediz.CodiceNAZIONE))
+                {
+                    codicenazione = clispediz.CodiceNAZIONE;
+                }
+            }
+            totali = CommonPage.CalcolaTotaliCarrello(context.Request, context.Session, codicenazione, "", supplementoisole, supplementocontrassegno);
 
             //PRENDIAMO I DATI DAL FORM PER LA PREPARAZIONE ORDINE //////////////////////////////////////////////////////////////////
             totali.Denominazionecliente = cliente.Cognome + " " + cliente.Nome;
@@ -845,10 +860,10 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
 
             //SE INDIRIZZO SPEDIIZONE DIVERSO -> LO MEMORIZZO NEI TOTALI ( E serializzo il dettaglio nel cliente nel campo serialized )
             string indirizzospedizione = "";
-            if (parametri.ContainsKey("chkspedizione") && !(bool)parametri["chkspedizione"])
+            if (parametri.ContainsKey("chkspedizione") && !(bool)parametri["chkspedizione"] && !string.IsNullOrEmpty(cliente.Serialized))
             {
                 /////////////////////////////////////
-                //prendiamO dati spedizione dal cliente serializzato .... in accordo col metodo usato per fatturazione anziche dal form
+                //prendiamo dati spedizione dal cliente serializzato .... in accordo col metodo usato per fatturazione anziche dal form
                 Cliente clispediz = Newtonsoft.Json.JsonConvert.DeserializeObject<Cliente>(cliente.Serialized);
                 /////////////////////////////////////
                 if (clispediz != null)

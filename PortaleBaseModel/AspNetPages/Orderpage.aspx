@@ -11,6 +11,7 @@
     <div class="container">
         <script type="text/javascript">
             makeRevLower = true;
+            makeRevLower = true;
         </script>
         <%-- TITOLO --%>
         <div class="row">
@@ -157,7 +158,7 @@
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"selezionaNazione") %>
                                         </label>
-                                        <asp:DropDownList ID="ddlNazione" Enabled="false" OnSelectedIndexChanged="ddlNazione_SelectedIndexChanged" AutoPostBack="true"
+                                        <asp:DropDownList ID="ddlNazione" Enabled="true" OnSelectedIndexChanged="ddlNazione_SelectedIndexChanged" AutoPostBack="true"
                                             CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" />
                                     </div>
                                 </div>
@@ -208,15 +209,22 @@
                                         <%=  references.ResMan("Common", Lingua,"testochkSpedizione") %><br />
                                     </label>
                                     <script>
-                                        $("[id$='chkSpedizione']").on('change', function () {
+                                        jQuery(document).ready(function () {
+                                            $("[id$='chkSpedizione']").on('change', function () {
+                                                if ($("[id$='chkSpedizione']")[0].checked)
+                                                    $("[id$='plhShipping']").hide();
+                                                else $("[id$='plhShipping']").show();
+                                            });
                                             if ($("[id$='chkSpedizione']")[0].checked)
                                                 $("[id$='plhShipping']").hide();
                                             else $("[id$='plhShipping']").show();
                                         });
+
+
                                     </script>
                                 </div>
                             </div>
-                            <div id="plhShipping" style="display: none" runat="server" clientidmode="Static">
+                            <div id="plhShipping" runat="server" clientidmode="Static">
                                 <div class="form-row row">
                                     <div class="col-6 form-group">
                                         <label>
@@ -249,18 +257,24 @@
                                     </div>
                                 </div>
                                 <div class="form-row row form-group">
-                                    <div class="col-12 col-sm-6">
+                                    <div class="col-12 col-sm-4">
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"FormTesto7") %>
                                         </label>
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpProvinciaS" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto7") %>' />
                                     </div>
-                                    <div class="col-12 col-sm-6 form-group">
+                                    <div class="col-12 col-sm-4">
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"FormTesto9") %>
                                         </label>
-
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpCaps" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto9") %>' />
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label>
+                                            <%= references.ResMan("Common", Lingua,"selezionaNazione") %>
+                                        </label>
+                                        <asp:DropDownList ID="ddlNazioneS" Enabled="true" OnSelectedIndexChanged="ddlNazioneS_SelectedIndexChanged" AutoPostBack="true"
+                                            CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" />
                                     </div>
                                 </div>
                                 <div class="form-row row">
@@ -301,7 +315,7 @@
                                     <asp:TextBox runat="server" CssClass="w-100 px-2 form-control bg-white" ID="txtCodiceSconto" /><br />
                                 </div>
                                 <div class="col-12 col-sm-4">
-                                    <asp:Button style="width:180px" Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="Button1" OnClick="btnCodiceSconto_Click" />
+                                    <asp:Button Style="width: 180px" Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="Button1" OnClick="btnCodiceSconto_Click" />
                                 </div>
                             </div>
                             <div class="row d-flex align-items-center my-2">
@@ -312,7 +326,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-4">
-                                    <asp:Button style="width:180px" Text='<%# references.ResMan("Common", Lingua,"testoBtnResetCodiceSconto") %>' runat="server" ID="btnCodiceSconto" OnClick="btnResetCodiceSconto_Click" />
+                                    <asp:Button Style="width: 180px" Text='<%# references.ResMan("Common", Lingua,"testoBtnResetCodiceSconto") %>' runat="server" ID="btnCodiceSconto" OnClick="btnResetCodiceSconto_Click" />
                                 </div>
                             </div>
                         </div>
@@ -550,8 +564,8 @@
                                             <li style="display: block">
                                                 <div class="clearfix" style="margin-bottom: 20px">
                                                     <div class="float-left mt-1 mr-2" style="width: 25px">
-                                                        <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" disabled="false" checked="false" name="payment_method" value="contanti"  validationgroup="none"  autopostback="true"  onclick="refreshcarrello(this, 'inpContanti')"
-                                                            runat="server" id="inpContanti"  />
+                                                        <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" disabled="false" checked="false" name="payment_method" value="contanti" validationgroup="none" autopostback="true" onclick="refreshcarrello(this, 'inpContanti')"
+                                                            runat="server" id="inpContanti" />
                                                     </div>
                                                     <div class="float-left" style="width: calc(100% - 30px - .5rem);">
                                                         <b><%= references.ResMan("Common", Lingua,"txtcontanti") %></b>
@@ -563,7 +577,7 @@
                                             <li style="display: block">
                                                 <div class="clearfix" style="margin-bottom: 20px">
                                                     <div class="float-left mt-0 mr-2" style="width: 25px">
-                                                        <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" name="payment_method" value="bacs" checked="false" onclick="refreshcarrello(this, 'inpBonifico')" validationgroup="none" autopostback="true" runat="server" id="inpBonifico"  />
+                                                        <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" name="payment_method" value="bacs" checked="false" onclick="refreshcarrello(this, 'inpBonifico')" validationgroup="none" autopostback="true" runat="server" id="inpBonifico" />
                                                     </div>
                                                     <div class="float-left" style="width: calc(100% - 30px - .5rem); margin-top: 6px;">
                                                         <b><%= references.ResMan("Common", Lingua,"txtbacs") %></b><br />
@@ -582,7 +596,7 @@
                                             <li style="display: none">
                                                 <div class="clearfix" style="margin-bottom: 20px">
                                                     <div class="float-left mt-1 mr-2" style="width: 25px;">
-                                                        <input type="radio" class="form-control" style="background-color: transparent" value="payway" runat="server" id="inpPayway" autopostback="true" validationgroup="none"/>
+                                                        <input type="radio" class="form-control" style="background-color: transparent" value="payway" runat="server" id="inpPayway" autopostback="true" validationgroup="none" />
                                                     </div>
                                                     <div class="float-left" style="width: calc(100% - 30px - .5rem);">
                                                         <b><%= references.ResMan("Common", Lingua,"txtpayway") %></b><br />
@@ -593,7 +607,7 @@
                                             <li style="display: block" id="liPaypal" runat="server">
                                                 <div class="clearfix" style="margin-bottom: 25px">
                                                     <div class="float-left mt-0 mr-2" style="width: 25px;">
-                                                        <input type="radio" class="form-control" style="background-color: transparent" disabled="false" checked="false" name="payment_method" value="paypal" runat="server" validationgroup="none" autopostback="true" id="inpPaypal" onclick="refreshcarrello(this, 'inpPaypal')"  />
+                                                        <input type="radio" class="form-control" style="background-color: transparent" disabled="false" checked="false" name="payment_method" value="paypal" runat="server" validationgroup="none" autopostback="true" id="inpPaypal" onclick="refreshcarrello(this, 'inpPaypal')" />
                                                     </div>
 
                                                     <div class="float-left" style="width: calc(100% - 30px - .5rem); margin-top: 6px;">
@@ -638,56 +652,60 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="widget bill-payment p-2" id="divOrderrequest" runat="server" visible="false">
-                                        <ul class="unstyled m-0 p-0">
-                                            <li>
-                                                <div class="clearfix" style="margin-bottom: 20px">
-                                                    <div class="float-left mt-1 mr-2" style="width: 25px">
-                                                        <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" disabled="false" checked="false" name="payment_method" value="richiesta" validationgroup="none"  onclick="refreshcarrello(this, 'inpRichiesta')"
-                                                            runat="server" id="inpRichiesta" />
-                                                    </div>
-                                                    <div class="float-left" style="width: calc(100% - 30px - .5rem);">
-                                                        <b><%= references.ResMan("Common", Lingua,"txtrichiesta") %></b>
-                                                        <br />
-                                                        <%= references.ResMan("Common", Lingua,"chkrichiesta") %>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <%--  BLOCCO ACCETTAZIONE CONDIZIONI DI VENDITA--%>
-                                    <div class="form-row row d-none">
-                                        <div class="col-12">
-                                            <label class="checkbox" style="margin: 5px 0 0 -2.5px;">
-                                                <input type="checkbox" enableviewstate="true" class="form-control" runat="server" clientidmode="static" id="chkcondizioni" />
-                                                <%= references.ResMan("Common", Lingua,"chkcondizioni") %><br />
-                                            </label>
-                                            <div class="pt-2" style="font-weight: bold; color: red">
-                                                <asp:Label ID="outputcondizioni" ClientIDMode="Static" Text="" runat="server" />
-                                            </div>
+                                </div>
+
+                                <%--  BLOCCO ACCETTAZIONE CONDIZIONI DI VENDITA--%>
+                                <div class="form-row row d-none">
+                                    <div class="col-12">
+                                        <label class="checkbox" style="margin: 5px 0 0 -2.5px;">
+                                            <input type="checkbox" enableviewstate="true" class="form-control" runat="server" clientidmode="static" id="chkcondizioni" />
+                                            <%= references.ResMan("Common", Lingua,"chkcondizioni") %><br />
+                                        </label>
+                                        <div class="pt-2" style="font-weight: bold; color: red">
+                                            <asp:Label ID="outputcondizioni" ClientIDMode="Static" Text="" runat="server" />
                                         </div>
                                     </div>
-                                    <div class="col-12 col-sm-8 mx-auto px-0 py-1" id="stdbutton">
-                                        <!- Normal button -->
+                                </div>
+
+                                <div class="widget bill-payment p-2 col-12" id="divOrderrequest" runat="server" visible="false">
+                                    <ul class="unstyled m-0 p-0">
+                                        <li>
+                                            <div class="clearfix" style="margin-bottom: 20px">
+                                                <div class="float-left mt-1 mr-2" style="width: 25px">
+                                                    <input type="radio" class="form-control" style="background-color: transparent; cursor: pointer" disabled="false" checked="false" name="payment_method" value="richiesta" validationgroup="none" onclick="refreshcarrello(this, 'inpRichiesta')"
+                                                        runat="server" id="inpRichiesta" />
+                                                </div>
+                                                <div class="float-left" style="width: calc(100% - 30px - .5rem);">
+                                                    <b><%= references.ResMan("Common", Lingua,"txtrichiesta") %></b>
+                                                    <br />
+                                                    <%= references.ResMan("Common", Lingua,"chkrichiesta") %>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-12 col-sm-8 mx-auto px-0 py-1" id="stdbutton">
+                                    <!- Normal button -->
                                         <button id="btnConvalida" type="button" class="btn w-100" runat="server" onclick="ConfirmValidationOrder(this);"><%= references.ResMan("Common", Lingua,"OrdineEsegui") %> </button>
-                                        <asp:Button ID="btnConvalidaSrv" ClientIDMode="Static" Style="display: none" runat="server" OnClick="btnConvalidaOrdine" />
-                                    </div>
-                                    <div class="col-12 col-sm-8 mx-auto px-0 py-1" id="stripebutton">
-                                        <!- Stripe button -->
+                                    <asp:Button ID="btnConvalidaSrv" ClientIDMode="Static" Style="display: none" runat="server" OnClick="btnConvalidaOrdine" />
+                                </div>
+
+                                <div class="col-12 col-sm-8 mx-auto px-0 py-1" id="stripebutton">
+                                    <!- Stripe button -->
                                         <button type="button" class="btn w-100" id="stripeproceedbtn" onclick="javascript:executeorder(this)">
                                             <%= references.ResMan("Common", Lingua,"OrdineEsegui") %> Stripe
                                         </button>
-                                        <p id="card-error-pre" class="py-1" role="alert" style="color: red"></p>
-                                    </div>
-                                    <script>
-                                        var stripechk = false;
-                                        if ($("[id$='inpstripe']").length != 0)
-                                            stripechk = $("[id$='inpstripe']")[0].checked; //chkSpedizione
-                                        if (stripechk == true) { $("[id$='stripebutton']").show(); $("[id$='stdbutton']").hide(); }
-                                        else { $("[id$='stripebutton']").hide(); $("[id$='stdbutton']").show(); }
-                                    </script>
-                                    <script>
-                                        function ConfirmValidationOrder(elembtn) {
+                                    <p id="card-error-pre" class="py-1" role="alert" style="color: red"></p>
+                                </div>
+                                <script>
+                                    var stripechk = false;
+                                    if ($("[id$='inpstripe']").length != 0)
+                                        stripechk = $("[id$='inpstripe']")[0].checked;
+                                    if (stripechk == true) { $("[id$='stripebutton']").show(); $("[id$='stdbutton']").hide(); }
+                                    else { $("[id$='stripebutton']").hide(); $("[id$='stdbutton']").show(); }
+                                </script>
+                                <script>
+                                    function ConfirmValidationOrder(elembtn) {
                                           <%--  var chkorder = document.getElementById("<%= chkcondizioni.ClientID  %>");
                                             var outorder = document.getElementById("<%= outputcondizioni.ClientID  %>");
 
@@ -713,21 +731,24 @@
                                                 $('html,body').animate({
                                                     scrollTop: $("#" + "<%= validsummary.ClientID  %>").offset().top - 160
                                                 }, 'fast');
-                                                console.log('not  validated');
-                                                //return false;
-                                            }
+                                            console.log('not  validated');
+                                            //return false;
                                         }
-                                        function resetValidationState() {
-                                            // clear any postback blocks from client validation of asp.net validators, which occur after validation fails:
-                                            window.Page_BlockSubmit = false;
-                                        }
-                                    </script>
+                                    }
+                                    function resetValidationState() {
+                                        // clear any postback blocks from client validation of asp.net validators, which occur after validation fails:
+                                        window.Page_BlockSubmit = false;
+                                    }
+                                </script>
 
-                                    <div>
-                                        <%= references.ResMan("Common", Lingua,"notespedizioni1") %>
-                                    </div>
+                                <div>
+                                    <%= references.ResMan("Common", Lingua,"notespedizioni1") %>
                                 </div>
                             </div>
+
+
+
+
 
                         </div>
                     </div>

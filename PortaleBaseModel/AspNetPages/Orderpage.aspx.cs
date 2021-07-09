@@ -48,6 +48,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                 if (registrazione != "false") // da abilita se non si vuole far far acquisti senza login ..... di registrazione utente!!!
                     VerificaStatoLoginUtente();
                 RiempiDdlNazione("IT", ddlNazione);
+                RiempiDdlNazione("IT", ddlNazioneS);
                 CaricaCarrello(true);
             }
             else
@@ -130,7 +131,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         rptProdotti.DataSource = carrello;
         rptProdotti.DataBind();
 
-        string codicenazione = SelezionaNazione(carrello, ddlNazione.SelectedValue);
+        string codicenazione = SelezionaNazione(carrello, ddlNazione.SelectedValue, ddlNazioneS.SelectedValue);
 
         //Spengo paypal se non riesco a calcolare le spese di spedizione
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -332,7 +333,6 @@ public partial class AspNetPages_Orderpage : CommonPage
                         string SoggettoMailFornitore = references.ResMan("Common", Lingua, "OrdineSoggettomailRichiesta") + Nome;
                         TestoMail = CreaMailPerFornitore(totali, prodotti);
                         Utility.invioMailGenerico(Nome, Email, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
-                        //Utility.invioMailGenerico(totali.Denominazionecliente, totali.Mailcliente, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
 
                         //Invia la mail per il cliente
                         string SoggettoMailCliente = references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + Nome;
@@ -495,7 +495,6 @@ public partial class AspNetPages_Orderpage : CommonPage
                         string SoggettoMailFornitore = references.ResMan("Common", Lingua, "OrdineSoggettomailRichiesta") + Nome;
                         TestoMail = CreaMailPerFornitore(totali, prodotti);
                         Utility.invioMailGenerico(Nome, Email, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
-                        //Utility.invioMailGenerico(totali.Denominazionecliente, totali.Mailcliente, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, Server);
 
                         //Invia la mail per il cliente
                         string SoggettoMailCliente = references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + Nome;
@@ -617,6 +616,8 @@ public partial class AspNetPages_Orderpage : CommonPage
         AggiornaDatiUtenteSuCarrello(prodotti, cliente.Id_cliente);  //aggiorno il codice cliente e sconto nel carrello
         if (prodotti != null && prodotti.Count > 0)
         {
+
+
             //vERIFICA finale PER IL BOOKING PRIMA DI ORDINARE!!!
             if (!VerificaDisponibilitaEventoBooking(prodotti, "rif000001"))
             {
@@ -631,7 +632,22 @@ public partial class AspNetPages_Orderpage : CommonPage
             CodiceOrdine = GeneraCodiceOrdine();
             bool supplementoisole = (bool)parametri["supplementoisole"];// chkSupplemento.Checked;
             bool supplementocontrassegno = (bool)parametri["supplementocontrassegno"];// inpContanti.Checked;
-            totali = CalcolaTotaliCarrello(Request, Session, cliente.CodiceNAZIONE, "", supplementoisole, supplementocontrassegno);
+
+            //totali = CalcolaTotaliCarrello(Request, Session, cliente.CodiceNAZIONE, "", supplementoisole, supplementocontrassegno);
+            //Prendo la nazione giusta dal cliente per il calcolo delle spese di spedizione
+            string codicenazione = "";
+            Carrello c = prodotti.Find(_c => !string.IsNullOrWhiteSpace(_c.Codicenazione)); //dal carrello
+            if (c != null) codicenazione = c.Codicenazione;
+            if (cliente != null && !string.IsNullOrEmpty(cliente.CodiceNAZIONE)) codicenazione = cliente.CodiceNAZIONE;
+            if (cliente != null && !chkSpedizione.Checked) // se tolta spunta spedizione uguale da quella di fatturazione prendo la nazione da quella di spedizione del cliente
+            {
+                Cliente clispediz = Newtonsoft.Json.JsonConvert.DeserializeObject<Cliente>(cliente.Serialized);
+                if (clispediz != null && !string.IsNullOrEmpty(clispediz.CodiceNAZIONE))
+                {
+                    codicenazione = clispediz.CodiceNAZIONE;
+                }
+            }
+            totali = CalcolaTotaliCarrello(Request, Session, codicenazione, "", supplementoisole, supplementocontrassegno);
 
             //PRENDIAMO I DATI DAL FORM PER LA PREPARAZIONE ORDINE //////////////////////////////////////////////////////////////////
             totali.Denominazionecliente = cliente.Cognome + " " + cliente.Nome;
@@ -649,7 +665,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             totali.Indirizzofatturazione += "CodiceDestinatario/Pec: " + cliente.Emailpec + "<br/>";
             //SE INDIRIZZO SPEDIIZONE DIVERSO -> LO MEMORIZZO NEI TOTALI ( E serializzo il dettaglio nel cliente nel campo serialized )
             string indirizzospedizione = "";
-            if (!chkSpedizione.Checked)
+            if (!chkSpedizione.Checked && !string.IsNullOrEmpty(cliente.Serialized))
             {
                 /////////////////////////////////////
                 //prendiamO dati spedizione dal cliente serializzato .... in accordo col metodo usato per fatturazione anziche dal form
@@ -918,21 +934,21 @@ public partial class AspNetPages_Orderpage : CommonPage
             AggiornaProdottoCarrello(Request, Session, c.id_prodotto, c.Numero, User.Identity.Name, c.Campo2, c.ID, idcliente, c.Prezzo, c.Datastart, c.Dataend, c.jsonfield1);
         }
     }
-    private void RiempiDdlNazione(string valore, DropDownList ddlNazione)
+    private void RiempiDdlNazione(string valore, DropDownList ddlnazionelocal)
     {
         List<Tabrif> nazioni = WelcomeLibrary.UF.Utility.Nazioni.FindAll(delegate (Tabrif _nz) { return _nz.Lingua == Lingua; });
         nazioni.Sort(new GenericComparer<Tabrif>("Campo1", System.ComponentModel.ListSortDirection.Ascending));
-        ddlNazione.Items.Clear();
+        ddlnazionelocal.Items.Clear();
         foreach (Tabrif n in nazioni)
         {
             ListItem i = new ListItem(n.Campo1, n.Codice);
-            ddlNazione.Items.Add(i);
+            ddlnazionelocal.Items.Add(i);
         }
         try
         {
-            ddlNazione.SelectedValue = valore.ToUpper();
+            ddlnazionelocal.SelectedValue = valore.ToUpper();
         }
-        catch { valore = "IT"; ddlNazione.SelectedValue = valore.ToUpper(); }
+        catch { valore = "IT"; ddlnazionelocal.SelectedValue = valore.ToUpper(); }
     }
 
 
@@ -940,6 +956,12 @@ public partial class AspNetPages_Orderpage : CommonPage
     {
         CaricaCarrello();
     }
+    protected void ddlNazioneS_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        CaricaCarrello();
+    }
+
+
     protected string TestoSezione(string codicetipologia)
     {
         string ret = "";
@@ -988,22 +1010,37 @@ public partial class AspNetPages_Orderpage : CommonPage
 
     }
 
-    private string SelezionaNazione(CarrelloCollection carrello, string selcodicenazione = "")
+    private string SelezionaNazione(CarrelloCollection carrello, string selcodicenazione = "", string selcodicenaziones = "")
     {
+        bool samespedizione = chkSpedizione.Checked; //se spuntata spedizione stesso indirizzo di fatturazione!
         string codicenazione = "";
+
         if (carrello != null)
         {
+            //prendo prima dal carrello il codice nazione
             Carrello c = carrello.Find(_c => !string.IsNullOrWhiteSpace(_c.Codicenazione));
             if (c != null)
                 codicenazione = c.Codicenazione;
-            if (!string.IsNullOrEmpty(selcodicenazione)) codicenazione = selcodicenazione;
         }
+        //se presente imposto la nazione da quella di fatturazione
+        if (!string.IsNullOrEmpty(selcodicenazione)) codicenazione = selcodicenazione;
         try
         {
             ddlNazione.SelectedValue = codicenazione;
         }
         catch
         { }
+
+        //se diverso indirizzo spedizione prendo la nazione da indirizzo spedizione 
+        if (!samespedizione && !string.IsNullOrEmpty(selcodicenaziones)) codicenazione = selcodicenaziones;
+        if (samespedizione) // se spuntata spedizione = fatturazione uguaglio le selezioni di nazione
+            try
+            {
+                ddlNazioneS.SelectedValue = codicenazione;
+            }
+            catch
+            { }
+
         return codicenazione;
     }
     private void VisualizzaTotaliCarrello(string codicenazione, string codiceprovincia)
@@ -1018,13 +1055,15 @@ public partial class AspNetPages_Orderpage : CommonPage
             liPaypal.Visible = false;
         else
             liPaypal.Visible = true;
-#if false //metodo alternativo di blocco pagamento e invio solo ordine
+#if true //metodo alternativo di blocco pagamento e invio solo ordine
 
         if (totali.Bloccaacquisto)
         {
             litMessage.Text = references.ResMan("Common", Lingua, "testoBloccoacquisto");
+            //liPaypal.Visible = false;
             divPayment.Visible = false;
             inpPaypal.Checked = false;
+            inpstripe.Checked = false;
             inpRichiesta.Checked = true;
             divOrderrequest.Visible = true;
         }
@@ -1033,10 +1072,11 @@ public partial class AspNetPages_Orderpage : CommonPage
             litMessage.Text = "";
             liPaypal.Visible = true;
             divPayment.Visible = true;
-           // inpPaypal.Checked = true;
+            // inpPaypal.Checked = true;
             inpRichiesta.Checked = false;
             divOrderrequest.Visible = false;
-        } 
+
+        }
 #endif
 
 
@@ -1605,7 +1645,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         //MEMORIZZO I DATI DI SPEDIZIONE DI DETTAGLIO IN UN CLIENTE TEMPORANEO AD HOC CHE SERIALIZZO IN UN CAMPO CLIENTE
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Cliente clispediz = new Cliente();
-        clispediz.CodiceNAZIONE = ddlNazione.SelectedValue.Trim();
+        clispediz.CodiceNAZIONE = ddlNazioneS.SelectedValue.Trim();
 
         if (!string.IsNullOrEmpty(inpNomeS.Value.Trim()))
             clispediz.Nome = inpNomeS.Value.Trim();
@@ -1909,6 +1949,13 @@ public partial class AspNetPages_Orderpage : CommonPage
             Cliente clispediz = Newtonsoft.Json.JsonConvert.DeserializeObject<Cliente>(c.Serialized);
             if (clispediz != null)
             {
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(clispediz.CodiceNAZIONE))
+                        ddlNazioneS.SelectedValue = clispediz.CodiceNAZIONE;
+                }
+                catch
+                { }
                 if (string.IsNullOrWhiteSpace(inpNomeS.Value))
                     inpNomeS.Value = clispediz.Nome;
                 if (string.IsNullOrWhiteSpace(inpCognomeS.Value))

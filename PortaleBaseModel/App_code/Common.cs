@@ -1716,8 +1716,8 @@ public class CommonPage : Page
                 string codicifiltrodascontare = (!string.IsNullOrEmpty(codattuale.Codicifiltro)) ? codattuale.Codicifiltro : "";
                 //qui potri aggiungere un campo nel codice sconto per associazione a idscaglione per associazione di sconto a scaglioni!!! .. da vedere
                 //long idscaglionedascontare = 0;
-                long idscaglionedascontare =  (codattuale.Idscaglione != null) ? codattuale.Idscaglione.Value : 0; // aggiungere il campo in tabella scaglioni ...
-                if (idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare) && idscaglionedascontare == 0)  
+                long idscaglionedascontare = (codattuale.Idscaglione != null) ? codattuale.Idscaglione.Value : 0; // aggiungere il campo in tabella scaglioni ...
+                if (idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare) && idscaglionedascontare == 0)
                 {
                     //sconto percentuale sul totale generale carrello
                     if (scontoper != 0)
@@ -1854,12 +1854,14 @@ public class CommonPage : Page
             double.TryParse(ConfigManagement.ReadKey("defaultesterospedizione"), out costodefaultestero);
             //Modificare per caricare il campo per gli scaglioni di peso dalla tabella nazioni per il conteggio 
             double costospedizionenazione = references.TrovaCostoNazione(codicenazione); //Costo spedizione per nazione
-            if (costospedizionenazione == 0) totali.Bloccaacquisto = true; //blocoo l'acquisto con carta !!! ( caso costo non specificato in tabella nazioni )
+
+            if (costospedizionenazione == 0) totali.Bloccaacquisto = true; //blocoo l'acquisto con carta !!! ( caso costo non specificato in tabella nazioni .. attenzione se non specificato da 0.... )
 
             //SE NON PRESENTE COSTO SPEDIZIONE IN TABELLA NAZIONI PRENDO IL DEFAULT
-            if (codicenazione.ToLower() == "it" && costospedizionenazione == 0) costospedizionenazione = costodefaultitalia; //Costostandard per l'estero
+            if (codicenazione.ToLower() == "it" && costospedizionenazione == 0) costospedizionenazione = costodefaultitalia; //Costostandard per italia
             if (codicenazione.ToLower() != "it" && costospedizionenazione == 0) costospedizionenazione = costodefaultestero; //Costostandard per l'estero
             costofinalespedizione = costospedizionenazione;
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             ///// impostazione spese spedizione con controllo SOGLIE Azzeramento METODO CLASSICO ( NO PESO )
             ////////////////////////////////////////////////////////////////////////////////////////////////////

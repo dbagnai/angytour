@@ -153,6 +153,14 @@ public partial class AspNetPages_Shoppingcart : CommonPage
             ClientiDM cliDM = new ClientiDM();
             Cliente c = cliDM.CaricaClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idcliente);
             if (c != null && !string.IsNullOrEmpty(c.CodiceNAZIONE)) codicenazionecliente = c.CodiceNAZIONE;
+            if (c != null) //nazione spedizione impostata nel cliente se specificata diversa da quella di fatturazione
+            {
+                Cliente clispediz = Newtonsoft.Json.JsonConvert.DeserializeObject<Cliente>(c.Serialized);
+                if (clispediz != null && !string.IsNullOrEmpty(clispediz.CodiceNAZIONE))
+                {
+                    codicenazionecliente = clispediz.CodiceNAZIONE;
+                }
+            }
             codicenazione = SelezionaNazione(carrello, codicenazionecliente);
         }
 

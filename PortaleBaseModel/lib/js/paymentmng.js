@@ -274,6 +274,8 @@ function getcontactdataformorder(contactdatas, callback) {
         contactdatas.chkSpedizione = $("[id$='chkSpedizione']")[0].checked; //chkSpedizione
     if ($("[id$='ddlNazione']").length != 0)
         contactdatas.naziones = $("[id$='ddlNazione']")[0].value;
+    if ($("[id$='ddlNazioneS']").length != 0)
+        contactdatas.naziones = $("[id$='ddlNazioneS']")[0].value;
     contactdatas.nomes = $("[id$='inpNomeS']").val();
     contactdatas.cognomes = $("[id$='inpCognomeS']").val();
     contactdatas.caps = $("[id$='inpCaps']").val();
