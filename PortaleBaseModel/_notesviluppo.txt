@@ -1,9 +1,11 @@
 
-
-update-package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r
-
-https://dotnet.microsoft.com/download/dotnet-core/2.2
+strumenti -> gestione pacchetti nuget -> console di gesione pacchetti
 
 Update-Package -reinstall
  
+
+ -------
+ 
+update-package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r
+https://dotnet.microsoft.com/download/dotnet-core/2.2
 
