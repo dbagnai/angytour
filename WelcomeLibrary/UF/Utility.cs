@@ -1311,7 +1311,8 @@ namespace WelcomeLibrary.UF
                 //mailMessage.ReplyTo.Email = replytoemail;//indirizzo per risposta
                 //if (!string.IsNullOrEmpty(replytoname))
                 //    mailMessage.ReplyTo.Name = replytoname;//nome per risposta
-                //mailMessage.AddHeaderField("Message-ID", "<" + Guid.NewGuid().ToString() + "." + mittenteMail + ">"); //header messaggio
+                
+                mailMessage.AddHeaderField("Message-ID", "<" + Guid.NewGuid().ToString() + "." + mittenteMail + ">"); //header messaggio
 
                 if (destinatarioMail1 != "")
                 {
