@@ -133,8 +133,8 @@ public class Filehnd : IHttpHandler, IRequiresSessionState
                         string soggetto = "Richiesta inserimento attività " + html.Convert(jdata.titolo);
                         string portale = ConfigManagement.ReadKey("Nome");
                         string porteleemail = ConfigManagement.ReadKey("Email");
-                        Utility.invioMailGenerico("Mittente", porteleemail, soggetto, testomail, porteleemail, portale);
-                        //Utility.invioMailGenerico("Mittente", item.Email, soggetto, testomail, destinatarioemail, destinatario);
+                        //Utility.invioMailGenerico("Mittente", porteleemail, soggetto, testomail, porteleemail, portale);
+                        Utility.invioMailGenerico("Mittente", item.Email, soggetto, testomail, porteleemail, portale);
                         break;
                     case "deletefilebypath":
                         Dictionary<string, List<string>> valoriritorno1 = new Dictionary<string, List<string>>();

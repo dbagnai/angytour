@@ -468,8 +468,8 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
 
             if (chkPrivacy.Checked)
             {
-                Utility.invioMailGenerico(ConfigManagement.ReadKey("Nome"), ConfigManagement.ReadKey("Email"), SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
-                //Utility.invioMailGenerico(cognomemittente + " " + nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
+                //Utility.invioMailGenerico(ConfigManagement.ReadKey("Nome"), ConfigManagement.ReadKey("Email"), SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
+                Utility.invioMailGenerico(cognomemittente + " " + nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
 
                 //Registro la statistica di contatto
                 Statistiche stat = new Statistiche();
@@ -496,8 +496,8 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
                         nomedestinatario = d.Value;
 #if true
 
-                        Utility.invioMailGenerico(ConfigManagement.ReadKey("Nome"), ConfigManagement.ReadKey("Email"), SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
-                        //Utility.invioMailGenerico(nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
+                        //Utility.invioMailGenerico(ConfigManagement.ReadKey("Nome"), ConfigManagement.ReadKey("Email"), SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
+                        Utility.invioMailGenerico(nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
 
 #endif
                         //Registro la statistica di contatto

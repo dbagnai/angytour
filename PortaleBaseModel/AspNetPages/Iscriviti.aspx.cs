@@ -273,8 +273,8 @@ public partial class _Iscriviti : CommonPage
 
 
             string SoggettoMail = references.ResMan("Common", Lingua, "testoMailIscrizione").ToString();
-            Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Email, Nome);
-            //Utility.invioMailGenerico(nomecliente, Mailcliente, SoggettoMail, Descrizione, Email, Nome);
+            //Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Email, Nome);
+            Utility.invioMailGenerico(nomecliente, Mailcliente, SoggettoMail, Descrizione, Email, Nome);
             ret = references.ResMan("Common", Lingua, "testoMailIscrizioneOK").ToString();
 
         }
@@ -748,8 +748,8 @@ public partial class _Iscriviti : CommonPage
             Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailcliente, nomecliente);
 
             string SoggettoMailPerGestore = "Mail di iscrizione nuovo cliente al sito web.";
-            Utility.invioMailGenerico(Nome, Email, SoggettoMailPerGestore, Descrizione, Email, Nome);
-            //Utility.invioMailGenerico(nomecliente, Mailcliente, SoggettoMailPerGestore, Descrizione, Email, Nome);
+            //Utility.invioMailGenerico(Nome, Email, SoggettoMailPerGestore, Descrizione, Email, Nome);
+            Utility.invioMailGenerico(nomecliente, Mailcliente, SoggettoMailPerGestore, Descrizione, Email, Nome);
 
         }
         catch (Exception err)

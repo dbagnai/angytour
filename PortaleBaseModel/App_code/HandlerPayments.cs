@@ -503,7 +503,8 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
             //Invio la mail per il fornitore
             string SoggettoMailFornitore = references.ResMan("Common", Lingua, "OrdineSoggettomailRichiesta") + Nome;
             TestoMail = CreaMailPerFornitore(totali, prodotti, Lingua);
-            Utility.invioMailGenerico(Nome, Email, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, context.Server);
+            //Utility.invioMailGenerico(Nome, Email, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, context.Server);
+            Utility.invioMailGenerico(totali.Denominazionecliente, totali.Mailcliente, SoggettoMailFornitore, TestoMail, Email, Nome, null, "", true, context.Server);
             //Invia la mail per il cliente
             string SoggettoMailCliente = references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + Nome;
             TestoMail = CreaMailCliente(totali, prodotti, Lingua);

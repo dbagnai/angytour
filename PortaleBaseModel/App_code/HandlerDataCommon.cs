@@ -331,8 +331,8 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
 
                     if (spuntaprivacy)
                     {
-                        Utility.invioMailGenerico(ConfigManagement.ReadKey("Nome"), ConfigManagement.ReadKey("Email"), SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
-                        //Utility.invioMailGenerico(nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
+                        //Utility.invioMailGenerico(ConfigManagement.ReadKey("Nome"), ConfigManagement.ReadKey("Email"), SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
+                        Utility.invioMailGenerico(ragsoc + " " + cognomemittente + " " + nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
                         // Registro la statistica di contatto
                         Statistiche stat = new Statistiche();
                         stat.Data = DateTime.Now;
@@ -508,7 +508,8 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     {
                         Descrizione1 += " <br/> Il cliente ha richiesto l'invio newsletter. " + references.ResMan("Common", lingua, "titolonewsletter1").ToString() + "<br/>";
                     }
-                    Utility.invioMailGenerico(nomedestinatario1, maildestinatario1, SoggettoMail1, Descrizione1, maildestinatario1, nomedestinatario1);
+                    //Utility.invioMailGenerico(nomedestinatario1, maildestinatario1, SoggettoMail1, Descrizione1, maildestinatario1, nomedestinatario1);
+                    Utility.invioMailGenerico(cliente.Cognome + " " + cliente.Nome, cliente.Email, SoggettoMail1, Descrizione1, maildestinatario1, nomedestinatario1);
 
 
 

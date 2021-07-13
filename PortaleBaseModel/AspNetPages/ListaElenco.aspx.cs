@@ -835,8 +835,8 @@ public partial class AspNetPages_ListaElenco : CommonPage
 
             if (chkContactPrivacy.Checked)
             {
-                Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
-                //Utility.invioMailGenerico(cognomemittente + " " + nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
+                //Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
+                Utility.invioMailGenerico(cognomemittente + " " + nomemittente, mittenteMail, SoggettoMail, Descrizione, maildestinatario, nomedestinatario);
 
                 //Registro la statistica di contatto
                 Statistiche stat = new Statistiche();

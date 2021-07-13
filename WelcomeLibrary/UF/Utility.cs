@@ -640,7 +640,7 @@ namespace WelcomeLibrary.UF
 #endif
 
         public static bool invioMailGenerico(string mittenteNome, string mittenteMail, string SoggettoMail, string Descrizione,
-         string destinatarioMail1, string destinatarioNome, List<string> foto = null, string percorsofoto = "", bool incorporaimmagini = false, System.Web.HttpServerUtility server = null, bool plaintext = false, List<string> emaildestbcc = null, string sectionName = "smtpbase", string libtype = "mailsystem")
+         string destinatarioMail1, string destinatarioNome, List<string> foto = null, string percorsofoto = "", bool incorporaimmagini = false, System.Web.HttpServerUtility server = null, bool plaintext = false, List<string> emaildestbcc = null, string sectionName = "smtpbase", string libtype = "mailsystem", string replytoemail = "", string replytoname = "")
         {
             bool ret = false;
             try
@@ -659,7 +659,7 @@ namespace WelcomeLibrary.UF
 
                     case "mailsystem":
                         ret = invioMailGenericomailsystem(mittenteNome, mittenteMail, SoggettoMail, Descrizione,
-                 destinatarioMail1, destinatarioNome, foto, percorsofoto, incorporaimmagini, server, plaintext, emaildestbcc, sectionName);
+                 destinatarioMail1, destinatarioNome, foto, percorsofoto, incorporaimmagini, server, plaintext, emaildestbcc, sectionName );
                         break;
                     default:
                         ret = invioMailGenericosystemnet(mittenteNome, mittenteMail, SoggettoMail, Descrizione,
@@ -1286,7 +1286,7 @@ namespace WelcomeLibrary.UF
         }
 
         public static bool invioMailGenericomailsystem(string mittenteNome, string mittenteMail, string SoggettoMail, string Descrizione,
-       string destinatarioMail1, string destinatarioNome, List<string> foto = null, string percorsofoto = "", bool incorporaimmagini = false, System.Web.HttpServerUtility server = null, bool plaintext = false, List<string> emaildestbcc = null, string sectionName = "smtpbase")
+       string destinatarioMail1, string destinatarioNome, List<string> foto = null, string percorsofoto = "", bool incorporaimmagini = false, System.Web.HttpServerUtility server = null, bool plaintext = false, List<string> emaildestbcc = null, string sectionName = "smtpbase" )
         {
             bool ret = false;
             ActiveUp.Net.Mail.Message mailMessage = new ActiveUp.Net.Mail.Message();
@@ -1295,10 +1295,23 @@ namespace WelcomeLibrary.UF
 
                 //MimeMailAddress mittente = new MimeMailAddress(mittenteMail); // se metti il nome aegis non funziona
                 //MimeMailAddress destinatario = new MimeMailAddress(destinatarioMail1); // se metti il nome aegis non funziona
-                // mailMessage.Sender = mittente;
+
                 mailMessage.From.Email = mittenteMail;
                 mailMessage.From.Name = mittenteNome;
-                mailMessage.AddHeaderField("Message-ID", "<" + Guid.NewGuid().ToString() + "." + mittenteMail + ">"); //header messaggio
+
+                //Set del reply to in base al mittente passato se questo non è quello del sito necessario per non fare relaying
+                if (mittenteMail.ToLower().Trim() != ConfigManagement.ReadKey("Email").ToLower().Trim())
+                { 
+                    mailMessage.From.Email = ConfigManagement.ReadKey("Email");
+                    mailMessage.From.Name = ConfigManagement.ReadKey("Nome"); ;
+                    mailMessage.ReplyTo.Email = mittenteMail;
+                    mailMessage.ReplyTo.Name = mittenteNome;
+                }
+                //if (!string.IsNullOrEmpty(replytoemail))
+                //mailMessage.ReplyTo.Email = replytoemail;//indirizzo per risposta
+                //if (!string.IsNullOrEmpty(replytoname))
+                //    mailMessage.ReplyTo.Name = replytoname;//nome per risposta
+                //mailMessage.AddHeaderField("Message-ID", "<" + Guid.NewGuid().ToString() + "." + mittenteMail + ">"); //header messaggio
 
                 if (destinatarioMail1 != "")
                 {
