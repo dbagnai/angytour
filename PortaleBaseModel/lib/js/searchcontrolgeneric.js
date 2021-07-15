@@ -213,7 +213,7 @@ function Visualizzalistadati() {
         if ($(this).slider().length > 0 && (low != min || high != max))
             valore = low + "|" + high;
         //if (objfiltro != null && objfiltro.hasOwnProperty(idsel))
-        if (objfiltro != null && low != '' && high != '')
+        if (objfiltro != null && valore != '')
             objfiltro[idsel] = valore;
     });
 
