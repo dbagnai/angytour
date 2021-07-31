@@ -1481,6 +1481,13 @@ public partial class AspNetPages_Orderpage : CommonPage
     }
 
 #endif
+    /// <summary>
+    /// prepara le righe per comporre il totale al fine dell'ordine su paypal in paypaldatas ( un elemento per ogni voce che compone il totale )
+    /// </summary>
+    /// <param name="percentualeanticipo"></param>
+    /// <param name="totali"></param>
+    /// <param name="prodotti"></param>
+    /// <param name="paypaldatas"></param>
     private void MemorizzaDatiPerPaypal(double percentualeanticipo, TotaliCarrello totali, CarrelloCollection prodotti, ref Dictionary<string, List<string>> paypaldatas)
     {
         paypaldatas = new Dictionary<string, List<string>>();
@@ -1525,27 +1532,70 @@ public partial class AspNetPages_Orderpage : CommonPage
         //if (!paypaldatas.ContainsKey("pp_pfucosts"))
         //    paypaldatas.Add("pp_pfucosts", dettagliitem);
 
-        //Aggiungo un elemento per spesespedizione
-        dettagliitem = new List<string>();
-        dettagliitem.Add("");
-        dettagliitem.Add(references.ResMan("Common", Lingua, "CarrelloTotaleSpedizione")); //Descrizione elemento")
-        dettagliitem.Add("");
-        dettagliitem.Add(totali.TotaleSpedizione.ToString());
-        dettagliitem.Add("1");//Quantità
-        dettagliitem.Add("100");//Percentualeanticipo
-        if (!paypaldatas.ContainsKey("pp_expcosts"))
-            paypaldatas.Add("pp_expcosts", dettagliitem);
+        //aggiungo un elemento per assicurazione
+        if (totali.TotaleAssicurazione != 0)
+        {
+            dettagliitem = new List<string>();
+            dettagliitem.Add("");
+            dettagliitem.Add(references.ResMan("Common", Lingua, "carrellototaleassicurazione")); //Descrizione elemento")
+            dettagliitem.Add("");
+            dettagliitem.Add(totali.TotaleAssicurazione.ToString());
+            dettagliitem.Add("1");//Quantità
+            dettagliitem.Add(percentualeanticipo.ToString());//Percentuale anticipo da applicare anche alla spedizione
+            if (!paypaldatas.ContainsKey("pp_insurance"))
+                paypaldatas.Add("pp_insurance", dettagliitem);
+        }
 
-        //aggiungo elemento per scontp
+        //Aggiungo un elemento per spesespedizione
+        if (totali.TotaleSpedizione != 0)
+        {
+            dettagliitem = new List<string>();
+            dettagliitem.Add("");
+            dettagliitem.Add(references.ResMan("Common", Lingua, "CarrelloTotaleSpedizione")); //Descrizione elemento")
+            dettagliitem.Add("");
+            dettagliitem.Add(totali.TotaleSpedizione.ToString());
+            dettagliitem.Add("1");//Quantità
+                                  //dettagliitem.Add("100");//Percentualeanticipo
+            dettagliitem.Add(percentualeanticipo.ToString());//Percentuale anticipo da applicare anche alla spedizione
+            if (!paypaldatas.ContainsKey("pp_expcosts"))
+                paypaldatas.Add("pp_expcosts", dettagliitem);
+        }
+
+        //aggiungo elemento per sconto
+        if (totali.TotaleSconto != 0)
+        {
+            dettagliitem = new List<string>();
+            dettagliitem.Add("");
+            dettagliitem.Add(references.ResMan("Common", Lingua, "testoSconto"));//Descrizione elemento
+            dettagliitem.Add("");
+            dettagliitem.Add("-" + totali.TotaleSconto.ToString());
+            dettagliitem.Add("1");//Quantità
+                                  //dettagliitem.Add("100");//Percentuale anticipo
+            dettagliitem.Add(percentualeanticipo.ToString());//Percentuale anticipo ( da applicare anche allo sconto )
+            if (!paypaldatas.ContainsKey("pp_discount"))
+                paypaldatas.Add("pp_discount", dettagliitem);
+        }
+
+        /////////////////////////////////////////////////////////////////////
+        //il totale finale deve corrispondere al segunete sempre !!!! lo inserisco nella lista voci di paypal da non sommare ai totali ma per controllo
+        //((_TotaleSmaltimento + _TotaleSpedizione + _TotaleOrdine + _TotaleAssicurazione) - _TotaleSconto) * _precacconto / 100 
+        /////////////////////////////////////////////////////////////////////
+        double amount = 0; // importo da pagare in centesimi di euro
+        if (totali.Percacconto != 100)
+            amount = (totali.TotaleAcconto);
+        else
+            amount = ((totali.TotaleAcconto + totali.TotaleSaldo));
         dettagliitem = new List<string>();
         dettagliitem.Add("");
-        dettagliitem.Add(references.ResMan("Common", Lingua, "testoSconto"));//Descrizione elemento
+        //dettagliitem.Add(references.ResMan("Common", Lingua, "xxxx"));//Descrizione elemento
+        dettagliitem.Add("Importo richiesto/amount to pay");//Descrizione elemento
         dettagliitem.Add("");
-        dettagliitem.Add("-" + totali.TotaleSconto.ToString());
+        dettagliitem.Add(amount.ToString());
         dettagliitem.Add("1");//Quantità
         dettagliitem.Add("100");//Percentuale anticipo
-        if (!paypaldatas.ContainsKey("pp_discount"))
-            paypaldatas.Add("pp_discount", dettagliitem);
+        if (!paypaldatas.ContainsKey("pp_totalamountcheck"))
+            paypaldatas.Add("pp_totalamountcheck", dettagliitem);
+
     }
 
     /// <summary>

@@ -120,21 +120,22 @@ public class NVPAPICaller
         //ALLOWNOTE
 
 
+        double totaleforcheck = 0; //totale precalcolato da richiedere
         double totalamount = 0;
         int i = 0;
-        foreach (string item in paypaldatas.Keys)
+        foreach (string item in paypaldatas.Keys)//scorro gli elementi a carrello
         {
             //paypaldatas contiene indicizzato per ogni id i seguenti in sequenza
             List<string> dettaglio = paypaldatas[item];
             //testo1
-            string testo1 = dettaglio[0];
+            string testo1 = dettaglio[0]; //id prodotto o vuoto
             //testo2
-            string testo2 = dettaglio[1];
+            string testo2 = dettaglio[1]; //titolo rigo
             //testo3
-            string testo3 = dettaglio[2];
+            string testo3 = dettaglio[2]; //descrizione rigo
             //prezzounitario
             double d = 0;
-            double.TryParse(dettaglio[3], out d);
+            double.TryParse(dettaglio[3], out d); //prezzo rigo
 #if false
             if (bSandbox)//In sandbox mode il prezzo è sempre 0,1 per evitar di consumare fondi
             {
@@ -145,16 +146,23 @@ public class NVPAPICaller
             } 
 #endif
             if (d == 0) continue;//Non aggiungo gli ementi a costo zero -> altrimenti il sistema si irrita
+            if (item.ToLower() == "pp_totalamountcheck")
+            {
+                double d1 = 0;
+                double.TryParse(dettaglio[3], out d1); //prezzo totale per controllo
+                totaleforcheck = d1;
+                continue;
+            }
 
             string prezzounitario = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] { d });
 
             //ncamere
             int quantita = 0;
-            int.TryParse(dettaglio[4], out quantita);
+            int.TryParse(dettaglio[4], out quantita);  //quantita rigo
             string strquantita = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N0}", new object[] { quantita });
             //percentualeanticipo
             double percanticipo = 0;
-            double.TryParse(dettaglio[5], out percanticipo);
+            double.TryParse(dettaglio[5], out percanticipo); //%anticipo
             //Dettaglio articoli
 #if true
             //encoder["L_PAYMENTREQUEST_0_NUMBER" + i.ToString()] = "12334.00"; //item number
@@ -172,6 +180,8 @@ public class NVPAPICaller
             totalamount += d * quantita * percanticipo / 100;
             i++;
         }
+        //totaleforcheck e totalamount devono corrispondere sempre 
+
         //Totale costo articoli (formato numeri sempre xxxxxxxx.xx )
         encoder["PAYMENTREQUEST_0_ITEMAMT"] = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] { totalamount });
         encoder["PAYMENTREQUEST_0_AMT"] = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] { totalamount });
