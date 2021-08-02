@@ -575,12 +575,13 @@
              "~/lib/js/paymentmng.js",
             "~/js/aos/aos.js",
 
-             "~/js/slick181/slick/slick.js",
-             "~/js/lightGallery-master/dist/lightgallery.umd.js",
-             "~/js/lightGallery-master/dist/plugins/thumbnail/lg-thumbnail.umd.js",
-             "~/js/lightGallery-master/dist/plugins/zoom/lg-zoom.umd.js",
-             "~/js/lightGallery-master/dist/plugins/justifiedgallery/jquery.justifiedGallery.js",
-           
+              "~/js/slick181/slick/slick.min.js",
+            "~/js/lightGallery-master/dist/lightgallery.min.js",
+            "~/js/lightGallery-master/dist/plugins/thumbnail/lg-thumbnail.min.js",
+            "~/js/lightGallery-master/dist/plugins/zoom/lg-zoom.min.js",
+            "~/js/lightGallery-master/dist/plugins/justifiedgallery/jquery.justifiedGallery.min.js",
+
+
             "~/js/maininit.js"
         );
 
@@ -618,7 +619,7 @@
               "~/js/slick181/slick/slick.css",
               "~/js/slick181/slick/slick-theme.css",
               "~/js/lightGallery-master/dist/css/lightgallery-bundle.css",
-              "~/js/lightGallery-master/dist/plugins/justifiedgallery/justifiedGallery.css", 
+              "~/js/lightGallery-master/dist/plugins/justifiedgallery/justifiedGallery.css",
 
 
              "~/css/custom.css"
