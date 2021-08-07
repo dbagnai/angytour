@@ -4977,7 +4977,7 @@ namespace WelcomeLibrary.UF
 
                                     HtmlDocument doc = new HtmlDocument();
                                     doc.LoadHtml(descrizione); //Template per il bind
-                                    HtmlNodeCollection links = doc.DocumentNode.SelectNodes("//a | //img"); //tolgo i link e img
+                                    HtmlNodeCollection links = doc.DocumentNode.SelectNodes("//a | //img | //iframe"); //tolgo i link e img
                                     if (links != null)
                                         foreach (HtmlNode link in links)
                                         {
