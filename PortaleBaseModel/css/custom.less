@@ -62,7 +62,9 @@ path.bg-light-color-path {
 .bg-secondary-color {
     background-color: @bg-secondary-color !important;
 }
-
+.bg-custom-color1 {
+    background-color: @bg-custom-color1 !important;
+}
 .bg-secondarylight-color {
     background-color: @bg-secondarylight-color !important;
 }
@@ -6392,6 +6394,33 @@ svg path {
     background: inherit;*/
 }
 
+.ss-style-triangles-inverted::before,
+.ss-style-triangles-inverted::after {
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    -webkit-transform: translateX(-50%) rotate(45deg);
+    transform: translateX(-50%) rotate(45deg);
+    z-index: 96;
+}
+
+.ss-style-triangles-inverted::before {
+    top: -30px;
+    background-color: rgb(255,255,255) !important;
+    z-index: 96;
+    /*background: inherit;*/
+}
+
+.ss-style-triangles-inverted::after {
+    /*
+    z-index: 10;
+    background: inherit;*/
+    bottom: -30px;
+    /*background-color: rgb(255,255,255) !important;*/
+    /*background-color: @bg-primary-color !important;*/
+    background-color: @bg-custom-color1 !important;
+}
+
 /* Rounded center split and bottom rounded */
 .ss-style-roundedsplit {
     margin-top: 70px;
@@ -6553,4 +6582,38 @@ svg path {
     .mbr-parallax-background.bg-light-color-pattern-1 {
         background-image: none !important
     }
+}
+
+/*************************************************************************************************/
+/*Rifiniture guerrino*/
+
+.elementor-spacer-inner {
+    /*height: 50px;*/
+}
+
+.elementor-spacer-inner::before {
+    margin-left: -5px;
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #c5a464;
+    position: absolute;
+    left: 50%;
+    /*top: 50%;*/
+    transform: translate(-50%,-50%);
+    transform: rotate( 45deg );
+    margin-top: -5px;
+}
+
+.elementor-spacer-inner:after {
+    width: 50%;
+    margin-left: 25%;
+    content: "";
+    /*width: 100%;*/
+    height: 1px;
+    background-color: #c5a464;
+    position: absolute;
+    /*top: 50%;*/
+    transform: translateY(-50%);
+    margin-left: -25% !important;
 }
