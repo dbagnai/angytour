@@ -58,7 +58,7 @@ var fetchpaymentintent = function (paymentIntentId, callback) {
             return result.json();
         })
         .then(function (data) {
-            var errfromhnd = "";
+            var messagefromhnd = "";
             if (data.messages != undefined) messagefromhnd = data.messages;
             if (data.clientSecret == undefined) { loadingstripe(true); document.querySelector("#card-error").innerHTML = 'stripe not initialized' + messagefromhnd; document.querySelector("#card-error-pre").innerHTML = 'stripe not initialized' + messagefromhnd; return; }
 
