@@ -1371,7 +1371,7 @@
             </code>
             </example>
         </member>
-        <!-- Commento XML in formato non corretto ignorato per il membro 'M:ActiveUp.Net.Mail.IMailbox.DeleteMessage(System.Int32,System.Boolean)' -->
+        <!-- Badly formed XML comment ignored for member "M:ActiveUp.Net.Mail.IMailbox.DeleteMessage(System.Int32,System.Boolean)" -->
         <member name="T:ActiveUp.Net.Mail.Crypto">
             <summary>
             Contains several static methods providing cryptographic digesting and transformations.
@@ -2574,7 +2574,7 @@
             Represents a parsed e-mail message.
             </summary>
         </member>
-        <!-- Commento XML in formato non corretto ignorato per il membro 'P:ActiveUp.Net.Mail.Message.Attachments' -->
+        <!-- Badly formed XML comment ignored for member "P:ActiveUp.Net.Mail.Message.Attachments" -->
         <member name="P:ActiveUp.Net.Mail.Message.CustomCollection">
             <summary>
             Collection containing custom string to be replaced.
@@ -2610,7 +2610,7 @@
             Indicates whether the message has been encrypted using S/MIME.
             </summary>
         </member>
-        <!-- Commento XML in formato non corretto ignorato per il membro 'P:ActiveUp.Net.Mail.Message.EmbeddedObjects' -->
+        <!-- Badly formed XML comment ignored for member "P:ActiveUp.Net.Mail.Message.EmbeddedObjects" -->
         <member name="P:ActiveUp.Net.Mail.Message.SubMessages">
             <summary>
             Contains messages that were included as message/rfc822 parts.
@@ -2634,8 +2634,8 @@
             For multipart/alternative messages, you can access the two bodies via the Message.PartTreeRoot.SubParts property, as well as via the Message.BodyHtml and Message.BodyText properties.
             </example>
         </member>
-        <!-- Commento XML in formato non corretto ignorato per il membro 'P:ActiveUp.Net.Mail.Message.BodyText' -->
-        <!-- Commento XML in formato non corretto ignorato per il membro 'P:ActiveUp.Net.Mail.Message.BodyHtml' -->
+        <!-- Badly formed XML comment ignored for member "P:ActiveUp.Net.Mail.Message.BodyText" -->
+        <!-- Badly formed XML comment ignored for member "P:ActiveUp.Net.Mail.Message.BodyHtml" -->
         <member name="P:ActiveUp.Net.Mail.Message.Size">
             <summary>
             The size of the RFC 2822 formatted message in octets.
@@ -3971,7 +3971,7 @@
             The LOGIN mechanism (BASE64 encoded exchanges).
             </summary>
         </member>
-        <!-- Commento XML in formato non corretto ignorato per il membro 'F:ActiveUp.Net.Mail.SaslMechanism.Plain' -->
+        <!-- Badly formed XML comment ignored for member "F:ActiveUp.Net.Mail.SaslMechanism.Plain" -->
         <member name="F:ActiveUp.Net.Mail.SaslMechanism.CramMd5">
             <summary>
             The CRAM-MD5 mechanism. [RFC2195]

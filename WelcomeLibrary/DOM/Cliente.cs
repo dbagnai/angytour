@@ -45,7 +45,7 @@ namespace WelcomeLibrary.DOM
         {
             get { return _Cognome; }
             set { _Cognome = value; }
-        }  
+        }
         private string _Sesso;
         public string Sesso
         {
@@ -272,9 +272,9 @@ namespace WelcomeLibrary.DOM
             this.Id_card = 0;
             this.Id_cliente = 0;
             this.Indirizzo = string.Empty;
-            this.IPclient= string.Empty;
-            this.Lingua=  "I";
-            this.Nome=  string.Empty;
+            this.IPclient = string.Empty;
+            this.Lingua = "I";
+            this.Nome = string.Empty;
             this.Professione = string.Empty;
             this.Spare1 = string.Empty;
             this.Spare2 = string.Empty;
@@ -288,7 +288,7 @@ namespace WelcomeLibrary.DOM
             this.Codicisconto = string.Empty;
             this.Serialized = string.Empty;
             this.Ragsoc = string.Empty;
-           
+
         }
         public Cliente(Cliente tmp)
         {
@@ -299,7 +299,7 @@ namespace WelcomeLibrary.DOM
 
             this.Cellulare = tmp.Cellulare;
             this.CodiceNAZIONE = tmp.CodiceNAZIONE;
-            this.CodiceCOMUNE =tmp.CodiceCOMUNE;
+            this.CodiceCOMUNE = tmp.CodiceCOMUNE;
             this.CodicePROVINCIA = tmp.CodicePROVINCIA;
             this.CodiceREGIONE = tmp.CodiceREGIONE;
             this.Sesso = tmp.Sesso;

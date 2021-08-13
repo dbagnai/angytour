@@ -768,7 +768,7 @@
             </code>
             </example>
         </member>
-        <!-- Commento XML in formato non corretto ignorato per il membro 'M:ActiveUp.Net.Mail.Pop3Client.GetUniqueIds' -->
+        <!-- Badly formed XML comment ignored for member "M:ActiveUp.Net.Mail.Pop3Client.GetUniqueIds" -->
         <member name="M:ActiveUp.Net.Mail.Pop3Client.GetMessageIndex(System.String)">
             <summary>
             Retreives message index on the pop server from its internal unique Id.

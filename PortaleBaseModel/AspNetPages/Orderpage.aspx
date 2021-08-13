@@ -8,11 +8,7 @@
     <%--<script src="https://js.stripe.com/v3/"></script>--%>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="container">
-        <script type="text/javascript">
-            makeRevLower = true;
-            makeRevLower = true;
-        </script>
+    <div class="container"> 
         <%-- TITOLO --%>
         <div class="row">
             <div class="col-12">
@@ -64,6 +60,15 @@
                                         $("[id*='outputlogin']").html(ret);
                                     })
                                 }
+                                function refreshcarrello(btn, args) {
+                                    bloccaSblocca('divOrderformOverlay');
+                                    resetValidationState();
+                                    __doPostBack('refreshcarrello', args);
+                                }
+                                function bloccaSblocca(idDiv) {
+                                    $('#' + idDiv).attr('style', 'position: absolute; top: 0; bottom: 0; z-index: 2; height:100%; width:100%; background-color:rgba(0,0,0,0.2);');
+                                }
+
                             </script>
                             <div runat="server" visible='<%# ControlloLogin() %>'>
                                 <input type="text" class="form-control" placeholder="Username" style="display: inline-block; width: 180px; background-color: #fff" runat="server" id="inputName" value="" />
@@ -158,8 +163,10 @@
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"selezionaNazione") %>
                                         </label>
-                                        <asp:DropDownList ID="ddlNazione" Enabled="true" OnSelectedIndexChanged="ddlNazione_SelectedIndexChanged" AutoPostBack="true"
-                                            CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" />
+                                      <%--  <asp:DropDownList ID="ddlNazione" Enabled="true" OnSelectedIndexChanged="ddlNazione_SelectedIndexChanged"  AutoPostBack="true"
+                                            CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true"  />  --%>
+                                         <asp:DropDownList ID="ddlNazione" Enabled="true"  onchange="refreshcarrello(this, '')"
+                                            CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true"  /> 
                                     </div>
                                 </div>
                                 <div class="form-row row d-block">
@@ -273,8 +280,10 @@
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"selezionaNazione") %>
                                         </label>
-                                        <asp:DropDownList ID="ddlNazioneS" Enabled="true" OnSelectedIndexChanged="ddlNazioneS_SelectedIndexChanged" AutoPostBack="true"
-                                            CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" />
+                                         <%--   <asp:DropDownList ID="ddlNazioneS" Enabled="true" OnSelectedIndexChanged="ddlNazioneS_SelectedIndexChanged" AutoPostBack="true"
+                                            CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" />--%>
+                                           <asp:DropDownList ID="ddlNazioneS" Enabled="true" onchange="refreshcarrello(this, '')"
+                                            CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" /> 
                                     </div>
                                 </div>
                                 <div class="form-row row">
@@ -549,16 +558,7 @@
                                 </div>--%>
                                 <div class="widget bill-payment p-2" id="divPayment" runat="server">
                                     <h3><%= references.ResMan("Common", Lingua,"testoMetodopagamento") %></h3>
-                                    <script>
-                                        function refreshcarrello(btn, args) {
-                                            bloccaSblocca('divOrderformOverlay');
-                                            resetValidationState();
-                                            __doPostBack('refreshcarrello', args);
-                                        }
-                                        function bloccaSblocca(idDiv) {
-                                            $('#' + idDiv).attr('style', 'position: absolute; top: 0; bottom: 0; z-index: 2; height:100%; width:100%; background-color:rgba(0,0,0,0.2);');
-                                        }
-                                    </script>
+                                  
                                     <div class="col-12 mx-auto px-0 py-2">
                                         <ul class="unstyled m-0 p-0">
                                             <li style="display: block">

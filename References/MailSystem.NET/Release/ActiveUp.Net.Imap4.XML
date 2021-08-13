@@ -2412,7 +2412,7 @@
             </code>
             </example>
         </member>
-        <!-- Commento XML in formato non corretto ignorato per il membro 'M:ActiveUp.Net.Mail.Mailbox.DeleteMessage(System.Int32,System.Boolean)' -->
+        <!-- Badly formed XML comment ignored for member "M:ActiveUp.Net.Mail.Mailbox.DeleteMessage(System.Int32,System.Boolean)" -->
         <member name="P:ActiveUp.Net.Mail.Mailbox.SourceClient">
             <summary>
             The Imap4Client object that will be used to perform commands on the server.
