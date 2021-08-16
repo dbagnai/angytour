@@ -362,6 +362,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                     }
                     //AGGIORNO  I PRODOTTI NEL CARRELLO INSERENDO IL CODICE DI ORDINE
                     //E GLI ALTRI DATI ACCESSORI ( TBL_CARRELLO )
+                    int J = 0;
                     foreach (Carrello item in prodotti)
                     {
                         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -370,7 +371,6 @@ public partial class AspNetPages_Orderpage : CommonPage
 #if true
                         try
                         {
-                            int J = 0;
                             J++;
                             if (J <= 2)
                             {

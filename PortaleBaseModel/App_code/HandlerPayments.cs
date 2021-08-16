@@ -327,6 +327,7 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
         ecom.InsertOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, totali);//INSERISCO L'ORDINE NELLA TABELLA ORDINI FINALE TBL_CARRELLO_ORDINI
 
         //AGGIORNO  I PRODOTTI NEL CARRELLO INSERENDO IL CODICE DI ORDINE E GLI ALTRI DATI ACCESSORI ( TBL_CARRELLO )
+        int J = 0;
         foreach (Carrello item in prodotti)
         {
             item.CodiceOrdine = CodiceOrdine;
@@ -340,10 +341,9 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //Prepariamo le richieste di feeback per gli articoli in ordine!!
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#if false
+#if true
             try
             {
-                int J = 0;
                 Mail mailfeedback = new Mail();
                 J++;
                 if (J <= 2)
@@ -356,7 +356,7 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
                     HandlerNewsletter.preparamail(mailfeedback, Lingua); //Preparo le mail nello scheduler!!
                 }
             }
-            catch { } 
+            catch { }
 #endif
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////e
             //Decrementiamo anche le quantità per i prodotti che sono a disponibilità limitata
@@ -434,7 +434,7 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
                                 string codicifiltrodascontare = (!string.IsNullOrEmpty(_tmpcode[0].Codicifiltro)) ? _tmpcode[0].Codicifiltro : "";
                                 string[] _tmplist = codicifiltrodascontare.Split(',');
                                 List<string> listcodicifiltro = (_tmplist != null) ? _tmplist.ToList() : new List<string>();
-                                
+
                                 bool bruciacodiceusosingolo = false;
                                 //codice senza riferimento a prodotto o categoria -> da bruciare SEMPRE
                                 if (!bruciacodiceusosingolo && idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare) && idscaglionedascontare == 0) bruciacodiceusosingolo = true;

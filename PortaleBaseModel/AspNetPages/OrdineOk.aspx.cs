@@ -290,6 +290,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
         ecom.InsertOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, totali);
         //AGGIORNO  I PRODOTTI NEL CARRELLO INSERENDO IL CODICE DI ORDINE
         //E GLI ALTRI DATI ACCESSORI ( TBL_CARRELLO )
+                int J = 0;
         foreach (Carrello item in prodotti)
         {
             item.CodiceOrdine = CodiceOrdine;
@@ -298,22 +299,21 @@ public partial class AspNetPages_OrdineOk : CommonPage
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //Prepariamo le richieste di feeback per gli articoli in ordine!!
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //try
-            //{
-            //    int J = 0;
-            //    Mail mailfeedback = new Mail();
-            //    J++;
-            //    if (J <= 2)
-            //    {
-            //        mailfeedback.Sparedict["linkfeedback"] = "";//default preso dalle risorse feedbacksdefaultform
-            //        mailfeedback.Sparedict["idnewsletter"] = "";//default dalle risorse feedbackdefaultnewsletter
-            //        mailfeedback.Sparedict["deltagiorniperinvio"] = "";//default dalle risorse feedbacksdefaultdeltagg
-            //        mailfeedback.Sparedict["idclienti"] = cliente.Id_cliente.ToString();
-            //        mailfeedback.Id_card = item.id_prodotto;
-            //        HandlerNewsletter.preparamail(mailfeedback, Lingua); //Preparo le mail nello scheduler!!
-            //    }
-            //}
-            //catch { }
+            try
+            {
+                Mail mailfeedback = new Mail();
+                J++;
+                if (J <= 2)
+                {
+                    mailfeedback.Sparedict["linkfeedback"] = "";//default preso dalle risorse feedbacksdefaultform
+                    mailfeedback.Sparedict["idnewsletter"] = "";//default dalle risorse feedbackdefaultnewsletter
+                    mailfeedback.Sparedict["deltagiorniperinvio"] = "";//default dalle risorse feedbacksdefaultdeltagg
+                    mailfeedback.Sparedict["idclienti"] = cliente.Id_cliente.ToString();
+                    mailfeedback.Id_card = item.id_prodotto;
+                    HandlerNewsletter.preparamail(mailfeedback, Lingua); //Preparo le mail nello scheduler!!
+                }
+            }
+            catch { }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
