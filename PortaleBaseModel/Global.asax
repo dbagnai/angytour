@@ -574,7 +574,7 @@
             "~/lib/js/formmng.js",
              "~/lib/js/paymentmng.js",
             "~/js/aos/aos.js",
-
+            "~/js/share42/share42.js", 
               "~/js/slick181/slick/slick.min.js",
             "~/js/lightGallery-master/dist/lightgallery.min.js",
             "~/js/lightGallery-master/dist/plugins/thumbnail/lg-thumbnail.min.js",

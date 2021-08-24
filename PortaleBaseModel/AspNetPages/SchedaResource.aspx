@@ -8,7 +8,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderSubhead" runat="Server">
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57dd1b48e4253a53"></script>
+    <%--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57dd1b48e4253a53"></script>--%>
 
     <div class="container" style="text-align: center; margin-top: 10px">
         <div class="row" runat="server" id="divTitle">

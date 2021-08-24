@@ -42,7 +42,7 @@
             <div id="divItemContainter1" style="position: relative; display: none"></div>
             <asp:Literal Text="" ID="placeholderrisultati" runat="server" />
             <!-- Go to www.addthis.com/dashboard to customize your tools -->
-            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ab9f0ea30a9272e"></script>
+            <%--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ab9f0ea30a9272e"></script>--%>
         </div>
         <div class="col-md-3 col-sm-3" runat="server" id="column3">
             <%--<div class="sticky-top" style="top: 120px" id="divColumnsticky">--%>

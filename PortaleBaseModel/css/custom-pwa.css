@@ -1194,6 +1194,9 @@ path.bg-light-color-path {
   fill: #fff;
   stroke: #fff;
 }
+.bg-highlight {
+  background-color: #609cec !important;
+}
 .bg-primary-color {
   background-color: #098f8f !important;
 }
