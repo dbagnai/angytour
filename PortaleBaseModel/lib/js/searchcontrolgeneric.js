@@ -2,10 +2,10 @@
 
 
 
-function InitSearchControls(idcontainer, partipologia, template) {
+function InitSearchControls(idcontainer, paramtipologia, template) {
     var idcontainer = idcontainer || "divSearchBarPlaceholder1";
     if (tipologia == "") tipologia = "rif000001"; //questa cerca nella tipologia in base alla pagina dove sei
-    tipologia = partipologia || tipologia;
+    var localtipologia = paramtipologia || tipologia;
     template = template || "searchbar3.html";
 
     $("#" + idcontainer).load(pathAbs + "/lib/Template/" + template, function () {
@@ -19,11 +19,13 @@ function InitSearchControls(idcontainer, partipologia, template) {
                 setTimeout(wait, 300);
             }
         })();
-        initAutocompleteRicercaCaratteristiche();
+        initAutocompleteRicercaCaratteristiche(localtipologia);
     });
 }
 
-function initAutocompleteRicercaCaratteristiche() {
+function initAutocompleteRicercaCaratteristiche(paramtipologia) {
+    if (tipologia == "") tipologia = "rif000001"; //questa cerca nella tipologia in base alla pagina dove sei
+    var localtipologia = paramtipologia || tipologia;
 
     //  initializePlacesAutocomplete("geolocation");
 
@@ -31,7 +33,7 @@ function initAutocompleteRicercaCaratteristiche() {
     $(".autocompletesearch").each(function () {
         var idact = $(this).attr("id");
         $("#" + idact).autocomplete({
-            source: pathAbs + commonhandlerpath + '?q=autocompletericercalist&r=20&tipologia=' + tipologia + "&lng=" + lng,
+            source: pathAbs + commonhandlerpath + '?q=autocompletericercalist&r=20&tipologia=' + localtipologia + "&lng=" + lng,
             minLength: 3,
             //appendTo: '#' + idact , //in alternativa puoi maettere la calsee ui-front al container
             open: function (event, ui) {
@@ -64,7 +66,7 @@ function initAutocompleteRicercaCaratteristiche() {
 
 
     $("#txt" + "hidricercaid").autocomplete({
-        source: pathAbs + commonhandlerpath + '?q=autocompletericerca&r=20&tipologia=' + tipologia + "&lng=" + lng,
+        source: pathAbs + commonhandlerpath + '?q=autocompletericerca&r=20&tipologia=' + localtipologia + "&lng=" + lng,
         minLength: 6,
         appendTo: '#divAutocomplete2',
         open: function () {
@@ -155,8 +157,9 @@ function initAutocompleteRicercaCaratteristiche() {
 /**************************************************************************************************************************************************************************/
 //CHIAMATA DI FILTRAGGIO Riempie objfiltro con le chiavi|valore di filtraggio e lo passa alla funzione per generare l'url di chiamata e poi fa il redirect all'URL generato!
 /**************************************************************************************************************************************************************************/
-function Visualizzalistadati() {
-    var objfiltro = {};
+function Visualizzalistadati(paramtipologia) {
+    if (tipologia == "") tipologia = "rif000001"; //questa cerca nella tipologia in base alla pagina dove sei
+    var localtipologia = paramtipologia || tipologia;
     //emptysession('', function (retval) {  //non serve piu tanto i parametri non son letti per i filtri dalla sessione ma da quelli inseriti nella route
 
     $(".searchcheck").each(function () {
@@ -217,7 +220,7 @@ function Visualizzalistadati() {
             objfiltro[idsel] = valore;
     });
 
-    objfiltro["tipologia"] = tipologia; //memorizzo in ogni caso la tipologia di ricerca che serve anche alla creazione del link url di filtraggio 
+    objfiltro["tipologia"] = localtipologia; //memorizzo in ogni caso la tipologia di ricerca che serve anche alla creazione del link url di filtraggio
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
