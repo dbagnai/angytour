@@ -2945,6 +2945,12 @@ namespace WelcomeLibrary.UF
                                 }
                                 else
                                 {
+                                    nodetobind.Attributes["href"].Value = "";
+                                    if (!nodetobind.Attributes.Contains("rel"))
+                                        nodetobind.Attributes.Add("rel", "nofollow");
+                                    else
+                                        nodetobind.Attributes["rel"].Value = "nofollow";
+
                                     if (nodetobind.Attributes.Contains("style"))
                                     {
                                         nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace("display:inline-block", "");
@@ -2957,6 +2963,12 @@ namespace WelcomeLibrary.UF
                             }
                             else
                             {
+                                nodetobind.Attributes["href"].Value = "";
+                                if (!nodetobind.Attributes.Contains("rel"))
+                                    nodetobind.Attributes.Add("rel", "nofollow");
+                                else
+                                    nodetobind.Attributes["rel"].Value = "nofollow";
+
                                 if (nodetobind.Attributes.Contains("style"))
                                 {
                                     nodetobind.Attributes["style"].Value = nodetobind.Attributes["style"].Value.Replace("display:block", "");
