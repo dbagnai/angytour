@@ -53,13 +53,15 @@
     </div>
     <form id="form1" runat="server">
         <%= InjectedStartPageScripts() %>
-        <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss2",null," rel=\"preload\" as=\"style\" onload=\"this.rel='stylesheet'\" ") %>
+        <%-- <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1",null," rel=\"preload\" as=\"style\" onload=\"this.rel='stylesheet'\" ") %>--%>
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
-        <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0",null," async ") %>--%>
+        <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss2",null," rel=\"preload\" as=\"style\" onload=\"this.rel='stylesheet'\" ") %>
+        <%-- <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss2") %>--%>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
-        <%--           <%= references.ResMan("Common", Lingua,"tastoprenota") %> --%>
-        <%--<%= references.ResMan("Common", Lingua,"pulsantecontattipopup") %>--%>
+        <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0",null," async ") %>--%>
+         <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <%-- <%= references.ResMan("Common", Lingua,"tastoprenota") %> --%>
+        <%= references.ResMan("Common", Lingua,"pulsantecontattipopup") %>
         <!-- MENU -->
         <div class="fixedtop" id="divTop" runat="server" visible="true">
             <div class="row d-flex justify-content-between " style="padding: 5px 0px;">
@@ -864,6 +866,6 @@
     <%--SERVICE WORKER--%>
     <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>  --%>
     <script src='https://www.google.com/recaptcha/api.js'></script>
-<%--    <%= InjectDirectrenderinPage() %>--%>
+    <%--    <%= InjectDirectrenderinPage() %>--%>
 </body>
 </html>
