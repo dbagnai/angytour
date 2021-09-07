@@ -44,12 +44,12 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
     }
     public int ResizeHeight
     {
-        get { return ViewState["ResizeHeight"] != null ? (int)(ViewState["ResizeHeight"]) : 190; }
+        get { return ViewState["ResizeHeight"] != null ? (int)(ViewState["ResizeHeight"]) : 800; }
         set { ViewState["ResizeHeight"] = value; }
     }
     public int ResizeWidth
     {
-        get { return ViewState["ResizeWidth"] != null ? (int)(ViewState["ResizeWidth"]) : 270; }
+        get { return ViewState["ResizeWidth"] != null ? (int)(ViewState["ResizeWidth"]) : 800; }
         set { ViewState["ResizeWidth"] = value; }
     }
     protected void Page_Load(object sender, EventArgs e)
@@ -116,7 +116,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
             if (Sezione.ToLower().Contains("header2-"))
             {
                 ResizeWidth = 1800;
-                ResizeHeight = 450;
+                ResizeHeight = 900;
             }
             //NUOVO METODO A TABELLA UNICA
             if (Sezione.ToLower().Contains("banner-portfolio-bg"))
@@ -149,7 +149,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
             if (Sezione.ToLower().Contains("banners-testata-funnel"))
             {
                 ResizeWidth = 800;
-                ResizeHeight = 350;
+                ResizeHeight = 400;
             }
             if (Sezione.ToLower().Contains("banner-portfolio-sezioni"))
             {
