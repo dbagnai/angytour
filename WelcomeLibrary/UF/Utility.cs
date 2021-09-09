@@ -1444,7 +1444,9 @@ namespace WelcomeLibrary.UF
                 mailMessage.BodyHtml.Charset = "utf-8";
                 //mailMessage.BodyEncoding = System.Text.Encoding.UTF8; ;
                 //mailMessage.SubjectEncoding = Encoding.UTF8; 
-
+                //inseriamo MIME-Version: 1.0 per il filtro antispam
+                mailMessage.HeaderFields.Add("MIME-Version", "1.0"); //test
+                mailMessage.HeaderFieldNames.Add("mime-version", "MIME-Version"); //test
 
                 //Tolgo interrruzioni di linea non html
                 Descrizione = Descrizione.Replace("\r\n", "");

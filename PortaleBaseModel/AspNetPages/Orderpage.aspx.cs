@@ -759,6 +759,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         insertedcode = insertedcode.ToLower().Trim();
         bool validcode = false;
         outputCodiceSconto.Text = "";
+        output.Text = "";
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////CHECK CODICE CON SCONTO CLIENTE COMMERCIALE ///////////////////////////////////
@@ -771,6 +772,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             Session.Add("codicesconto", insertedcode);
             txtCodiceSconto.Text = "";
             outputCodiceSconto.Text = "Sconto Applicato Correttamente / Discount applied";
+            output.Text += "Sconto Applicato Correttamente / Discount applied";
             validcode = true;
         }
         /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -785,6 +787,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                 Session.Add("codicesconto", insertedcode);
                 validcode = true;
                 outputCodiceSconto.Text = "Sconto Applicato Correttamente / Discount applied";
+                output.Text += "Sconto Applicato Correttamente / Discount applied";
                 txtCodiceSconto.Text = "";
             }
         }
@@ -798,6 +801,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             Session.Add("codicesconto", insertedcode);
             txtCodiceSconto.Text = "";
             outputCodiceSconto.Text = "Sconto Applicato Correttamente / Discount applied";
+            output.Text += "Sconto Applicato Correttamente / Discount applied";
             validcode = true;
         }
 
@@ -839,7 +843,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                         //Se presenti codici controlliamo di non averlo gia inserito o che non sia in conflitto con gli altri
                         if (codiciinsessione.Contains(codicedainserire.Testocodicesconto.ToLower()))
                         {
-                            outputCodiceSconto.Text = "Codice già presente / Discount code already present"; validcode = true; //non svuoto la lista codici in sessione
+                            outputCodiceSconto.Text = "Codice già presente / Discount code already present"; output.Text += "Codice già presente / Discount code already present"; validcode = true; //non svuoto la lista codici in sessione
                         }
                         else if (codiciinsessione.Length < 2)  /////se codice non presente verifico che non sia in conflitto con quelli inseriti e controllo  
                         {
@@ -874,12 +878,13 @@ public partial class AspNetPages_Orderpage : CommonPage
                                 Session["codicesconto"] += "|" + insertedcode;
                                 txtCodiceSconto.Text = "";
                                 outputCodiceSconto.Text = "Sconto Aggiunto Correttamente / Discount applied";
+                                output.Text += "Sconto Aggiunto Correttamente / Discount applied";
                             }
                             else
-                            { outputCodiceSconto.Text = "Impossibile inserire massimo 1 codice percentuale ed 1 voucher in sede  di acquisto carrello. / Only 1 voucher and 1 % discount allowed "; }
+                            { outputCodiceSconto.Text = "Impossibile inserire massimo 1 codice percentuale ed 1 voucher in sede  di acquisto carrello. / Only 1 voucher and 1 % discount allowed "; output.Text += "Impossibile inserire massimo 1 codice percentuale ed 1 voucher in sede  di acquisto carrello. / Only 1 voucher and 1 % discount allowed "; }
                             validcode = true; //comunque non cacello il codice inserito in quesot caso
                         }
-                        else { outputCodiceSconto.Text = "Consentiti Massimo due codici contemporanei. / Max 2 codes at once "; validcode = true; }
+                        else { outputCodiceSconto.Text = "Consentiti Massimo due codici contemporanei. / Max 2 codes at once "; output.Text += "Consentiti Massimo due codici contemporanei. / Max 2 codes at once "; validcode = true; }
                     }
                 }
             }
@@ -894,6 +899,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         {
             Session.Remove("codicesconto");
             outputCodiceSconto.Text = references.ResMan("Common", Lingua, "testoErrCodiceSconto").ToString();
+            output.Text += references.ResMan("Common", Lingua, "testoErrCodiceSconto").ToString();
         }
 
         CaricaCarrello();

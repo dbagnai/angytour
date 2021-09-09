@@ -40,6 +40,8 @@ public class HandlerSconti : IHttpHandler, IRequiresSessionState
         {
             eCommerceDM ecDM = new eCommerceDM();
             Codicesconto empyitem = new Codicesconto();
+            //empyitem.Usosingolo = true; //presetto la selezione usosingolo
+
             //usermanager USM = new usermanager();
             Tabrif utente = new Tabrif();
             string body = HandlerHelper.GetPostContent(context);
