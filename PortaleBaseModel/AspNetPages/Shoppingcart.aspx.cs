@@ -36,11 +36,15 @@ public partial class AspNetPages_Shoppingcart : CommonPage
     {
         try
         {
+          
             if (!IsPostBack)
             {
                 PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
                 PercorsoFiles = WelcomeLibrary.STATIC.Global.PercorsoContenuti;
                 PercorsoAssolutoApplicazione = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
+                HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
+                metarobots.Attributes["Content"] = "noindex,follow";
+
                 //Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "vuoto", false, Lingua);
                 //Prendiamo i dati dalla querystring
                 Lingua = CaricaValoreMaster(Request, Session, "Lingua");

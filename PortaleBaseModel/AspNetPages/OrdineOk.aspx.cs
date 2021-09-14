@@ -40,6 +40,8 @@ public partial class AspNetPages_OrdineOk : CommonPage
             //Carico la galleria in masterpage corretta
             //Master.CaricaBannerHomegallery("TBL_BANNERS_GENERALE", 0, 0, "vuoto", false, Lingua);
 
+            HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
+            metarobots.Attributes["Content"] = "noindex,follow";
 
             /////////////////////////////////////////////////////////////////
             //CODICI PER TRANSAZIONE PAYWAY SOAR!!!

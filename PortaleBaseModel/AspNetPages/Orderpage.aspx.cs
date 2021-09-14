@@ -832,7 +832,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                 //////////////////////////////////////
                 //check vincoli per inserimento codici multipli contemporanei
                 //////////////////////////////////////
-                if (string.IsNullOrEmpty(codicigiasettati)) { Session.Add("codicesconto", insertedcode); txtCodiceSconto.Text = ""; outputCodiceSconto.Text = "Sconto Applicato Correttamente"; validcode = true; }
+                if (string.IsNullOrEmpty(codicigiasettati)) { Session.Add("codicesconto", insertedcode); txtCodiceSconto.Text = ""; outputCodiceSconto.Text = "Sconto Applicato Correttamente"; output.Text += "Sconto Applicato Correttamente"; validcode = true; }
                 else //presenti codici in sessione-> devo controllare il numero e se compatibili con quello richiesto
                 {
                     /// Possibilità di cumulare massimo 1 codice percentuale ed 1 voucher in sede  di acquisto carrello.

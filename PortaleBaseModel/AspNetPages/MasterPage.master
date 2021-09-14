@@ -58,6 +58,7 @@
         <%-- <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss2") %>--%>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
         <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0",null," async ") %>--%>
+        <link rel="preload" as="font">
          <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <%-- <%= references.ResMan("Common", Lingua,"tastoprenota") %> --%>
         <%= references.ResMan("Common", Lingua,"pulsantecontattipopup") %>
@@ -677,7 +678,7 @@
                         <div class="row justify-content-md-center">
                             <div class="col-sm-6 align-self-center py-3 text-center text-md-left">
                                 <a href='<%= CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome")) %>' title='<%= references.ResMan("Common", Lingua,"testoHomeIndex") %>'>
-                                    <img src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png" )%>' class="my-0 mx-auto animated" data-animtype="bounceInLeft" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s" style="height: 45px" alt="" />
+                                    <img src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png" )%>' class="my-0 mx-auto  " style="height: 45px" alt="" />
                                 </a>
                             </div>
 
