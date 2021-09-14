@@ -2286,7 +2286,7 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                string query = "SELECT  A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  where CodiceProdotto=@CodiceProdotto order BY DataInserimento Desc";
+                string query = "SELECT  A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  where CodiceProdotto like @CodiceProdotto order BY DataInserimento Desc";
 
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 SQLiteParameter p1 = new SQLiteParameter("@CodiceProdotto", codiceProdotto);//OleDbType.VarChar
@@ -6521,7 +6521,7 @@ namespace WelcomeLibrary.DAL
                     {
                         if (!string.IsNullOrWhiteSpace(url))
                             strIn = strIn.Replace(origtext, "<a target=\"_blank\"  href=\"" + urlcorretto + "\" ><img class=\"aimg\"  style=\"max-width:100%;border:none\"  src=\"" + testourlcorretto + "\"  /></a>");
-
+                        else strIn = strIn.Replace(origtext, testourl);
 
                     }
                     else
@@ -6662,7 +6662,7 @@ namespace WelcomeLibrary.DAL
                             texthtml += "</div>";
                             strIn = strIn.Replace(origtext, texthtml);
                         }
-
+                        else strIn = strIn.Replace(origtext, testourl);
                     }
                     else
                         strIn = strIn.Replace(origtext, testourl);
