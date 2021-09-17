@@ -16,17 +16,28 @@ namespace WelcomeLibrary.UF
             MembershipUserCollection MUColl = Membership.GetAllUsers();
             foreach (MembershipUser user in MUColl)
             {
-                string idclente = usermanager.getidcliente(user.UserName);
-                string nomecliente = user.UserName;
-                if (!string.IsNullOrEmpty(idclente))
+                bool flagrole = false;
+                foreach (string role in Roles.GetRolesForUser(user.UserName))
                 {
-                    WelcomeLibrary.DOM.Cliente c = WelcomeLibrary.DAL.ClientiDM.GetNomeClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idclente);
-                    nomecliente = (c.Cognome + " " + c.Nome).Trim();
+                    if (role.ToString() == "Autore") flagrole = true;
                 }
-                if (!_users.ContainsKey(user.UserName))
-                    _users.Add(user.UserName, nomecliente);
-                else
-                    _users[user.UserName] = nomecliente;
+                if (flagrole)
+                {
+                    string idclente = usermanager.getidcliente(user.UserName);
+                    string nomecliente = user.UserName;
+                    if (!string.IsNullOrEmpty(idclente))
+                    {
+
+
+                        WelcomeLibrary.DOM.Cliente c = WelcomeLibrary.DAL.ClientiDM.GetNomeClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idclente);
+                        nomecliente = (c.Cognome + " " + c.Nome).Trim();
+
+                    }
+                    if (!_users.ContainsKey(user.UserName))
+                        _users.Add(user.UserName, nomecliente);
+                    else
+                        _users[user.UserName] = nomecliente;
+                }
             }
         }
     }
@@ -271,15 +282,32 @@ namespace WelcomeLibrary.UF
 
         }
 
+        /// <summary>
+        /// Al momento usata solo pe ri nomi degli autori!!!
+        /// </summary>
+        /// <param name="utente"></param>
+        /// <returns></returns>
         public static string getFullNameFromStatic(string utente)
         {
+            ///CORREZIONE .... NON posso caricare la lista utenti a tutti i giri se un nome non è presente altrimenti avrei troppi caricamenti se il nome non è nel database!!!
+            //come faceva questa funzione qui
+            //string ret = "";
+            //if (usersmem._users == null || !usersmem._users.ContainsKey(utente)) new usersmem();
+            //else
+            //{
+            //    ret = usersmem._users[utente];
+            //}
+            //return ret;
+
+
             string ret = "";
-            if (usersmem._users == null || !usersmem._users.ContainsKey(utente)) new usersmem();
-            else
-            {
+            //if (usersmem._users == null || !usersmem._users.ContainsKey(utente)) new usersmem();
+            if (usersmem._users == null) new usersmem(); //la carico una solo volta la lista solo se vuota!, se non è presente il nome evito senno a tutte le chiamate se il nome viene elimintato mi ricarica tutto e  se glu users sono molti si rallenta tantissimo ( è usata solo per gli autori!!! e se aggiungo un autore basta richiamare una volta il metodo costruttore  new usersmem() al momento dell'aggiunta o far il restart dell'application
+            if (usersmem._users.ContainsKey(utente))
                 ret = usersmem._users[utente];
-            }
+            else ret = utente;
             return ret;
+
         }
         public static string getFullName(string utente)
         {

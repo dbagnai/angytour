@@ -382,7 +382,7 @@
                 }
 
                 string appaddress = "";
-                if (System.Web.HttpContext.Current.Request.Url.AbsolutePath != "/")
+                if (System.Web.HttpContext.Current.Request.Url.AbsolutePath != "/") //chiamata pagina specifica 
                 {
                     int pathpos = System.Web.HttpContext.Current.Request.Url.ToString().IndexOf(System.Web.HttpContext.Current.Request.Url.AbsolutePath);
                     if (pathpos != -1)
@@ -400,7 +400,7 @@
                         }
                     }
                 }
-                else
+                else //chiamata solo dominio
                 {
                     appaddress = System.Web.HttpContext.Current.Request.Url.ToString();
                     int startquery = appaddress.IndexOf("?");
@@ -442,6 +442,10 @@
                     Messaggi["Messaggio"] += " Global init server appaddress : " + appaddress;
                     WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
                 }
+
+                //forzatura sito con www.
+                //if (!appaddress.Contains("://wwww."))
+                //    appaddress = appaddress.Replace("://", "://www.");
 
                 WelcomeLibrary.STATIC.Global.percorsobaseapplicazione = appaddress;
                 WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione = HttpContext.Current.Request.PhysicalApplicationPath;
@@ -574,7 +578,7 @@
             "~/lib/js/formmng.js",
              "~/lib/js/paymentmng.js",
             "~/js/aos/aos.js",
-            "~/js/share42/share42.js", 
+            "~/js/share42/share42.js",
               "~/js/slick181/slick/slick.min.js",
             "~/js/lightGallery-master/dist/lightgallery.min.js",
             "~/js/lightGallery-master/dist/plugins/thumbnail/lg-thumbnail.min.js",
