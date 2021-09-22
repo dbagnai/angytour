@@ -99,7 +99,7 @@
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="ui-input">
-                                                                        <asp:TextBox   autocomplete="off"  CssClass ="form-control" ID="txtData" Width="99%" runat="server"
+                                                                        <asp:TextBox autocomplete="none" CssClass="form-control" ID="txtData" Width="99%" runat="server"
                                                                             placeholder='<%# references.ResMan("Common", Lingua,"FormData") %>' />
                                                                         <label class="ui-icon"><i class="fa fa-calendar"></i></label>
                                                                     </div>
@@ -244,43 +244,52 @@
                                                         <%--NOME E COGNOME--%>
                                                         <div class="row">
                                                             <div class="col-sm-6">
+                                                                <asp:RequiredFieldValidator CssClass="errorvalidateclass" runat="server" ID="RequiredFieldValidator6" ControlToValidate="txtNome"
+                                                                    ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' Style="text-align: left; width: 100%;" Text="* Obbligatorio" ValidationGroup="MailInfo" />
                                                                 <div class="ui-input my-0">
                                                                     <asp:TextBox ID="txtNome" Width="99%" runat="server"
                                                                         class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' />
                                                                     <label class="ui-icon"><i class="fa fa-user"></i></label>
-                                                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator6" ControlToValidate="txtNome"
-                                                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' Style="text-align: left; width: 100%;" Text="*" ValidationGroup="MailInfo" />
-                                                                </div>
-                                                                 <div class="ui-input my-0">
-                                                                    <asp:TextBox ID="txtCognome" Width="99%" runat="server"
-                                                                        class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' />
-                                                                    <label class="ui-icon"><i class="fa fa-user"></i></label>
-                                                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtCognome"
-                                                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto3Err") %>' Style="text-align: left; width: 100%;" Text="*" ValidationGroup="MailInfo" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
+                                                                <asp:RequiredFieldValidator CssClass="errorvalidateclass" runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtCognome"
+                                                                    ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto3Err") %>' Style="text-align: left; width: 100%;" Text="* Obbligatorio" ValidationGroup="MailInfo" />
+
+                                                                <div class="ui-input my-0">
+                                                                    <asp:TextBox ID="txtCognome" Width="99%" runat="server"
+                                                                        class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' />
+                                                                    <label class="ui-icon"><i class="fa fa-user"></i></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <br />
+                                                                <%--<asp:RequiredFieldValidator runat="server" ID="reqValidatorNome" ControlToValidate="txtSoc"
+                                                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"formtesto16sErr") %>' Text="*" ValidationGroup="MailInfo" />--%>
                                                                 <div class="ui-input my-0">
                                                                     <asp:TextBox ID="txtSoc" Width="99%" runat="server"
                                                                         class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"formtesto16s") %>' />
                                                                     <label class="ui-icon"><i class="fa fa-user"></i></label>
-                                                                    <%--<asp:RequiredFieldValidator runat="server" ID="reqValidatorNome" ControlToValidate="txtSoc"
-                                                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"formtesto16sErr") %>' Text="*" ValidationGroup="MailInfo" />--%>
+
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                         <div class="row">
                                                             <div class="col-sm-6">
+                                                                <asp:RequiredFieldValidator CssClass="errorvalidateclass" runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtEmail"
+                                                                    ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' Text="* Obbligatorio" ValidationGroup="MailInfo" />
+
                                                                 <div class="ui-input my-0">
                                                                     <asp:TextBox ID="txtEmail" Width="99%" runat="server"
                                                                         class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto4") %>' />
                                                                     <label class="ui-icon"><i class="fa fa-envelope-o"></i></label>
-                                                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtEmail"
-                                                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' Text="*" ValidationGroup="MailInfo" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
+                                                                <asp:RequiredFieldValidator CssClass="errorvalidateclass" runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtTel"
+                                                                    ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto11Err") %>' Text="* Obbligatorio" ValidationGroup="MailInfo" />
+
                                                                 <div class="ui-input mt-0">
                                                                     <asp:TextBox ID="txtTel" Width="99%" runat="server"
                                                                         class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto11") %>' />
@@ -291,24 +300,27 @@
 
                                                         <div class="row" runat="server" id="divRegione" visible="false">
                                                             <div class="col-sm-12">
+                                                                <asp:RequiredFieldValidator CssClass="errorvalidateclass" runat="server" ID="reqValidatorRegione" ControlToValidate="ddlRegione" Enabled="false" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto6Err") %>' Text="*" ValidationGroup="MailInfo" />
+
                                                                 <div class="ui-input my-0">
                                                                     <asp:Literal ID="Literal8" runat="server" Text='<%# references.ResMan("Common", Lingua,"FormTesto6") %>' />*<br />
                                                                     <asp:DropDownList class="form-control" runat="server" ID="ddlRegione" AppendDataBoundItems="true"
                                                                         OnInit="ddlRegione_OnInit" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto6") %>' />
-                                                                    <asp:RequiredFieldValidator runat="server" ID="reqValidatorRegione" ControlToValidate="ddlRegione" Enabled="false"
-                                                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto6Err") %>' Text="*" ValidationGroup="MailInfo" />
+
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                         <div class="row">
                                                             <div class="col-sm-12">
+                                                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtDescrizione"
+                                                                    ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto17Err") %>' Text="*" ValidationGroup="MailInfo" />
+
                                                                 <div class="ui-input my-0">
                                                                     <asp:TextBox ID="txtDescrizione" Width="99%"
                                                                         TextMode="MultiLine" Font-Size="17px" Font-Names="Raleway"
                                                                         Height="150px" runat="server" class="form-control" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' />
-                                                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtDescrizione"
-                                                                        ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto17Err") %>' Text="*" ValidationGroup="MailInfo" />
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -323,7 +335,7 @@
                                                                 <%--MESSAGGIO ERRORE RECAPTCHA--%>
                                                                 <%--<div id="recaptcharesponse"></div>--%>
 
-                                                                <button id="btnInvia" type="button" class="btn btn-lg btn-block text-white" style="width: 200px" runat="server" validationgroup="MailInfo" onclick="ConfirmContactValue(this);"><%=  references.ResMan("Common", Lingua,"TestoInvio")  %> </button>
+
                                                                 <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnInvia_Click" />
                                                                 <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
                                                                 <style>
@@ -390,11 +402,14 @@
                                                                             buttpost.click();--%>
                                                                             ////////////////////////////////////////////////////////////////////////
 
-                                                                        } else {
-                                                                            // alert('not validated');
+                                                                        }
+                                                                        else {
+                                                                            $('html,body').animate({
+                                                                                scrollTop: $("#" + "<%= divTitlemail.ClientID  %>").offset().top - 160
+                                                                            }, 5);
+                                                                            console.log('not  validated');
                                                                             return false;
                                                                         }
-                                                                        //}
                                                                     }
                                                                     function getcontactdata1(contactdatas, callback) {
                                                                         var contactdatas = contactdatas || {};
@@ -442,9 +457,14 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 p-0 pr-5 text-center">
+                                                                    <button id="btnInvia" type="button" class="btn btn-lg btn-block text-white" style="width: 200px" runat="server" validationgroup="MailInfo" onclick="ConfirmContactValue(this);"><%=  references.ResMan("Common", Lingua,"TestoInvio")  %> </button>
+
                                                                     <%--AVVISO ERRORE DATI NON INSERITI--%>
-                                                                    <asp:ValidationSummary runat="server" ID="Summary" class="" ValidationGroup="MailInfo" DisplayMode="BulletList"
-                                                                        ShowSummary="true" HeaderText='<%# references.ResMan("Common", Lingua,"testoDatiMancanti")  %>' />
+                                                                    <%-- <asp:ValidationSummary runat="server" ID="Summary" class="" ValidationGroup="MailInfo" DisplayMode="BulletList"
+                                                                        ShowSummary="true" HeaderText='<%# references.ResMan("Common", Lingua,"testoDatiMancanti")  %>' />--%>
+
+                                                                    <asp:ValidationSummary ID="Summary" ValidationGroup="MailInfo" runat="server" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="true" HeaderText='<%# references.ResMan("Common", Lingua,"testoDatiMancanti") +  "<br/><style> span.errorvalidateclass ~ * {  border: 2px solid red; }  </style>" %>' />
+
                                                                     <%--AVVISO ERRORE TRATTAMENTO DATI NON SPUNTATO--%>
                                                                     <div id="recaptcharesponse" style="display: none;" class=""></div>
                                                                 </div>

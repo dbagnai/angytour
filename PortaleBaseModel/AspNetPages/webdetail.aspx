@@ -93,7 +93,7 @@
                                                 <!-- UI Input -->
                                                 <div class="ui-input">
                                                     <!-- Input Box -->
-                                                    <input class="form-control" type="text" name="uname"  validationgroup="contattilateral" placeholder="Nome" runat="server" id="txtContactName1" />
+                                                    <input class="form-control" type="text" name="uname" validationgroup="contattilateral" placeholder="Nome" runat="server" id="txtContactName1" />
                                                     <label class="ui-icon"><i class="fa fa-user"></i></label>
                                                 </div>
                                                 <div class="ui-input">
@@ -261,7 +261,7 @@
 
     <%--CONTATTI--%>
     <div class="ui-15 bg-secondary-color no-plygon-bottom" runat="server" id="divContactBelow" clientidmode="static" visible="false">
-        <div class="container">
+        <div class="container  bg-secondary-color formborder1 formshadow pb-3">
             <section class="mbr-section mbr-section__container article" id="header3-a" style="padding-top: 60px; padding-bottom: 10px;">
                 <div class="container">
                     <div class="row justify-content-center">
@@ -279,6 +279,7 @@
                     <div class="col-md-8 col-md-offset-2">
                         <div class="row">
                             <div class="col-sm-6">
+                                <asp:RequiredFieldValidator CssClass="errorvalidateclass" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactName" runat="server" />
                                 <div class="ui-input">
                                     <!-- Input Box -->
                                     <input class="form-control" type="text" name="uname" validationgroup="contattilateral" placeholder="Nome" runat="server" id="txtContactName" />
@@ -286,6 +287,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
+                                <asp:RequiredFieldValidator CssClass="errorvalidateclass" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactCognome" runat="server" />
                                 <div class="ui-input">
                                     <input class="form-control" type="text" name="unname" validationgroup="contattilateral" placeholder="Cognome" runat="server" id="txtContactCognome" />
                                     <label class="ui-icon"><i class="fa fa-user"></i></label>
@@ -294,12 +296,14 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
+                                <asp:RequiredFieldValidator CssClass="errorvalidateclass" ErrorMessage='<%# references.ResMan("Common", Lingua,"formtesto11Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactPhone" runat="server" />
                                 <div class="ui-input">
                                     <input class="form-control" type="text" name="unname" validationgroup="contattilateral" placeholder="Telefono" runat="server" id="txtContactPhone" />
                                     <label class="ui-icon"><i class="fa fa-phone"></i></label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
+                                <asp:RequiredFieldValidator CssClass="errorvalidateclass" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactEmail" runat="server" />
                                 <div class="ui-input">
                                     <input type="text" class="form-control" name="unname" validationgroup="contattilateral" placeholder="Email" runat="server" id="txtContactEmail" />
                                     <label class="ui-icon"><i class="fa fa-envelope-o"></i></label>
@@ -365,6 +369,9 @@
                                     buttpost.click();--%>
                                     ////////////////////////////////////////////////////////////////////////
                                 } else {
+                                    $('html,body').animate({
+                                        scrollTop: $("#" + "<%= divContactBelow.ClientID  %>").offset().top - 160
+                                    }, 5);
                                     console.log('not  validated');
                                     return false;
                                 }
@@ -388,9 +395,8 @@
                         <div style="font-weight: 300; font-size: 1rem; color: red" id="outputContactdiv">
                             <asp:Literal Text="" ID="outputContact" runat="server" />
                         </div>
-                        <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactName" runat="server" />
-                        <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto16lErr") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactCognome" runat="server" />
-                        <asp:RequiredFieldValidator ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattilateral" ControlToValidate="txtContactEmail" runat="server" />
+                        <asp:ValidationSummary ID="validsummary" ValidationGroup="contattilateral" runat="server" BackColor="#cccccc" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="true" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<br/><style> span.errorvalidateclass ~ * {  border: 2px solid red; }  </style>" %>' />
+
                     </div>
                 </div>
             </div>

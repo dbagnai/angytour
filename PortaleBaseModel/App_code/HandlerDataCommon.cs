@@ -298,7 +298,8 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         Descrizione += " <br/> Data richiesta:" + datarichiesta + " Orario Richiesto: " + orario;
                     }
                     Descrizione += " <br/> Nome Cliente:" + nomemittente + " Cognome Cliente: " + cognomemittente;
-                    Descrizione += " <br/> Azienda: " + ragsoc;
+                    if (!string.IsNullOrEmpty(ragsoc))
+                        Descrizione += " <br/> Azienda: " + ragsoc;
                     Descrizione += " <br/> Telefono Cliente: " + mittenteTelefono + "  Email Cliente: " + mittenteMail + " Lingua Cliente: " + lingua;
                     Descrizione += " <br/> Il cliente ha Confermato l'autorizzazione al trattamento dei dati personali. ";
 

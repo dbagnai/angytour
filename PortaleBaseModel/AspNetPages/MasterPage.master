@@ -53,13 +53,13 @@
     <form id="form1" runat="server">
         <%= InjectedStartPageScripts() %>
         <%--  <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1",null," rel=\"preload\" as=\"style\" onload=\"this.rel='stylesheet'\" ") %>--%>
-       <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
+        <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
         <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss2",null," rel=\"preload\" as=\"style\" onload=\"this.rel='stylesheet'\" ") %>
         <%-- <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss2") %>--%>
         <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
         <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0",null," async ") %>--%>
         <link rel="preload" as="font">
-         <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <%-- <%= references.ResMan("Common", Lingua,"tastoprenota") %> --%>
         <%= references.ResMan("Common", Lingua,"pulsantecontattipopup") %>
         <!-- MENU -->
@@ -554,8 +554,11 @@
                                 <%-- <a href="<%= references.ResMan("Common", Lingua,"GoogleUrl1") %>" target="_blank"><%= references.ResMan("Common", Lingua,"iconMaptext") %></a> --%>
                                 <br />
                                 <br />
+                                <asp:RequiredFieldValidator CssClass="errorvalidateclass" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactName" runat="server" />
                                 <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' runat="server" id="txtContactName" />
-                                <br />
+                                <asp:RequiredFieldValidator CssClass="errorvalidateclass" ErrorMessage='<%# references.ResMan("Common", Lingua,"formtesto3Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactCognome" runat="server" />
+                                <input style="background-color: rgba(255, 255, 255, 0.9);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' runat="server" id="txtContactCognome" />
+                                <asp:RequiredFieldValidator CssClass="errorvalidateclass" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactEmail" runat="server" />
                                 <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.6s" validationgroup="contattifooter" placeholder="Email .." runat="server" id="txtContactEmail" />
                                 <br />
                                 <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.7s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"formtesto11") %>' runat="server" id="txtContactTelefono" />
@@ -637,6 +640,7 @@
                                             var contactdatas = contactdatas || {};
                                             contactdatas.idofferta = '<%= idOfferta %>';
                                             contactdatas.name = $("[id$='txtContactName']").val();
+                                            contactdatas.cognome = $("[id$='txtContactCognome']").val();
                                             contactdatas.email = $("[id$='txtContactEmail']").val();
                                             contactdatas.telefono = $("[id$='txtContactTelefono']").val();
                                             contactdatas.message = $("[id$='txtContactMessage']").val();
@@ -649,12 +653,12 @@
                                     <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />
 
                                 </div>
-                                <div class="lead py-3" style="height: 75px;">
+                                <div class="lead py-3" style="height: 120px;">
                                     <div style="font-weight: 300; color: #d2ac67" id="outputContactMasterDiv">
                                         <asp:Literal Text="" ID="outputContact" runat="server" />
                                     </div>
-                                    <asp:RequiredFieldValidator ForeColor="#d2ac67" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactName" runat="server" />
-                                    <asp:RequiredFieldValidator ForeColor="#d2ac67" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactEmail" runat="server" />
+                                      <asp:ValidationSummary ID="validsummary" ValidationGroup="contattifooter" runat="server" BackColor="#cccccc" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="false" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<br/><style> span.errorvalidateclass + * {  border: 2px solid red; }  </style>" %>' />
+                              
                                 </div>
                             </div>
                         </div>
@@ -865,7 +869,7 @@
     <%= InjectedEndPageScripts() %>
     <%--SERVICE WORKER--%>
     <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>  --%>
- <%--   <script src='https://www.google.com/recaptcha/api.js'></script>--%>
+    <%--   <script src='https://www.google.com/recaptcha/api.js'></script>--%>
     <%--    <%= InjectDirectrenderinPage() %>--%>
 </body>
 </html>
