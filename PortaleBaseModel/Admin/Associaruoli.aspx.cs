@@ -124,6 +124,8 @@ public partial class admin_roles : System.Web.UI.Page
         {
             Roles.AddUserToRole(UsersList.SelectedValue, RolesList.SelectedValue);
             Results.Text = "Aggiunto a ruolo!";
+
+            new WelcomeLibrary.UF.usersmem(); //aggiorno la lista utenti in memoria degli autori!
         }
         catch (Exception error)
         {
@@ -141,6 +143,9 @@ public partial class admin_roles : System.Web.UI.Page
         {
             Roles.RemoveUserFromRole(UsersList.SelectedValue, RolesList.SelectedValue);
             Results.Text = "Rimosso da ruolo!";
+
+            new WelcomeLibrary.UF.usersmem(); //aggiorno la lista utenti in memoria degli autori!
+
         }
         catch (Exception error)
         {

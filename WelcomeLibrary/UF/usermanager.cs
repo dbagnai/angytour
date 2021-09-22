@@ -27,8 +27,6 @@ namespace WelcomeLibrary.UF
                     string nomecliente = user.UserName;
                     if (!string.IsNullOrEmpty(idclente))
                     {
-
-
                         WelcomeLibrary.DOM.Cliente c = WelcomeLibrary.DAL.ClientiDM.GetNomeClientePerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idclente);
                         nomecliente = (c.Cognome + " " + c.Nome).Trim();
 
@@ -215,6 +213,9 @@ namespace WelcomeLibrary.UF
                     prof.Save();
                     //password = "User: " + username + " Psw: " + password;
                     esito = true;
+
+                    new usersmem(); //aggiorno la lista utenti in memoria degli autori!
+
                 }
             }
             catch (Exception error)
@@ -289,18 +290,8 @@ namespace WelcomeLibrary.UF
         /// <returns></returns>
         public static string getFullNameFromStatic(string utente)
         {
-            ///CORREZIONE .... NON posso caricare la lista utenti a tutti i giri se un nome non è presente altrimenti avrei troppi caricamenti se il nome non è nel database!!!
-            //come faceva questa funzione qui
-            //string ret = "";
-            //if (usersmem._users == null || !usersmem._users.ContainsKey(utente)) new usersmem();
-            //else
-            //{
-            //    ret = usersmem._users[utente];
-            //}
-            //return ret;
-
-
             string ret = "";
+            //NON posso caricare la lista utenti a tutti i giri se un nome non è presente altrimenti avrei troppi caricamenti se il nome non è nel database!!!
             //if (usersmem._users == null || !usersmem._users.ContainsKey(utente)) new usersmem();
             if (usersmem._users == null) new usersmem(); //la carico una solo volta la lista solo se vuota!, se non è presente il nome evito senno a tutte le chiamate se il nome viene elimintato mi ricarica tutto e  se glu users sono molti si rallenta tantissimo ( è usata solo per gli autori!!! e se aggiungo un autore basta richiamare una volta il metodo costruttore  new usersmem() al momento dell'aggiunta o far il restart dell'application
             if (usersmem._users.ContainsKey(utente))
