@@ -661,7 +661,7 @@ public partial class _webdetail : CommonPage
                 column2.Attributes["class"] = "col-12 col-sm-10 offset-sm-1";
                 column3.Visible = false;
                 divSearch.Visible = true;
-                ContaArticoliPerperiodo(CodiceTipologia);
+                //ContaArticoliPerperiodo(CodiceTipologia);
                 //  Caricalinksrubriche(CodiceTipologia);
                 divContact.Visible = false;
                 divContactBelow.Visible = true;

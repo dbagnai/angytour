@@ -2,7 +2,7 @@
     .border-impagination img {
         border-radius: calc(.25rem - 1px);
     }
-
+   
     @media (max-width: 576px) {
         .border-impagination {
             overflow: hidden;
@@ -18,15 +18,23 @@
             border-radius: calc(.25rem - 1px) 0 0;
             padding: 0 !important;
         }
+
+        .bg-odd {
+            background: #fff;
+        }
+
+        .bg-even {
+            background: #fff;
+        }
     }
 </style>
 <div style="display: none">
     <div>
         <div class="alternatecolor" id="replaceid">
-            <item>
-                <div class="bg-white">
-                    <div class="position-relative my-0 mx-auto bg-white" style="max-width: 1179px;">
-                        <div class="row no-gutters align-items-center even pb-0 pt-0 pb-md-5 justify-content-center border-impagination">
+            <item class="even">
+                <div class="bg-even py-5 p-md-5">
+                    <div class="position-relative my-0 mx-auto" style="max-width: 1179px;">
+                        <div class="row no-gutters align-items-center   pb-0 pt-0 pb-md-5 justify-content-center border-impagination">
                             <div class="col-12 col-md-6 text-right pl-0">
                                 <!--<div class="animated w-100 text-center" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" style="overflow:hidden;">--> <!--IMMAGINE ANIMATA-->
                                 <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
@@ -53,10 +61,10 @@
                     </div>
                 </div>
             </item>
-            <item>
-                <div class="bg-white">
-                    <div class="position-relative my-0 mx-auto bg-white" style="        max-width: 1179px;">
-                        <div class="row no-gutters align-items-center odd pb-0 pt-0 pb-md-5 justify-content-center border-impagination">
+            <item class="odd">
+                <div class="bg-odd py-5 p-md-5">
+                    <div class="position-relative my-0 mx-auto" style="max-width: 1179px;">
+                        <div class="row no-gutters align-items-center  pb-0 pt-0 pb-md-5 justify-content-center border-impagination">
                             <div class="col-12 col-md-6 order-1 order-md-12 pr-0">
                                 <!--<div class="animated w-100 text-center" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" style="overflow:hidden;">--> <!--IMMAGINE ANIMATA-->
                                 <a class="bind" target="_self" href="link" title="titolo" mybind="Id">

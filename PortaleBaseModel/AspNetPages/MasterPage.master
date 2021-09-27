@@ -657,8 +657,8 @@
                                     <div style="font-weight: 300; color: #d2ac67" id="outputContactMasterDiv">
                                         <asp:Literal Text="" ID="outputContact" runat="server" />
                                     </div>
-                                      <asp:ValidationSummary ID="validsummary" ValidationGroup="contattifooter" runat="server" BackColor="#cccccc" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="false" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<br/><style> span.errorvalidateclass + * {  border: 2px solid red; }  </style>" %>' />
-                              
+                                    <asp:ValidationSummary ID="validsummary" ValidationGroup="contattifooter" runat="server" BackColor="#cccccc" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="false" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<br/><style> span.errorvalidateclass + * {  border: 2px solid red; }  </style>" %>' />
+
                                 </div>
                             </div>
                         </div>

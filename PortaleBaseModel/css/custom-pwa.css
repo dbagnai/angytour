@@ -1190,6 +1190,12 @@ a.btn-black-outline.restaurant-menu:nth-child(5):focus {
 /*---------------------------------
 -------------- COLORI -------------
 ----------------------------------*/
+.bg-odd {
+  background: #ebf6f6;
+}
+.bg-even {
+  color: #fff;
+}
 path.bg-light-color-path {
   fill: #fff;
   stroke: #fff;

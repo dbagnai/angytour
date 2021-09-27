@@ -410,7 +410,7 @@ public partial class AspNetPages_weblist : CommonPage
                 //column2.Attributes["class"] = "col-md-1 col-sm-1";
                 column3.Attributes["class"] = "col-12 col-sm-3";
                 column3.Visible = false;
-                ContaArticoliPerperiodo(Tipologia);
+                //ContaArticoliPerperiodo(Tipologia);
                 //  Caricalinksrubriche(Tipologia); //arica la ddl con le sttocategorie
                 divSearch.Visible = true;
                 if (!JavaInjection)
@@ -518,7 +518,7 @@ public partial class AspNetPages_weblist : CommonPage
                     //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
 
                     sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                    sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioSingleRow-mono.html,divPortfolioList,portlist1, 1, 42,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
+                    sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioSingleRow-alternate.html,divPortfolioList,portlist1, 1, 42,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
 
@@ -670,7 +670,7 @@ public partial class AspNetPages_weblist : CommonPage
                 //column2.Attributes["class"] = "col-md-1 col-sm-1";
                 column3.Attributes["class"] = "col-12 col-sm-3";
                 column3.Visible = false;
-                ContaArticoliPerperiodo(Tipologia);
+                //ContaArticoliPerperiodo(Tipologia);
                 //  Caricalinksrubriche(Tipologia); //arica la ddl con le sttocategorie
                 divSearch.Visible = true;
                 if (!JavaInjection)
