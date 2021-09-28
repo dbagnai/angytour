@@ -183,8 +183,10 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                     jra.stato = references.ResMan("Common", Lingua, "carrelloaddsuccess"); //inserire messaggio da risorse
                     if (context.Session != null && context.Session["superamentoquantita"] != null)
                     {
-                        if (context.Session["superamentoquantita"] != null && context.Session["superamentoquantita"].ToString() != "0")
+                        if (context.Session["superamentoquantita"].ToString() != "0")
                             jra.stato = references.ResMan("Common", Lingua, "testocarellosuperamentoquantita");
+                        else
+                            jra.stato = references.ResMan("Common", Lingua, "testocarelloesaurito");
                     }
                     context.Session.Remove("superamentoquantita");
                     //testi aggiuntivi
@@ -247,6 +249,8 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                     {
                         if (context.Session["superamentoquantita"].ToString() != "0")
                             jrs.stato = references.ResMan("Common", Lingua, "testocarellosuperamentoquantita");
+                        else
+                            jrs.stato = references.ResMan("Common", Lingua, "testocarelloesaurito");
                     }
                     context.Session.Remove("superamentoquantita");
                     
