@@ -42,7 +42,7 @@ var loadingstripe = function (isloadingstripe) {
     }
 };
 
-var fetchpaymentintent = function (paymentIntentId, callback) {
+var fetchpaymentintent = function (paymentIntentId, callback, errorbck) {
 
     if (stripelocal == null) return;
     //PROCEDURA UNICA CREATE OR UPDATE
@@ -110,6 +110,7 @@ var fetchpaymentintent = function (paymentIntentId, callback) {
                     errorMsgpre.innerHTML = "";
                     errorMsg.innerHTML = "";
                 }, 10000);
+                errorbck(data);
                 return;
             }
 
@@ -236,6 +237,10 @@ function executeorder(btnorder) {
 
                 //richiediamo di eseguire il pagamento con la carta tramite una modal box che apro adesso
                 showModalStripe();  // se tutto ok per il pagamento viene chiamata la funzione orderComplete dove l'utente esegue la transazione di pagamento tramite modal box
+            }, function (data) {
+
+                $(btnorder).removeAttr("disabled")
+                $(btnorder).html(tastotxt);
             });
         }
         else {

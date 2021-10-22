@@ -9,7 +9,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container"> 
-        <%-- TITOLO --%>
+        
         <div class="row">
             <div class="col-12">
                 <%= references.ResMan("basetext", Lingua,"testoordine1") %>
@@ -751,6 +751,8 @@
 
                         </div>
                     </div>
+
+
                 </div>
                 <!--end:.row-->
             </div>

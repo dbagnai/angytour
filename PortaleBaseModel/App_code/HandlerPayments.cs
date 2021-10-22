@@ -1113,7 +1113,8 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
         TestoMail += "</table></td><tr/>";
         TestoMail += "<tr><td><br/>L'utente ha correttamente pagato tramite la modalità qui indicata, è in attesa di vorstro contatto per la spedizione della merce.";
 
-        TestoMail += "<tr><td><br/>Il cliente ha selezionato :  " + references.ResMan("Common", Lingua, "chkcondizioni").ToString() + " </td></tr>";
+        if (!string.IsNullOrEmpty(references.ResMan("Common", Lingua, "chkcondizioni").ToString())) 
+            TestoMail += "<tr><td><br/>Il cliente ha selezionato :  " + references.ResMan("Common", Lingua, "chkcondizioni").ToString() + " </td></tr>";
 
         TestoMail += "</td></tr></table>";
 
