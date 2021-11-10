@@ -5108,7 +5108,9 @@ namespace WelcomeLibrary.UF
                             double vd = 0;
                             double.TryParse(valore[0], out vd);
                             if (vd != 0)
-                                ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { vd }) + " " + unit;
+                                //ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { vd }) + " " + unit;
+                                //ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,###.00}", new object[] { vd });
+                                ret = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { vd });
                             else
                                 ret = valore[0];
 
