@@ -36,6 +36,7 @@ namespace WelcomeLibrary.DOM
     {
         public string transaction_id { set; get; }
         public string affiliation { set; get; }
+        public string send_to { set; get; }
         public double value { set; get; }
         public string currency { set; get; }
         public double tax { set; get; }

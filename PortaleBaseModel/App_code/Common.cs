@@ -1824,10 +1824,25 @@ public class CommonPage : Page
                 purchaseitem.coupon = c.Codicesconto;
                 purchaseitem.list_position = 0;
                 jtagpurchaseevent.items.Add(purchaseitem);
+
             }
             jsoncarrelloordine = Newtonsoft.Json.JsonConvert.SerializeObject(jtagpurchaseevent);
-
             scriptRegVariables += ";\r\n " + string.Format("gtag('event', 'purchase', {0});console.log('gtag called;');", jsoncarrelloordine);
+
+            //dati conversione per google ads per conversione acquisto ecommerce
+            if (!string.IsNullOrEmpty(ConfigManagement.ReadKey("send_to"))) // invio dati verso google ads!!!
+            {
+                WelcomeLibrary.DOM.jsongtagpurchase jtaggoogleadseevent = new jsongtagpurchase();
+                jtaggoogleadseevent.transaction_id = totali.CodiceOrdine;
+                jtaggoogleadseevent.affiliation = ConfigManagement.ReadKey("Nome");
+                jtaggoogleadseevent.value = totali.TotaleOrdine - totali.TotaleSconto;
+                jtaggoogleadseevent.tax = 0;// qui dovresti scorporare l'iva
+                jtaggoogleadseevent.shipping = totali.TotaleSpedizione;
+                jtaggoogleadseevent.send_to = ConfigManagement.ReadKey("send_to");// "AW-xxxxxxx/xxxxxxxx"; // va passata da fuori tramite config 
+                string jsongoogleadsconversione = Newtonsoft.Json.JsonConvert.SerializeObject(jtaggoogleadseevent);
+                scriptRegVariables += ";\r\n " + string.Format("gtag('event', 'conversion', {0});console.log('gtag called;');", jsongoogleadsconversione);
+            }
+
             scriptRegVariables = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariables); //wrapper fo waiting
             Dictionary<string, string> addelements = new Dictionary<string, string>();
             addelements.Add("jsvarfrommasterstart", scriptRegVariables);
