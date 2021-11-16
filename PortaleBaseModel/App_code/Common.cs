@@ -1798,13 +1798,19 @@ public class CommonPage : Page
             //https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce
             // qui devo inserire i dati del carrello e dei prodotti e serializzari per gtag
             // da fare con totali e prodotti DOM.jsongtagpurchase DOM.jsongtagitem //.....
+
             WelcomeLibrary.DOM.jsongtagpurchase jtagpurchaseevent = new jsongtagpurchase();
             WelcomeLibrary.DOM.jsongtagitem purchaseitem = new jsongtagitem();
             jtagpurchaseevent.transaction_id = totali.CodiceOrdine;
             jtagpurchaseevent.affiliation = ConfigManagement.ReadKey("Nome");
-            jtagpurchaseevent.value = totali.TotaleAcconto + totali.TotaleSaldo;// totali.TotaleOrdine - totali.TotaleSconto;
+            //jtagpurchaseevent.value = totali.TotaleOrdine - totali.TotaleSconto;
+            jtagpurchaseevent.value = Math.Round(totali.TotaleOrdine - totali.TotaleSconto, 2, MidpointRounding.ToEven);
+            //jtagpurchaseevent.value = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { totali.TotaleOrdine - totali.TotaleSconto });
+
+
             jtagpurchaseevent.tax = 0;// qui dovresti scorporare l'iva
             jtagpurchaseevent.shipping = totali.TotaleSpedizione;
+            jtagpurchaseevent.currency = "EUR";
             jtagpurchaseevent.items = new List<jsongtagitem>();
             foreach (Carrello c in prodotti)
             {
@@ -1819,29 +1825,28 @@ public class CommonPage : Page
                 purchaseitem.brand = text;
                 purchaseitem.category = references.TestoCategoria(c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, "I"); ; //Categoria di catalogo del prodotto
                 purchaseitem.variant = ""; //eventuale caratteristica del prodotto
-                purchaseitem.price = c.Prezzo; //prezzo non scontato
+                //purchaseitem.price = c.Prezzo;
+                purchaseitem.price = Math.Round(c.Prezzo, 2, MidpointRounding.ToEven);
                 purchaseitem.quantity = c.Numero;
                 purchaseitem.coupon = c.Codicesconto;
                 purchaseitem.list_position = 0;
                 jtagpurchaseevent.items.Add(purchaseitem);
-
             }
             jsoncarrelloordine = Newtonsoft.Json.JsonConvert.SerializeObject(jtagpurchaseevent);
             scriptRegVariables += ";\r\n " + string.Format("gtag('event', 'purchase', {0});console.log('gtag called;');", jsoncarrelloordine);
 
-            //dati conversione per google ads per conversione acquisto ecommerce
             if (!string.IsNullOrEmpty(ConfigManagement.ReadKey("send_to"))) // invio dati verso google ads!!!
             {
-                WelcomeLibrary.DOM.jsongtagpurchase jtaggoogleadseevent = new jsongtagpurchase();
+                WelcomeLibrary.DOM.jsongtagconversion jtaggoogleadseevent = new jsongtagconversion();
                 jtaggoogleadseevent.transaction_id = totali.CodiceOrdine;
-                jtaggoogleadseevent.affiliation = ConfigManagement.ReadKey("Nome");
-                jtaggoogleadseevent.value = totali.TotaleOrdine - totali.TotaleSconto;
-                jtaggoogleadseevent.tax = 0;// qui dovresti scorporare l'iva
-                jtaggoogleadseevent.shipping = totali.TotaleSpedizione;
-                jtaggoogleadseevent.send_to = ConfigManagement.ReadKey("send_to");// "AW-xxxxxxx/xxxxxxxx"; // va passata da fuori tramite config 
+                //jtaggoogleadseevent.value = totali.TotaleOrdine - totali.TotaleSconto;
+                jtaggoogleadseevent.value = Math.Round(totali.TotaleOrdine - totali.TotaleSconto, 2, MidpointRounding.ToEven);
+                jtaggoogleadseevent.currency = "EUR";
+                jtaggoogleadseevent.send_to = ConfigManagement.ReadKey("send_to");// "AW-306245660/POpGCNukq4IDEJzgg5IB"; // va passata da fuori tramite config 
                 string jsongoogleadsconversione = Newtonsoft.Json.JsonConvert.SerializeObject(jtaggoogleadseevent);
                 scriptRegVariables += ";\r\n " + string.Format("gtag('event', 'conversion', {0});console.log('gtag called;');", jsongoogleadsconversione);
             }
+
 
             scriptRegVariables = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariables); //wrapper fo waiting
             Dictionary<string, string> addelements = new Dictionary<string, string>();
@@ -1852,6 +1857,7 @@ public class CommonPage : Page
         catch { }
         return ret;
     }
+
 
     private static double CalcolaSpeseSpedizione(CarrelloCollection ColItem, string codicenazione, string codiceprovincia, TotaliCarrello totali)
     {

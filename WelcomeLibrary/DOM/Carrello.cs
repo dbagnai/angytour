@@ -32,11 +32,29 @@ namespace WelcomeLibrary.DOM
         public string coupon { set; get; }
 
     }
+
+
+    public class jsongtagconversion
+    {
+        public string transaction_id { set; get; }
+        public string send_to { set; get; }
+        public double value { set; get; }
+        public string currency { set; get; }
+    }
+    //    <!-- Event snippet for GTM-Acquisto conversion page -->
+    //<script>
+    //  gtag('event', 'conversion', {
+    //        'send_to': 'AW-306245660/POpGCNukq4IDEJzgg5IB',
+    //      'value': 1.0,
+    //      'currency': 'EUR',
+    //      'transaction_id': ''
+    //  });
+    //</script>
+
     public class jsongtagpurchase
     {
         public string transaction_id { set; get; }
         public string affiliation { set; get; }
-        public string send_to { set; get; }
         public double value { set; get; }
         public string currency { set; get; }
         public double tax { set; get; }

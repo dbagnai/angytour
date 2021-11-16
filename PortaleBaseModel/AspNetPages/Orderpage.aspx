@@ -8,13 +8,12 @@
     <%--<script src="https://js.stripe.com/v3/"></script>--%>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="container"> 
-        
+    <div class="container">
         <div class="row">
             <div class="col-12">
                 <%= references.ResMan("basetext", Lingua,"testoordine1") %>
-                <h4> <asp:Label Style="font-size: 1.2em" Text="" ID="output" runat="server" /></h4>
-                <asp:ValidationSummary ID="validsummary" runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="true" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<br/><style> span.errorvalidateclass + * {  border: 2px solid red; }  </style>" %>' />
+                <h4><asp:Label Style="font-size: 1.2em" Text="" ID="output" runat="server" /></h4>
+                <asp:ValidationSummary ID="validsummary" runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="true" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<br/><style> span.errorvalidateclassspan.errorvalidateclass[style*=\"visibility: visible\"] + * {  border: 2px solid red; }  </style>" %>' />
                 <%--      <asp:ValidationSummary runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium"  
                             ShowValidationErrors="true"  HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError")  %>' />--%>
             </div>
@@ -124,9 +123,6 @@
                                     </div>
                                 </div>
 
-
-
-
                                 <div class="form-row row">
                                     <div class="col-6 form-group">
                                         <label>
@@ -162,10 +158,10 @@
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"selezionaNazione") %>
                                         </label>
-                                      <%--  <asp:DropDownList ID="ddlNazione" Enabled="true" OnSelectedIndexChanged="ddlNazione_SelectedIndexChanged"  AutoPostBack="true"
+                                        <%--  <asp:DropDownList ID="ddlNazione" Enabled="true" OnSelectedIndexChanged="ddlNazione_SelectedIndexChanged"  AutoPostBack="true"
                                             CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true"  />  --%>
-                                         <asp:DropDownList ID="ddlNazione" Enabled="true"  onchange="refreshcarrello(this, '')"
-                                            CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true"  /> 
+                                        <asp:DropDownList ID="ddlNazione" Enabled="true" onchange="refreshcarrello(this, '')"
+                                            CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" />
                                     </div>
                                 </div>
                                 <div class="form-row row d-block">
@@ -279,10 +275,10 @@
                                         <label>
                                             <%= references.ResMan("Common", Lingua,"selezionaNazione") %>
                                         </label>
-                                         <%--   <asp:DropDownList ID="ddlNazioneS" Enabled="true" OnSelectedIndexChanged="ddlNazioneS_SelectedIndexChanged" AutoPostBack="true"
+                                        <%--   <asp:DropDownList ID="ddlNazioneS" Enabled="true" OnSelectedIndexChanged="ddlNazioneS_SelectedIndexChanged" AutoPostBack="true"
                                             CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" />--%>
-                                           <asp:DropDownList ID="ddlNazioneS" Enabled="true" onchange="refreshcarrello(this, '')"
-                                            CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" /> 
+                                        <asp:DropDownList ID="ddlNazioneS" Enabled="true" onchange="refreshcarrello(this, '')"
+                                            CssClass="form-control" Width="100%" runat="server" AppendDataBoundItems="true" />
                                     </div>
                                 </div>
                                 <div class="form-row row">
@@ -320,7 +316,7 @@
                             </div>
                             <div class="row d-flex align-items-center">
                                 <div class="col-12 col-sm-8">
-                                    <asp:TextBox runat="server" autocomplete="none"  CssClass="w-100 px-2 form-control bg-white" ID="txtCodiceSconto" /><br />
+                                    <asp:TextBox runat="server" autocomplete="none" CssClass="w-100 px-2 form-control bg-white" ID="txtCodiceSconto" /><br />
                                 </div>
                                 <div class="col-12 col-sm-4">
                                     <asp:Button Style="width: 180px" Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="Button1" OnClick="btnCodiceSconto_Click" />
@@ -338,7 +334,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <%-- NORME GENERALI DI ACQUISTO --%>
                         <div class="row">
@@ -557,7 +552,7 @@
                                 </div>--%>
                                 <div class="widget bill-payment p-2" id="divPayment" runat="server">
                                     <h3><%= references.ResMan("Common", Lingua,"testoMetodopagamento") %></h3>
-                                  
+
                                     <div class="col-12 mx-auto px-0 py-2">
                                         <ul class="unstyled m-0 p-0">
                                             <li style="display: block">
@@ -716,13 +711,13 @@
                                                 return false;
                                             } else { outorder.innerHTML = ''; }--%>
 
-                                            if (Page_ClientValidate("")) {
-                                                /*do work and go for postback*/
-                                                console.log('ok validated');
-                                                $(elembtn).attr("disabled", "")
-                                                ///////////////////////////////////////////////////////////////////////
-                                                //Invio con post back (metodo originale)
-                                                var buttpost = document.getElementById("<%= btnConvalidaSrv.ClientID  %>");
+                                        if (Page_ClientValidate("")) {
+                                            /*do work and go for postback*/
+                                            console.log('ok validated');
+                                            $(elembtn).attr("disabled", "")
+                                            ///////////////////////////////////////////////////////////////////////
+                                            //Invio con post back (metodo originale)
+                                            var buttpost = document.getElementById("<%= btnConvalidaSrv.ClientID  %>");
                                                 //$(elembtn).html("Wait ..");
                                                 document.getElementById("<%= btnConvalidaSrv.ClientID  %>").click();
                                                 ////////////////////////////////////////////////////////////////////////
