@@ -7852,7 +7852,7 @@ namespace WelcomeLibrary.DAL
                             if (_new.Prezzo != 0)
                             {
                                 writer.WriteStartElement("g:price");
-                                writer.WriteValue(_new.Prezzo.ToString() + " EUR");
+                                writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { _new.Prezzo }) + " EUR");
                                 writer.WriteEndElement();
                             }
                             ////////////////////////////////////////////////////////////////
