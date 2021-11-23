@@ -1298,7 +1298,6 @@ namespace WelcomeLibrary.UF
 
                 mailMessage.From.Email = mittenteMail;
                 mailMessage.From.Name = mittenteNome;
-
                 //Set del reply to in base al mittente passato se questo non è quello del sito necessario per non fare relaying
                 if (mittenteMail.ToLower().Trim() != ConfigManagement.ReadKey("Email").ToLower().Trim())
                 { 

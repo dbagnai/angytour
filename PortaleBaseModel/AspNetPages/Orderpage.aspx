@@ -13,8 +13,7 @@
             <div class="col-12">
                 <%= references.ResMan("basetext", Lingua,"testoordine1") %>
                 <h4><asp:Label Style="font-size: 1.2em" Text="" ID="output" runat="server" /></h4>
-                <asp:ValidationSummary ID="validsummary" runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="true" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<br/><style> span.errorvalidateclassspan.errorvalidateclass[style*=\"visibility: visible\"] + * {  border: 2px solid red; }  </style>" %>' />
-                <%--      <asp:ValidationSummary runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium"  
+              <asp:ValidationSummary ID="validsummary" ValidationGroup="" runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="true" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<br/><style> span.errorvalidateclass[style*=\"visibility: visible\"] + * {  border: 2px solid red; }  </style>" %>' />  <%--      <asp:ValidationSummary runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium"  
                             ShowValidationErrors="true"  HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError")  %>' />--%>
             </div>
         </div>
