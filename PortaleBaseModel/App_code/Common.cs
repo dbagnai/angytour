@@ -1784,6 +1784,7 @@ public class CommonPage : Page
         return valoresconto;
     }
 
+
     public static string Creaeventopurchaseagooglegtag(TotaliCarrello totali, CarrelloCollection prodotti)
     {
         string ret = "";
@@ -1799,6 +1800,7 @@ public class CommonPage : Page
             // qui devo inserire i dati del carrello e dei prodotti e serializzari per gtag
             // da fare con totali e prodotti DOM.jsongtagpurchase DOM.jsongtagitem //.....
 
+            //EVENTO ACQUISTO CON PASSAGGIO CARRELLO A GOOGLE
             WelcomeLibrary.DOM.jsongtagpurchase jtagpurchaseevent = new jsongtagpurchase();
             WelcomeLibrary.DOM.jsongtagitem purchaseitem = new jsongtagitem();
             jtagpurchaseevent.transaction_id = totali.CodiceOrdine;
@@ -1806,8 +1808,6 @@ public class CommonPage : Page
             //jtagpurchaseevent.value = totali.TotaleOrdine - totali.TotaleSconto;
             jtagpurchaseevent.value = Math.Round(totali.TotaleOrdine - totali.TotaleSconto, 2, MidpointRounding.ToEven);
             //jtagpurchaseevent.value = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { totali.TotaleOrdine - totali.TotaleSconto });
-
-
             jtagpurchaseevent.tax = 0;// qui dovresti scorporare l'iva
             jtagpurchaseevent.shipping = totali.TotaleSpedizione;
             jtagpurchaseevent.currency = "EUR";
@@ -1835,22 +1835,47 @@ public class CommonPage : Page
             jsoncarrelloordine = Newtonsoft.Json.JsonConvert.SerializeObject(jtagpurchaseevent);
             scriptRegVariables += ";\r\n " + string.Format("gtag('event', 'purchase', {0});console.log('gtag called;');", jsoncarrelloordine);
 
+            //EVENTO CONVERSIONE GOOGLE ADS
             if (!string.IsNullOrEmpty(ConfigManagement.ReadKey("send_to"))) // invio dati verso google ads!!!
             {
                 WelcomeLibrary.DOM.jsongtagconversion jtaggoogleadseevent = new jsongtagconversion();
                 jtaggoogleadseevent.transaction_id = totali.CodiceOrdine;
                 //jtaggoogleadseevent.value = totali.TotaleOrdine - totali.TotaleSconto;
                 jtaggoogleadseevent.value = Math.Round(totali.TotaleOrdine - totali.TotaleSconto, 2, MidpointRounding.ToEven);
+                //jtaggoogleadseevent.value = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { totali.TotaleOrdine - totali.TotaleSconto });
                 jtaggoogleadseevent.currency = "EUR";
                 jtaggoogleadseevent.send_to = ConfigManagement.ReadKey("send_to");// "AW-306245660/POpGCNukq4IDEJzgg5IB"; // va passata da fuori tramite config 
                 string jsongoogleadsconversione = Newtonsoft.Json.JsonConvert.SerializeObject(jtaggoogleadseevent);
                 scriptRegVariables += ";\r\n " + string.Format("gtag('event', 'conversion', {0});console.log('gtag called;');", jsongoogleadsconversione);
             }
 
-
             scriptRegVariables = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariables); //wrapper fo waiting
+
+            //per facebook
+            WelcomeLibrary.DOM.jsongtagpurchasefbq jtagpurchafbq = new jsongtagpurchasefbq();
+            WelcomeLibrary.DOM.jsongtagitemfbq purchaseitemfbq = new jsongtagitemfbq();
+            jtagpurchafbq.value = Math.Round(totali.TotaleOrdine - totali.TotaleSconto, 2, MidpointRounding.ToEven);
+            //jtagpurchafbq.value = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { totali.TotaleOrdine - totali.TotaleSconto });
+            jtagpurchafbq.currency = "EUR";
+            jtagpurchafbq.content_type = "product";
+            jtagpurchafbq.contents = new List<jsongtagitemfbq>();
+            foreach (Carrello c in prodotti)
+            {
+                purchaseitemfbq = new jsongtagitemfbq();
+                purchaseitemfbq.id = c.Offerta.Id.ToString();
+                purchaseitemfbq.quantity = c.Numero; ;
+                purchaseitemfbq.item_price = Math.Round(c.Prezzo, 2, MidpointRounding.ToEven);
+                jtagpurchafbq.contents.Add(purchaseitemfbq);
+            }
+            string fbpeventpurchase = Newtonsoft.Json.JsonConvert.SerializeObject(jtagpurchafbq);
+            string scriptRegVariablesfbq = ";\r\n " + string.Format("fbq('track', 'Purchase', {0});console.log('fbq track purchase called;');", fbpeventpurchase);
+            scriptRegVariablesfbq = WelcomeLibrary.UF.Utility.waitwrappercall("fbq", scriptRegVariablesfbq); //wrapper fo waiting
+
+            string scriptvariablesfinal = "";
+            scriptvariablesfinal += scriptRegVariables;
+            scriptvariablesfinal += scriptRegVariablesfbq;
             Dictionary<string, string> addelements = new Dictionary<string, string>();
-            addelements.Add("jsvarfrommasterstart", scriptRegVariables);
+            addelements.Add("jsvarfrommasterstart", scriptvariablesfinal);
             ret = custombind.CreaInitStringJavascriptOnly(addelements);
             /////////////////////////////////////////////////////////////////////
         }

@@ -18,20 +18,7 @@ namespace WelcomeLibrary.DOM
         public string stato { set; get; }
     }
 
-    public class jsongtagitem
-    {
-        public string id { set; get; }
-        public string name { set; get; }
-        public string list_name { set; get; }
-        public string brand { set; get; }
-        public string category { set; get; }
-        public string variant { set; get; }
-        public int list_position { set; get; }
-        public long quantity { set; get; }
-        public double price { set; get; }
-        public string coupon { set; get; }
 
-    }
 
 
     public class jsongtagconversion
@@ -98,6 +85,63 @@ namespace WelcomeLibrary.DOM
         //  ]
         //});
 
+    }
+
+
+    public class jsongtagitem
+    {
+        public string id { set; get; }
+        public string name { set; get; }
+        public string list_name { set; get; }
+        public string brand { set; get; }
+        public string category { set; get; }
+        public string variant { set; get; }
+        public int list_position { set; get; }
+        public long quantity { set; get; }
+        public double price { set; get; }
+        public string coupon { set; get; }
+    }
+
+
+    public class jsongtagpurchasefbq
+    {
+        public double value { set; get; }
+        public string currency { set; get; }
+        public string content_type { set; get; }
+        public List<jsongtagitemfbq> contents { set; get; }
+
+        //https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce
+        //        https://developers.google.com/analytics/devguides/collection/gtagjs/sending-data
+        //javascript function call!!
+
+        /*
+
+          fbq('track', 'Purchase',
+                // begin parameter object data
+                {
+                    value: 115.00,
+                    currency: 'USD',
+                    contents: [
+                    {
+                        id: '301',
+                        quantity: 1
+                    },
+                    {
+                        id: '401',
+                        quantity: 2
+                    }],
+                    content_type: 'product'
+                }
+                // end parameter object data
+                );
+        */
+
+    }
+    public class jsongtagitemfbq
+    {
+        public string id { set; get; }
+        public long quantity { set; get; }
+        public double item_price { set; get; }
     }
 
     [Serializable]
