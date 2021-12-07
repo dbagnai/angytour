@@ -27,7 +27,7 @@
     <div class="container my-3 py-0 my-sm-5 py-sm-3">
 
         <%-- TITOLO --%>
-        <div class="row d-none d-sm-block">
+        <div class="row">
             <div class="col-12">
                 <%= references.ResMan("basetext", Lingua,"testodettaglioordine") %>
             </div>

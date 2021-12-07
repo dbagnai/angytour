@@ -197,6 +197,12 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                     if (context.Session != null && context.Session["scaglionimultipli"] != null)
                         jra.stato = references.ResMan("Common", Lingua, "testocarelloscaglionimultipli");
                     //////////////////////////////////////////////////////////////////////////
+                    //tracking code per agigunta al carrello
+                    if (context.Session != null && context.Session["jscodefortracking"] != null)
+                        jra.jscodetoexecute = context.Session["jscodefortracking"].ToString();
+                    context.Session.Remove("jscodefortracking");
+
+
                     ///
                     string resulta = Newtonsoft.Json.JsonConvert.SerializeObject(jra, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
                     {
@@ -253,7 +259,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                             jrs.stato = references.ResMan("Common", Lingua, "testocarelloesaurito");
                     }
                     context.Session.Remove("superamentoquantita");
-                    
+
                     if (context.Session != null && context.Session["nontrovata"] != null)
                         jrs.stato = references.ResMan("Common", Lingua, "testocarellononesistente");
                     if (context.Session != null && context.Session["selezionacaratteristiche"] != null)
@@ -261,7 +267,11 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                     if (context.Session != null && context.Session["scaglionimultipli"] != null)
                         jrs.stato = references.ResMan("Common", Lingua, "testocarelloscaglionimultipli");
                     //////////////////////////////////////////////////////////////////////////
-                    ///
+                    if (context.Session != null && context.Session["jscodefortracking"] != null)
+                        jrs.jscodetoexecute = context.Session["jscodefortracking"].ToString();
+                    context.Session.Remove("jscodefortracking");
+
+
                     string results = Newtonsoft.Json.JsonConvert.SerializeObject(jrs, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
                     {
                         NullValueHandling = NullValueHandling.Ignore,
@@ -278,7 +288,7 @@ public class CarrelloHandler : IHttpHandler, IRequiresSessionState
                     string listcod = "";
                     righeordine.ForEach(rigo => listcod += rigo.id_prodotto + ",");
                     ////////////////////////////////////////
-                    
+
                     //ELIMINIAMO GLI ORDINI
                     ecDM.DeleteCarrelloPerCodiceOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, scodiceordine);
                     ecDM.DeleteOrdinePerCodice(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, scodiceordine);

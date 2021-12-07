@@ -896,7 +896,9 @@ function InserisciCarrelloNopostback(testo) {
     var lingua = res[1];
     var username = res[2];
     var contenitoredestinazione = '';
-    AddCurrentCarrelloNopostback(contenitoredestinazione, idprodotto, lingua, username);
+    AddCurrentCarrelloNopostback(contenitoredestinazione, idprodotto, lingua, username, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,
+        function (data) {  /*qui in data json ho i valori tornati dalla chiamata che posso iniettare es. tracking .....*/ });
+
 }
 
 function AddCurrentCarrelloNopostback(contenitoredestinazione, idprodotto, lingua, username, idcombined, idcarrello, prezzo, datastart, dataend, Jsonfield1, mode, forceidcarrello, callback) {

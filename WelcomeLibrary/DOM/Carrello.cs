@@ -16,6 +16,7 @@ namespace WelcomeLibrary.DOM
     {
         public string id { set; get; }
         public string stato { set; get; }
+        public string jscodetoexecute { set; get; }
     }
 
 
@@ -102,7 +103,15 @@ namespace WelcomeLibrary.DOM
         public string coupon { set; get; }
     }
 
-
+    public class jsoncartdetailsfbq
+    {
+        public string content_name { get; set; }
+        public string content_category { get; set; }
+        public List<string> content_ids { get; set; }
+        public string content_type { get; set; }
+        public double value { get; set; }
+        public string currency { get; set; }
+    }
     public class jsongtagpurchasefbq
     {
         public double value { set; get; }

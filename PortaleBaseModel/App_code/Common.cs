@@ -1264,9 +1264,18 @@ public class CommonPage : Page
                 Item.ID_cliente = i;
             }
             if (quantita >= 1)
+            {
+                //metto in sessione in codice di tracking da eseguire all'aggiunta del carrello o eliminazione
+                Session.Add("jscodefortracking", Creaeventtrackaddtocart(Item));
+
                 ecom.InsertUpdateCarrello(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Item, false);
+            }
             else
+            {
+                Session.Remove("jscodefortracking");
                 ecom.DeleteCarrelloPerID(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, Item.ID);
+            }
+
 
             ret = Item.ID.ToString();
         }
@@ -1725,7 +1734,7 @@ public class CommonPage : Page
                 long idprodottodascontare = (codattuale.Idprodotto != null) ? codattuale.Idprodotto.Value : 0;
                 string codicifiltrodascontare = (!string.IsNullOrEmpty(codattuale.Codicifiltro)) ? codattuale.Codicifiltro : "";
                 // campo nel codice sconto per associazione a idscaglione per associazione di sconto a scaglioni!!! 
-                long idscaglionedascontare = (codattuale.Idscaglione != null) ? codattuale.Idscaglione.Value : 0; 
+                long idscaglionedascontare = (codattuale.Idscaglione != null) ? codattuale.Idscaglione.Value : 0;
                 if (idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare) && idscaglionedascontare == 0)
                 {
                     //sconto percentuale sul totale generale carrello
@@ -1848,10 +1857,11 @@ public class CommonPage : Page
                 string jsongoogleadsconversione = Newtonsoft.Json.JsonConvert.SerializeObject(jtaggoogleadseevent);
                 scriptRegVariables += ";\r\n " + string.Format("gtag('event', 'conversion', {0});console.log('gtag called;');", jsongoogleadsconversione);
             }
-
             scriptRegVariables = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariables); //wrapper fo waiting
+            /////////////////////////////////////////////////////
 
-            //per facebook
+            /////////////////////////////////////////////////////
+            //conversione tracking per facebook
             WelcomeLibrary.DOM.jsongtagpurchasefbq jtagpurchafbq = new jsongtagpurchasefbq();
             WelcomeLibrary.DOM.jsongtagitemfbq purchaseitemfbq = new jsongtagitemfbq();
             jtagpurchafbq.value = Math.Round(totali.TotaleOrdine - totali.TotaleSconto, 2, MidpointRounding.ToEven);
@@ -1870,6 +1880,7 @@ public class CommonPage : Page
             string fbpeventpurchase = Newtonsoft.Json.JsonConvert.SerializeObject(jtagpurchafbq);
             string scriptRegVariablesfbq = ";\r\n " + string.Format("fbq('track', 'Purchase', {0});console.log('fbq track purchase called;');", fbpeventpurchase);
             scriptRegVariablesfbq = WelcomeLibrary.UF.Utility.waitwrappercall("fbq", scriptRegVariablesfbq); //wrapper fo waiting
+            /////////////////////////////////////////////////////
 
             string scriptvariablesfinal = "";
             scriptvariablesfinal += scriptRegVariables;
@@ -1883,6 +1894,36 @@ public class CommonPage : Page
         return ret;
     }
 
+    /// <summary>
+    /// Genera il codice evento tracking facebook per l'aggiunda di un elemento a carrello
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    public static string Creaeventtrackaddtocart(Carrello item)
+    {
+        string ret = "";
+        //item.offerte contiene i dettagli dell'oggetto aggiunto a carrello
+        jsoncartdetailsfbq itemfbq = new jsoncartdetailsfbq();
+        //riempiamo l'elemento con i valori
+        string nomearticolo = "";
+        if (item.Offerta != null) nomearticolo = item.Offerta.DenominazioneI;
+        itemfbq.content_name = nomearticolo;
+        itemfbq.content_ids = new List<string>();
+        itemfbq.content_ids.Add(item.ID.ToString());
+        itemfbq.content_type = "product";
+        itemfbq.content_category = "";
+        itemfbq.value = Math.Round(item.Prezzo, 2, MidpointRounding.ToEven);
+        itemfbq.currency = "EUR";
+
+        //torniamo il codice da inisettare
+        string serializedstring = Newtonsoft.Json.JsonConvert.SerializeObject(itemfbq);
+        string scriptRegVariablesfbq = ";\r\n " + string.Format("fbq('track', 'AddToCart', {0});console.log('fbq track adttocart called;');", serializedstring);
+        scriptRegVariablesfbq = WelcomeLibrary.UF.Utility.waitwrappercall("fbq", scriptRegVariablesfbq); //wrapper fo waiting
+        Dictionary<string, string> addelements = new Dictionary<string, string>();
+        addelements.Add("jsvarfrommasterstart", scriptRegVariablesfbq);
+        ret = custombind.CreaInitStringJavascriptOnly(addelements);
+        return ret;
+    }
 
     private static double CalcolaSpeseSpedizione(CarrelloCollection ColItem, string codicenazione, string codiceprovincia, TotaliCarrello totali)
     {

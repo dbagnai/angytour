@@ -1046,7 +1046,6 @@ namespace WelcomeLibrary.DAL
                 }
 
                 /*CALCOLO IL NUMERO DI RIGHE FILTRATE TOTALI*/
-
                 long totalrecords = dbDataAccess.ExecuteScalar<long>("SELECT count(*) FROM  " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  " + queryfilter, _parUsed, connection);
                 list.Totrecs = totalrecords;
 
