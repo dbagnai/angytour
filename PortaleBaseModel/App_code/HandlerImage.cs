@@ -139,15 +139,26 @@ public class HandlerImage : IHttpHandler, IRequiresSessionState
         }
         if (imgF == System.Drawing.Imaging.ImageFormat.Jpeg)
         {
-            // Create an Encoder object based on the GUID for the Quality parameter category.
-            ImageCodecInfo jgpEncoder = GetEncoder(imgF);
+            //Using mozjpeg ( da testare )
+            byte[] rawJpeg;
+            using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
+                rawJpeg = mozJpeg.Encode(img, 75, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+            context.Response.BinaryWrite(rawJpeg);
+            context.Response.End();
+#if false
+           // Create an Encoder object based on the GUID for the Quality parameter category.
+           ImageCodecInfo jgpEncoder = GetEncoder(imgF);
             System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
             // Create an EncoderParameters object.
             // An EncoderParameters object has an array of EncoderParameter objects. In this case, there is only one EncoderParameter object in the array.
             EncoderParameters myEncoderParameters = new EncoderParameters(1);
             EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 95L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
             myEncoderParameters.Param[0] = myEncoderParameter;
-            img.Save(context.Response.OutputStream, jgpEncoder, myEncoderParameters);
+            img.Save(context.Response.OutputStream, jgpEncoder, myEncoderParameters); 
+#endif
+
+
+
         }
         else
             img.Save(context.Response.OutputStream, imgF);
