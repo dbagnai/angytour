@@ -139,13 +139,15 @@ public class HandlerImage : IHttpHandler, IRequiresSessionState
         }
         if (imgF == System.Drawing.Imaging.ImageFormat.Jpeg)
         {
+#if false
             //Using mozjpeg ( da testare )
             byte[] rawJpeg;
             using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
                 rawJpeg = mozJpeg.Encode(img, 75, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
             context.Response.BinaryWrite(rawJpeg);
-            context.Response.End();
-#if false
+            context.Response.End(); 
+#endif
+#if true
            // Create an Encoder object based on the GUID for the Quality parameter category.
            ImageCodecInfo jgpEncoder = GetEncoder(imgF);
             System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;

@@ -14,6 +14,7 @@ namespace WelcomeLibrary.UF
     public class filemanage
     {
         public static int reslevels = 2; //Imposta il numero di livelli di immagini da usare in base alle rispuluzioni 1- solo xs 2-solo xs sm etc ...
+        public static int jpgprocessor = 2;//1 - classic net 2 - mozjpg
 
         public filemanage()
         {
@@ -633,28 +634,34 @@ namespace WelcomeLibrary.UF
                             //img.Save(Filename, System.Drawing.Imaging.ImageFormat.Jpeg);
                             if (imgF == System.Drawing.Imaging.ImageFormat.Jpeg)
                             {
+                                if (jpgprocessor == 1)
+                                {
+
+#if true    //vecchio metodo con librerua drawing imaging
+
+                                    // Create an Encoder object based on the GUID for the Quality parameter category.
+                                    ImageCodecInfo jgpEncoder = GetEncoder(imgF);
+                                    System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+                                    // Create an EncoderParameters object.
+                                    // An EncoderParameters object has an array of EncoderParameter objects. In this case, there is only one EncoderParameter object in the array.
+                                    EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                                    EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 90L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
+                                    myEncoderParameters.Param[0] = myEncoderParameter;
+                                    img.Save(Filename, jgpEncoder, myEncoderParameters);
+#endif
+
+                                }
+                                else if (jpgprocessor == 2)
+                                {
 
 #if true
-                                //Using mozjpeg
-                                byte[] rawJpeg;
-                                using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
-                                    rawJpeg = mozJpeg.Encode(img, 85, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
-                                File.WriteAllBytes(Filename, rawJpeg); 
+                                    //Using mozjpeg
+                                    byte[] rawJpeg;
+                                    using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
+                                        rawJpeg = mozJpeg.Encode(img, 85, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                    File.WriteAllBytes(Filename, rawJpeg);
 #endif
-
-#if false    //vecchio metodo con librerua drawing imaging
-
-                                // Create an Encoder object based on the GUID for the Quality parameter category.
-                                ImageCodecInfo jgpEncoder = GetEncoder(imgF);
-                                System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-                                // Create an EncoderParameters object.
-                                // An EncoderParameters object has an array of EncoderParameter objects. In this case, there is only one EncoderParameter object in the array.
-                                EncoderParameters myEncoderParameters = new EncoderParameters(1);
-                                EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 90L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
-                                myEncoderParameters.Param[0] = myEncoderParameter;
-                                img.Save(Filename, jgpEncoder, myEncoderParameters); 
-#endif
-
+                                }
 
                             }
                             else
@@ -710,25 +717,34 @@ namespace WelcomeLibrary.UF
                         //img.Save(Filename, System.Drawing.Imaging.ImageFormat.Jpeg);
                         if (imgF == System.Drawing.Imaging.ImageFormat.Jpeg)
                         {
+
+                            if (jpgprocessor == 1)
+                            {
+
 #if true
-                            //Using mozjpeg
-                            byte[] rawJpeg;
-                            using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
-                                rawJpeg = mozJpeg.Encode(img, 85, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
-                            File.WriteAllBytes(Filename, rawJpeg);
+                                // Create an Encoder object based on the GUID for the Quality parameter category.
+                                ImageCodecInfo jgpEncoder = GetEncoder(imgF);
+                                System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+                                // Create an EncoderParameters object.
+                                // An EncoderParameters object has an array of EncoderParameter objects. In this case, there is only one EncoderParameter object in the array.
+                                EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                                EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 90L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
+                                myEncoderParameters.Param[0] = myEncoderParameter;
+                                img.Save(Filename, jgpEncoder, myEncoderParameters);
+#endif
+                            }
+                            else if (jpgprocessor == 2)
+                            {
+
+#if true
+                                //Using mozjpeg
+                                byte[] rawJpeg;
+                                using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
+                                    rawJpeg = mozJpeg.Encode(img, 85, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                File.WriteAllBytes(Filename, rawJpeg);
 
 #endif
-#if false
-                            // Create an Encoder object based on the GUID for the Quality parameter category.
-                            ImageCodecInfo jgpEncoder = GetEncoder(imgF);
-                            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-                            // Create an EncoderParameters object.
-                            // An EncoderParameters object has an array of EncoderParameter objects. In this case, there is only one EncoderParameter object in the array.
-                            EncoderParameters myEncoderParameters = new EncoderParameters(1);
-                            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 90L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
-                            myEncoderParameters.Param[0] = myEncoderParameter;
-                            img.Save(Filename, jgpEncoder, myEncoderParameters); 
-#endif
+                            }
 
 
 
@@ -767,7 +783,7 @@ namespace WelcomeLibrary.UF
                     return false;
 
                 //if (!(fileorigine.ToString().ToLower().EndsWith("jpg") || fileorigine.ToString().ToLower().EndsWith("gif") || fileorigine.ToString().ToLower().EndsWith("png")))
-                if (!(fileorigine.ToString().ToLower().EndsWith("jpg") ||   fileorigine.ToString().ToLower().EndsWith("png")))
+                if (!(fileorigine.ToString().ToLower().EndsWith("jpg") || fileorigine.ToString().ToLower().EndsWith("png")))
                     return false;
 
                 bool existsanteprima = false;
@@ -853,69 +869,76 @@ namespace WelcomeLibrary.UF
                     }
                     if (imgF == System.Drawing.Imaging.ImageFormat.Jpeg)
                     {
+                        if (jpgprocessor == 1)
+                        {
+#if true  //vecchio metodo con librerua drawing imaging
+                            // Create an Encoder object based on the GUID for the Quality parameter category.
+                            ImageCodecInfo jgpEncoder = GetEncoder(imgF); //ImageCodecInfo.GetImageEncoders().First(c => c.MimeType == "image/jpeg");
+                            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+                            EncoderParameters myEncoderParameters = new EncoderParameters(3);
+                            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 90L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
+                            myEncoderParameters.Param[0] = myEncoderParameter;
+                            myEncoderParameters.Param[1] = new EncoderParameter(System.Drawing.Imaging.Encoder.ScanMethod, (int)EncoderValue.ScanMethodInterlaced);
+                            myEncoderParameters.Param[2] = new EncoderParameter(System.Drawing.Imaging.Encoder.RenderMethod, (int)EncoderValue.RenderProgressive);
+                            img.Save(pathAnteprime + nomeAnteprima, jgpEncoder, myEncoderParameters);
+                            if (generateversions)
+                            {
+                                if ((!System.IO.File.Exists(pathAnteprime + filename_xs) || replacefile) && img_xs != null)
+                                    img_xs.Save(pathAnteprime + filename_xs, jgpEncoder, myEncoderParameters);
+                                if ((!System.IO.File.Exists(pathAnteprime + filename_sm) || replacefile) && img_sm != null)
+                                    img_sm.Save(pathAnteprime + filename_sm, jgpEncoder, myEncoderParameters);
+                                if ((!System.IO.File.Exists(pathAnteprime + filename_md) || replacefile) && img_md != null)
+                                    img_md.Save(pathAnteprime + filename_md, jgpEncoder, myEncoderParameters);
+                                if ((!System.IO.File.Exists(pathAnteprime + filename_lg) || replacefile) && img_lg != null)
+                                    img_lg.Save(pathAnteprime + filename_lg, jgpEncoder, myEncoderParameters);
+                            }
+#endif
+
+                        }
+                        else if (jpgprocessor == 2)
+                        {
 
 #if true  //mozjpeg nuova libreria per jpg
 
-                        //Using mozjpeg
-                        byte[] rawJpeg;
-                        using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
-                            rawJpeg = mozJpeg.Encode(img, 85, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
-                        File.WriteAllBytes(pathAnteprime + nomeAnteprima, rawJpeg);
-                        if (generateversions)
-                        {
-                            if ((!System.IO.File.Exists(pathAnteprime + filename_xs) || replacefile) && img_xs != null)
+                            //Using mozjpeg
+                            byte[] rawJpeg;
+                            using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
+                                rawJpeg = mozJpeg.Encode(img, 85, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                            File.WriteAllBytes(pathAnteprime + nomeAnteprima, rawJpeg);
+                            if (generateversions)
                             {
-                                byte[] rawJpeg_xs;
-                                using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
-                                    rawJpeg_xs = mozJpeg.Encode(img_xs, 85, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
-                                File.WriteAllBytes(pathAnteprime + filename_xs, rawJpeg_xs);
+                                if ((!System.IO.File.Exists(pathAnteprime + filename_xs) || replacefile) && img_xs != null)
+                                {
+                                    byte[] rawJpeg_xs;
+                                    using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
+                                        rawJpeg_xs = mozJpeg.Encode(img_xs, 85, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                    File.WriteAllBytes(pathAnteprime + filename_xs, rawJpeg_xs);
+                                }
+                                if ((!System.IO.File.Exists(pathAnteprime + filename_sm) || replacefile) && img_sm != null)
+                                {
+                                    byte[] rawJpeg_sm;
+                                    using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
+                                        rawJpeg_sm = mozJpeg.Encode(img_sm, 85, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                    File.WriteAllBytes(pathAnteprime + filename_sm, rawJpeg_sm);
+                                }
+                                if ((!System.IO.File.Exists(pathAnteprime + filename_md) || replacefile) && img_md != null)
+                                {
+                                    byte[] rawJpeg_md;
+                                    using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
+                                        rawJpeg_md = mozJpeg.Encode(img_md, 85, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                    File.WriteAllBytes(pathAnteprime + filename_md, rawJpeg_md);
+                                }
+                                if ((!System.IO.File.Exists(pathAnteprime + filename_lg) || replacefile) && img_lg != null)
+                                {
+                                    byte[] rawJpeg_lg;
+                                    using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
+                                        rawJpeg_lg = mozJpeg.Encode(img_lg, 85, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                    File.WriteAllBytes(pathAnteprime + filename_lg, rawJpeg_lg);
+                                }
                             }
-                            if ((!System.IO.File.Exists(pathAnteprime + filename_sm) || replacefile) && img_sm != null)
-                            {
-                                byte[] rawJpeg_sm;
-                                using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
-                                    rawJpeg_sm = mozJpeg.Encode(img_sm, 85, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
-                                File.WriteAllBytes(pathAnteprime + filename_sm, rawJpeg_sm);
-                            }
-                            if ((!System.IO.File.Exists(pathAnteprime + filename_md) || replacefile) && img_md != null)
-                            {
-                                byte[] rawJpeg_md;
-                                using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
-                                    rawJpeg_md = mozJpeg.Encode(img_md, 85, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
-                                File.WriteAllBytes(pathAnteprime + filename_md, rawJpeg_md);
-                            }
-                            if ((!System.IO.File.Exists(pathAnteprime + filename_lg) || replacefile) && img_lg != null)
-                            {
-                                byte[] rawJpeg_lg;
-                                using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
-                                    rawJpeg_lg = mozJpeg.Encode(img_lg, 85, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
-                                File.WriteAllBytes(pathAnteprime + filename_lg, rawJpeg_lg);
-                            }
-                        } 
 #endif
 
-#if false  //vecchio metodo con librerua drawing imaging
-                        // Create an Encoder object based on the GUID for the Quality parameter category.
-                        ImageCodecInfo jgpEncoder = GetEncoder(imgF); //ImageCodecInfo.GetImageEncoders().First(c => c.MimeType == "image/jpeg");
-                        System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-                        EncoderParameters myEncoderParameters = new EncoderParameters(3);
-                        EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 90L); //Livelli di compressione da 0L a 100L ( peggio -> meglio)
-                        myEncoderParameters.Param[0] = myEncoderParameter;
-                        myEncoderParameters.Param[1] = new EncoderParameter(System.Drawing.Imaging.Encoder.ScanMethod, (int)EncoderValue.ScanMethodInterlaced);
-                        myEncoderParameters.Param[2] = new EncoderParameter(System.Drawing.Imaging.Encoder.RenderMethod, (int)EncoderValue.RenderProgressive);
-                        img.Save(pathAnteprime + nomeAnteprima, jgpEncoder, myEncoderParameters); 
-                           if (generateversions)
-                        {
-                            if ((!System.IO.File.Exists(pathAnteprime + filename_xs) || replacefile) && img_xs != null)
-                                img_xs.Save(pathAnteprime + filename_xs, jgpEncoder, myEncoderParameters);
-                            if ((!System.IO.File.Exists(pathAnteprime + filename_sm) || replacefile) && img_sm != null)
-                                img_sm.Save(pathAnteprime + filename_sm, jgpEncoder, myEncoderParameters);
-                            if ((!System.IO.File.Exists(pathAnteprime + filename_md) || replacefile) && img_md != null)
-                                img_md.Save(pathAnteprime + filename_md, jgpEncoder, myEncoderParameters);
-                            if ((!System.IO.File.Exists(pathAnteprime + filename_lg) || replacefile) && img_lg != null)
-                                img_lg.Save(pathAnteprime + filename_lg, jgpEncoder, myEncoderParameters);
                         }
-#endif
 
 
                     }
@@ -1119,7 +1142,7 @@ namespace WelcomeLibrary.UF
                 {
                     if (CodiceTipologia != "" && idOfferta != "")
                         //if ((NomeAnteprima.ToString().ToLower().EndsWith("jpg") || NomeAnteprima.ToString().ToLower().EndsWith("gif") || NomeAnteprima.ToString().ToLower().EndsWith("png")))
-                        if ((NomeAnteprima.ToString().ToLower().EndsWith("jpg") ||  NomeAnteprima.ToString().ToLower().EndsWith("png")))
+                        if ((NomeAnteprima.ToString().ToLower().EndsWith("jpg") || NomeAnteprima.ToString().ToLower().EndsWith("png")))
                         {
                             ritorno = WelcomeLibrary.STATIC.Global.PercorsoContenuti + "/" + CodiceTipologia + "/" + idOfferta.ToString();
                             physpath = WelcomeLibrary.STATIC.Global.PercorsoFiscoContenuti + "\\" + CodiceTipologia + "\\" + idOfferta.ToString();
@@ -1175,7 +1198,7 @@ namespace WelcomeLibrary.UF
             int actwidth = 0;
             if (!string.IsNullOrEmpty(pathimmagine) && pathimmagine.LastIndexOf('.') != -1)
                 //if ((pathimmagine.ToString().ToLower().EndsWith("jpg") || pathimmagine.ToString().ToLower().EndsWith("gif") || pathimmagine.ToString().ToLower().EndsWith("png")))
-                if ((pathimmagine.ToString().ToLower().EndsWith("jpg") ||  pathimmagine.ToString().ToLower().EndsWith("png")))
+                if ((pathimmagine.ToString().ToLower().EndsWith("jpg") || pathimmagine.ToString().ToLower().EndsWith("png")))
                     if (int.TryParse(viewportw, out actwidth))
                     {
                         string modifier = "";
