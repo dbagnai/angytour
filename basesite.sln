@@ -10,7 +10,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PortaleBaseModel(2)", "Port
 		SccLocalPath = ""
 		SccProvider = ""
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
-		ProjectReferences = "{2fa43dec-c17c-4616-b3cd-d6e0c12f938a}|TechInfoSystems.Data.SQLiteProvider.dll;{83832bbc-64ad-4f93-9726-9678c027ea80}|WelcomeLibrary.dll;{11073D58-1276-4DBA-A653-D8F6105CCAFB}|MozjpegWrapperJP.dll;"
+		ProjectReferences = "{2fa43dec-c17c-4616-b3cd-d6e0c12f938a}|TechInfoSystems.Data.SQLiteProvider.dll;{83832bbc-64ad-4f93-9726-9678c027ea80}|WelcomeLibrary.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/PortaleBaseModel"
 		Debug.AspNetCompiler.PhysicalPath = "PortaleBaseModel\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\PortaleBaseModel\"
@@ -37,8 +37,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLiteProvider", "SQLiteMembership\SQLiteProvider.csproj", "{2FA43DEC-C17C-4616-B3CD-D6E0C12F938A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MozjpegWrapperJP", "MozjpegWrapperJP\MozjpegWrapperJP.csproj", "{11073D58-1276-4DBA-A653-D8F6105CCAFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,18 +84,6 @@ Global
 		{2FA43DEC-C17C-4616-B3CD-D6E0C12F938A}.Release|x64.Build.0 = Release|Any CPU
 		{2FA43DEC-C17C-4616-B3CD-D6E0C12F938A}.Release|x86.ActiveCfg = Release|Any CPU
 		{2FA43DEC-C17C-4616-B3CD-D6E0C12F938A}.Release|x86.Build.0 = Release|Any CPU
-		{11073D58-1276-4DBA-A653-D8F6105CCAFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11073D58-1276-4DBA-A653-D8F6105CCAFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11073D58-1276-4DBA-A653-D8F6105CCAFB}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{11073D58-1276-4DBA-A653-D8F6105CCAFB}.Debug|x64.Build.0 = Debug|Any CPU
-		{11073D58-1276-4DBA-A653-D8F6105CCAFB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{11073D58-1276-4DBA-A653-D8F6105CCAFB}.Debug|x86.Build.0 = Debug|Any CPU
-		{11073D58-1276-4DBA-A653-D8F6105CCAFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11073D58-1276-4DBA-A653-D8F6105CCAFB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11073D58-1276-4DBA-A653-D8F6105CCAFB}.Release|x64.ActiveCfg = Release|Any CPU
-		{11073D58-1276-4DBA-A653-D8F6105CCAFB}.Release|x64.Build.0 = Release|Any CPU
-		{11073D58-1276-4DBA-A653-D8F6105CCAFB}.Release|x86.ActiveCfg = Release|Any CPU
-		{11073D58-1276-4DBA-A653-D8F6105CCAFB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

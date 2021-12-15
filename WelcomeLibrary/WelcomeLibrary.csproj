@@ -278,6 +278,8 @@
     <Compile Include="UF\IListRandomExtensions.cs" />
     <Compile Include="UF\ImageProcessing.cs" />
     <Compile Include="UF\Log.cs" />
+    <Compile Include="UF\MozClsArray.cs" />
+    <Compile Include="UF\MozJpegWrapper.cs" />
     <Compile Include="UF\PagerGeneric.cs" />
     <Compile Include="UF\paypalfunctions.cs" />
     <Compile Include="UF\references.cs" />
@@ -327,14 +329,18 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MozjpegWrapperJP\MozjpegWrapperJP.csproj">
-      <Project>{11073d58-1276-4dba-a653-d8f6105ccafb}</Project>
-      <Name>MozjpegWrapperJP</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SQLiteMembership\SQLiteProvider.csproj">
       <Project>{2fa43dec-c17c-4616-b3cd-d6e0c12f938a}</Project>
       <Name>SQLiteProvider</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="turbojpeg_x64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="turbojpeg_x86.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

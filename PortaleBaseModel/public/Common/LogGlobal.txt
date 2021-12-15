@@ -159,3 +159,47 @@
 <Messaggio>httplocalhost52646Generato sitemap  18/08/2020 17:48:46</Messaggio>
  <Data>18/08/2020 17:48:46</Data>
 <Messaggio>httplocalhost52646Generato sitemap  18/08/2020 17:48:46Terminato Aggiornamento  18/08/2020 17:48:46</Messaggio>
+ <Data>15/12/2021 17:20:34</Data>
+<Messaggio> Application start : 15/12/2021 17:20:32</Messaggio>
+ <Data>15/12/2021 17:20:34</Data>
+<Messaggio> Global init original path: http://localhost:60010/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:60010</Messaggio>
+ <Data>15/12/2021 17:21:35</Data>
+<Messaggio>httplocalhost60010Generato sitemap  15/12/2021 17:21:35</Messaggio>
+ <Data>15/12/2021 17:21:35</Data>
+<Messaggio>httplocalhost60010Generato sitemap  15/12/2021 17:21:35Terminato Aggiornamento  15/12/2021 17:21:35</Messaggio>
+ <Data>15/12/2021 17:25:05</Data>
+<Messaggio> Application start : 15/12/2021 17:25:04</Messaggio>
+ <Data>15/12/2021 17:25:06</Data>
+<Messaggio> Global init original path: http://localhost:60010/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:60010</Messaggio>
+ <Data>15/12/2021 17:26:06</Data>
+<Messaggio>httplocalhost60010Generato sitemap  15/12/2021 17:26:06</Messaggio>
+ <Data>15/12/2021 17:26:06</Data>
+<Messaggio>httplocalhost60010Generato sitemap  15/12/2021 17:26:06Terminato Aggiornamento  15/12/2021 17:26:06</Messaggio>
+ <Data>15/12/2021 17:27:03</Data>
+<Messaggio> Application start : 15/12/2021 17:27:02</Messaggio>
+ <Data>15/12/2021 17:27:03</Data>
+<Messaggio> Global init original path: http://localhost:60010/AreaContenuti/GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-home Global init AbsolutePath : /AreaContenuti/GestioneBanners.aspx Global init ApplicationPath : / Global init Query : ?NomeTblBanners=tbl_banners_generale&sezione=header-home Global init server host : localhost Global init server appaddress : http://localhost:60010</Messaggio>
+ <Data>15/12/2021 17:27:25</Data>
+<Messaggio> Application start : 15/12/2021 17:27:24</Messaggio>
+ <Data>15/12/2021 17:27:25</Data>
+<Messaggio> Global init original path: http://localhost:60010/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:60010</Messaggio>
+ <Data>15/12/2021 17:28:26</Data>
+<Messaggio>httplocalhost60010Generato sitemap  15/12/2021 17:28:26</Messaggio>
+ <Data>15/12/2021 17:28:26</Data>
+<Messaggio>httplocalhost60010Generato sitemap  15/12/2021 17:28:26Terminato Aggiornamento  15/12/2021 17:28:26</Messaggio>
+ <Data>15/12/2021 17:30:04</Data>
+<Messaggio> Application start : 15/12/2021 17:30:03</Messaggio>
+ <Data>15/12/2021 17:30:04</Data>
+<Messaggio> Global init original path: http://localhost:60010/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:60010</Messaggio>
+ <Data>15/12/2021 17:31:05</Data>
+<Messaggio>httplocalhost60010Generato sitemap  15/12/2021 17:31:05</Messaggio>
+ <Data>15/12/2021 17:31:05</Data>
+<Messaggio>httplocalhost60010Generato sitemap  15/12/2021 17:31:05Terminato Aggiornamento  15/12/2021 17:31:05</Messaggio>
+ <Data>15/12/2021 17:33:30</Data>
+<Messaggio> Application start : 15/12/2021 17:33:29</Messaggio>
+ <Data>15/12/2021 17:33:30</Data>
+<Messaggio> Global init original path: http://localhost:60010/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:60010</Messaggio>
+ <Data>15/12/2021 17:34:31</Data>
+<Messaggio>httplocalhost60010Generato sitemap  15/12/2021 17:34:31</Messaggio>
+ <Data>15/12/2021 17:34:31</Data>
+<Messaggio>httplocalhost60010Generato sitemap  15/12/2021 17:34:31Terminato Aggiornamento  15/12/2021 17:34:31</Messaggio>
