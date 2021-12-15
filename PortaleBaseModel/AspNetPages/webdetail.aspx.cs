@@ -769,11 +769,14 @@ public partial class _webdetail : CommonPage
             //{
             //    litSezione.Text += " " + catselected.Descrizione.ToUpper();
             //}
+           
             string htmlPage = "";
-            if (references.ResMan("Common", Lingua, "testo" + data.CodiceTipologia) != null)
+            if (!string.IsNullOrEmpty(references.ResMan("Common", Lingua, "testo" + data.CodiceTipologia)))
                 htmlPage = references.ResMan("Common", Lingua, "testo" + CodiceTipologia).ToString();
-            if (references.ResMan("Common", Lingua, "testo" + data.CodiceCategoria) != null)
+            if (!string.IsNullOrEmpty(references.ResMan("Common", Lingua, "testo" + data.CodiceCategoria)))
                 htmlPage = references.ResMan("Common", Lingua, "testo" + data.CodiceCategoria).ToString();
+
+
             Contenuti content = null;
 
             string linkcanonico = CreaLinkRoutes(null, false, Lingua, CleanUrl(data.UrltextforlinkbyLingua(Lingua)), data.Id.ToString(), data.CodiceTipologia);

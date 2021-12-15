@@ -30,26 +30,31 @@ namespace WelcomeLibrary.UF
 
 			ResourceItem ret = new ResourceItem() { Gruppo = "", Categoria = "", Lingua = "", Chiave = "", Valore = "", Comment = "" }; // per evitare cose spiacevoli ritorno un oggetto vuoto
 
-			if (Items.ContainsKey(Gruppo))
-			{
-				if (Items[Gruppo].ContainsKey(categoria))
-				{
+            try
+            {
 
-					if (Items[Gruppo][categoria].ContainsKey(Lingua))
-					{
-						if (Items[Gruppo][categoria][Lingua].ContainsKey(Chiave))
-						{
-							ret = Items[Gruppo][categoria][Lingua][Chiave];
+                if (Items.ContainsKey(Gruppo))
+                {
+                    if (Items[Gruppo].ContainsKey(categoria))
+                    {
 
-						}
-					}
+                        if (Items[Gruppo][categoria].ContainsKey(Lingua))
+                        {
+                            if (Items[Gruppo][categoria][Lingua].ContainsKey(Chiave))
+                            {
+                                ret = Items[Gruppo][categoria][Lingua][Chiave];
 
-				}
-			}
+                            }
+                        }
 
-			//System.Diagnostics.Debug.Print("ReadKey : gruppo:" + Gruppo + " categoria:" + categoria + " Lingua:" + Lingua + " chiave:" + Chiave + " valore:" + ret.Valore + " " + (DateTime.Now - st).TotalMilliseconds.ToString());
+                    }
+                }
+            }
+            catch { }
 
-			return ret;
+            //System.Diagnostics.Debug.Print("ReadKey : gruppo:" + Gruppo + " categoria:" + categoria + " Lingua:" + Lingua + " chiave:" + Chiave + " valore:" + ret.Valore + " " + (DateTime.Now - st).TotalMilliseconds.ToString());
+
+            return ret;
 		}
 
 		public static List<ResourceItem> ReadItemsByLingua(string _lingua)

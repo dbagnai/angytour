@@ -526,7 +526,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                             if (o.Codice == CodiceTipologia && Caratteristica2 == elem.Codice)
                                 sb.Append(" style=\"font-weight:600 !important\"  ");
                             sb.Append(" >");
-                            string testoforced = references.ResMan("Common", Lingua, "testo" + elem.Codice);
+                            string testoforced = references.ResMan("Common", Lingua, "testolink" + elem.Codice);
                             if (!string.IsNullOrEmpty(testoforced)) testo = testoforced;
                             sb.Append(testo);
                             sb.Append("</a>");
@@ -559,7 +559,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                             if (o.Codice == CodiceTipologia && Caratteristica2 == elem.Codice)
                                 sb.Append(" style=\"font-weight:600 !important\"  ");
                             sb.Append(" >");
-                            string testoforced = references.ResMan("Common", Lingua, "testo" + elem.Codice);
+                            string testoforced = references.ResMan("Common", Lingua, "testolink" + elem.Codice);
                             if (!string.IsNullOrEmpty(testoforced)) testo = testoforced;
                             sb.Append(testo);
                             sb.Append("</a>");
@@ -620,7 +620,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                                 if (o.Codice == CodiceTipologia && Caratteristica2 == elem.Codice)
                                     sb.Append(" style=\"font-weight:600 !important\"  ");
                                 sb.Append(" >");
-                                string testoforced = references.ResMan("Common", Lingua, "testo" + elem.Codice);
+                                string testoforced = references.ResMan("Common", Lingua, "testolink" + elem.Codice);
                                 if (!string.IsNullOrEmpty(testoforced)) testo = testoforced;
                                 sb.Append(testo);
                                 sb.Append("</a>");
@@ -673,7 +673,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
                 sb.Append(" >");
 
-                string testoforced = references.ResMan("Common", Lingua, "testo" + o.Codice);
+                string testoforced = references.ResMan("Common", Lingua, "testolink" + o.Codice);
                 if (!string.IsNullOrEmpty(testoforced)) testo = testoforced;
                 sb.Append(testo);
                 sb.Append("</a>");
@@ -782,7 +782,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 //sb.Append(" onclick=\"javascript:JsSvuotaSession(this)\"  ");
                 sb.Append(" >");
 
-                string testoforced = references.ResMan("Common", Lingua, "testo" + o.CodiceProdotto);
+                string testoforced = references.ResMan("Common", Lingua, "testolink" + o.CodiceProdotto);
                 if (!string.IsNullOrEmpty(testoforced)) testo = testoforced;
 
                 sb.Append(testo);

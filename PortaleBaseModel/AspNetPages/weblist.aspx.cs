@@ -1421,9 +1421,9 @@ public partial class AspNetPages_weblist : CommonPage
         //CARICAMENTO E CUSTOMIZZAZIONE DA PAGINE STATICHE testi e meta
         ////////////////////////////////////////////////////////////////
         string htmlPage = "";
-        if (references.ResMan("Common", Lingua, "testo" + Tipologia) != null)
+        if (!string.IsNullOrEmpty(references.ResMan("Common", Lingua, "testo" + Tipologia)))
             htmlPage = references.ResMan("Common", Lingua, "testo" + Tipologia).ToString();
-        if (references.ResMan("Common", Lingua, "testo" + Categoria) != null)
+        if (!string.IsNullOrEmpty(references.ResMan("Common", Lingua, "testo" + Categoria)))
             htmlPage = references.ResMan("Common", Lingua, "testo" + Categoria).ToString();
 
         //prendiamo i dalti dal contenuto collegato coretto nelle statiche se presente

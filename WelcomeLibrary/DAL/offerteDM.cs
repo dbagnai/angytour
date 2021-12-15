@@ -7539,6 +7539,7 @@ namespace WelcomeLibrary.DAL
         /// </summary>
         public void CreaRssFeed(string Lng, string FiltroTipologia = "", string titolo = "", string descrizione = "", bool gmerchant = false)
         {
+            WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();
 
             titolo = (ConfigManagement.ReadKey("Nome") ?? "");
             string descrizionefeed = (ConfigManagement.ReadKey("Descrizione") ?? "");
@@ -7633,7 +7634,7 @@ namespace WelcomeLibrary.DAL
                     foreach (Offerte _new in lista)
                     {
                         string testotitolo = _new.DenominazionebyLingua(Lingua).ToLower();
-                        string descrizioneitem = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_new.DescrizionebyLingua(Lingua), 5000)));
+                        string descrizioneitem = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_new.DescrizionebyLingua(Lingua), 10000)));
 
                         if (_new == null || string.IsNullOrEmpty(_new.Id.ToString())) continue;
                         if (descrizioneitem == null || string.IsNullOrEmpty(descrizioneitem)) continue;
@@ -7902,7 +7903,7 @@ namespace WelcomeLibrary.DAL
                         if (_new.FotoCollection_M != null && !gmerchant)
                             sb.Append("<img style=\"margin-right: 10px; float: left\" src=\"" + linkimmagine + "\" alt=\"" + testotitolo + "\" width=\"350\" />");
 
-                        sb.Append("<p>" + ReplaceLinks(descrizioneitem) + "</p>");
+                        sb.Append("<p>" + html.Convert(descrizioneitem) + "</p>");
 
                         if (!gmerchant)
                             sb.Append("<p>Continua a leggere / Read More <a href=\"" + UrlCompleto + "\"><em>" + testotitolo + "</em></a>.</p>");

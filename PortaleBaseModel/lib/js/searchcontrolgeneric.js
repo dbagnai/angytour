@@ -160,6 +160,7 @@ function initAutocompleteRicercaCaratteristiche(paramtipologia) {
 function Visualizzalistadati(paramtipologia) {
     if (tipologia == "") tipologia = "rif000001"; //questa cerca nella tipologia in base alla pagina dove sei
     var localtipologia = paramtipologia || tipologia;
+    var objfiltro = {};
     //emptysession('', function (retval) {  //non serve piu tanto i parametri non son letti per i filtri dalla sessione ma da quelli inseriti nella route
 
     $(".searchcheck").each(function () {

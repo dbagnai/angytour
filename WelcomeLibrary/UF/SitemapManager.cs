@@ -528,7 +528,7 @@ namespace WelcomeLibrary.UF
             if (!string.IsNullOrEmpty(mese))
                 parameters.Add("mese", mese);
             if (!string.IsNullOrEmpty(regione))
-                parameters.Add("Regione", regione);
+                parameters.Add("regione", regione);
 
             if (addparms != null)
                 foreach (KeyValuePair<string, string> kv in addparms)
