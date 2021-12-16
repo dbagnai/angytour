@@ -7745,7 +7745,7 @@ namespace WelcomeLibrary.DAL
                         writer.WriteStartElement("item");
 
                         //TITOLO SCHEDA
-                        writer.WriteElementString("title", testotitolo.Replace("-", " "));
+                        writer.WriteElementString("title", html.Convert(testotitolo.Replace("-", " ")));
 
                         //LINK A SCHEDA
                         string UrlCompleto = "";

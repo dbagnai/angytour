@@ -15,7 +15,7 @@ namespace WelcomeLibrary.UF
     {
         public static int reslevels = 2; //Imposta il numero di livelli di immagini da usare in base alle rispuluzioni 1- solo xs 2-solo xs sm etc ...
         public static int jpgprocessor = 2;//1 - classic net 2 - mozjpg
-        public static int comprerc = 80;
+        public static int comprerc = 80; //livello di compressione per mozjpeg
 
         public filemanage()
         {

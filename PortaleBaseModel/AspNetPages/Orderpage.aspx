@@ -318,7 +318,7 @@
                                     <asp:TextBox runat="server" autocomplete="none" CssClass="w-100 px-2 form-control bg-white" ID="txtCodiceSconto" /><br />
                                 </div>
                                 <div class="col-12 col-sm-4">
-                                    <asp:Button Style="width: 180px" Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="Button1" OnClick="btnCodiceSconto_Click" />
+                                    <asp:Button Style="width: 180px"    CausesValidation="false"  Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="Button1" OnClick="btnCodiceSconto_Click" />
                                 </div>
                             </div>
                             <div class="row d-flex align-items-center my-2">
@@ -329,7 +329,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-4">
-                                    <asp:Button Style="width: 180px" Text='<%# references.ResMan("Common", Lingua,"testoBtnResetCodiceSconto") %>' runat="server" ID="btnCodiceSconto" OnClick="btnResetCodiceSconto_Click" />
+                                    <asp:Button Style="width: 180px"   CausesValidation="false"  Text='<%# references.ResMan("Common", Lingua,"testoBtnResetCodiceSconto") %>' runat="server" ID="btnCodiceSconto" OnClick="btnResetCodiceSconto_Click" />
                                 </div>
                             </div>
                         </div>

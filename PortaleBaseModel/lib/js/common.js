@@ -621,7 +621,20 @@ function initDdl(q, ddlid, selecttext, selectvalue, selectedvalue, lng, filter1,
         }
     });
 }
-function fillDDL(ddlID, jsonDictionary, selectionText, selectionVaue, selectedvalue) {
+
+function sortOn(property) {
+    return function (a, b) {
+        if (a[property] < b[property]) {
+            return -1;
+        } else if (a[property] > b[property]) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+function fillDDL(ddlID, jsonDictionary, selectionText, selectionVaue, selectedvalue, sortby) {
     try {
         // console.log("fiiDDL: " + ddlID + ",deftext:" + selectionText + ",defval:" + selectionVaue + ",selval:" + selectedvalue)
         var sel = baseresources[lng]["selectgeneric"];
@@ -633,9 +646,35 @@ function fillDDL(ddlID, jsonDictionary, selectionText, selectionVaue, selectedva
             listitems += '<option value="' + selectionVaue + '"> ' + sel + ' </option>';
             try {
                 var opers = JSON.parse(jsonDictionary);
-                $.each(opers, function (key, value) {
-                    listitems += '<option value="' + key + '">' + value + '</option>';
-                });
+
+
+                /////////////////////////////////////////
+                //Creiamo un ordinamento per valore! se necessario tramite un dictionary
+                /////////////////////////////////////////
+                if (sortby == 'value') {
+
+                    // First create the array of keys/values so that we can sort it:
+                    var sort_array = [];
+                    for (var key in opers) {
+                        sort_array.push({ key: key, value: opers[key] });
+                    }
+                    //sort on key
+                    //sort_array.sort(sortOn("key"));
+                    //sort on value
+                    sort_array.sort(sortOn("value"));
+
+                    // Now process that object with it:
+                    for (var i = 0; i < sort_array.length; i++) {
+                        listitems += '<option value="' + [sort_array[i].key] + '">' + [sort_array[i].value] + '</option>';
+                    }
+                }
+                /////////////////////////////////////////
+                else
+                    $.each(opers, function (key, value) {
+                        listitems += '<option value="' + key + '">' + value + '</option>';
+                    });
+
+
             }
             catch (e1) { }
             $select.append(listitems);
