@@ -102,147 +102,15 @@ path.bg-light-color-path {
 }
 
 
-/*.bg-light-color-pattern-1:before {
-    content: ' ';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    opacity: 0.6;
-    background-color: @bg-light-color !important;
-    background-image: @pattern-image-sfondo-1;
-    background-size: @pattern-size-sfondo-1;
-}*/
-
 .bg-white-color-path {
     fill: @white-color;
     stroke: @white-color;
 }
 
-
-/*START BORDI OBLIQUI ON / OFF*/
-/*@media screen and (min-width: 1280px) {
-    .bg-light-color {
-        clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% 100%);
-        border-top: 40px solid transparent;
-        border-bottom: 40px solid transparent;
-    }
-
-    .bg-light-color.no-plygon, .no-plygon .bg-light-color, .position-sticky .bg-light-color {
-        clip-path: polygon(0% 0%, 100% 0px, 100% 100%, 0% 100%) !important;
-        border-top: 0px solid transparent;
-        border-bottom: 0px solid transparent;
-    }
-
-    .bg-light-color.no-plygon-top {
-        clip-path: polygon(0% 0%, 100% 0px, 100% calc(100% - 40px), 0% 100%);
-        border-top: 0px solid transparent;
-        border-bottom: 40px solid transparent;
-    }
-
-    .bg-light-color.no-plygon-bottom {
-        clip-path: polygon(0% 0%, 100% 40px, 100% 100%, 0% 100%);
-        border-top: 40px solid transparent;
-        border-bottom: 0px solid transparent;
-    }
-
-    .div-poligon, .mbr-overlay-sfumato {
-        clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% 100%);
-        border-top: 0px solid transparent;
-        border-bottom: 0px solid transparent;
-    }
-
-    .div-poligon-alternate, .mbr-overlay-sfumato-alternate {
-        clip-path: polygon(0% 40px, 100% 0%, 100% 100%, 0% calc(100% - 40px));
-        border-top: 0px solid transparent;
-        border-bottom: 0px solid transparent;
-    }
-
-    .alternatecolor .bg-light-color {
-        border-top: 0 solid transparent;
-        border-bottom: 0 solid transparent;
-    }
-
-    .alternatecolor .bg-light-color:before {
-        position: absolute;
-        width: 100%;
-        content: "";
-        background: @bg-secondary-color;
-        right: 0;
-        left: 0;
-        z-index: 12;
-        top: unset;
-        margin-top: 0px;
-        height: 100px;
-        clip-path: polygon(0% 0%,100% 40px,100% calc(100% - 40px),0% calc(100% - 80px));
-    }
-
-    .alternatecolor .bg-light-color:after {
-        &:extend(.alternatecolor .bg-light-color:before);
-        top: unset;
-        clip-path: polygon(0% 80px,100% 40px,100% calc(100% - 40px),0% 100%);
-        margin-top: -100px;
-    }
-
-    ul.alternatecolor .bg-light-color:before {
-        &:extend(.alternatecolor .bg-light-color:before);
-        margin-top: -50px;
-    }
-
-    ul.alternatecolor .bg-light-color:after {
-        &:extend(.alternatecolor .bg-light-color:after);
-        margin-top: -50px;
-        top: unset;
-    }
-
-    .alternatecolor .bg-light-color.no-plygon:before, ul.alternatecolor .bg-light-color.no-plygon:before {
-        position: absolute;
-        width: 100%;
-        content: "";
-        background: @bg-secondary-color;
-        right: 0;
-        left: 0;
-        z-index: 12;
-        top: unset;
-        margin-top: 0px;
-        height: 0px;
-        clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%);
-    }
-
-    .alternatecolor .bg-light-color.no-plygon:after, ul.alternatecolor .bg-light-color.no-plygon:after {
-        &:extend(.alternatecolor .bg-light-color.no-plygon:before);
-        top: unset;
-        clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%);
-        margin-top: 0px;
-    }
-
-    .alternatecolor .bg-light-color .row {
-        border-top: 60px solid transparent;
-        border-bottom: 60px solid transparent;
-    }
-
-    .alternatecolor li:last-child .bg-light-color .row, .alternatecolor item:nth-last-child(2) .bg-light-color .row {
-        border-bottom: 0px solid transparent;
-    }
-
-    .alternatecolor li:last-child .bg-light-color, .alternatecolor item:nth-last-child(2) .bg-light-color {
-        clip-path: polygon(0% 0%, 100% 40px, 100% 100%, 0% 100%);
-    }
-
-    .alternatecolor li:last-child .bg-light-color:after, .alternatecolor item:nth-last-child(2) .bg-light-color:after {
-        display: none;
-    }
-
-    #divSuggeritiContainer.bg-light-color, .bg-light-color.position-sticky, #divCommentiscroll-ctrl .bg-light-color, ul li .a-176.col-12.bg-light-color {
-        clip-path: none;
-        border-top: 0 solid transparent;
-        border-bottom: 0 solid transparent;
-    }
-}*/
-/*END BORDI OBLIQUI ON / OFF*/
+.bg-gray-color {
+    background-color: @gray-color !important;
+}
+ 
 
 .bg-medium-color {
     background-color: @bg-medium-color !important;
@@ -782,14 +650,14 @@ i .fa {
     word-wrap: break-word;
     padding-bottom: 10px;
     /*Start svg decorazione sotto il titolo*/
-    padding-bottom: 21px;
+  /*  padding-bottom: 21px;
     background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='@{color-sottomeu-rgba}' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
     background-size: 135px 21px;
 
     &.noafter {
         background: none;
         background-size: 0;
-    }
+    }*/
     /*&::after {
         margin-top: 55px;
         content: "";

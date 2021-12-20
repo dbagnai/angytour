@@ -1217,7 +1217,7 @@ path.bg-light-color-path {
 }
 .bg-light-color {
   background-color: #ebf6f6 !important;
-  background-image: url(/images/pattern/ricicled5.png);
+  background-image: none;
   background-size: 15%;
 }
 .bg-light-color-path {
@@ -1229,144 +1229,13 @@ path.bg-light-color-path {
   background-image: url(/images/pattern/pattern-8.jpg);
   background-size: 564px;
 }
-/*.bg-light-color-pattern-1:before {
-    content: ' ';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    opacity: 0.6;
-    background-color: @bg-light-color !important;
-    background-image: @pattern-image-sfondo-1;
-    background-size: @pattern-size-sfondo-1;
-}*/
 .bg-white-color-path {
   fill: #fff;
   stroke: #fff;
 }
-/*START BORDI OBLIQUI ON / OFF*/
-/*@media screen and (min-width: 1280px) {
-    .bg-light-color {
-        clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% 100%);
-        border-top: 40px solid transparent;
-        border-bottom: 40px solid transparent;
-    }
-
-    .bg-light-color.no-plygon, .no-plygon .bg-light-color, .position-sticky .bg-light-color {
-        clip-path: polygon(0% 0%, 100% 0px, 100% 100%, 0% 100%) !important;
-        border-top: 0px solid transparent;
-        border-bottom: 0px solid transparent;
-    }
-
-    .bg-light-color.no-plygon-top {
-        clip-path: polygon(0% 0%, 100% 0px, 100% calc(100% - 40px), 0% 100%);
-        border-top: 0px solid transparent;
-        border-bottom: 40px solid transparent;
-    }
-
-    .bg-light-color.no-plygon-bottom {
-        clip-path: polygon(0% 0%, 100% 40px, 100% 100%, 0% 100%);
-        border-top: 40px solid transparent;
-        border-bottom: 0px solid transparent;
-    }
-
-    .div-poligon, .mbr-overlay-sfumato {
-        clip-path: polygon(0% 0%, 100% 40px, 100% calc(100% - 40px), 0% 100%);
-        border-top: 0px solid transparent;
-        border-bottom: 0px solid transparent;
-    }
-
-    .div-poligon-alternate, .mbr-overlay-sfumato-alternate {
-        clip-path: polygon(0% 40px, 100% 0%, 100% 100%, 0% calc(100% - 40px));
-        border-top: 0px solid transparent;
-        border-bottom: 0px solid transparent;
-    }
-
-    .alternatecolor .bg-light-color {
-        border-top: 0 solid transparent;
-        border-bottom: 0 solid transparent;
-    }
-
-    .alternatecolor .bg-light-color:before {
-        position: absolute;
-        width: 100%;
-        content: "";
-        background: @bg-secondary-color;
-        right: 0;
-        left: 0;
-        z-index: 12;
-        top: unset;
-        margin-top: 0px;
-        height: 100px;
-        clip-path: polygon(0% 0%,100% 40px,100% calc(100% - 40px),0% calc(100% - 80px));
-    }
-
-    .alternatecolor .bg-light-color:after {
-        &:extend(.alternatecolor .bg-light-color:before);
-        top: unset;
-        clip-path: polygon(0% 80px,100% 40px,100% calc(100% - 40px),0% 100%);
-        margin-top: -100px;
-    }
-
-    ul.alternatecolor .bg-light-color:before {
-        &:extend(.alternatecolor .bg-light-color:before);
-        margin-top: -50px;
-    }
-
-    ul.alternatecolor .bg-light-color:after {
-        &:extend(.alternatecolor .bg-light-color:after);
-        margin-top: -50px;
-        top: unset;
-    }
-
-    .alternatecolor .bg-light-color.no-plygon:before, ul.alternatecolor .bg-light-color.no-plygon:before {
-        position: absolute;
-        width: 100%;
-        content: "";
-        background: @bg-secondary-color;
-        right: 0;
-        left: 0;
-        z-index: 12;
-        top: unset;
-        margin-top: 0px;
-        height: 0px;
-        clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%);
-    }
-
-    .alternatecolor .bg-light-color.no-plygon:after, ul.alternatecolor .bg-light-color.no-plygon:after {
-        &:extend(.alternatecolor .bg-light-color.no-plygon:before);
-        top: unset;
-        clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%);
-        margin-top: 0px;
-    }
-
-    .alternatecolor .bg-light-color .row {
-        border-top: 60px solid transparent;
-        border-bottom: 60px solid transparent;
-    }
-
-    .alternatecolor li:last-child .bg-light-color .row, .alternatecolor item:nth-last-child(2) .bg-light-color .row {
-        border-bottom: 0px solid transparent;
-    }
-
-    .alternatecolor li:last-child .bg-light-color, .alternatecolor item:nth-last-child(2) .bg-light-color {
-        clip-path: polygon(0% 0%, 100% 40px, 100% 100%, 0% 100%);
-    }
-
-    .alternatecolor li:last-child .bg-light-color:after, .alternatecolor item:nth-last-child(2) .bg-light-color:after {
-        display: none;
-    }
-
-    #divSuggeritiContainer.bg-light-color, .bg-light-color.position-sticky, #divCommentiscroll-ctrl .bg-light-color, ul li .a-176.col-12.bg-light-color {
-        clip-path: none;
-        border-top: 0 solid transparent;
-        border-bottom: 0 solid transparent;
-    }
-}*/
-/*END BORDI OBLIQUI ON / OFF*/
+.bg-gray-color {
+  background-color: #f0f0f0 !important;
+}
 .bg-medium-color {
   background-color: #333333 !important;
 }
@@ -1403,7 +1272,7 @@ path.bg-light-color-path {
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .bg-figura-contatti {
-  background-image: url('/public/Files/con001000/1/guarda-mail-2.png') !important;
+  background-image: none !important;
 }
 .tx-primary-color {
   color: #098f8f !important;
@@ -1624,7 +1493,7 @@ a:hover {
   width: 100%;
   font-size: 0.8rem;
   font-weight: normal;
-  background-image: url(/images/pattern/ricicled4.png);
+  background-image: none;
   background-size: 30%;
 }
 .fixedtop .form-control,
@@ -1823,9 +1692,14 @@ h1 span:nth-child(1).mbr-section-title,
   word-wrap: break-word;
   padding-bottom: 10px;
   /*Start svg decorazione sotto il titolo*/
-  padding-bottom: 21px;
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='rgba(243, 198, 73, 0.8)' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
-  background-size: 135px 21px;
+  /*  padding-bottom: 21px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='@{color-sottomeu-rgba}' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
+    background-size: 135px 21px;
+
+    &.noafter {
+        background: none;
+        background-size: 0;
+    }*/
   /*&::after {
         margin-top: 55px;
         content: "";
@@ -1840,12 +1714,6 @@ h1 span:nth-child(1).mbr-section-title,
         display: none;
     }*/
   /*End svg decorazione sotto il titolo*/
-}
-.mbr-section-title.noafter,
-a .mbr-section-title.noafter,
-.title-block.noafter {
-  background: none;
-  background-size: 0;
 }
 h3.mbr-section-title.display-5.bg-dark-color.noafter {
   letter-spacing: 1px !important;
@@ -2410,7 +2278,7 @@ ul.footer-category-list {
   border-top: none;
   font-size: 1.1rem;
   padding: 25px 0px;
-  background-image: url(/images/pattern/ricicled4.png);
+  background-image: none;
   background-size: 30%;
 }
 .footer .copyright p {
@@ -2472,32 +2340,32 @@ ul.footer-category-list {
   content: "";
 }
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(1) {
-  background: url(/images/icon-trattore.png) center left no-repeat !important;
+  background: none center left no-repeat !important;
   background-size: 20px !important;
   padding-left: 42px;
 }
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(2) {
-  background: url(/images/icon-spina.png) center left no-repeat !important;
+  background: none center left no-repeat !important;
   background-size: 20px !important;
   padding-left: 42px;
 }
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(3) {
-  background: url(/images/icon-ingranaggio.png) center left no-repeat !important;
+  background: none center left no-repeat !important;
   background-size: 20px !important;
   padding-left: 42px;
 }
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(4) {
-  background: url(/images/icon-vaso-fiore.png) center left no-repeat !important;
+  background: none center left no-repeat !important;
   background-size: 20px !important;
   padding-left: 42px;
 }
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(5) {
-  background: url(/images/icon-paletta-dx.png) center left no-repeat !important;
+  background: none center left no-repeat !important;
   background-size: 20px !important;
   padding-left: 42px;
 }
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(6) {
-  background: url(/images/icon-tubo.png) center left no-repeat !important;
+  background: none center left no-repeat !important;
   background-size: 20px !important;
   padding-left: 42px;
 }
@@ -2537,7 +2405,7 @@ ul.footer-category-list {
 .footer-wrapper {
   padding: 20px 60px 50px 60px;
   background-color: #90cdcd;
-  background-image: url(/images/pattern/ricicled5.png);
+  background-image: none;
   background-size: 15%;
 }
 .footer .social-icons .social-media-icon {
@@ -3022,37 +2890,37 @@ ul.footer-category-list {
 }
 .navigazione-home #isoBannav1 li:nth-child(1) .work-image:hover:after,
 .navigazione-home #isoBannav1 div:nth-child(1) .work-image:hover:after {
-  background: url(/images/icon-trattore.png) center calc((100% - 0.1px) / 2) no-repeat !important;
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .navigazione-home #isoBannav1 li:nth-child(2) .work-image:hover:after,
 .navigazione-home #isoBannav1 div:nth-child(2) .work-image:hover:after {
-  background: url(/images/icon-spina.png) center calc((100% - 0.1px) / 2) no-repeat !important;
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .navigazione-home #isoBannav1 li:nth-child(3) .work-image:hover:after,
 .navigazione-home #isoBannav1 div:nth-child(3) .work-image:hover:after {
-  background: url(/images/icon-ingranaggio.png) center calc((100% - 0.1px) / 2) no-repeat !important;
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .navigazione-home #isoBannav1 li:nth-child(4) .work-image:hover:after,
 .navigazione-home #isoBannav1 div:nth-child(4) .work-image:hover:after {
-  background: url(/images/icon-vaso-fiore.png) center calc((100% - 0.1px) / 2) no-repeat !important;
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .navigazione-home #isoBannav1 li:nth-child(5) .work-image:hover:after,
 .navigazione-home #isoBannav1 div:nth-child(5) .work-image:hover:after {
-  background: url(/images/icon-paletta-dx.png) center calc((100% - 0.1px) / 2) no-repeat !important;
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .navigazione-home #isoBannav1 li:nth-child(6) .work-image:hover:after,
 .navigazione-home #isoBannav1 div:nth-child(6) .work-image:hover:after {
-  background: url(/images/icon-tubo.png) center calc((100% - 0.1px) / 2) no-repeat !important;
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
@@ -5662,7 +5530,7 @@ button.js-roundedpush:hover {
     opacity: 1 !important;
     border: none;
     padding: 0px 55px;
-    background-image: url(/images/pattern/ricicled4.png);
+    background-image: none;
     background-size: 20%;
     background-color: #f3c649;
     /*background: @bg-primary-color-sfumato;*/
@@ -5698,27 +5566,27 @@ button.js-roundedpush:hover {
     padding: 14px 14px 14px 40px !important;
   }
   .menuzord-menu li.catalogo-menu ul li:nth-child(6) {
-    background: url(/images/icon-tubo.png) 10px center no-repeat !important;
+    background: none 10px center no-repeat !important;
     background-size: 32px !important;
   }
   .menuzord-menu li.catalogo-menu ul li:nth-child(5) {
-    background: url(/images/icon-paletta-dx.png) 10px center no-repeat !important;
+    background: none 10px center no-repeat !important;
     background-size: 32px !important;
   }
   .menuzord-menu li.catalogo-menu ul li:nth-child(4) {
-    background: url(/images/icon-vaso-fiore.png) 10px center no-repeat !important;
+    background: none 10px center no-repeat !important;
     background-size: 32px !important;
   }
   .menuzord-menu li.catalogo-menu ul li:nth-child(3) {
-    background: url(/images/icon-ingranaggio.png) 10px center no-repeat !important;
+    background: none 10px center no-repeat !important;
     background-size: 32px !important;
   }
   .menuzord-menu li.catalogo-menu ul li:nth-child(2) {
-    background: url(/images/icon-spina.png) 10px center no-repeat !important;
+    background: none 10px center no-repeat !important;
     background-size: 32px !important;
   }
   .menuzord-menu li.catalogo-menu ul li:nth-child(1) {
-    background: url(/images/icon-trattore.png) 10px center no-repeat !important;
+    background: none 10px center no-repeat !important;
     background-size: 32px !important;
   }
   /*sotto sotto menu catalogo*/
@@ -6418,22 +6286,22 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
   background-size: 10% !important;
 }
 .firstbig-banner item:nth-of-type(2) .imgovercontainer.work-image:hover:after {
-  background: url(/images/icon-trattore.png) center calc((100% - 0.1px) / 2) no-repeat !important;
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .firstbig-banner item:nth-of-type(3) .imgovercontainer.work-image:hover:after {
-  background: url(/images/icon-spina.png) center calc((100% - 0.1px) / 2) no-repeat !important;
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .firstbig-banner item:nth-of-type(4) .imgovercontainer.work-image:hover:after {
-  background: url(/images/icon-ingranaggio.png) center calc((100% - 0.1px) / 2) no-repeat !important;
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .firstbig-banner item:nth-of-type(5) .imgovercontainer.work-image:hover:after {
-  background: url(/images/icon-vaso-fiore.png) center calc((100% - 0.1px) / 2) no-repeat !important;
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
@@ -7124,34 +6992,6 @@ svg path {
 /*------------------------------------
 ////| BANNER TESTATA HOME - 100% |////
 ------------------------------------*/
-/*-----------------------------------
-////| BANNER TESTATA HOME - 55% |////
------------------------------------*/
-/*@bg-width-768: 100%;
-@bg-max-width-768: 100%;
-@bg-path-768: polygon(0 0%, 99% 0%, 100% 101%, 0% 100%);
-
-@bg-width: 55%;
-@bg-max-width: 55%;
-@bg-size: cover;
-@bg-path: polygon(0 0%, 99% 0%, 80% 101%, 0% 100%);
-
-@bg-testata-opacity: @bg-primary-color;
-@bg-testata-color: @bg-fixedtop-color-sfumato-alpha;
-@title-testata-home-size: calc(18px + (28 - 18) * ((100vw - 768px) / (1200 - 768)));
-@title-testata-home-font: @testata-font;
-@title-testata-home-color: @white-color;
-@title-testata-home-weight: 700;
-
-@subtitle-testata-home-size: 1.5rem;
-@subtitle-testata-home-font: @testata-font;
-@subtitle-testata-home-color: @white-color;
-@subtitle-testata-home-weight: 400;
-
-@prezzo-testata-home-size: 2.5rem;
-@prezzo-testata-home-font: @testata-font;
-@prezzo-testata-home-color: @white-color;
-@prezzo-testata-home-weight: 400;*/
 /*----------------------------------
 /////| BANNER TESTATA FUNNEL |//////
 ----------------------------------*/

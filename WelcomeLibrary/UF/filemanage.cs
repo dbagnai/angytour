@@ -659,7 +659,8 @@ namespace WelcomeLibrary.UF
                                     //Using mozjpeg
                                     byte[] rawJpeg;
                                     using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
-                                        rawJpeg = mozJpeg.Encode(img, comprerc, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                        //rawJpeg = mozJpeg.Encode(img, comprerc, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                        rawJpeg = mozJpeg.Encode(img, comprerc);
                                     File.WriteAllBytes(Filename, rawJpeg);
 #endif
                                 }
@@ -741,7 +742,8 @@ namespace WelcomeLibrary.UF
                                 //Using mozjpeg
                                 byte[] rawJpeg;
                                 using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
-                                    rawJpeg = mozJpeg.Encode(img, comprerc, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                    //rawJpeg = mozJpeg.Encode(img, comprerc, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                    rawJpeg = mozJpeg.Encode(img, comprerc);
                                 File.WriteAllBytes(Filename, rawJpeg);
 
 #endif
@@ -904,7 +906,8 @@ namespace WelcomeLibrary.UF
                             //Using mozjpeg
                             byte[] rawJpeg;
                             using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
-                                rawJpeg = mozJpeg.Encode(img, comprerc, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                rawJpeg = mozJpeg.Encode(img, comprerc);
+                            //rawJpeg = mozJpeg.Encode(img, comprerc, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
                             File.WriteAllBytes(pathAnteprime + nomeAnteprima, rawJpeg);
                             if (generateversions)
                             {
@@ -912,28 +915,32 @@ namespace WelcomeLibrary.UF
                                 {
                                     byte[] rawJpeg_xs;
                                     using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
-                                        rawJpeg_xs = mozJpeg.Encode(img_xs, comprerc, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                        //rawJpeg_xs = mozJpeg.Encode(img_xs, comprerc, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                        rawJpeg_xs = mozJpeg.Encode(img_xs, comprerc);
                                     File.WriteAllBytes(pathAnteprime + filename_xs, rawJpeg_xs);
                                 }
                                 if ((!System.IO.File.Exists(pathAnteprime + filename_sm) || replacefile) && img_sm != null)
                                 {
                                     byte[] rawJpeg_sm;
                                     using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
-                                        rawJpeg_sm = mozJpeg.Encode(img_sm, comprerc, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                        //rawJpeg_sm = mozJpeg.Encode(img_sm, comprerc, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                        rawJpeg_sm = mozJpeg.Encode(img_sm, comprerc);
                                     File.WriteAllBytes(pathAnteprime + filename_sm, rawJpeg_sm);
                                 }
                                 if ((!System.IO.File.Exists(pathAnteprime + filename_md) || replacefile) && img_md != null)
                                 {
                                     byte[] rawJpeg_md;
                                     using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
-                                        rawJpeg_md = mozJpeg.Encode(img_md, comprerc, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                        //rawJpeg_md = mozJpeg.Encode(img_md, comprerc, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                        rawJpeg_md = mozJpeg.Encode(img_md, comprerc);
                                     File.WriteAllBytes(pathAnteprime + filename_md, rawJpeg_md);
                                 }
                                 if ((!System.IO.File.Exists(pathAnteprime + filename_lg) || replacefile) && img_lg != null)
                                 {
                                     byte[] rawJpeg_lg;
                                     using (MozJpegWrapper.MozJpeg mozJpeg = new MozJpegWrapper.MozJpeg())
-                                        rawJpeg_lg = mozJpeg.Encode(img_lg, comprerc, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                        //rawJpeg_lg = mozJpeg.Encode(img_lg, comprerc, true, MozJpegWrapper.TJFlags.ACCURATEDCT | MozJpegWrapper.TJFlags.DC_SCAN_OPT2 | MozJpegWrapper.TJFlags.TUNE_MS_SSIM);
+                                        rawJpeg_lg = mozJpeg.Encode(img_lg, comprerc);
                                     File.WriteAllBytes(pathAnteprime + filename_lg, rawJpeg_lg);
                                 }
                             }
