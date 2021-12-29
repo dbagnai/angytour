@@ -934,6 +934,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
         //chiudo tabella e riga relativa
         TestoMail += "</table></td><tr/>";
         //testo di chiusura
+        TestoMail += "<tr><td style=' font-size:14px;'><br/>" + references.ResMan("Common", Lingua, "TestoConfermaOrdine" + totali.Modalitapagamento).ToString() + " </td></tr>";
         TestoMail += "<tr><td style=' font-size:14px;'><br/>" + references.ResMan("Common", Lingua, "TestoConfermaOrdine").ToString() + " </td></tr>";
         TestoMail += "<tr><td style=' font-size:14px;'><br/>" + references.ResMan("Common", Lingua, "TestoSaluti").ToString() + "<br/>" + references.ResMan("Common", Lingua, "TestoHomeIndex").ToString() + "</td></td> <br/>";
 

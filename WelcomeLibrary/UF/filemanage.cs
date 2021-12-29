@@ -381,7 +381,7 @@ namespace WelcomeLibrary.UF
                 NomeCorretto = NomeCorretto.Replace("%", "");
                 NomeCorretto = NomeCorretto.Replace("'", "").ToLower();
                 //string NomeCorretto = Server.HtmlEncode(FotoUpload1.FileName);
-                if (System.IO.File.Exists(pathDestinazione))
+                if (System.IO.Directory.Exists(pathDestinazione))
                 {
                     if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
                 }
@@ -445,7 +445,7 @@ namespace WelcomeLibrary.UF
                 NomeCorretto = NomeCorretto.Replace("%", "");
                 NomeCorretto = NomeCorretto.Replace("'", "").ToLower();
                 //string NomeCorretto = Server.HtmlEncode(FotoUpload1.FileName);
-                if (System.IO.File.Exists(pathDestinazione))
+                if (System.IO.Directory.Exists(pathDestinazione))
                 {
                     if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto)) System.IO.File.Delete(pathDestinazione + "\\" + NomeCorretto);
                 }
