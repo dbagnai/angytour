@@ -1211,6 +1211,14 @@ namespace WelcomeLibrary.UF
                                         if (flexgallerycontainer.First().Attributes["myvalue1"].Value.ToLower() == "skip")
                                             templategallery = templategallery.Replace("skip=\"\"", "skip=\"true\"");
                                     }
+
+
+                                    if (flexgallerycontainer.First().Attributes.Contains("myvalue2"))
+                                    {
+
+                                        if (flexgallerycontainer.First().Attributes["myvalue2"].Value.ToLower() != "")
+                                            templategallery = templategallery.Replace("max-height=\"\"", "max-height=\"" + flexgallerycontainer.First().Attributes["myvalue2"].Value + "\"");
+                                    }
                                 }
 
                                 if ((flexgallerycontainer != null) && (flexgallerycontainer.Count() > 0))
@@ -3495,6 +3503,15 @@ namespace WelcomeLibrary.UF
                                     sb.Append("\">");
                                     sb.Append("<div class=\"slide-content\"  style=\"position:relative;padding: 1px\">");
 
+                                    int maxheightfromtemplate = 0;
+                                    if (nodetobind.Attributes.Contains("max-height"))
+                                    {
+                                        string myvalue = nodetobind.Attributes["max-height"].Value;
+                                        if (int.TryParse(myvalue, out maxheightfromtemplate))
+                                            maxheight = maxheightfromtemplate.ToString();
+                                    }
+
+
                                     string imgstyle = "max-width:100%;height:auto;";
                                     if (nodetobind.Attributes.Contains("style") && nodetobind.Attributes["style"].Value.Contains("max-height"))
                                     {
@@ -3510,7 +3527,7 @@ namespace WelcomeLibrary.UF
                                             }
                                         }
                                     }
-                                    if (maxheight != "")
+                                    if (maxheight != "" && maxheight != "0")
                                     {
                                         maxheight = maxheight.Replace("px", "");
                                         int calcheight = 0;
@@ -4846,7 +4863,7 @@ namespace WelcomeLibrary.UF
                             if (valore[0] != "" && valore[0] != "0")
                             {
                                 double _tmppz = 0;
-                                double.TryParse(valore[0] , out _tmppz);
+                                double.TryParse(valore[0], out _tmppz);
                                 ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,##0.00}", new object[] { _tmppz }) + ' ' + unit;
                                 //ret = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { _tmppz }) + ' ' + unit;
                             }

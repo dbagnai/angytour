@@ -173,7 +173,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                 //ResizeHeight = 633;//280
 
                 ResizeWidth = 1024;//360
-                ResizeHeight = 546;//280
+                ResizeHeight = 750;//280
             }
 
             if (Sezione.ToLower().Contains("banners-fascia-home"))
