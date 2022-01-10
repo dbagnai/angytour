@@ -463,7 +463,7 @@
                                                                     <%-- <asp:ValidationSummary runat="server" ID="Summary" class="" ValidationGroup="MailInfo" DisplayMode="BulletList"
                                                                         ShowSummary="true" HeaderText='<%# references.ResMan("Common", Lingua,"testoDatiMancanti")  %>' />--%>
 
-                                                                    <asp:ValidationSummary ID="Summary" ValidationGroup="MailInfo" runat="server" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="true" HeaderText='<%# references.ResMan("Common", Lingua,"testoDatiMancanti") +  "<br/><style> span.errorvalidateclass ~ * {  border: 2px solid red; }  </style>" %>' />
+                                                                    <asp:ValidationSummary ID="Summary" ValidationGroup="MailInfo" runat="server" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="true" HeaderText='<%# references.ResMan("Common", Lingua,"testoDatiMancanti")  +  "<br/><style> span.errorvalidateclass[style*=\"visibility: visible\"] + * {  border: 2px solid red; }  </style>" %>' />
 
                                                                     <%--AVVISO ERRORE TRATTAMENTO DATI NON SPUNTATO--%>
                                                                     <div id="recaptcharesponse" style="display: none;" class=""></div>
