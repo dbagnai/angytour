@@ -7,8 +7,8 @@ var CookiesPolicy = {
     css_element: null,
     view_element: true,
     cookie_name: 'CookiePolicy',
-    cookie_duration: '259200', // durata in minuti 
-    testo_introduttivo: 'Questo sito utilizza i cookies per offrirti un\'esperienza di navigazione migliore.Usando il nostro servizio accetti l\'impiego di cookie in accordo con la nostra cookie policy: <a href="#" id="link_open_cookie_policy">Scoprine di piu\' </a>.',
+    cookie_duration: '356', // durata in giorni   
+    testo_introduttivo: 'Questo sito e gli strumenti di terze parti in esso integrati trattano dati personali e fanno uso di Cookie, Pixel, Tags o altri identificatori necessari per il funzionamento e per il raggiungimento delle finalita\' descritte nella cookie policy. Cliccando sul pulsante ACCETTA dichiari di accettare l\'utilizzo di queste tecnologie. In alternativa puoi personalizzare le tue scelte cliccando su scopri di piu\'<br/>',
     bar_height: 13, // pixel 
     bar_padding: 3, // pixel 
 
@@ -48,7 +48,7 @@ var CookiesPolicy = {
         var html = '';
 
         html += '<div id="cookies_policy" class="cookies_policy" >';
-        html += ' <input id="link_close_cookie_policy" type="button" value="Ok">' + '' + CookiesPolicy.testo_introduttivo;
+        html += ' <input  class="btn btn-lg btn-primary"  id="link_close_cookie_policy" type="button" value="Accetta" />' + '<input class="btn btn-lg btn-primary" id="link_open_cookie_policy" type="button" value="Scopri di piu\'" />'  + '<div style="padding-left:5px;padding-right:5px">' + CookiesPolicy.testo_introduttivo  + "</div>" ;
         html += '</div>';
 
         return html;
@@ -61,9 +61,9 @@ var CookiesPolicy = {
 
         css += '<style type="text/css">';
         css += '.ui-mobile [data-role=page]{top:25px !important}';
-        css += '.cookies_policy{box-sizing: initial;position:fixed; bottom:0; padding-top:' + CookiesPolicy.bar_padding + 'px; padding-bottom:' + CookiesPolicy.bar_padding + 'px;  background-color:#ffffff; border-bottom:1px solid #ccc; color:#333; text-align:center;  width:100%; font-family:verdana; font-size:13px; z-index:19999}';
-        css += '.cookies_policy a:link{color:#333; text-decoration:underline; padding:0px 0px; } .cookies_policy a:visited{color:#333; text-decoration:underline} .cookies_policy a:hover{color:#ccc; text-decoration:underline}';
-        css += '.cookies_policy input[type=button]{background-color:#000000; color:white; cursor:pointer; border:gray;  padding:0px 0px; height: 35px; }';
+        css += '.cookies_policy{box-sizing: initial;position:fixed; bottom:0; padding-top:' + CookiesPolicy.bar_padding + 'px; padding-bottom:' + CookiesPolicy.bar_padding + 'px;  background-color:#ffffff; border-bottom:1px solid #ccc; color:#333; text-align:center;  width:100%; font-family:verdana; font-size:11px; z-index:19999; line-height:15px}';
+        css += '.cookies_policy a:link{color:#333;} .cookies_policy a:visited{color:#333; text-decoration:underline} .cookies_policy a:hover{color:#ccc; text-decoration:underline}';
+        css += '.cookies_policy input[type=button]{ cursor:pointer;  }';
         css += '</style>';
 
         return css;
@@ -230,7 +230,7 @@ var CookiesPolicy = {
     HideCookiesPolicy: function () {
 
         CookiesPolicy.SetCookie(CookiesPolicy.cookie_name, '1', CookiesPolicy.cookie_duration, '/');
-
+                //fbq('consent', 'grant'); //per abilitare il tracciamento pixel ( prima devi settare pero fbq('consent', 'revoke');  prima dell'init del pixel!)
         if (CookiesPolicy.isjQuery()) {
             jQuery('#cookies_policy').remove();
         } else {
