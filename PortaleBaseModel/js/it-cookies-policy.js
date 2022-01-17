@@ -7,7 +7,7 @@ var CookiesPolicy = {
     css_element: null,
     view_element: true,
     cookie_name: 'CookiePolicy',
-    cookie_duration: '356', // durata in giorni   
+    cookie_duration: '180', // durata in giorni   
     testo_introduttivo: 'Questo sito e gli strumenti di terze parti in esso integrati trattano dati personali e fanno uso di Cookie, Pixel, Tags o altri identificatori necessari per il funzionamento e per il raggiungimento delle finalita\' descritte nella cookie policy. Cliccando sul pulsante ACCETTA dichiari di accettare l\'utilizzo di queste tecnologie. In alternativa puoi personalizzare le tue scelte cliccando su scopri di piu\'<br/>',
     bar_height: 13, // pixel 
     bar_padding: 3, // pixel 
@@ -24,20 +24,21 @@ var CookiesPolicy = {
         CookiesPolicy.view_element = CookiesPolicy.IsRequiredView();
 
         if (CookiesPolicy.view_element) CookiesPolicy.ViewCookiesPolicy();
+        //else //dovrei abilitare i servizi approvati
 
         //////////////////////////////////////////////////////////
         //Spengo i cookies su scroll
-        if (CookiesPolicy.isjQuery())
-            jQuery(window).scroll(function () {
-                if (jQuery(window).scrollTop() > 200) {
-                    if (CookiesPolicy.isjQuery()) {
-                        jQuery('#cookies_policy').remove();
-                    } else {
-                        var el = document.getElementById('cookies_policy');
-                        el.parentNode.removeChild(el);
-                    }
-                }
-            });
+        //if (CookiesPolicy.isjQuery())
+        //    jQuery(window).scroll(function () {
+        //        if (jQuery(window).scrollTop() > 200) {
+        //            if (CookiesPolicy.isjQuery()) {
+        //                jQuery('#cookies_policy').remove();
+        //            } else {
+        //                var el = document.getElementById('cookies_policy');
+        //                el.parentNode.removeChild(el);
+        //            }
+        //        }
+        //    });
         //////////////////////////////////////////////////////////
 
 
