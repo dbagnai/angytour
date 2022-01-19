@@ -2,6 +2,18 @@
     .bg-color-sottomeu-tenue.no-image {
         background-image: none !important;
     }
+
+    .button-carrello svg {
+        fill: #fff;
+        stroke: #fff;
+    }
+
+    @media (max-width: 1179px) {
+        #divContainerPromo .owl-pagination {
+            /*opacity: 0;*/
+            display: none;
+        }
+    }
 </style>
 
 <!-- Scroller  -->
@@ -26,7 +38,7 @@
                         <div class="bind" mybind="Prezzo" mybind1="PrezzoListino" format="formatlabelsconto"></div>
 
                         <a target="_self" href="link" class="bind mb-3" title="titolo" mybind="Id" style="overflow:hidden">
-                            <div class="work-image imgovercontainer m-0" style="max-height:300px; overflow:hidden">
+                            <div class="work-image imgovercontainer d-flex align-items-center" style="height:260px;overflow:hidden">
                                 <img src="/images/dummylogo.png" alt="" class="bind lazyOwl" mybind="Id" />
                                 <!--<div class="item-img-overlay">
                                 </div>-->
@@ -34,14 +46,14 @@
                         </a>
 
 
-                        <div class="body-banner-slider px-3" style="max-height:125px">
+                        <div class=" px-3" style="max-height:125px;min-height:110px">
                             <h3 class="h3-body-title-1 mb-0">
                                 <a class="bind title-banner-slider" target="_self" href="link" title="titolo" mybind="Id">
                                     <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
                                 </a>
                             </h3>
-                            <a class="bind subtitle-banner-slider mt-2" target="_self" href="link" title="titolo" mybind="Id">
-                                <p class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></p>
+                            <a class="bind subtitle-banner-slider" target="_self" href="link" title="titolo" mybind="Id">
+                                <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
                             </a>
                             <!--<p style="font-size:0.9rem" class="bind" mybind="Id" myvalue="descrizione" myvalue1="200" format="formatdescrizione"></p>-->
                         </div>
@@ -49,23 +61,23 @@
                         <div class="container bg-color-sottomeu-tenue no-image mt-3">
                             <div class="row align-items-end py-3">
 
-                                <div class="col float-left text-left">
+                                <div class="col d-flex justify-content-start align-items-center ">
                                     <!-- DETTAGLI PRODOTTO -->
-                                    <div class="float-left my-0 mr-2 d-flex">
+                                    <div class="col-auto">
                                         <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
-                                            <div class="float-right bind button-carrello" mybind="Id" myvalue="vedi" format="formatlabelresource"></div>
+                                            <div class="bind button-carrello d-flex align-items-center justify-content-center" mybind="Id" myvalue="vedi" format="formatlabelresource"></div>
                                         </a>
                                     </div>
                                     <!-- AGGIUNGI AL CARRELLO -->
-                                    <div id="carrello-click" class="float-left my-0 bind carrello-stop" style="z-index:1;height:100%" mybind="Id" mybind1="Qta_vendita" mybind2="Xmlvalue" mybind3="Prezzo" format="formatbtncarrello">
+                                    <div id="carrello-click" class="bind carrello-stop" mybind="Id" mybind1="Qta_vendita" mybind2="Xmlvalue" mybind3="Prezzo" format="formatbtncarrello">
                                     </div>
 
                                 </div>
 
                                 <!-- PREZZO -->
-                                <div class="col-auto float-right text-right prezzo-responsive">
-                                    <span class="bind tx-primary-color" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta" style="line-height: 2vw;"></span><br/>
-                                    <span style="font-size:0.6em;text-decoration:line-through;" class="bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                                <div class="col-auto float-right text-right">
+                                    <span class="bind tx-primary-color scalablefont-small" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta" style="line-height: 2vw;"></span><br />
+                                    <span style="font-size:0.6em;text-decoration:line-through;" class="bind tx-secondary-color scalablefont-smallest" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                                 </div>
 
                                 <div class="clearfix"></div>

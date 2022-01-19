@@ -3724,7 +3724,9 @@ namespace WelcomeLibrary.UF
                                     catch
                                     {
                                     }
-                                    if (string.IsNullOrEmpty(descrizione)) descrizione = (fileslist[j]);
+                                    //if (string.IsNullOrEmpty(descrizione)) descrizione = (fileslist[j]); //metto il nome in mancanza di descrizione
+                                    if (string.IsNullOrEmpty(descrizione)) descrizione = WelcomeLibrary.UF.ResourceManagement.ReadKey("common", Lingua, "testoallegato").Valore;
+
                                     sb.Append(descrizione);
                                     sb.Append("</a>");
                                 }

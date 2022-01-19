@@ -2,11 +2,9 @@
     .slidercycle > div {
         display: none
     }
-
-        .slidercycle > div:nth-child(1) {
-            display: block
-        }
-
+    .slidercycle > div:nth-child(1) {
+        display: block
+    }
     div.cycle-pager {
         position: absolute;
         display: inline-block;
@@ -14,7 +12,6 @@
         z-index: 95;
         bottom: 10px;
     }
-
     .cycle-pager span {
         display: block;
         float: left;
@@ -29,7 +26,6 @@
         margin-right: 10px;
         cursor: pointer;
     }
-
     .cycle-pager-active {
         background: #000 !important;
     }
@@ -54,7 +50,7 @@
         </div>
     </div>
 </div>
-<div class="position-absolute w-100 h-100" style="top:0px;left:0px">
+<div class="position-absolute w-100 h-100 d-none d-md-block" style="top:0px;left:0px">
     <div class="replaceid-pager cycle-pager" style="left:50%"></div>
     <div class="replaceid-prev cycle-prev position-absolute" style="z-index: 96;  bottom:50%;left: 0px;display:none"><i class="fa fa-2x fa-chevron-left black-color"></i></div>
     <div class="replaceid-next cycle-next  position-absolute" style="z-index: 96; bottom:50%; right: 0px;display:none"><i class="fa fa-2x fa-chevron-right black-color"></i></div>

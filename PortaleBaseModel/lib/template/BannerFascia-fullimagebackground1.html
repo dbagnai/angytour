@@ -1,0 +1,56 @@
+﻿<style>
+    .cicle-1 .slidercycle > div {
+        display: none
+    }
+    .slidercycle > div:nth-child(1) {
+        display: block
+    }
+    .cicle-1 div.cycle-pager {
+        position: absolute;
+        display: inline-block;
+        height: 20px;
+        z-index: 95;
+        bottom: 10px;
+    }
+    .cicle-1 .cycle-pager span {
+        display: block;
+        float: left;
+        width: 20px;
+        height: 20px;
+        text-indent: -999em;
+        background: #fff;
+        border-radius: 20px;
+        -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        box-shadow: 0 0 1px 1px #707173;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+    .cicle-1 .cycle-pager-active {
+        background: #000 !important;
+    }
+    /* Setta l'altezza del contenitore dei banner*/
+    .cicle-1 .heightcontainerbanner {
+        /* height: 600px; */
+        height: calc(75vh);
+        /*   height: calc(100vh - 90px) !important;*/
+    }
+</style>
+<div class="cicle-1">
+    <div id="replaceid" data-prev="+ div > div.cycle-prev" data-next="+ div > div.cycle-next" data-pager="+ div > div.cycle-pager" data-cycle-log="false" data-cycle-timeout="3500" data-cycle-speed="500" data-cycle-pause-on-hover="false" data-cycle-slides="> div" data-cycle-auto-height="container" style="z-index:95;" class="slidercycle">
+        <div class="w-100 heightcontainerbanner">
+            <!--VISUALIZZAZIONE DESKTOP-->
+            <div class="w-100 h-100 m-0 position-relative imgbackstyle imgback bind lazy row align-items-center" mybind="Id">
+                <!--<div class="mbr-overlay-gradient"></div>-->
+                <div class="position-relative w-100 align-self-end" style="z-index:96">
+                    <div class="bind" mybind="Id" myvalue="titolo" format="formattestoreplace"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="position-absolute w-100 h-100" style="top:0px;left:0px">
+        <div class="replaceid-pager cycle-pager" style="left:50%"></div>
+        <div class="replaceid-prev cycle-prev position-absolute" style="z-index: 96;  bottom:50%;left: 0px;display:none;cursor:pointer"><i class="fa fa-2x fa-chevron-left black-color"></i></div>
+        <div class="replaceid-next cycle-next  position-absolute" style="z-index: 96; bottom:50%; right: 0px;display:none;cursor:pointer"><i class="fa fa-2x fa-chevron-right black-color"></i></div>
+    </div>
+</div>

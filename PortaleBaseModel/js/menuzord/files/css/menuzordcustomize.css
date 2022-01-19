@@ -366,7 +366,8 @@
 }
 
 .menuzord-menu > li {
-    margin-top: 50px;
+    /*margin-top: 50px;*/
+    margin-top: 0px;
 }
 
 .logotop .menuzord-menu > li {
@@ -506,10 +507,13 @@
 }
 
 .menuzord .showhide {
-    float: left;
+  /*  float: left;*/
     height: 27px;
     padding: 15px 0px 20px 0px;
     margin-bottom: 20px;
+    position:absolute;
+    z-index:99;
+    left:10px;
 }
 
 .menuzord.sec-menu .showhide {
