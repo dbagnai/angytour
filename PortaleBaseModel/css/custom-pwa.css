@@ -1336,6 +1336,15 @@ path.bg-light-color-path {
   /*background-color: #f9f9f9;*/
   background-color: #f9f9f9;
 }
+.title-weight {
+  font-weight: 400;
+}
+.title-weight-1 {
+  font-weight: 700;
+}
+.subtitle-weight {
+  font-weight: 400;
+}
 /* Stilizzazione selectbox comune per safari !!*/
 select.form-control {
   -moz-appearance: none;
@@ -1399,6 +1408,18 @@ h6 {
 .h1-body-title {
   font-size: 1.3rem;
   font-weight: bold;
+}
+.font-weight-light {
+  font-weight: 400 !important;
+}
+.font-weight-medium {
+  font-weight: 600 !important;
+}
+.font-weight-strong {
+  font-weight: 800 !important;
+}
+.font-italic {
+  font-style: italic;
 }
 hr {
   margin: 10px 0px;
@@ -2450,7 +2471,7 @@ ul.footer-category-list {
   /*    animation-duration: 70s;*/
   animation-iteration-count: infinite;
   opacity: 0;
-  font-size: calc(28px + 1vw + 1vh + 1vmin) !important;
+  font-size: calc(28px + 1vw + 1vh + 0.5vmin) !important;
 }
 .titolo2videohome {
   animation: titolo2 50s;
@@ -3533,7 +3554,7 @@ select.form-control:not([size]):not([multiple]) {
   position: absolute;
   right: 0;
   top: 0;
-  z-index: 1;
+  z-index: 0;
 }
 .mbr-overlay-white {
   background-color: rgba(255, 255, 255, 0.6);
@@ -5456,7 +5477,7 @@ button.js-roundedpush:hover {
 }
 .menutext-1 {
   color: #077777;
-  font-size: calc(15px + 0.12vw + 0.12vh + 0.06vmin) !important;
+  font-size: calc(16px + 0.15vw + 0.15vh + 0.075vmin) !important;
   font-family: 'Fira Sans', sans-serif !important;
   font-weight: 400;
   font-style: normal;
@@ -6603,21 +6624,31 @@ Modify  class per jqxcalendar
 }
 /* fine callout con bordi */
 /* classi per scalatura forzata dei caratteri */
+.scalablefont-huge,
+.scalablefont-huge:hover {
+  font-size: calc(30px + 2.8vw + 2.8vh + 0.3vmin) !important;
+  line-height: 125% !important;
+}
 .scalable-extrime,
 .scalablefont-extrim,
 .scalable-extrime:hover,
 .scalablefont-extrim:hover {
-  font-size: calc(30px + 2vw + 2vh + 2vmin) !important;
+  font-size: calc(30px + 2vw + 2vh + 1vmin) !important;
   line-height: 125% !important;
 }
 .scalablefont-testata-extrime,
 .scalablefont-testata-extrime:hover {
-  font-size: calc(30px + 2vw + 1vh + 1vmin) !important;
+  font-size: calc(30px + 2vw + 2vh + 1vmin) !important;
+  line-height: 125% !important;
+}
+.scalablefont-medium2-extrime,
+.scalablefont-medium2-extrime:hover {
+  font-size: calc(28px + 1.4vw + 1.4vh + 0.7vmin) !important;
   line-height: 125% !important;
 }
 .scalablefont-medium-extrime,
 .scalablefont-medium-extrime:hover {
-  font-size: calc(28px + 1vw + 1vh + 1vmin) !important;
+  font-size: calc(28px + 1vw + 1vh + 0.5vmin) !important;
   line-height: 125% !important;
 }
 .scalablefont-big,
@@ -6626,8 +6657,7 @@ Modify  class per jqxcalendar
   line-height: 125% !important;
 }
 .scalablefont-big.testo-banner-offerta {
-  line-height: 125% !important;
-  /*line-height: 150% !important;*/
+  line-height: 120% !important;
 }
 .scalablefont-medium-big,
 .scalablefont-medium-big:hover {
@@ -6637,7 +6667,7 @@ Modify  class per jqxcalendar
 .scalablefont-medium,
 .scalablefont-medium:hover {
   font-size: calc(20px + 0.35vw + 0.35vh + 0.175vmin) !important;
-  /*line-height: normal !important;*/
+  line-height: 125% !important;
 }
 .scalablefont-small-medium,
 .scalablefont-small-medium:hover {
@@ -6652,8 +6682,68 @@ Modify  class per jqxcalendar
 }
 .scalablefont-smallest,
 .scalablefont-smallest:hover {
-  font-size: calc(15px + 0.12vw + 0.12vh + 0.06vmin) !important;
+  font-size: calc(16px + 0.15vw + 0.15vh + 0.075vmin) !important;
   line-height: normal !important;
+}
+@media screen and (max-width: 600px) {
+  .scalablefont-huge,
+  .scalablefont-huge:hover {
+    font-size: calc(28px + 1vw + 1vh + 0.5vmin) !important;
+    line-height: 105% !important;
+  }
+  .scalable-extrime,
+  .scalablefont-extrim,
+  .scalable-extrime:hover,
+  .scalablefont-extrim:hover {
+    font-size: calc(30px + 0.7vw + 0.7vh + 0.3vmin) !important;
+    line-height: 105% !important;
+  }
+  .scalablefont-testata-extrime,
+  .scalablefont-testata-extrime:hover {
+    font-size: calc(24px + 0.6vw + 0.6vh + 0.3vmin) !important;
+    line-height: 105% !important;
+  }
+  .scalablefont-medium2-extrime,
+  .scalablefont-medium2-extrime:hover {
+    font-size: calc(22px + 0.4vw + 0.4vh + 0.2vmin) !important;
+    line-height: 105% !important;
+  }
+  .scalablefont-medium-extrime,
+  .scalablefont-medium-extrime:hover {
+    font-size: calc(22px + 0.4vw + 0.4vh + 0.2vmin) !important;
+    line-height: 105% !important;
+  }
+  .scalablefont-big,
+  .scalablefont-big:hover {
+    font-size: calc(22px + 0.4vw + 0.4vh + 0.2vmin) !important;
+    line-height: 105% !important;
+  }
+  .scalablefont-medium-big,
+  .scalablefont-medium-big:hover {
+    font-size: calc(20px + 0.3vw + 0.3vh + 0.15vmin) !important;
+    line-height: 105% !important;
+  }
+  .scalablefont-medium,
+  .scalablefont-medium:hover {
+    font-size: calc(20px + 0.3vw + 0.3vh + 0.15vmin) !important;
+    line-height: 105% !important;
+  }
+  .scalablefont-small-medium,
+  .scalablefont-small-medium:hover {
+    font-size: calc(18px + 0.2vw + 0.2vh + 0.1vmin) !important;
+    line-height: 105% !important;
+  }
+  .scalablefont-small,
+  .scalablefont-small:hover {
+    font-size: calc(16px + 0.18vw + 0.18vh + 0.09vmin) !important;
+    line-height: normal !important;
+    line-height: 150% !important;
+  }
+  .scalablefont-smallest,
+  .scalablefont-smallest:hover {
+    font-size: calc(16px + 0.18vw + 0.18vh + 0.09vmin) !important;
+    line-height: 105% !important;
+  }
 }
 /*************************************************************************************************/
 /*section SEPARATORS*/
@@ -6881,6 +6971,14 @@ svg path {
   .mbr-parallax-background.bg-light-color-pattern-1 {
     background-image: none !important;
   }
+  .mbr-section.mobile-back {
+    background-image: none !important;
+    background-color: #ebf6f6 !important;
+    background-size: 100% 100% !important;
+  }
+  .mbr-overlay-white1 {
+    background-color: rgba(255, 255, 255, 0);
+  }
 }
 /*************************************************************************************************/
 /*Rifiniture guerrino*/
@@ -6967,6 +7065,7 @@ svg path {
 /*----------------------------------
 ///////////| FONT PAGE |///////////
 ----------------------------------*/
+/* dimensioni scalabili sotto i 600 px*/
 /**/
 /*@title-text-transform: uppercase;*/
 /**/

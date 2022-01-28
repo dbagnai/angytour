@@ -243,6 +243,17 @@ path.bg-light-color-path {
     background-color: rgb(249,249,249);
 }
 
+.title-weight {
+    font-weight: @title-weight;
+}
+
+.title-weight-1 {
+    font-weight: @title-weight-1;
+}
+
+.subtitle-weight {
+    font-weight: @subtitle-weight;
+}
 
 /* Stilizzazione selectbox comune per safari !!*/
 select.form-control {
@@ -322,6 +333,22 @@ h6 {
     font-weight: bold;
 }
 
+
+.font-weight-light {
+   font-weight: @font-weight-light  !important;
+}
+
+.font-weight-medium {
+    font-weight: @font-weight-medium !important;
+}
+
+.font-weight-strong {
+    font-weight: @font-weight-strong !important;
+}
+
+.font-italic {
+    font-style: italic;
+}
 
 hr {
     margin: 10px 0px;
@@ -2725,7 +2752,7 @@ select.form-control:not([size]):not([multiple]) {
     position: absolute;
     right: 0;
     top: 0;
-    z-index: 1;
+    z-index: 0;
 }
 
 .mbr-overlay-white {
@@ -6144,6 +6171,13 @@ Modify  class per jqxcalendar
 /* fine callout con bordi */
 
 /* classi per scalatura forzata dei caratteri */
+
+.scalablefont-huge, .scalablefont-huge:hover {
+    font-size: @scalable-huge-font-size !important;
+    line-height: 125% !important;
+}
+
+
 .scalable-extrime, .scalablefont-extrim, .scalable-extrime:hover, .scalablefont-extrim:hover {
     font-size: @scalable-extrime-font-size !important;
     line-height: 125% !important;
@@ -6151,6 +6185,11 @@ Modify  class per jqxcalendar
 
 .scalablefont-testata-extrime, .scalablefont-testata-extrime:hover {
     font-size: @scalable-testata-extrime-font-size !important;
+    line-height: 125% !important;
+}
+
+.scalablefont-medium2-extrime, .scalablefont-medium2-extrime:hover {
+    font-size: @scalable-medium2-extrime-font-size !important;
     line-height: 125% !important;
 }
 
@@ -6165,8 +6204,7 @@ Modify  class per jqxcalendar
 }
 
 .scalablefont-big.testo-banner-offerta {
-    line-height: 125% !important;
-    /*line-height: 150% !important;*/
+    line-height: 120% !important;
 }
 
 .scalablefont-medium-big, .scalablefont-medium-big:hover {
@@ -6176,7 +6214,7 @@ Modify  class per jqxcalendar
 
 .scalablefont-medium, .scalablefont-medium:hover {
     font-size: @scalable-medium-font-size !important;
-    /*line-height: normal !important;*/
+    line-height: 125% !important;
 }
 
 .scalablefont-small-medium, .scalablefont-small-medium:hover {
@@ -6195,6 +6233,71 @@ Modify  class per jqxcalendar
     font-size: @scalable-smallest-font-size !important;
     line-height: normal !important;
 }
+
+
+@media screen and (max-width: 600px) {
+
+
+    .scalablefont-huge, .scalablefont-huge:hover {
+        font-size: @scalable-huge-font-size-600 !important;
+        line-height: 105% !important;
+    }
+
+
+    .scalable-extrime, .scalablefont-extrim, .scalable-extrime:hover, .scalablefont-extrim:hover {
+        font-size: @scalable-extrime-font-size-600 !important;
+        line-height: 105% !important;
+    }
+
+    .scalablefont-testata-extrime, .scalablefont-testata-extrime:hover {
+        font-size: @scalable-testata-extrime-font-size-600 !important;
+        line-height: 105% !important;
+    }
+
+    .scalablefont-medium2-extrime, .scalablefont-medium2-extrime:hover {
+        font-size: @scalable-medium2-extrime-font-size-600 !important;
+        line-height: 105% !important;
+    }
+
+    .scalablefont-medium-extrime, .scalablefont-medium-extrime:hover {
+        font-size: @scalable-medium-extrime-font-size-600 !important;
+        line-height: 105% !important;
+    }
+
+    .scalablefont-big, .scalablefont-big:hover {
+        font-size: @scalable-big-font-size-600 !important;
+        line-height: 105% !important;
+    }
+
+    .scalablefont-medium-big, .scalablefont-medium-big:hover {
+        font-size: @scalable-medium-big-font-size-600 !important;
+        line-height: 105% !important;
+    }
+
+    .scalablefont-medium, .scalablefont-medium:hover {
+        font-size: @scalable-medium-font-size-600 !important;
+        line-height: 105% !important;
+    }
+
+    .scalablefont-small-medium, .scalablefont-small-medium:hover {
+        font-size: @scalable-small-medium-font-size-600 !important;
+        line-height: 105% !important;
+    }
+
+
+    .scalablefont-small, .scalablefont-small:hover {
+        font-size: @scalable-small-font-size-600 !important;
+        line-height: normal !important;
+        line-height: 150% !important;
+    }
+
+    .scalablefont-smallest, .scalablefont-smallest:hover {
+        font-size: @scalable-smallest-font-size-600 !important;
+        line-height: 105% !important;
+    }
+}
+
+
 
 /*************************************************************************************************/
 /*section SEPARATORS*/
@@ -6465,6 +6568,15 @@ svg path {
 @media (max-width: 576px) {
     .mbr-parallax-background.bg-light-color-pattern-1 {
         background-image: none !important
+    }
+    .mbr-section.mobile-back {
+        background-image: none !important;
+        background-color: @bg-light-color !important;
+        background-size: 100% 100% !important;
+    }
+
+    .mbr-overlay-white1 {
+        background-color: rgba(255, 255, 255, 0.0);
     }
 }
 
