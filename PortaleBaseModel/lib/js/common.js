@@ -138,6 +138,12 @@ function loadvariables(result) { //se precarichi questa roba chiamando la funzio
         JSONcar2 = JSON.parse((dictresources["JSONcar2"]));
     if (dictresources["JSONcar3"] != null && dictresources["JSONcar3"] != '')
         JSONcar3 = JSON.parse((dictresources["JSONcar3"]));
+    if (dictresources["JSONcar4"] != null && dictresources["JSONcar4"] != '')
+        JSONcar4 = JSON.parse((dictresources["JSONcar4"]));
+    if (dictresources["JSONcar5"] != null && dictresources["JSONcar5"] != '')
+        JSONcar5 = JSON.parse((dictresources["JSONcar5"]));
+    if (dictresources["JSONcar6"] != null && dictresources["JSONcar6"] != '')
+        JSONcar6 = JSON.parse((dictresources["JSONcar6"]));
     ////////////////ALTRE VARIABILI DI RIFERIMENTO SPECIFICHE////////////////////////////////////////
 
     referencesloaded = true;
