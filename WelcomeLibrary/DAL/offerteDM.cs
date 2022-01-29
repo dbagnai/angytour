@@ -5695,18 +5695,18 @@ namespace WelcomeLibrary.DAL
                 {
                     case "GB":
                         testotitolo = _o.DenominazioneGB;
-                        descrizione = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DescrizioneGB, 30000, true));
-                        datitecnici = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DatitecniciGB, 30000, true));
+                        descrizione = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DescrizioneGB, 300000, true));
+                        datitecnici = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DatitecniciGB, 300000, true));
                         break;
                     case "RU":
                         testotitolo = _o.DenominazioneRU;
-                        descrizione = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DescrizioneRU, 30000, true));
-                        datitecnici = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DatitecniciRU, 30000, true));
+                        descrizione = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DescrizioneRU, 300000, true));
+                        datitecnici = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DatitecniciRU, 300000, true));
                         break;
                     case "FR":
                         testotitolo = _o.DenominazioneFR;
-                        descrizione = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DescrizioneFR, 30000, true));
-                        datitecnici = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DatitecniciFR, 30000, true));
+                        descrizione = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DescrizioneFR, 300000, true));
+                        datitecnici = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DatitecniciFR, 300000, true));
                         break;
                     default:
                         testotitolo = _o.DenominazioneI;
