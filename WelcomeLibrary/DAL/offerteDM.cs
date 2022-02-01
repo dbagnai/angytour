@@ -10,6 +10,7 @@ using System.Data.SQLite;
 using Newtonsoft.Json;
 using ActiveUp.Net.Mail;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace WelcomeLibrary.DAL
 {
@@ -7487,6 +7488,7 @@ namespace WelcomeLibrary.DAL
             {
                 CreaRssFeed("I", item.Codice);
                 CreaRssFeed("I", item.Codice, "", "", true);
+                CreaRssFeedFacebook("I", item.Codice, "", "");
             }
         }
         /// <summary>
@@ -7935,6 +7937,464 @@ namespace WelcomeLibrary.DAL
             WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
 
         }
+
+        /// <summary>
+        /// Removes control characters and other non-UTF-8 characters
+        /// </summary>
+        /// <param name="inString">The string to process</param>
+        /// <returns>A string with no control characters or entities above 0x00FD</returns>
+        public static string RemoveTroublesomeCharacters(string inString)
+        {
+            if (inString == null) return null;
+
+            StringBuilder newString = new StringBuilder();
+            char ch;
+
+            for (int i = 0; i < inString.Length; i++)
+            {
+
+                ch = inString[i];
+                // remove any characters outside the valid UTF-8 range as well as all control characters
+                // except tabs and new lines
+                //if ((ch < 0x00FD && ch > 0x001F) || ch == '\t' || ch == '\n' || ch == '\r')
+                //if using .NET version prior to 4, use above logic
+                if (XmlConvert.IsXmlChar(ch)) //this method is new in .NET 4
+                {
+                    newString.Append(ch);
+                }
+            }
+            return newString.ToString();
+
+        }
+        public void CreaRssFeedFacebook(string Lng, string FiltroTipologia = "", string titolo = "", string descrizione = "")
+        {
+            WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();
+
+            titolo = (ConfigManagement.ReadKey("Nome") ?? "");
+            string descrizionefeed = (ConfigManagement.ReadKey("Descrizione") ?? "");
+
+            //string Lingua = "I";
+            string Lingua = Lng;
+            string titolofeed = titolo;
+            TipologiaOfferte item = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == FiltroTipologia); });
+            if (item != null)
+                titolofeed += " " + item.Descrizione;
+
+            string logfilename = "LogRss.txt";
+            //string stringabase = "articoli/";
+            System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
+
+            string PathFileXml = WelcomeLibrary.STATIC.Global.percorsoFisicoComune; //Percorsi fisico comune per l'appoggio dell'xml per il feed
+
+            //string NomeAgenzia = ConfigManagement.ReadKey("NomeAgenzia");
+            Messaggi.Add("Messaggio", "");
+            Messaggi["Messaggio"] = "Creazione rss feed xml facebook " + System.DateTime.Now.ToString() + " \r\n";
+
+            WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
+
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            parColl = new List<SQLiteParameter>();
+            offerteDM offDM = new offerteDM();
+            WelcomeLibrary.DOM.OfferteCollection lista = new WelcomeLibrary.DOM.OfferteCollection();
+
+            //Carichiamo la lista contenuto presenti 
+            try
+            {
+                //Carichiamo in memoria tutti le ultime 1000 news ( eventualmente x tipologia )
+                if (!string.IsNullOrEmpty(FiltroTipologia))
+                {
+                    SQLiteParameter filtrotipologia = new SQLiteParameter("@CodiceTIPOLOGIA", FiltroTipologia);
+                    parColl.Add(filtrotipologia);
+                }
+                lista = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);
+            }
+            catch (Exception error)
+            {
+                Messaggi["Messaggio"] = " &nbsp; <br/> Errore caricamento news per feed facebook rss: " + error.Message + " \r\n";
+                WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
+            }
+            //PREPARIAMO IL FILE XML DA FORNIRE AL PORTALE
+            try
+            {
+                //-------------------------------------------------------------------------------------------------------------
+                //QUI creo L'XML PER IL PROGRAMMA DI VISUALIZZAZIONE
+                //System.IO.FileStream str = new System.IO.FileStream(Server.MapPath(basevetrinadir + immobile.Codice + ".xml"), System.IO.FileMode.Create);
+                string filename = PathFileXml + "\\facebookfeed" + FiltroTipologia + Lng + ".xml";
+                System.IO.FileStream str = new System.IO.FileStream(filename, System.IO.FileMode.Create);
+                using (str)
+                {
+
+                    System.Xml.XmlTextWriter writer = new System.Xml.XmlTextWriter(str, System.Text.Encoding.UTF8);
+                    writer.Formatting = System.Xml.Formatting.Indented;
+                    // aggiungo l'intestazione XML 
+                    //writer.WriteRaw("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
+                    writer.WriteRaw("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
+                    // apro la root rss  
+
+                    //writer.WriteStartElement("rss");
+                    //writer.WriteAttributeString("xmlns:sy", "http://purl.org/rss/1.0/modules/syndication/");
+                    //writer.WriteAttributeString("version", "2.0");
+
+                    //https://support.google.com/merchants/answer/7052112?hl=en
+                    writer.WriteStartElement("rss");
+                    writer.WriteAttributeString("xmlns:g", "http://base.google.com/ns/1.0");
+                    writer.WriteAttributeString("version", "2.0");
+
+                    writer.WriteStartElement("channel");
+                    //Intestazione del feed
+                    writer.WriteElementString("title", titolofeed);
+                    writer.WriteElementString("link", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                    writer.WriteElementString("description", descrizionefeed);
+
+#if  false //non so se va bene x facebook
+
+                    //writer.WriteElementString("lastBuildDate", System.Xml.XmlConvert.ToString(System.DateTime.Now, "yyyy-MM-ddTHH:mm:ss+01:00"));
+                    writer.WriteElementString("lastBuildDate", System.Xml.XmlConvert.ToString(System.DateTime.Now, "ddd, dd MMM yyyy HH:mm:ss 'GMT'"));
+                    writer.WriteElementString("language", "it-IT");
+
+#endif
+                    //https://it-it.facebook.com/business/help/120325381656392?id=725943027795860
+                    //Creaiamo il feed facebook ( obbligatori: id, title, description, availability, condition, price, link , image_link, brand
+                    foreach (Offerte _new in lista)
+                    {
+                        string testotitolo = _new.DenominazionebyLingua(Lingua).ToLower();
+                        string descrizioneitem = (WelcomeLibrary.UF.Utility.SostituisciTestoACapo(ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_new.DescrizionebyLingua(Lingua), 5000))));
+                        descrizioneitem += (WelcomeLibrary.UF.Utility.SostituisciTestoACapo(ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_new.DatitecnicibyLingua(Lingua), 30000))));
+
+                        descrizioneitem = html.Convert(descrizioneitem);
+
+                        //byte[] bytes = Encoding.Default.GetBytes(descrizioneitem);
+                        //descrizioneitem = Encoding.UTF8.GetString(bytes);
+
+
+
+                        if (_new == null || string.IsNullOrEmpty(_new.Id.ToString())) continue;
+                        if (descrizioneitem == null || string.IsNullOrEmpty(descrizioneitem)) continue;
+
+                        ////////////////////////////////////PARAMETRI BASE PER MERCHANT CENTER 
+                        string gtinean = "";
+                        string gtinmpn = "";
+                        string brand = "";
+                        string prezzo = "";
+
+                        //Cerco brand:-> codice produttore per pubblicare
+                        //Cerco ean:-> codice per pubblicare
+                        //Cerco mpn:-> codice per pubblicare se non presente ean
+
+                        string codiceprodotto = _new.CodiceProdotto; // codice del prodotto principale
+                        if (string.IsNullOrEmpty(codiceprodotto)) codiceprodotto = _new.Id.ToString();
+
+                        int start = descrizioneitem.ToLower().IndexOf("ean:");
+                        if (start != -1)
+                        {
+                            int end1 = descrizioneitem.ToLower().IndexOf(" ", start + 5);
+                            int end2 = descrizioneitem.ToLower().IndexOf("\r", start + 5);
+                            int end3 = descrizioneitem.ToLower().IndexOf("\n", start + 5);
+                            int end4 = descrizioneitem.ToLower().IndexOf("\r\n", start + 5);
+                            //Prendiamo il minimo != -1
+                            int end = -1;
+                            if (end1 != -1) end = end1; if (end2 != -1) end = end2; if (end3 != -1) end = end3; if (end4 != -1) end = end4;
+                            if (end1 != -1 && end1 < end) end = end1; if (end2 != -1 && end2 < end) end = end2; if (end3 != -1 && end3 < end) end = end3; if (end4 != -1 && end4 < end) end = end4;
+
+                            if (end != -1)
+                                gtinean = descrizioneitem.Substring(start + 4, end - (start + 4)).Trim();
+                        }
+                        start = descrizioneitem.ToLower().IndexOf("mpn:");
+                        if (start != -1)
+                        {
+                            int end1 = descrizioneitem.ToLower().IndexOf(" ", start + 5);
+                            int end2 = descrizioneitem.ToLower().IndexOf("\r", start + 5);
+                            int end3 = descrizioneitem.ToLower().IndexOf("\n", start + 5);
+                            int end4 = descrizioneitem.ToLower().IndexOf("\r\n", start + 5);
+                            //Prendiamo il minimo != -1
+                            int end = -1;
+                            if (end1 != -1) end = end1; if (end2 != -1) end = end2; if (end3 != -1) end = end3; if (end4 != -1) end = end4;
+                            if (end1 != -1 && end1 < end) end = end1; if (end2 != -1 && end2 < end) end = end2; if (end3 != -1 && end3 < end) end = end3; if (end4 != -1 && end4 < end) end = end4;
+
+                            if (end != -1)
+                                gtinmpn = descrizioneitem.Substring(start + 4, end - (start + 4)).Trim();
+                        }
+
+
+                        //_new.Caratteristica1 //è usata per il brand
+                        brand = references.TestoCaratteristica(0, _new.Caratteristica1.ToString(), Lingua);
+                        start = descrizioneitem.ToLower().IndexOf("brand:");
+                        if (start != -1)
+                        {
+                            int end1 = descrizioneitem.ToLower().IndexOf(" ", start + 7);
+                            int end2 = descrizioneitem.ToLower().IndexOf("\r", start + 7);
+                            int end3 = descrizioneitem.ToLower().IndexOf("\n", start + 7);
+                            int end4 = descrizioneitem.ToLower().IndexOf("\r\n", start + 7);
+                            //Prendiamo il minimo != -1
+                            int end = -1;
+                            if (end1 != -1) end = end1; if (end2 != -1) end = end2; if (end3 != -1) end = end3; if (end4 != -1) end = end4;
+                            if (end1 != -1 && end1 < end) end = end1; if (end2 != -1 && end2 < end) end = end2; if (end3 != -1 && end3 < end) end = end3; if (end4 != -1 && end4 < end) end = end4;
+
+                            if (end != -1)
+                                brand = descrizioneitem.Substring(start + 6, end - (start + 6)).Trim();
+                        }
+                        start = descrizioneitem.ToLower().IndexOf("marchio:");
+                        if (start != -1)
+                        {
+                            int end1 = descrizioneitem.ToLower().IndexOf(" ", start + 9);
+                            int end2 = descrizioneitem.ToLower().IndexOf("\r", start + 9);
+                            int end3 = descrizioneitem.ToLower().IndexOf("\n", start + 9);
+                            int end4 = descrizioneitem.ToLower().IndexOf("\r\n", start + 9);
+                            //Prendiamo il minimo != -1
+                            int end = -1;
+                            if (end1 != -1) end = end1; if (end2 != -1) end = end2; if (end3 != -1) end = end3; if (end4 != -1) end = end4;
+                            if (end1 != -1 && end1 < end) end = end1; if (end2 != -1 && end2 < end) end = end2; if (end3 != -1 && end3 < end) end = end3; if (end4 != -1 && end4 < end) end = end4;
+
+                            if (end != -1)
+                                brand = descrizioneitem.Substring(start + 8, end - (start + 8)).Trim();
+                        }
+
+
+                        start = descrizioneitem.ToLower().IndexOf("prezzo:");
+                        if (start != -1)
+                        {
+                            int end1 = descrizioneitem.ToLower().IndexOf(" ", start + 7);
+                            int end2 = descrizioneitem.ToLower().IndexOf("\r", start + 7);
+                            int end3 = descrizioneitem.ToLower().IndexOf("\n", start + 7);
+                            int end4 = descrizioneitem.ToLower().IndexOf("\r\n", start + 7);
+                            //Prendiamo il minimo != -1
+                            int end = -1;
+                            if (end1 != -1) end = end1; if (end2 != -1) end = end2; if (end3 != -1) end = end3; if (end4 != -1) end = end4;
+                            if (end1 != -1 && end1 < end) end = end1; if (end2 != -1 && end2 < end) end = end2; if (end3 != -1 && end3 < end) end = end3; if (end4 != -1 && end4 < end) end = end4;
+
+                            if (end != -1)
+                                prezzo = descrizioneitem.Substring(start + 6, end - (start + 6));
+                            if (_new.Prezzo == 0)
+                            {
+                                double prezzodbo = 0;
+                                if (double.TryParse(prezzo, out prezzodbo))
+                                {
+                                    _new.Prezzo = prezzodbo;
+                                }
+                            }
+                        }
+#if false //i vincoli di generazione obbligatori li sblocco
+                            if (string.IsNullOrEmpty(brand)) continue;
+                            if (string.IsNullOrEmpty(gtinean) && string.IsNullOrEmpty(gtinmpn)) continue; 
+#endif
+                        if (_new == null || _new.Prezzo == 0) continue;
+
+                        ////////////////////////////////////PARAMETRI BASE PER MERCHANT CENTER 
+                        //INIZIAMO A RIEMPIRE I CAMPI PER L'ITEM NEL FEED
+                        /////////////////////////////////////////////////
+                        writer.WriteStartElement("item");
+
+                        writer.WriteStartElement("g:id");
+                        writer.WriteCData(codiceprodotto);
+                        writer.WriteEndElement();
+
+
+                        //<g:item_group_id>  // per le variati dell'articolo es. articolo in colori diversi o taglie .....
+
+                        //TITOLO SCHEDA
+                        writer.WriteStartElement("title");
+                        writer.WriteCData(html.Convert(testotitolo.Replace("-", " ")));
+                        writer.WriteEndElement();
+
+                        //LINK A SCHEDA
+                        string UrlCompleto = "";
+                        //UrlCompleto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + stringabase + _new.CodiceTipologia.Replace(" ", "_") + "_" + Lingua + "_" + _new.Id.ToString().Replace(" ", "_") + "_" + testotitolo + ".aspx";
+                        UrlCompleto = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, _new.UrltextforlinkbyLingua(Lingua), _new.Id.ToString(), _new.CodiceTipologia, _new.CodiceCategoria, "", "", "", "", true, false);
+                        //writer.WriteElementString("link", UrlCompleto);
+                        writer.WriteStartElement("link");
+                        writer.WriteCData(UrlCompleto);
+                        writer.WriteEndElement();
+
+
+                        double tmpprezzo = _new.Prezzo;
+                        double tmpprezzoscontato = 0;
+                        if (_new.PrezzoListino != 0 && _new.PrezzoListino > _new.Prezzo)
+                        {
+                            tmpprezzo = _new.PrezzoListino;
+                            tmpprezzoscontato = _new.Prezzo;
+                        }
+                        if (tmpprezzo != 0)
+                        {
+                            writer.WriteStartElement("g:price");
+                            writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { tmpprezzo }) + " EUR");
+                            //  ret = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { _new.Prezzo });
+                            writer.WriteEndElement();
+                        }
+                        if (tmpprezzoscontato != 0)
+                        {
+                            writer.WriteStartElement("g:sale_price");
+                            writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { tmpprezzoscontato }) + " EUR");
+                            //  ret = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { _new.Prezzo });
+                            writer.WriteEndElement();
+                        }
+
+
+
+                        //writer.WriteElementString("description", descrizioneitem);
+                        writer.WriteStartElement("description");
+                        writer.WriteCData(RemoveTroublesomeCharacters(descrizioneitem));
+                        writer.WriteEndElement();
+
+#if false
+                        StringBuilder sb = new StringBuilder();
+                        if (_new.FotoCollection_M != null && !gmerchant)
+                            sb.Append("<img style=\"margin-right: 10px; float: left\" src=\"" + linkimmagine + "\" alt=\"" + testotitolo + "\" width=\"350\" />");
+                        sb.Append("<p>" + ReplaceLinks(descrizioneitem) + "</p>");
+                        if (!gmerchant)
+                            sb.Append("<p>Continua a leggere / Read More <a href=\"" + UrlCompleto + "\"><em>" + testotitolo + "</em></a>.</p>");
+                        writer.WriteStartElement("description");
+                        writer.WriteCData(sb.ToString());
+                        //writer.WriteRaw("<![CDATA[Questo è un test con caratteri <>]]>");
+                        writer.WriteEndElement(); 
+#endif
+
+
+                        //tipo di prodotto
+                        //<product_type>
+                        string categoriaprodotto = references.TestoCategoria(_new.CodiceTipologia, _new.CodiceCategoria, Lingua);
+                        categoriaprodotto += " > " + references.TestoCategoria2liv(_new.CodiceTipologia, _new.CodiceCategoria, _new.CodiceCategoria2Liv, Lingua).Trim();
+                        categoriaprodotto = categoriaprodotto.Trim().TrimEnd('>');
+                        if (!string.IsNullOrEmpty(categoriaprodotto))
+                        {
+                            writer.WriteStartElement("g:product_type");
+                            writer.WriteValue(categoriaprodotto);
+                            writer.WriteEndElement();
+                        }
+                        //<g:google_product_category>  //opzionale categoria su google
+                        //<g:fb_product_category>   //opzionale categoria su focebook
+
+                        //if (!gmerchant)
+                        //{
+
+                        //    writer.WriteStartElement("guid");
+                        //    writer.WriteAttributeString("isPermaLink", "true");
+                        //    writer.WriteValue(UrlCompleto);
+                        //    writer.WriteEndElement();
+                        //    //<pubDate>
+                        //    writer.WriteStartElement("pubDate");
+                        //    writer.WriteValue(System.Xml.XmlConvert.ToString(_new.DataInserimento, "ddd, dd MMM yyyy HH:mm:ss zzz"));
+                        //    writer.WriteEndElement();
+                        //}
+
+
+                        //IMMAGINE
+                        string linkimmagine = filemanage.ComponiUrlAnteprima(_new.FotoCollection_M.FotoAnteprima, _new.CodiceTipologia, _new.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                        writer.WriteStartElement("g:image_link");
+                        writer.WriteCData(linkimmagine);
+                        writer.WriteEndElement();
+                        //<g:additional_image_link>
+                        if ((_new != null) && (_new.FotoCollection_M.Count > 1))
+                        {
+                            foreach (Allegato a in _new.FotoCollection_M)
+                            {
+                                if ((a.NomeFile.ToString().ToLower().EndsWith("jpg") || a.NomeFile.ToString().ToLower().EndsWith("gif") || a.NomeFile.ToString().ToLower().EndsWith("png")))
+                                {
+                                    //IMMAGINE
+                                    string tmppathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, _new.CodiceTipologia, _new.Id.ToString());
+                                    string abspathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                                    if (abspathimmagine != linkimmagine)
+                                    {
+                                        writer.WriteStartElement("g:additional_image_link");
+                                        writer.WriteCData(abspathimmagine);
+                                        writer.WriteEndElement();
+                                    }
+                                }
+                            }
+                        }
+
+#if false
+                            //store code per i feed locali
+                            writer.WriteStartElement("g:store_code");
+                            writer.WriteValue(WelcomeLibrary.UF.ResourceManagement.ReadKey("Common", Lingua, "storecode")); //va messo lo store code nelle risorse
+                            writer.WriteEndElement();
+#endif
+
+                        //Specifico che non fornisco codice gtin o mpn per il prodotto ( che sarebbero meglio)
+                        //if (string.IsNullOrEmpty(brand) && string.IsNullOrEmpty(gtinean) && string.IsNullOrEmpty(gtinmpn))
+                        //{
+                        //    //Identifier_exists ( indica che non sono presenti brand,mpn o gtin ( occhio a non inserirli se metti a false il default è true )
+                        //    writer.WriteStartElement("g:identifier_exists");
+                        //    writer.WriteValue("false");
+                        //    writer.WriteEndElement();
+                        //}
+
+                        //BRAND
+                        if (!string.IsNullOrEmpty(brand))
+                        {
+                            writer.WriteStartElement("g:brand");
+                            writer.WriteCData(brand);
+                            writer.WriteEndElement();
+                        }
+                        //CODIE  EAN / ISBN / UPC / JAN / ITF-14
+                        if (!string.IsNullOrEmpty(gtinean))
+                        {
+                            writer.WriteStartElement("g:gtin");
+                            writer.WriteCData(gtinean);
+                            writer.WriteEndElement();
+                        }
+                        //MANUFACTURER PART NUMBER
+                        if (!string.IsNullOrEmpty(gtinmpn))
+                        {
+                            writer.WriteStartElement("g:mpn");
+                            writer.WriteCData(gtinmpn);
+                            writer.WriteEndElement();
+                        }
+
+                        writer.WriteStartElement("g:availability");
+                        writer.WriteValue("in stock"); //out of stock | preorder
+                        writer.WriteEndElement();
+                        writer.WriteStartElement("g:condition");
+                        writer.WriteValue("new"); //new refurbished used ( o nuovo ricondizionato usato )
+                        writer.WriteEndElement();
+
+                        ////////////////////////////////////////////////////////////////
+                        //                         < g:shipping >
+                        //< g:country > US </ g:country >
+                        //     < g:region > MA </ g:region >
+                        //          < g:service > Ground </ g:service >
+                        //               < g:price > 6.49 USD </ g:price >
+                        //                  </ g:shipping >
+
+                        writer.WriteStartElement("g:shipping");
+                        writer.WriteStartElement("g:country");
+                        writer.WriteValue("IT"); //prezzo spedizione
+                        writer.WriteEndElement();
+                        writer.WriteStartElement("g:price");
+                        writer.WriteValue("0.00 EUR"); //prezzo spedizione
+                        writer.WriteEndElement();
+                        writer.WriteEndElement();
+                        //<g:shipping_weight>
+
+
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////FINE MERCHANT
+
+                        //TAG ITEM
+                        writer.WriteEndElement();
+                    }
+
+                    //Chiudo tag channel
+                    writer.WriteEndElement();
+                    // chiudo tag rss 
+                    writer.WriteEndElement();
+                    // scrivo a video e chiudo lo stream 
+                    writer.Flush();
+                    writer.Close();
+                    str.Close();
+                }
+            }
+            catch (Exception error)
+            {
+                Messaggi["Messaggio"] = " &nbsp; <br/> Errore creazione file feed facebook  xml : " + error.Message + " \r\n";
+                WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
+            }
+            Messaggi["Messaggio"] = "Fine Creazione feed facebook xml   rss " + System.DateTime.Now.ToString() + " \r\n";
+            WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
+
+        }
+
+
+
+
         public static string Getvaluebytag(string tag, string text)
         {
             string ret = "";
