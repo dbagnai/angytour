@@ -4,6 +4,8 @@ using System.Web.Profile;
 using System.Web.Security;
 using WelcomeLibrary.DAL;
 using WelcomeLibrary.DOM;
+using System.Linq;
+using System.Data.SQLite;
 
 namespace WelcomeLibrary.UF
 {
@@ -228,25 +230,223 @@ namespace WelcomeLibrary.UF
             return esito;
         }
 
+        /// <summary>
+        /// fUNZIONE DI SPLIT DEI VALORI STIRNGA DEL profile provider passando 
+        /// </summary>
+        /// <param name="names">array split : stringe del campo propertynames</param>
+        /// <param name="values">stringa property values</param>
+        /// <param name="outvalcollection"></param>
+        private Dictionary<string, string> ParseDataFromProfileDb(string[] names, string values)
+        {
+            Dictionary<string, string> namevaluescollection = new Dictionary<string, string>();
+            if (names == null || values == null)
+                return namevaluescollection;
+
+            for (int iter = 0; iter < names.Length / 4; iter++)
+            {
+                string name = names[iter * 4].ToLowerInvariant();
+
+                if (!namevaluescollection.ContainsKey(name)) namevaluescollection.Add(name, "");
+
+                int startPos = Int32.Parse(names[iter * 4 + 2], System.Globalization.CultureInfo.InvariantCulture);
+                int length = Int32.Parse(names[iter * 4 + 3], System.Globalization.CultureInfo.InvariantCulture);
+
+                if (names[iter * 4 + 1] == "S" && startPos >= 0 && length > 0 && values.Length >= startPos + length)
+                {
+                    namevaluescollection[name] = values.Substring(startPos, length);
+                }
+            }
+            return namevaluescollection;
+        }
+        private Dictionary<string, Dictionary<string, string>> GetPropertyValuesFromDatabase(string username, string propname, string propvalue)
+        {
+            string[] names = null;
+            string values = null;
+            //byte[] buffer = null;
+            Dictionary<string, Dictionary<string, string>> namevaluesforuser = new Dictionary<string, Dictionary<string, string>>();
+
+            string query = "SELECT Username,PropertyNames, PropertyValuesString FROM aspnet_Profile P left join aspnet_Users U on P.UserId=U.UserId   ";
+            query += "";
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+
+            if (username != "")
+            {
+                SQLiteParameter p2 = new SQLiteParameter("@Username", username.ToLowerInvariant()); //OleDbType.VarChar
+                parColl.Add(p2);
+                if (!query.ToLower().Contains("where"))
+                    query += " WHERE  LoweredUsername=@Username";
+                else
+                    query += " AND  LoweredUsername=@Username  ";
+            }
+
+
+            try
+            {
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, "dbmembership");
+                using (reader)
+                {
+                    if (reader == null) { return null; };
+                    if (reader.HasRows == false)
+                        return null;
+                    while (reader.Read())
+                    {
+                        if (!reader["PropertyNames"].Equals(DBNull.Value))
+                            names = reader.GetString(reader.GetOrdinal("PropertyNames")).Split(':');
+                        if (!reader["PropertyValuesString"].Equals(DBNull.Value))
+                            values = reader.GetString(reader.GetOrdinal("PropertyValuesString"));
+
+                        string usernametmp = "";
+                        if (!reader["Username"].Equals(DBNull.Value))
+                            usernametmp = reader.GetString(reader.GetOrdinal("Username"));
+                        if (names != null && names.Length > 0 && !string.IsNullOrEmpty(usernametmp))
+                        {
+                            Dictionary<string, string> namevaluescollection = ParseDataFromProfileDb(names, values);
+                            //namevaluesforuser
+
+                            if (namevaluescollection.Count > 0)
+                            {
+                                if (!namevaluesforuser.ContainsKey(usernametmp))
+                                    namevaluesforuser.Add(usernametmp, namevaluescollection);
+
+                                //Se presente filtro idcliente e non specificat username controllo se coincide col filtro il valore della proprieta
+                                if (string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(propname) && !string.IsNullOrEmpty(propvalue))
+                                    if (namevaluescollection.ContainsKey(propname.ToLowerInvariant()))
+                                    {
+                                        string valuechk = namevaluescollection[propname.ToLowerInvariant()];
+                                        if (valuechk != propvalue) namevaluesforuser.Remove(usernametmp);
+                                        else break; //stop trovato cliente del filtro
+                                    }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+                //throw new ApplicationException("Errore Caricamento Cliente :" + error.Message, error);
+            }
+            return namevaluesforuser;
+            /// <summary>
+            /// ////////////////////////////////////
+            /// </summary>
+#if false
+            SQLiteConnection cn = GetDbConnectionForProfile();
+            try
+            {
+                using (SQLiteCommand cmd = cn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT UserId FROM " + USER_TB_NAME + " WHERE LoweredUsername = $UserName AND ApplicationId = $ApplicationId";
+                    cmd.Parameters.AddWithValue("$UserName", username.ToLowerInvariant());
+                    cmd.Parameters.AddWithValue("$ApplicationId", _membershipApplicationId);
+                    if (cn.State == ConnectionState.Closed)
+                        cn.Open();
+                    string userId = cmd.ExecuteScalar() as string;
+
+                    if (userId != null)
+                    {
+                        // User exists?
+                        cmd.CommandText = "SELECT PropertyNames, PropertyValuesString, PropertyValuesBinary FROM " + PROFILE_TB_NAME + " WHERE UserId = $UserId";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("$UserId", userId);
+
+
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                names = dr.GetString(0).Split(':');
+                                values = dr.GetString(1);
+                                int length = (int)dr.GetBytes(2, 0L, null, 0, 0);
+                                buffer = new byte[length];
+                                dr.GetBytes(2, 0L, buffer, 0, length);
+                            }
+                        }
+
+                        cmd.CommandText = "UPDATE " + USER_TB_NAME + " SET LastActivityDate = $LastActivityDate WHERE UserId = $UserId";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("$LastActivityDate", DateTime.UtcNow);
+                        cmd.Parameters.AddWithValue("$UserId", userId);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            finally
+            {
+                if (!IsTransactionInProgress())
+                    cn.Dispose();
+            }
+
+            if (names != null && names.Length > 0)
+            {
+                ParseDataFromDb(names, values, buffer, svc);
+            } 
+#endif
+
+        }
+
         public string GetUsernamebycamporofilo(string field, string value)
         {
             string retval = "";
+            if (string.IsNullOrEmpty(value) || value == "0") return retval;
             //ELIMINIAMO GLI UTENTI CHE NON DOBBIAMO VISUALIZZARE in base all'agenzia
             MembershipUserCollection MUColl = Membership.GetAllUsers();
-            // MembershipUserCollection MUColl_filtrata = new MembershipUserCollection();
 
+            ////////////////////////////////////////////////////////////////
+            //METODO DI RICERCA DIRETTTA IN TABELLA PROFILE IN BASE
+            ////a Propertynaem/èrpertyvlues con id cliente-> predno userid e dalla tabella user prendo l'username
+            ////////////////////////////////////////////////////////////////
+            Dictionary<string, Dictionary<string, string>> namevaluesforuser = GetPropertyValuesFromDatabase("", field, value);
+            if (namevaluesforuser != null && namevaluesforuser.Count == 1) { var firstElement = namevaluesforuser.FirstOrDefault(); retval = firstElement.Key; }
+
+#if false
+            /////////////////////////VERSIONE VELOCE CHE USA IL NOME UTENTE + ID CLIENTE PER TROVARE L'UNTENTE ... NON IL MASSIMO /////
+            var user = Membership.GetAllUsers().Cast<MembershipUser>().FirstOrDefault(m => m.UserName.StartsWith(value + "-"));
+            ProfileBase prf = ProfileBase.Create("");
+            if (user != null)
+            {
+                DateTime UserLastActivityDate = new DateTime(1900, 1, 1);
+                if (user != null)
+                {
+                    UserLastActivityDate = user.LastActivityDate;
+                }
+                prf = ProfileBase.Create(user.UserName);
+                if (value == prf[field].ToString())
+                {
+                    retval = user.UserName;
+                    // need to reset the UserLastActivityDate that has just been updated by above two lines
+                    if (user != null)
+                    {
+                        user.LastActivityDate = UserLastActivityDate;
+                        Membership.UpdateUser(user);
+                    }
+                    return retval;
+                }
+            } 
+#endif
+#if false
+            //VERSIONE LENTA CHE SCORRE SEMPRE TUTTI I PROFILI MA FUNZIONA ANCHE PER NOMI CHE NON INIZIANO CON IDCLIENTE-EMAIL
             foreach (MembershipUser _user in MUColl)
             {
+
                 DateTime UserLastActivityDate = new DateTime(1900, 1, 1);
                 if (_user != null)
                 {
                     UserLastActivityDate = _user.LastActivityDate;
                 }
-                //ProfileCommon prf = (ProfileCommon)ProfileCommon.Create(_user.UserName);
-                ProfileBase prf = ProfileBase.Create(_user.UserName);
-                string valueselected = prf[field].ToString();
-                if (value == valueselected)
-                { retval = _user.UserName; }
+                prf = ProfileBase.Create(_user.UserName);
+                if (value == prf[field].ToString())
+                {
+                    retval = _user.UserName;
+                    // need to reset the UserLastActivityDate that has just been updated by above two lines
+                    if (_user != null)
+                    {
+                        _user.LastActivityDate = UserLastActivityDate;
+                        Membership.UpdateUser(_user);
+                    }
+                    break;
+                }
+
                 // need to reset the UserLastActivityDate that has just been updated by above two lines
                 if (_user != null)
                 {
@@ -254,11 +454,10 @@ namespace WelcomeLibrary.UF
                     Membership.UpdateUser(_user);
                 }
             }
+#endif
 
             //MUColl_filtrata = MUColl;
-
             return retval;
-
         }
 
 
