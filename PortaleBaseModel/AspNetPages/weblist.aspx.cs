@@ -749,6 +749,11 @@ public partial class AspNetPages_weblist : CommonPage
         {
             objvalue["tipologia"] = Tipologia;
         }
+
+        //if (Tipologia == "rif000001")
+        //  objvalue["filtrodisponibili"] = "true";//mettendo questo valore prendo solo gli elementi che hanno disponibilità >0 nei risultati di ricerca
+
+
         if (!string.IsNullOrEmpty(mese)) //
         {
             objvalue.Remove("mese");

@@ -724,6 +724,7 @@
                                                 $('html,body').animate({
                                                     scrollTop: $("#" + "<%= validsummary.ClientID  %>").offset().top - 160
                                                 }, 'fast');
+                                            resetValidationState();
                                             console.log('not  validated');
                                             //return false;
                                         }

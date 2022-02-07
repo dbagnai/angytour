@@ -5341,6 +5341,14 @@ namespace WelcomeLibrary.DAL
                 }
             }
 
+            //se inserito parametro filtrodisponibili :  valore true solo elementi qty null o > 0 altrimenti
+            //se false solo elementi a quantità non null e minore ugiale a zero
+            if (filtri.ContainsKey("filtrodisponibili") && !string.IsNullOrEmpty(filtri["filtrodisponibili"])) 
+            {
+                SQLiteParameter pdispo = new SQLiteParameter("@filtrodisponibili", filtri["filtrodisponibili"]);
+                parColl.Add(pdispo);
+            }
+
             // List<string> idlisttofilter = new List<string>(); //creo una lista unica di id per il filtro idlist che è un and di tutti gli id risultanti
 
             //////////////////////////////////////////////////////////////////////////////////////////////////
