@@ -1594,6 +1594,10 @@ namespace WelcomeLibrary.UF
                                                 ///////////PAGINAZIONE PER LINK CON QUERYSTRING
                                                 ///////////////////////////////////////////////////////////////////////////////////
 #if true
+
+                                                string testoricerca = "";
+                                                if (dictpars.ContainsKey("testoricerca")) testoricerca = dictpars["testoricerca"];
+
                                                 //Contenitore numeridi pagina
                                                 string linkprev = "";
                                                 string linknext = "";
@@ -1603,8 +1607,11 @@ namespace WelcomeLibrary.UF
                                                 {
                                                     aNextPage.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pageravanti").Valore;
                                                     //aNextPage.First().SetAttributeValue("onClick", "javascript:nextpagebindonserver('" + dictpars["controlid"] + "')");
-                                                    aNextPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + nextpage);
                                                     linknext = Richiesta.Url.LocalPath + "?" + "page=" + nextpage;//Imposto la next page per l'head
+                                                    if (!string.IsNullOrEmpty(testoricerca)) linknext += "&testoricerca=" + testoricerca;
+                                                    aNextPage.First().SetAttributeValue("href", linknext);
+
+
                                                     if (aNextPage.First().Attributes.Contains("style"))
                                                     {
                                                         aNextPage.First().Attributes["style"].Value = aNextPage.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
@@ -1624,6 +1631,10 @@ namespace WelcomeLibrary.UF
                                                         linkprev = Richiesta.Url.LocalPath + "?" + "page=" + prevpage;//Imposto la next page per l'head
                                                     else
                                                         linkprev = Richiesta.Url.LocalPath;//Imposto la next page per l'head
+
+                                                    if (!string.IsNullOrEmpty(testoricerca)) { linkprev += (linkprev.Contains("?")) ? "&testoricerca=" + testoricerca : "?testoricerca=" + testoricerca; }
+
+
                                                     aPrevPage.First().SetAttributeValue("href", linkprev);
 
                                                     if (aPrevPage.First().Attributes.Contains("style"))
@@ -1635,8 +1646,6 @@ namespace WelcomeLibrary.UF
                                                         aPrevPage.First().Attributes.Add("style", "display:block");
                                                 }
 
-
-
                                                 if (Session != null)
                                                 {
                                                     Session.Remove("linkprev"); //link pagina precendente
@@ -1645,13 +1654,18 @@ namespace WelcomeLibrary.UF
                                                 var pnumbers = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "pagenumbers");
                                                 if ((pnumbers != null) && (pnumbers.Count() > 0) && Richiesta != null)//&& page > 1)
                                                 {
+
                                                     //elementi da creare da 1 a  pagesnumber da accorare a pnumbers
                                                     HtmlDocument tmpdoc1 = new HtmlDocument();//Documento temporaneo
                                                     StringBuilder htmltoappend = new StringBuilder();
                                                     //Creiamo gli elementi <li class="page-item"><a class="page-link" href="#">1</a></li> 
                                                     // se attivo      <li class="page-item active"><a class="page-link" href="#">1</a></li> 
+
+                                                    string basepagelink = Richiesta.Url.LocalPath;
+                                                    if (!string.IsNullOrEmpty(testoricerca)) { basepagelink += (basepagelink.Contains("?")) ? "&testoricerca=" + testoricerca : "?testoricerca=" + testoricerca; }
+
                                                     if (page > 3)
-                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "\"><<</a></li> ");
+                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + basepagelink + "\"><<</a></li> ");
                                                     if (!string.IsNullOrEmpty(linkprev))
                                                         htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + linkprev + "\"><</a></li> ");
                                                     for (int p = 1; p <= pagesnumber; p++)
@@ -1661,6 +1675,9 @@ namespace WelcomeLibrary.UF
                                                             string disabled = "";//disabled
                                                             string active = ""; //active
                                                             string linkpagina = Richiesta.Url.LocalPath + "?" + "page=" + p;
+                                                            if (!string.IsNullOrEmpty(testoricerca)) { linkpagina += (linkpagina.Contains("?")) ? "&testoricerca=" + testoricerca : "?testoricerca=" + testoricerca; }
+
+
                                                             active = (p == page) ? active = "active" : active = "";
                                                             if (active != "active")
                                                                 htmltoappend.Append("<li class=\"page-item " + active + " pt-1\"><a class=\"page-link\" href=\"" + linkpagina + "\">" + p + "</a></li> ");
@@ -1673,9 +1690,13 @@ namespace WelcomeLibrary.UF
                                                     }
                                                     if (linknext != "")
                                                         htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + linknext + "\">></a></li> ");
-                                                    if (page < pagesnumber - 2)
-                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "?" + "page=" + pagesnumber + "\">>></a></li> ");
 
+                                                    if (page < pagesnumber - 2)
+                                                    {
+                                                        string basepagelinkactnum = Richiesta.Url.LocalPath + "?" + "page=" + pagesnumber;
+                                                        if (!string.IsNullOrEmpty(testoricerca)) { basepagelinkactnum += (basepagelinkactnum.Contains("?")) ? "&testoricerca=" + testoricerca : "?testoricerca=" + testoricerca; }
+                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + basepagelinkactnum + "\">>></a></li> ");
+                                                    }
                                                     tmpdoc1.LoadHtml(htmltoappend.ToString());
                                                     pnumbers.First().AppendChild(tmpdoc1.DocumentNode.Clone());
                                                     if (pnumbers.First().Attributes.Contains("style"))
@@ -2136,6 +2157,10 @@ namespace WelcomeLibrary.UF
                                                 ///////////PAGINAZIONE PER LINK CON QUERYSTRING
                                                 ///////////////////////////////////////////////////////////////////////////////////
 #if true
+
+                                                string testoricerca = "";
+                                                if (dictpars.ContainsKey("testoricerca")) testoricerca = dictpars["testoricerca"];
+
                                                 //Contenitore numeridi pagina
                                                 string linkprev = "";
                                                 string linknext = "";
@@ -2145,8 +2170,11 @@ namespace WelcomeLibrary.UF
                                                 {
                                                     aNextPage.First().InnerHtml = WelcomeLibrary.UF.ResourceManagement.ReadKey("basetext", Lingua, "pageravanti").Valore;
                                                     //aNextPage.First().SetAttributeValue("onClick", "javascript:nextpagebindonserver('" + dictpars["controlid"] + "')");
-                                                    aNextPage.First().SetAttributeValue("href", Richiesta.Url.LocalPath + "?" + "page=" + nextpage);
                                                     linknext = Richiesta.Url.LocalPath + "?" + "page=" + nextpage;//Imposto la next page per l'head
+                                                    if (!string.IsNullOrEmpty(testoricerca)) linknext += "&testoricerca=" + testoricerca;
+                                                    aNextPage.First().SetAttributeValue("href", linknext);
+
+
                                                     if (aNextPage.First().Attributes.Contains("style"))
                                                     {
                                                         aNextPage.First().Attributes["style"].Value = aNextPage.First().Attributes["style"].Value.Replace(": ", ":").Replace("display:none", "");
@@ -2166,6 +2194,10 @@ namespace WelcomeLibrary.UF
                                                         linkprev = Richiesta.Url.LocalPath + "?" + "page=" + prevpage;//Imposto la next page per l'head
                                                     else
                                                         linkprev = Richiesta.Url.LocalPath;//Imposto la next page per l'head
+
+                                                    if (!string.IsNullOrEmpty(testoricerca)) { linkprev += (linkprev.Contains("?")) ? "&testoricerca=" + testoricerca : "?testoricerca=" + testoricerca; }
+
+
                                                     aPrevPage.First().SetAttributeValue("href", linkprev);
 
                                                     if (aPrevPage.First().Attributes.Contains("style"))
@@ -2177,8 +2209,6 @@ namespace WelcomeLibrary.UF
                                                         aPrevPage.First().Attributes.Add("style", "display:block");
                                                 }
 
-
-
                                                 if (Session != null)
                                                 {
                                                     Session.Remove("linkprev"); //link pagina precendente
@@ -2187,13 +2217,18 @@ namespace WelcomeLibrary.UF
                                                 var pnumbers = pagercontainer.First().Descendants().Where(t => t.Id == dictpars["controlid"] + "pagenumbers");
                                                 if ((pnumbers != null) && (pnumbers.Count() > 0) && Richiesta != null)//&& page > 1)
                                                 {
+
                                                     //elementi da creare da 1 a  pagesnumber da accorare a pnumbers
                                                     HtmlDocument tmpdoc1 = new HtmlDocument();//Documento temporaneo
                                                     StringBuilder htmltoappend = new StringBuilder();
                                                     //Creiamo gli elementi <li class="page-item"><a class="page-link" href="#">1</a></li> 
                                                     // se attivo      <li class="page-item active"><a class="page-link" href="#">1</a></li> 
+
+                                                    string basepagelink = Richiesta.Url.LocalPath;
+                                                    if (!string.IsNullOrEmpty(testoricerca)) { basepagelink += (basepagelink.Contains("?")) ? "&testoricerca=" + testoricerca : "?testoricerca=" + testoricerca; }
+
                                                     if (page > 3)
-                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "\"><<</a></li> ");
+                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + basepagelink + "\"><<</a></li> ");
                                                     if (!string.IsNullOrEmpty(linkprev))
                                                         htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + linkprev + "\"><</a></li> ");
                                                     for (int p = 1; p <= pagesnumber; p++)
@@ -2203,6 +2238,9 @@ namespace WelcomeLibrary.UF
                                                             string disabled = "";//disabled
                                                             string active = ""; //active
                                                             string linkpagina = Richiesta.Url.LocalPath + "?" + "page=" + p;
+                                                            if (!string.IsNullOrEmpty(testoricerca)) { linkpagina += (linkpagina.Contains("?")) ? "&testoricerca=" + testoricerca : "?testoricerca=" + testoricerca; }
+
+
                                                             active = (p == page) ? active = "active" : active = "";
                                                             if (active != "active")
                                                                 htmltoappend.Append("<li class=\"page-item " + active + " pt-1\"><a class=\"page-link\" href=\"" + linkpagina + "\">" + p + "</a></li> ");
@@ -2215,9 +2253,13 @@ namespace WelcomeLibrary.UF
                                                     }
                                                     if (linknext != "")
                                                         htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + linknext + "\">></a></li> ");
-                                                    if (page < pagesnumber - 2)
-                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + Richiesta.Url.LocalPath + "?" + "page=" + pagesnumber + "\">>></a></li> ");
 
+                                                    if (page < pagesnumber - 2)
+                                                    {
+                                                        string basepagelinkactnum = Richiesta.Url.LocalPath + "?" + "page=" + pagesnumber;
+                                                        if (!string.IsNullOrEmpty(testoricerca)) { basepagelinkactnum += (basepagelinkactnum.Contains("?")) ? "&testoricerca=" + testoricerca : "?testoricerca=" + testoricerca; }
+                                                        htmltoappend.Append("<li class=\"page-item  pt-1\"><a class=\"page-link\" href=\"" + basepagelinkactnum + "\">>></a></li> ");
+                                                    }
                                                     tmpdoc1.LoadHtml(htmltoappend.ToString());
                                                     pnumbers.First().AppendChild(tmpdoc1.DocumentNode.Clone());
                                                     if (pnumbers.First().Attributes.Contains("style"))
