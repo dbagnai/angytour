@@ -281,6 +281,23 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 SQLiteParameter p8 = new SQLiteParameter("@CodiceCategoria2Liv", CodiceSottoProdottoRicerca);
                 parColl.Add(p8);
             }
+            string statoarchiviati = radarchiviati.SelectedValue;
+            if (!string.IsNullOrEmpty(statoarchiviati))
+            {
+                bool _tmpb = false;
+                bool.TryParse(statoarchiviati, out _tmpb);
+                SQLiteParameter parch = new SQLiteParameter("@Archiviato", _tmpb);
+                parColl.Add(parch);
+            }
+            string statopromozioni = radpromozioni.SelectedValue;
+            if (!string.IsNullOrEmpty(statopromozioni))
+            {
+                bool _tmpb = false;
+                bool.TryParse(statopromozioni, out _tmpb);
+                SQLiteParameter promo = new SQLiteParameter("@promozioni", _tmpb);
+                parColl.Add(promo);
+            }
+
 
             //if (ddlProdottoRicerca.SelectedValue != "")
             //{

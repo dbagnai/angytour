@@ -85,6 +85,26 @@
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtinputCerca" Width="100%" placeholder="cerca .." />
                         </div>
                     </div>
+                    <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                     <div class="col-sm-12">
+                            <b>Visibilità online</b>
+                            <asp:RadioButtonList ID="radarchiviati" runat="server" RepeatDirection="Horizontal">
+                            <asp:ListItem Text="Tutti" Value="" Selected="True" />
+                            <asp:ListItem Text="Solo Archiviati" Value="true" />
+                            <asp:ListItem Text="Solo non archiviati" Value="false" />
+                        </asp:RadioButtonList><br />
+                    </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
+                     <div class="col-sm-12">
+                            <b>Prodotti in Promozione</b>
+                            <asp:RadioButtonList ID="radpromozioni" runat="server" RepeatDirection="Horizontal">
+                            <asp:ListItem Text="Tutti" Value="" Selected="True" />
+                            <asp:ListItem Text="In promozione" Value="true" />
+                            <asp:ListItem Text="Non In promozione" Value="false" />
+                        </asp:RadioButtonList><br />
+                    </div>
+                    </div>
                     <div class="row" style="margin-bottom: 30px; margin-top: 10px;">
                         <%-- <div class="col-sm-4">
                             <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtinputmese" />
