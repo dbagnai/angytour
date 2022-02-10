@@ -2555,83 +2555,29 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
     }
     protected void btnAggiornaCaratteristica1_Click(object sender, EventArgs e)
     {
-        offerteDM DM = new offerteDM();
+        string valore = ddlCaratteristica1_gest.SelectedValue;
+        Dictionary<string, string> dictesto = new Dictionary<string, string>();
+        dictesto.Add("I", txtCar1I.Text);
+        dictesto.Add("GB", txtCar1GB.Text);
+        dictesto.Add("FR", txtCar1FR.Text);
+        dictesto.Add("RU", txtCar1RU.Text);
+        int progressivo = 1;
+        references.AggiornaInserisciCaratteristica(progressivo, dictesto, valore);
 
-        //Cerichiamo il prossimo progressivo codice libero
-        //Utility.TipiClienti
-        int ultimoprogressivo = 0;
-        int _i = 0;
-        Utility.Caratteristiche[0].ForEach(c => ultimoprogressivo = (int.TryParse(c.Codice, out _i)) ? ((_i > ultimoprogressivo) ? _i : ultimoprogressivo) : (ultimoprogressivo));
-        ultimoprogressivo += 1;
-
-        Tabrif item = new Tabrif();
-        if (string.IsNullOrWhiteSpace(ddlCaratteristica1_gest.SelectedValue) || ddlCaratteristica1_gest.SelectedValue == "0")
-            item.Codice = ultimoprogressivo.ToString();
-        else
-        {
-            item = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "I");
-        }
-        if (item != null)
-        {
-            item.Campo1 = txtCar1I.Text;
-            item.Lingua = "I";
-            DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica1");
-        }
-
-        item = new Tabrif();
-        if (string.IsNullOrWhiteSpace(ddlCaratteristica1_gest.SelectedValue) || ddlCaratteristica1_gest.SelectedValue == "0")
-            item.Codice = ultimoprogressivo.ToString();
-        else
-        {
-            item = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "GB");
-        }
-        if (item != null)
-        {
-            item.Campo1 = txtCar1GB.Text;
-            item.Lingua = "GB";
-            DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica1");
-        }
-
-        item = new Tabrif();
-        if (string.IsNullOrWhiteSpace(ddlCaratteristica1_gest.SelectedValue) || ddlCaratteristica1_gest.SelectedValue == "0")
-            item.Codice = ultimoprogressivo.ToString();
-        else
-        {
-            item = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "RU");
-        }
-        if (item != null)
-        {
-            item.Campo1 = txtCar1RU.Text;
-            item.Lingua = "RU";
-            DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica1");
-        }
-
-        item = new Tabrif();
-        if (string.IsNullOrWhiteSpace(ddlCaratteristica1_gest.SelectedValue) || ddlCaratteristica1_gest.SelectedValue == "0")
-            item.Codice = ultimoprogressivo.ToString();
-        else
-        {
-            item = Utility.Caratteristiche[0].Find(c => c.Codice == ddlCaratteristica1_gest.SelectedValue && c.Lingua == "FR");
-        }
-        if (item != null)
-        {
-            item.Campo1 = txtCar1FR.Text;
-            item.Lingua = "FR";
-            DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica1");
-        }
-
+        //svuoto i valori
         txtCar1I.Text = "";
         txtCar1GB.Text = "";
         txtCar1RU.Text = "";
         txtCar1FR.Text = "";
 
         //Aggiorno la visualizzazione
-        WelcomeLibrary.UF.Utility.Caratteristiche[0] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica1");
-        CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
+        //WelcomeLibrary.UF.Utility.Caratteristiche[0] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica1");
 
+        CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
         CaricaDati();
 
     }
+
     protected void btnDeleteCaratteristica1_Click(object sender, EventArgs e)
     {
         offerteDM DM = new offerteDM();
@@ -2685,8 +2631,19 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
     }
     protected void btnAggiornaCaratteristica2_Click(object sender, EventArgs e)
     {
-        offerteDM DM = new offerteDM();
 
+        string valore = ddlCaratteristica2_gest.SelectedValue;
+        Dictionary<string, string> dictesto = new Dictionary<string, string>();
+        dictesto.Add("I", txtCar2I.Text);
+        dictesto.Add("GB", txtCar2GB.Text);
+        dictesto.Add("FR", txtCar2FR.Text);
+        dictesto.Add("RU", txtCar2RU.Text);
+        int progressivo = 2;
+        references.AggiornaInserisciCaratteristica(progressivo, dictesto, valore);
+#if false
+
+
+        offerteDM DM = new offerteDM();
         //Cerichiamo il prossimo progressivo codice libero
         int ultimoprogressivo = 0;
         int _i = 0;
@@ -2739,18 +2696,20 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica2");
 
 
+#endif
         txtCar2I.Text = "";
         txtCar2GB.Text = "";
         txtCar2RU.Text = "";
         txtCar2FR.Text = "";
 
         //Aggiorno la visualizzazione
-        WelcomeLibrary.UF.Utility.Caratteristiche[1] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica2");
-        CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
+        // WelcomeLibrary.UF.Utility.Caratteristiche[1] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica2");
 
+        CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
         CaricaDati();
 
     }
+    
     protected void btnDeleteCaratteristica2_Click(object sender, EventArgs e)
     {
         offerteDM DM = new offerteDM();
@@ -2803,6 +2762,17 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
     }
     protected void btnAggiornaCaratteristica3_Click(object sender, EventArgs e)
     {
+        string valore = ddlCaratteristica3_gest.SelectedValue;
+        Dictionary<string, string> dictesto = new Dictionary<string, string>();
+        dictesto.Add("I", txtCar3I.Text);
+        dictesto.Add("GB", txtCar3GB.Text);
+        dictesto.Add("FR", txtCar3FR.Text);
+        dictesto.Add("RU", txtCar3RU.Text);
+        int progressivo = 3;
+        references.AggiornaInserisciCaratteristica(progressivo, dictesto, valore);
+
+#if false
+
         offerteDM DM = new offerteDM();
 
         //Cerichiamo il prossimo progressivo codice libero
@@ -2858,13 +2828,14 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica3");
 
 
+#endif
         txtCar3I.Text = "";
         txtCar3GB.Text = "";
         txtCar3RU.Text = "";
         txtCar3FR.Text = "";
 
         //Aggiorno la visualizzazione
-        WelcomeLibrary.UF.Utility.Caratteristiche[2] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica3");
+        // WelcomeLibrary.UF.Utility.Caratteristiche[2] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica3");
 
 
         WelcomeLibrary.UF.Utility.Caratteristiche[2].Sort(new WelcomeLibrary.UF.GenericComparer<WelcomeLibrary.DOM.Tabrif>("Double1", System.ComponentModel.ListSortDirection.Ascending));
@@ -2924,6 +2895,17 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
     }
     protected void btnAggiornaCaratteristica4_Click(object sender, EventArgs e)
     {
+
+        string valore = ddlCaratteristica4_gest.SelectedValue;
+        Dictionary<string, string> dictesto = new Dictionary<string, string>();
+        dictesto.Add("I", txtCar4I.Text);
+        dictesto.Add("GB", txtCar4GB.Text);
+        dictesto.Add("FR", txtCar4FR.Text);
+        dictesto.Add("RU", txtCar4RU.Text);
+        int progressivo = 4;
+        references.AggiornaInserisciCaratteristica(progressivo, dictesto, valore);
+#if false
+
         offerteDM DM = new offerteDM();
 
         //Cerichiamo il prossimo progressivo codice libero
@@ -2978,14 +2960,15 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica4");
 
 
+#endif
         txtCar4I.Text = "";
         txtCar4GB.Text = "";
         txtCar4RU.Text = "";
         txtCar4FR.Text = "";
 
         //Aggiorno la visualizzazione
-        WelcomeLibrary.UF.Utility.Caratteristiche[3] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica4");
-        WelcomeLibrary.UF.Utility.Caratteristiche[3].Sort(new WelcomeLibrary.UF.GenericComparer<WelcomeLibrary.DOM.Tabrif>("Double1", System.ComponentModel.ListSortDirection.Ascending));
+        //WelcomeLibrary.UF.Utility.Caratteristiche[3] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica4");
+        //WelcomeLibrary.UF.Utility.Caratteristiche[3].Sort(new WelcomeLibrary.UF.GenericComparer<WelcomeLibrary.DOM.Tabrif>("Double1", System.ComponentModel.ListSortDirection.Ascending));
         CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
 
         CaricaDati();
@@ -3042,6 +3025,17 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
     }
     protected void btnAggiornaCaratteristica5_Click(object sender, EventArgs e)
     {
+        string valore = ddlCaratteristica5_gest.SelectedValue;
+        Dictionary<string, string> dictesto = new Dictionary<string, string>();
+        dictesto.Add("I", txtCar5I.Text);
+        dictesto.Add("GB", txtCar5GB.Text);
+        dictesto.Add("FR", txtCar5FR.Text);
+        dictesto.Add("RU", txtCar5RU.Text);
+        int progressivo = 5;
+        references.AggiornaInserisciCaratteristica(progressivo, dictesto, valore);
+#if false
+
+
         offerteDM DM = new offerteDM();
 
         //Cerichiamo il prossimo progressivo codice libero
@@ -3095,19 +3089,21 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica5");
 
 
+#endif
         txtCar5I.Text = "";
         txtCar5GB.Text = "";
         txtCar5RU.Text = "";
         txtCar5FR.Text = "";
 
         //Aggiorno la visualizzazione
-        WelcomeLibrary.UF.Utility.Caratteristiche[4] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica5");
-        WelcomeLibrary.UF.Utility.Caratteristiche[4].Sort(new WelcomeLibrary.UF.GenericComparer<WelcomeLibrary.DOM.Tabrif>("Double1", System.ComponentModel.ListSortDirection.Ascending));
+        // WelcomeLibrary.UF.Utility.Caratteristiche[4] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica5");
+        //WelcomeLibrary.UF.Utility.Caratteristiche[4].Sort(new WelcomeLibrary.UF.GenericComparer<WelcomeLibrary.DOM.Tabrif>("Double1", System.ComponentModel.ListSortDirection.Ascending));
         CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
 
         CaricaDati();
 
     }
+
     protected void btnDeleteCaratteristica5_Click(object sender, EventArgs e)
     {
         offerteDM DM = new offerteDM();
@@ -3160,6 +3156,18 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
     }
     protected void btnAggiornaCaratteristica6_Click(object sender, EventArgs e)
     {
+
+        string valore = ddlCaratteristica6_gest.SelectedValue;
+        Dictionary<string, string> dictesto = new Dictionary<string, string>();
+        dictesto.Add("I", txtCar6I.Text);
+        dictesto.Add("GB", txtCar6GB.Text);
+        dictesto.Add("FR", txtCar6FR.Text);
+        dictesto.Add("RU", txtCar6RU.Text);
+        int progressivo = 6;
+        references.AggiornaInserisciCaratteristica(progressivo, dictesto, valore);
+
+#if false
+
         offerteDM DM = new offerteDM();
 
         //Cerichiamo il prossimo progressivo codice libero
@@ -3212,19 +3220,21 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         item.Lingua = "FR";
         DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica6");
 
+#endif
         txtCar6I.Text = "";
         txtCar6GB.Text = "";
         txtCar6RU.Text = "";
         txtCar6FR.Text = "";
 
         //Aggiorno la visualizzazione
-        WelcomeLibrary.UF.Utility.Caratteristiche[5] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica6");
-        WelcomeLibrary.UF.Utility.Caratteristiche[5].Sort(new WelcomeLibrary.UF.GenericComparer<WelcomeLibrary.DOM.Tabrif>("Double1", System.ComponentModel.ListSortDirection.Ascending));
+        // WelcomeLibrary.UF.Utility.Caratteristiche[5] = WelcomeLibrary.UF.Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica6");
+        //WelcomeLibrary.UF.Utility.Caratteristiche[5].Sort(new WelcomeLibrary.UF.GenericComparer<WelcomeLibrary.DOM.Tabrif>("Double1", System.ComponentModel.ListSortDirection.Ascending));
         CaricaDatiDdlCaratteristiche(0, 0, 0, 0, 0, 0);
 
         CaricaDati();
 
     }
+
     protected void btnDeleteCaratteristica6_Click(object sender, EventArgs e)
     {
         offerteDM DM = new offerteDM();

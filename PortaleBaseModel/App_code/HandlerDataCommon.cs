@@ -167,6 +167,78 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     }
                     result = Newtonsoft.Json.JsonConvert.SerializeObject(lra, Newtonsoft.Json.Formatting.Indented);
                     break;
+                case "autocompletericercalist1":
+                    long.TryParse(Recs, out irecs);
+                    if (irecs == 0) irecs = 20;
+                    if (term != "null")
+                    {
+                        offerteDM offDM = new offerteDM();
+                        OfferteCollection coll = offDM.GetLista(term, irecs.ToString(), lingua, WelcomeLibrary.STATIC.Global.NomeConnessioneDb, tipologia, true);
+                        //filtrodisponibili
+
+                        long count = 0;
+                        ResultAutocomplete ra1 = new ResultAutocomplete() { id = "", label = "Articoli trovati", linktext = "<span style=\"font-weight:600\">" + "Articoli trovati" + "</span>" };
+                        lra.Add(ra1);
+
+                        if (coll != null)
+                        {
+                            foreach (Offerte r in coll)
+                            {
+                                string shorttext = r.DenominazionebyLingua(lingua);
+                                double _tmppz = r.Prezzo;
+                                string prezzo = String.Format(WelcomeLibrary.UF.Utility.setCulture(lingua), "{0:##,##0.00}", new object[] { r.Prezzo }) + ' ' + '€';
+                                string prezzolistino = String.Format(WelcomeLibrary.UF.Utility.setCulture(lingua), "{0:##,##0.00}", new object[] { r.PrezzoListino }) + ' ' + '€';
+                                string imgofferta = CommonPage.ReplaceAbsoluteLinks(filemanage.ComponiUrlAnteprima(r.FotoCollection_M.FotoAnteprima, r.CodiceTipologia, r.Id.ToString()));
+
+                                string htmltext = "<div class=\"row border-bottom border-primary\">";
+                                htmltext += "<div class=\"col-5\">";
+                                htmltext += " <img src=\"" + imgofferta + "\" alt=\"\" style=\"max-width:120px\" class=\"img-ant\"  />";
+                                htmltext += "</div>";
+                                htmltext += "<div class=\"col-7\">";
+                                htmltext += "<span style=\"font-weight:600;line-height:normal\">" + r.DenominazionebyLingua(lingua) + "</span><br/>";
+                                htmltext += "<span class=\"tx-primary-color\" style=\"font-weight: 500; font-size: 1rem; line-height: normal;\">";
+                                htmltext += prezzo;
+                                htmltext += "</span>";
+                                htmltext += "<span class=\"tx-secondary-color\" style=\"font-weight: 300; font-size: 0.8rem; text-decoration: line-through;line-height:normal\">";
+                                htmltext += prezzolistino;
+                                htmltext += "</span>";
+                                htmltext += "</div>";
+                                htmltext += "</div> ";
+
+                                //htmltext += " <br/> ";
+                                //htmltext += "  " + r.Prezzo;
+                                //htmltext += " • ";
+
+                                //htmltext += references.ResMan("Common", lingua, "titoloprezzoapartire").ToString() + " " + scaglione.prezzo + "€";
+
+                                string linkurlidhtml = "<a target=\"_self\" href =\"" + WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, r.UrltextforlinkbyLingua(lingua), r.Id.ToString(), r.CodiceTipologia.ToString()) + "\" >" + htmltext + "</a>";
+
+                                string linkurlsimple = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(lingua, r.UrltextforlinkbyLingua(lingua), r.Id.ToString(), r.CodiceTipologia.ToString());
+
+                                ra1 = new ResultAutocomplete() { id = r.Id.ToString(), label = shorttext, link = linkurlsimple, linktext = htmltext };
+                                if (id == null || id == "") lra.Add(ra1);
+                                else if (id != "" && r.Id.ToString() == id) lra.Add(ra1);
+                                count++;
+                                if (count > irecs) break;
+                            }
+
+                            //Generic search tramite link generico
+                            if (!string.IsNullOrEmpty(term))
+                                context.Session.Add("testoricerca", term);
+                            string categoria = ""; string sottocategoria = "";
+                            string linkret = CommonPage.CreaLinkRicerca("", tipologia, categoria, sottocategoria, "", "", "", "-", lingua);
+                            linkret = CommonPage.ReplaceAbsoluteLinks(linkret);
+                            string htmltextgeneric = "<div class=\"row \">";
+                            htmltextgeneric += "<div class=\"col-12 text-center \">";
+                            htmltextgeneric += "<span style=\"font-weight:600;\">" + "Vedi tutti risultati >> " + "</span>";
+                            htmltextgeneric += "</div> ";
+                            htmltextgeneric += "</div> ";
+                            ResultAutocomplete ragenriclink = new ResultAutocomplete() { id = "", label = "Vedi tutti risultati", link = linkret, linktext = htmltextgeneric };
+                            lra.Add(ragenriclink);
+                        }
+                    }
+                    result = Newtonsoft.Json.JsonConvert.SerializeObject(lra, Newtonsoft.Json.Formatting.Indented);
+                    break;
                 case "autocompletericerca":
                     long.TryParse(Recs, out irecs);
                     if (irecs == 0) irecs = 20;

@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Web;
+using WelcomeLibrary.DAL;
 using WelcomeLibrary.DOM;
 using WelcomeLibrary.UF;
 
@@ -1240,6 +1241,72 @@ public class references
             }
         }
         return retstr;
+    }
+    public static void AggiornaInserisciCaratteristica(int progressivo, Dictionary<string, string> testo, string valore)
+    {
+        offerteDM DM = new offerteDM();
+        //Cerichiamo il prossimo progressivo codice libero
+        int ultimoprogressivo = 0;
+        int _i = 0;
+        Utility.Caratteristiche[progressivo - 1].ForEach(c => ultimoprogressivo = (int.TryParse(c.Codice, out _i)) ? ((_i > ultimoprogressivo) ? _i : ultimoprogressivo) : (ultimoprogressivo));
+        ultimoprogressivo += 1;
+        Tabrif item = new Tabrif();
+        if (string.IsNullOrWhiteSpace(valore) || valore == "0")
+            item.Codice = ultimoprogressivo.ToString();
+        else
+        {
+            item = Utility.Caratteristiche[progressivo - 1].Find(c => c.Codice == valore && c.Lingua == "I");
+        }
+        if (item != null)
+        {
+            item.Lingua = "I";
+            item.Campo1 = testo[item.Lingua];
+            DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica" + progressivo.ToString());
+        }
+
+        item = new Tabrif();
+        if (string.IsNullOrWhiteSpace(valore) || valore == "0")
+            item.Codice = ultimoprogressivo.ToString();
+        else
+        {
+            item = Utility.Caratteristiche[progressivo - 1].Find(c => c.Codice == valore && c.Lingua == "GB");
+        }
+        if (item != null)
+        {
+            item.Lingua = "GB";
+            item.Campo1 = testo[item.Lingua];
+            DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica" + progressivo.ToString());
+        }
+
+        item = new Tabrif();
+        if (string.IsNullOrWhiteSpace(valore) || valore == "0")
+            item.Codice = ultimoprogressivo.ToString();
+        else
+        {
+            item = Utility.Caratteristiche[progressivo - 1].Find(c => c.Codice == valore && c.Lingua == "RU");
+        }
+        if (item != null)
+        {
+            item.Lingua = "RU";
+            item.Campo1 = testo[item.Lingua];
+            DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica" + progressivo.ToString());
+        }
+
+        item = new Tabrif();
+        if (string.IsNullOrWhiteSpace(valore) || valore == "0")
+            item.Codice = ultimoprogressivo.ToString();
+        else
+        {
+            item = Utility.Caratteristiche[progressivo - 1].Find(c => c.Codice == valore && c.Lingua == "FR");
+        }
+        if (item != null)
+        {
+            item.Lingua = "FR";
+            item.Campo1 = testo[item.Lingua];
+            DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica" + progressivo.ToString());
+        }
+        //Aggiorno la memoria statica
+        Utility.Caratteristiche[progressivo - 1] = Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica" + progressivo.ToString());
     }
     public static List<Tabrif> FiltraCaratteristiche(int progr, string term, string lingua = "I")
     {

@@ -467,7 +467,7 @@ namespace WelcomeLibrary.DAL
         }
 
 
-        public OfferteCollection GetLista(string testoricerca, string maxresults, string lingua, string connection, string tipologia = "")
+        public OfferteCollection GetLista(string testoricerca, string maxresults, string lingua, string connection, string tipologia = "", bool solodisponibili = false)
         {
             OfferteCollection list = new OfferteCollection();
             if (connection == null || connection == "") return list;
@@ -477,6 +477,11 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter ptesto = new SQLiteParameter("@testoricerca", "%" + testoricerca.Trim().Replace(" ", "%") + "%");
             _pars.Add(ptesto);
 
+            if (solodisponibili)
+            {
+                SQLiteParameter pdisponibili = new SQLiteParameter("@filtrodisponibili", true);
+                _pars.Add(pdisponibili);
+            }
             if (!string.IsNullOrEmpty(tipologia))
             {
                 SQLiteParameter ptipologia = new SQLiteParameter("@CodiceTIPOLOGIA", tipologia);
