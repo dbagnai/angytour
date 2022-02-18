@@ -1,18 +1,15 @@
 ﻿<div id="replaceid" style="text-align: left" itemscope="" itemtype="http://schema.org/Product">
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <div itemprop="name" class="w-100 text-center text-lg-left" style="margin-bottom:4px">
-                    <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
-                        <h1 itemprop="name" class="bind mb-2 tx-primary-color scalablefont-medium-big" mybind="Id" myvalue="titolo" format="formattitle"></h1>
-                        <h2 class="bind tx-sottomenu-color scalablefont-small" mybind="Id" myvalue="titolo" format="formatsubtitle"></h2>
-                    </a>
+            <div class="col-12 col-lg-8 order-first">
+                <div class="w-100 text-center text-lg-left" style="margin-bottom:4px">
+                    <div class="bind" mybind="Prezzo" mybind1="PrezzoListino" format="formatlabelsconto"></div>
+                    <div class="bind" mybind="Promozione" format="formatlabelpromo"></div>
                 </div>
                 <!----------------------------------------------
                 ------ RIGA PREZZO E DATI AGGIUNTIVI ------
                 ----------------------------------------------->
                 <div class="w-100 d-flex justify-content-center justify-content-lg-start mx-3 mx-lg-0">
-
                     <!--<div class="clearfix"></div>
                     <div class="blog-post-details-item blog-post-details-item-left" style="display:none;">
                         <span class="bind" mybind="CodiceTipologia" format="frmtipologia"></span>
@@ -24,114 +21,81 @@
                         <span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata"></span>
                     </div> -->
                 </div>
-                <!------------------ RIGA RECENZIONI STELLINE --------------->
-                <div id="divCommentstotals" class="bind commenttool onlytotals d-flex justify-content-center justify-content-lg-start w-100 px-3 px-lg-0" mybind="Id" instance="commenttool1" style="line-height: 1.0;">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <!------------------------------
-            ------ COLONNA 1 LEFT IMMAGINE ------
-            ------------------------------->
-            <div class="col-12 col-lg-8 order-last  order-lg-1">
-                <div id="plhGallery" class="bind" mybind="Id" myvalue="video"  myvalue2="600" format="frmvisibility"></div>
+                <div id="plhGallery" class="bind" mybind="Id" myvalue="video" myvalue2="500" format="frmvisibility"></div>
                 <div class="responsive-video" style="display: none">
                     <iframe frameborder="0" allowfullscreen class="bind" mybind="Id" myvalue="video" frameborder="0" allowfullscreen src=""></iframe>
-                </div> <p>
-                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                    <!--   <div class="addthis_inline_share_toolbox"></div> --><div class="share42init" data-path="/js/share42/"></div>
-                </p>
-                <!---------------------------------
-                ------ COLONNA 2 LEFT DESCRIZIONE ------
-                ---------------------------------->
-                <div class="mx-0 text-left" style="line-height: 1.6rem;">
-
-                    <div class="blog-post-body mb-3" itemprop="description">
-                        <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="16000" format="formatdescrizione"></span>
-                    </div>
-                    <!----------------------------------
-                    ------ COLONNA LEFT DATI TECNICI ------
-                    ----------------------------------->
-                    <!--<div class="mb-4 w-100 faq-section" id="accordion">
-
-                        <div class="card">
-                            <div class="card-header" id="headingTwo">
-                                <a class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <h4 class="mb-0" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
-                                        <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="ulterioriinformazioni" format="formatlabelresource"></span>
-                                    </h4>
-                                </a>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                <div class="card-body px-3 py-3">
-                                    <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
-
                 </div>
 
             </div>
             <!----------------------------
             ------ COLONNA 3 RIGTH TITOLO ------
             ----------------------------->
-            <div class="col-12 col-lg-4 order-first order-lg-9 ">
+            <div class="col-12 col-lg-4 order-lg-9 mt-lg-3">
                 <div class="position-sticky" style="top:160px">
-                    <div class="d-lg-block mx-lg-0">
-
-                        <div class="w-100"  itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
-                            <meta itemprop="price" class="bind" mybind="Prezzo" format="formatvalue">
-                            <meta itemprop="priceCurrency" content="EUR">
-                            <meta itemprop="availability" content="https://schema.org/InStock">
-                            <span class="bind" mybind="Id" myvalue="prezzo" myvalue1="Prezzo" format="formatlabelresource"></span>
-
-                            <div class="tx-primary-color" style="font-weight: 500; font-size: 2rem; line-height: normal;">
-                                <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                    <div class="d-lg-block mx-lg-0 bg-light-color border-tipo1 px-3">
+                        <span class="bind tx-sottomenu-color font-light-medium scalablefont-smallest" mybind="Caratteristica1" format="frmcaratteristica1"></span>
+                        <!--<a class="bind" target="_self" href="link" title="titolo" mybind="Id">-->
+                        <h1 itemprop="name" class="bind mb-2 scalablefont-medium font-medium primary-font" mybind="Id" myvalue="titolo" format="formattitle"></h1>
+                        <h2 class="bind tx-sottomenu-color scalablefont-small" mybind="Id" myvalue="titolo" format="formatsubtitle"></h2>
+                        <!--</a>-->
+                        <div itemprop="description" class="bind" mybind="Id" myvalue="datitecnici" myvalue1="200" format="formatdescrizione"></div>
+                        <span class="bind" style="font-size:0.7rem" mybind="Id" myvalue="basetext" myvalue1="Codice" format="formatstringfromresource"></span>:
+                        <span class="bind" style="font-size:0.7rem" mybind="CodiceProdotto"></span><br />
+                        <div class="w-100 py-2 d-flex justify-content-between">
+                            <div class="" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                                <meta itemprop="price" class="bind" mybind="Prezzo" format="formatvalue">
+                                <meta itemprop="priceCurrency" content="EUR">
+                                <meta itemprop="availability" content="https://schema.org/InStock">
+                                <span class="bind primary-font primary-color scalablefont-smallest font-medium" mybind="Id" myvalue="prezzo" myvalue1="Prezzo" format="formatlabelresource"></span>
+                                <span class=" primary-font primary-color scalablefont-small font-medium" style="  line-height: normal;">
+                                    <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                                </span>
+                                <span class="py-0  primary-font primary-color" style="  text-decoration: line-through;">
+                                    <span style="padding-left:10px; padding-right:5px;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                                </span>
                             </div>
-                            <div class="px-2 py-0 tx-secondary-color" style="font-weight: 300; font-size: 1.4rem; text-decoration: line-through;">
-                                <span style="padding-left:10px; padding-right:5px; font-weight: 200;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
-                            </div>
-                            <div class="bind" mybind="Id" myvalue="descrizione" myvalue1="600" format="formatdescrizione"></div>
+                        </div>
+                        <div class="w-100">
+                            <div class="bind" mybind="Id" myvalue="common" myvalue1="genericdetailtext" format="formatstringfromresource"></div>
+                        </div>
+                        <!------------------ RIGA RECENZIONI STELLINE --------------->
+                        <div id="divCommentstotals" class="bind commenttool onlytotals d-flex justify-content-center justify-content-lg-start w-100 px-1 px-lg-0" mybind="Id" instance="commenttool1">
                         </div>
                         <!------------------ COLONNA RIGTH SOCIAL ----------------->
-                        <div mybind="Id" class="bind files-list" style="display:none"></div>
-
                         <!-- SEZIONE GESTIONE CARRELLO PRENOTAZIONI -->
                         <!--<div id="prenotalinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>-->
                         <!-- SEZIONE GESTIONE CARRELLO -->
-                        <div id="carrellos1" class="bind carellotool w-100 mt-3 mt-lg-0 px-3 px-lg-0 " mybind="Id" myvalue="Prezzo">
+                        <div id="carrellos1" class="bind carellotool w-100 mt-0 px-1 px-lg-0" mybind="Id" myvalue="Prezzo">
 
                             <!--<div class="float-right table-col ecomctr" id="carrellos1messages"></div>
-                            <div class="float-right table-col ecomctr" id="carrellos1selectdate" style="display:none">
-                                <div style="display:table;margin: 10px auto 0px auto;position:relative">
-                                    <div class="ecomctr-group">
-                                        <input class="form-control bind" style="min-width:160px" placeholder="testoordineform1" mybind="fake" id="carrellos1price" />
-                                        <label class="ecomctr-icon"><i class="fa fa-calendar"></i></label>
-                                        <div id="carrellos1calendar" style="position:absolute;left:0px;top:35px;display:none;z-index:96"></div>
-                                    </div>
-                                </div>
-                            </div>-->
+        <div class="float-right table-col ecomctr" id="carrellos1selectdate" style="display:none">
+            <div style="display:table;margin: 10px auto 0px auto;position:relative">
+                <div class="ecomctr-group">
+                    <input class="form-control bind" style="min-width:160px" placeholder="testoordineform1" mybind="fake" id="carrellos1price" />
+                    <label class="ecomctr-icon"><i class="fa fa-calendar"></i></label>
+                    <div id="carrellos1calendar" style="position:absolute;left:0px;top:35px;display:none;z-index:9999"></div>
+                </div>
+            </div>
+        </div>-->
                             <!--<div class="w-100">
-                                <div class="float-left table-col" id="carrellos1minus"></div>
-                                <div class="float-left table-col px-1" id="carrellos1qty"></div>
-                                <div class="float-left table-col" id="carrellos1plus"></div>
+            <div class="float-left table-col" id="carrellos1minus"></div>
+            <div class="float-left table-col px-1" id="carrellos1qty"></div>
+            <div class="float-left table-col" id="carrellos1plus"></div>
 
-                                <div class="float-right table-col bind" mybind="Id" myvalue="vaialcarrello" format="formatlabelresource"></div>
-                            </div>-->
-
-                            <div class="formbackground   bg-light-color  my-3 p-3" style="background-size: 140px">
-                                <div class="w-100 p-3" style="border:1px solid #ccc;border-radius: 10px;">
+            <div class="float-right table-col bind" mybind="Id" myvalue="vaialcarrello" format="formatlabelresource"></div>
+        </div>-->
+                            <div class="" style="background-size: 140px">
+                                <div class="w-100 p-3 bg-secondary-color" style="border:1px solid #ccc;border-radius: 10px;">
                                     <div class="bind" mybind="Id" myvalue="testocarrelloacquisto" format="formatlabelresource"></div>
                                     <div class="w-100 d-flex justify-content-center align-items-center ">
                                         <div id="carrellos1minus"></div>
                                         <div class="px-1" id="carrellos1qty" optiontype=""></div>
                                         <div id="carrellos1plus"></div>
-                                        <!--<div class="pl-2" id="carrellos1addsingle"></div>-->
+                                        <div class="pl-2" id="carrellos1addsingle"></div>
                                     </div>
                                     <!--<div class="w-100 pt-3 d-flex justify-content-center align-items-center ">
-                                        <div class="ml-3 bind" mybind="Id" myvalue="vaialcarrello" format="formatlabelresource"></div>
-                                    </div>-->
+                    <div class="ml-3 bind" mybind="Id" myvalue="vaialcarrello" format="formatlabelresource"></div>
+                </div>-->
                                     <div class="pt-3 pb-1 w-100 px-3 px-md-0 bind" mybind="Id" myvalue="vaialcarrello1" format="formatlabelresource"></div>
 
                                     <div class="w-100 d-flex justify-content-center align-items-center ">
@@ -139,26 +103,121 @@
                                     </div>
                                 </div>
                             </div>
+
                             <!--SEZIONE PER LA GESTIONE CARATTERISTICHE CON RIFERIMENTO ALLE QUANITA' -->
-                            <div id="carrellos1cars" class="px-2 pt-3 bg-light-color border bd-primary-color" style="display:none">
+                            <div id="carrellos1cars" class="px-2 pt-3" style="display:none">
                                 <div class="w-100 d-flex justify-content-center align-items-center ">
                                     <select id="carrellos1car1" bindingprop="Caratteristica1" class="mx-auto form-control ddlcaratteristiche  w-100" style="background-color:#fff"></select>
                                     <select id="carrellos1car2" bindingprop="Caratteristica2" class="mx-auto form-control ddlcaratteristiche  w-100" style="background-color:#fff"></select>
                                 </div>
                             </div>
 
-                            <div class="formbackground  bg-light-color-pattern-2 my-3 p-3" style="background-size: 140px">
-                                <div class="w-100 p-1" style="border:1px solid #ccc;border-radius: 10px;">
-                                    <div class="bind" mybind="Id" myvalue="testocall" format="formatlabelresource"></div>
-                                </div>
-                                <!--<div class="bind mb-3 text-center" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>-->
-                            </div>
-
-                            <!--<div class="bind mb-3 text-center" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>-->
-                            <div class="bind mb-3 text-center" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>
                         </div>
                         <!-- FINE SEZIONE GESTIONE CARRELLO -->
+                        <!-- Sezione Contatti CTA -->
+                        <div class="mt-3" style="background-size: 400px">
+                            <div class="w-100 p-3 bg-color-sottomeu-tenue " style="border:1px solid #ccc;border-radius: 10px;">
+                                <div class="bind" mybind="Id" myvalue="testocall1" format="formatlabelresource"></div>
+                            </div>
+                            <!--<div class="bind mb-3 text-center" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>-->
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+            <!------------------------------
+            ------ COLONNA 1 LEFT ------
+            ------------------------------->
+            <div class="col-12 col-lg-8 order-last">
+                <!---------------------------------
+                ------ COLONNA 2 LEFT DESCRIZIONE ------
+                ---------------------------------->
+                <p>
+                    <div class="bind" mybind="Id" myvalue="common" myvalue1="social_condividi" format="formatstringfromresource"></div>
+                    <div class="share42init" data-path="/js/share42/"></div>
+                </p>
+                <div class="mx-0 text-left">
+                    <div mybind="Id" class="bind files-list" style="display:none"></div>
+
+                    <div class="blog-post-body mb-3">
+
+                        <!--<span class="bind" mybind="Id" myvalue="Qta_vendita" format="formatstandardtext"></span>-->
+
+                        <ul class="nav nav-tabs mt-3" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active  " id="home-tab" data-toggle="tab" role="tab" href="#home" aria-controls="home" aria-selected="true">Descrizione</a>
+                            </li>
+                            <!--<li class="nav-item">
+                                <a class="nav-link  " id="details-tab" data-toggle="tab" role="tab" href="#details" aria-controls="details" aria-selected="false">Dettagli</a>
+                            </li>-->
+                            <li class="nav-item">
+                                <a class="nav-link  " id="info-tab" data-toggle="tab" role="tab" href="#info" aria-controls="info" aria-selected="false">Termini di servizio</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active py-3" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                                <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="16000" format="formatdescrizione"></span>
+                            </div>
+
+                            <div class="tab-pane fade py-3" id="info" role="tabpanel" aria-labelledby="info-tab">
+                                <div class="bind" mybind="Id" myvalue="testoordine2" format="formatlabelresource"></div>
+                            </div>
+                            <!--<div class="tab-pane fade py-3" role="tabpanel" id="details" aria-labelledby="details-tab">
+                                <div class="table-responsive m-auto p-0" style="width:100%;">
+                                    <table class="table table-bordered m-0 p-0">
+                                        <tbody>
+                                            <tr>
+                                                <td class="bg-gray-color">Marca</td>
+                                                <td>         <span class="bind" mybind="Caratteristica1" format="frmcaratteristica1"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-gray-color">Colore</td>
+                                                <td>
+                                                    <span class="bind" mybind="Caratteristica3" format="frmcaratteristica3"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-gray-color">Modello</td>
+                                                <td>
+                                                    <span class="bind" mybind="Caratteristica5" format="frmcaratteristica5"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-gray-color">Taglia</td>
+                                                <td>
+                                                    <span class="bind" mybind="Caratteristica4" format="frmcaratteristica4"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-gray-color">A (mm) x L (mm) x S (mm)</td>
+                                                <td>
+                                                    <span class="bind" mybind="Id" myvalue="Textfield1_dts" myvalue1="altezza" format="formatjsontext"></span> -
+                                                    <span class="bind" mybind="Id" myvalue="Textfield1_dts" myvalue1="larghezza" format="formatjsontext"></span> -
+                                                    <span class="bind" mybind="Id" myvalue="Textfield1_dts" myvalue1="spessore" format="formatjsontext"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-gray-color">Linea</td>
+                                                <td><span class="bind" mybind="Id" myvalue="Textfield1_dts" myvalue1="linea" format="formatjsontext"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-gray-color">Stagione</td>
+                                                <td><span class="bind" mybind="Id" myvalue="Textfield1_dts" myvalue1="stagione" format="formatjsontext"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-gray-color">Materiale</td>
+                                                <td><span class="bind" mybind="Id" myvalue="Textfield1_dts" myvalue1="materiale" format="formatjsontext"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-gray-color">Barcode</td>
+                                                <td><span class="bind" mybind="Id" myvalue="Textfield1_dts" myvalue1="barcode" format="formatjsontext"></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>-->
+                        </div>
                     </div>
                 </div>
             </div>

@@ -360,14 +360,14 @@
 
 .menuzord-menu > li {
     padding-top: 0px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     padding-left: 5px;
     padding-right: 5px;
 }
 
 .menuzord-menu > li {
     /*margin-top: 50px;*/
-    margin-top: 0px;
+    margin-top: 15px;
 }
 
 .logotop .menuzord-menu > li {

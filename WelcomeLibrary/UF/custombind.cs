@@ -4908,7 +4908,8 @@ namespace WelcomeLibrary.UF
                             {
                                 double _tmppz = 0;
                                 double.TryParse(valore[0], out _tmppz);
-                                ret = String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,##0.00}", new object[] { _tmppz }) + ' ' + unit;
+                                ret = unit;
+                                ret += String.Format(WelcomeLibrary.UF.Utility.setCulture(Lingua), "{0:##,##0.00}", new object[] { _tmppz });
                                 //ret = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}", new object[] { _tmppz }) + ' ' + unit;
                             }
                         }
@@ -5038,7 +5039,7 @@ namespace WelcomeLibrary.UF
                                         if (descrizione.Substring(i + j, 1) == " " || descrizione.Substring(i + j, 1) == "." || descrizione.Substring(i + j, 1) == "\n") stop = true;
                                         j += 1;
                                     }
-                                    descrizione = descrizione.Substring(0, i + j) + "... &#10132;";
+                                    descrizione = descrizione.Substring(0, i + j - 1) + "... &#10132;";
                                 }
 
                                 if (prop[2] != null && prop[2] == "nobreak")
@@ -5074,6 +5075,23 @@ namespace WelcomeLibrary.UF
                     catch { }
                     break;
 
+                case "formatlabelpromo":
+                    try
+                    {
+                        string testopromo = WelcomeLibrary.UF.ResourceManagement.ReadKey("common", Lingua, "testolblpromo").Valore;
+                        var promochk = valore[0];
+                        bool promo = false;
+                        bool.TryParse(promochk, out promo);
+                        if (promo)
+                        {
+                            ret = "<div class=\"prod_promo\"><span>";
+
+                            ret += testopromo;
+                            ret += "</span></div>";
+                        }
+                    }
+                    catch { }
+                    break;
                 case "formatlabelsconto":
                     try
                     {

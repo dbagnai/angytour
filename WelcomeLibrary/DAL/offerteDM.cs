@@ -184,6 +184,16 @@ namespace WelcomeLibrary.DAL
                     //	queryfilter += " AND  Promozione = " + ((bool)promozione.Value ? "1" : "0") + "   ";
 
                 }
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@percentualesconto"; }))
+                {
+                    SQLiteParameter psconto = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@percentualesconto"; });
+                    _parUsed.Add(psconto);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE   Prezzo is not null and PrezzoListino is not null  and PrezzoListino != 0 and (100-Prezzo/PrezzoListino*100) <= @percentualesconto  ";
+                    else
+                        queryfilter += " AND   Prezzo is not null and PrezzoListino is not null  and PrezzoListino != 0 and (100-Prezzo/PrezzoListino*100) <= @percentualesconto   ";
+                }
+
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Autore"; }))
                 {
                     SQLiteParameter Autore = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Autore"; });
@@ -5348,10 +5358,20 @@ namespace WelcomeLibrary.DAL
 
             //se inserito parametro filtrodisponibili :  valore true solo elementi qty null o > 0 altrimenti
             //se false solo elementi a quantità non null e minore ugiale a zero
-            if (filtri.ContainsKey("filtrodisponibili") && !string.IsNullOrEmpty(filtri["filtrodisponibili"])) 
+            if (filtri.ContainsKey("filtrodisponibili") && !string.IsNullOrEmpty(filtri["filtrodisponibili"]))
             {
                 SQLiteParameter pdispo = new SQLiteParameter("@filtrodisponibili", filtri["filtrodisponibili"]);
                 parColl.Add(pdispo);
+            }
+
+            if (filtri.ContainsKey("percentualesconto") && !string.IsNullOrEmpty(filtri["percentualesconto"]))
+            {
+                double _tmpsconto = 0;
+                double.TryParse(filtri["percentualesconto"], out _tmpsconto);//passare la soglia di sconto minima
+                if (filtri["percentualesconto"] == "true") _tmpsconto = 100;//se spunta mentto il 100 di limite
+                //il valore se passato potrei prenderelo come filtri["percentualesconto"] , ma ho messo una spunta quindi arriva true!!!!
+                SQLiteParameter pscont = new SQLiteParameter("@percentualesconto", _tmpsconto);
+                parColl.Add(pscont);
             }
 
             // List<string> idlisttofilter = new List<string>(); //creo una lista unica di id per il filtro idlist che è un and di tutti gli id risultanti
@@ -5364,10 +5384,13 @@ namespace WelcomeLibrary.DAL
                 bool filtriaggiunti = false;
                 //aggiungere i paametri per il fitraggio su tabella scaglioni, raccogliendo gli id per idlist 
                 //////////// campi di filtro per scaglioni: 
-                /////prezzo scaglione (@PrezzoMin)(@PrezzoMax) 
                 string idlistattivitafilter = "";
                 List<SQLiteParameter> parCollScaglioni = new List<SQLiteParameter>();
-                if (filtri.ContainsKey("prezzofilter") && !string.IsNullOrEmpty(filtri["prezzofilter"]))
+
+#if false
+
+                /////prezzo scaglione (@PrezzoMin)(@PrezzoMax) 
+                 if (filtri.ContainsKey("prezzofilter") && !string.IsNullOrEmpty(filtri["prezzofilter"]))
                 {
                     string[] prezzi = filtri["prezzofilter"].Split('|');
                     if (prezzi.Length == 2)
@@ -5379,6 +5402,8 @@ namespace WelcomeLibrary.DAL
                         filtriaggiunti = true;
                     }
                 }
+
+#endif
                 //da inserire tutti gli altri parametri di filtro scaglioni nella collection dei paramentri di filtraggio parCollScaglioni
                 //da finire  datapartenza (@Data_inizio)(@Data_fine), stato viaggio (@stato), durata viaggio  (@duratamin)(@duratamax), fascia di eta (@fasciaeta), coordinatore (@idcoordinatore)
 
@@ -5551,6 +5576,21 @@ namespace WelcomeLibrary.DAL
                 SQLiteParameter pc3 = new SQLiteParameter("@Caratteristica3", filtri["Caratteristica3"]);
                 parColl.Add(pc3);
             }
+            if (filtri.ContainsKey("Caratteristica4") && !string.IsNullOrEmpty(filtri["Caratteristica4"]))
+            {
+                SQLiteParameter pc4 = new SQLiteParameter("@Caratteristica4", filtri["Caratteristica4"]);
+                parColl.Add(pc4);
+            }
+            if (filtri.ContainsKey("Caratteristica5") && !string.IsNullOrEmpty(filtri["Caratteristica5"]))
+            {
+                SQLiteParameter pc5 = new SQLiteParameter("@Caratteristica5", filtri["Caratteristica5"]);
+                parColl.Add(pc5);
+            }
+            if (filtri.ContainsKey("Caratteristica6") && !string.IsNullOrEmpty(filtri["Caratteristica6"]))
+            {
+                SQLiteParameter pc6 = new SQLiteParameter("@Caratteristica6", filtri["Caratteristica6"]);
+                parColl.Add(pc6);
+            }
             if (filtri.ContainsKey("nazione") && !string.IsNullOrEmpty(filtri["nazione"]))
             {
                 SQLiteParameter pnaz = new SQLiteParameter("@CodiceNAZIONE", filtri["nazione"]);
@@ -5595,6 +5635,20 @@ namespace WelcomeLibrary.DAL
                 parColl.Add(p8);
             }
 
+
+            //sposto il filtro di prezzo sulla scheda primaria!!
+            if (filtri.ContainsKey("prezzofilter") && !string.IsNullOrEmpty(filtri["prezzofilter"]))
+            {
+                string[] prezzi = filtri["prezzofilter"].Split('|');
+                if (prezzi.Length == 2)
+                {
+                    SQLiteParameter pminfilter = new SQLiteParameter("@PrezzoMin", prezzi[0]);
+                    parColl.Add(pminfilter);
+                    SQLiteParameter pmaxfilter = new SQLiteParameter("@PrezzoMax", prezzi[1]);
+                    parColl.Add(pmaxfilter);
+                }
+            }
+
             if (filtri.ContainsKey("mese") && !string.IsNullOrEmpty(filtri["mese"]))
                 if (filtri.ContainsKey("anno") && !string.IsNullOrEmpty(filtri["anno"]))
                 {
@@ -5632,13 +5686,21 @@ namespace WelcomeLibrary.DAL
 #endif
                 }
 
+
+            string capoordinamento = "";
+            if (filtri.ContainsKey("orderby") && !string.IsNullOrEmpty(filtri["orderby"]))
+            {
+                capoordinamento = filtri["orderby"].Trim();
+            }
+
+
             if (enabledpager && page != 0 && pagesize != 0)
             {
-                offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxrecords, lingua, null, "", false, page, pagesize);
+                offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxrecords, lingua, null, capoordinamento, false, page, pagesize);
             }
             else if (senablepager == "skip" && page != 0 && pagesize != 0)
             {
-                offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", lingua, null, "", false, page, pagesize);
+                offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "", lingua, null, capoordinamento, false, page, pagesize);
                 int lmaxrecords = 0;
                 int.TryParse(maxrecords, out lmaxrecords);
                 if (offerte != null && lmaxrecords != 0)
@@ -5656,7 +5718,7 @@ namespace WelcomeLibrary.DAL
 
             }
             else
-                offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxrecords, lingua, null, "");
+                offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, maxrecords, lingua, null, capoordinamento);
 
 
             /////////////////////////////////////////////////////////

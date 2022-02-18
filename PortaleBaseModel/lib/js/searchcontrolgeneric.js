@@ -33,7 +33,7 @@ function initAutocompleteRicercaCaratteristiche(paramtipologia) {
     $(".autocompletesearch").each(function () {
         var idact = $(this).attr("id");
         $("#" + idact).autocomplete({
-            source: pathAbs + commonhandlerpath + '?q=autocompletericercalist&r=20&tipologia=' + localtipologia + "&lng=" + lng,
+            source: pathAbs + commonhandlerpath + '?q=autocompletericercalist1&r=20&tipologia=' + localtipologia + "&lng=" + lng,
             minLength: 3,
             //appendTo: '#' + idact , //in alternativa puoi maettere la calsee ui-front al container
             open: function (event, ui) {
@@ -227,8 +227,8 @@ function Visualizzalistadati(paramtipologia) {
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     ///VISUALIZZIAMO LA STRINGA DA USARE NELL FUNZIONE DI INJECT debugprametersforinject COME PARAMETRO DI CHIAMATA PER FILTRAGGIO
     var debugprametersforinject = utf8ToB64(JSON.stringify(objfiltro));
-    console.log('stringa codificata per filtro objfiltro da usare nelle funzioni inject: ' + debugprametersforinject);
-    console.log('reverse da base 64 a utf parsed: ' );
+    console.log('codifica filtro objfiltro per added parameters: ' + debugprametersforinject);
+  //  console.log('reverse da base 64 a utf parsed: ' );
     console.log( JSON.parse(b64ToUtf8(debugprametersforinject)));
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     
@@ -288,8 +288,8 @@ function VisualizzaSearchControls() {
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         ///VISUALIZZIAMO LA STRINGA DA USARE NELL FUNZIONE DI INJECT debugprametersforinject COME PARAMETRO DI CHIAMATA PER FILTRAGGIO
         var debugprametersforinject = utf8ToB64(JSON.stringify(objfiltro));
-        console.log('stringa codificata per filtro objfiltro da usare nelle funzioni inject: ' + debugprametersforinject);
-        console.log('reverse da base 64 a utf parsed: ');
+        console.log('codifica filtro objfiltro per added parameters: ' + debugprametersforinject);
+        //console.log('reverse da base 64 a utf parsed: ');
         console.log(JSON.parse(b64ToUtf8(debugprametersforinject)));
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 

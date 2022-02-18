@@ -79,29 +79,45 @@
                     <asp:Literal ID="litTitolo" runat="server"></asp:Literal>
                     - Selezione scheda struttura</h2>
                 <hr />
-                <div class="cerca">
+                 <div class="cerca" style="background-color:#f0f0f0;padding:10px;border: 1px solid #ccc">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtinputCerca" Width="100%" placeholder="cerca .." />
+                            <asp:TextBox CssClass="mceNoEditor" runat="server" ID="txtinputCerca" Width="100%" placeholder="cerca inserendo un testo .." />
                         </div>
                     </div>
                     <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
-                     <div class="col-sm-12">
+                     <div class="col-sm-6">
                             <b>Visibilità online</b>
                             <asp:RadioButtonList ID="radarchiviati" runat="server" RepeatDirection="Horizontal">
                             <asp:ListItem Text="Tutti" Value="" Selected="True" />
                             <asp:ListItem Text="Solo Archiviati" Value="true" />
                             <asp:ListItem Text="Solo non archiviati" Value="false" />
                         </asp:RadioButtonList><br />
+                    </div> 
+                     <div class="col-sm-6">
+                            <b>Prodotti promo/novità</b>
+                            <asp:RadioButtonList ID="radpromozioni" runat="server" RepeatDirection="Horizontal">
+                            <asp:ListItem Text="Tutti" Value="" Selected="True" />
+                            <asp:ListItem Text="Novità" Value="true" />
+                            <asp:ListItem Text="Non Novità" Value="false" />
+                        </asp:RadioButtonList><br />
                     </div>
                     </div>
                     <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
-                     <div class="col-sm-12">
-                            <b>Prodotti in Promozione</b>
-                            <asp:RadioButtonList ID="radpromozioni" runat="server" RepeatDirection="Horizontal">
+                    <div class="col-sm-6">
+                            Articoli Scontati/Saldi 
+                        <asp:CheckBox ID="chkscontati" runat="server" /><br/>
+                            Scontati fino al:
+                        <asp:TextBox CssClass="mceNoEditor form-control" ID="sogliasconto" runat="server">100</asp:TextBox>
+                        <Ajax:FilteredTextBoxExtender ID="ftfltsc" runat="server" TargetControlID="sogliasconto"
+                            FilterMode="ValidChars" ValidChars="0123456789," />
+                    </div>
+                    <div class="col-sm-6">
+                            <b>Prodotti disponibilie</b>
+                            <asp:RadioButtonList ID="radquantita" runat="server" RepeatDirection="Horizontal">
                             <asp:ListItem Text="Tutti" Value="" Selected="True" />
-                            <asp:ListItem Text="In promozione" Value="true" />
-                            <asp:ListItem Text="Non In promozione" Value="false" />
+                            <asp:ListItem Text="Solo disponibili" Value="0" />
+                            <asp:ListItem Text="Solo non disponibili" Value="1" />
                         </asp:RadioButtonList><br />
                     </div>
                     </div>
@@ -123,7 +139,7 @@
                             </Ajax:TextBoxWatermarkExtender>
                         </div>--%>
                         <div class="col-sm-8">
-                            <asp:DropDownList Width="100%" AppendDataBoundItems="true" AutoPostBack="true" ID="ddlSottoProdSearch"
+                            <asp:DropDownList Width="100%" AppendDataBoundItems="true" ID="ddlSottoProdSearch"
                                 runat="server" OnSelectedIndexChanged="ddlSottoProdSearch_SelectedIndexChange" />
                         </div>
                         <div class="col-sm-4">

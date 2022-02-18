@@ -18,7 +18,12 @@
 @black-color: #000;
 @white-color: #fff;
 @gray-color: #f0f0f0;
+@lightgray-color: #fafafa;
+@darkgray-color: #474747;
 @blue-color: #609cec;
+@red-color: #f60d0d;
+
+
 /* sistema di colori a triade */
 @triadic-secondary: spin(@bg-primary-color, -(360 / 3));
 @triadic-tertiary: spin(@bg-primary-color, (360 / 3));
@@ -63,7 +68,8 @@
 /*----------------------------------
 //////////////| MENU |//////////////
 ----------------------------------*/
-@menu-size: 1rem;
+@menu-size-base: 0.9rem;
+@menu-size: 0.85rem;
 @menu-font: @base-font;
 @menu-color: @primary-color;
 @menu-hover-color: @color-sottomeu;
@@ -75,6 +81,16 @@
 @submenu-weight: 400;
 @submenu-hover-weight: 400;
 @submenu-weight-1: 600;
+
+@font-weight-light: 400;
+@font-weight-medium: 500;
+@font-weight-stirng: 800;
+
+@light-weight: 300;
+@light-medium-weight: 400;
+@medium-weight: 500;
+@medium-bold-weight: 600;
+@bold-weight: 700;
 
 /**/
 @submenu-catalogo-color: @white-color;
@@ -101,17 +117,17 @@
 ///////////| FONT PAGE |///////////
 ----------------------------------*/
 
-@scalable-huge-font-size: calc(30px + 2.8vw + 2.8vh + 0.3vmin);
-@scalable-extrime-font-size: calc(30px + 2vw + 2vh + 1vmin);
-@scalable-testata-extrime-font-size: calc(30px + 2vw + 2vh + 1vmin);
-@scalable-medium2-extrime-font-size: calc(28px + 1.4vw + 1.4vh + 0.7vmin);
-@scalable-medium-extrime-font-size: calc(28px + 1vw + 1vh + 0.5vmin);
-@scalable-big-font-size: calc(24px + 0.6vw + 0.6vh + 0.3vmin);
-@scalable-medium-big-font-size: calc(22px + 0.4vw + 0.4vh + 0.2vmin);
-@scalable-medium-font-size: calc(20px + 0.35vw + 0.35vh + 0.175vmin);
-@scalable-small-medium-font-size: calc(18px + 0.3vw + 0.3vh + 0.15vmin);
-@scalable-small-font-size: calc(18px + 0.2vw + 0.2vh + 0.1vmin);
-@scalable-smallest-font-size: calc(16px + 0.15vw + 0.15vh + 0.075vmin);
+@scalable-huge-font-size: calc(40px + 2.5vw + 1.6vh + 01vmin);
+@scalable-extrime-font-size: calc(30px + 2vw + 1.6vh + 2vmin);
+@scalable-testata-extrime-font-size: calc(30px + 2vw + 0.8vh + 1vmin);
+@scalable-medium-extrime-font-size: calc(28px + 1vw + 0.7vh + 1vmin);
+@scalable-big-font-size: calc(24px + 0.5vw + 0.4vh + 0.3vmin);
+@scalable-medium-big-font-size: calc(22px + 0.35vw + 0.24vh + 0.15vmin);
+@scalable-medium-font-size: calc(20px + 0.25vw + 0.18vh + 0.1vmin);
+@scalable-small-medium-font-size: calc(18px + 0.18vw + 0.1vh + 0.05vmin);
+@scalable-small-font-size: calc(15px + 0.15vw + 0.08vh + 0.05vmin);
+@scalable-smallest-font-size: calc(14px + 0.07vw + 0.03vh + 0.05vmin);
+@scalable-minimal-font-size: calc(10px + 0.04vw + 0.02vh + 0.02vmin);
 
 
 /* dimensioni scalabili sotto i 600 px*/

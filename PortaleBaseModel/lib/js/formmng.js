@@ -68,7 +68,7 @@ function ConfirmValidationFormGeneral(btnid, serveroperation) {
                             $("#form" + btnid.id).hide();
                         }
                         else
-                            out1.innerHTML = (result);
+                            else { out1.innerHTML = (result); location.replace(result); }
                         $(btnid).removeAttr("disabled");
                         $(btnid).html(tastotxt);
                     }, tastotxt);
@@ -84,7 +84,7 @@ function ConfirmValidationFormGeneral(btnid, serveroperation) {
                             out1.innerHTML = (result);
                         }
                         else
-                            out1.innerHTML = (result);
+                                    else { out1.innerHTML = (result); location.replace(result); }
                         $(btnid).removeAttr("disabled");
                         $(btnid).html(tastotxt);
                     }, tastotxt);

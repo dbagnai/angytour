@@ -298,6 +298,25 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 parColl.Add(promo);
             }
 
+            string statodisponibili = radquantita.SelectedValue;
+            if (!string.IsNullOrEmpty(statodisponibili))
+            {
+                string statd = "";
+                if (statodisponibili == "0") statd = "true";
+                if (statodisponibili == "1") statd = "false";
+                SQLiteParameter promo = new SQLiteParameter("@filtrodisponibili", statd);
+                parColl.Add(promo);
+            }
+
+            if (chkscontati.Checked)
+            {
+                double _tmpsconto = 0;
+                double.TryParse(sogliasconto.Text, out _tmpsconto);//passare la soglia di sconto minima
+                SQLiteParameter psconto = new SQLiteParameter("@percentualesconto", _tmpsconto);
+                parColl.Add(psconto);
+
+            }
+
 
             //if (ddlProdottoRicerca.SelectedValue != "")
             //{
@@ -700,8 +719,9 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         ddlSottoProdSearch.DataBind();
         try
         {
-            ddlSottoProdSearch.SelectedValue = "";
-            CodiceSottoProdottoRicerca = "";
+            ddlSottoProdSearch.SelectedValue = CodiceSottoProdottoRicerca;
+            //CodiceSottoProdottoRicerca = "";
+            //ddlSottoProdSearch.SelectedValue = "";
         }
         catch { }
     }

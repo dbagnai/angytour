@@ -537,6 +537,7 @@ namespace WelcomeLibrary.UF
             if (addparms != null)
                 foreach (KeyValuePair<string, string> kv in addparms)
                 {
+                    if (kv.Key.ToLower() == "filtrodisponibili") continue; //non creo una customizzazione del link per i disponibili in qunato è implicito in tutti i filtri!!!!
                     if (!parameters.ContainsKey(kv.Key))
                         parameters.Add(kv.Key, kv.Value);
                     else
@@ -700,7 +701,11 @@ namespace WelcomeLibrary.UF
                     retxt = nomeregione.Trim();
                 }
             }
-
+            if (kv.Key.ToLower() == ("promozioni"))
+            {
+                retxt = "promo"; //per ora metto fisso questo testo
+            }
+            
             if (kv.Key.ToLower() == ("prezzofilter"))
             {
                 retxt = "prezzofilter"; //per ora metto fisso questo testo
