@@ -1182,10 +1182,10 @@ public partial class AspNetPages_weblist : CommonPage
             string sobjvalue = Session["objfiltro"].ToString();
             objvalue = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(sobjvalue);
         }
-        string linki = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "I"));
-        string linken = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "GB"));
-        string linkru = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "RU"));
-        string linkfr = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "FR"));
+        string linki = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "I",false));
+        string linken = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "GB", false));
+        string linkru = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "RU", false));
+        string linkfr = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "FR", false));
 
         contentcollegato = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, linki.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, ""));
         if ((contentcollegato == null || contentcollegato.Id == 0) && WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")

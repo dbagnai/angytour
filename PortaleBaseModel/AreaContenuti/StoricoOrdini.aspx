@@ -206,6 +206,11 @@
 
         }
     </script>
+      <div class="row"> 
+        <div class="col-xs-12" style="border-bottom: 1px dotted #e2e2e2;text-align:center;padding:20px 0px;">
+            <%= references.ResMan("Common",Lingua,"intestazioneprofiloutente") %>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-3">
             <div class="widget">

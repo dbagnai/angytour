@@ -7562,8 +7562,8 @@ namespace WelcomeLibrary.DAL
             foreach (TipologiaOfferte item in Utility.TipologieOfferte)
             {
                 CreaRssFeed("I", item.Codice);
-                CreaRssFeed("I", item.Codice, "", "", true);
-                CreaRssFeedFacebook("I", item.Codice, "", "");
+                CreaRssFeed("I", item.Codice, "", "", true); //google merchan
+                CreaRssFeedFacebook("I", item.Codice, "", ""); //facebook feed
             }
         }
         /// <summary>
@@ -7611,6 +7611,7 @@ namespace WelcomeLibrary.DAL
             }
         }
 
+
         /// <summary>
         /// Creo un feed rss con tutti gli immobili per ogni lingua ( inglese , italiano )
         /// </summary>
@@ -7654,7 +7655,7 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter filtrotipologia = new SQLiteParameter("@CodiceTIPOLOGIA", FiltroTipologia);
                     parColl.Add(filtrotipologia);
                 }
-                lista = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "1000", Lingua);
+                lista = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "30000", Lingua);
             }
             catch (Exception error)
             {
@@ -7711,7 +7712,9 @@ namespace WelcomeLibrary.DAL
                     foreach (Offerte _new in lista)
                     {
                         string testotitolo = _new.DenominazionebyLingua(Lingua).ToLower();
-                        string descrizioneitem = WelcomeLibrary.UF.Utility.SostituisciTestoACapo(ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_new.DescrizionebyLingua(Lingua), 10000)));
+
+                        string descrizioneitem = (WelcomeLibrary.UF.Utility.SostituisciTestoACapo(ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_new.DatitecnicibyLingua(Lingua), 30000)))) + "\r\n";
+                        descrizioneitem += WelcomeLibrary.UF.Utility.SostituisciTestoACapo(ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_new.DescrizionebyLingua(Lingua), 30000)));
 
                         if (_new == null || string.IsNullOrEmpty(_new.Id.ToString())) continue;
                         if (descrizioneitem == null || string.IsNullOrEmpty(descrizioneitem)) continue;
@@ -7725,8 +7728,26 @@ namespace WelcomeLibrary.DAL
                         {
 
                             //Cerco brand:-> codice produttore per pubblicare
-                            //Cerco ean:-> codice per pubblicare
-                            //Cerco mpn:-> codice per pubblicare se non presente ean
+                            //Cerco ean:-> codice per pubblicare ( è il barcode )
+                            //Cerco mpn:-> codice per pubblicare ( è lo sku )
+
+                            string codiceprodotto = _new.CodiceProdotto; // codice del prodotto principale
+                            if (string.IsNullOrEmpty(codiceprodotto)) codiceprodotto = _new.Id.ToString();
+                            gtinmpn = codiceprodotto;//Sku
+
+                            //barcode
+                            List<Tabrif> extradata = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Tabrif>>(_new.Textfield1_dts);
+                            if (extradata != null)
+                            {
+                                Tabrif elem = extradata.Find(e => e.Campo2 == "barcode");
+                                if (elem != null)
+                                {
+                                    if (!string.IsNullOrEmpty(elem.Campo1))
+                                        gtinean = elem.Campo1;
+                                }
+                            }
+                            brand = references.TestoCaratteristica(0, _new.Caratteristica1.ToString(), Lingua);
+
                             int start = descrizioneitem.ToLower().IndexOf("ean:");
                             if (start != -1)
                             {
@@ -7814,6 +7835,8 @@ namespace WelcomeLibrary.DAL
                             if (string.IsNullOrEmpty(brand)) continue;
                             if (string.IsNullOrEmpty(gtinean) && string.IsNullOrEmpty(gtinmpn)) continue; 
 #endif
+                            //per articoli esurito o qtita null salto
+                            if (_new.Qta_vendita == null || (_new.Qta_vendita != null && _new.Qta_vendita.Value == 0)) continue;
                             if (_new == null || _new.Prezzo == 0) continue;
 
                         }
@@ -7822,13 +7845,26 @@ namespace WelcomeLibrary.DAL
                         writer.WriteStartElement("item");
 
                         //TITOLO SCHEDA
-                        writer.WriteElementString("title", html.Convert(testotitolo.Replace("-", " ")));
+                        //writer.WriteElementString("title", html.Convert(testotitolo.Replace("-", " ")));
+                        writer.WriteStartElement("title");
+                        writer.WriteCData(html.Convert(testotitolo.Replace("-", " ")));
+                        writer.WriteEndElement();
+
 
                         //LINK A SCHEDA
                         string UrlCompleto = "";
                         //UrlCompleto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + stringabase + _new.CodiceTipologia.Replace(" ", "_") + "_" + Lingua + "_" + _new.Id.ToString().Replace(" ", "_") + "_" + testotitolo + ".aspx";
                         UrlCompleto = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, _new.UrltextforlinkbyLingua(Lingua), _new.Id.ToString(), _new.CodiceTipologia, _new.CodiceCategoria, "", "", "", "", true, false);
-                        writer.WriteElementString("link", UrlCompleto);
+                        if (gmerchant) UrlCompleto += "?fee=1&fep=" + _new.Id.ToString() + "&utm_source=google_cpc&utm_medium=google_shopping&utm_campaign=google_cpc-shopping";
+                        //?fee=6&fep=27176&utm_source=google_cpc&utm_medium=google_shopping&utm_campaign=google_cpc-shopping
+                        //se merchant devo aggiungere i valori utm .... al link
+
+                        //writer.WriteElementString("link", UrlCompleto);
+                        writer.WriteStartElement("link");
+                        writer.WriteCData(UrlCompleto);
+                        writer.WriteEndElement();
+
+
 
                         if (!gmerchant)
                         {
@@ -7843,18 +7879,46 @@ namespace WelcomeLibrary.DAL
                             writer.WriteEndElement();
                         }
 
-                        //Categoria
-                        //<category>
-                        item = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == _new.CodiceTipologia); });
-                        if (item != null)
+                        //<product_type>
+                        //string categoriaprodotto = references.TestoTipologia(_new.CodiceTipologia, Lingua);
+                        string categoriaprodotto = " > " + references.TestoCategoria(_new.CodiceTipologia, _new.CodiceCategoria, Lingua);
+                        categoriaprodotto += " > " + references.TestoCategoria2liv(_new.CodiceTipologia, _new.CodiceCategoria, _new.CodiceCategoria2Liv, Lingua).Trim();
+                        categoriaprodotto = categoriaprodotto.Trim().TrimEnd('>').TrimStart('>');
+                        if (!string.IsNullOrEmpty(categoriaprodotto))
                         {
-                            writer.WriteStartElement("category");
-                            writer.WriteValue(item.Descrizione);
+                            writer.WriteStartElement("g:product_type");
+                            writer.WriteCData(categoriaprodotto);
                             writer.WriteEndElement();
                         }
 
+                        //eventuale aggiunta di  <g:google_product_category> .. da vedere
+
+
+
                         //DESCRIZIONE
                         string linkimmagine = filemanage.ComponiUrlAnteprima(_new.FotoCollection_M.FotoAnteprima, _new.CodiceTipologia, _new.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                        writer.WriteStartElement("g:image_link");
+                        writer.WriteCData(linkimmagine);
+                        writer.WriteEndElement();
+                        //<g:additional_image_link>
+                        if ((_new != null) && (_new.FotoCollection_M.Count > 1))
+                        {
+                            foreach (Allegato a in _new.FotoCollection_M)
+                            {
+                                if ((a.NomeFile.ToString().ToLower().EndsWith("jpg") || a.NomeFile.ToString().ToLower().EndsWith("gif") || a.NomeFile.ToString().ToLower().EndsWith("png")))
+                                {
+                                    //IMMAGINE
+                                    string tmppathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, _new.CodiceTipologia, _new.Id.ToString());
+                                    string abspathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                                    if (abspathimmagine != linkimmagine)
+                                    {
+                                        writer.WriteStartElement("g:additional_image_link");
+                                        writer.WriteCData(abspathimmagine);
+                                        writer.WriteEndElement();
+                                    }
+                                }
+                            }
+                        }
 
                         ///////////////////////////////////////////
                         ///PER FEED MERCHANT GOOGLE //////////////////////////////////////
@@ -7868,6 +7932,47 @@ namespace WelcomeLibrary.DAL
                             writer.WriteEndElement();
 #endif
 
+
+                            //<g:color>
+                            string color = references.TestoCaratteristica(2, _new.Caratteristica3.ToString(), Lingua);
+                            if (!string.IsNullOrEmpty(color))
+                            {
+                                writer.WriteStartElement("g:color");
+                                writer.WriteCData(color);
+                                writer.WriteEndElement();
+                            }
+
+
+                            //<g:gender>
+                            string gender = references.TestoCaratteristica(1, _new.Caratteristica2.ToString(), Lingua);
+                            if (!string.IsNullOrEmpty(gender))
+                            {
+                                writer.WriteStartElement("g:gender");
+                                writer.WriteCData(gender);
+                                writer.WriteEndElement();
+                            }
+
+
+                            //stagione
+                            List<Tabrif> extradata = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Tabrif>>(_new.Textfield1_dts);
+                            if (extradata != null)
+                            {
+                                Tabrif elem = extradata.Find(e => e.Campo2 == "stagione");
+                                if (elem != null)
+                                {
+                                    if (!string.IsNullOrEmpty(elem.Campo1))
+                                    {
+                                        writer.WriteStartElement("g:custom_label_0");
+                                        writer.WriteCData(elem.Campo1);
+                                        writer.WriteEndElement();
+                                    }
+                                }
+                            }
+
+                            /*  ??
+                                <g:custom_label_1><![CDATA[True]]></g:custom_label_1>
+                             */
+
                             if (string.IsNullOrEmpty(brand) && string.IsNullOrEmpty(gtinean) && string.IsNullOrEmpty(gtinmpn))
                             {
                                 //Identifier_exists ( indica che non sono presenti brand,mpn o gtin ( occhio a non inserirli se metti a false il default è true )
@@ -7876,46 +7981,27 @@ namespace WelcomeLibrary.DAL
                                 writer.WriteEndElement();
                             }
 
-                            writer.WriteStartElement("g:image_link");
-                            writer.WriteValue(linkimmagine);
-                            writer.WriteEndElement();
-                            //if ((_new != null) && (_new.FotoCollection_M.Count > 1))
-                            //{
-                            //    foreach (Allegato a in _new.FotoCollection_M)
-                            //    {
-                            //        if ((a.NomeFile.ToString().ToLower().EndsWith("jpg") || a.NomeFile.ToString().ToLower().EndsWith("gif") || a.NomeFile.ToString().ToLower().EndsWith("png")))
-                            //        {
-                            //            //IMMAGINE
-                            //            string tmppathimmagine = ComponiUrlAnteprima(a.NomeFile, _new.CodiceTipologia, _new.Id.ToString());
-                            //            string abspathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-                            //            if (abspathimmagine != linkimmagine)
-                            //            {
-                            //                writer.WriteStartElement("g:additional_​​​image_​​​link");
-                            //                writer.WriteValue(abspathimmagine);
-                            //                writer.WriteEndElement();
-                            //            }
-                            //        }
-                            //    }
-                            //}
+
+
                             //BRAND
                             if (!string.IsNullOrEmpty(brand))
                             {
                                 writer.WriteStartElement("g:brand");
-                                writer.WriteValue(brand);
+                                writer.WriteCData(brand);
                                 writer.WriteEndElement();
                             }
-                            //CODIE  EAN / ISBN / UPC / JAN / ITF-14
+                            //CODIE  EAN / ISBN / UPC / JAN / ITF-14 (barcode )
                             if (!string.IsNullOrEmpty(gtinean))
                             {
                                 writer.WriteStartElement("g:gtin");
-                                writer.WriteValue(gtinean);
+                                writer.WriteCData(gtinean);
                                 writer.WriteEndElement();
                             }
-                            //MANUFACTURER PART NUMBER
+                            //MANUFACTURER PART NUMBER  ( qui ci va lo sku )
                             if (!string.IsNullOrEmpty(gtinmpn))
                             {
                                 writer.WriteStartElement("g:mpn");
-                                writer.WriteValue(gtinmpn);
+                                writer.WriteCData(gtinmpn);
                                 writer.WriteEndElement();
                             }
                             //Specifico che non fornisco codice gtin o mpn per il prodotto ( che sarebbero meglio)
@@ -7926,12 +8012,28 @@ namespace WelcomeLibrary.DAL
                             //writer.WriteStartElement("g:google_​​product_​​category");
                             //writer.WriteValue("276"); //Codice o desrizione google taxonomy ( quesot è per le batterie )
                             //writer.WriteEndElement();
-                            if (_new.Prezzo != 0)
+                            double tmpprezzo = _new.Prezzo;
+                            double tmpprezzoscontato = 0;
+                            if (_new.PrezzoListino != 0 && _new.PrezzoListino > _new.Prezzo)
+                            {
+                                tmpprezzo = _new.PrezzoListino;
+                                tmpprezzoscontato = _new.Prezzo;
+                            }
+                            if (tmpprezzo != 0)
                             {
                                 writer.WriteStartElement("g:price");
-                                writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { _new.Prezzo }) + " EUR");
+                                writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { tmpprezzo }) + " EUR");
+                                //  ret = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { _new.Prezzo });
                                 writer.WriteEndElement();
                             }
+                            if (tmpprezzoscontato != 0)
+                            {
+                                writer.WriteStartElement("g:sale_price");
+                                writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { tmpprezzoscontato }) + " EUR");
+                                //  ret = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { _new.Prezzo });
+                                writer.WriteEndElement();
+                            }
+
                             ////////////////////////////////////////////////////////////////
                             //                         < g:shipping >
 
@@ -7968,7 +8070,7 @@ namespace WelcomeLibrary.DAL
                             writer.WriteValue("in stock"); //out of stock | preorder
                             writer.WriteEndElement();
                             writer.WriteStartElement("g:condition");
-                            writer.WriteValue("nuovo"); //new refurbished used ( o nuovo ricondizionato usato )
+                            writer.WriteValue("new"); //new refurbished used ( o nuovo ricondizionato usato )
                             writer.WriteEndElement();
                             writer.WriteStartElement("g:id");
                             writer.WriteValue(_new.Id);
@@ -7980,7 +8082,7 @@ namespace WelcomeLibrary.DAL
                         if (_new.FotoCollection_M != null && !gmerchant)
                             sb.Append("<img style=\"margin-right: 10px; float: left\" src=\"" + linkimmagine + "\" alt=\"" + testotitolo + "\" width=\"350\" />");
 
-                        sb.Append("<p>" + html.Convert(descrizioneitem) + "</p>");
+                        sb.Append(RemoveTroublesomeCharacters(html.Convert(descrizioneitem)));
 
                         if (!gmerchant)
                             sb.Append("<p>Continua a leggere / Read More <a href=\"" + UrlCompleto + "\"><em>" + testotitolo + "</em></a>.</p>");
@@ -8013,6 +8115,7 @@ namespace WelcomeLibrary.DAL
 
         }
 
+
         /// <summary>
         /// Removes control characters and other non-UTF-8 characters
         /// </summary>
@@ -8041,6 +8144,7 @@ namespace WelcomeLibrary.DAL
             return newString.ToString();
 
         }
+
         public void CreaRssFeedFacebook(string Lng, string FiltroTipologia = "", string titolo = "", string descrizione = "")
         {
             WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();
@@ -8081,7 +8185,7 @@ namespace WelcomeLibrary.DAL
                     SQLiteParameter filtrotipologia = new SQLiteParameter("@CodiceTIPOLOGIA", FiltroTipologia);
                     parColl.Add(filtrotipologia);
                 }
-                lista = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);
+                lista = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "30000", Lingua);
             }
             catch (Exception error)
             {
@@ -8121,7 +8225,7 @@ namespace WelcomeLibrary.DAL
                     writer.WriteElementString("link", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                     writer.WriteElementString("description", descrizionefeed);
 
-#if  false //non so se va bene x facebook
+#if false //non so se va bene x facebook
 
                     //writer.WriteElementString("lastBuildDate", System.Xml.XmlConvert.ToString(System.DateTime.Now, "yyyy-MM-ddTHH:mm:ss+01:00"));
                     writer.WriteElementString("lastBuildDate", System.Xml.XmlConvert.ToString(System.DateTime.Now, "ddd, dd MMM yyyy HH:mm:ss 'GMT'"));
@@ -8133,8 +8237,8 @@ namespace WelcomeLibrary.DAL
                     foreach (Offerte _new in lista)
                     {
                         string testotitolo = _new.DenominazionebyLingua(Lingua).ToLower();
-                        string descrizioneitem = (WelcomeLibrary.UF.Utility.SostituisciTestoACapo(ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_new.DescrizionebyLingua(Lingua), 5000))));
-                        descrizioneitem += (WelcomeLibrary.UF.Utility.SostituisciTestoACapo(ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_new.DatitecnicibyLingua(Lingua), 30000))));
+                        string descrizioneitem = (WelcomeLibrary.UF.Utility.SostituisciTestoACapo(ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_new.DatitecnicibyLingua(Lingua), 30000)))) + "\r\n";
+                        descrizioneitem += WelcomeLibrary.UF.Utility.SostituisciTestoACapo(ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_new.DescrizionebyLingua(Lingua), 30000)));
 
                         descrizioneitem = html.Convert(descrizioneitem);
 
@@ -8158,7 +8262,19 @@ namespace WelcomeLibrary.DAL
 
                         string codiceprodotto = _new.CodiceProdotto; // codice del prodotto principale
                         if (string.IsNullOrEmpty(codiceprodotto)) codiceprodotto = _new.Id.ToString();
+                        gtinmpn = codiceprodotto;//Sku
 
+                        //barcode
+                        List<Tabrif> extradata = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Tabrif>>(_new.Textfield1_dts);
+                        if (extradata != null)
+                        {
+                            Tabrif elem = extradata.Find(e => e.Campo2 == "barcode");
+                            if (elem != null)
+                            {
+                                if (!string.IsNullOrEmpty(elem.Campo1))
+                                    gtinean = elem.Campo1;
+                            }
+                        }
                         int start = descrizioneitem.ToLower().IndexOf("ean:");
                         if (start != -1)
                         {
@@ -8253,6 +8369,7 @@ namespace WelcomeLibrary.DAL
                             if (string.IsNullOrEmpty(gtinean) && string.IsNullOrEmpty(gtinmpn)) continue; 
 #endif
                         if (_new == null || _new.Prezzo == 0) continue;
+                        if (_new.Qta_vendita == null || (_new.Qta_vendita != null && _new.Qta_vendita.Value == 0)) continue;
 
                         ////////////////////////////////////PARAMETRI BASE PER MERCHANT CENTER 
                         //INIZIAMO A RIEMPIRE I CAMPI PER L'ITEM NEL FEED
@@ -8261,6 +8378,7 @@ namespace WelcomeLibrary.DAL
 
                         writer.WriteStartElement("g:id");
                         writer.WriteCData(codiceprodotto);
+                        //writer.WriteCData(_new.Id.ToString());
                         writer.WriteEndElement();
 
 
@@ -8275,6 +8393,9 @@ namespace WelcomeLibrary.DAL
                         string UrlCompleto = "";
                         //UrlCompleto = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/" + stringabase + _new.CodiceTipologia.Replace(" ", "_") + "_" + Lingua + "_" + _new.Id.ToString().Replace(" ", "_") + "_" + testotitolo + ".aspx";
                         UrlCompleto = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, _new.UrltextforlinkbyLingua(Lingua), _new.Id.ToString(), _new.CodiceTipologia, _new.CodiceCategoria, "", "", "", "", true, false);
+                        UrlCompleto += "?fee=2&fep=" + _new.Id.ToString() + "utm_source=facebook&utm_medium=fb_ads&utm_campaign=facebook";
+
+                        //?fee=2&fep=19047&utm_source=facebook&utm_medium=fb_ads&utm_campaign=facebook
                         //writer.WriteElementString("link", UrlCompleto);
                         writer.WriteStartElement("link");
                         writer.WriteCData(UrlCompleto);
@@ -8326,13 +8447,14 @@ namespace WelcomeLibrary.DAL
 
                         //tipo di prodotto
                         //<product_type>
-                        string categoriaprodotto = references.TestoCategoria(_new.CodiceTipologia, _new.CodiceCategoria, Lingua);
+                        //string categoriaprodotto = references.TestoTipologia(_new.CodiceTipologia, Lingua);
+                        string categoriaprodotto = " > " + references.TestoCategoria(_new.CodiceTipologia, _new.CodiceCategoria, Lingua);
                         categoriaprodotto += " > " + references.TestoCategoria2liv(_new.CodiceTipologia, _new.CodiceCategoria, _new.CodiceCategoria2Liv, Lingua).Trim();
-                        categoriaprodotto = categoriaprodotto.Trim().TrimEnd('>');
+                        categoriaprodotto = categoriaprodotto.Trim().TrimEnd('>').TrimStart('>');
                         if (!string.IsNullOrEmpty(categoriaprodotto))
                         {
                             writer.WriteStartElement("g:product_type");
-                            writer.WriteValue(categoriaprodotto);
+                            writer.WriteCData(categoriaprodotto);
                             writer.WriteEndElement();
                         }
                         //<g:google_product_category>  //opzionale categoria su google
@@ -8400,14 +8522,14 @@ namespace WelcomeLibrary.DAL
                             writer.WriteCData(brand);
                             writer.WriteEndElement();
                         }
-                        //CODIE  EAN / ISBN / UPC / JAN / ITF-14
+                        //CODIE  EAN / ISBN / UPC / JAN / ITF-14 (barcode )
                         if (!string.IsNullOrEmpty(gtinean))
                         {
                             writer.WriteStartElement("g:gtin");
                             writer.WriteCData(gtinean);
                             writer.WriteEndElement();
                         }
-                        //MANUFACTURER PART NUMBER
+                        //MANUFACTURER PART NUMBER  ( qui ci va lo sku )
                         if (!string.IsNullOrEmpty(gtinmpn))
                         {
                             writer.WriteStartElement("g:mpn");

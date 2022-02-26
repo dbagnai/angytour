@@ -477,11 +477,11 @@ public partial class AspNetPages_Orderpage : CommonPage
                     switch (Lingua)
                     {
                         case "I":
-                            output.Text += references.ResMan("Common", Lingua, "risposta_5");
+                            output.Text += references.ResMan("Common", Lingua, "risposta_5a");
 
                             break;
                         default:
-                            output.Text += references.ResMan("Common", Lingua, "risposta_5");
+                            output.Text += references.ResMan("Common", Lingua, "risposta_5a");
                             break;
                     }
 
@@ -2115,6 +2115,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         TestoMail += "</td></tr>";
         if (!string.IsNullOrEmpty(totali.Note))
             TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
+      
         TestoMail += "<tr><td><table cellpadding='0' cellspacing='0' style='font-size:14px;'><tr><td><br/> <b>DETTAGLIO ORDINE</b> </td></tr>";
         TestoMail += "<tr><td> <br/><b>CODICE ORDINE</b> : " + totali.CodiceOrdine + "<br/></td></tr>";
         int i = 1;

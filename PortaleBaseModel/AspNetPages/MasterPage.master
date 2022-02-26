@@ -32,18 +32,18 @@
     <link rel="icon" type="image/png" href="#" runat="server" id="linkFi2" />
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
     <%--META FOR PWA--%>
-    <link rel="icon" href="/images/icons/icon-152x152.png">
+    <link rel="icon" href="/images/icons/icon-144x144.png">
     <!-- theme-color defines the top bar color (blue in my case)-->
     <meta name="theme-color" content="#008aff" />
     <!-- Add to home screen for Safari on iOS-->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Sito Base" />
-    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-144x144.png" />
     <!-- Add to home screen for Windows-->
-    <meta name="msapplication-TileImage" content="/images/icons/icon-152x152.png" />
+    <meta name="msapplication-TileImage" content="/images/icons/icon-144x144.png" />
     <meta name="msapplication-TileColor" content="#000000" />
-    <link rel="manifest" href="~/manifest.json" runat="server">
+    <link rel="manifest" href="~/site.webmanifest" runat="server">
 </head>
 <%--<body class="bckGray">--%>
 <body>
@@ -530,6 +530,8 @@
             <div id="contactmasterlinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
             <%--START BANNER E_COMMERCE_ VENDITA IN BASSO--%>
             <div id="masterlow1" runat="server" clientid="static"></div>
+            <div id="masterlow3" runat="server" clientid="static"></div>
+            
             <%--END BANNER E_COMMERCE_ VENDITA IN BASSO--%>
             <div id="divContattiMaster" runat="server" visible="true">
                 <section class="mbr-section mbr-parallax-background p-0" style="padding-top: 80px; padding-bottom: 80px; background-image: url('/public/Files/con001000/1/contact-back.jpg')">

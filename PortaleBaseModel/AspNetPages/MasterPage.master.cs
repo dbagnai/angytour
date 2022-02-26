@@ -167,6 +167,8 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //CommonPage.CustomContentInject(((HtmlGenericControl)Page.Master.FindControl("masterlow1")), "customcontent3-" + Lingua + ".html", Lingua, Page.User.Identity.Name, Session);
         CommonPage.CustomContentInject(((HtmlGenericControl)Page.Master.FindControl("masterlow1")), "customcontent4-" + Lingua + ".html", Lingua, Page.User.Identity.Name, Session);
 
+        CommonPage.CustomContentInject(((HtmlGenericControl)Page.Master.FindControl("masterlow3")), "customcontent-popup-" + Lingua + ".html", Lingua, Page.User.Identity.Name, Session);
+
     }
 
     /// <summary>

@@ -800,7 +800,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
         TestoMail += "<tr><td style='font-size:14px;'><br/> " + references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + "<a href='" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "'>" + Nome + "</a> da " + totali.Denominazionecliente + " <br/>";
         TestoMail += "<br/><font color='#e12222'>Dettaglio Ordine</font> " + "<br/>";
 
-        TestoMail += "<br/><b>Fatturazione</b> :<br/> ";
+        TestoMail += "<br/><b>Spedizione</b> :<br/>";
         TestoMail += totali.Indirizzofatturazione + "<br/>";
         if (!string.IsNullOrEmpty(totali.Indirizzospedizione))
         {

@@ -12,8 +12,10 @@
         <div class="row">
             <div class="col-12">
                 <%= references.ResMan("basetext", Lingua,"testoordine1") %>
-                <h4><asp:Label Style="font-size: 1.2em" Text="" ID="output" runat="server" /></h4>
-              <asp:ValidationSummary ID="validsummary" ValidationGroup="" runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="true" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<br/><style> span.errorvalidateclass[style*=\"visibility: visible\"] + * {  border: 2px solid red; }  </style>" %>' />  <%--      <asp:ValidationSummary runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium"  
+                <h4>
+                    <asp:Label Style="font-size: 1.2em" Text="" ID="output" runat="server" /></h4>
+                <asp:ValidationSummary ID="validsummary" ValidationGroup="" runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="true" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<br/><style> span.errorvalidateclass[style*=\"visibility: visible\"] + * {  border: 2px solid red; }  </style>" %>' />
+                <%--      <asp:ValidationSummary runat="server" BackColor="#f0f0f0" DisplayMode="SingleParagraph" Font-Size="Medium"  
                             ShowValidationErrors="true"  HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError")  %>' />--%>
             </div>
         </div>
@@ -88,7 +90,34 @@
                     <div class="col-12 col-lg-7">
                         <div class="widget bill-address">
                             <div class="form-vertical">
+                                <%-- CODICE SCONTO --%>
+                                <div class=" bg-light-color p-3">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="TitlePrezzo mb-2"><%= references.ResMan("Common", Lingua,"TitleCodiceSconto") %></div>
 
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-12 col-sm-8">
+                                            <asp:TextBox runat="server" autocomplete="none" CssClass="w-100 px-2 form-control bg-white" ID="txtCodiceSconto" /><br />
+                                        </div>
+                                        <div class="col-12 col-sm-4">
+                                            <asp:Button Style="width: 180px" CausesValidation="false" Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="Button1" OnClick="btnCodiceSconto_Click" />
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-center my-2">
+                                        <div class="col-12 col-sm-8">
+                                            <asp:Literal runat="server" ID="litCodiceSconto"></asp:Literal><br />
+                                            <div style="color: red; width: 100%">
+                                                <asp:Literal Text="" ID="outputCodiceSconto" runat="server" />
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-4">
+                                            <asp:Button Style="width: 180px" CausesValidation="false" Text='<%# references.ResMan("Common", Lingua,"testoBtnResetCodiceSconto") %>' runat="server" ID="btnCodiceSconto" OnClick="btnResetCodiceSconto_Click" />
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-row row">
                                     <div class="col-6 form-group">
                                         <label>
@@ -305,34 +334,7 @@
                             </div>
                         </div>
 
-                        <%-- CODICE SCONTO --%>
-                        <div class=" bg-light-color p-3">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="TitlePrezzo mb-2"><%= references.ResMan("Common", Lingua,"TitleCodiceSconto") %></div>
 
-                                </div>
-                            </div>
-                            <div class="row d-flex align-items-center">
-                                <div class="col-12 col-sm-8">
-                                    <asp:TextBox runat="server" autocomplete="none" CssClass="w-100 px-2 form-control bg-white" ID="txtCodiceSconto" /><br />
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <asp:Button Style="width: 180px"    CausesValidation="false"  Text='<%# references.ResMan("Common", Lingua,"testoBtnCodiceSconto") %>' runat="server" ID="Button1" OnClick="btnCodiceSconto_Click" />
-                                </div>
-                            </div>
-                            <div class="row d-flex align-items-center my-2">
-                                <div class="col-12 col-sm-8">
-                                    <asp:Literal runat="server" ID="litCodiceSconto"></asp:Literal><br />
-                                    <div style="color: red; width: 100%">
-                                        <asp:Literal Text="" ID="outputCodiceSconto" runat="server" />
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <asp:Button Style="width: 180px"   CausesValidation="false"  Text='<%# references.ResMan("Common", Lingua,"testoBtnResetCodiceSconto") %>' runat="server" ID="btnCodiceSconto" OnClick="btnResetCodiceSconto_Click" />
-                                </div>
-                            </div>
-                        </div>
 
                         <%-- NORME GENERALI DI ACQUISTO --%>
                         <div class="row">
@@ -540,7 +542,7 @@
                     <%-- COLONNA METODO PAGAMENTO E ACQUISTO --%>
                     <div class="col-12 col-lg-5">
                         <div class="position-sticky" style="top: 120px" id="divColumnsticky">
-                            <div class="mb-0 mb-sm-3 px-3 py-4 bg-light-color">
+                            <div class="mb-0 mb-sm-3 px-3 pt-1 pb-3 bg-light-color">
                                 <asp:Literal Text="" ID="litMessage" runat="server" />
                                 <%--<div class="widget bill-payment" style="text-align: left; display: none">
                                     <span class="TitlePrezzo"><%= references.ResMan("Common", Lingua,"TitleCodiceSconto") %></span>
@@ -717,13 +719,13 @@
                                             ///////////////////////////////////////////////////////////////////////
                                             //Invio con post back (metodo originale)
                                             var buttpost = document.getElementById("<%= btnConvalidaSrv.ClientID  %>");
-                                                //$(elembtn).html("Wait ..");
-                                                document.getElementById("<%= btnConvalidaSrv.ClientID  %>").click();
-                                                ////////////////////////////////////////////////////////////////////////
-                                            } else {
-                                                $('html,body').animate({
-                                                    scrollTop: $("#" + "<%= validsummary.ClientID  %>").offset().top - 160
-                                                }, 'fast');
+                                            //$(elembtn).html("Wait ..");
+                                            document.getElementById("<%= btnConvalidaSrv.ClientID  %>").click();
+                                            ////////////////////////////////////////////////////////////////////////
+                                        } else {
+                                            $('html,body').animate({
+                                                scrollTop: $("#" + "<%= validsummary.ClientID  %>").offset().top - 160
+                                            }, 'fast');
                                             resetValidationState();
                                             console.log('not  validated');
                                             //return false;

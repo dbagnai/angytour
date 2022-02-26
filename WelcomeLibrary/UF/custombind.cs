@@ -5109,6 +5109,59 @@ namespace WelcomeLibrary.UF
                     }
                     catch { }
                     break;
+                case "formatstandardtext":
+                    if (prop.Count > 0 && prop[0] != "")
+                        if (itemdic.ContainsKey(prop[0]))
+                        {
+                            ret = itemdic[prop[0]];
+                        }
+                    break;
+                case "formatjsontext":
+                    List<Tabrif> extradata = new List<Tabrif>();
+                    if (prop.Count > 0 && prop[0] != "")
+                        if (itemdic.ContainsKey(prop[0]))
+                        {
+                            ret = itemdic[prop[0]];
+                            if (!string.IsNullOrEmpty(ret))
+                            {
+                                extradata = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Tabrif>>(ret);
+                                ret = String.Empty;
+
+                                //Caricamento template per binding
+                                //string templatetext = "";
+                                //if (prop.Count > 1 && prop[1] != "")
+                                //if (System.IO.File.Exists(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + prop[2]))
+                                //    templatetext = System.IO.File.ReadAllText(WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\lib\\template\\" + prop[2]);
+                                if (extradata != null)
+                                    if (prop.Count > 1 && prop[1] != "")
+                                    {
+                                        if (prop[1] == "allvalues")  //lista completa
+                                        {
+                                            foreach (Tabrif t in extradata)
+                                            {
+                                                if (!string.IsNullOrEmpty(t.Campo1))
+                                                    ret += t.Campo2 + " : " + t.Campo1 + "<br/>";
+                                                else if (t.Double1 != 0)
+                                                    ret += t.Campo2 + " : " + t.Double1 + "<br/>";
+
+                                            }
+                                        }
+                                        else //valore specifico
+                                        {
+                                            Tabrif elem = extradata.Find(e => e.Campo2 == prop[1]);
+                                            if (elem != null)
+                                            {
+                                                if (!string.IsNullOrEmpty(elem.Campo1))
+                                                    ret += elem.Campo1;
+                                                else if (elem.Double1 != 0)
+                                                    ret += elem.Double1;
+                                            }
+                                        }
+                                    }
+
+                            }
+                        }
+                    break;
                 case "formatlabelresource":
                     try
                     {

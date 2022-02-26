@@ -1,6 +1,6 @@
-﻿<div style="width: 100%" id="replaceid-gallery">
-    <div class="flexslider" data-transition="slide" data-slidernav="auto" id="replaceid-main-slider" style="width: 100%; overflow: hidden; margin-bottom: 10px; margin-top: 0px; display: none; ">
-        <div class="slides flexmaincontainer bind" skip="" max-height="" mybind="Id" >
+﻿<div style="width: 100%" id="replaceid-gallery" class="border-tipo2">
+    <div class="flexslider border-bottom" data-transition="slide" data-slidernav="auto" id="replaceid-main-slider" style="width: 100%; overflow: hidden; margin-bottom: 10px; margin-top: 0px; display: none; ">
+        <div class="slides flexmaincontainer bind" skip="" max-height="" mybind="Id">
             <!--<div class="slide" data-thumb="">
                 <div class="slide-content" style="position:relative;padding:1px">
                     <img itemprop="image" style="border:none" src="" alt="" />
@@ -11,11 +11,16 @@
             </div>-->
         </div>
     </div>
-    <div class="flexslider d-none d-sm-block" id="replaceid-navigation-slider" style="max-height: 80px; padding-top: 0px; padding-bottom: 0px; overflow: hidden;display:none">
-        <ul class="slides flexnavcontainer bind" skip=""  mybind="Id">
+    <div class="flexslider d-none d-sm-block" id="replaceid-navigation-slider" style="max-height: 100px; padding-top: 0px; padding-bottom: 0px; overflow: hidden;display:none">
+        <ul class="slides flexnavcontainer bind" skip="" mybind="Id">
             <!--<li><img src="" alt="" style="padding:5px" /></li>-->
         </ul>
         <div style="clear: both"></div>
     </div>
 </div>
- 
+<style>
+    .flexnavcontainer > li > img {
+        max-height: 100px;
+        max-width: 100px;
+    }
+</style>

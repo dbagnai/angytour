@@ -223,11 +223,12 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                             }
 
                             //Generic search tramite link generico
-                            if (!string.IsNullOrEmpty(term))
-                                context.Session.Add("testoricerca", term);
+                            //if (!string.IsNullOrEmpty(term))
+                            //    context.Session.Add("testoricerca", term);
                             string categoria = ""; string sottocategoria = "";
                             string linkret = CommonPage.CreaLinkRicerca("", tipologia, categoria, sottocategoria, "", "", "", "-", lingua);
-                            linkret = CommonPage.ReplaceAbsoluteLinks(linkret);
+                            linkret = CommonPage.ReplaceAbsoluteLinks(linkret) + "?testoricerca=" + term;
+
                             string htmltextgeneric = "<div class=\"row \">";
                             htmltextgeneric += "<div class=\"col-12 text-center \">";
                             htmltextgeneric += "<span style=\"font-weight:600;\">" + "Vedi tutti risultati >> " + "</span>";
@@ -273,14 +274,16 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         string par3 = "";
                         string par4 = "";
                         Dictionary<string, string> searchdata = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(ssearchdata);
-                        if (searchdata.ContainsKey("testoricerca"))
-                            context.Session.Add("testoricerca", searchdata["testoricerca"].ToString());
+                        //if (searchdata.ContainsKey("testoricerca"))
+                        //    context.Session.Add("testoricerca", searchdata["testoricerca"].ToString());
+
+
                         if (searchdata.ContainsKey("categoria"))
                             par1 = searchdata["categoria"].ToString();
                         if (searchdata.ContainsKey("categoria2liv"))
                             par2 = searchdata["categoria2liv"].ToString();
                         string linkret = CommonPage.CreaLinkRicerca("", searchdata["tipologia"].ToString(), par1, par2, "", "", "", "-", lingua);
-                        result = CommonPage.ReplaceAbsoluteLinks(linkret);
+                        result = CommonPage.ReplaceAbsoluteLinks(linkret) + "?testoricerca=" + searchdata["testoricerca"].ToString();
                     }
                     break;
                 case "inviamessaggiomail":

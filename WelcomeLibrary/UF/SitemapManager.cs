@@ -12,6 +12,96 @@ namespace WelcomeLibrary.UF
 {
     public static class SitemapManager
     {
+
+        public static void CreaSitemps()
+        {
+            //Creo una variabile per la scrittura dei messaggi nel file di log
+            System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
+            Messaggi.Add("Messaggio", "");
+
+            try
+            {
+                string percorsoBase = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
+                string PathSitemap = WelcomeLibrary.UF.MemoriaDisco.physiclogdir;//.Replace("\\Common", "");
+                string host = percorsoBase.Replace(".", "");
+                host = host.Replace(":", "");
+                host = host.Replace("/", "");
+                Messaggi["Messaggio"] += host.ToLower();
+
+                //Carichiamo la lista delle offerte totale
+                WelcomeLibrary.DAL.offerteDM offDM = new WelcomeLibrary.DAL.offerteDM();
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                parColl = new List<SQLiteParameter>();
+                //SQLiteParameter ptipo = new SQLiteParameter("@CodiceTIPOLOGIA", "rif000001"); //Catalogo prodotti unico
+                //parColl.Add(ptipo);
+
+                //VA' CREATO UN FILTRO PER LA GENERAZIONE
+                //rif000001-rif000050 ( rubriche da 0 a 50 ) ( elenco tipo blog + scheda ) -> CreaLinkAScheda href='<%# CreaLinkAScheda(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,true) %>'
+                //rif000051 -rif000060 -> non ci sono le schede ma solo le liste con i pdf (lista elenco!!) NON CI SONO LE SCHEDE SINGOLE!! MA SOLO LE LISTE
+                //rif000061 -> per  i comunicati stmapa come blog -> CreaLinkAScheda href='<%# CreaLinkAScheda(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,true) %>'
+                //rif000100 soci -> schede CreaLinkGenerico //CreaLinkGenerico(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","","","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,true) %>'
+                //rif000101 -> trattaemtni   schede indirizzabili a  href='<%# CreaLinkRicercaprodotti(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","","","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,false) %>'
+
+                //rif000199 -> partners SOLO ELENCO NON CI SONO LE SCHEDE singole i link mandano fuori
+                List<string> Tmp_linksite = new List<string>();
+                string Lingua = "I";
+                Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));
+
+                references.CreazioneSitemap("sitemapLinkBaselinks" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
+                Tmp_linksite = new List<string>();
+
+
+                WelcomeLibrary.DOM.OfferteCollection offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "20000", Lingua);
+                Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true));
+                references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
+                Tmp_linksite = new List<string>();
+
+                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
+                {
+                    Lingua = "GB";
+                    Tmp_linksite = new List<string>();
+                    Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));
+                    offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);
+                    Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true));
+                    references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
+                }
+#if false
+            Lingua = "RU";
+            Tmp_linksite = new List<string>();
+            Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));
+            offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);
+            Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true));
+            references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
+#endif
+#if false
+            Lingua = "FR";
+            Tmp_linksite = new List<string>();
+            Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));
+            offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);
+            Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true));
+            references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
+#endif
+                //references.CreaSitemapImmobili(null, "rif000666");//Sitemap per la parte immobiliare
+                Messaggi["Messaggio"] += "Generato sitemap  " + System.DateTime.Now.ToString();
+                WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
+            }
+            catch (Exception errore)
+            {
+                //Devi scrivere l'errore in un file di log (per gli errori) sennò nessuno lo vede!!!!
+                Messaggi["Messaggio"] += " Errore aggiornamento in app start: " + errore.Message + " " + System.DateTime.Now.ToString();
+                WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
+            }
+            finally
+            {
+                //Rimuovo il file di accesso per la concorrenza
+                string retfa = WelcomeLibrary.UF.MemoriaDisco.EliminaFileAccesso(WelcomeLibrary.STATIC.Global.percorsoFisicoComune, "NowTrasferingIndirectMode.txt");
+                //Creare un file di log con il successo/fallimento di tutte le operazioni
+                Messaggi["Messaggio"] += "Terminato Aggiornamento  " + System.DateTime.Now.ToString();
+                WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune);
+            }
+        }
+
+
         /// <summary>
         /// Check nella tablella reindirizzamenti per presenza redirect
         /// </summary>
