@@ -46,7 +46,6 @@ namespace WelcomeLibrary.UF
                 List<string> Tmp_linksite = new List<string>();
                 string Lingua = "I";
                 Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));
-
                 references.CreazioneSitemap("sitemapLinkBaselinks" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
                 Tmp_linksite = new List<string>();
 
@@ -61,9 +60,14 @@ namespace WelcomeLibrary.UF
                     Lingua = "GB";
                     Tmp_linksite = new List<string>();
                     Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));
+                    references.CreazioneSitemap("sitemapLinkBaselinks" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
+                    Tmp_linksite = new List<string>();
+
                     offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);
                     Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true));
                     references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
+                    Tmp_linksite = new List<string>();
+
                 }
 #if false
             Lingua = "RU";
@@ -100,7 +104,6 @@ namespace WelcomeLibrary.UF
                 WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune);
             }
         }
-
 
         /// <summary>
         /// Check nella tablella reindirizzamenti per presenza redirect
