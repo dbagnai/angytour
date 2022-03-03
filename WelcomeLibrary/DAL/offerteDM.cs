@@ -7896,7 +7896,7 @@ namespace WelcomeLibrary.DAL
 
 
                         //DESCRIZIONE
-                        string linkimmagine = filemanage.ComponiUrlAnteprima(_new.FotoCollection_M.FotoAnteprima, _new.CodiceTipologia, _new.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                        string linkimmagine = filemanage.ComponiUrlAnteprima(_new.FotoCollection_M.FotoAnteprima, _new.CodiceTipologia, _new.Id.ToString(),false).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                         writer.WriteStartElement("g:image_link");
                         writer.WriteCData(linkimmagine);
                         writer.WriteEndElement();
@@ -8475,7 +8475,7 @@ namespace WelcomeLibrary.DAL
 
 
                         //IMMAGINE
-                        string linkimmagine = filemanage.ComponiUrlAnteprima(_new.FotoCollection_M.FotoAnteprima, _new.CodiceTipologia, _new.Id.ToString()).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                        string linkimmagine = filemanage.ComponiUrlAnteprima(_new.FotoCollection_M.FotoAnteprima, _new.CodiceTipologia, _new.Id.ToString(), false).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                         writer.WriteStartElement("g:image_link");
                         writer.WriteCData(linkimmagine);
                         writer.WriteEndElement();

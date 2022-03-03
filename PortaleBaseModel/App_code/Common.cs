@@ -1796,6 +1796,8 @@ public class CommonPage : Page
 
     public static string Creaeventopurchaseagooglegtag(TotaliCarrello totali, CarrelloCollection prodotti)
     {
+        //per sondaggio recensioni ( da fare )
+        //https://support.google.com/merchants/answer/7106244
         string ret = "";
         try
         {
@@ -1903,6 +1905,33 @@ public class CommonPage : Page
     {
         string ret = "";
         //item.offerte contiene i dettagli dell'oggetto aggiunto a carrello
+
+
+        //google add tocart
+        jsongtagcartelements cartcontainer = new jsongtagcartelements();
+        jsongtagitem purchaseitem = new jsongtagitem();
+        purchaseitem.id = item.Offerta.Id.ToString(); //Id scheda prodott ( sarebbe meglio lo sku o ptn // da ricavare dalla descrzione se presente
+        //string skuprod = offerteDM.Getvaluebytag("ean:", c.Offerta.DescrizioneI);
+        //skuprod = offerteDM.Getvaluebytag("mpn:", c.Offerta.DescrizioneI);
+        purchaseitem.name = item.Offerta.DenominazioneI;
+        purchaseitem.list_name = "";//nome della lista filtro di ricerca risultati
+        string text = offerteDM.Getvaluebytag("brand:", item.Offerta.DescrizioneI);
+        if (string.IsNullOrEmpty(text)) text = offerteDM.Getvaluebytag("marchio:", item.Offerta.DescrizioneI);
+        purchaseitem.brand = text;
+        purchaseitem.category = references.TestoCategoria(item.Offerta.CodiceTipologia, item.Offerta.CodiceCategoria, "I"); ; //Categoria di catalogo del prodotto
+        purchaseitem.variant = ""; //eventuale caratteristica del prodotto tipo colore
+        purchaseitem.price = Math.Round(item.Prezzo, 2, MidpointRounding.ToEven);
+        purchaseitem.quantity = item.Numero;
+        purchaseitem.coupon = item.Codicesconto;
+        purchaseitem.list_position = 0;
+        cartcontainer.items.Add(purchaseitem);
+        //torniamo il codice da inisettare
+        string serializedstringgoogle = Newtonsoft.Json.JsonConvert.SerializeObject(cartcontainer);
+        string scriptRegVariablesgoogle = ";\r\n " + string.Format("gtag('event', 'add_to_cart', {0});console.log('google track adttocart called;');", serializedstringgoogle);
+        scriptRegVariablesgoogle = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariablesgoogle); //wrapper fo waiting
+                                                                                                                //google add tocart
+
+        ////facebook ///////////////////
         jsoncartdetailsfbq itemfbq = new jsoncartdetailsfbq();
         //riempiamo l'elemento con i valori
         string nomearticolo = "";
@@ -1914,104 +1943,21 @@ public class CommonPage : Page
         itemfbq.content_category = "";
         itemfbq.value = Math.Round(item.Prezzo, 2, MidpointRounding.ToEven);
         itemfbq.currency = "EUR";
-
         //torniamo il codice da inisettare
-        string serializedstring = Newtonsoft.Json.JsonConvert.SerializeObject(itemfbq);
-        string scriptRegVariablesfbq = ";\r\n " + string.Format("fbq('track', 'AddToCart', {0});console.log('fbq track adttocart called;');", serializedstring);
+        string serializedstringfbq = Newtonsoft.Json.JsonConvert.SerializeObject(itemfbq);
+        string scriptRegVariablesfbq = ";\r\n " + string.Format("fbq('track', 'AddToCart', {0});console.log('fbq track adttocart called;');", serializedstringfbq);
         scriptRegVariablesfbq = WelcomeLibrary.UF.Utility.waitwrappercall("fbq", scriptRegVariablesfbq); //wrapper fo waiting
+                                                                                                         ////fbq ///////////////////////
+        string scriptvariablesfinal = "";
+        scriptvariablesfinal += scriptRegVariablesgoogle;
+        scriptvariablesfinal += scriptRegVariablesfbq;
+
         Dictionary<string, string> addelements = new Dictionary<string, string>();
-        addelements.Add("jsvarfrommasterstart", scriptRegVariablesfbq);
+        addelements.Add("jsvarfrommasterstart", scriptvariablesfinal);
         ret = custombind.CreaInitStringJavascriptOnly(addelements);
         return ret;
     }
 
-    private static double CalcolaSpeseSpedizione(CarrelloCollection ColItem, string codicenazione, string codiceprovincia, TotaliCarrello totali)
-    {
-        double spesespedizione = 0;
-        totali.Bloccaacquisto = false;
-        ////////////////////////////////////////////
-        //CALCOLO COSTI SPEDIZIONE A PESO 
-        //(  impostare il json per i pesi nella colonna apposita in base al smaple json tbl_nazioni per le nazioni di intersse, bloccare paypal dove indicato nel json nell'apposito campo. )
-        ////////////////////////////////////////////
-        double? costoperpeso = 0;
-        costoperpeso = CalcolaSpedizioneSuPeso(totali, codicenazione);
-        if (costoperpeso != null)
-        {
-
-            if (costoperpeso != 999999)
-                spesespedizione = costoperpeso.Value;
-            else
-            {
-                //devo bloccare paypal e non far fare l'acquisto!!!! con carta su indicazione della verifica sistema pesi
-                totali.Bloccaacquisto = true; //blocoo l'acquisto con carta !!!
-            }
-        }
-        else
-        {
-            double costofinalespedizione = 0;
-            double totaleordine = totali.TotaleOrdine;
-            double totalesconto = totali.TotaleSconto;
-            ////////////////////////////////////////////////////////////
-            // CALCOLO COSTI SPEDIZIONE metodo classico BASE PER NAZIONE
-            ///////////////////////////////////////////////////////////
-            double costodefaultitalia = 0;
-            double.TryParse(ConfigManagement.ReadKey("costobasespedizioni"), out costodefaultitalia);
-            double costodefaultestero = 0;
-            double.TryParse(ConfigManagement.ReadKey("defaultesterospedizione"), out costodefaultestero);
-            //Modificare per caricare il campo per gli scaglioni di peso dalla tabella nazioni per il conteggio 
-            double costospedizionenazione = references.TrovaCostoNazione(codicenazione); //Costo spedizione per nazione
-
-            if (costospedizionenazione == 0) totali.Bloccaacquisto = true; //blocoo l'acquisto con carta !!! ( caso costo non specificato in tabella nazioni .. attenzione se non specificato da 0.... )
-
-            //SE NON PRESENTE COSTO SPEDIZIONE IN TABELLA NAZIONI PRENDO IL DEFAULT
-            if (codicenazione.ToLower() == "it" && costospedizionenazione == 0) costospedizionenazione = costodefaultitalia; //Costostandard per italia
-            if (codicenazione.ToLower() != "it" && costospedizionenazione == 0) costospedizionenazione = costodefaultestero; //Costostandard per l'estero
-            costofinalespedizione = costospedizionenazione;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////
-            ///// impostazione spese spedizione con controllo SOGLIE Azzeramento METODO CLASSICO ( NO PESO )
-            ////////////////////////////////////////////////////////////////////////////////////////////////////
-            double sogliaitalia = 0;
-            double.TryParse(ConfigManagement.ReadKey("sogliaSpedizioni"), out sogliaitalia);
-            double sogliaestero = 0;
-            double.TryParse(ConfigManagement.ReadKey("sogliaspedizioniestero"), out sogliaestero);
-            switch (codicenazione)
-            {
-                case "IT":
-                    if (totaleordine - totalesconto < sogliaitalia)
-                    {
-                        spesespedizione += costofinalespedizione;// Convert.ToDouble(ConfigManagement.ReadKey("costobaseSpedizioni"));
-                    }
-                    break;
-                default:
-                    if (totaleordine - totalesconto < sogliaestero)
-                    {
-                        spesespedizione += costofinalespedizione;
-                    }
-                    break;
-            }
-        }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///
-        //Da calcolare in base ai parametri passati EVENTUALI altri aspetti delle spedizioni
-        //long totalearticoli = 0;
-        //foreach (Carrello c in ColItem)
-        //{
-        //    totalearticoli += c.Numero;
-        //}
-
-        //SUPPLEMENTI OBBLIGATORI FISSI ( CON SPUNTE )
-        double tmpconv = 0;
-        double.TryParse(ConfigManagement.ReadKey("supplementoSpedizioni"), out tmpconv);
-        if (totali.Supplementospedizione) //Supplemento isole supplementoSpedizioni
-            spesespedizione += tmpconv;
-        tmpconv = 0;
-        double.TryParse(ConfigManagement.ReadKey("supplementoContrassegno"), out tmpconv);
-        if (totali.Supplementocontrassegno) //Supplemento contrassegno  
-            spesespedizione += tmpconv;
-
-        return spesespedizione;
-    }
 
     /// <summary>
     /// Se torna null -> devo usare il metodo classico di calcolo delle spedizioni, altrimenti devi prendere il valore del costo ritornato

@@ -867,6 +867,7 @@
     </form>
     <div id="testzoom" style="position: fixed; bottom: 0px; left: 0px;"></div>
     <%= InjectedEndPageScripts() %>
+    <span id="endspaceforjs"></span>
     <%--SERVICE WORKER--%>
     <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>  --%>
     <%--   <script src='https://www.google.com/recaptcha/api.js'></script>--%>

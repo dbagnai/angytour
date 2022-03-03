@@ -115,6 +115,13 @@ var carrellotool = new function () {
                                 parsedret = JSON.parse(data);
                             if (parsedret != null && parsedret.hasOwnProperty("id"))
                                 ret = parsedret.id;
+
+                            var codetoexecute = "";
+                            if (parsedret != null && parsedret.hasOwnProperty("jscodetoexecute")) {
+                                codetoexecute = parsedret.jscodetoexecute;
+                                $('#' + "endspaceforjs").html(codetoexecute);
+                            }
+
                             $('#' + controlid + "messages").html(parsedret.stato);
                             idcarrello = ret;  //(aggiunta)comunque memorizzo l'id del record carrello inserito o modificato
                             carrellotool.caricaquantita();
@@ -129,6 +136,13 @@ var carrellotool = new function () {
                                 parsedret = JSON.parse(data);
                             if (parsedret != null && parsedret.hasOwnProperty("id"))
                                 ret = parsedret.id;
+
+                            var codetoexecute = "";
+                            if (parsedret != null && parsedret.hasOwnProperty("jscodetoexecute")) {
+                                codetoexecute = parsedret.jscodetoexecute;
+                                $('#' + "endspaceforjs").html(codetoexecute);
+                            }
+
                             $('#' + controlid + "messages").html(parsedret.stato);
                             /************COMMENTARE LA RIGA PER OPERATIVITA' NORMALE SINGOLO RIGO CARRELLO PER PRODOTTO **********************************************************************/
                             idcarrello = ret;   //SERVE NEL CASO IMPOSTAZIONE CON FORCEIDCARRELLO IN MODO CHE L'AGGIORNAMENTO/INSERIMENTO SIA SOLO PER IDCARRELLO e non PRODOTTO ( in modo da consentire inserimenti multipli )
@@ -897,7 +911,15 @@ function InserisciCarrelloNopostback(testo) {
     var username = res[2];
     var contenitoredestinazione = '';
     AddCurrentCarrelloNopostback(contenitoredestinazione, idprodotto, lingua, username, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,
-        function (data) {  /*qui in data json ho i valori tornati dalla chiamata che posso iniettare es. tracking .....*/ });
+        function (data) {  /*qui in data json ho i valori tornati dalla chiamata che posso iniettare es. tracking .....*/
+
+            var codetoexecute = "";
+            if (parsedret != null && parsedret.hasOwnProperty("jscodetoexecute")) {
+                codetoexecute = parsedret.jscodetoexecute;
+                $('#' + "endspaceforjs").html(codetoexecute);
+            }
+
+        });
 
 }
 

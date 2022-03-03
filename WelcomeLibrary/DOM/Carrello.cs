@@ -88,6 +88,12 @@ namespace WelcomeLibrary.DOM
 
     }
 
+    public class jsongtagcartelements
+    {
+        public List<jsongtagitem> items { set; get; }
+
+    }
+
 
     public class jsongtagitem
     {
