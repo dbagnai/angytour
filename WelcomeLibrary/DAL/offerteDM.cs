@@ -7611,7 +7611,6 @@ namespace WelcomeLibrary.DAL
             }
         }
 
-
         /// <summary>
         /// Creo un feed rss con tutti gli immobili per ogni lingua ( inglese , italiano )
         /// </summary>
@@ -7732,7 +7731,7 @@ namespace WelcomeLibrary.DAL
                             //Cerco mpn:-> codice per pubblicare ( è lo sku )
 
                             string codiceprodotto = _new.CodiceProdotto; // codice del prodotto principale
-                            if (string.IsNullOrEmpty(codiceprodotto)) codiceprodotto = _new.Id.ToString();
+                            //if (string.IsNullOrEmpty(codiceprodotto)) codiceprodotto = _new.Id.ToString();
                             gtinmpn = codiceprodotto;//Sku
 
                             //barcode
@@ -7836,7 +7835,8 @@ namespace WelcomeLibrary.DAL
                             if (string.IsNullOrEmpty(gtinean) && string.IsNullOrEmpty(gtinmpn)) continue; 
 #endif
                             //per articoli esurito o qtita null salto
-                            if (_new.Qta_vendita == null || (_new.Qta_vendita != null && _new.Qta_vendita.Value == 0)) continue;
+                            //if (_new.Qta_vendita == null || (_new.Qta_vendita != null && _new.Qta_vendita.Value == 0)) continue;
+                            if ((_new.Qta_vendita != null && _new.Qta_vendita.Value == 0)) continue;
                             if (_new == null || _new.Prezzo == 0) continue;
 
                         }
@@ -7865,6 +7865,9 @@ namespace WelcomeLibrary.DAL
                         writer.WriteEndElement();
 
 
+                        //DESCRIZIONE
+                        string linkimmagine = filemanage.ComponiUrlAnteprima(_new.FotoCollection_M.FotoAnteprima, _new.CodiceTipologia, _new.Id.ToString(), true).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
 
                         if (!gmerchant)
                         {
@@ -7877,47 +7880,17 @@ namespace WelcomeLibrary.DAL
                             writer.WriteStartElement("pubDate");
                             writer.WriteValue(System.Xml.XmlConvert.ToString(_new.DataInserimento, "ddd, dd MMM yyyy HH:mm:ss zzz"));
                             writer.WriteEndElement();
-                        }
 
-                        //<product_type>
-                        //string categoriaprodotto = references.TestoTipologia(_new.CodiceTipologia, Lingua);
-                        string categoriaprodotto = " > " + references.TestoCategoria(_new.CodiceTipologia, _new.CodiceCategoria, Lingua);
-                        categoriaprodotto += " > " + references.TestoCategoria2liv(_new.CodiceTipologia, _new.CodiceCategoria, _new.CodiceCategoria2Liv, Lingua).Trim();
-                        categoriaprodotto = categoriaprodotto.Trim().TrimEnd('>').TrimStart('>');
-                        if (!string.IsNullOrEmpty(categoriaprodotto))
-                        {
-                            writer.WriteStartElement("g:product_type");
-                            writer.WriteCData(categoriaprodotto);
-                            writer.WriteEndElement();
-                        }
-
-                        //eventuale aggiunta di  <g:google_product_category> .. da vedere
-
-
-
-                        //DESCRIZIONE
-                        string linkimmagine = filemanage.ComponiUrlAnteprima(_new.FotoCollection_M.FotoAnteprima, _new.CodiceTipologia, _new.Id.ToString(),false).Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-                        writer.WriteStartElement("g:image_link");
-                        writer.WriteCData(linkimmagine);
-                        writer.WriteEndElement();
-                        //<g:additional_image_link>
-                        if ((_new != null) && (_new.FotoCollection_M.Count > 1))
-                        {
-                            foreach (Allegato a in _new.FotoCollection_M)
+                            //Categoria
+                            //<category>
+                            item = Utility.TipologieOfferte.Find(delegate (TipologiaOfferte tmp) { return (tmp.Lingua == Lingua && tmp.Codice == _new.CodiceTipologia); });
+                            if (item != null)
                             {
-                                if ((a.NomeFile.ToString().ToLower().EndsWith("jpg") || a.NomeFile.ToString().ToLower().EndsWith("gif") || a.NomeFile.ToString().ToLower().EndsWith("png")))
-                                {
-                                    //IMMAGINE
-                                    string tmppathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, _new.CodiceTipologia, _new.Id.ToString());
-                                    string abspathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
-                                    if (abspathimmagine != linkimmagine)
-                                    {
-                                        writer.WriteStartElement("g:additional_image_link");
-                                        writer.WriteCData(abspathimmagine);
-                                        writer.WriteEndElement();
-                                    }
-                                }
+                                writer.WriteStartElement("category");
+                                writer.WriteValue(item.Descrizione);
+                                writer.WriteEndElement();
                             }
+
                         }
 
                         ///////////////////////////////////////////
@@ -7925,6 +7898,46 @@ namespace WelcomeLibrary.DAL
                         ///////////////////////////////////////////
                         if (gmerchant)
                         {
+
+                            //<product_type>
+                            //string categoriaprodotto = references.TestoTipologia(_new.CodiceTipologia, Lingua);
+                            string categoriaprodotto = " > " + references.TestoCategoria(_new.CodiceTipologia, _new.CodiceCategoria, Lingua);
+                            categoriaprodotto += " > " + references.TestoCategoria2liv(_new.CodiceTipologia, _new.CodiceCategoria, _new.CodiceCategoria2Liv, Lingua).Trim();
+                            categoriaprodotto = categoriaprodotto.Trim().TrimEnd('>').TrimStart('>');
+                            if (!string.IsNullOrEmpty(categoriaprodotto))
+                            {
+                                writer.WriteStartElement("g:product_type");
+                                writer.WriteCData(categoriaprodotto);
+                                writer.WriteEndElement();
+                            }
+
+                            //eventuale aggiunta di  <g:google_product_category> .. da vedere
+
+
+
+                            writer.WriteStartElement("g:image_link");
+                            writer.WriteCData(linkimmagine);
+                            writer.WriteEndElement();
+                            //<g:additional_image_link>
+                            if ((_new != null) && (_new.FotoCollection_M.Count > 1))
+                            {
+                                foreach (Allegato a in _new.FotoCollection_M)
+                                {
+                                    if ((a.NomeFile.ToString().ToLower().EndsWith("jpg") || a.NomeFile.ToString().ToLower().EndsWith("gif") || a.NomeFile.ToString().ToLower().EndsWith("png")))
+                                    {
+                                        //IMMAGINE
+                                        string tmppathimmagine = filemanage.ComponiUrlAnteprima(a.NomeFile, _new.CodiceTipologia, _new.Id.ToString());
+                                        string abspathimmagine = tmppathimmagine.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                                        if (abspathimmagine != linkimmagine)
+                                        {
+                                            writer.WriteStartElement("g:additional_image_link");
+                                            writer.WriteCData(abspathimmagine);
+                                            writer.WriteEndElement();
+                                        }
+                                    }
+                                }
+                            }
+
 #if false
                             //store code per i feed locali
                             writer.WriteStartElement("g:store_code");
@@ -8114,8 +8127,7 @@ namespace WelcomeLibrary.DAL
             WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
 
         }
-
-
+        
         /// <summary>
         /// Removes control characters and other non-UTF-8 characters
         /// </summary>
@@ -8144,7 +8156,6 @@ namespace WelcomeLibrary.DAL
             return newString.ToString();
 
         }
-
         public void CreaRssFeedFacebook(string Lng, string FiltroTipologia = "", string titolo = "", string descrizione = "")
         {
             WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();
@@ -8369,7 +8380,8 @@ namespace WelcomeLibrary.DAL
                             if (string.IsNullOrEmpty(gtinean) && string.IsNullOrEmpty(gtinmpn)) continue; 
 #endif
                         if (_new == null || _new.Prezzo == 0) continue;
-                        if (_new.Qta_vendita == null || (_new.Qta_vendita != null && _new.Qta_vendita.Value == 0)) continue;
+                       // if (_new.Qta_vendita == null || (_new.Qta_vendita != null && _new.Qta_vendita.Value == 0)) continue;
+                        if (  (_new.Qta_vendita != null && _new.Qta_vendita.Value == 0)) continue;
 
                         ////////////////////////////////////PARAMETRI BASE PER MERCHANT CENTER 
                         //INIZIAMO A RIEMPIRE I CAMPI PER L'ITEM NEL FEED
