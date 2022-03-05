@@ -1963,6 +1963,96 @@ public class CommonPage : Page
     }
 
 
+
+    private static double CalcolaSpeseSpedizione(CarrelloCollection ColItem, string codicenazione, string codiceprovincia, TotaliCarrello totali)
+    {
+        double spesespedizione = 0;
+        totali.Bloccaacquisto = false;
+        ////////////////////////////////////////////
+        //CALCOLO COSTI SPEDIZIONE A PESO 
+        //(  impostare il json per i pesi nella colonna apposita in base al smaple json tbl_nazioni per le nazioni di intersse, bloccare paypal dove indicato nel json nell'apposito campo. )
+        ////////////////////////////////////////////
+        double? costoperpeso = 0;
+        costoperpeso = CalcolaSpedizioneSuPeso(totali, codicenazione);
+        if (costoperpeso != null)
+        {
+
+            if (costoperpeso != 999999)
+                spesespedizione = costoperpeso.Value;
+            else
+            {
+                //devo bloccare paypal e non far fare l'acquisto!!!! con carta su indicazione della verifica sistema pesi
+                totali.Bloccaacquisto = true; //blocoo l'acquisto con carta !!!
+            }
+        }
+        else
+        {
+            double costofinalespedizione = 0;
+            double totaleordine = totali.TotaleOrdine;
+            double totalesconto = totali.TotaleSconto;
+            ////////////////////////////////////////////////////////////
+            // CALCOLO COSTI SPEDIZIONE metodo classico BASE PER NAZIONE
+            ///////////////////////////////////////////////////////////
+            double costodefaultitalia = 0;
+            double.TryParse(ConfigManagement.ReadKey("costobasespedizioni"), out costodefaultitalia);
+            double costodefaultestero = 0;
+            double.TryParse(ConfigManagement.ReadKey("defaultesterospedizione"), out costodefaultestero);
+            //Modificare per caricare il campo per gli scaglioni di peso dalla tabella nazioni per il conteggio 
+            double costospedizionenazione = references.TrovaCostoNazione(codicenazione); //Costo spedizione per nazione
+
+            if (costospedizionenazione == 0) totali.Bloccaacquisto = true; //blocoo l'acquisto con carta !!! ( caso costo non specificato in tabella nazioni .. attenzione se non specificato da 0.... )
+
+            //SE NON PRESENTE COSTO SPEDIZIONE IN TABELLA NAZIONI PRENDO IL DEFAULT
+            if (codicenazione.ToLower() == "it" && costospedizionenazione == 0) costospedizionenazione = costodefaultitalia; //Costostandard per italia
+            if (codicenazione.ToLower() != "it" && costospedizionenazione == 0) costospedizionenazione = costodefaultestero; //Costostandard per l'estero
+            costofinalespedizione = costospedizionenazione;
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///// impostazione spese spedizione con controllo SOGLIE Azzeramento METODO CLASSICO ( NO PESO )
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            double sogliaitalia = 0;
+            double.TryParse(ConfigManagement.ReadKey("sogliaSpedizioni"), out sogliaitalia);
+            double sogliaestero = 0;
+            double.TryParse(ConfigManagement.ReadKey("sogliaspedizioniestero"), out sogliaestero);
+            switch (codicenazione)
+            {
+                case "IT":
+                    if (totaleordine - totalesconto < sogliaitalia)
+                    {
+                        spesespedizione += costofinalespedizione;// Convert.ToDouble(ConfigManagement.ReadKey("costobaseSpedizioni"));
+                    }
+                    break;
+                default:
+                    if (totaleordine - totalesconto < sogliaestero)
+                    {
+                        spesespedizione += costofinalespedizione;
+                    }
+                    break;
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///
+        //Da calcolare in base ai parametri passati EVENTUALI altri aspetti delle spedizioni
+        //long totalearticoli = 0;
+        //foreach (Carrello c in ColItem)
+        //{
+        //    totalearticoli += c.Numero;
+        //}
+
+        //SUPPLEMENTI OBBLIGATORI FISSI ( CON SPUNTE )
+        double tmpconv = 0;
+        double.TryParse(ConfigManagement.ReadKey("supplementoSpedizioni"), out tmpconv);
+        if (totali.Supplementospedizione) //Supplemento isole supplementoSpedizioni
+            spesespedizione += tmpconv;
+        tmpconv = 0;
+        double.TryParse(ConfigManagement.ReadKey("supplementoContrassegno"), out tmpconv);
+        if (totali.Supplementocontrassegno) //Supplemento contrassegno  
+            spesespedizione += tmpconv;
+
+        return spesespedizione;
+    }
+
+
     /// <summary>
     /// Se torna null -> devo usare il metodo classico di calcolo delle spedizioni, altrimenti devi prendere il valore del costo ritornato
     /// (considera già il peso massimo spedibile, eventuale azzeramento dei costi per nazione, eventuali supplementi )

@@ -247,10 +247,15 @@ public partial class _Iscriviti : CommonPage
             string Mailcliente = cliente.Email;
             //testoMailOroscopo
             string Descrizione = references.ResMan("Common", Lingua, "testoMailIscrizione").ToString() + "<br/>";
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto2").ToString() + " " + cliente.Nome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto3").ToString() + " " + cliente.Cognome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto4").ToString() + " " + cliente.Email + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto5").ToString() + " " + cliente.CodiceNAZIONE + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+
+            if (!string.IsNullOrEmpty(cliente.Nome))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto2").ToString() + " " + cliente.Nome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Cognome))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto3").ToString() + " " + cliente.Cognome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Email))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto4").ToString() + " " + cliente.Email + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.CodiceNAZIONE))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto5").ToString() + " " + cliente.CodiceNAZIONE + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
             Province p = WelcomeLibrary.UF.Utility.ElencoProvinceCompleto.Find(delegate (Province _p) { return _p.Codice == cliente.CodiceREGIONE; });
             if (p != null)
                 Descrizione += references.ResMan("Common", Lingua, "FormTesto6").ToString() + " " + p.Regione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
@@ -260,17 +265,21 @@ public partial class _Iscriviti : CommonPage
             Comune c = WelcomeLibrary.UF.Utility.ElencoComuni.Find(delegate (Comune _p) { return _p.Nome.ToLower() == cliente.CodiceCOMUNE.ToLower(); });
             if (c != null)
                 Descrizione += references.ResMan("Common", Lingua, "FormTesto8").ToString() + " " + c.Nome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto9").ToString() + " " + cliente.Cap + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto10").ToString() + " " + cliente.Indirizzo + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto11").ToString() + " " + cliente.Telefono + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto12").ToString() + " " + cliente.Professione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Cap))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto9").ToString() + " " + cliente.Cap + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Indirizzo))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto10").ToString() + " " + cliente.Indirizzo + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Telefono))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto11").ToString() + " " + cliente.Telefono + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Professione))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto12").ToString() + " " + cliente.Professione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
             //Descrizione += references.ResMan("Common", Lingua, "FormTesto13").ToString() + " " + cliente.DataNascita.ToShortDateString() + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto14").ToString() + " " + cliente.Spare1 + "<br/><br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Spare1))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto14").ToString() + " " + cliente.Spare1 + "<br/><br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
             Descrizione += cliente.TestoFormConsensi + "<br/>";
 
             if (chkNewsletter.Checked == true)
-                Descrizione += " <br/> Il cliente ha richiesto l'adesione all'invio newsletter : " + references.ResMan("Common", Lingua, "titolonewsletter1").ToString() + "<br/>";
-
+                Descrizione += " <br/> Adesione all'invio newsletter : " + references.ResMan("Common", Lingua, "titolonewsletter1").ToString() + "<br/>";
 
             string SoggettoMail = references.ResMan("Common", Lingua, "testoMailIscrizione").ToString();
             //Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Email, Nome);
@@ -666,10 +675,14 @@ public partial class _Iscriviti : CommonPage
             Descrizione += references.ResMan("Common", Lingua, "TestoIscrivi").ToString() + "<br/><br/>";
 
             //Descrizione += references.ResMan("Common",Lingua,"FormTesto1").ToString() + " " + cliente.CodiceCard + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto2").ToString() + " " + cliente.Nome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto3").ToString() + " " + cliente.Cognome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto4").ToString() + " " + cliente.Email + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto5").ToString() + " " + cliente.CodiceNAZIONE + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Nome))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto2").ToString() + " " + cliente.Nome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Cognome))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto3").ToString() + " " + cliente.Cognome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Email))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto4").ToString() + " " + cliente.Email + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.CodiceNAZIONE))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto5").ToString() + " " + cliente.CodiceNAZIONE + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
 
             Province p = WelcomeLibrary.UF.Utility.ElencoProvinceCompleto.Find(delegate (Province _p) { return _p.Codice == cliente.CodiceREGIONE; });
             if (p != null)
@@ -680,12 +693,17 @@ public partial class _Iscriviti : CommonPage
             Comune c = WelcomeLibrary.UF.Utility.ElencoComuni.Find(delegate (Comune _p) { return _p.Nome.ToLower() == cliente.CodiceCOMUNE.ToLower(); });
             if (c != null)
                 Descrizione += references.ResMan("Common", Lingua, "FormTesto8").ToString() + " " + c.Nome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto9").ToString() + " " + cliente.Cap + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto10").ToString() + " " + cliente.Indirizzo + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto11").ToString() + " " + cliente.Telefono + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto12").ToString() + " " + cliente.Professione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Cap))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto9").ToString() + " " + cliente.Cap + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Indirizzo))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto10").ToString() + " " + cliente.Indirizzo + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Telefono))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto11").ToString() + " " + cliente.Telefono + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Professione))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto12").ToString() + " " + cliente.Professione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
             //Descrizione += references.ResMan("Common", Lingua, "FormTesto13").ToString() + " " + cliente.DataNascita.ToShortDateString() + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto14").ToString() + " " + cliente.Spare1 + "<br/><br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Spare1))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto14").ToString() + " " + cliente.Spare1 + "<br/><br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
 
             Descrizione += cliente.TestoFormConsensi + "<br/>";
             Descrizione += "<a href=\"" + linkvalidazione + "\" target=\"_blank\" style=\"font-size:22px;color:#b13c4e\">" + references.ResMan("Common", Lingua, "testoLinkValidazioneIscrizione").ToString() + "<br/>";
@@ -708,7 +726,7 @@ public partial class _Iscriviti : CommonPage
         string ret = "";
         try
         {
-            string SoggettoMail = Nome + " : " + "Mail di conferma avvenuta iscrizione portale  / Confirmation e-mail for application to  portal.";
+            string SoggettoMail = Nome + " : " + "Mail di conferma avvenuta iscrizione   / Confirmation e-mail for application.";
 
             //Dati per la mail
             string nomecliente = cliente.Cognome + " " + cliente.Nome;
@@ -716,13 +734,18 @@ public partial class _Iscriviti : CommonPage
             string Descrizione = references.ResMan("Common", Lingua, "testoMailIscrizione1").ToString() + "<br/>";
             Descrizione += references.ResMan("Common", Lingua, "TestoIscrivi").ToString() + "<br/>";
 
-            //Descrizione += references.ResMan("Common",Lingua,"FormTesto1").ToString() + " " + cliente.CodiceCard + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto2").ToString() + " " + cliente.Nome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto3").ToString() + " " + cliente.Cognome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto4").ToString() + " " + cliente.Email + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTestoPass").ToString() + " " + password + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto5").ToString() + " " + cliente.CodiceNAZIONE + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
 
+            //Descrizione += references.ResMan("Common",Lingua,"FormTesto1").ToString() + " " + cliente.CodiceCard + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Nome))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto2").ToString() + " " + cliente.Nome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Cognome))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto3").ToString() + " " + cliente.Cognome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Email))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto4").ToString() + " " + cliente.Email + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(password))
+                Descrizione += references.ResMan("Common", Lingua, "FormTestoPass").ToString() + " " + password + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.CodiceNAZIONE))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto5").ToString() + " " + cliente.CodiceNAZIONE + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
             Province p = WelcomeLibrary.UF.Utility.ElencoProvinceCompleto.Find(delegate (Province _p) { return _p.Codice == cliente.CodiceREGIONE; });
             if (p != null)
                 Descrizione += references.ResMan("Common", Lingua, "FormTesto6").ToString() + " " + p.Regione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
@@ -733,16 +756,22 @@ public partial class _Iscriviti : CommonPage
             if (c != null)
                 Descrizione += references.ResMan("Common", Lingua, "FormTesto8").ToString() + " " + c.Nome + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
 
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto9").ToString() + " " + cliente.Cap + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto10").ToString() + " " + cliente.Indirizzo + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto11").ToString() + " " + cliente.Telefono + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto12").ToString() + " " + cliente.Professione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Cap))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto9").ToString() + " " + cliente.Cap + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Indirizzo))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto10").ToString() + " " + cliente.Indirizzo + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Telefono))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto11").ToString() + " " + cliente.Telefono + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Professione))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto12").ToString() + " " + cliente.Professione + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
             //Descrizione += references.ResMan("Common", Lingua, "FormTesto13").ToString() + " " + cliente.DataNascita.ToShortDateString() + "<br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+            if (!string.IsNullOrEmpty(cliente.Spare1))
+                Descrizione += references.ResMan("Common", Lingua, "FormTesto14").ToString() + " " + cliente.Spare1 + "<br/><br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
 
-            Descrizione += references.ResMan("Common", Lingua, "FormTesto14").ToString() + " " + cliente.Spare1 + "<br/><br/>";//Qui devo riepilogare tutti i dati inseriti dal cliente nel form di attivazione
+
 
             Descrizione += cliente.TestoFormConsensi + "<br/>";
-            Descrizione += " <br/> Il cliente ha richiesto l'invio newsletter. " + references.ResMan("Common", Lingua, "titolonewsletter1").ToString() + "<br/>";
+            Descrizione += " <br/> Il cliente è iscritto al servizio di invio newsletter. " + references.ResMan("Common", Lingua, "titolonewsletter1").ToString() + "<br/>";
 
             //Descrizione += "<a href=\"" + linkvalidazione + "\" target=\"_blank\" style=\"font-size:18px\">" + references.ResMan("Common",Lingua,"testoLinkValidazioneAttivazione").ToString() + "<br/>";
             Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailcliente, nomecliente);
