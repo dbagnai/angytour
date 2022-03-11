@@ -2301,7 +2301,7 @@ namespace WelcomeLibrary.DAL
 
             try
             {
-                string query = "SELECT  A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  where CodiceProdotto like @CodiceProdotto order BY DataInserimento Desc";
+                string query = "SELECT  A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts  where CodiceProdotto like @CodiceProdotto order BY DataInserimento  COLLATE NOCASE Desc";
 
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 SQLiteParameter p1 = new SQLiteParameter("@CodiceProdotto", codiceProdotto);//OleDbType.VarChar

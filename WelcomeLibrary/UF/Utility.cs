@@ -91,7 +91,9 @@ namespace WelcomeLibrary.UF
                 //string mySheetName = myFnameCsv.Replace(".csv", "");
                 string mySheetName = Path.GetFileName(myFnameCsv).Replace(".csv", "");
 
-                System.Text.Encoding myEncSjis = System.Text.Encoding.GetEncoding("Shift_JIS");
+                //System.Text.Encoding myEncSjis = System.Text.Encoding.GetEncoding("Shift_JIS");
+                System.Text.Encoding myEncoding = System.Text.Encoding.GetEncoding(1252);//ISO-8859-1 ANSI
+                                                                                         //System.Text.Encoding.UTF8
 
                 string[,] myAryStr = new string[MAX_NUM_ROW, MAX_NUM_COLUMN];
                 Dictionary<UInt32, Dictionary<UInt32, string>> myAryDict = new Dictionary<UInt32, Dictionary<UInt32, string>>();
@@ -99,7 +101,7 @@ namespace WelcomeLibrary.UF
                 UInt32 uiMaxColumn = 0;
 
                 // read csv file
-                using (StreamReader myrd = new StreamReader(myFnameCsv, myEncSjis))
+                using (StreamReader myrd = new StreamReader(myFnameCsv, myEncoding))
                 {
                     UInt32 uiR = 0;
                     while (!myrd.EndOfStream)
@@ -114,14 +116,15 @@ namespace WelcomeLibrary.UF
                             i++;
                             if (i > 50)
                             {
-                                throw new ApplicationException("Errore conversione da csv  TOO MANY carraige return");
+                                throw new ApplicationException("Errore conversione da csv  TOO MANY carriage return");
                             }
                         }
 
                         UInt32 uiC = 0;
                         foreach (string tmpstr in tmpStAry)
                         {
-                            string tmpstr2 = tmpstr.Replace("\"", "").Trim();
+                            string tmpstr2 = tmpstr.Replace("\"", "").Replace("\0", "").Trim();
+
                             //myAryStr[uiR, uiC] = tmpstr2;
 
                             if (!myAryDict.ContainsKey(uiR))
@@ -162,6 +165,9 @@ namespace WelcomeLibrary.UF
                             string tmpcolval = colonna.Value;
                             if (colonna.Key == 2 || colonna.Key == 3 || colonna.Key >= 25) tmpcolval = tmpcolval.Replace(".", ",");
                             mySheet1.Cell((int)(riga + 1), (int)(colonna.Key + 1)).Value = tmpcolval;
+                            //setta a testo le colonne che non voglio convertire a numeri
+                            //if (!(colonna.Key == 1 ))
+                            //    mySheet1.Cell((int)(riga + 1), (int)(colonna.Key + 1)).SetDataType(ClosedXML.Excel.XLCellValues.Text);
                         }
                     }
 

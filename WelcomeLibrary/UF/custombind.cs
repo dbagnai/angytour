@@ -1140,9 +1140,10 @@ namespace WelcomeLibrary.UF
                         if (pars.Count > 5) dictpars.Add("visualPrezzo", pars[5]);
                         if (pars.Count > 6) dictpars.Add("id", pars[6]);
 
-                        if (!dictpars.ContainsKey("container")) return;
-                        if (!dictpars.ContainsKey("controlid")) return;
-                        if (!dictpars.ContainsKey("id")) return;
+
+                        if (!dictpars.ContainsKey("container") || string.IsNullOrEmpty(dictpars["container"])) return;
+                        if (!dictpars.ContainsKey("controlid") || string.IsNullOrEmpty(dictpars["controlid"])) return;
+                        if (!dictpars.ContainsKey("id") || string.IsNullOrEmpty(dictpars["id"])) return;
 
                         //////////////////////////////////////////////////
                         //Ricarichiamo dalla session eventuali parametri aggiuntivi non passati nella chiamata di bind ma presenti in sessione
