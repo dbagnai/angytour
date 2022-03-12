@@ -10,7 +10,7 @@
     <script type="text/javascript">
 
         jQuery(document).ready(function () {
-            commenttool.rendercommentsloadref('all', 'divCommenti', '', 'true', '1', '35');
+            commenttool.rendercommentsloadref('all', 'divCommenti', '', 'true', '1', '35', undefined, undefined, undefined, undefined, undefined, 'feedbackinsert1-idpost.html');
             commenttool.initautocompleteclienti('searchcliente');
             fillddllanguages();
         });
@@ -32,11 +32,10 @@
             fillDDLArraySimple($("#ddlLingue"), langdict, "lingua", "", "codice", "valore", lng);
         }
 
-        function setlng(select)
-        {
+        function setlng(select) {
             console.log(select.value);
             lng = select.value;
-            commenttool.rendercommentsloadref('all', 'divCommenti', '', 'true', '1', '35');
+            commenttool.rendercommentsloadref('all', 'divCommenti', '', 'true', '1', '35', undefined, undefined, undefined, undefined, undefined, 'feedbackinsert1-idpost.html');
             commenttool.initautocompleteclienti('searchcliente');
         }
         function visualizzacommenti() {
@@ -50,7 +49,7 @@
                         delete commenttool.objfiltro["approvati"]; //Elimino l'elemento
                 }
             });
-            commenttool.rendercommentsloadref(idpost, 'divCommenti', '', 'true', '1', '35');
+            commenttool.rendercommentsloadref(idpost, 'divCommenti', '', 'true', '1', '35', undefined, undefined, undefined, undefined, undefined, 'feedbackinsert1-idpost.html');
         }
 
         function inseriscirichiesta() {

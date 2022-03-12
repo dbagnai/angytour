@@ -1,0 +1,72 @@
+﻿<div style="list-style:none" id="replaceid" class="py-4 ">
+    <div class="container">
+        <div class="row mt-4 mb-2">
+            <div class="col-12 text-center">
+                <span class="bind" mybind="Id" myvalue="feedbackstitle2" format="formatlabelresource"></span>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-12 col-sm-6 text-left pt-5">
+                <span class="bind" mybind="Id" myvalue="feedbacksinserisci" format="formatlabelresource"></span>
+            </div>
+            <div class="col-12 col-sm-6 text-left">
+                <div class="ui-15">
+                    <div class="ui-content">
+                        <div class="ui-form">
+                            <div class="row">
+                                <div class="col-3 text-left">
+                                    <span class="bind" mybind="Id" myvalue="valutazione" format="formatlabelresource"></span><br />
+                                    <span class="rating" mybind="stelle" data-default-rating="0"></span>
+                                </div>
+                                <div class="col-12 text-left">
+                                    <div class="ui-input my-2 my-sm-3">
+                                        <input type="number" class="form-control bind" placeholder="Id Articolo (opzionale)" mybind="Idpost" onchange="commenttool.onchangenewValue(this)" onkeyup="commenttool.onchangenewValue(this)" />
+                                        <label class="ui-icon"><i class="fa fa-envelope-o"></i></label>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-left">
+                                    <!--<span id="t2"></span>
+        <script>GetResourcesValue("nome", null, 't2')</script>-->
+                                    <!--<span class="bind" mybind="Id" myvalue="nome" format="formatlabelresource"></span>-->
+                                    <div class="ui-input my-2 my-sm-3">
+                                        <input type="text" class="form-control bind" placeholder="nome" mybind="Nome" onchange="commenttool.onchangenewValue(this)" onkeyup="commenttool.onchangenewValue(this)" />
+                                        <label class="ui-icon"><i class="fa fa-user"></i></label>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-left">
+                                    <div class="ui-input my-2 my-sm-3">
+                                        <input type="email" class="form-control bind" placeholder="email" mybind="Email" onchange="commenttool.onchangenewValue(this)" onkeyup="commenttool.onchangenewValue(this)" />
+                                        <label class="ui-icon"><i class="fa fa-envelope-o"></i></label>
+                                    </div>
+                                </div>
+                                <!--<div class="col-1 text-left"><span class="bind" mybind="Data" myvalue="" format="formatdata" /></div>-->
+                                <div class="col-12" style="text-align:left">
+                                    <div class="ui-input my-2 my-sm-3">
+                                        <input type="text" class="form-control bind" placeholder="titolo" mybind="Titolo" onchange="commenttool.onchangenewValue(this)" onkeyup="commenttool.onchangenewValue(this)" />
+                                        <label class="ui-icon"><i class="fa fa-bullseye"></i></label>
+                                    </div>
+                                </div>
+                                <div class="col-12" style="text-align:left">
+                                    <div class="ui-input my-2 my-sm-3">
+                                        <textarea rows="3" type="text" class="form-control bind" placeholder="messaggio" mybind="Testo" onchange="commenttool.onchangenewValue(this)" onkeyup="commenttool.onchangenewValue(this)"></textarea>
+                                        <label class="ui-icon"><i class="fa fa-comments"></i></label>
+                                    </div>
+
+                                </div>
+                                <div class="col-12" style="text-align:left">
+                                    <div class="col-12 text-right">
+                                        <button type="button" id="replaceidinsertbtn" class="btn btn-primary" onclick="javascript:commenttool.insertitem(this)">  <span class="bind" mybind="Id" myvalue="invia" format="formatlabelresource"></span></button>
+                                    </div>
+                                    <div class="col-12 text-left">
+                                        <div class="display-4" style="color:red;font-weight:600;font-size:1.3rem" id="replaceidtresponse"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

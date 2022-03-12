@@ -370,7 +370,7 @@ namespace WelcomeLibrary.DAL
                 query += queryfilter;
 
                 if (campoordinamento == "")
-                    query += "  order BY DataInserimento Desc, Id Desc  ";
+                    query += "  order BY DataInserimento COLLATE NOCASE Desc, Id Desc  ";
                 else
                     query += "  order BY " + campoordinamento + " COLLATE NOCASE Desc, Id Desc ";
 
@@ -1047,7 +1047,7 @@ namespace WelcomeLibrary.DAL
                 query += queryfilter;
 
                 if (campoordinamento == "")
-                    query += "  order BY DataInserimento Desc, Id Desc  ";
+                    query += "  order BY DataInserimento COLLATE NOCASE Desc, Id Desc  ";
                 else
                     query += "  order BY " + campoordinamento + " COLLATE NOCASE Desc, Id Desc ";
 
@@ -1477,7 +1477,7 @@ namespace WelcomeLibrary.DAL
                 else
                 {
                     if (campoordinamento == "")
-                        query += "  order BY DataInserimento Desc, Id Desc  ";
+                        query += "  order BY DataInserimento COLLATE NOCASE Desc, Id Desc  ";
                     else
                         query += "  order BY " + campoordinamento + " COLLATE NOCASE Desc, Id Desc ";
                 }
@@ -1932,7 +1932,7 @@ namespace WelcomeLibrary.DAL
                 {
 
                     if (campoordinamento == "")
-                        query += "  order BY DataInserimento Desc, Id Desc  ";
+                        query += "  order BY DataInserimento COLLATE NOCASE Desc, Id Desc  ";
                     else
                         query += "  order BY " + campoordinamento + " COLLATE NOCASE Desc, Id Desc ";
                 }
@@ -2663,7 +2663,7 @@ namespace WelcomeLibrary.DAL
             try
             {
 
-                string query = "SELECT  A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts where ID=@ID order BY DataInserimento Desc";
+                string query = "SELECT  A.*,B.* FROM " + Tblarchivio + " A left join " + _tblarchiviodettaglio + " B on A.id_dts_collegato=B.Id_dts where ID=@ID ";
                 List<SQLiteParameter> parColl = new List<SQLiteParameter>();
                 SQLiteParameter p1 = new SQLiteParameter("@ID", idOfferta);//OleDbType.VarChar
                 parColl.Add(p1);
@@ -3039,7 +3039,7 @@ namespace WelcomeLibrary.DAL
                     else
                         query += " AND CodiceTIPOLOGIA like @CodiceTIPOLOGIA  ";
                 }
-                query += " order BY DataInserimento Desc";
+                query += " order BY DataInserimento COLLATE NOCASE Desc";
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)

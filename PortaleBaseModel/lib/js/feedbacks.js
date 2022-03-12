@@ -349,8 +349,8 @@ function commentclosure(varname) {
                         found = true;
                         if (!isNaN(Number(mainscope.idpost)))
                             mainscope.localcontainer.item['Idpost'] = Number(mainscope.idpost);
-                        else
-                            mainscope.localcontainer.item['Idpost'] = 0;
+                        //else  
+                        //    mainscope.localcontainer.item['Idpost'] = 0;
                         mainscope.localcontainer.item[property] = valore;
                         console.log(mainscope.localcontainer.item[property]);
                     }
@@ -460,13 +460,19 @@ function commentclosure(varname) {
         var property = $(elem).attr('mybind');
         if (mainscope.localcontainer.item.hasOwnProperty(property)) {
             found = true;
+
             if (!isNaN(Number(mainscope.idpost)))
                 mainscope.localcontainer.item['Idpost'] = Number(mainscope.idpost);
-            else
-                mainscope.localcontainer.item['Idpost'] = 0;
+            else if (property == 'Idpost' && !isNaN(Number(newval)))
+                mainscope.localcontainer.item['Idpost'] = Number(newval);
+            //else
+            //    mainscope.localcontainer.item['Idpost'] = 0;
 
-            mainscope.localcontainer.item[property] = newval;
-            mainscope.localcontainer.item[property + lng] = newval;
+            if (property != 'Idpost') {
+                mainscope.localcontainer.item[property] = newval;
+                mainscope.localcontainer.item[property + lng] = newval;
+            }
+
             console.log(mainscope.localcontainer.item[property]);
         }
     };
