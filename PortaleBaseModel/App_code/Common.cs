@@ -1375,6 +1375,8 @@ public class CommonPage : Page
             bool foundzeropeso = false;
             if (c.Offerta.Peso != null && c.Offerta.Peso.Value != 0) //Calcolo il peso totale della merce.. da capire che succede quando hai dei pesi nullo o a zero ....
             {
+
+                c.Offerta.Peso = ((c.Offerta.Peso != null) ? c.Offerta.Peso.Value : 0);
                 totali.TotalePeso += c.Offerta.Peso.Value * (double)c.Numero;
 
                 ////////////////////////////////////////////////////////////////////////////////////////////

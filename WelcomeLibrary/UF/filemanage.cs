@@ -82,6 +82,12 @@ namespace WelcomeLibrary.UF
                         string NomeCorretto = file.FileName.Replace("+", "");
                         NomeCorretto = NomeCorretto.Replace("%", "");
                         NomeCorretto = NomeCorretto.Replace(" ", "-");
+                        NomeCorretto = NomeCorretto.Replace("à", "a");
+                        NomeCorretto = NomeCorretto.Replace("è", "e");
+                        NomeCorretto = NomeCorretto.Replace("ì", "i");
+                        NomeCorretto = NomeCorretto.Replace("ò", "o");
+                        NomeCorretto = NomeCorretto.Replace("ù", "u");
+                        NomeCorretto = NomeCorretto.Replace(",", "");
                         NomeCorretto = NomeCorretto.Replace("'", "").ToLower();
                         //string NomeCorretto = Server.HtmlEncode(FotoUpload1.FileName);
                         if (System.IO.File.Exists(pathDestinazione))
@@ -238,6 +244,12 @@ namespace WelcomeLibrary.UF
                         string NomeCorretto = UploadControl.FileName.Replace("+", "");
                         NomeCorretto = NomeCorretto.Replace("%", "");
                         NomeCorretto = NomeCorretto.Replace(" ", "-");
+                        NomeCorretto = NomeCorretto.Replace("à", "a");
+                        NomeCorretto = NomeCorretto.Replace("è", "e");
+                        NomeCorretto = NomeCorretto.Replace("ì", "i");
+                        NomeCorretto = NomeCorretto.Replace("ò", "o");
+                        NomeCorretto = NomeCorretto.Replace("ù", "u");
+                        NomeCorretto = NomeCorretto.Replace(",", "");
                         NomeCorretto = NomeCorretto.Replace("'", "").ToLower();
                         //string NomeCorretto = Server.HtmlEncode(FotoUpload1.FileName);
                         if (System.IO.File.Exists(pathDestinazione))
@@ -379,6 +391,13 @@ namespace WelcomeLibrary.UF
                 //ELIMINO I CARATTERI CHE CREANO PROBLEMI IN APERTURA AL BROWSER
                 string NomeCorretto = Nomefile.Replace("+", "");
                 NomeCorretto = NomeCorretto.Replace("%", "");
+                NomeCorretto = NomeCorretto.Replace(" ", "-");
+                NomeCorretto = NomeCorretto.Replace("à", "a");
+                NomeCorretto = NomeCorretto.Replace("è", "e");
+                NomeCorretto = NomeCorretto.Replace("ì", "i");
+                NomeCorretto = NomeCorretto.Replace("ò", "o");
+                NomeCorretto = NomeCorretto.Replace("ù", "u");
+                NomeCorretto = NomeCorretto.Replace(",", "");
                 NomeCorretto = NomeCorretto.Replace("'", "").ToLower();
                 //string NomeCorretto = Server.HtmlEncode(FotoUpload1.FileName);
                 if (System.IO.Directory.Exists(pathDestinazione))
@@ -443,6 +462,13 @@ namespace WelcomeLibrary.UF
                 //ELIMINO I CARATTERI CHE CREANO PROBLEMI IN APERTURA AL BROWSER
                 string NomeCorretto = Nomefile.Replace("+", "");
                 NomeCorretto = NomeCorretto.Replace("%", "");
+                NomeCorretto = NomeCorretto.Replace(" ", "-");
+                NomeCorretto = NomeCorretto.Replace("à", "a");
+                NomeCorretto = NomeCorretto.Replace("è", "e");
+                NomeCorretto = NomeCorretto.Replace("ì", "i");
+                NomeCorretto = NomeCorretto.Replace("ò", "o");
+                NomeCorretto = NomeCorretto.Replace("ù", "u");
+                NomeCorretto = NomeCorretto.Replace(",", "");
                 NomeCorretto = NomeCorretto.Replace("'", "").ToLower();
                 //string NomeCorretto = Server.HtmlEncode(FotoUpload1.FileName);
                 if (System.IO.Directory.Exists(pathDestinazione))

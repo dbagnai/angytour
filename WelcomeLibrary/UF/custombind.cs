@@ -3706,6 +3706,7 @@ namespace WelcomeLibrary.UF
                                     nodetobind.ParentNode.Attributes.Add("style", "display:block");
                         }
                     }
+
                     else if (nodetobind.Name == "div" && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("owl-carousel") && nodetobind.Attributes["class"].Value.Contains("img-list"))
                     {
                         List<string> imgslist = new List<string>();

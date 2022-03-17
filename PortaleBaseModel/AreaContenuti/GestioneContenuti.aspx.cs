@@ -1037,8 +1037,15 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                 {
                     //ELIMINO I CARATTERI CHE CREANO PROBLEMI IN APERTURA AL BROWSER
                     string NomeCorretto = fileupload.FileName.Replace("+", "");
-                    NomeCorretto = NomeCorretto.Replace(" ", "-");
+                    NomeCorretto = NomeCorretto.Replace("_", "");
                     NomeCorretto = NomeCorretto.Replace("%", "");
+                    NomeCorretto = NomeCorretto.Replace(" ", "-");
+                    NomeCorretto = NomeCorretto.Replace("à", "a");
+                    NomeCorretto = NomeCorretto.Replace("è", "e");
+                    NomeCorretto = NomeCorretto.Replace("ì", "i");
+                    NomeCorretto = NomeCorretto.Replace("ò", "o");
+                    NomeCorretto = NomeCorretto.Replace("ù", "u");
+                    NomeCorretto = NomeCorretto.Replace(",", "");
                     NomeCorretto = NomeCorretto.Replace("'", "").ToLower();
                     //Se la foto è presente la cancello
                     if (System.IO.File.Exists(pathDestinazione + "\\" + NomeCorretto))
@@ -1172,8 +1179,15 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                 {
                     //ELIMINO I CARATTERI CHE CREANO PROBLEMI IN APERTURA AL BROWSER
                     string NomeCorretto = UploadFoto.FileName.Replace("+", "");
+                    NomeCorretto = NomeCorretto.Replace("_", "");
                     NomeCorretto = NomeCorretto.Replace("%", "");
                     NomeCorretto = NomeCorretto.Replace(" ", "-");
+                    NomeCorretto = NomeCorretto.Replace("à", "a");
+                    NomeCorretto = NomeCorretto.Replace("è", "e");
+                    NomeCorretto = NomeCorretto.Replace("ì", "i");
+                    NomeCorretto = NomeCorretto.Replace("ò", "o");
+                    NomeCorretto = NomeCorretto.Replace("ù", "u");
+                    NomeCorretto = NomeCorretto.Replace(",", "");
                     NomeCorretto = NomeCorretto.Replace("'", "").ToLower();
                     //string NomeCorretto = Server.HtmlEncode(FotoUpload1.FileName);
                     if (System.IO.File.Exists(pathDestinazione))
