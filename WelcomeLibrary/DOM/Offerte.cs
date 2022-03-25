@@ -1402,6 +1402,7 @@ namespace WelcomeLibrary.DOM
                 _tmp = new Allegato(tmplist);
                 this.FotoCollection_M.Add(_tmp);
             }
+            this.FotoCollection_M.FotoAnteprima = tmp.FotoCollection_M.FotoAnteprima;
 
             this.Scaglioni = new ScaglioniCollection(tmp.Scaglioni);
             this.Pivacf_dts = tmp.Pivacf_dts;

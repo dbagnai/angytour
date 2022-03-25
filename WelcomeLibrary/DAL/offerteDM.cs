@@ -6026,7 +6026,8 @@ namespace WelcomeLibrary.DAL
                 }
                 ////////////////////////////////////////////////////////////////////////////////////////////
 
-                linksurl.Add(_o.Id.ToString(), tmp);
+                if (!linksurl.ContainsKey(_o.Id.ToString()))
+                    linksurl.Add(_o.Id.ToString(), tmp);
             }
 
             string retlinksurl = Newtonsoft.Json.JsonConvert.SerializeObject(linksurl);
@@ -8127,7 +8128,7 @@ namespace WelcomeLibrary.DAL
             WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
 
         }
-        
+
         /// <summary>
         /// Removes control characters and other non-UTF-8 characters
         /// </summary>
@@ -8380,8 +8381,8 @@ namespace WelcomeLibrary.DAL
                             if (string.IsNullOrEmpty(gtinean) && string.IsNullOrEmpty(gtinmpn)) continue; 
 #endif
                         if (_new == null || _new.Prezzo == 0) continue;
-                       // if (_new.Qta_vendita == null || (_new.Qta_vendita != null && _new.Qta_vendita.Value == 0)) continue;
-                        if (  (_new.Qta_vendita != null && _new.Qta_vendita.Value == 0)) continue;
+                        // if (_new.Qta_vendita == null || (_new.Qta_vendita != null && _new.Qta_vendita.Value == 0)) continue;
+                        if ((_new.Qta_vendita != null && _new.Qta_vendita.Value == 0)) continue;
 
                         ////////////////////////////////////PARAMETRI BASE PER MERCHANT CENTER 
                         //INIZIAMO A RIEMPIRE I CAMPI PER L'ITEM NEL FEED

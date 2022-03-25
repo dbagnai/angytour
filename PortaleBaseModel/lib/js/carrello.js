@@ -598,7 +598,7 @@ var carrellotool = new function () {
         //altrimenti dovrei alla selezione scaglione valorizare l'idcarrelo corrispondente .. facendo un caricamento del carrello dal server
         if (idcarrello != '' && param != 'notemptycart') {
             CancellaCurrentCarrellobyid(idcarrello, function (ret) {
-
+                idcarrello = ""; //cacello 'id seleziona che è eliminato
                 //svuoto casella assicurazione
                 if ($("#" + controlid + "ddlassicurazioni").length)
                     $("#" + controlid + "ddlassicurazioni").val('0');

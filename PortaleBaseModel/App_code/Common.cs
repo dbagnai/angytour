@@ -1829,15 +1829,20 @@ public class CommonPage : Page
             {
                 purchaseitem = new jsongtagitem();
                 purchaseitem.id = c.Offerta.Id.ToString(); //Id scheda prodott ( sarebbe meglio lo sku o ptn // da ricavare dalla descrzione se presente
+                purchaseitem.item_id = c.Offerta.Id.ToString(); //Ga4
                 //string skuprod = offerteDM.Getvaluebytag("ean:", c.Offerta.DescrizioneI);
                 //skuprod = offerteDM.Getvaluebytag("mpn:", c.Offerta.DescrizioneI);
                 purchaseitem.name = c.Offerta.DenominazioneI;
+                purchaseitem.item_name = c.Offerta.DenominazioneI; //GA4
                 purchaseitem.list_name = "";//nome della lista filtro di ricerca risultati
                 string text = offerteDM.Getvaluebytag("brand:", c.Offerta.DescrizioneI);
                 if (string.IsNullOrEmpty(text)) text = offerteDM.Getvaluebytag("marchio:", c.Offerta.DescrizioneI);
                 purchaseitem.brand = text;
+                purchaseitem.item_brand = text;
                 purchaseitem.category = references.TestoCategoria(c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, "I"); ; //Categoria di catalogo del prodotto
+                purchaseitem.item_category = references.TestoCategoria(c.Offerta.CodiceTipologia, c.Offerta.CodiceCategoria, "I"); ; //Ga4
                 purchaseitem.variant = ""; //eventuale caratteristica del prodotto
+                purchaseitem.item_variant = ""; //eventuale caratteristica del prodotto tipo colore
                 //purchaseitem.price = c.Prezzo;
                 purchaseitem.price = Math.Round(c.Prezzo, 2, MidpointRounding.ToEven);
                 purchaseitem.quantity = c.Numero;
@@ -1917,15 +1922,20 @@ public class CommonPage : Page
 
         jsongtagitem purchaseitem = new jsongtagitem();
         purchaseitem.id = item.Offerta.Id.ToString(); //Id scheda prodott ( sarebbe meglio lo sku o ptn // da ricavare dalla descrzione se presente
+        purchaseitem.item_id = item.Offerta.Id.ToString(); //Id scheda prodott ( sarebbe meglio lo sku o ptn // da ricavare dalla descrzione se presente
         //string skuprod = offerteDM.Getvaluebytag("ean:", c.Offerta.DescrizioneI);
         //skuprod = offerteDM.Getvaluebytag("mpn:", c.Offerta.DescrizioneI);
         purchaseitem.name = item.Offerta.DenominazioneI;
+        purchaseitem.item_name = item.Offerta.DenominazioneI;
         purchaseitem.list_name = "";//nome della lista filtro di ricerca risultati
         string text = offerteDM.Getvaluebytag("brand:", item.Offerta.DescrizioneI);
         if (string.IsNullOrEmpty(text)) text = offerteDM.Getvaluebytag("marchio:", item.Offerta.DescrizioneI);
         purchaseitem.brand = text;
+        purchaseitem.item_brand = text;
         purchaseitem.category = references.TestoCategoria(item.Offerta.CodiceTipologia, item.Offerta.CodiceCategoria, "I"); ; //Categoria di catalogo del prodotto
+        purchaseitem.item_category = references.TestoCategoria(item.Offerta.CodiceTipologia, item.Offerta.CodiceCategoria, "I"); ; //Categoria di catalogo del prodotto
         purchaseitem.variant = ""; //eventuale caratteristica del prodotto tipo colore
+        purchaseitem.item_variant = ""; //eventuale caratteristica del prodotto tipo colore
         purchaseitem.price = Math.Round(item.Prezzo, 2, MidpointRounding.ToEven);
         purchaseitem.quantity = item.Numero;
         purchaseitem.coupon = item.Codicesconto;

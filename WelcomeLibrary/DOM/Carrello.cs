@@ -98,11 +98,16 @@ namespace WelcomeLibrary.DOM
     public class jsongtagitem
     {
         public string id { set; get; }
+        public string item_id { set; get; }
         public string name { set; get; }
+        public string item_name { set; get; }
         public string list_name { set; get; }
         public string brand { set; get; }
+        public string item_brand { set; get; }
         public string category { set; get; }
+        public string item_category { set; get; }
         public string variant { set; get; }
+        public string item_variant { set; get; }
         public int list_position { set; get; }
         public long quantity { set; get; }
         public double price { set; get; }
