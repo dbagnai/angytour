@@ -180,6 +180,14 @@ var carrellotool = new function () {
                             parsedret = JSON.parse(data);
                         if (parsedret != null && parsedret.hasOwnProperty("id"))
                             ret = parsedret.id;
+
+
+                        var codetoexecute = "";
+                        if (parsedret != null && parsedret.hasOwnProperty("jscodetoexecute")) {
+                            codetoexecute = parsedret.jscodetoexecute;
+                            $('#' + "endspaceforjs").html(codetoexecute);
+                        }
+
                         $('#' + controlid + "messages").html(parsedret.stato);
                         idcarrello = ret;  //(aggiunta)comunque memorizzo l'id del record carrello inserito o modificato
                         carrellotool.caricaquantita();
@@ -912,8 +920,11 @@ function InserisciCarrelloNopostback(testo) {
     var contenitoredestinazione = '';
     AddCurrentCarrelloNopostback(contenitoredestinazione, idprodotto, lingua, username, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,
         function (data) {  /*qui in data json ho i valori tornati dalla chiamata che posso iniettare es. tracking .....*/
-
-            var codetoexecute = "";
+            var ret = "";
+            var parsedret = "";
+            if (data != null && data != "")
+                parsedret = JSON.parse(data);
+            var codetoexecute = "";;
             if (parsedret != null && parsedret.hasOwnProperty("jscodetoexecute")) {
                 codetoexecute = parsedret.jscodetoexecute;
                 $('#' + "endspaceforjs").html(codetoexecute);
