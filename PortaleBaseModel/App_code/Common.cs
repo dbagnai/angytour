@@ -1903,8 +1903,6 @@ public class CommonPage : Page
         return ret;
     }
 
-
-
     /// <summary>
     /// Genera il codice evento tracking facebook per l'aggiunda di un elemento a carrello
     /// </summary>
