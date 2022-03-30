@@ -67,8 +67,7 @@ function ConfirmValidationFormGeneral(btnid, serveroperation) {
                             out1.innerHTML = (localmessagegeneral.successmsg);
                             $("#form" + btnid.id).hide();
                         }
-                        else
-                            else { out1.innerHTML = (result); location.replace(result); }
+                        else  { out1.innerHTML = (result); location.replace(result); }
                         $(btnid).removeAttr("disabled");
                         $(btnid).html(tastotxt);
                     }, tastotxt);
@@ -82,9 +81,7 @@ function ConfirmValidationFormGeneral(btnid, serveroperation) {
                     inviamessaggiomail(lng, contactdatas, function (result) {
                         if (result == "") {
                             out1.innerHTML = (result);
-                        }
-                        else
-                                    else { out1.innerHTML = (result); location.replace(result); }
+                        } else { out1.innerHTML = (result); location.replace(result); }
                         $(btnid).removeAttr("disabled");
                         $(btnid).html(tastotxt);
                     }, tastotxt);
