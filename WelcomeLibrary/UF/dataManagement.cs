@@ -653,6 +653,108 @@ namespace WelcomeLibrary.UF
 
             }
         }
+
+
+
+        public static string Get(string uri)
+        {
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+            catch { }
+            return "";
+        }
+        public static async System.Threading.Tasks.Task<string> GetAsync(string uri)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+            request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+            using (HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync())
+            using (Stream stream = response.GetResponseStream())
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                return await reader.ReadToEndAsync();
+            }
+        }
+
+        /*
+         
+METODO PER POSTARE DA CODICE I DATI IN JSON (esempio )
+#if true
+                    //PASSO IL CLIENTE AL SISTEMA DI GESTIONE TRADING SYSTEM
+                    if (cliente != null && tipocontenuto1 == "prova gratuita")
+                    {
+                        string clienteserialized = Newtonsoft.Json.JsonConvert.SerializeObject(cliente, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                        {
+                            NullValueHandling = NullValueHandling.Ignore,
+                            MissingMemberHandling = MissingMemberHandling.Ignore,
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                            PreserveReferencesHandling = PreserveReferencesHandling.None,
+                        });
+                        SharedStatic.Post(ConfigManagement.ReadKey("urlfortrial"), clienteserialized, "application/json");
+                    }
+#endif
+         */
+        public static string Post(string uri, string data, string contentType, string method = "POST")
+        {
+            try
+            {
+                byte[] dataBytes = Encoding.UTF8.GetBytes(data);
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+                request.ContentLength = dataBytes.Length;
+                request.ContentType = contentType;
+                request.Method = method;
+
+                using (Stream requestBody = request.GetRequestStream())
+                {
+                    requestBody.Write(dataBytes, 0, dataBytes.Length);
+                }
+
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+            catch (Exception err) { string message = err.Message; }
+            return "";
+        }
+        public static async System.Threading.Tasks.Task<string> PostAsync(string uri, string data, string contentType, string method = "POST")
+        {
+            byte[] dataBytes = Encoding.UTF8.GetBytes(data);
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+            request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+            request.ContentLength = dataBytes.Length;
+            request.ContentType = contentType;
+            request.Method = method;
+
+            using (Stream requestBody = request.GetRequestStream())
+            {
+                await requestBody.WriteAsync(dataBytes, 0, dataBytes.Length);
+            }
+
+            using (HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync())
+            using (Stream stream = response.GetResponseStream())
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                return await reader.ReadToEndAsync();
+            }
+        }
+
+
         /// <summary>
         /// Prende un file da un indirizzo Url e lo passa in uno stream per riferimento
         /// al chiamante

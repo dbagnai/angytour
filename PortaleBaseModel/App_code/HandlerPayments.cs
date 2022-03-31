@@ -982,30 +982,40 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
             return;
         }
     }
+
     protected string CreaMailPerFornitore(TotaliCarrello totali, CarrelloCollection prodotti, string Lingua)
     {
         string TestoMail = "";
         //Mi preparo il testo della mail (formattiamo in html)
-        TestoMail += "<table cellpadding='0' cellspacing='0'  style='font-size:14px;'>";
+        TestoMail += "<table cellpadding='0' cellspacing='0' style='font-size:14px;max-width:600px;width:100%' ><tr><td  valign='top'>" + "<img width=\"200\" src=\"" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "\" />" + "</td></tr>";
         TestoMail += "<tr><td> Ordine effettuato da " + totali.Denominazionecliente + " tramite sito " + ConfigManagement.ReadKey("Nome") + "  <br/>";
         TestoMail += "<br/><b>EMAIL CLIENTE :</b>  <br/>";
-        TestoMail += totali.Mailcliente;
-        TestoMail += "<br/><b>Indirizzo fatturazione</b> : <br/> ";
+        TestoMail += totali.Mailcliente + "<br/>";
+        TestoMail += references.ResMan("Common", Lingua, "testointromailfornitore");
+
+        TestoMail += "<tr><td><br/><table  style='font-size:14px;max-width:600px;width:100%'  cellpadding='10' cellspacing='0'>";
+        TestoMail += "<tr style='background-color:#e0e0e0;;border-color:#e0e0e0'><td style='font-size:14px;'>";
+        TestoMail += "<br/><b>Indirizzo Fatturazione</b> :<br/> ";
         TestoMail += totali.Indirizzofatturazione + "<br/>";
+        TestoMail += "</td>";
+        TestoMail += "<td>";
         if (!string.IsNullOrEmpty(totali.Indirizzospedizione))
         {
-            TestoMail += "<br/><b>Indirizzo spedizione</b> : <br/> ";
+            TestoMail += "<br/><b>Indirizzo Spedizione</b> :<br/>";
             TestoMail += totali.Indirizzospedizione;
         }
+        TestoMail += "</td></tr></table/>";
         TestoMail += "</td></tr>";
+
+
         if (!string.IsNullOrEmpty(totali.Note))
             TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
-        TestoMail += "<tr><td><table cellpadding='0' cellspacing='0' style='font-size:14px;'><tr><td><br/> DETTAGLIO ORDINE </td></tr>";
-        TestoMail += "<tr><td> <br/><b>CODICE ORDINE</b> : " + totali.CodiceOrdine + "<br/></td></tr>";
+        TestoMail += "<tr><td><table style='border:1px solid #e0e0e0' cellpadding='10' cellspacing='0'>";
+        TestoMail += "<tr><td style='font-size:14px;border-bottom:1px solid #e0e0e0'><b>CODICE ORDINE :</b> " + totali.CodiceOrdine + "<br/></td></tr>";
         int i = 1;
         foreach (Carrello item in prodotti)
         {
-            TestoMail += "<tr><td><br/><b>Articolo:</b> " + item.Offerta.DenominazioneI + "<br/>";
+            TestoMail += "<tr><td style=' font-size:14px;border-bottom:1px solid #ccc'><br/><b>Articolo:</b> " + item.Offerta.DenominazioneI + "<br/>";
             //DATE A CARRELLO SE PRESENTI
             if (item.Dataend != null && item.Datastart != null)
             {
@@ -1080,40 +1090,40 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
             //    }
             //}
 
-            TestoMail += " <br/></td></tr>";
+            TestoMail += "</td></tr>";
             i++;
         }
 
 
-        TestoMail += "<tr><td>Totale Articoli " + totali.TotaleOrdine + " € </td></tr>";
+
+        TestoMail += "<tr><td><br/>Totale articoli " + totali.TotaleOrdine + " € </td></tr>";
         if (totali.TotaleSconto != 0)
-            TestoMail += "<tr><td><br/>Sconto applicato " + totali.TotaleSconto + " € </td></tr>";
+            TestoMail += "<tr><td>Sconto applicato " + totali.TotaleSconto + " € </td></tr>";
         TestoMail += "<tr><td>";
         if (totali.TotaleSpedizione != 0)
-            TestoMail += "<br/>Spese di spedizione " + totali.TotaleSpedizione + " €<br/>";
+            TestoMail += "Spese di spedizione " + totali.TotaleSpedizione + "  €<br/>";
         if (totali.TotaleSmaltimento != 0)
-            TestoMail += "<br/>Spese smaltimento(PFU) " + totali.TotaleSmaltimento + " €<br/>";
+            TestoMail += "<br/>Spese di smaltimeto(PFU) " + totali.TotaleSmaltimento + "  €<br/>";
         if (totali.TotaleAssicurazione != 0)
             TestoMail += "Totale Assicurazione " + totali.TotaleAssicurazione + "  €<br/>";
         if (totali.Nassicurazioni != 0)
             TestoMail += "( Assicurazione per " + totali.Nassicurazioni + "  Persone )<br/>";
-        TestoMail += "<b>Totale ordine complessivo:</b> " + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
-
+        TestoMail += "<br/><b>TOTALE ORDINE COMPLESSIVO: </b>" + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
         if (totali.Percacconto != 100)
         {
             TestoMail += "<tr><td><b>PAGATO ACCONTO </b> " + totali.Percacconto + "% :</b> " + (totali.TotaleAcconto) + " €</td></tr>";
-            TestoMail += "<tr><td><b>DA SALDARE ENTRO 30 GG DATA PARTENZA" + ":</b> " + totali.TotaleSaldo + " €</td></tr>";
+            TestoMail += "<tr><td><b>DA SALDARE " + ":</b> " + totali.TotaleSaldo + " €</td></tr>";
         }
         else
-            TestoMail += "<tr><td><b>PAGATO SALDO  :</b> " + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
-
-        TestoMail += "<tr><td><br/>Metodo di pagamento:  " + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento).ToString() + " </td></tr>";
+            TestoMail += "<tr><td><b>PAGATO SALDO :</b> " + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
+        TestoMail += "<tr><td><br/><b>Metodo di pagamento: </b>" + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento).ToString() + " </td></tr>";
+        TestoMail += "<tr><td>" + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento + "dettaglio").ToString() + " </td></tr>";
 
         //chiudo tabella e riga relativa
         TestoMail += "</table></td><tr/>";
-        TestoMail += "<tr><td><br/>L'utente ha correttamente pagato tramite la modalità qui indicata, è in attesa di vorstro contatto per la spedizione della merce.";
+        TestoMail += "<tr><td>";
 
-        if (!string.IsNullOrEmpty(references.ResMan("Common", Lingua, "chkcondizioni").ToString())) 
+        if (!string.IsNullOrEmpty(references.ResMan("Common", Lingua, "chkcondizioni").ToString()))
             TestoMail += "<tr><td><br/>Il cliente ha selezionato :  " + references.ResMan("Common", Lingua, "chkcondizioni").ToString() + " </td></tr>";
 
         TestoMail += "</td></tr></table>";
@@ -1124,29 +1134,39 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
     {
         string TestoMail = "";
         //MAIL PER IL CLIENTE DI CONFERMA ORDINE
-        TestoMail = "<div style='width:600px;font-size:14px'><table  style='font-size:14px;' cellpadding='0' cellspacing='0'><tr><td  valign='top'>" + "<img width=\"200\" src=\"" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/images/main_logo.png\" />" + "</td></tr>";
-        TestoMail += "<div style='width:600px;'><table cellpadding='0' cellspacing='0'><tr><td  valign='top'> </td></tr>";
+        TestoMail += "<table cellpadding='0' cellspacing='0' style='font-size:14px;max-width:600px;width:100%' ><tr><td  valign='top'>" + "<img width=\"200\" src=\"" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "\" />" + "</td></tr>";
+        //TestoMail = "<div style='width:600px;font-size:14px'><table  style='font-size:14px;max-width:600px;width:100%' cellpadding='0' cellspacing='0'><tr><td  valign='top'>" + "<img width=\"200\" src=\"http://testsite1.weapps.eu/images/main_logo.png\" />" + "</td></tr>";
         //Testo mail
-        TestoMail += "<tr><td style='font-size:14px;'><br/> " + references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + "<a href='" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "'>" + ConfigManagement.ReadKey("Nome") + "</a> da " + totali.Denominazionecliente + " <br/>";
-        TestoMail += "<br/><font color='#e12222'>Dettaglio Ordine</font> " + "<br/>";
+        TestoMail += "<tr><td style='font-size:14px;'><br/> " + references.ResMan("Common", Lingua, "OrdineSoggettomailRiepilogo") + "<a href='" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "'>" + ConfigManagement.ReadKey("Nome") + "</a> da " + totali.Denominazionecliente + ".<br/>";
+        TestoMail += references.ResMan("Common", Lingua, "testointromailcliente");
+        //TestoMail += "<br/><font color='#e12222'>Dettaglio Ordine</font> " + "<br/>";
+        TestoMail += "</td></tr>";
 
-        TestoMail += "<br/><b>Fatturazione</b> :<br/> ";
+        TestoMail += "<tr><td><br/><table  style='font-size:14px;max-width:600px;width:100%'  cellpadding='10' cellspacing='0'>";
+        TestoMail += "<tr  style='background-color:#e0e0e0;border-color:#e0e0e0'><td style='font-size:14px;'>";
+        TestoMail += "<br/><b>Indirizzo Fatturazione</b> :<br/> ";
         TestoMail += totali.Indirizzofatturazione + "<br/>";
+        TestoMail += "</td>";
+        TestoMail += "<td>";
         if (!string.IsNullOrEmpty(totali.Indirizzospedizione))
         {
-            TestoMail += "<br/><b>Spedizione</b> :<br/>";
+            TestoMail += "<br/><b>Indirizzo Spedizione</b> :<br/>";
             TestoMail += totali.Indirizzospedizione;
         }
+        TestoMail += "</td></tr></table/>";
         TestoMail += "</td></tr>";
+
+
+
         if (!string.IsNullOrEmpty(totali.Note))
             TestoMail += "<tr><td> <br/>Note : " + totali.Note + "<br/></td></tr>";
 
-        TestoMail += "<tr><td><table cellpadding='0' cellspacing='0'>";
-        TestoMail += "<tr><td style='font-size:14px;'><br/><br/><b>CODICE ORDINE :</b> " + totali.CodiceOrdine + "<br/><br/></td></tr>";
+        TestoMail += "<tr><td><table style='border:1px solid #e0e0e0' cellpadding='10' cellspacing='0'>";
+        TestoMail += "<tr><td style='font-size:14px;border-bottom:1px solid #e0e0e0'><b>CODICE ORDINE :</b> " + totali.CodiceOrdine + "<br/></td></tr>";
         int i = 1;
         foreach (Carrello item in prodotti)
         {
-            TestoMail += "<tr><td style=' font-size:14px;'><b>Articolo:</b> ";
+            TestoMail += "<tr><td style=' font-size:14px;border-bottom:1px solid #ccc'><br/><b>Articolo:</b> ";
             switch (Lingua)
             {
                 case "I":
@@ -1234,45 +1254,44 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
             //    }
             //}
 
-            TestoMail += "<br/></td></tr>";
+            TestoMail += "</td></tr>";
             i++;
         }
 
-        TestoMail += "<tr><td>Totale Articoli " + totali.TotaleOrdine + " € </td></tr>";
+        //RIEPILOGO ORDINE
+        TestoMail += "<tr><td><br/>Totale articoli " + totali.TotaleOrdine + " € </td></tr>";
         if (totali.TotaleSconto != 0)
-            TestoMail += "<tr><td><br/>Sconto applicato " + totali.TotaleSconto + " € </td></tr>";
+            TestoMail += "<tr><td>Sconto applicato " + totali.TotaleSconto + " € </td></tr>";
         TestoMail += "<tr><td>";
         if (totali.TotaleSpedizione != 0)
-            TestoMail += "<br/>Spese di spedizione " + totali.TotaleSpedizione + " €<br/>";
+            TestoMail += "Spese di spedizione " + totali.TotaleSpedizione + "  €<br/>";
         if (totali.TotaleSmaltimento != 0)
-            TestoMail += "<br/>Spese smaltimento(PFU) " + totali.TotaleSmaltimento + " €<br/>";
+            TestoMail += "<br/>Spese di smaltimeto(PFU) " + totali.TotaleSmaltimento + "  €<br/>";
         if (totali.TotaleAssicurazione != 0)
             TestoMail += "Totale Assicurazione " + totali.TotaleAssicurazione + "  €<br/>";
         if (totali.Nassicurazioni != 0)
             TestoMail += "( Assicurazione per " + totali.Nassicurazioni + "  Persone )<br/>";
-        TestoMail += "<b>Totale ordine complessivo:</b> " + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
+        TestoMail += "<br/><b>TOTALE COMPLESSIVO ORDINE: </b>" + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
 
         if (totali.Percacconto != 100)
         {
-            TestoMail += "<tr><td><b>PAGATO ACCONTO </b> " + totali.Percacconto + "% :</b> " + (totali.TotaleAcconto) + " €</td></tr>";
-            TestoMail += "<tr><td><b>DA SALDARE ENTRO 30 GG DATA PARTENZA " + ":</b> " + totali.TotaleSaldo + " €</td></tr>";
+            TestoMail += "<tr><td><b>RICHIESTO PAGAMENTO ACCONTO " + totali.Percacconto + "% :</b> " + totali.TotaleAcconto + " €</td></tr>";
+            TestoMail += "<tr><td><b>DA SALDARE " + ":</b> " + totali.TotaleSaldo + " €</td></tr>";
         }
         else
-            TestoMail += "<tr><td><b>PAGATO SALDO  :</b> " + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
+            TestoMail += "<tr><td><b>RICHIESTO PAGAMENTO SALDO  :</b> " + (totali.TotaleAcconto + totali.TotaleSaldo) + " €</td></tr>";
 
-        TestoMail += "<tr><td><br/>Metodo di pagamento: " + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento).ToString() + " </td></tr>";
+        TestoMail += "<tr><td><br/><b>Metodo di pagamento: </b>" + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento).ToString() + " </td></tr>";
+        TestoMail += "<tr><td>" + references.ResMan("Common", Lingua, "chk" + totali.Modalitapagamento + "dettaglio").ToString() + " </td></tr>";
         //chiudo tabella e riga relativa
         TestoMail += "</table></td><tr/>";
-        //testo di chiusura
-        TestoMail += "<tr><td><br/>Il cliente ha selezionato :  " + references.ResMan("Common", Lingua, "chkcondizioni").ToString() + " </td></tr>";
 
+        //testo di chiusura
         TestoMail += "<tr><td style=' font-size:14px;'><br/>" + references.ResMan("Common", Lingua, "TestoConfermaOrdine" + totali.Modalitapagamento).ToString() + " </td></tr>";
         TestoMail += "<tr><td style=' font-size:14px;'><br/>" + references.ResMan("Common", Lingua, "TestoConfermaOrdine").ToString() + " </td></tr>";
         TestoMail += "<tr><td style=' font-size:14px;'><br/>" + references.ResMan("Common", Lingua, "TestoSaluti").ToString() + "<br/>" + references.ResMan("Common", Lingua, "TestoHomeIndex").ToString() + "</td></td> <br/>";
-
         //Inserisco il footer con i dati
         TestoMail += "<tr><td style='text-align:center; font-size:14px;'><br/><br/>" + references.ResMan("Common", Lingua, "txtFooter").ToString();
-
         TestoMail += "</td></tr></table></div>";
 
         return TestoMail;
