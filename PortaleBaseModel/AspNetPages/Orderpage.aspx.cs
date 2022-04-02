@@ -656,13 +656,14 @@ public partial class AspNetPages_Orderpage : CommonPage
             totali.Mailcliente = cliente.Email;
             totali.Dataordine = System.DateTime.Now;
             totali.CodiceOrdine = CodiceOrdine;
-            if (!string.IsNullOrEmpty(cliente.Ragsoc))
-                totali.Denominazionecliente += cliente.Ragsoc + "<br/>";
-            totali.Indirizzofatturazione = cliente.Cognome + " " + cliente.Nome + "<br/>";
+          
+            totali.Indirizzofatturazione += cliente.Cognome + " " + cliente.Nome + "<br/>";
             totali.Indirizzofatturazione += cliente.Indirizzo + "<br/>";
             totali.Indirizzofatturazione += cliente.Cap + " " + cliente.CodiceCOMUNE + "  (" + ((!(string.IsNullOrWhiteSpace(NomeProvincia(cliente.CodicePROVINCIA, Lingua)))) ? NomeProvincia(cliente.CodicePROVINCIA, Lingua) : cliente.CodicePROVINCIA) + ")<br/>";
             totali.Indirizzofatturazione += "Nazione: " + cliente.CodiceNAZIONE + "<br/>";
             totali.Indirizzofatturazione += "Telefono: " + cliente.Telefono + "<br/>";
+            if (!string.IsNullOrEmpty(cliente.Ragsoc))
+                totali.Denominazionecliente += cliente.Ragsoc + "<br/>";
             totali.Indirizzofatturazione += "P.Iva: " + cliente.Pivacf + "<br/>";
             totali.Indirizzofatturazione += "CodiceDestinatario/Pec: " + cliente.Emailpec + "<br/>";
             //SE INDIRIZZO SPEDIIZONE DIVERSO -> LO MEMORIZZO NEI TOTALI ( E serializzo il dettaglio nel cliente nel campo serialized )
