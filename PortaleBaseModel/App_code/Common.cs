@@ -2124,7 +2124,7 @@ public class CommonPage : Page
                 //Calcolo le spese per i gruppi di codice in base ai totali di peso del gruppo
                 foreach (KeyValuePair<string, double> kv in totalepesogruppicodici)
                 {
-                    fascespedizioni fasciapergruppocodici = js.fascespedizioni.Find(e => e.PesoMin < kv.Value && e.PesoMax >= kv.Value && e.Codice == (kv.Key));
+                    fascespedizioni fasciapergruppocodici = js.fascespedizioni.Find(e => e.PesoMin <= kv.Value && e.PesoMax >= kv.Value && e.Codice == (kv.Key));
                     if (fasciapergruppocodici != null)
                         speseconcodice += fasciapergruppocodici.Costo;
 
@@ -2141,7 +2141,7 @@ public class CommonPage : Page
 
                 //Calcolo le spese per le categorie senza fascia con codice corrispondente come un'unica spedizione !!!
                 double spesenocodice = 0;
-                fascespedizioni fasciasenzacodice = js.fascespedizioni.Find(e => e.PesoMin < totalepesosenzacodice && e.PesoMax >= totalepesosenzacodice && e.Codice == "");
+                fascespedizioni fasciasenzacodice = js.fascespedizioni.Find(e => e.PesoMin <= totalepesosenzacodice && e.PesoMax >= totalepesosenzacodice && e.Codice == "");
                 if (fasciasenzacodice != null) spesenocodice = fasciasenzacodice.Costo;
 
                 ret = speseconcodice + spesenocodice; //sommo le spedizioni raggruppate
