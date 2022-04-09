@@ -5786,8 +5786,8 @@ namespace WelcomeLibrary.DAL
                         break;
                     default:
                         testotitolo = _o.DenominazioneI;
-                        descrizione = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DescrizioneI, 30000, true));
-                        datitecnici = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DatitecniciI, 30000, true));
+                        descrizione = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DescrizioneI, 300000, true));
+                        datitecnici = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DatitecniciI, 300000, true));
                         break;
                 }
 
@@ -7018,7 +7018,7 @@ namespace WelcomeLibrary.DAL
                 case "ru":
                     lingua = "RU";
                     break;
-                case "da":
+                case "fr":
                     lingua = "FR";
                     break;
                 default:
