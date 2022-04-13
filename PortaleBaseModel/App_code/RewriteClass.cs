@@ -109,6 +109,8 @@ public class GenericRouteHandler : IRouteHandler
                 case "fr":
                 case "it":
                 case "en":
+                case "de":
+                case "es":
                     break;
                 default:
                     HttpContext.Current.Items["Lingua"] = ConfigManagement.ReadKey("deflanguage");

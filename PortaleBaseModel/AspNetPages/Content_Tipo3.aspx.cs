@@ -97,6 +97,52 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
 
                 SettaTestoPagina();
 
+                string linki = "";
+                string linken = "";
+                string linkru = "";
+                string linkfr = "";
+                string linkde = "";
+                string linkes = "";
+                string urlcorrente = HttpContext.Current.Request.Url.ToString();
+                //string absoluteurlcorrente = HttpContext.Current.Request.Url.AbsolutePath.ToString();
+                //string absoluteurlandquerycorrente = HttpContext.Current.Request.Url.PathAndQuery.ToString();
+                string lngfromquerys = HttpContext.Current.Request.QueryString.Get("Lingua");
+                if (!string.IsNullOrEmpty(lngfromquerys))
+                {
+                    linki = urlcorrente.Replace("Lingua=" + lngfromquerys, "Lingua=I");
+                    linken = urlcorrente.Replace("Lingua=" + lngfromquerys, "Lingua=GB");
+                    linkru = urlcorrente.Replace("Lingua=" + lngfromquerys, "Lingua=RU");
+                    linkes = urlcorrente.Replace("Lingua=" + lngfromquerys, "Lingua=ES");
+                    linkfr = urlcorrente.Replace("Lingua=" + lngfromquerys, "Lingua=FR");
+                    linkde = urlcorrente.Replace("Lingua=" + lngfromquerys, "Lingua=DE");
+
+                }
+                else if (HttpContext.Current.Request.QueryString.AllKeys.Length > 0)
+                {
+                    linki = (urlcorrente + "&" + "Lingua=I");
+                    linken = (urlcorrente + "&" + "Lingua=GB");
+                    linkru = (urlcorrente + "&" + "Lingua=RU");
+                    linkfr = (urlcorrente + "&" + "Lingua=FR");
+                    linkde = (urlcorrente + "&" + "Lingua=DE");
+                    linkes = (urlcorrente + "&" + "Lingua=ES");
+                }
+                else if (HttpContext.Current.Request.QueryString.AllKeys.Length == 0)
+                {
+                    linki = (urlcorrente + "?" + "Lingua=I");
+                    linken = (urlcorrente + "?" + "Lingua=GB");
+                    linkru = (urlcorrente + "?" + "Lingua=RU");
+                    linkfr = (urlcorrente + "?" + "Lingua=FR");
+                    linkde = (urlcorrente + "?" + "Lingua=DE");
+                    linkes = (urlcorrente + "?" + "Lingua=ES");
+                }
+                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatei").ToLower() != "true") linki = "";
+                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() != "true") linken = "";
+                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() != "true") linkru = "";
+                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatees").ToLower() != "true") linkes = "";
+                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatefr").ToLower() != "true") linkfr = "";
+                if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatede").ToLower() != "true") linkde = "";
+                SettaLinkCambioLingua(Lingua, linki, "Content_Tipo3", linken, "Content_Tipo3", linkru, "Content_Tipo3", linkfr, "Content_Tipo3", linkde, "Content_Tipo3", linkes, "Content_Tipo3");
+
                 DataBind();
             }
             //else
@@ -398,7 +444,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
                 tipo = "richiesta preventivo prenotazione ";
             if (TipoContenuto == "Acquistousato")
                 tipo = "vendita usato ";
-            string SoggettoMail = "Richiesta " + tipo + " da " + ragionesociale + " "  + cognomemittente + " " + nomemittente + " tramite il sito " + Nome;
+            string SoggettoMail = "Richiesta " + tipo + " da " + ragionesociale + " " + cognomemittente + " " + nomemittente + " tramite il sito " + Nome;
             string Descrizione = txtDescrizione.Text.Replace("\r", "<br/>") + " <br/> ";
 
             if (idOfferta != "") //Inseriamo il dettaglio della scheda di provenienza
@@ -433,7 +479,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
             //    Descrizione += " <br/>Targa :" + txttarga.Text + " Km percorsi : " + txtKm.Text;
             //}
             Descrizione += " <br/> Nome Cliente:" + nomemittente + " Cognome   Cliente: " + cognomemittente;
-            Descrizione += " <br/> Azienda:" + ragionesociale ;
+            Descrizione += " <br/> Azienda:" + ragionesociale;
             Descrizione += " <br/> Telefono Cliente:" + txtTel.Text + " Email Cliente: " + mittenteMail + " Lingua Cliente: " + Lingua;
             Descrizione += " <br/> Il cliente ha Confermato l'autorizzazione al trattamento dei  dati personali ";
 

@@ -80,7 +80,7 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
             //    ddlAreaAnnunci.DataBind();
             //    lblAnnunci.Visible = true;
             //}
- 
+
 
             //NUOVO METODO A TABELLA UNICA
             if (Sezione.ToLower().Contains("headhomegallery"))
@@ -251,6 +251,14 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         txtDescrizioneFR.Text = "";
         imgFR.ImageUrl = "";
 
+        txtNavigateUrlDE.Text = "";
+        txtDescrizioneDE.Text = "";
+        imgDE.ImageUrl = "";
+
+        txtNavigateUrlES.Text = "";
+        txtDescrizioneES.Text = "";
+        imgES.ImageUrl = "";
+
         txtNavigateUrl.Text = "";
         txtDescrizioneI.Text = "";
         imgI.ImageUrl = "";
@@ -260,6 +268,8 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         txtImgalttextGB.Text = "";
         txtImgalttextRU.Text = "";
         txtImgalttextFR.Text = "";
+        txtImgalttextDE.Text = "";
+        txtImgalttextES.Text = "";
     }
 
     protected void VisualizzaDettaglio()
@@ -281,6 +291,14 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         txtDescrizioneFR.Text = BannerSelezionato.AlternateTextFR;
         imgFR.ImageUrl = BannerSelezionato.ImageUrlFR;
 
+        txtNavigateUrlDE.Text = BannerSelezionato.NavigateUrlDE;
+        txtDescrizioneDE.Text = BannerSelezionato.AlternateTextDE;
+        imgDE.ImageUrl = BannerSelezionato.ImageUrlDE;
+
+        txtNavigateUrlES.Text = BannerSelezionato.NavigateUrlES;
+        txtDescrizioneES.Text = BannerSelezionato.AlternateTextES;
+        imgES.ImageUrl = BannerSelezionato.ImageUrlES;
+
         txtNavigateUrl.Text = BannerSelezionato.NavigateUrl;
         txtDescrizioneI.Text = BannerSelezionato.AlternateText;
         imgI.ImageUrl = BannerSelezionato.ImageUrl;
@@ -289,6 +307,8 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         txtImgalttextI.Text = BannerSelezionato.AltimgtextI;
         txtImgalttextGB.Text = BannerSelezionato.AltimgtextGB;
         txtImgalttextFR.Text = BannerSelezionato.AltimgtextFR;
+        txtImgalttextDE.Text = BannerSelezionato.AltimgtextDE;
+        txtImgalttextES.Text = BannerSelezionato.AltimgtextES;
         txtImgalttextRU.Text = BannerSelezionato.AltimgtextRU;
 
     }
@@ -305,6 +325,14 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         BannerSelezionato.AlternateTextFR = txtDescrizioneFR.Text;
         BannerSelezionato.ImageUrlFR = imgFR.ImageUrl;
 
+        BannerSelezionato.NavigateUrlES = txtNavigateUrlES.Text;
+        BannerSelezionato.AlternateTextES = txtDescrizioneES.Text;
+        BannerSelezionato.ImageUrlES = imgES.ImageUrl;
+
+        BannerSelezionato.NavigateUrlDE = txtNavigateUrlDE.Text;
+        BannerSelezionato.AlternateTextDE = txtDescrizioneDE.Text;
+        BannerSelezionato.ImageUrlDE = imgDE.ImageUrl;
+
         BannerSelezionato.NavigateUrlRU = txtNavigateUrlRU.Text;
         BannerSelezionato.AlternateTextRU = txtDescrizioneRU.Text;
         BannerSelezionato.ImageUrlRU = imgRU.ImageUrl;
@@ -319,6 +347,8 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         BannerSelezionato.AltimgtextGB = txtImgalttextGB.Text;
         BannerSelezionato.AltimgtextRU = txtImgalttextRU.Text;
         BannerSelezionato.AltimgtextFR = txtImgalttextFR.Text;
+        BannerSelezionato.AltimgtextDE = txtImgalttextDE.Text;
+        BannerSelezionato.AltimgtextES = txtImgalttextES.Text;
 
 
         int _p = 0;
@@ -381,6 +411,92 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
 
     }
 
+
+
+    protected void btnINserisciDE_Click(object sender, EventArgs e)
+    {
+        if (BannerSelezionato == null || BannerSelezionato.Id == 0)
+        {
+            output.Text = "Banner non selezionato";
+            return;
+        }
+
+        if (!UploadFoto.HasFile)
+        {
+            output.Text = "Foto per Banner in Danese non selezionata";
+            return;
+        }
+
+        //Carico la foto in lingua e aggiorno la visualizzazione (se uguali non la carico aggiorno solo il db )
+        BannerSelezionato.ImageUrlDE = PercorsoFiles + "/" + LeggiNomeFotoCorrettoPerUpload(); ;
+        if (BannerSelezionato.ImageUrl != BannerSelezionato.ImageUrlDE)
+        {
+            if (CaricaFotoSuServer(ResizeHeight, ResizeWidth, true))
+            {
+                //Aggiorno il db
+                BannerSelezionato.ImageUrlDE = PercorsoFiles + "/" + LeggiNomeFotoCorrettoPerUpload(); ;
+                bannersDM banDM = new bannersDM(NomeTblBanners);
+                banDM.UpdateBanners(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, BannerSelezionato);
+                //Aggiorno la visualizzazione
+                CaricaDati(Sezione);
+                VisualizzaDettaglio();
+            }
+        }
+        else
+        {
+            //Aggiorno il db
+            BannerSelezionato.ImageUrlDE = PercorsoFiles + "/" + LeggiNomeFotoCorrettoPerUpload(); ;
+            bannersDM banDM = new bannersDM(NomeTblBanners);
+            banDM.UpdateBanners(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, BannerSelezionato);
+            //Aggiorno la visualizzazione
+            CaricaDati(Sezione);
+            VisualizzaDettaglio();
+        }
+
+    }
+
+
+    protected void btnINserisciES_Click(object sender, EventArgs e)
+    {
+        if (BannerSelezionato == null || BannerSelezionato.Id == 0)
+        {
+            output.Text = "Banner non selezionato";
+            return;
+        }
+
+        if (!UploadFoto.HasFile)
+        {
+            output.Text = "Foto per Banner in Danese non selezionata";
+            return;
+        }
+
+        //Carico la foto in lingua e aggiorno la visualizzazione (se uguali non la carico aggiorno solo il db )
+        BannerSelezionato.ImageUrlES = PercorsoFiles + "/" + LeggiNomeFotoCorrettoPerUpload(); ;
+        if (BannerSelezionato.ImageUrl != BannerSelezionato.ImageUrlES)
+        {
+            if (CaricaFotoSuServer(ResizeHeight, ResizeWidth, true))
+            {
+                //Aggiorno il db
+                BannerSelezionato.ImageUrlES = PercorsoFiles + "/" + LeggiNomeFotoCorrettoPerUpload(); ;
+                bannersDM banDM = new bannersDM(NomeTblBanners);
+                banDM.UpdateBanners(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, BannerSelezionato);
+                //Aggiorno la visualizzazione
+                CaricaDati(Sezione);
+                VisualizzaDettaglio();
+            }
+        }
+        else
+        {
+            //Aggiorno il db
+            BannerSelezionato.ImageUrlES = PercorsoFiles + "/" + LeggiNomeFotoCorrettoPerUpload(); ;
+            bannersDM banDM = new bannersDM(NomeTblBanners);
+            banDM.UpdateBanners(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, BannerSelezionato);
+            //Aggiorno la visualizzazione
+            CaricaDati(Sezione);
+            VisualizzaDettaglio();
+        }
+
+    }
 
     protected void btnINserisciRusso_Click(object sender, EventArgs e)
     {
@@ -673,6 +789,12 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                     ban.AlternateTextFR = txtDescrizioneFR.Text;
                     ban.NavigateUrlFR = txtNavigateUrlFR.Text;
 
+                    ban.AlternateTextDE = txtDescrizioneDE.Text;
+                    ban.NavigateUrlDE = txtNavigateUrlDE.Text;
+
+                    ban.AlternateTextES = txtDescrizioneES.Text;
+                    ban.NavigateUrlES = txtNavigateUrlES.Text;
+
                     ban.AlternateText = txtDescrizioneI.Text;
                     ban.NavigateUrl = txtNavigateUrl.Text;
                     if (!string.IsNullOrWhiteSpace(NomeCorretto))
@@ -686,6 +808,8 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                     ban.AltimgtextGB = txtImgalttextGB.Text;
                     ban.AltimgtextRU = txtImgalttextRU.Text;
                     ban.AltimgtextFR = txtImgalttextFR.Text;
+                    ban.AltimgtextDE = txtImgalttextDE.Text;
+                    ban.AltimgtextES = txtImgalttextES.Text;
 
                     banDM.InsertBanner(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, ban);
                     BannerSelezionato = ban;
@@ -722,6 +846,12 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
     /// <param name="e"></param>
     protected void btnElimina_Click(object sender, EventArgs e)
     {
+
+        if (cancelHidden.Value == "false")
+        {
+            return;
+        }
+
         if (BannerSelezionato == null || BannerSelezionato.ImageUrl == "")
         {
             output.Text = "Selezionare un banner da cancellare";
@@ -733,6 +863,8 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
         FileInfo fiGB = new FileInfo(Server.MapPath(BannerSelezionato.ImageUrlGB));
         FileInfo fiRU = new FileInfo(Server.MapPath(BannerSelezionato.ImageUrlRU));
         FileInfo fiFR = new FileInfo(Server.MapPath(BannerSelezionato.ImageUrlFR));
+        FileInfo fiDE = new FileInfo(Server.MapPath(BannerSelezionato.ImageUrlDE));
+        FileInfo fiES = new FileInfo(Server.MapPath(BannerSelezionato.ImageUrlES));
 
         //-------------------------------------
         //Eliminiamo il file se presente
@@ -805,7 +937,43 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                     if (System.IO.File.Exists(filename_lg)) System.IO.File.Delete(filename_lg);
                 }
 
-                if (fi.Exists && !fi.FullName.Contains("\\images\\dummylogo.jpg"))  fi.Delete();
+
+                if (fiDE.Exists)
+                {
+                    string fileext = fiDE.Extension;
+                    string pathfile = fiDE.DirectoryName;
+                    string filenamenoext = fiDE.Name;
+                    filenamenoext = filenamenoext.Substring(0, filenamenoext.LastIndexOf(fileext)); string filename_xs = pathfile + "\\" + filenamenoext + "-xs" + fileext;
+                    string filename_sm = pathfile + "\\" + filenamenoext + "-sm" + fileext;
+                    string filename_md = pathfile + "\\" + filenamenoext + "-md" + fileext;
+                    string filename_lg = pathfile + "\\" + filenamenoext + "-lg" + fileext;
+                    if (System.IO.File.Exists(filename_xs)) System.IO.File.Delete(filename_xs);
+                    if (System.IO.File.Exists(filename_sm)) System.IO.File.Delete(filename_sm);
+                    if (System.IO.File.Exists(filename_md)) System.IO.File.Delete(filename_md);
+                    if (System.IO.File.Exists(filename_lg)) System.IO.File.Delete(filename_lg);
+                }
+
+
+
+                if (fiES.Exists)
+                {
+                    string fileext = fiES.Extension;
+                    string pathfile = fiES.DirectoryName;
+                    string filenamenoext = fiES.Name;
+                    filenamenoext = filenamenoext.Substring(0, filenamenoext.LastIndexOf(fileext)); string filename_xs = pathfile + "\\" + filenamenoext + "-xs" + fileext;
+                    string filename_sm = pathfile + "\\" + filenamenoext + "-sm" + fileext;
+                    string filename_md = pathfile + "\\" + filenamenoext + "-md" + fileext;
+                    string filename_lg = pathfile + "\\" + filenamenoext + "-lg" + fileext;
+                    if (System.IO.File.Exists(filename_xs)) System.IO.File.Delete(filename_xs);
+                    if (System.IO.File.Exists(filename_sm)) System.IO.File.Delete(filename_sm);
+                    if (System.IO.File.Exists(filename_md)) System.IO.File.Delete(filename_md);
+                    if (System.IO.File.Exists(filename_lg)) System.IO.File.Delete(filename_lg);
+                }
+
+
+
+
+                if (fi.Exists && !fi.FullName.Contains("\\images\\dummylogo.jpg")) fi.Delete();
                 if (System.IO.File.Exists(fi.DirectoryName + "\\ant" + fi.Name)) System.IO.File.Delete(fi.DirectoryName + "\\ant" + fi.Name);
                 if (fiGB.Exists) fiGB.Delete();
                 if (System.IO.File.Exists(fiGB.DirectoryName + "\\ant" + fiGB.Name)) System.IO.File.Delete(fiGB.DirectoryName + "\\ant" + fiGB.Name);
@@ -813,6 +981,12 @@ public partial class AreaContenuti_GestioneBannersNew : CommonPage
                 if (System.IO.File.Exists(fiRU.DirectoryName + "\\ant" + fiRU.Name)) System.IO.File.Delete(fiRU.DirectoryName + "\\ant" + fiRU.Name);
                 if (fiFR.Exists) fiFR.Delete();
                 if (System.IO.File.Exists(fiFR.DirectoryName + "\\ant" + fiFR.Name)) System.IO.File.Delete(fiFR.DirectoryName + "\\ant" + fiFR.Name);
+
+                if (fiDE.Exists) fiDE.Delete();
+                if (System.IO.File.Exists(fiDE.DirectoryName + "\\ant" + fiDE.Name)) System.IO.File.Delete(fiDE.DirectoryName + "\\ant" + fiDE.Name);
+
+                if (fiES.Exists) fiES.Delete();
+                if (System.IO.File.Exists(fiES.DirectoryName + "\\ant" + fiES.Name)) System.IO.File.Delete(fiES.DirectoryName + "\\ant" + fiES.Name);
 
                 //Elimino il record e svuoto la visualizzazione
                 bannersDM banDM = new bannersDM(NomeTblBanners);

@@ -292,7 +292,7 @@ public partial class AspNetPages_OrdineOk : CommonPage
         ecom.InsertOrdine(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, totali);
         //AGGIORNO  I PRODOTTI NEL CARRELLO INSERENDO IL CODICE DI ORDINE
         //E GLI ALTRI DATI ACCESSORI ( TBL_CARRELLO )
-                int J = 0;
+        int J = 0;
         foreach (Carrello item in prodotti)
         {
             item.CodiceOrdine = CodiceOrdine;
@@ -452,6 +452,12 @@ public partial class AspNetPages_OrdineOk : CommonPage
                     output.Text += "Error creating export order. Contact support.";
                     break;
                 case "FR":
+                    output.Text += "Error creating export order. Contact support.";
+                    break;
+                case "DE":
+                    output.Text += "Error creating export order. Contact support.";
+                    break;
+                case "ES":
                     output.Text += "Error creating export order. Contact support.";
                     break;
             }
@@ -650,6 +656,12 @@ public partial class AspNetPages_OrdineOk : CommonPage
                     output.Text = "Error save CodiceOrdine";
                     break;
                 case "FR":
+                    output.Text = "Error save CodiceOrdine";
+                    break;
+                case "DE":
+                    output.Text = "Error save CodiceOrdine";
+                    break;
+                case "ES":
                     output.Text = "Error save CodiceOrdine";
                     break;
             }
@@ -851,6 +863,12 @@ public partial class AspNetPages_OrdineOk : CommonPage
                     break;
                 case "FR":
                     TestoMail += item.Offerta.DenominazioneFR + "<br/>";
+                    break;
+                case "DE":
+                    TestoMail += item.Offerta.DenominazioneDE + "<br/>";
+                    break;
+                case "ES":
+                    TestoMail += item.Offerta.DenominazioneES + "<br/>";
                     break;
             }
 

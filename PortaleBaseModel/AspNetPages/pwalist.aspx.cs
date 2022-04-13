@@ -602,6 +602,11 @@ public partial class AspNetPages_pwalist : CommonPage
         string host = System.Web.HttpContext.Current.Request.Url.Host.ToString();
         Tabrif actualpagelink = new Tabrif();
         Contenuti contentcollegato = null;
+        //Eventuali parametri filtro aggiuntivo caratteristiche
+        Dictionary<string, string> addpars = new Dictionary<string, string>();
+        if (!string.IsNullOrEmpty(Caratteristica1)) addpars.Add("Caratteristica1", Caratteristica1);
+        if (!string.IsNullOrEmpty(Caratteristica2)) addpars.Add("Caratteristica2", Caratteristica2);
+        if (!string.IsNullOrEmpty(Caratteristica3)) addpars.Add("Caratteristica3", Caratteristica3);
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////  IMPOSTAZIONE LINK CANONICI E ALTERNATE ///////////////////////////////////////////////////////////////////////////////////
@@ -628,6 +633,13 @@ public partial class AspNetPages_pwalist : CommonPage
                 sezionedescrizioneI = categoriasprodotto.Descrizione;
             }
         }
+        if (!string.IsNullOrEmpty(Caratteristica1))
+            sezionedescrizioneI += " " + references.TestoCaratteristica(0, Caratteristica1, "I");
+        if (!string.IsNullOrEmpty(Caratteristica2))
+            sezionedescrizioneI += " " + references.TestoCaratteristica(1, Caratteristica2, "I");
+        if (!string.IsNullOrEmpty(Caratteristica3))
+            sezionedescrizioneI += " " + references.TestoCaratteristica(2, Caratteristica3, "I");
+
 
         ///GB/////
         WelcomeLibrary.DOM.TipologiaOfferte sezioneGB = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "GB" & tmp.Codice == Tipologia); });
@@ -650,6 +662,12 @@ public partial class AspNetPages_pwalist : CommonPage
                 sezionedescrizioneGB = categoriasprodotto.Descrizione;
             }
         }
+        if (!string.IsNullOrEmpty(Caratteristica1))
+            sezionedescrizioneGB += " " + references.TestoCaratteristica(0, Caratteristica1, "GB");
+        if (!string.IsNullOrEmpty(Caratteristica2))
+            sezionedescrizioneGB += " " + references.TestoCaratteristica(1, Caratteristica2, "GB");
+        if (!string.IsNullOrEmpty(Caratteristica3))
+            sezionedescrizioneGB += " " + references.TestoCaratteristica(2, Caratteristica3, "GB");
 
         ///RU/////
         WelcomeLibrary.DOM.TipologiaOfferte sezioneRU = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "RU" & tmp.Codice == Tipologia); });
@@ -672,6 +690,12 @@ public partial class AspNetPages_pwalist : CommonPage
                 sezionedescrizioneRU = categoriasprodotto.Descrizione;
             }
         }
+        if (!string.IsNullOrEmpty(Caratteristica1))
+            sezionedescrizioneRU += " " + references.TestoCaratteristica(0, Caratteristica1, "RU");
+        if (!string.IsNullOrEmpty(Caratteristica2))
+            sezionedescrizioneRU += " " + references.TestoCaratteristica(1, Caratteristica2, "RU");
+        if (!string.IsNullOrEmpty(Caratteristica3))
+            sezionedescrizioneRU += " " + references.TestoCaratteristica(2, Caratteristica3, "RU");
 
         ///FR/////
         WelcomeLibrary.DOM.TipologiaOfferte sezioneFR = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "FR" & tmp.Codice == Tipologia); });
@@ -694,14 +718,94 @@ public partial class AspNetPages_pwalist : CommonPage
                 sezionedescrizioneFR = categoriasprodotto.Descrizione;
             }
         }
+        if (!string.IsNullOrEmpty(Caratteristica1))
+            sezionedescrizioneFR += " " + references.TestoCaratteristica(0, Caratteristica1, "FR");
+        if (!string.IsNullOrEmpty(Caratteristica2))
+            sezionedescrizioneFR += " " + references.TestoCaratteristica(1, Caratteristica2, "FR");
+        if (!string.IsNullOrEmpty(Caratteristica3))
+            sezionedescrizioneFR += " " + references.TestoCaratteristica(2, Caratteristica3, "FR");
+
+
+
+
+        ///DE/////
+        WelcomeLibrary.DOM.TipologiaOfferte sezioneDE = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "DE" & tmp.Codice == Tipologia); });
+        string sezionedescrizioneDE = "";
+        if (sezioneDE != null)
+            sezionedescrizioneDE = sezioneDE.Descrizione;
+        if (!string.IsNullOrEmpty(Categoria))
+        {
+            Prodotto categoriaprodotto = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == "DE");
+            if (categoriaprodotto != null)
+            {
+                sezionedescrizioneDE = categoriaprodotto.Descrizione;
+            }
+        }
+        if (!string.IsNullOrEmpty(Categoria2liv))
+        {
+            SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == "DE" && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
+            if (categoriasprodotto != null)
+            {
+                sezionedescrizioneDE = categoriasprodotto.Descrizione;
+            }
+        }
+        if (!string.IsNullOrEmpty(Caratteristica1))
+            sezionedescrizioneDE += " " + references.TestoCaratteristica(0, Caratteristica1, "DE");
+        if (!string.IsNullOrEmpty(Caratteristica2))
+            sezionedescrizioneDE += " " + references.TestoCaratteristica(1, Caratteristica2, "DE");
+        if (!string.IsNullOrEmpty(Caratteristica3))
+            sezionedescrizioneDE += " " + references.TestoCaratteristica(2, Caratteristica3, "DE");
+
+        ///ES/////
+        WelcomeLibrary.DOM.TipologiaOfferte sezioneES = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == "ES" & tmp.Codice == Tipologia); });
+        string sezionedescrizioneES = "";
+        if (sezioneES != null)
+            sezionedescrizioneES = sezioneES.Descrizione;
+        if (!string.IsNullOrEmpty(Categoria))
+        {
+            Prodotto categoriaprodotto = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == "ES");
+            if (categoriaprodotto != null)
+            {
+                sezionedescrizioneES = categoriaprodotto.Descrizione;
+            }
+        }
+        if (!string.IsNullOrEmpty(Categoria2liv))
+        {
+            SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == "ES" && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
+            if (categoriasprodotto != null)
+            {
+                sezionedescrizioneES = categoriasprodotto.Descrizione;
+            }
+        }
+        if (!string.IsNullOrEmpty(Caratteristica1))
+            sezionedescrizioneES += " " + references.TestoCaratteristica(0, Caratteristica1, "ES");
+        if (!string.IsNullOrEmpty(Caratteristica2))
+            sezionedescrizioneES += " " + references.TestoCaratteristica(1, Caratteristica2, "ES");
+        if (!string.IsNullOrEmpty(Caratteristica3))
+            sezionedescrizioneES += " " + references.TestoCaratteristica(2, Caratteristica3, "ES");
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////// ALTERNATE E CANONICAL /////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        string linki = ReplaceAbsoluteLinks(CreaLinkRoutes(null, false, "I", CleanUrl(sezionedescrizioneI), "", Tipologia, Categoria, Categoria2liv));
-        string linken = ReplaceAbsoluteLinks(CreaLinkRoutes(null, false, "GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria, Categoria2liv));
-        string linkru = ReplaceAbsoluteLinks(CreaLinkRoutes(null, false, "RU", CleanUrl(sezionedescrizioneRU), "", Tipologia, Categoria, Categoria2liv));
-        string linkfr = ReplaceAbsoluteLinks(CreaLinkRoutes(null, false, "FR", CleanUrl(sezionedescrizioneFR), "", Tipologia, Categoria, Categoria2liv));
+
+        //string linki = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("I", CleanUrl(sezionedescrizioneI), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
+        //string linken = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", CleanUrl(sezionedescrizioneGB), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
+        //string linkru = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("RU", CleanUrl(sezionedescrizioneRU), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
+        //string linkfr = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("FR", CleanUrl(sezionedescrizioneFR), "", Tipologia, Categoria, Categoria2liv, "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars));
+
+        Dictionary<string, string> objvalue = new Dictionary<string, string>();
+        if (Session["objfiltro"] != null)
+        {
+            string sobjvalue = Session["objfiltro"].ToString();
+            objvalue = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(sobjvalue);
+        }
+        string linki = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "I", false));
+        string linken = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "GB", false));
+        string linkru = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "RU", false));
+        string linkfr = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "FR", false));
+        string linkde = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "DE", false));
+        string linkes = ReplaceAbsoluteLinks(WelcomeLibrary.UF.SitemapManager.getlinkbyfiltri(objvalue, "ES", false));
+
         contentcollegato = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, linki.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, ""));
         if ((contentcollegato == null || contentcollegato.Id == 0) && WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
             contentcollegato = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, linken.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, ""));
@@ -709,6 +813,10 @@ public partial class AspNetPages_pwalist : CommonPage
             contentcollegato = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, linkru.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, ""));
         if ((contentcollegato == null || contentcollegato.Id == 0) && WelcomeLibrary.UF.ConfigManagement.ReadKey("activatefr").ToLower() == "true")
             contentcollegato = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, linkfr.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, ""));
+        if ((contentcollegato == null || contentcollegato.Id == 0) && WelcomeLibrary.UF.ConfigManagement.ReadKey("activatede").ToLower() == "true")
+            contentcollegato = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, linkde.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, ""));
+        if ((contentcollegato == null || contentcollegato.Id == 0) && WelcomeLibrary.UF.ConfigManagement.ReadKey("activatees").ToLower() == "true")
+            contentcollegato = conDM.CaricaContenutiPerURI(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, linkes.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione, ""));
 
         Literal litcanonic = ((Literal)Master.FindControl("litgeneric"));
         string hreflang = "";
@@ -728,17 +836,22 @@ public partial class AspNetPages_pwalist : CommonPage
         if (contentcollegato != null && !string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("I").Trim()))
             modcanonical = (contentcollegato.CanonicalbyLingua("I").Trim());
 
-        //alternate
-        Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
-        if (!string.IsNullOrEmpty(CleanUrl(sezionedescrizioneI)))
-            litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (modcanonical) + "\"/>";
-
-        //x-default
-        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "I")
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatei").ToLower() == "true")
         {
-            Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
-            litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + (modcanonical) + "\"/>";
+            //alternate
+            Literal litgenericalt = ((Literal)Master.FindControl("litgeneric1"));
+            if (!string.IsNullOrEmpty(CleanUrl(sezionedescrizioneI)))
+                litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (modcanonical) + "\"/>";
+
+            //x-default
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "I")
+            {
+                Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
+                litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + (modcanonical) + "\"/>";
+            }
         }
+
+
         if (Lingua.ToLower() == "i")
         {
             litcanonic.Text = "<link rel=\"canonical\"  href=\"" + (modcanonical) + "\"/>";
@@ -750,7 +863,7 @@ public partial class AspNetPages_pwalist : CommonPage
             {
                 HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                 metarobots.Attributes["Content"] = "noindex,follow";
-                //if (string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("I").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                //if (contentcollegato != null && string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("I").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
                 //    if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
                 //        if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
                 //        {
@@ -773,7 +886,7 @@ public partial class AspNetPages_pwalist : CommonPage
             if (contentcollegato != null && !string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("GB").Trim()))
                 modcanonical = (contentcollegato.CanonicalbyLingua("GB").Trim());
             //alternate
-            litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
+            Literal litgenericalt = ((Literal)Master.FindControl("litgeneric2"));
             if (!string.IsNullOrEmpty(CleanUrl(sezionedescrizioneGB)))
                 litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (modcanonical) + "\"/>";
             //x-default
@@ -792,17 +905,16 @@ public partial class AspNetPages_pwalist : CommonPage
                 {
                     HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                     metarobots.Attributes["Content"] = "noindex,follow";
-                    //if (string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("GB").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
-                    //if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
-                    //    if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
-                    //    {
-                    //        Response.RedirectPermanent(modcanonical, true);
-                    //    }
+                    //if (contentcollegato != null && string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("GB").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                    //    if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
+                    //        if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
+                    //        {
+                    //            Response.RedirectPermanent(modcanonical, true);
+                    //        }
                 }
             }
         }
         else linken = "";
-
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true")
         {
             hreflang = " hreflang=\"ru\" ";
@@ -817,7 +929,7 @@ public partial class AspNetPages_pwalist : CommonPage
             if (contentcollegato != null && !string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("RU").Trim()))
                 modcanonical = (contentcollegato.CanonicalbyLingua("RU").Trim());
             //alternate
-            litgenericalt = ((Literal)Master.FindControl("litgeneric3"));
+            Literal litgenericalt = ((Literal)Master.FindControl("litgeneric3"));
             if (!string.IsNullOrEmpty(CleanUrl(sezionedescrizioneRU)))
                 litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (modcanonical) + "\"/>";
             //x-default
@@ -836,7 +948,7 @@ public partial class AspNetPages_pwalist : CommonPage
                 {
                     HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
                     metarobots.Attributes["Content"] = "noindex,follow";
-                    //if (string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("RU").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                    //if (contentcollegato != null && string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("RU").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
                     //    if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
                     //        if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
                     //        {
@@ -862,7 +974,7 @@ public partial class AspNetPages_pwalist : CommonPage
             if (contentcollegato != null && !string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("FR").Trim()))
                 modcanonical = (contentcollegato.CanonicalbyLingua("FR").Trim());
             //alternate
-            litgenericalt = ((Literal)Master.FindControl("litgeneric4"));
+            Literal litgenericalt = ((Literal)Master.FindControl("litgeneric4"));
             if (!string.IsNullOrEmpty(CleanUrl(sezionedescrizioneFR)))
                 litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (modcanonical) + "\"/>";
             //x-default
@@ -893,9 +1005,97 @@ public partial class AspNetPages_pwalist : CommonPage
         else linkfr = "";
 
 
-        //SET LINK PER CAMBIO LINGUA
-        SettaLinkCambioLingua(linki, sezionedescrizioneI, linken, sezionedescrizioneGB, linkru, sezionedescrizioneRU, linkfr, sezionedescrizioneFR);
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatede").ToLower() == "true")
+        {
+            hreflang = " hreflang=\"de\" ";
+            //Leggiamo se presente un contenuto collegato nelle statiche
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
+                linkde = linkde.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domainde"));
 
+            //FORZATURA CANONICAL utente
+            modcanonical = linkde;
+            if (!string.IsNullOrEmpty(querystring))
+                modcanonical += querystring;
+            if (contentcollegato != null && !string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("DE").Trim()))
+                modcanonical = (contentcollegato.CanonicalbyLingua("DE").Trim());
+            //alternate
+            Literal litgenericalt = ((Literal)Master.FindControl("litgeneric5"));
+            if (!string.IsNullOrEmpty(CleanUrl(sezionedescrizioneDE)))
+                litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (modcanonical) + "\"/>";
+            //x-default
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "DE")
+            {
+                Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
+                litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + (modcanonical) + "\"/>";
+            }
+            if (Lingua.ToLower() == "de")
+            {
+                litcanonic.Text = "<link rel=\"canonical\"  href=\"" + (modcanonical) + "\"/>";
+                actualpagelink.Campo1 = (linkde);
+                actualpagelink.Campo2 = CleanUrl(sezionedescrizioneDE);
+                //redirect al canonical se il canonical non coincide con l'url
+                if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+                {
+                    HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
+                    metarobots.Attributes["Content"] = "noindex,follow";
+                    //if (string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("DE").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                    //    if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
+                    //        if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
+                    //        {
+                    //            Response.RedirectPermanent(modcanonical, true);
+                    //        }
+                }
+            }
+        }
+        else linkde = "";
+
+
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatees").ToLower() == "true")
+        {
+            hreflang = " hreflang=\"es\" ";
+            //Leggiamo se presente un contenuto collegato nelle statiche
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
+                linkes = linkes.Replace(host, WelcomeLibrary.UF.ConfigManagement.ReadKey("domaines"));
+
+            //FORZATURA CANONICAL utente
+            modcanonical = linkes;
+            if (!string.IsNullOrEmpty(querystring))
+                modcanonical += querystring;
+            if (contentcollegato != null && !string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("ES").Trim()))
+                modcanonical = (contentcollegato.CanonicalbyLingua("ES").Trim());
+            //alternate
+            Literal litgenericalt = ((Literal)Master.FindControl("litgeneric6"));
+            if (!string.IsNullOrEmpty(CleanUrl(sezionedescrizioneES)))
+                litgenericalt.Text = "<link rel=\"alternate\" " + hreflang + " href=\"" + (modcanonical) + "\"/>";
+            //x-default
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "ES")
+            {
+                Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
+                litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + (modcanonical) + "\"/>";
+            }
+            if (Lingua.ToLower() == "es")
+            {
+                litcanonic.Text = "<link rel=\"canonical\"  href=\"" + (modcanonical) + "\"/>";
+                actualpagelink.Campo1 = (linkes);
+                actualpagelink.Campo2 = CleanUrl(sezionedescrizioneES);
+                //redirect al canonical se il canonical non coincide con l'url
+                if (!CheckCanonicalUrl(System.Web.HttpContext.Current.Request.Url.ToString(), modcanonical, false))
+                {
+                    HtmlMeta metarobots = (HtmlMeta)Master.FindControl("metaRobots");
+                    metarobots.Attributes["Content"] = "noindex,follow";
+                    //if (string.IsNullOrEmpty(contentcollegato.CanonicalbyLingua("ES").Trim())) // redirect solo se vuoto il campo di forzatura del canonical
+                    //    if (!(!string.IsNullOrEmpty(mese) && !string.IsNullOrEmpty(anno))) //controllo filtro archivio nel qual caso non faccio redirect
+                    //        if (!System.Web.HttpContext.Current.Request.Url.ToString().EndsWith("-")) // non faccio redirec neppure per gli indizizzi con ricerca!!! ( finicono in - )
+                    //        {
+                    //            Response.RedirectPermanent(modcanonical, true);
+                    //        }
+                }
+            }
+        }
+        else linkes = "";
+
+        //SET LINK PER CAMBIO LINGUA
+        SettaLinkCambioLingua(Lingua, linki, sezionedescrizioneI, linken, sezionedescrizioneGB, linkru, sezionedescrizioneRU, linkfr, sezionedescrizioneFR, linkde, sezionedescrizioneDE, linkes, sezionedescrizioneES);
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////SEZIONE META TITLE E DESC E CONTENUTO HEADER/h1 PAGINA ///////////////////////
@@ -903,14 +1103,8 @@ public partial class AspNetPages_pwalist : CommonPage
         WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();
         WelcomeLibrary.DOM.TipologiaOfferte sezione = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua & tmp.Codice == Tipologia); });
         string sezionedescrizione = "";
-        if (!string.IsNullOrEmpty(Categoria2liv))
-        {
-            SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
-            if (categoriasprodotto != null)
-            {
-                sezionedescrizione += " " + categoriasprodotto.Descrizione;
-            }
-        }
+        if (sezione != null)
+            sezionedescrizione += " " + sezione.Descrizione;
         if (!string.IsNullOrEmpty(Categoria))
         {
             Prodotto categoriaprodotto = WelcomeLibrary.UF.Utility.ElencoProdotti.Find(p => p.CodiceTipologia == Tipologia && p.CodiceProdotto == Categoria && p.Lingua == Lingua);
@@ -919,20 +1113,34 @@ public partial class AspNetPages_pwalist : CommonPage
                 sezionedescrizione += " " + categoriaprodotto.Descrizione;
             }
         }
-        if (sezione != null)
-            sezionedescrizione += " " + sezione.Descrizione;
+        if (!string.IsNullOrEmpty(Categoria2liv))
+        {
+            SProdotto categoriasprodotto = Utility.ElencoSottoProdotti.Find(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceProdotto == Categoria) && (tmp.CodiceSProdotto == Categoria2liv)); });
+            if (categoriasprodotto != null)
+            {
+                sezionedescrizione += " " + categoriasprodotto.Descrizione;
+            }
+        }
+        if (!string.IsNullOrEmpty(Caratteristica1))
+            sezionedescrizione += " " + references.TestoCaratteristica(0, Caratteristica1, Lingua);
+        if (!string.IsNullOrEmpty(Caratteristica2))
+            sezionedescrizione += " " + references.TestoCaratteristica(1, Caratteristica2, Lingua);
+        if (!string.IsNullOrEmpty(Caratteristica3))
+            sezionedescrizione += " " + references.TestoCaratteristica(2, Caratteristica3, Lingua);
+
+
         ////////EVIDENZIAZIONE MENU//////////////////////////////////////////////////////////////
         if (sezione != null)
-            EvidenziaSelezione(sezione.Descrizione); // Serve Solo per la voce al top dei dropdown ....
+            EvidenziaSelezione(sezione.Descrizione); // Serve Solo per la voce al top dei dropdown n non per i link finali ....
 
 
         ////////////////////////////////////////////////////////////////
         //CARICAMENTO E CUSTOMIZZAZIONE DA PAGINE STATICHE testi e meta
         ////////////////////////////////////////////////////////////////
         string htmlPage = "";
-        if (references.ResMan("Common", Lingua, "testo" + Tipologia) != null)
+        if (!string.IsNullOrEmpty(references.ResMan("Common", Lingua, "testo" + Tipologia)))
             htmlPage = references.ResMan("Common", Lingua, "testo" + Tipologia).ToString();
-        if (references.ResMan("Common", Lingua, "testo" + Categoria) != null)
+        if (!string.IsNullOrEmpty(references.ResMan("Common", Lingua, "testo" + Categoria)))
             htmlPage = references.ResMan("Common", Lingua, "testo" + Categoria).ToString();
 
         //prendiamo i dalti dal contenuto collegato coretto nelle statiche se presente
@@ -962,6 +1170,14 @@ public partial class AspNetPages_pwalist : CommonPage
                     customdesc = contentcollegato.CustomdescFR;
                     customtitle = contentcollegato.CustomtitleFR;
                     break;
+                case "DE":
+                    customdesc = contentcollegato.CustomdescDE;
+                    customtitle = contentcollegato.CustomtitleDE;
+                    break;
+                case "ES":
+                    customdesc = contentcollegato.CustomdescES;
+                    customtitle = contentcollegato.CustomtitleES;
+                    break;
             }
 
             /////////////////////////////////////////////
@@ -989,6 +1205,13 @@ public partial class AspNetPages_pwalist : CommonPage
             {
                 litNomePagina.Text += " " + categoriasprodotto.Descrizione;
             }
+            if (!string.IsNullOrEmpty(Caratteristica1))
+                litNomePagina.Text += " " + references.TestoCaratteristica(0, Caratteristica1, Lingua);
+            if (!string.IsNullOrEmpty(Caratteristica2))
+                litNomePagina.Text += " " + references.TestoCaratteristica(1, Caratteristica2, Lingua);
+            if (!string.IsNullOrEmpty(Caratteristica3))
+                litNomePagina.Text += " " + references.TestoCaratteristica(2, Caratteristica3, Lingua);
+
             ///////////////////////////////////////////////////////////////
             divTitleContainer.Visible = true; //accendo il titolo
         }
@@ -996,7 +1219,8 @@ public partial class AspNetPages_pwalist : CommonPage
         //META TITLE E DESCRIPTION DEFAULT E CUSTOM ( da sezione admin )
         ////////////////////////////////////////////////////////////
         /////default meta
-        string metametatitle = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + references.ResMan("Common", Lingua, "testoPosizionebase")) + " " + Nome);
+        //string metametatitle = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione + " " + references.ResMan("Common", Lingua, "testoPosizionebase")) + " " + Nome); // agingo semrpre posizione e nome ....
+        string metametatitle = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione));
         string description = "";
         description = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(htmlPage, 300, true)).Replace("<br/>", "\r\n")).Trim();
         //custom meta
@@ -1005,6 +1229,9 @@ public partial class AspNetPages_pwalist : CommonPage
         if (!string.IsNullOrEmpty(customdesc))
             description = customdesc.Replace("<br/>", "\r\n");
         description = html.Convert(CommonPage.ReplaceLinks(ConteggioCaratteri(description, 300, true)).Replace("<br/>", "\r\n")).Trim();
+        if (string.IsNullOrEmpty(description))
+            description = metametatitle + " " + references.ResMan("Common", Lingua, "testoPosizionebase") + " " + Nome;
+
         ////////////////////////////////////////////////////////////
         //Opengraph per facebook
         ((HtmlMeta)Master.FindControl("metafbTitle")).Content = html.Convert(WelcomeLibrary.UF.Utility.SostituisciTestoACapo(sezionedescrizione)).Trim();
@@ -1026,185 +1253,6 @@ public partial class AspNetPages_pwalist : CommonPage
 
         HtmlGenericControl ulbr = (HtmlGenericControl)Master.FindControl("ulBreadcrumb");
         ulbr.InnerHtml = BreadcrumbConstruction(links);
-    }
-
-    private void SettaLinkCambioLingua(string linki, string urltexti, string linken, string urltexten, string linkru, string urltextru, string linkfr, string urltextfr)
-    {
-        //SET LINK PER CAMBIO LINGUA
-        HtmlGenericControl divCambioLingua1 = (HtmlGenericControl)Master.FindControl("divCambioLingua1");
-        HtmlGenericControl divCambioLingua2 = (HtmlGenericControl)Master.FindControl("divCambioLingua2");
-        HtmlGenericControl divCambioLingua3 = (HtmlGenericControl)Master.FindControl("divCambioLingua3");
-        divCambioLingua1.Visible = false;
-        divCambioLingua2.Visible = false;
-        divCambioLingua3.Visible = false;
-
-        //valori di default non dall'activate language
-        HtmlGenericControl divCambioLinguadef1 = (HtmlGenericControl)Master.FindControl("divCambioLinguadef1");
-        HtmlGenericControl divCambioLinguadef2 = (HtmlGenericControl)Master.FindControl("divCambioLinguadef2");
-        HtmlGenericControl divCambioLinguadef3 = (HtmlGenericControl)Master.FindControl("divCambioLinguadef3");
-        divCambioLinguadef1.Visible = false;
-        divCambioLinguadef2.Visible = false;
-        divCambioLinguadef3.Visible = false;
-
-        switch (Lingua.ToLower())
-        {
-            case "i":
-                if (!string.IsNullOrEmpty(linken) && !string.IsNullOrEmpty(CommonPage.CleanUrl(urltexten)))
-                {
-                    divCambioLingua1.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua1.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua1.InnerHtml += "href=\"";
-                    divCambioLingua1.InnerHtml += linken;
-                    divCambioLingua1.InnerHtml += "\" >";
-                    divCambioLingua1.InnerHtml += references.ResMan("Common", Lingua, "testoCambio1").ToUpper();
-                    divCambioLingua1.InnerHtml += "</a>";
-                    divCambioLingua1.Visible = true;
-                }
-                else if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateen").ToLower() == "true") divCambioLinguadef1.Visible = true;
-
-                if (!string.IsNullOrEmpty(linkru) && !string.IsNullOrEmpty(CommonPage.CleanUrl(urltextru)))
-                {
-                    divCambioLingua2.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua2.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua2.InnerHtml += "href=\"";
-                    divCambioLingua2.InnerHtml += linkru;
-                    divCambioLingua2.InnerHtml += "\" >";
-                    divCambioLingua2.InnerHtml += references.ResMan("Common", Lingua, "testoCambio2").ToUpper();
-                    divCambioLingua2.InnerHtml += "</a>";
-                    divCambioLingua2.Visible = true;
-                }
-                else if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true") divCambioLinguadef2.Visible = true;
-                if (!string.IsNullOrEmpty(linkfr) && !string.IsNullOrEmpty(CommonPage.CleanUrl(urltextfr)))
-                {
-                    divCambioLingua3.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua3.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua3.InnerHtml += "href=\"";
-                    divCambioLingua3.InnerHtml += linkfr;
-                    divCambioLingua3.InnerHtml += "\" >";
-                    divCambioLingua3.InnerHtml += references.ResMan("Common", Lingua, "testoCambio3").ToUpper();
-                    divCambioLingua3.InnerHtml += "</a>";
-                    divCambioLingua3.Visible = true;
-                }
-                else if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatefr").ToLower() == "true") divCambioLinguadef3.Visible = true;
-
-                break;
-            case "gb":
-                if (!string.IsNullOrEmpty(linki) && !string.IsNullOrEmpty(CommonPage.CleanUrl(urltexti)))
-                {
-                    divCambioLingua1.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua1.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua1.InnerHtml += "href=\"";
-                    divCambioLingua1.InnerHtml += linki;
-                    divCambioLingua1.InnerHtml += "\" >";
-                    divCambioLingua1.InnerHtml += references.ResMan("Common", Lingua, "testoCambio1").ToUpper();
-                    divCambioLingua1.InnerHtml += "</a>";
-                    divCambioLingua1.Visible = true;
-                }
-                else divCambioLinguadef1.Visible = true;
-
-                if (!string.IsNullOrEmpty(linkru) && !string.IsNullOrEmpty(CommonPage.CleanUrl(urltextru)))
-                {
-                    divCambioLingua2.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua2.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua2.InnerHtml += "href=\"";
-                    divCambioLingua2.InnerHtml += linkru;
-                    divCambioLingua2.InnerHtml += "\" >";
-                    divCambioLingua2.InnerHtml += references.ResMan("Common", Lingua, "testoCambio2").ToUpper();
-                    divCambioLingua2.InnerHtml += "</a>";
-                    divCambioLingua2.Visible = true;
-                }
-                else if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true") divCambioLinguadef2.Visible = true;
-                if (!string.IsNullOrEmpty(linkfr) && !string.IsNullOrEmpty(CommonPage.CleanUrl(urltextfr)))
-                {
-                    divCambioLingua3.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua3.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua3.InnerHtml += "href=\"";
-                    divCambioLingua3.InnerHtml += linkfr;
-                    divCambioLingua3.InnerHtml += "\" >";
-                    divCambioLingua3.InnerHtml += references.ResMan("Common", Lingua, "testoCambio3").ToUpper();
-                    divCambioLingua3.InnerHtml += "</a>";
-                    divCambioLingua3.Visible = true;
-                }
-                else if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatefr").ToLower() == "true") divCambioLinguadef3.Visible = true;
-                break;
-            case "ru":
-                if (!string.IsNullOrEmpty(linken) && !string.IsNullOrEmpty(CommonPage.CleanUrl(urltexten)))
-                {
-                    divCambioLingua1.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua1.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua1.InnerHtml += "href=\"";
-                    divCambioLingua1.InnerHtml += linken;
-                    divCambioLingua1.InnerHtml += "\" >";
-                    divCambioLingua1.InnerHtml += references.ResMan("Common", Lingua, "testoCambio1").ToUpper();
-                    divCambioLingua1.InnerHtml += "</a>";
-                    divCambioLingua1.Visible = true;
-                }
-                else if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateen").ToLower() == "true") divCambioLinguadef1.Visible = true;
-                if (!string.IsNullOrEmpty(linki) && !string.IsNullOrEmpty(CommonPage.CleanUrl(urltexti)))
-                {
-                    divCambioLingua2.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua2.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua2.InnerHtml += "href=\"";
-                    divCambioLingua2.InnerHtml += linki;
-                    divCambioLingua2.InnerHtml += "\" >";
-                    divCambioLingua2.InnerHtml += references.ResMan("Common", Lingua, "testoCambio2").ToUpper();
-                    divCambioLingua2.InnerHtml += "</a>";
-                    divCambioLingua2.Visible = true;
-                }
-                else divCambioLinguadef2.Visible = true;
-                if (!string.IsNullOrEmpty(linkfr) && !string.IsNullOrEmpty(CommonPage.CleanUrl(urltextfr)))
-                {
-                    divCambioLingua3.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua3.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua3.InnerHtml += "href=\"";
-                    divCambioLingua3.InnerHtml += linkfr;
-                    divCambioLingua3.InnerHtml += "\" >";
-                    divCambioLingua3.InnerHtml += references.ResMan("Common", Lingua, "testoCambio3").ToUpper();
-                    divCambioLingua3.InnerHtml += "</a>";
-                    divCambioLingua3.Visible = true;
-                }
-                else if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatefr").ToLower() == "true") divCambioLinguadef3.Visible = true;
-                break;
-            case "dk":
-                if (!string.IsNullOrEmpty(linken) && !string.IsNullOrEmpty(CommonPage.CleanUrl(urltexten)))
-                {
-                    divCambioLingua1.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua1.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua1.InnerHtml += "href=\"";
-                    divCambioLingua1.InnerHtml += linken;
-                    divCambioLingua1.InnerHtml += "\" >";
-                    divCambioLingua1.InnerHtml += references.ResMan("Common", Lingua, "testoCambio1").ToUpper();
-                    divCambioLingua1.InnerHtml += "</a>";
-                    divCambioLingua1.Visible = true;
-                }
-                else if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateen").ToLower() == "true") divCambioLinguadef1.Visible = true;
-                if (!string.IsNullOrEmpty(linki) && !string.IsNullOrEmpty(CommonPage.CleanUrl(urltexti)))
-                {
-                    divCambioLingua2.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua2.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua2.InnerHtml += "href=\"";
-                    divCambioLingua2.InnerHtml += linki;
-                    divCambioLingua2.InnerHtml += "\" >";
-                    divCambioLingua2.InnerHtml += references.ResMan("Common", Lingua, "testoCambio2").ToUpper();
-                    divCambioLingua2.InnerHtml += "</a>";
-                    divCambioLingua2.Visible = true;
-                }
-                else divCambioLinguadef2.Visible = true;
-                if (!string.IsNullOrEmpty(linkru) && !string.IsNullOrEmpty(CommonPage.CleanUrl(urltextru)))
-                {
-                    divCambioLingua3.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua3.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua3.InnerHtml += "href=\"";
-                    divCambioLingua3.InnerHtml += linkru;
-                    divCambioLingua3.InnerHtml += "\" >";
-                    divCambioLingua3.InnerHtml += references.ResMan("Common", Lingua, "testoCambio3").ToUpper();
-                    divCambioLingua3.InnerHtml += "</a>";
-                    divCambioLingua3.Visible = true;
-                }
-                else if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activateru").ToLower() == "true") divCambioLinguadef3.Visible = true;
-
-                break;
-        }
     }
 
 

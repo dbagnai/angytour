@@ -22,6 +22,8 @@
     <%--<meta property="fb:app_id" content="435846069925856" />--%>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <asp:Literal Text="" ID="litgeneric6" runat="server" />
+    <asp:Literal Text="" ID="litgeneric5" runat="server" />
     <asp:Literal Text="" ID="litgeneric4" runat="server" />
     <asp:Literal Text="" ID="litgeneric3" runat="server" />
     <asp:Literal Text="" ID="litgeneric2" runat="server" />
@@ -64,7 +66,7 @@
         <%= references.ResMan("Common", Lingua,"pulsantecontattipopup") %>
         <!-- MENU -->
         <div class="fixedtop" id="divTop" runat="server" visible="true">
-            <div class="row d-flex justify-content-between " style="padding: 5px 0px;">
+            <div class="row d-flex justify-content-between " style="padding: 5px 0px;margin:0px;">
                 <div class="col-auto  d-flex justify-content-start">
                     <%-- SOCIAL --%>
                     <div class="social-icons-small  d-block px-2 px-lg-4 border-right bd-secondary-color" runat="server" visible="true">
@@ -186,23 +188,84 @@
                         <%-- CARRELLO END --%>
                     </div>
                     <!-- LINGUE --->
-                    <div runat="server" visible="false">
+
+                    <div runat="server" visible="false" class="simplemenu" id="divlngchange"  >
+                        <ul>
+                            <li  class="dropdown px-2">
+                                <a data-target="#" data-toggle="dropdown" class="dropdown-toggle" style="cursor: pointer; color: #fff"> <span id="divActLingua" runat="server"></span><b class="caret"></b></a>
+                                <ul class="dropdown-menu dropdown-menu-right px-0" style="min-width:60px !important">
+                                    <li>
+                                        <span id="divCambioLingua1" class="bd-secondary-color" style="padding-top: 6px; padding-bottom: 6px;  font-size: 0.8rem;" runat="server" visible="false"></span>
+                                        <span id="divCambioLinguadef1" class=" bd-secondary-color" style="padding-top: 6px; padding-bottom: 6px;  font-size: 0.8rem;" runat="server" visible="false">
+                                            <a style=" padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio1")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio1") %>'><%= references.ResMan("Common", Lingua,"testoCambio1").ToUpper() %></a>
+                                        </span>
+
+                                    </li>
+                                    <li>
+
+                                        <span id="divCambioLingua2" class="bd-secondary-color" style="padding-top: 6px; padding-bottom: 6px;  font-size: 0.8rem;" runat="server" visible="false"></span>
+                                        <span id="divCambioLinguadef2" class="bd-secondary-color" style="padding-top: 6px; padding-bottom: 6px;  font-size: 0.8rem;" runat="server" visible="false">
+                                            <a style="padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio2")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio2") %>'><%= references.ResMan("Common", Lingua,"testoCambio2").ToUpper() %></a>
+                                        </span>
+
+
+                                    </li>
+                                    <li>
+                                        <span id="divCambioLingua3" class="bd-secondary-color" style="padding-top: 6px; padding-bottom: 6px;  font-size: 0.8rem;" runat="server" visible="false"></span>
+                                        <span id="divCambioLinguadef3" class="bd-secondary-color" style="padding-top: 6px; padding-bottom: 6px;  font-size: 0.8rem;" runat="server" visible="false">
+                                            <a style=" padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio3")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio3") %>'><%= references.ResMan("Common", Lingua,"testoCambio3").ToUpper() %></a>
+                                        </span>
+
+                                    </li>
+                                    <li>
+                                        <span id="divCambioLingua4" class="bd-secondary-color" style="padding-top: 6px; padding-bottom: 6px;  font-size: 0.8rem;" runat="server" visible="false"></span>
+                                        <span id="divCambioLinguadef4" class="bd-secondary-color" style="padding-top: 6px; padding-bottom: 6px;  font-size: 0.8rem;" runat="server" visible="false">
+                                            <a style=" padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio4")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio4") %>'><%= references.ResMan("Common", Lingua,"testoCambio4").ToUpper() %></a>
+                                        </span>
+
+                                    </li>
+                                    <li>
+                                        <span id="divCambioLingua5" class="bd-secondary-color" style="padding-top: 6px; padding-bottom: 6px;  font-size: 0.8rem;" runat="server" visible="false"></span>
+                                        <span id="divCambioLinguadef5" class="bd-secondary-color" style="padding-top: 6px; padding-bottom: 6px;  font-size: 0.8rem;" runat="server" visible="false">
+                                            <a style=" padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio5")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio5") %>'><%= references.ResMan("Common", Lingua,"testoCambio5").ToUpper() %></a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <%-- <div runat="server" visible="true"  id="divlngchange" >
+
                         <div id="divCambioLingua1" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
                         </div>
                         <div id="divCambioLinguadef1" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="true">
                             <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio1")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio1") %>'><%= references.ResMan("Common", Lingua,"testoCambio1").ToUpper() %></a>
                         </div>
+
                         <div id="divCambioLingua2" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
                         </div>
                         <div id="divCambioLinguadef2" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
                             <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio2")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio2") %>'><%= references.ResMan("Common", Lingua,"testoCambio2").ToUpper() %></a>
                         </div>
+
                         <div id="divCambioLingua3" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
                         </div>
                         <div id="divCambioLinguadef3" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
                             <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio3")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio3") %>'><%= references.ResMan("Common", Lingua,"testoCambio3").ToUpper() %></a>
                         </div>
-                    </div>
+
+                        <div id="divCambioLingua4" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
+                        </div>
+                        <div id="divCambioLinguadef4" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
+                            <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio4")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio4") %>'><%= references.ResMan("Common", Lingua,"testoCambio4").ToUpper() %></a>
+                        </div>
+
+                        <div id="divCambioLingua5" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
+                        </div>
+                        <div id="divCambioLinguadef5" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
+                            <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio5")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio5") %>'><%= references.ResMan("Common", Lingua,"testoCambio5").ToUpper() %></a>
+                        </div>
+                    </div>--%>
                 </div>
             </div>
         </div>
@@ -531,7 +594,7 @@
             <%--START BANNER E_COMMERCE_ VENDITA IN BASSO--%>
             <div id="masterlow1" runat="server" clientid="static"></div>
             <div id="masterlow3" runat="server" clientid="static"></div>
-            
+
             <%--END BANNER E_COMMERCE_ VENDITA IN BASSO--%>
             <div id="divContattiMaster" runat="server" visible="true">
                 <section class="mbr-section mbr-parallax-background p-0" style="padding-top: 80px; padding-bottom: 80px; background-image: url('/public/Files/con001000/1/contact-back.jpg')">
@@ -822,8 +885,8 @@
                         <div class="row">
                             <div class="col-lg-12 text-center">
                                 <p class="size-body-copyright body-copyright-lineh px-4 py-3">
-                                    <%= references.ResMan("Common", Lingua,"txtFooter") %><br />  <%= references.ResMan("Common", Lingua,"txtFooterLinks") %>
-                                   
+                                    <%= references.ResMan("Common", Lingua,"txtFooter") %><br />
+                                    <%= references.ResMan("Common", Lingua,"txtFooterLinks") %>
                                 </p>
                                 <%-- <div class="float-right">
                                     <p style="font-size: 1.2em; padding-top: 10px">

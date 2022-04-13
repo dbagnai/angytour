@@ -94,6 +94,15 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             {
                 if (Lingua.ToLower() == "fr") Response.RedirectPermanent("~");
             }
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatede").ToLower() != "true")
+            {
+                if (Lingua.ToLower() == "de") Response.RedirectPermanent("~");
+            }
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatees").ToLower() != "true")
+            {
+                if (Lingua.ToLower() == "es") Response.RedirectPermanent("~");
+            }
+
             //if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
             //    ControlloLingua(); // RIABILITARE PER ONLINE per reindirizzare le lingue su domini diversi
             CodiceTipologia = CommonPage.CaricaValoreMaster(Request, Session, "Tipologia", false, "");
@@ -313,7 +322,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             //if (!noli) sb.Append("<li>");
             sb.Append("<li");
             if (idps.ToString() == idContenuto)
-            sb.Append(" class=\"activeelemntli\" style=\"" + stile + "\"  ");
+                sb.Append(" class=\"activeelemntli\" style=\"" + stile + "\"  ");
             sb.Append(">");
             sb.Append("<a  href=\"");
             sb.Append(link);
@@ -360,7 +369,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
                 link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
 
                 //if (noli == false)
-                    sb.Append("<li");
+                sb.Append("<li");
                 if (o.Codice == CodiceTipologia)
                     sb.Append("  class=\"activeelemntli\"  ");
                 sb.Append(">");
@@ -378,7 +387,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
 
 
                 //if (noli == false)
-                    sb.Append("</li>");
+                sb.Append("</li>");
 
             }
         return sb.ToString();
@@ -461,7 +470,7 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
             {
                 string testo = o.Descrizione;
 
-               string testomodificato = references.ResMan("Common", Lingua, "testo" + o.CodiceProdotto);
+                string testomodificato = references.ResMan("Common", Lingua, "testo" + o.CodiceProdotto);
                 if (!string.IsNullOrEmpty(testomodificato))
                     testo = testomodificato;
                 string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(o.Descrizione), "", o.CodiceTipologia, o.CodiceProdotto);

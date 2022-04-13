@@ -4,21 +4,21 @@
     <title>Nome Sito Commenti</title>
     <link>http://localhost:60010</link>
     <description>Nome Sito</description>
-    <lastBuildDate>Wed, 15 Dec 2021 17:34:31 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 13 Apr 2022 17:23:24 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2021-12-15T17:34+01:00</sy:updateBase>
+    <sy:updateBase>2022-04-13T17:23+02:00</sy:updateBase>
     <language>it-IT</language>
     <item>
-      <title>testo commento 1
-sottotitolo</title>
-      <link>http://localhost:60010/it/commenti/testo-commento-1-sottotitolo-1</link>
+      <title><![CDATA[testo commento 1 sottotitolo
+]]></title>
+      <link><![CDATA[http://localhost:60010/it/commenti/testo-commento-1-sottotitolo-1]]></link>
       <guid isPermaLink="true">http://localhost:60010/it/commenti/testo-commento-1-sottotitolo-1</guid>
       <pubDate>Mon, 19 Dec 2016 00:00:00 +01:00</pubDate>
       <category>Commenti</category>
       <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="testo commento 1
-sottotitolo" width="350" /><p>Lorem ipsum ...
-</p><p>Continua a leggere / Read More <a href="http://localhost:60010/it/commenti/testo-commento-1-sottotitolo-1"><em>testo commento 1
+sottotitolo" width="350" />Lorem ipsum ...
+<p>Continua a leggere / Read More <a href="http://localhost:60010/it/commenti/testo-commento-1-sottotitolo-1"><em>testo commento 1
 sottotitolo</em></a>.</p>]]></description>
     </item>
   </channel>

@@ -131,6 +131,16 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                 if (Lingua.ToLower() == "fr") Response.RedirectPermanent("~");
             }
 
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatede").ToLower() != "true")
+            {
+                if (Lingua.ToLower() == "de") Response.RedirectPermanent("~");
+            }
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatees").ToLower() != "true")
+            {
+                if (Lingua.ToLower() == "es") Response.RedirectPermanent("~");
+            }
+
+
             //if (WelcomeLibrary.UF.ConfigManagement.ReadKey("debug") != "true")
             //    ControlloLingua(); // RIABILITARE PER ONLINE per reindirizzare le lingue su domini diversi
 
@@ -588,7 +598,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                     List<Tabrif> gruppocompleto = Utility.Caratteristiche[1].FindAll(e => e.Lingua == Lingua);
 
                     //Incolonniamo automaticamente
-                     int nlink = gruppocompleto.Count;
+                    int nlink = gruppocompleto.Count;
                     int resto = 0;
                     int colonne = Math.DivRem(nlink, maxrighepercolonna, out resto);
                     if (resto > 0) colonne += 1;
@@ -1619,7 +1629,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
     //    CaricaDatiDdlCaratteristiche(Lingua, ((DropDownList)(sender)).SelectedValue);
     //}
 
-  
+
 
 
 }

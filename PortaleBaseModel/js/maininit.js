@@ -147,6 +147,8 @@ jQuery(document).ready(function ($) {
             window.location.pathname.toLowerCase() == "/en/home" ||
             window.location.pathname.toLowerCase() == "/ru/home" ||
             window.location.pathname.toLowerCase() == "/fr/home" ||
+            window.location.pathname.toLowerCase() == "/de/home" ||
+            window.location.pathname.toLowerCase() == "/es/home" ||
             window.location.pathname.toLowerCase() == "/index.aspx") ishome = true;
 
         var fulliimageheader = false;
@@ -966,69 +968,69 @@ $(function () {
 
 //sectionEls.forEach(el => observer.observe(el));
 
-try { 
-/* ---------------------------------------------- /*
-     * ANIMA ELEMENTO SCROLL TEXT CON OBSERVER ELEMENT 1 => scritte
-    /* ---------------------------------------------- */
-const stickyContainers = document.querySelectorAll('.show-on-scroll');
-const io_options = {
-    //root: document.body,
-    //rootMargin: '0px 0px -390px 0px',
-    rootMargin: '0px 0px -55% 0px',
-    threshold: 0
-};
-const io_observer = new IntersectionObserver(io_callback, io_options);
+try {
+    /* ---------------------------------------------- /*
+         * ANIMA ELEMENTO SCROLL TEXT CON OBSERVER ELEMENT 1 => scritte
+        /* ---------------------------------------------- */
+    const stickyContainers = document.querySelectorAll('.show-on-scroll');
+    const io_options = {
+        //root: document.body,
+        //rootMargin: '0px 0px -390px 0px',
+        rootMargin: '0px 0px -55% 0px',
+        threshold: 0
+    };
+    const io_observer = new IntersectionObserver(io_callback, io_options);
 
-stickyContainers.forEach(element => {
-    io_observer.observe(element);
-});
-
-function io_callback(entries, observer) {
-    entries.forEach(entry => {
-        entry.target.classList.toggle('is-visible-text', entry.isIntersecting);
+    stickyContainers.forEach(element => {
+        io_observer.observe(element);
     });
-}
 
-/* ---------------------------------------------- /*
-     * ANIMA ELEMENTO SCROLL TEXT CON OBSERVER ELEMENT 2 => ingrandimento banner
-    /* ---------------------------------------------- */
-const stickyContainers2 = document.querySelectorAll('.show-on-scroll2');
-const io_options2 = {
-    //root: document.body,
-    //rootMargin: '0px 0px -390px 0px',
-    rootMargin: '0px 0px -77.5% 0px',
-    threshold: 0
-};
-const io_observer2 = new IntersectionObserver(io_callback2, io_options2);
+    function io_callback(entries, observer) {
+        entries.forEach(entry => {
+            entry.target.classList.toggle('is-visible-text', entry.isIntersecting);
+        });
+    }
 
-stickyContainers2.forEach(element => {
-    io_observer2.observe(element);
-});
+    /* ---------------------------------------------- /*
+         * ANIMA ELEMENTO SCROLL TEXT CON OBSERVER ELEMENT 2 => ingrandimento banner
+        /* ---------------------------------------------- */
+    const stickyContainers2 = document.querySelectorAll('.show-on-scroll2');
+    const io_options2 = {
+        //root: document.body,
+        //rootMargin: '0px 0px -390px 0px',
+        rootMargin: '0px 0px -77.5% 0px',
+        threshold: 0
+    };
+    const io_observer2 = new IntersectionObserver(io_callback2, io_options2);
 
-function io_callback2(entries, observer) {
-    entries.forEach(entry => {
-        entry.target.classList.toggle('is-visible-text', entry.isIntersecting);
+    stickyContainers2.forEach(element => {
+        io_observer2.observe(element);
     });
-}
 
-/* ---------------------------------------------- /*
-     * ANIMA ELEMENTO SCROLL TEXT/IMAGE CON OBSERVER ELEMENT 3 => ingrandimento banner
-    /* ---------------------------------------------- */
-const stickyContainers3 = document.querySelectorAll('.show-on-scroll3');
-const io_options3 = {
-    rootMargin: '0px 0px -68% 0px',
-    threshold: 0
+    function io_callback2(entries, observer) {
+        entries.forEach(entry => {
+            entry.target.classList.toggle('is-visible-text', entry.isIntersecting);
+        });
+    }
 
-};
-const io_observer3 = new IntersectionObserver(io_callback3, io_options3);
+    /* ---------------------------------------------- /*
+         * ANIMA ELEMENTO SCROLL TEXT/IMAGE CON OBSERVER ELEMENT 3 => ingrandimento banner
+        /* ---------------------------------------------- */
+    const stickyContainers3 = document.querySelectorAll('.show-on-scroll3');
+    const io_options3 = {
+        rootMargin: '0px 0px -68% 0px',
+        threshold: 0
 
-stickyContainers3.forEach(element => {
-    io_observer3.observe(element);
-});
+    };
+    const io_observer3 = new IntersectionObserver(io_callback3, io_options3);
 
-function io_callback3(entries, observer) {
-    entries.forEach(entry => {
-        entry.target.classList.toggle('is-visible-text', entry.isIntersecting);
+    stickyContainers3.forEach(element => {
+        io_observer3.observe(element);
     });
+
+    function io_callback3(entries, observer) {
+        entries.forEach(entry => {
+            entry.target.classList.toggle('is-visible-text', entry.isIntersecting);
+        });
     }
 } catch (e) { };

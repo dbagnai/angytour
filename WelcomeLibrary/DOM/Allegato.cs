@@ -56,6 +56,22 @@ namespace WelcomeLibrary.DOM
             set { _DescrizioneFR = value; }
 
         }
+
+        private string _DescrizioneDE;
+        public string DescrizioneDE
+        {
+            get { return _DescrizioneDE; }
+            set { _DescrizioneDE = value; }
+
+        }
+
+        private string _DescrizioneES;
+        public string DescrizioneES
+        {
+            get { return _DescrizioneES; }
+            set { _DescrizioneES = value; }
+
+        }
         private string _Cartella;
         public string Cartella
         {
@@ -93,6 +109,8 @@ namespace WelcomeLibrary.DOM
             this.DescrizioneGB = tmp.DescrizioneGB;
             this.DescrizioneRU = tmp.DescrizioneRU;
             this.DescrizioneFR = tmp.DescrizioneFR;
+            this.DescrizioneDE = tmp.DescrizioneDE;
+            this.DescrizioneES = tmp.DescrizioneES;
             this.File = tmp.File;
             this.NomeAnteprima = tmp.NomeAnteprima;
             this.NomeFile = tmp.NomeFile;
@@ -107,6 +125,8 @@ namespace WelcomeLibrary.DOM
             this.DescrizioneGB = string.Empty;
             this.DescrizioneRU = string.Empty;
             this.DescrizioneFR = string.Empty;
+            this.DescrizioneDE = string.Empty;
+            this.DescrizioneES = string.Empty;
             this.File = null;
             this.NomeAnteprima = "";
             this.NomeFile = "";
@@ -127,6 +147,12 @@ namespace WelcomeLibrary.DOM
                 case "FR":
                     ret = (!string.IsNullOrEmpty(this.DescrizioneFR)) ? this.DescrizioneFR : this.DescrizioneI;
                     break;
+                case "DE":
+                    ret = (!string.IsNullOrEmpty(this.DescrizioneDE)) ? this.DescrizioneDE : this.DescrizioneI;
+                    break;
+                case "ES":
+                    ret = (!string.IsNullOrEmpty(this.DescrizioneES)) ? this.DescrizioneES : this.DescrizioneI;
+                    break;
                 default:
                     ret = this.DescrizioneI;
                     break;
@@ -146,6 +172,12 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "FR":
                     this.DescrizioneFR = value;
+                    break;
+                case "DE":
+                    this.DescrizioneDE = value;
+                    break;
+                case "ES":
+                    this.DescrizioneES = value;
                     break;
                 default:
                     this.DescrizioneI = value;

@@ -106,6 +106,12 @@ public partial class AspNetPages_Orderpage : CommonPage
             case "FR":
                 output.Text = "<br/>Order Correctly Sent. <br/>You'll be contacted as soon as possible. " + references.ResMan("Common", Lingua, "GoogleConversione");
                 break;
+            case "DE":
+                output.Text = "<br/>Order Correctly Sent. <br/>You'll be contacted as soon as possible. " + references.ResMan("Common", Lingua, "GoogleConversione");
+                break;
+            case "ES":
+                output.Text = "<br/>Order Correctly Sent. <br/>You'll be contacted as soon as possible. " + references.ResMan("Common", Lingua, "GoogleConversione");
+                break;
         }
     }
     private void CaricaCarrello(bool forcerefreshformcliente = false)
@@ -656,7 +662,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             totali.Mailcliente = cliente.Email;
             totali.Dataordine = System.DateTime.Now;
             totali.CodiceOrdine = CodiceOrdine;
-          
+
             totali.Indirizzofatturazione += cliente.Cognome + " " + cliente.Nome + "<br/>";
             totali.Indirizzofatturazione += cliente.Indirizzo + "<br/>";
             totali.Indirizzofatturazione += cliente.Cap + " " + cliente.CodiceCOMUNE + "  (" + ((!(string.IsNullOrWhiteSpace(NomeProvincia(cliente.CodicePROVINCIA, Lingua)))) ? NomeProvincia(cliente.CodicePROVINCIA, Lingua) : cliente.CodicePROVINCIA) + ")<br/>";
@@ -2094,6 +2100,12 @@ public partial class AspNetPages_Orderpage : CommonPage
                 case "FR":
                     output.Text = "Error save CodiceOrdine";
                     break;
+                case "DE":
+                    output.Text = "Error save CodiceOrdine";
+                    break;
+                case "ES":
+                    output.Text = "Error save CodiceOrdine";
+                    break;
             }
         }
     }
@@ -2294,6 +2306,12 @@ public partial class AspNetPages_Orderpage : CommonPage
                     break;
                 case "FR":
                     TestoMail += item.Offerta.DenominazioneFR + "<br/>";
+                    break;
+                case "DE":
+                    TestoMail += item.Offerta.DenominazioneDE + "<br/>";
+                    break;
+                case "ES":
+                    TestoMail += item.Offerta.DenominazioneES + "<br/>";
                     break;
             }
 

@@ -81,11 +81,15 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             if (CodiceContenuto == "con001000") //Area pagine statiche
             {
                 plhHtmlEditorFR.Visible = true;
+                plhHtmlEditorDE.Visible = true;
+                plhHtmlEditorES.Visible = true;
                 plhHtmlEditorRU.Visible = true;
                 plhHtmlEditorGB.Visible = true;
                 plhHtmlEditorI.Visible = true;
 
                 plhSimpleEditorFR.Visible = false;
+                plhSimpleEditorDE.Visible = false;
+                plhSimpleEditorES.Visible = false;
                 plhSimpleEditorRU.Visible = false;
                 plhSimpleEditorGB.Visible = false;
                 plhSimpleEditorI.Visible = false;
@@ -101,11 +105,15 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                 //plhSimpleEditorI.Visible = true;
 
                 plhHtmlEditorFR.Visible = true;
+                plhHtmlEditorDE.Visible = true;
+                plhHtmlEditorES.Visible = true;
                 plhHtmlEditorRU.Visible = true;
                 plhHtmlEditorGB.Visible = true;
                 plhHtmlEditorI.Visible = true;
 
                 plhSimpleEditorFR.Visible = false;
+                plhSimpleEditorDE.Visible = false;
+                plhSimpleEditorES.Visible = false;
                 plhSimpleEditorRU.Visible = false;
                 plhSimpleEditorGB.Visible = false;
                 plhSimpleEditorI.Visible = false;
@@ -315,31 +323,43 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             litlinkGB.Text = CreaLinkPaginastatica(Details.Id, true, "", "", "GB");
             litlinkRU.Text = CreaLinkPaginastatica(Details.Id, true, "", "", "RU");
             litlinkFR.Text = CreaLinkPaginastatica(Details.Id, true, "", "", "FR");
+            litlinkDE.Text = CreaLinkPaginastatica(Details.Id, true, "", "", "DE");
+            litlinkES.Text = CreaLinkPaginastatica(Details.Id, true, "", "", "ES");
 
             //Riempiamo i dati del dettaglio
             txtTitoloI.Text = Details.TitoloI;//(((Literal)e.Item.FindControl("lit1")).Text);
             txtTitoloGB.Text = Details.TitoloGB;//(((Literal)e.Item.FindControl("lit2")).Text);
             txtTitoloRU.Text = Details.TitoloRU;//(((Literal)e.Item.FindControl("lit2")).Text);
             txtTitoloFR.Text = Details.TitoloFR;//(((Literal)e.Item.FindControl("lit2")).Text);
+            txtTitoloDE.Text = Details.TitoloDE;//(((Literal)e.Item.FindControl("lit2")).Text);
+            txtTitoloES.Text = Details.TitoloES;//(((Literal)e.Item.FindControl("lit2")).Text);
 
             txtCustomtitleI.Text = Details.CustomtitleI;
             txtCustomtitleGB.Text = Details.CustomtitleGB;
             txtCustomtitleRU.Text = Details.CustomtitleRU;
             txtCustomtitleFR.Text = Details.CustomtitleFR;
+            txtCustomtitleDE.Text = Details.CustomtitleDE;
+            txtCustomtitleES.Text = Details.CustomtitleES;
             txtCustomdescI.Text = Details.CustomdescI;
             txtCustomdescGB.Text = Details.CustomdescGB;
             txtCustomdescRU.Text = Details.CustomdescRU;
             txtCustomdescFR.Text = Details.CustomdescFR;
+            txtCustomdescDE.Text = Details.CustomdescDE;
+            txtCustomdescES.Text = Details.CustomdescES;
 
             txtCanonicalI.Text = Details.CanonicalI;
             txtCanonicalGB.Text = Details.CanonicalGB;
             txtCanonicalRU.Text = Details.CanonicalRU;
             txtCanonicalFR.Text = Details.CanonicalFR;
+            txtCanonicalDE.Text = Details.CanonicalDE;
+            txtCanonicalES.Text = Details.CanonicalES;
             txtRobots.Text = Details.Robots;
 
             if (CodiceContenuto == "con001000")
             {
                 tinyhtmlEditFR.InnerText = Details.DescrizioneFR;
+                tinyhtmlEditDE.InnerText = Details.DescrizioneDE;
+                tinyhtmlEditES.InnerText = Details.DescrizioneES;
                 tinyhtmlEditRU.InnerText = Details.DescrizioneRU;
                 tinyhtmlEditGB.InnerText = Details.DescrizioneGB;
                 tinyhtmlEditI.InnerText = Details.DescrizioneI;
@@ -349,6 +369,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             else
             {
                 tinyhtmlEditFR.InnerText = Details.DescrizioneFR;
+                tinyhtmlEditDE.InnerText = Details.DescrizioneDE;
+                tinyhtmlEditES.InnerText = Details.DescrizioneES;
                 tinyhtmlEditRU.InnerText = Details.DescrizioneRU;
                 tinyhtmlEditGB.InnerText = Details.DescrizioneGB;
                 tinyhtmlEditI.InnerText = Details.DescrizioneI;
@@ -528,21 +550,29 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     updrecord.TitoloGB = txtTitoloGB.Text; // WelcomeLibrary.UF.SitemapManager.CleanUrl(txtTitoloGB.Text);
                     updrecord.TitoloRU = txtTitoloRU.Text;// WelcomeLibrary.UF.SitemapManager.CleanUrl(txtTitoloRU.Text);
                     updrecord.TitoloFR = txtTitoloFR.Text;
+                    updrecord.TitoloDE = txtTitoloDE.Text;
+                    updrecord.TitoloES = txtTitoloES.Text;
 
                     updrecord.CustomtitleI = txtCustomtitleI.Text;
                     updrecord.CustomtitleGB = txtCustomtitleGB.Text;
                     updrecord.CustomtitleRU = txtCustomtitleRU.Text;
                     updrecord.CustomtitleFR = txtCustomtitleFR.Text;
+                    updrecord.CustomtitleDE = txtCustomtitleDE.Text;
+                    updrecord.CustomtitleES = txtCustomtitleES.Text;
                     updrecord.CustomdescI = txtCustomdescI.Text;
                     updrecord.CustomdescGB = txtCustomdescGB.Text;
                     updrecord.CustomdescRU = txtCustomdescRU.Text;
                     updrecord.CustomdescFR = txtCustomdescFR.Text;
+                    updrecord.CustomdescDE = txtCustomdescDE.Text;
+                    updrecord.CustomdescES = txtCustomdescES.Text;
 
 
                     updrecord.CanonicalI = txtCanonicalI.Text;
                     updrecord.CanonicalGB = txtCanonicalGB.Text;
                     updrecord.CanonicalRU = txtCanonicalRU.Text;
                     updrecord.CanonicalFR = txtCanonicalFR.Text;
+                    updrecord.CanonicalDE = txtCanonicalDE.Text;
+                    updrecord.CanonicalES = txtCanonicalES.Text;
                     updrecord.Robots = txtRobots.Text;
 
                     if (CodiceContenuto == "con001000")
@@ -551,6 +581,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                         updrecord.DescrizioneGB = tinyhtmlEditGB.InnerText;
                         updrecord.DescrizioneRU = tinyhtmlEditRU.InnerText;
                         updrecord.DescrizioneFR = tinyhtmlEditFR.InnerText;
+                        updrecord.DescrizioneDE = tinyhtmlEditDE.InnerText;
+                        updrecord.DescrizioneES = tinyhtmlEditES.InnerText;
 
 
                     }
@@ -560,6 +592,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                         updrecord.DescrizioneGB = tinyhtmlEditGB.InnerText;
                         updrecord.DescrizioneRU = tinyhtmlEditRU.InnerText;
                         updrecord.DescrizioneFR = tinyhtmlEditFR.InnerText;
+                        updrecord.DescrizioneDE = tinyhtmlEditDE.InnerText;
+                        updrecord.DescrizioneES = tinyhtmlEditES.InnerText;
 
                         //updrecord.DescrizioneI = txtDescrizioneI.Text;
                         //updrecord.DescrizioneGB = txtDescrizioneGB.Text;
@@ -591,22 +625,30 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                 updrecord.TitoloI = txtTitoloI.Text;// WelcomeLibrary.UF.SitemapManager.CleanUrl(txtTitoloI.Text);
                 updrecord.TitoloGB = txtTitoloGB.Text; // WelcomeLibrary.UF.SitemapManager.CleanUrl(txtTitoloGB.Text);
                 updrecord.TitoloRU = txtTitoloRU.Text;// WelcomeLibrary.UF.SitemapManager.CleanUrl(txtTitoloRU.Text);
-                updrecord.TitoloFR = txtTitoloFR.Text; 
+                updrecord.TitoloFR = txtTitoloFR.Text;
+                updrecord.TitoloDE = txtTitoloDE.Text;
+                updrecord.TitoloES = txtTitoloES.Text;
 
                 updrecord.CustomtitleI = txtCustomtitleI.Text;
                 updrecord.CustomtitleGB = txtCustomtitleGB.Text;
                 updrecord.CustomtitleRU = txtCustomtitleRU.Text;
                 updrecord.CustomtitleFR = txtCustomtitleFR.Text;
+                updrecord.CustomtitleDE = txtCustomtitleDE.Text;
+                updrecord.CustomtitleES = txtCustomtitleES.Text;
                 updrecord.CustomdescI = txtCustomdescI.Text;
                 updrecord.CustomdescGB = txtCustomdescGB.Text;
                 updrecord.CustomdescRU = txtCustomdescRU.Text;
                 updrecord.CustomdescFR = txtCustomdescFR.Text;
+                updrecord.CustomdescDE = txtCustomdescDE.Text;
+                updrecord.CustomdescES = txtCustomdescES.Text;
 
 
                 updrecord.CanonicalI = txtCanonicalI.Text;
                 updrecord.CanonicalGB = txtCanonicalGB.Text;
                 updrecord.CanonicalRU = txtCanonicalRU.Text;
                 updrecord.CanonicalFR = txtCanonicalFR.Text;
+                updrecord.CanonicalDE = txtCanonicalDE.Text;
+                updrecord.CanonicalES = txtCanonicalES.Text;
                 updrecord.Robots = txtRobots.Text;
 
                 if (CodiceContenuto == "con001000")
@@ -619,6 +661,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     updrecord.DescrizioneGB = tinyhtmlEditGB.InnerText;
                     updrecord.DescrizioneRU = tinyhtmlEditRU.InnerText;
                     updrecord.DescrizioneFR = tinyhtmlEditFR.InnerText;
+                    updrecord.DescrizioneDE = tinyhtmlEditDE.InnerText;
+                    updrecord.DescrizioneES = tinyhtmlEditES.InnerText;
 
                 }
                 else
@@ -627,6 +671,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     updrecord.DescrizioneGB = tinyhtmlEditGB.InnerText;
                     updrecord.DescrizioneRU = tinyhtmlEditRU.InnerText;
                     updrecord.DescrizioneFR = tinyhtmlEditFR.InnerText;
+                    updrecord.DescrizioneDE = tinyhtmlEditDE.InnerText;
+                    updrecord.DescrizioneES = tinyhtmlEditES.InnerText;
 
                     //updrecord.DescrizioneI = txtDescrizioneI.Text;
                     //updrecord.DescrizioneGB = txtDescrizioneGB.Text;
@@ -667,6 +713,8 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("GB", updrecord.TitolobyLingua("GB"), updrecord.Id.ToString(), CodiceContenuto, "", "", "", "", "", true, true);
             WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("RU", updrecord.TitolobyLingua("RU"), updrecord.Id.ToString(), CodiceContenuto, "", "", "", "", "", true, true);
             WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("FR", updrecord.TitolobyLingua("FR"), updrecord.Id.ToString(), CodiceContenuto, "", "", "", "", "", true, true);
+            WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("DE", updrecord.TitolobyLingua("DE"), updrecord.Id.ToString(), CodiceContenuto, "", "", "", "", "", true, true);
+            WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes("ES", updrecord.TitolobyLingua("ES"), updrecord.Id.ToString(), CodiceContenuto, "", "", "", "", "", true, true);
 
 
             /////////////////////////////////////
@@ -817,25 +865,40 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
         txtDescrizioneRU.Text = "";
         txtTitoloFR.Text = "";
         txtDescrizioneFR.Text = "";
+
+        txtTitoloDE.Text = "";
+        txtDescrizioneDE.Text = "";
+
+        txtTitoloES.Text = "";
+        txtDescrizioneES.Text = "";
+
         txtDescrizioneI.Text = "";
         tinyhtmlEditI.InnerText = "";
         tinyhtmlEditGB.InnerText = "";
         tinyhtmlEditRU.InnerText = "";
         tinyhtmlEditFR.InnerText = "";
+        tinyhtmlEditDE.InnerText = "";
+        tinyhtmlEditES.InnerText = "";
 
         txtCustomtitleI.Text = "";
         txtCustomtitleGB.Text = "";
         txtCustomtitleRU.Text = "";
         txtCustomtitleFR.Text = "";
+        txtCustomtitleDE.Text = "";
+        txtCustomtitleES.Text = "";
         txtCustomdescI.Text = "";
         txtCustomdescGB.Text = "";
         txtCustomdescRU.Text = "";
         txtCustomdescFR.Text = "";
+        txtCustomdescDE.Text = "";
+        txtCustomdescES.Text = "";
 
         txtCanonicalI.Text = "";
         txtCanonicalGB.Text = "";
         txtCanonicalRU.Text = "";
         txtCanonicalFR.Text = "";
+        txtCanonicalDE.Text = "";
+        txtCanonicalES.Text = "";
         txtRobots.Text = "";
 
         txtData.Text = string.Format("{0:dd/MM/yyyy HH:mm:ss}", System.DateTime.Now);
@@ -848,16 +911,22 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
         txtCustomtitleGB.ReadOnly = valore;
         txtCustomtitleRU.ReadOnly = valore;
         txtCustomtitleFR.ReadOnly = valore;
+        txtCustomtitleDE.ReadOnly = valore;
+        txtCustomtitleES.ReadOnly = valore;
         txtCustomdescI.ReadOnly = valore;
         txtCustomdescGB.ReadOnly = valore;
         txtCustomdescRU.ReadOnly = valore;
         txtCustomdescFR.ReadOnly = valore;
+        txtCustomdescDE.ReadOnly = valore;
+        txtCustomdescES.ReadOnly = valore;
 
 
         txtCanonicalI.ReadOnly = valore;
         txtCanonicalGB.ReadOnly = valore;
         txtCanonicalRU.ReadOnly = valore;
         txtCanonicalFR.ReadOnly = valore;
+        txtCanonicalDE.ReadOnly = valore;
+        txtCanonicalES.ReadOnly = valore;
         txtRobots.ReadOnly = valore;
 
         txtTitoloI.ReadOnly = valore;
@@ -868,6 +937,10 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
         txtDescrizioneRU.ReadOnly = valore;
         txtTitoloFR.ReadOnly = valore;
         txtDescrizioneFR.ReadOnly = valore;
+        txtTitoloDE.ReadOnly = valore;
+        txtDescrizioneDE.ReadOnly = valore;
+        txtTitoloES.ReadOnly = valore;
+        txtDescrizioneES.ReadOnly = valore;
         ddlTipologie.Enabled = !valore;
         ddlStruttura.Enabled = !valore;
         //txtFotoSchema.Value = "";
@@ -907,6 +980,77 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
             // htmlEditFR.Content += htmlfotodainserire;
             tinyhtmlEditFR.InnerText += htmlfotodainserire;
     }
+
+
+    protected void btnCaricafileDE_Click(object sender, EventArgs e)
+    {
+        //Controlliamo se ho selezionato un record
+        if (ContentIDSelected == null || ContentIDSelected == "")
+        {
+            output.Text = "Selezionare un elemento per associare la foto";
+            return;
+        }
+        long idSelected = 0;
+        if (!long.TryParse(ContentIDSelected, out idSelected))
+        {
+            output.Text = "Selezionare un elemento per associare la foto";
+            return;
+        }
+
+        string Nome = upFileDE.FileName;
+        int maxdimxDE = 300;
+        int maxdimyDE = 300;
+        int.TryParse(resizeDimxDE.Text, out maxdimxDE);
+        int.TryParse(resizeDimyDE.Text, out maxdimyDE);
+
+        string pathCompletoFoto = CaricaFoto(upFileDE, PercorsoFiles + "/" + CodiceContenuto + "/" + ContentIDSelected + "/", Nome, maxdimxDE, maxdimyDE);
+        string htmlfotodainserire = "<img src=\"" + pathCompletoFoto + "\"  />";
+
+        if (pathCompletoFoto.ToLower().Contains(".jpg") || pathCompletoFoto.ToLower().Contains("png") || pathCompletoFoto.ToLower().Contains(".gif"))
+            htmlfotodainserire = "<img src=\"" + pathCompletoFoto + "\"  />";
+        else
+            htmlfotodainserire = "<a href=\"" + pathCompletoFoto + "\" >" + Nome + "</a>";
+
+        if (!string.IsNullOrEmpty(pathCompletoFoto))
+            // htmlEditDE.Content += htmlfotodainserire;
+            tinyhtmlEditDE.InnerText += htmlfotodainserire;
+    }
+
+
+    protected void btnCaricafileES_Click(object sender, EventArgs e)
+    {
+        //Controlliamo se ho selezionato un record
+        if (ContentIDSelected == null || ContentIDSelected == "")
+        {
+            output.Text = "Selezionare un elemento per associare la foto";
+            return;
+        }
+        long idSelected = 0;
+        if (!long.TryParse(ContentIDSelected, out idSelected))
+        {
+            output.Text = "Selezionare un elemento per associare la foto";
+            return;
+        }
+
+        string Nome = upFileES.FileName;
+        int maxdimxES = 300;
+        int maxdimyES = 300;
+        int.TryParse(resizeDimxES.Text, out maxdimxES);
+        int.TryParse(resizeDimyES.Text, out maxdimyES);
+
+        string pathCompletoFoto = CaricaFoto(upFileES, PercorsoFiles + "/" + CodiceContenuto + "/" + ContentIDSelected + "/", Nome, maxdimxES, maxdimyES);
+        string htmlfotodainserire = "<img src=\"" + pathCompletoFoto + "\"  />";
+
+        if (pathCompletoFoto.ToLower().Contains(".jpg") || pathCompletoFoto.ToLower().Contains("png") || pathCompletoFoto.ToLower().Contains(".gif"))
+            htmlfotodainserire = "<img src=\"" + pathCompletoFoto + "\"  />";
+        else
+            htmlfotodainserire = "<a href=\"" + pathCompletoFoto + "\" >" + Nome + "</a>";
+
+        if (!string.IsNullOrEmpty(pathCompletoFoto))
+            // htmlEditES.Content += htmlfotodainserire;
+            tinyhtmlEditES.InnerText += htmlfotodainserire;
+    }
+
 
     protected void btnCaricafileRU_Click(object sender, EventArgs e)
     {
@@ -1052,7 +1196,7 @@ public partial class AreaContenuti_GestioneContenutiNew : CommonPage
                     {
                         File.Delete(pathDestinazione + "\\" + NomeCorretto);
                     }
-                    if (fileupload.PostedFile.ContentType == "image/jpeg" || fileupload.PostedFile.ContentType == "image/pjpeg"  || fileupload.PostedFile.ContentType == "image/png")
+                    if (fileupload.PostedFile.ContentType == "image/jpeg" || fileupload.PostedFile.ContentType == "image/pjpeg" || fileupload.PostedFile.ContentType == "image/png")
                     {
                         bool ridimensiona = true;
                         //RIDIMENSIONO E FACCIO L'UPLOAD DELLA FOTO!!!

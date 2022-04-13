@@ -51,6 +51,8 @@
                     <asp:ListItem Text="Inglese" Value="GB" />
                     <asp:ListItem Text="Russo" Value="RU" />
                     <asp:ListItem Text="Francese" Value="FR" />
+                    <asp:ListItem Text="Tedesco" Value="DE" />
+                    <asp:ListItem Text="Spagnolo" Value="ES" />
                 </asp:DropDownList>
             </div>
             <div style="clear: both">
@@ -99,16 +101,16 @@
                 $(function () {
                     tinymceinit();
                 });
-                  function tinymceinit() {
+                function tinymceinit() {
                     tinymce.init({
                         selector: "textarea.tiny",
-                       extended_valid_elements: 'button[class|onclick|style|type|id|name],input[class|onclick|style|type|value|id|name|placeholder]',
-                         theme: "modern",
+                        extended_valid_elements: 'button[class|onclick|style|type|id|name],input[class|onclick|style|type|value|id|name|placeholder]',
+                        theme: "modern",
                         convert_urls: false,
                         relative_urls: false,
                         allow_html_in_named_anchor: true,
-                         valid_children: "+a[div|i|span|h1|h2|h3|h4|h5|h6|p|#text],+body[style]",
-                       plugins: [
+                        valid_children: "+a[div|i|span|h1|h2|h3|h4|h5|h6|p|#text],+body[style]",
+                        plugins: [
                             "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
                             "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
                             "save table directionality emoticons template paste textcolor"
@@ -250,6 +252,8 @@
                     <asp:ListItem Text="Inglese" Value="GB" />
                     <asp:ListItem Text="Russo" Value="RU" />
                     <asp:ListItem Text="Francese" Value="FR" />
+                    <asp:ListItem Text="Tedesco" Value="DE" />
+                    <asp:ListItem Text="Spagnolo" Value="ES" />
                 </asp:DropDownList>
                 <br />
                 <asp:Literal ID="Literal10" Text="Seleziona Nazione Clienti anagrafica: " runat="server" />

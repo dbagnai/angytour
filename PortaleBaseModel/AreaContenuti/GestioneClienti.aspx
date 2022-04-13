@@ -450,6 +450,8 @@
                                     <asp:ListItem Text="Inglese" Value="GB" />
                                     <asp:ListItem Text="Russo" Value="RU" />
                                     <asp:ListItem Text="Francese" Value="FR" />
+                                    <asp:ListItem Text="Tedesco" Value="DE" />
+                                    <asp:ListItem Text="Spagnolo" Value="ES" />
                                 </asp:DropDownList>
                                     <br />
                                  <br />

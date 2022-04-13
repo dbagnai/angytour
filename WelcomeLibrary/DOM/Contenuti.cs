@@ -80,6 +80,69 @@ namespace WelcomeLibrary.DOM
         }
 
 
+        private string _customtitleDE;
+        public string CustomtitleDE
+        {
+            get { return _customtitleDE; }
+            set { _customtitleDE = value; }
+        }
+        private string _customdescDE;
+        public string CustomdescDE
+        {
+            get { return _customdescDE; }
+            set { _customdescDE = value; }
+        }
+        private string _DescrizioneDE;
+        public string DescrizioneDE
+        {
+            get { return _DescrizioneDE; }
+            set { _DescrizioneDE = value; }
+        }
+        private string _TitoloDE;
+        public string TitoloDE
+        {
+            get { return _TitoloDE; }
+            set { _TitoloDE = value; }
+        }
+        private string _CanonicalDE;
+        public string CanonicalDE
+        {
+            get { return _CanonicalDE; }
+            set { _CanonicalDE = value; }
+        }
+
+
+        private string _customtitleES;
+        public string CustomtitleES
+        {
+            get { return _customtitleES; }
+            set { _customtitleES = value; }
+        }
+        private string _customdescES;
+        public string CustomdescES
+        {
+            get { return _customdescES; }
+            set { _customdescES = value; }
+        }
+        private string _DescrizioneES;
+        public string DescrizioneES
+        {
+            get { return _DescrizioneES; }
+            set { _DescrizioneES = value; }
+        }
+        private string _TitoloES;
+        public string TitoloES
+        {
+            get { return _TitoloES; }
+            set { _TitoloES = value; }
+        }
+        private string _CanonicalES;
+        public string CanonicalES
+        {
+            get { return _CanonicalES; }
+            set { _CanonicalES = value; }
+        }
+
         private string _TitoloI;
         public string TitoloI
         {
@@ -198,6 +261,12 @@ namespace WelcomeLibrary.DOM
                 case "FR":
                     ret = this.CanonicalFR;
                     break;
+                case "ES":
+                    ret = this.CanonicalES;
+                    break;
+                case "DE":
+                    ret = this.CanonicalDE;
+                    break;
                 default:
                     ret = this.CanonicalI;
                     break;
@@ -216,6 +285,12 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "FR":
                     this.CanonicalFR = value;
+                    break;
+                case "DE":
+                    this.CanonicalDE = value;
+                    break;
+                case "ES":
+                    this.CanonicalES = value;
                     break;
                 default:
                     this.CanonicalI = value;
@@ -237,6 +312,12 @@ namespace WelcomeLibrary.DOM
                 case "FR":
                     ret = this.TitoloFR;
                     break;
+                case "ES":
+                    ret = this.TitoloES;
+                    break;
+                case "DE":
+                    ret = this.TitoloDE;
+                    break;
                 default:
                     ret = this.TitoloI;
                     break;
@@ -255,6 +336,12 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "FR":
                     this.TitoloFR = value;
+                    break;
+                case "DE":
+                    this.TitoloDE = value;
+                    break;
+                case "ES":
+                    this.TitoloES = value;
                     break;
                 default:
                     this.TitoloI = value;
@@ -275,6 +362,12 @@ namespace WelcomeLibrary.DOM
                 case "FR":
                     ret = this.DescrizioneFR;
                     break;
+                case "ES":
+                    ret = this.DescrizioneES;
+                    break;
+                case "DE":
+                    ret = this.DescrizioneDE;
+                    break;
                 default:
                     ret = this.DescrizioneI;
                     break;
@@ -294,6 +387,12 @@ namespace WelcomeLibrary.DOM
                 case "FR":
                     this.DescrizioneFR = value;
                     break;
+                case "DE":
+                    this.DescrizioneDE = value;
+                    break;
+                case "ES":
+                    this.DescrizioneES = value;
+                    break;
                 default:
                     this.DescrizioneI = value;
                     break;
@@ -311,13 +410,19 @@ namespace WelcomeLibrary.DOM
             this.DescrizioneI = "";
             this.DescrizioneRU = "";
             this.DescrizioneFR = "";
+            this.DescrizioneDE = "";
+            this.DescrizioneES = "";
             this.TitoloRU = "";
             this.TitoloGB = "";
             this.TitoloFR = "";
+            this.TitoloDE = "";
+            this.TitoloES = "";
             this.TitoloI = "";
             this.CanonicalGB = "";
             this.CanonicalRU = "";
             this.CanonicalFR = "";
+            this.CanonicalDE = "";
+            this.CanonicalES = "";
             this.CanonicalI = "";
             this.Robots = "";
             this.offertaassociata = new Offerte();
@@ -331,7 +436,11 @@ namespace WelcomeLibrary.DOM
 
             this.CustomtitleFR = "";
             this.CustomdescFR = "";
+            this.CustomtitleDE = "";
+            this.CustomdescDE = "";
 
+            this.CustomtitleES = "";
+            this.CustomdescES = "";
         }
         public Contenuti(Contenuti tmp)
         {
@@ -341,11 +450,15 @@ namespace WelcomeLibrary.DOM
             this.DataInserimento = tmp.DataInserimento;
             this.DescrizioneGB = tmp.DescrizioneGB;
             this.DescrizioneFR = tmp.DescrizioneFR;
+            this.DescrizioneDE = tmp.DescrizioneDE;
+            this.DescrizioneES = tmp.DescrizioneES;
             this.DescrizioneI = tmp.DescrizioneI;
             this.DescrizioneRU = tmp.DescrizioneRU;
             this.TitoloRU = tmp.TitoloRU;
             this.TitoloGB = tmp.TitoloGB;
             this.TitoloFR = tmp.TitoloFR;
+            this.TitoloDE = tmp.TitoloDE;
+            this.TitoloES = tmp.TitoloES;
             this.TitoloI = tmp.TitoloI;
             this.CustomtitleI = tmp.CustomtitleI;
             this.CustomdescI = tmp.CustomdescI;
@@ -358,10 +471,16 @@ namespace WelcomeLibrary.DOM
 
             this.CustomtitleFR = tmp.CustomtitleFR;
             this.CustomdescFR = tmp.CustomdescFR;
+            this.CustomtitleDE = tmp.CustomtitleDE;
+            this.CustomdescDE = tmp.CustomdescDE;
+            this.CustomtitleES = tmp.CustomtitleES;
+            this.CustomdescES = tmp.CustomdescES;
 
             this.CanonicalGB = tmp.CanonicalGB;
             this.CanonicalRU = tmp.CanonicalRU;
             this.CanonicalFR = tmp.CanonicalFR;
+            this.CanonicalDE = tmp.CanonicalDE;
+            this.CanonicalES = tmp.CanonicalES;
             this.CanonicalI = tmp.CanonicalI;
             this.Robots = tmp.Robots;
 

@@ -138,6 +138,33 @@ namespace WelcomeLibrary.DOM
             set { _titoloFR = value; }
         }
 
+        private string _testoES;
+        public string TestoES
+        {
+            get { return _testoES; }
+            set { _testoES = value; }
+        }
+        private string _titoloES;
+        public string TitoloES
+        {
+            get { return _titoloES; }
+            set { _titoloES = value; }
+        }
+
+
+        private string _testoDE;
+        public string TestoDE
+        {
+            get { return _testoDE; }
+            set { _testoDE = value; }
+        }
+        private string _titoloDE;
+        public string TitoloDE
+        {
+            get { return _titoloDE; }
+            set { _titoloDE = value; }
+        }
+
         private string _spare1;
 
         public string Spare1
@@ -165,6 +192,12 @@ namespace WelcomeLibrary.DOM
             this._testoFR = string.Empty;
             this._titoloFR = string.Empty;
 
+            this._testoDE = string.Empty;
+            this._titoloDE = string.Empty;
+
+            this._testoES = string.Empty;
+            this._titoloES = string.Empty;
+
             this.Spare1 = string.Empty;
             this.Approvato = false;
             this.Lingua = "I";
@@ -189,6 +222,12 @@ namespace WelcomeLibrary.DOM
 
             this._testoFR = tmp.TestoFR;
             this._titoloFR = tmp.TitoloFR;
+
+            this._testoES = tmp.TestoES;
+            this._titoloES = tmp.TitoloES;
+
+            this._testoDE = tmp.TestoDE;
+            this._titoloDE = tmp.TitoloDE;
 
             this.Spare1 = tmp.Spare1;
             this.Approvato = tmp.Approvato;
@@ -227,6 +266,12 @@ namespace WelcomeLibrary.DOM
                 case "FR":
                     ret = this.TitoloFR;
                     break;
+                case "DE":
+                    ret = this.TitoloDE;
+                    break;
+                case "ES":
+                    ret = this.TitoloES;
+                    break;
                 default:
                     ret = this.TitoloI;
                     break;
@@ -248,6 +293,12 @@ namespace WelcomeLibrary.DOM
                 case "FR":
                     this.TitoloFR = value;
                     break;
+                case "DE":
+                    this.TitoloDE = value;
+                    break;
+                case "ES":
+                    this.TitoloES = value;
+                    break;
                 default:
                     this.TitoloI = value;
                     break;
@@ -266,6 +317,12 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "FR":
                     ret = this.TestoFR;
+                    break;
+                case "ES":
+                    ret = this.TestoES;
+                    break;
+                case "DE":
+                    ret = this.TestoDE;
                     break;
                 default:
                     ret = this.TestoI;
@@ -286,6 +343,13 @@ namespace WelcomeLibrary.DOM
                 case "FR":
                     this.TestoFR = value;
                     break;
+                case "ES":
+                    this.TestoES = value;
+                    break;
+                case "DE":
+                    this.TestoDE = value;
+                    break;
+
                 default:
                     this.TestoI = value;
                     break;

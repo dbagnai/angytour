@@ -798,7 +798,7 @@ namespace WelcomeLibrary.UF
             {
                 retxt = "promo"; //per ora metto fisso questo testo
             }
-            
+
             if (kv.Key.ToLower() == ("prezzofilter"))
             {
                 retxt = "prezzofilter"; //per ora metto fisso questo testo
@@ -884,6 +884,14 @@ namespace WelcomeLibrary.UF
                 case "fr":
                     culturename = "fr";
                     break;
+                case "DE":
+                case "de":
+                    culturename = "de";
+                    break;
+                case "ES":
+                case "es":
+                    culturename = "es";
+                    break;
                 default:
                     culturename = "";
                     break;
@@ -911,6 +919,14 @@ namespace WelcomeLibrary.UF
                 case "fr":
                 case "FR":
                     culturename = "FR";
+                    break;
+                case "de":
+                case "DE":
+                    culturename = "DE";
+                    break;
+                case "es":
+                case "ES":
+                    culturename = "ES";
                     break;
                 default:
                     culturename = "";

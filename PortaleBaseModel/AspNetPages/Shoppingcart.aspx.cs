@@ -36,7 +36,7 @@ public partial class AspNetPages_Shoppingcart : CommonPage
     {
         try
         {
-          
+
             if (!IsPostBack)
             {
                 PercorsoComune = WelcomeLibrary.STATIC.Global.PercorsoComune;
@@ -112,6 +112,14 @@ public partial class AspNetPages_Shoppingcart : CommonPage
                     customdesc = content.CustomdescFR;
                     customtitle = content.CustomtitleFR;
                     break;
+                case "DE":
+                    customdesc = content.CustomdescDE;
+                    customtitle = content.CustomtitleDE;
+                    break;
+                case "ES":
+                    customdesc = content.CustomdescES;
+                    customtitle = content.CustomtitleES;
+                    break;
             }
 
             if (!string.IsNullOrEmpty(customtitle))
@@ -119,7 +127,6 @@ public partial class AspNetPages_Shoppingcart : CommonPage
             if (!string.IsNullOrEmpty(customdesc))
                 ((HtmlMeta)Master.FindControl("metaDesc")).Content = customdesc.Replace("<br/>", "\r\n");
             ////////////////////////////////////////////////////////////
-
 
 
         }

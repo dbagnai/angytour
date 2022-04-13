@@ -310,6 +310,12 @@ namespace WelcomeLibrary.UF
                 case "FR":
                     culturename = "fr";
                     break;
+                case "DE":
+                    culturename = "de";
+                    break;
+                case "ES":
+                    culturename = "es";
+                    break;
                 default:
                     culturename = "it";
                     break;
@@ -1937,6 +1943,24 @@ namespace WelcomeLibrary.UF
             _naz = new Tabrif();
             _naz.Codice = "XX";
             _naz.Lingua = "FR";
+            _naz.Campo1 = "International";
+            _naz.Double1 = 0;
+            _list.Add(_naz);
+
+
+
+            _naz = new Tabrif();
+            _naz.Codice = "XX";
+            _naz.Lingua = "DE";
+            _naz.Campo1 = "International";
+            _naz.Double1 = 0;
+            _list.Add(_naz);
+
+
+
+            _naz = new Tabrif();
+            _naz.Codice = "XX";
+            _naz.Lingua = "ES";
             _naz.Campo1 = "International";
             _naz.Double1 = 0;
             _list.Add(_naz);

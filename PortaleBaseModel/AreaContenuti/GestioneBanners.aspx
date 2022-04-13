@@ -3,10 +3,24 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+
+    <script type="text/javascript">
+        function ConfirmCancella() {
+            //document.getElementByID("CheckBoxListExCtrl").value
+            var conferma = confirm('Sei sicuro di voler cancellare il banner ?');
+            if (conferma) {
+                $get("<%=cancelHidden.ClientID%>").value = "true";
+            }
+            else {
+                $get("<%=cancelHidden.ClientID%>").value = "false";
+            }
+        }
+    </script>
     <div class="row">
         <div class="col-xs-12">
             <div class="row">
                 <div class="col-sm-6">
+                    <asp:HiddenField ID="cancelHidden" runat="server" Value="false" />
                     <h2>Banners</h2>
                     <%--          <asp:DropDownList runat="server" ID="ddlAreaAnnunci" AppendDataBoundItems="true"
                         AutoPostBack="true" OnSelectedIndexChanged="ddlAreaAnnunci_SelectedIndexChanged"
@@ -41,14 +55,21 @@
                     <br />
                     <asp:FileUpload ID="UploadFoto" CssClass="btn btn-default" runat="server" /><br />
                     <asp:Button ID="btnCarica" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Banner" OnClick="btnCarica_Click" />
-                    <asp:Button ID="btnInserisciInglese" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Immagine Banner Inglese"
-                        OnClick="btnINserisciInglese_Click" />
-                    <asp:Button ID="btnInserisciRusso" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Immagine Banner Russo"
-                        OnClick="btnINserisciRusso_Click" />
-                    <asp:Button ID="btnInserisciFR" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Immagine Banner Danese"
-                        OnClick="btnINserisciFR_Click" />
                     <asp:Button ID="btnAggiorna" runat="server" CssClass="btn btn-primary btn-sm" Text="Aggiorna Banner" OnClick="btnAggiorna_Click" />
-                    <asp:Button ID="btnElimina" runat="server" CssClass="btn btn-danger btn-sm" Text="Elimina Banner" OnClick="btnElimina_Click" />
+                    <asp:Button ID="btnElimina" runat="server" CssClass="btn btn-danger btn-sm" Text="Elimina Banner" OnClick="btnElimina_Click"  OnClientClick="javascript:ConfirmCancella()" UseSubmitBehavior="true"  />
+                    <br />
+                    <br />
+                    <asp:Button ID="btnInserisciInglese" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Img Inglese"
+                        OnClick="btnINserisciInglese_Click" />
+                    <asp:Button ID="btnInserisciFR" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Img Francese"
+                        OnClick="btnINserisciFR_Click" />
+                    <asp:Button ID="btnInserisciDE" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Img Tedesco"
+                        OnClick="btnINserisciDE_Click" />
+                    <asp:Button ID="ButtonES" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Img Spagnolo"
+                        OnClick="btnINserisciES_Click" />
+                                <asp:Button ID="btnInserisciRusso" CssClass="btn btn-primary btn-sm" runat="server" Text="Carica Img Russo"
+                        OnClick="btnINserisciRusso_Click" />
+
                 </div>
             </div>
 
@@ -72,8 +93,10 @@
                     <ul class="nav nav-pills" style="margin-left: 0;">
                         <li class="active"><a data-toggle="pill" href="#tabita">Italiano</a></li>
                         <li><a data-toggle="pill" href="#tebeng">Inglese</a></li>
-                        <li><a data-toggle="pill" href="#tabru">Russo</a></li>
                         <li><a data-toggle="pill" href="#tabfr">Francese</a></li>
+                        <li><a data-toggle="pill" href="#tabde">Tedesco</a></li>
+                        <li><a data-toggle="pill" href="#tabes">Spagnolo</a></li>
+                        <li><a data-toggle="pill" href="#tabru">Russo</a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="tabita" class="tab-pane fade in active">
@@ -183,12 +206,12 @@
                             </div>
                         </div>
                         <div id="tabfr" class="tab-pane fade">
-                            <h4>BANNER DANISH</h4>
+                            <h4>BANNER FRENCH</h4>
                             <asp:Image ID="imgFR" Width="250" runat="server" ImageUrl="" />
                             <div class="row" style="padding-bottom: 5px">
                                 <div class="col-sm-1 text-right">
                                     <strong>
-                                        <asp:Label ID="Label5" runat="server" Text="Link Destinazione Danese" />
+                                        <asp:Label ID="Label5" runat="server" Text="Link Destinazione Francese" />
                                     </strong>
                                 </div>
                                 <div class="col-sm-10">
@@ -198,7 +221,7 @@
                             <div class="row" style="padding-bottom: 5px">
                                 <div class="col-sm-1 text-right">
                                     <strong>
-                                        <asp:Label Width="30%" ID="Label6" runat="server" Text="Descrizione Danese" />
+                                        <asp:Label Width="30%" ID="Label6" runat="server" Text="Descrizione Francese" />
                                     </strong>
                                 </div>
                                 <div class="col-sm-10">
@@ -209,7 +232,7 @@
                             <div class="row" style="padding-bottom: 5px">
                                 <div class="col-sm-1 text-right">
                                     <strong>
-                                        <asp:Label ID="Label7" runat="server" Text="Img Alt Text Danese" />
+                                        <asp:Label ID="Label7" runat="server" Text="Img Alt Text Francese" />
                                     </strong>
                                 </div>
                                 <div class="col-sm-10">
@@ -217,6 +240,83 @@
                                 </div>
                             </div>
                         </div>
+
+
+                        <div id="tabde" class="tab-pane fade">
+                            <h4>BANNER TEDESCO</h4>
+                            <asp:Image ID="imgDE" Width="250" runat="server" ImageUrl="" />
+                            <div class="row" style="padding-bottom: 5px">
+                                <div class="col-sm-1 text-right">
+                                    <strong>
+                                        <asp:Label ID="Label8" runat="server" Text="Link Destinazione Tedesco" />
+                                    </strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass="form-control" ID="txtNavigateUrlDE" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-bottom: 5px">
+                                <div class="col-sm-1 text-right">
+                                    <strong>
+                                        <asp:Label Width="30%" ID="Label9" runat="server" Text="Descrizione Tedesco" />
+                                    </strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass=" form-control" Height="250px" TextMode="MultiLine" ID="txtDescrizioneDE"
+                                        runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-bottom: 5px">
+                                <div class="col-sm-1 text-right">
+                                    <strong>
+                                        <asp:Label ID="Label10" runat="server" Text="Img Alt Text Tedesco" />
+                                    </strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass="form-control" ID="txtImgalttextDE" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div id="tabes" class="tab-pane fade">
+                            <h4>BANNER SPAGNOLO</h4>
+                            <asp:Image ID="imgES" Width="250" runat="server" ImageUrl="" />
+                            <div class="row" style="padding-bottom: 5px">
+                                <div class="col-sm-1 text-right">
+                                    <strong>
+                                        <asp:Label ID="Label11" runat="server" Text="Link Destinazione Spagnolo" />
+                                    </strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass="form-control" ID="txtNavigateUrlES" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-bottom: 5px">
+                                <div class="col-sm-1 text-right">
+                                    <strong>
+                                        <asp:Label Width="30%" ID="Label12" runat="server" Text="Descrizione Spagnolo" />
+                                    </strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass=" form-control" Height="250px" TextMode="MultiLine" ID="txtDescrizioneES"
+                                        runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-bottom: 5px">
+                                <div class="col-sm-1 text-right">
+                                    <strong>
+                                        <asp:Label ID="Label13" runat="server" Text="Img Alt Text Spagnolo" />
+                                    </strong>
+                                </div>
+                                <div class="col-sm-10">
+                                    <asp:TextBox CssClass="form-control" ID="txtImgalttextES" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+
+
+
 
                     </div>
                 </div>

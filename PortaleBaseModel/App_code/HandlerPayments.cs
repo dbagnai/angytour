@@ -978,6 +978,12 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
                 case "FR":
                     valuefororder["messages"] += "Error save CodiceOrdine";
                     break;
+                case "DE":
+                    valuefororder["messages"] += "Error save CodiceOrdine";
+                    break;
+                case "ES":
+                    valuefororder["messages"] += "Error save CodiceOrdine";
+                    break;
             }
             return;
         }
@@ -1180,6 +1186,12 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
                     break;
                 case "FR":
                     TestoMail += item.Offerta.DenominazioneFR + "<br/>";
+                    break;
+                case "DE":
+                    TestoMail += item.Offerta.DenominazioneDE + "<br/>";
+                    break;
+                case "ES":
+                    TestoMail += item.Offerta.DenominazioneES + "<br/>";
                     break;
             }
 

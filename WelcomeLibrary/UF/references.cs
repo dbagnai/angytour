@@ -422,6 +422,14 @@ public class references
             case "fr":
                 culturename = "fr";
                 break;
+            case "DE":
+            case "de":
+                culturename = "de";
+                break;
+            case "ES":
+            case "es":
+                culturename = "es";
+                break;
             default:
                 culturename = "it";
                 break;
@@ -1305,6 +1313,38 @@ public class references
             item.Campo1 = testo[item.Lingua];
             DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica" + progressivo.ToString());
         }
+
+
+        item = new Tabrif();
+        if (string.IsNullOrWhiteSpace(valore) || valore == "0")
+            item.Codice = ultimoprogressivo.ToString();
+        else
+        {
+            item = Utility.Caratteristiche[progressivo - 1].Find(c => c.Codice == valore && c.Lingua == "ES");
+        }
+        if (item != null)
+        {
+            item.Lingua = "ES";
+            item.Campo1 = testo[item.Lingua];
+            DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica" + progressivo.ToString());
+        }
+
+        item = new Tabrif();
+        if (string.IsNullOrWhiteSpace(valore) || valore == "0")
+            item.Codice = ultimoprogressivo.ToString();
+        else
+        {
+            item = Utility.Caratteristiche[progressivo - 1].Find(c => c.Codice == valore && c.Lingua == "DE");
+        }
+        if (item != null)
+        {
+            item.Lingua = "DE";
+            item.Campo1 = testo[item.Lingua];
+            DM.InserisciAggiornaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item, "dbo_TBLRIF_Caratteristica" + progressivo.ToString());
+        }
+
+
+
         //Aggiorno la memoria statica
         Utility.Caratteristiche[progressivo - 1] = Utility.CaricaListaStaticaCaratteristica(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "dbo_TBLRIF_Caratteristica" + progressivo.ToString());
     }

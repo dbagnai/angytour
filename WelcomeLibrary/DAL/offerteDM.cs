@@ -275,17 +275,17 @@ namespace WelcomeLibrary.DAL
                     _parUsed.Add(testoricerca);
                     if (!queryfilter.ToLower().Contains("where"))
                     {
-                        queryfilter += " WHERE ( Id like @testoricerca or  CodiceProdotto like @testoricerca or  DenominazioneI like @testoricerca or DenominazioneGB like @testoricerca or DenominazioneRU like @testoricerca or DenominazioneFR like @testoricerca ";
+                        queryfilter += " WHERE ( Id like @testoricerca or  CodiceProdotto like @testoricerca or  DenominazioneI like @testoricerca or DenominazioneGB like @testoricerca or DenominazioneRU like @testoricerca or DenominazioneFR like @testoricerca or DenominazioneDE like @testoricerca or DenominazioneES like @testoricerca";
                         queryfilter += " or Nome_dts like @testoricerca or Cognome_dts like @testoricerca or Emailriservata_dts like @testoricerca or Email like @testoricerca ";
-                        queryfilter += " or DescrizioneI like @testoricerca or DescrizioneGB like @testoricerca or DescrizioneRU like @testoricerca or DescrizioneFR like @testoricerca or DatitecniciI like @testoricerca or DatitecniciGB like @testoricerca or DatitecniciRU like @testoricerca or DatitecniciFR like @testoricerca ";
-                        queryfilter += " or Campo1I like @testoricerca or Campo1GB like @testoricerca  or Campo1RU like @testoricerca  or Campo1FR like @testoricerca  or Campo2I like @testoricerca or Campo2GB like @testoricerca  or Campo2RU like @testoricerca or Campo2FR like @testoricerca or xmlValue like @testoricerca ) ";
+                        queryfilter += " or DescrizioneI like @testoricerca or DescrizioneGB like @testoricerca or DescrizioneRU like @testoricerca or DescrizioneFR like @testoricerca or DescrizioneDE like @testoricerca or DescrizioneES like @testoricerca or DatitecniciI like @testoricerca or DatitecniciGB like @testoricerca or DatitecniciRU like @testoricerca or DatitecniciFR like @testoricerca or DatitecniciDE like @testoricerca or DatitecniciES like @testoricerca ";
+                        queryfilter += " or Campo1I like @testoricerca or Campo1GB like @testoricerca  or Campo1RU like @testoricerca  or Campo1FR like @testoricerca or Campo1DE like @testoricerca or Campo1ES like @testoricerca or Campo2I like @testoricerca or Campo2GB like @testoricerca  or Campo2RU like @testoricerca or Campo2FR like @testoricerca or Campo2DE like @testoricerca or Campo2ES like @testoricerca or xmlValue like @testoricerca ) ";
                     }
                     else
                     {
-                        queryfilter += " AND ( Id like @testoricerca or  CodiceProdotto like @testoricerca or  DenominazioneI like @testoricerca or DenominazioneGB like @testoricerca or DenominazioneRU like @testoricerca or DenominazioneFR like @testoricerca ";
+                        queryfilter += " AND ( Id like @testoricerca or  CodiceProdotto like @testoricerca or  DenominazioneI like @testoricerca or DenominazioneGB like @testoricerca or DenominazioneRU like @testoricerca or DenominazioneFR like @testoricerca or DenominazioneDE like @testoricerca or DenominazioneES like @testoricerca";
                         queryfilter += " or Nome_dts like @testoricerca or Cognome_dts like @testoricerca or Emailriservata_dts like @testoricerca or Email like @testoricerca ";
-                        queryfilter += " or DescrizioneI like @testoricerca or DescrizioneGB like @testoricerca or DescrizioneRU like @testoricerca or DescrizioneFR like @testoricerca or DatitecniciI like @testoricerca or DatitecniciGB like @testoricerca or DatitecniciRU like @testoricerca or DatitecniciFR like @testoricerca ";
-                        queryfilter += " or Campo1I like @testoricerca or Campo1GB like @testoricerca  or Campo1RU like @testoricerca  or Campo1FR like @testoricerca  or Campo2I like @testoricerca or Campo2GB like @testoricerca  or Campo2RU like @testoricerca or Campo2FR like @testoricerca or xmlValue like @testoricerca ) ";
+                        queryfilter += " or DescrizioneI like @testoricerca or DescrizioneGB like @testoricerca or DescrizioneRU like @testoricerca or DescrizioneFR like @testoricerca or DescrizioneDE like @testoricerca or DescrizioneES like @testoricerca or DatitecniciI like @testoricerca or DatitecniciGB like @testoricerca or DatitecniciRU like @testoricerca or DatitecniciFR like @testoricerca or DatitecniciDE like @testoricerca or DatitecniciES like @testoricerca ";
+                        queryfilter += " or Campo1I like @testoricerca or Campo1GB like @testoricerca  or Campo1RU like @testoricerca  or Campo1FR like @testoricerca or Campo1DE like @testoricerca or Campo1ES like @testoricerca or Campo2I like @testoricerca or Campo2GB like @testoricerca  or Campo2RU like @testoricerca or Campo2FR like @testoricerca or Campo2DE like @testoricerca or Campo2ES like @testoricerca or xmlValue like @testoricerca ) ";
                     }
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data_inizio"; })
@@ -406,6 +406,12 @@ namespace WelcomeLibrary.DAL
                             if (!reader["DENOMINAZIONEFR"].Equals(DBNull.Value))
                                 item.DenominazioneFR = reader.GetString(reader.GetOrdinal("DENOMINAZIONEFR"));
 
+                            if (!reader["DENOMINAZIONEDE"].Equals(DBNull.Value))
+                                item.DenominazioneDE = reader.GetString(reader.GetOrdinal("DENOMINAZIONEDE"));
+                            if (!reader["DENOMINAZIONEES"].Equals(DBNull.Value))
+                                item.DenominazioneES = reader.GetString(reader.GetOrdinal("DENOMINAZIONEES"));
+
+
                             item.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
                             item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
                             if (!reader["CodiceProdotto"].Equals(DBNull.Value))
@@ -425,6 +431,12 @@ namespace WelcomeLibrary.DAL
                             if (!(reader["urlcustomFR"]).Equals(DBNull.Value))
                                 item.UrlcustomFR = reader.GetString(reader.GetOrdinal("urlcustomFR"));
 
+                            if (!(reader["urlcustomES"]).Equals(DBNull.Value))
+                                item.UrlcustomES = reader.GetString(reader.GetOrdinal("urlcustomES"));
+                            if (!(reader["urlcustomDE"]).Equals(DBNull.Value))
+                                item.UrlcustomDE = reader.GetString(reader.GetOrdinal("urlcustomDE"));
+
+
                             if (!(reader["canonicalGB"]).Equals(DBNull.Value))
                                 item.CanonicalGB = reader.GetString(reader.GetOrdinal("canonicalGB"));
                             if (!(reader["canonicalI"]).Equals(DBNull.Value))
@@ -433,6 +445,12 @@ namespace WelcomeLibrary.DAL
                                 item.CanonicalRU = reader.GetString(reader.GetOrdinal("canonicalRU"));
                             if (!(reader["canonicalFR"]).Equals(DBNull.Value))
                                 item.CanonicalFR = reader.GetString(reader.GetOrdinal("canonicalFR"));
+
+                            if (!(reader["canonicalDE"]).Equals(DBNull.Value))
+                                item.CanonicalDE = reader.GetString(reader.GetOrdinal("canonicalDE"));
+                            if (!(reader["canonicalES"]).Equals(DBNull.Value))
+                                item.CanonicalES = reader.GetString(reader.GetOrdinal("canonicalES"));
+
 
                             if (!(reader["robots"]).Equals(DBNull.Value))
                                 item.Robots = reader.GetString(reader.GetOrdinal("robots"));
@@ -883,17 +901,17 @@ namespace WelcomeLibrary.DAL
                     _parUsed.Add(testoricerca);
                     if (!queryfilter.ToLower().Contains("where"))
                     {
-                        queryfilter += " WHERE ( Id like @testoricerca or  CodiceProdotto like @testoricerca or  DenominazioneI like @testoricerca or DenominazioneGB like @testoricerca or DenominazioneRU like @testoricerca  or DenominazioneFR like @testoricerca ";
+                        queryfilter += " WHERE ( Id like @testoricerca or  CodiceProdotto like @testoricerca or  DenominazioneI like @testoricerca or DenominazioneGB like @testoricerca or DenominazioneRU like @testoricerca  or DenominazioneFR like @testoricerca or DenominazioneDE like @testoricerca or DenominazioneES like @testoricerca ";
                         queryfilter += " or Nome_dts like @testoricerca or Cognome_dts like @testoricerca or Emailriservata_dts like @testoricerca or Email like @testoricerca ";
-                        queryfilter += " or DescrizioneI like @testoricerca or DescrizioneGB like @testoricerca or DescrizioneRU like @testoricerca  or DescrizioneFR like @testoricerca or DatitecniciI like @testoricerca or DatitecniciGB like @testoricerca or DatitecniciRU like @testoricerca  or DatitecniciFR like @testoricerca ";
-                        queryfilter += " or Campo1I like @testoricerca or Campo1GB like @testoricerca  or Campo1RU like @testoricerca  or Campo1FR like @testoricerca or Campo2I like @testoricerca or Campo2GB like @testoricerca  or Campo2RU like @testoricerca  or Campo2FR like @testoricerca or xmlValue like @testoricerca ) ";
+                        queryfilter += " or DescrizioneI like @testoricerca or DescrizioneGB like @testoricerca or DescrizioneRU like @testoricerca  or DescrizioneFR like @testoricerca  or DescrizioneDE like @testoricerca  or DescrizioneES like @testoricerca or DatitecniciI like @testoricerca or DatitecniciGB like @testoricerca or DatitecniciRU like @testoricerca  or DatitecniciFR like @testoricerca   or DatitecniciDE like @testoricerca  or DatitecniciES like @testoricerca";
+                        queryfilter += " or Campo1I like @testoricerca or Campo1GB like @testoricerca  or Campo1RU like @testoricerca  or Campo1FR like @testoricerca or Campo1DE like @testoricerca or Campo1ES like @testoricerca or Campo2I like @testoricerca or Campo2GB like @testoricerca  or Campo2RU like @testoricerca  or Campo2FR like @testoricerca or Campo2DE like @testoricerca or Campo2ES like @testoricerca or xmlValue like @testoricerca ) ";
                     }
                     else
                     {
-                        queryfilter += " AND ( Id like @testoricerca or  CodiceProdotto like @testoricerca or  DenominazioneI like @testoricerca or DenominazioneGB like @testoricerca or DenominazioneRU like @testoricerca  or DenominazioneFR like @testoricerca ";
+                        queryfilter += " AND ( Id like @testoricerca or  CodiceProdotto like @testoricerca or  DenominazioneI like @testoricerca or DenominazioneGB like @testoricerca or DenominazioneRU like @testoricerca  or DenominazioneFR like @testoricerca or DenominazioneDE like @testoricerca or DenominazioneES like @testoricerca ";
                         queryfilter += " or Nome_dts like @testoricerca or Cognome_dts like @testoricerca or Emailriservata_dts like @testoricerca or Email like @testoricerca ";
-                        queryfilter += " or DescrizioneI like @testoricerca or DescrizioneGB like @testoricerca or DescrizioneRU like @testoricerca  or DescrizioneFR like @testoricerca or DatitecniciI like @testoricerca or DatitecniciGB like @testoricerca or DatitecniciRU like @testoricerca   or DatitecniciFR like @testoricerca ";
-                        queryfilter += " or Campo1I like @testoricerca or Campo1GB like @testoricerca  or Campo1RU like @testoricerca  or Campo1FR like @testoricerca or Campo2I like @testoricerca or Campo2GB like @testoricerca  or Campo2RU like @testoricerca  or Campo2FR like @testoricerca or xmlValue like @testoricerca ) ";
+                        queryfilter += " or DescrizioneI like @testoricerca or DescrizioneGB like @testoricerca or DescrizioneRU like @testoricerca  or DescrizioneFR like @testoricerca  or DescrizioneDE like @testoricerca  or DescrizioneES like @testoricerca or DatitecniciI like @testoricerca or DatitecniciGB like @testoricerca or DatitecniciRU like @testoricerca  or DatitecniciFR like @testoricerca   or DatitecniciDE like @testoricerca  or DatitecniciES like @testoricerca";
+                        queryfilter += " or Campo1I like @testoricerca or Campo1GB like @testoricerca  or Campo1RU like @testoricerca  or Campo1FR like @testoricerca or Campo1DE like @testoricerca or Campo1ES like @testoricerca or Campo2I like @testoricerca or Campo2GB like @testoricerca  or Campo2RU like @testoricerca  or Campo2FR like @testoricerca or Campo2DE like @testoricerca or Campo2ES like @testoricerca or xmlValue like @testoricerca ) ";
                     }
                 }
 
@@ -1033,6 +1051,18 @@ namespace WelcomeLibrary.DAL
                             else
                                 queryfilter += " AND  ( DenominazioneFR <> ''  and DenominazioneFR is not null )    ";
                             break;
+                        case "ES":
+                            if (!queryfilter.ToLower().Contains("where"))
+                                queryfilter += " WHERE ( DenominazioneES <> '' and DenominazioneES is not null )  ";
+                            else
+                                queryfilter += " AND  ( DenominazioneES <> ''  and DenominazioneES is not null )    ";
+                            break;
+                        case "DE":
+                            if (!queryfilter.ToLower().Contains("where"))
+                                queryfilter += " WHERE ( DenominazioneDE <> '' and DenominazioneDE is not null )  ";
+                            else
+                                queryfilter += " AND  ( DenominazioneDE <> ''  and DenominazioneDE is not null )    ";
+                            break;
                     }
                 }
                 if (!includiarchiviati)
@@ -1113,6 +1143,10 @@ namespace WelcomeLibrary.DAL
                             item.UrlcustomRU = reader.GetString(reader.GetOrdinal("urlcustomRU"));
                         if (!(reader["urlcustomFR"]).Equals(DBNull.Value))
                             item.UrlcustomFR = reader.GetString(reader.GetOrdinal("urlcustomFR"));
+                        if (!(reader["urlcustomDE"]).Equals(DBNull.Value))
+                            item.UrlcustomDE = reader.GetString(reader.GetOrdinal("urlcustomDE"));
+                        if (!(reader["urlcustomES"]).Equals(DBNull.Value))
+                            item.UrlcustomES = reader.GetString(reader.GetOrdinal("urlcustomES"));
 
                         if (!(reader["canonicalGB"]).Equals(DBNull.Value))
                             item.CanonicalGB = reader.GetString(reader.GetOrdinal("canonicalGB"));
@@ -1122,6 +1156,10 @@ namespace WelcomeLibrary.DAL
                             item.CanonicalRU = reader.GetString(reader.GetOrdinal("canonicalRU"));
                         if (!(reader["canonicalFR"]).Equals(DBNull.Value))
                             item.CanonicalFR = reader.GetString(reader.GetOrdinal("canonicalFR"));
+                        if (!(reader["canonicalES"]).Equals(DBNull.Value))
+                            item.CanonicalES = reader.GetString(reader.GetOrdinal("canonicalES"));
+                        if (!(reader["canonicalDE"]).Equals(DBNull.Value))
+                            item.CanonicalDE = reader.GetString(reader.GetOrdinal("canonicalDE"));
 
                         if (!(reader["robots"]).Equals(DBNull.Value))
                             item.Robots = reader.GetString(reader.GetOrdinal("robots"));
@@ -1156,6 +1194,32 @@ namespace WelcomeLibrary.DAL
                             item.Campo1FR = reader.GetString(reader.GetOrdinal("Campo1FR"));
                         if (!reader["Campo2FR"].Equals(DBNull.Value))
                             item.Campo2FR = reader.GetString(reader.GetOrdinal("Campo2FR"));
+
+
+
+                        if (!reader["DATITECNICIDE"].Equals(DBNull.Value))
+                            item.DatitecniciDE = reader.GetString(reader.GetOrdinal("DATITECNICIDE"));
+                        if (!reader["DescrizioneDE"].Equals(DBNull.Value))
+                            item.DescrizioneDE = reader.GetString(reader.GetOrdinal("DescrizioneDE"));
+                        if (!reader["DENOMINAZIONEDE"].Equals(DBNull.Value))
+                            item.DenominazioneDE = reader.GetString(reader.GetOrdinal("DENOMINAZIONEDE"));
+                        if (!reader["Campo1DE"].Equals(DBNull.Value))
+                            item.Campo1DE = reader.GetString(reader.GetOrdinal("Campo1DE"));
+                        if (!reader["Campo2DE"].Equals(DBNull.Value))
+                            item.Campo2DE = reader.GetString(reader.GetOrdinal("Campo2DE"));
+
+
+
+                        if (!reader["DATITECNICIES"].Equals(DBNull.Value))
+                            item.DatitecniciES = reader.GetString(reader.GetOrdinal("DATITECNICIES"));
+                        if (!reader["DescrizioneES"].Equals(DBNull.Value))
+                            item.DescrizioneES = reader.GetString(reader.GetOrdinal("DescrizioneES"));
+                        if (!reader["DENOMINAZIONEES"].Equals(DBNull.Value))
+                            item.DenominazioneES = reader.GetString(reader.GetOrdinal("DENOMINAZIONEES"));
+                        if (!reader["Campo1ES"].Equals(DBNull.Value))
+                            item.Campo1ES = reader.GetString(reader.GetOrdinal("Campo1ES"));
+                        if (!reader["Campo2ES"].Equals(DBNull.Value))
+                            item.Campo2ES = reader.GetString(reader.GetOrdinal("Campo2ES"));
 
                         if (!reader["XmlValue"].Equals(DBNull.Value))
                             item.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
@@ -1460,6 +1524,18 @@ namespace WelcomeLibrary.DAL
                             else
                                 query += " AND  (DenominazioneFR <> ''  and DenominazioneFR is not null)    ";
                             break;
+                        case "ES":
+                            if (!query.ToLower().Contains("where"))
+                                query += " WHERE (DenominazioneES <> '' and DenominazioneES is not null)  ";
+                            else
+                                query += " AND  (DenominazioneES <> ''  and DenominazioneES is not null)    ";
+                            break;
+                        case "DE":
+                            if (!query.ToLower().Contains("where"))
+                                query += " WHERE (DenominazioneDE <> '' and DenominazioneDE is not null)  ";
+                            else
+                                query += " AND  (DenominazioneDE <> ''  and DenominazioneDE is not null)    ";
+                            break;
                     }
                 }
                 if (!includiarchiviati)
@@ -1512,6 +1588,10 @@ namespace WelcomeLibrary.DAL
                             item.UrlcustomRU = reader.GetString(reader.GetOrdinal("urlcustomRU"));
                         if (!(reader["urlcustomFR"]).Equals(DBNull.Value))
                             item.UrlcustomFR = reader.GetString(reader.GetOrdinal("urlcustomFR"));
+                        if (!(reader["urlcustomDE"]).Equals(DBNull.Value))
+                            item.UrlcustomDE = reader.GetString(reader.GetOrdinal("urlcustomDE"));
+                        if (!(reader["urlcustomES"]).Equals(DBNull.Value))
+                            item.UrlcustomES = reader.GetString(reader.GetOrdinal("urlcustomES"));
 
                         if (!(reader["canonicalGB"]).Equals(DBNull.Value))
                             item.CanonicalGB = reader.GetString(reader.GetOrdinal("canonicalGB"));
@@ -1521,6 +1601,10 @@ namespace WelcomeLibrary.DAL
                             item.CanonicalRU = reader.GetString(reader.GetOrdinal("canonicalRU"));
                         if (!(reader["canonicalFR"]).Equals(DBNull.Value))
                             item.CanonicalFR = reader.GetString(reader.GetOrdinal("canonicalFR"));
+                        if (!(reader["canonicalDE"]).Equals(DBNull.Value))
+                            item.CanonicalDE = reader.GetString(reader.GetOrdinal("canonicalDE"));
+                        if (!(reader["canonicalES"]).Equals(DBNull.Value))
+                            item.CanonicalES = reader.GetString(reader.GetOrdinal("canonicalES"));
 
                         if (!(reader["robots"]).Equals(DBNull.Value))
                             item.Robots = reader.GetString(reader.GetOrdinal("robots"));
@@ -1570,6 +1654,28 @@ namespace WelcomeLibrary.DAL
                             item.Campo1FR = reader.GetString(reader.GetOrdinal("Campo1FR"));
                         if (!reader["Campo2FR"].Equals(DBNull.Value))
                             item.Campo2FR = reader.GetString(reader.GetOrdinal("Campo2FR"));
+
+                        if (!reader["DATITECNICIES"].Equals(DBNull.Value))
+                            item.DatitecniciES = reader.GetString(reader.GetOrdinal("DATITECNICIES"));
+                        if (!reader["DescrizioneES"].Equals(DBNull.Value))
+                            item.DescrizioneES = reader.GetString(reader.GetOrdinal("DescrizioneES"));
+                        if (!reader["DENOMINAZIONEES"].Equals(DBNull.Value))
+                            item.DenominazioneES = reader.GetString(reader.GetOrdinal("DENOMINAZIONEES"));
+                        if (!reader["Campo1ES"].Equals(DBNull.Value))
+                            item.Campo1ES = reader.GetString(reader.GetOrdinal("Campo1ES"));
+                        if (!reader["Campo2ES"].Equals(DBNull.Value))
+                            item.Campo2ES = reader.GetString(reader.GetOrdinal("Campo2ES"));
+
+                        if (!reader["DATITECNICIDE"].Equals(DBNull.Value))
+                            item.DatitecniciDE = reader.GetString(reader.GetOrdinal("DATITECNICIDE"));
+                        if (!reader["DescrizioneDE"].Equals(DBNull.Value))
+                            item.DescrizioneDE = reader.GetString(reader.GetOrdinal("DescrizioneDE"));
+                        if (!reader["DENOMINAZIONEDE"].Equals(DBNull.Value))
+                            item.DenominazioneDE = reader.GetString(reader.GetOrdinal("DENOMINAZIONEDE"));
+                        if (!reader["Campo1DE"].Equals(DBNull.Value))
+                            item.Campo1DE = reader.GetString(reader.GetOrdinal("Campo1DE"));
+                        if (!reader["Campo2DE"].Equals(DBNull.Value))
+                            item.Campo2DE = reader.GetString(reader.GetOrdinal("Campo2DE"));
 
                         if (!reader["XmlValue"].Equals(DBNull.Value))
                             item.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
@@ -1881,8 +1987,6 @@ namespace WelcomeLibrary.DAL
                     }
                 }
 
-
-
                 if (!String.IsNullOrEmpty(LinguaFiltro))
                 {
                     switch (LinguaFiltro)
@@ -1904,6 +2008,18 @@ namespace WelcomeLibrary.DAL
                                 query += " WHERE (DenominazioneFR <> '' and DenominazioneFR is not null)  ";
                             else
                                 query += " AND  (DenominazioneFR <> ''  and DenominazioneFR is not null)    ";
+                            break;
+                        case "DE":
+                            if (!query.ToLower().Contains("where"))
+                                query += " WHERE (DenominazioneDE <> '' and DenominazioneDE is not null)  ";
+                            else
+                                query += " AND  (DenominazioneDE <> ''  and DenominazioneDE is not null)    ";
+                            break;
+                        case "ES":
+                            if (!query.ToLower().Contains("where"))
+                                query += " WHERE (DenominazioneES <> '' and DenominazioneES is not null)  ";
+                            else
+                                query += " AND  (DenominazioneES <> ''  and DenominazioneES is not null)    ";
                             break;
                     }
                 }
@@ -1982,6 +2098,11 @@ namespace WelcomeLibrary.DAL
                             item.UrlcustomRU = reader.GetString(reader.GetOrdinal("urlcustomRU"));
                         if (!(reader["urlcustomFR"]).Equals(DBNull.Value))
                             item.UrlcustomFR = reader.GetString(reader.GetOrdinal("urlcustomFR"));
+                        if (!(reader["urlcustomES"]).Equals(DBNull.Value))
+                            item.UrlcustomES = reader.GetString(reader.GetOrdinal("urlcustomES"));
+
+                        if (!(reader["urlcustomDE"]).Equals(DBNull.Value))
+                            item.UrlcustomDE = reader.GetString(reader.GetOrdinal("urlcustomDE"));
 
                         if (!(reader["canonicalGB"]).Equals(DBNull.Value))
                             item.CanonicalGB = reader.GetString(reader.GetOrdinal("canonicalGB"));
@@ -1991,6 +2112,10 @@ namespace WelcomeLibrary.DAL
                             item.CanonicalRU = reader.GetString(reader.GetOrdinal("canonicalRU"));
                         if (!(reader["canonicalFR"]).Equals(DBNull.Value))
                             item.CanonicalFR = reader.GetString(reader.GetOrdinal("canonicalFR"));
+                        if (!(reader["canonicalDE"]).Equals(DBNull.Value))
+                            item.CanonicalDE = reader.GetString(reader.GetOrdinal("canonicalDE"));
+                        if (!(reader["canonicalES"]).Equals(DBNull.Value))
+                            item.CanonicalES = reader.GetString(reader.GetOrdinal("canonicalES"));
 
 
                         if (!(reader["robots"]).Equals(DBNull.Value))
@@ -2026,6 +2151,29 @@ namespace WelcomeLibrary.DAL
                             item.Campo1FR = reader.GetString(reader.GetOrdinal("Campo1FR"));
                         if (!reader["Campo2FR"].Equals(DBNull.Value))
                             item.Campo2FR = reader.GetString(reader.GetOrdinal("Campo2FR"));
+
+                        if (!reader["DATITECNICIES"].Equals(DBNull.Value))
+                            item.DatitecniciES = reader.GetString(reader.GetOrdinal("DATITECNICIES"));
+                        if (!reader["DescrizioneES"].Equals(DBNull.Value))
+                            item.DescrizioneES = reader.GetString(reader.GetOrdinal("DescrizioneES"));
+                        if (!reader["DENOMINAZIONEES"].Equals(DBNull.Value))
+                            item.DenominazioneES = reader.GetString(reader.GetOrdinal("DENOMINAZIONEES"));
+                        if (!reader["Campo1ES"].Equals(DBNull.Value))
+                            item.Campo1ES = reader.GetString(reader.GetOrdinal("Campo1ES"));
+                        if (!reader["Campo2ES"].Equals(DBNull.Value))
+                            item.Campo2ES = reader.GetString(reader.GetOrdinal("Campo2ES"));
+
+
+                        if (!reader["DATITECNICIDE"].Equals(DBNull.Value))
+                            item.DatitecniciDE = reader.GetString(reader.GetOrdinal("DATITECNICIDE"));
+                        if (!reader["DescrizioneDE"].Equals(DBNull.Value))
+                            item.DescrizioneDE = reader.GetString(reader.GetOrdinal("DescrizioneDE"));
+                        if (!reader["DENOMINAZIONEDE"].Equals(DBNull.Value))
+                            item.DenominazioneDE = reader.GetString(reader.GetOrdinal("DENOMINAZIONEDE"));
+                        if (!reader["Campo1DE"].Equals(DBNull.Value))
+                            item.Campo1DE = reader.GetString(reader.GetOrdinal("Campo1DE"));
+                        if (!reader["Campo2DE"].Equals(DBNull.Value))
+                            item.Campo2DE = reader.GetString(reader.GetOrdinal("Campo2DE"));
 
                         if (!reader["XmlValue"].Equals(DBNull.Value))
                             item.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
@@ -2348,6 +2496,12 @@ namespace WelcomeLibrary.DAL
                         if (!(reader["urlcustomFR"]).Equals(DBNull.Value))
                             item.UrlcustomFR = reader.GetString(reader.GetOrdinal("urlcustomFR"));
 
+                        if (!(reader["urlcustomDE"]).Equals(DBNull.Value))
+                            item.UrlcustomDE = reader.GetString(reader.GetOrdinal("urlcustomDE"));
+
+                        if (!(reader["urlcustomES"]).Equals(DBNull.Value))
+                            item.UrlcustomES = reader.GetString(reader.GetOrdinal("urlcustomES"));
+
                         if (!(reader["canonicalGB"]).Equals(DBNull.Value))
                             item.CanonicalGB = reader.GetString(reader.GetOrdinal("canonicalGB"));
                         if (!(reader["canonicalI"]).Equals(DBNull.Value))
@@ -2356,6 +2510,12 @@ namespace WelcomeLibrary.DAL
                             item.CanonicalRU = reader.GetString(reader.GetOrdinal("canonicalRU"));
                         if (!(reader["canonicalFR"]).Equals(DBNull.Value))
                             item.CanonicalFR = reader.GetString(reader.GetOrdinal("canonicalFR"));
+
+                        if (!(reader["canonicalES"]).Equals(DBNull.Value))
+                            item.CanonicalES = reader.GetString(reader.GetOrdinal("canonicalES"));
+
+                        if (!(reader["canonicalDE"]).Equals(DBNull.Value))
+                            item.CanonicalDE = reader.GetString(reader.GetOrdinal("canonicalDE"));
 
                         if (!(reader["robots"]).Equals(DBNull.Value))
                             item.Robots = reader.GetString(reader.GetOrdinal("robots"));
@@ -2391,6 +2551,28 @@ namespace WelcomeLibrary.DAL
                             item.Campo1FR = reader.GetString(reader.GetOrdinal("Campo1FR"));
                         if (!reader["Campo2FR"].Equals(DBNull.Value))
                             item.Campo2FR = reader.GetString(reader.GetOrdinal("Campo2FR"));
+
+                        if (!reader["DATITECNICIDE"].Equals(DBNull.Value))
+                            item.DatitecniciDE = reader.GetString(reader.GetOrdinal("DATITECNICIDE"));
+                        if (!reader["DescrizioneDE"].Equals(DBNull.Value))
+                            item.DescrizioneDE = reader.GetString(reader.GetOrdinal("DescrizioneDE"));
+                        if (!reader["DENOMINAZIONEDE"].Equals(DBNull.Value))
+                            item.DenominazioneDE = reader.GetString(reader.GetOrdinal("DENOMINAZIONEDE"));
+                        if (!reader["Campo1DE"].Equals(DBNull.Value))
+                            item.Campo1DE = reader.GetString(reader.GetOrdinal("Campo1DE"));
+                        if (!reader["Campo2DE"].Equals(DBNull.Value))
+                            item.Campo2DE = reader.GetString(reader.GetOrdinal("Campo2DE"));
+
+                        if (!reader["DATITECNICIES"].Equals(DBNull.Value))
+                            item.DatitecniciES = reader.GetString(reader.GetOrdinal("DATITECNICIES"));
+                        if (!reader["DescrizioneES"].Equals(DBNull.Value))
+                            item.DescrizioneES = reader.GetString(reader.GetOrdinal("DescrizioneES"));
+                        if (!reader["DENOMINAZIONEES"].Equals(DBNull.Value))
+                            item.DenominazioneES = reader.GetString(reader.GetOrdinal("DENOMINAZIONEES"));
+                        if (!reader["Campo1ES"].Equals(DBNull.Value))
+                            item.Campo1ES = reader.GetString(reader.GetOrdinal("Campo1ES"));
+                        if (!reader["Campo2ES"].Equals(DBNull.Value))
+                            item.Campo2ES = reader.GetString(reader.GetOrdinal("Campo2ES"));
 
                         if (!reader["XmlValue"].Equals(DBNull.Value))
                             item.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
@@ -2708,6 +2890,12 @@ namespace WelcomeLibrary.DAL
                         if (!(reader["urlcustomFR"]).Equals(DBNull.Value))
                             item.UrlcustomFR = reader.GetString(reader.GetOrdinal("urlcustomFR"));
 
+                        if (!(reader["urlcustomES"]).Equals(DBNull.Value))
+                            item.UrlcustomES = reader.GetString(reader.GetOrdinal("urlcustomES"));
+
+                        if (!(reader["urlcustomDE"]).Equals(DBNull.Value))
+                            item.UrlcustomDE = reader.GetString(reader.GetOrdinal("urlcustomDE"));
+
                         if (!(reader["canonicalGB"]).Equals(DBNull.Value))
                             item.CanonicalGB = reader.GetString(reader.GetOrdinal("canonicalGB"));
                         if (!(reader["canonicalI"]).Equals(DBNull.Value))
@@ -2716,6 +2904,12 @@ namespace WelcomeLibrary.DAL
                             item.CanonicalRU = reader.GetString(reader.GetOrdinal("canonicalRU"));
                         if (!(reader["canonicalFR"]).Equals(DBNull.Value))
                             item.CanonicalFR = reader.GetString(reader.GetOrdinal("canonicalFR"));
+
+                        if (!(reader["canonicalDE"]).Equals(DBNull.Value))
+                            item.CanonicalDE = reader.GetString(reader.GetOrdinal("canonicalDE"));
+
+                        if (!(reader["canonicalES"]).Equals(DBNull.Value))
+                            item.CanonicalES = reader.GetString(reader.GetOrdinal("canonicalES"));
 
                         if (!(reader["robots"]).Equals(DBNull.Value))
                             item.Robots = reader.GetString(reader.GetOrdinal("robots"));
@@ -2751,6 +2945,29 @@ namespace WelcomeLibrary.DAL
                             item.Campo1FR = reader.GetString(reader.GetOrdinal("Campo1FR"));
                         if (!reader["Campo2FR"].Equals(DBNull.Value))
                             item.Campo2FR = reader.GetString(reader.GetOrdinal("Campo2FR"));
+
+                        if (!reader["DATITECNICIES"].Equals(DBNull.Value))
+                            item.DatitecniciES = reader.GetString(reader.GetOrdinal("DATITECNICIES"));
+                        if (!reader["DescrizioneES"].Equals(DBNull.Value))
+                            item.DescrizioneES = reader.GetString(reader.GetOrdinal("DescrizioneES"));
+                        if (!reader["DENOMINAZIONEES"].Equals(DBNull.Value))
+                            item.DenominazioneES = reader.GetString(reader.GetOrdinal("DENOMINAZIONEES"));
+                        if (!reader["Campo1ES"].Equals(DBNull.Value))
+                            item.Campo1ES = reader.GetString(reader.GetOrdinal("Campo1ES"));
+                        if (!reader["Campo2ES"].Equals(DBNull.Value))
+                            item.Campo2ES = reader.GetString(reader.GetOrdinal("Campo2ES"));
+
+
+                        if (!reader["DATITECNICIDE"].Equals(DBNull.Value))
+                            item.DatitecniciDE = reader.GetString(reader.GetOrdinal("DATITECNICIDE"));
+                        if (!reader["DescrizioneDE"].Equals(DBNull.Value))
+                            item.DescrizioneDE = reader.GetString(reader.GetOrdinal("DescrizioneDE"));
+                        if (!reader["DENOMINAZIONEDE"].Equals(DBNull.Value))
+                            item.DenominazioneDE = reader.GetString(reader.GetOrdinal("DENOMINAZIONEDE"));
+                        if (!reader["Campo1DE"].Equals(DBNull.Value))
+                            item.Campo1DE = reader.GetString(reader.GetOrdinal("Campo1DE"));
+                        if (!reader["Campo2DE"].Equals(DBNull.Value))
+                            item.Campo2DE = reader.GetString(reader.GetOrdinal("Campo2DE"));
 
                         if (!reader["XmlValue"].Equals(DBNull.Value))
                             item.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
@@ -3082,6 +3299,12 @@ namespace WelcomeLibrary.DAL
                         if (!(reader["urlcustomFR"]).Equals(DBNull.Value))
                             item.UrlcustomFR = reader.GetString(reader.GetOrdinal("urlcustomFR"));
 
+                        if (!(reader["urlcustomDE"]).Equals(DBNull.Value))
+                            item.UrlcustomDE = reader.GetString(reader.GetOrdinal("urlcustomDE"));
+                        if (!(reader["urlcustomES"]).Equals(DBNull.Value))
+                            item.UrlcustomES = reader.GetString(reader.GetOrdinal("urlcustomES"));
+
+
                         if (!(reader["canonicalGB"]).Equals(DBNull.Value))
                             item.CanonicalGB = reader.GetString(reader.GetOrdinal("canonicalGB"));
                         if (!(reader["canonicalI"]).Equals(DBNull.Value))
@@ -3090,6 +3313,11 @@ namespace WelcomeLibrary.DAL
                             item.CanonicalRU = reader.GetString(reader.GetOrdinal("canonicalRU"));
                         if (!(reader["canonicalFR"]).Equals(DBNull.Value))
                             item.CanonicalFR = reader.GetString(reader.GetOrdinal("canonicalFR"));
+
+                        if (!(reader["canonicalES"]).Equals(DBNull.Value))
+                            item.CanonicalES = reader.GetString(reader.GetOrdinal("canonicalES"));
+                        if (!(reader["canonicalDE"]).Equals(DBNull.Value))
+                            item.CanonicalDE = reader.GetString(reader.GetOrdinal("canonicalDE"));
 
                         if (!(reader["robots"]).Equals(DBNull.Value))
                             item.Robots = reader.GetString(reader.GetOrdinal("robots"));
@@ -3127,6 +3355,29 @@ namespace WelcomeLibrary.DAL
                             item.Campo1FR = reader.GetString(reader.GetOrdinal("Campo1FR"));
                         if (!reader["Campo2FR"].Equals(DBNull.Value))
                             item.Campo2FR = reader.GetString(reader.GetOrdinal("Campo2FR"));
+
+
+                        if (!reader["DATITECNICIDE"].Equals(DBNull.Value))
+                            item.DatitecniciDE = reader.GetString(reader.GetOrdinal("DATITECNICIDE"));
+                        if (!reader["DescrizioneDE"].Equals(DBNull.Value))
+                            item.DescrizioneDE = reader.GetString(reader.GetOrdinal("DescrizioneDE"));
+                        if (!reader["DENOMINAZIONEDE"].Equals(DBNull.Value))
+                            item.DenominazioneDE = reader.GetString(reader.GetOrdinal("DENOMINAZIONEDE"));
+                        if (!reader["Campo1DE"].Equals(DBNull.Value))
+                            item.Campo1DE = reader.GetString(reader.GetOrdinal("Campo1DE"));
+                        if (!reader["Campo2DE"].Equals(DBNull.Value))
+                            item.Campo2DE = reader.GetString(reader.GetOrdinal("Campo2DE"));
+
+                        if (!reader["DATITECNICIES"].Equals(DBNull.Value))
+                            item.DatitecniciES = reader.GetString(reader.GetOrdinal("DATITECNICIES"));
+                        if (!reader["DescrizioneES"].Equals(DBNull.Value))
+                            item.DescrizioneES = reader.GetString(reader.GetOrdinal("DescrizioneES"));
+                        if (!reader["DENOMINAZIONEES"].Equals(DBNull.Value))
+                            item.DenominazioneES = reader.GetString(reader.GetOrdinal("DENOMINAZIONEES"));
+                        if (!reader["Campo1ES"].Equals(DBNull.Value))
+                            item.Campo1ES = reader.GetString(reader.GetOrdinal("Campo1ES"));
+                        if (!reader["Campo2ES"].Equals(DBNull.Value))
+                            item.Campo2ES = reader.GetString(reader.GetOrdinal("Campo2ES"));
 
 
 
@@ -3603,6 +3854,12 @@ namespace WelcomeLibrary.DAL
                         if (!(reader["urlcustomFR"]).Equals(DBNull.Value))
                             item.UrlcustomFR = reader.GetString(reader.GetOrdinal("urlcustomFR"));
 
+                        if (!(reader["urlcustomES"]).Equals(DBNull.Value))
+                            item.UrlcustomES = reader.GetString(reader.GetOrdinal("urlcustomES"));
+
+                        if (!(reader["urlcustomDE"]).Equals(DBNull.Value))
+                            item.UrlcustomDE = reader.GetString(reader.GetOrdinal("urlcustomDE"));
+
                         if (!(reader["canonicalGB"]).Equals(DBNull.Value))
                             item.CanonicalGB = reader.GetString(reader.GetOrdinal("canonicalGB"));
                         if (!(reader["canonicalI"]).Equals(DBNull.Value))
@@ -3611,6 +3868,11 @@ namespace WelcomeLibrary.DAL
                             item.CanonicalRU = reader.GetString(reader.GetOrdinal("canonicalRU"));
                         if (!(reader["canonicalFR"]).Equals(DBNull.Value))
                             item.CanonicalFR = reader.GetString(reader.GetOrdinal("canonicalFR"));
+
+                        if (!(reader["canonicalDE"]).Equals(DBNull.Value))
+                            item.CanonicalDE = reader.GetString(reader.GetOrdinal("canonicalDE"));
+                        if (!(reader["canonicalES"]).Equals(DBNull.Value))
+                            item.CanonicalES = reader.GetString(reader.GetOrdinal("canonicalES"));
 
                         if (!(reader["robots"]).Equals(DBNull.Value))
                             item.Robots = reader.GetString(reader.GetOrdinal("robots"));
@@ -3646,6 +3908,30 @@ namespace WelcomeLibrary.DAL
                             item.Campo1FR = reader.GetString(reader.GetOrdinal("Campo1FR"));
                         if (!reader["Campo2FR"].Equals(DBNull.Value))
                             item.Campo2FR = reader.GetString(reader.GetOrdinal("Campo2FR"));
+
+                        if (!reader["DATITECNICIES"].Equals(DBNull.Value))
+                            item.DatitecniciES = reader.GetString(reader.GetOrdinal("DATITECNICIES"));
+                        if (!reader["DescrizioneES"].Equals(DBNull.Value))
+                            item.DescrizioneES = reader.GetString(reader.GetOrdinal("DescrizioneES"));
+                        if (!reader["DENOMINAZIONEES"].Equals(DBNull.Value))
+                            item.DenominazioneES = reader.GetString(reader.GetOrdinal("DENOMINAZIONEES"));
+                        if (!reader["Campo1ES"].Equals(DBNull.Value))
+                            item.Campo1ES = reader.GetString(reader.GetOrdinal("Campo1ES"));
+                        if (!reader["Campo2ES"].Equals(DBNull.Value))
+                            item.Campo2ES = reader.GetString(reader.GetOrdinal("Campo2ES"));
+
+
+                        if (!reader["DATITECNICIDE"].Equals(DBNull.Value))
+                            item.DatitecniciDE = reader.GetString(reader.GetOrdinal("DATITECNICIDE"));
+                        if (!reader["DescrizioneDE"].Equals(DBNull.Value))
+                            item.DescrizioneDE = reader.GetString(reader.GetOrdinal("DescrizioneDE"));
+                        if (!reader["DENOMINAZIONEDE"].Equals(DBNull.Value))
+                            item.DenominazioneDE = reader.GetString(reader.GetOrdinal("DENOMINAZIONEDE"));
+                        if (!reader["Campo1DE"].Equals(DBNull.Value))
+                            item.Campo1DE = reader.GetString(reader.GetOrdinal("Campo1DE"));
+                        if (!reader["Campo2DE"].Equals(DBNull.Value))
+                            item.Campo2DE = reader.GetString(reader.GetOrdinal("Campo2DE"));
+
 
 
                         if (!reader["XmlValue"].Equals(DBNull.Value))
@@ -3838,6 +4124,8 @@ namespace WelcomeLibrary.DAL
                         if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("dgb")) etype = "dgb";
                         if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("dru")) etype = "dru";
                         if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("dfr")) etype = "dfr";
+                        if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("dde")) etype = "dde";
+                        if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("de1")) etype = "de1";
                         if (Schema.Substring(startseq + 1, 3).ToLower().StartsWith("pro")) etype = "pro";
                     }
                 }
@@ -3901,6 +4189,26 @@ namespace WelcomeLibrary.DAL
                         //LEGGIAMO IL VALORE (descrizione ALLEGATO)
                         item.DescrizioneFR = Value.Substring(i, j);
                         break;
+                    case "dde":
+                        end = Schema.IndexOf(":", start);
+                        i = Convert.ToInt32(Schema.Substring(start, (end - start)));//Posizione di inizio
+                        start = end + 1;
+                        end = Schema.IndexOf(":", start);
+                        j = Convert.ToInt32(Schema.Substring(start, (end - start)));//N.Caratteri da leggere
+                        start = end + 1;
+                        //LEGGIAMO IL VALORE (descrizione ALLEGATO)
+                        item.DescrizioneDE = Value.Substring(i, j);
+                        break;
+                    case "de1":
+                        end = Schema.IndexOf(":", start);
+                        i = Convert.ToInt32(Schema.Substring(start, (end - start)));//Posizione di inizio
+                        start = end + 1;
+                        end = Schema.IndexOf(":", start);
+                        j = Convert.ToInt32(Schema.Substring(start, (end - start)));//N.Caratteri da leggere
+                        start = end + 1;
+                        //LEGGIAMO IL VALORE (descrizione ALLEGATO)
+                        item.DescrizioneES = Value.Substring(i, j);
+                        break;
                     case "pro":
                         end = Schema.IndexOf(":", start);
                         i = Convert.ToInt32(Schema.Substring(start, (end - start)));//Posizione di inizio
@@ -3947,6 +4255,8 @@ namespace WelcomeLibrary.DAL
                 list.DescrizioneGB = list[0].DescrizioneGB; //Setto la descrizione per l'alt della foto anteprima
                 list.DescrizioneRU = list[0].DescrizioneRU; //Setto la descrizione per l'alt della foto anteprima
                 list.DescrizioneFR = list[0].DescrizioneFR; //Setto la descrizione per l'alt della foto anteprima
+                list.DescrizioneDE = list[0].DescrizioneDE; //Setto la descrizione per l'alt della foto anteprima
+                list.DescrizioneES = list[0].DescrizioneES; //Setto la descrizione per l'alt della foto anteprima
             }
 
             return list;
@@ -4019,6 +4329,29 @@ namespace WelcomeLibrary.DAL
                     pos += len;
                 }
 
+                //INSERISCO DESCRIZIONE DE
+                len = item.DescrizioneDE.Length;
+                if (len > 0)
+                {
+                    item.DescrizioneDE.Replace(":S:", "SSS");//Elimina eventuali presenze
+                                                             //del carattere di separazione dalla descrizione
+                    list.Schema += "Dde" + n + ":S:" + pos + ":" + len + ":";
+                    list.Valori += item.DescrizioneDE;
+                    pos += len;
+                }
+
+
+                //INSERISCO DESCRIZIONE ES
+                len = item.DescrizioneES.Length;
+                if (len > 0)
+                {
+                    item.DescrizioneDE.Replace(":S:", "SSS");//Elimina eventuali presenze
+                                                             //del carattere di separazione dalla descrizione
+                    list.Schema += "De1" + n + ":S:" + pos + ":" + len + ":";
+                    list.Valori += item.DescrizioneES;
+                    pos += len;
+                }
+
                 //INSERISCO Progressivo
                 len = item.Progressivo.ToString().Length;
                 item.Progressivo.ToString().Replace(":S:", "SSS");//Elimina eventuali presenze
@@ -4033,7 +4366,7 @@ namespace WelcomeLibrary.DAL
             return list;
         }
 
-        public bool modificaFoto(string connection, long idOfferta, string nomefile, string descrizioneI, string progressivo = "", string descrizioneGB = "", string descrizioneRU = "", string descrizioneFR = "")
+        public bool modificaFoto(string connection, long idOfferta, string nomefile, string descrizioneI, string progressivo = "", string descrizioneGB = "", string descrizioneRU = "", string descrizioneFR = "", string descrizioneDE = "", string descrizioneES = "")
         {
             if (connection == "") return false;
             if (idOfferta == 0) return false;
@@ -4053,6 +4386,8 @@ namespace WelcomeLibrary.DAL
                 F1.DescrizioneGB = (!string.IsNullOrEmpty(descrizioneGB)) ? descrizioneGB : descrizioneI;
                 F1.DescrizioneRU = (!string.IsNullOrEmpty(descrizioneRU)) ? descrizioneRU : descrizioneI;
                 F1.DescrizioneFR = (!string.IsNullOrEmpty(descrizioneFR)) ? descrizioneFR : descrizioneI;
+                F1.DescrizioneDE = (!string.IsNullOrEmpty(descrizioneDE)) ? descrizioneDE : descrizioneI;
+                F1.DescrizioneES = (!string.IsNullOrEmpty(descrizioneES)) ? descrizioneES : descrizioneI;
                 int tmp = 0;
                 int.TryParse(progressivo, out tmp);
                 F1.Progressivo = tmp;
@@ -4084,7 +4419,7 @@ namespace WelcomeLibrary.DAL
             return true;
         }
 
-        public bool insertFoto(string connection, long idOfferta, string nomefile, string descrizioneI, string progressivo = "", string descrizioneGB = "", string descrizioneRU = "", string descrizioneFR = "")
+        public bool insertFoto(string connection, long idOfferta, string nomefile, string descrizioneI, string progressivo = "", string descrizioneGB = "", string descrizioneRU = "", string descrizioneFR = "", string descrizioneDE = "", string descrizioneES = "")
         {
             if (connection == "") return false;
             if (idOfferta == 0) return false;
@@ -4105,6 +4440,8 @@ namespace WelcomeLibrary.DAL
                 tmp.DescrizioneGB = (!string.IsNullOrEmpty(descrizioneGB)) ? descrizioneGB : descrizioneI;
                 tmp.DescrizioneRU = (!string.IsNullOrEmpty(descrizioneRU)) ? descrizioneRU : descrizioneI;
                 tmp.DescrizioneFR = (!string.IsNullOrEmpty(descrizioneFR)) ? descrizioneFR : descrizioneI;
+                tmp.DescrizioneES = (!string.IsNullOrEmpty(descrizioneES)) ? descrizioneES : descrizioneI;
+                tmp.DescrizioneDE = (!string.IsNullOrEmpty(descrizioneDE)) ? descrizioneDE : descrizioneI;
 
                 int tmpint = 1;
                 if (!string.IsNullOrEmpty(progressivo))
@@ -4386,6 +4723,29 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pcampo2FR = new SQLiteParameter("@Campo2FR", item.Campo2FR);
             parColl.Add(pcampo2FR);
 
+            SQLiteParameter p3DE = new SQLiteParameter("@DENOMINAZIONEDE", item.DenominazioneDE);
+            parColl.Add(p3DE);
+            SQLiteParameter p5DE = new SQLiteParameter("@DescrizioneDE", item.DescrizioneDE);
+            parColl.Add(p5DE);
+            SQLiteParameter p12DE = new SQLiteParameter("@DATITECNICIDE", item.DatitecniciDE);
+            parColl.Add(p12DE);
+            SQLiteParameter pcampo1DE = new SQLiteParameter("@Campo1DE", item.Campo1DE);
+            parColl.Add(pcampo1DE);
+            SQLiteParameter pcampo2DE = new SQLiteParameter("@Campo2DE", item.Campo2DE);
+            parColl.Add(pcampo2DE);
+
+
+            SQLiteParameter p3ES = new SQLiteParameter("@DENOMINAZIONEES", item.DenominazioneES);
+            parColl.Add(p3ES);
+            SQLiteParameter p5ES = new SQLiteParameter("@DescrizioneES", item.DescrizioneES);
+            parColl.Add(p5ES);
+            SQLiteParameter p12ES = new SQLiteParameter("@DATITECNICIES", item.DatitecniciES);
+            parColl.Add(p12ES);
+            SQLiteParameter pcampo1ES = new SQLiteParameter("@Campo1ES", item.Campo1ES);
+            parColl.Add(pcampo1ES);
+            SQLiteParameter pcampo2ES = new SQLiteParameter("@Campo2ES", item.Campo2ES);
+            parColl.Add(pcampo2ES);
+
 
             SQLiteParameter pqtavendita = new SQLiteParameter();
             if (item.Qta_vendita == null)
@@ -4412,6 +4772,10 @@ namespace WelcomeLibrary.DAL
             parColl.Add(puca3);
             SQLiteParameter puca4 = new SQLiteParameter("@urlcustomFR", item.UrlcustomFR);
             parColl.Add(puca4);
+            SQLiteParameter puca5 = new SQLiteParameter("@urlcustomDE", item.UrlcustomDE);
+            parColl.Add(puca5);
+            SQLiteParameter puca6 = new SQLiteParameter("@urlcustomES", item.UrlcustomES);
+            parColl.Add(puca6);
 
             SQLiteParameter pca1 = new SQLiteParameter("@canonicalI", item.CanonicalI);
             parColl.Add(pca1);
@@ -4421,10 +4785,14 @@ namespace WelcomeLibrary.DAL
             parColl.Add(pca3);
             SQLiteParameter pca4 = new SQLiteParameter("@canonicalFR", item.CanonicalFR);
             parColl.Add(pca4);
+            SQLiteParameter pca5 = new SQLiteParameter("@canonicalDE", item.CanonicalDE);
+            parColl.Add(pca5);
+            SQLiteParameter pca6 = new SQLiteParameter("@canonicalES", item.CanonicalES);
+            parColl.Add(pca6);
             SQLiteParameter pr1 = new SQLiteParameter("@robots", item.Robots);
             parColl.Add(pr1);
 
-            string query = "INSERT INTO " + _tblarchivio + " ([CodiceTIPOLOGIA],[DENOMINAZIONEI],[DENOMINAZIONEGB],[DescrizioneI],[DescrizioneGB],[FotoSchema],[FotoValori],[CodiceNAZIONE],[CodiceCOMUNE],[CodicePROVINCIA],[CodiceREGIONE],[DATITECNICII],[DATITECNICIGB],[EMAIL],[FAX],[INDIRIZZO],[TELEFONO],[WEBSITE],[DataInserimento],[Data1],[CodiceProdotto],[CodiceCategoria],[CodiceCategoria2Liv],[Prezzo],[PrezzoListino],[Vetrina],[Abilitacontatto],linkVideo,campo1I,campo2I,campo1GB,campo2GB,Caratteristica1,Caratteristica2,Caratteristica3,Caratteristica4,Caratteristica5,Caratteristica6,Anno,Archiviato,Id_collegato,Id_dts_collegato,Autore,xmlValue,DENOMINAZIONERU,DescrizioneRU,DATITECNICIRU,campo1RU,campo2RU,DENOMINAZIONEFR,DescrizioneFR,DATITECNICIFR,campo1FR,campo2FR,Qta_vendita,Peso,Promozione,urlcustomI,urlcustomGB,urlcustomRU,urlcustomFR,canonicalI,canonicalGB,canonicalRU,canonicalFR,robots  ) VALUES (@CodiceTIPOLOGIA,@DENOMINAZIONEI,@DENOMINAZIONEGB,@DescrizioneI,@DescrizioneGB,@FotoSchema,@FotoValori,@CodiceNAZIONE,@CodiceCOMUNE,@CodicePROVINCIA,@CodiceREGIONE,@DATITECNICII,@DATITECNICIGB,@EMAIL,@FAX,@INDIRIZZO,@TELEFONO,@WEBSITE,@Data,@data1,@CodiceProdotto,@CodiceCategoria,@CodiceCategoria2Liv,@Prezzo,@PrezzoListino,@Vetrina,@Abilitacontatto,@linkVideo,@Campo1I,@Campo2I,@Campo1GB,@Campo2GB,@Caratteristica1,@Caratteristica2,@Caratteristica3,@Caratteristica4,@Caratteristica5,@Caratteristica6,@Anno,@Archiviato,@Id_collegato,@Id_dts_collegato,@Autore,@xmlValue,@DENOMINAZIONERU,@DescrizioneRU,@DATITECNICIRU,@Campo1RU,@Campo2RU,@DENOMINAZIONEFR,@DescrizioneFR,@DATITECNICIFR,@Campo1FR,@Campo2FR,@Qta_vendita,@Peso,@Promozione,@urlcustomI,@urlcustomGB,@urlcustomRU,@urlcustomFR,@canonicalI,@canonicalGB,@canonicalRU,@canonicalFR,@robots )";
+            string query = "INSERT INTO " + _tblarchivio + " ([CodiceTIPOLOGIA],[DENOMINAZIONEI],[DENOMINAZIONEGB],[DescrizioneI],[DescrizioneGB],[FotoSchema],[FotoValori],[CodiceNAZIONE],[CodiceCOMUNE],[CodicePROVINCIA],[CodiceREGIONE],[DATITECNICII],[DATITECNICIGB],[EMAIL],[FAX],[INDIRIZZO],[TELEFONO],[WEBSITE],[DataInserimento],[Data1],[CodiceProdotto],[CodiceCategoria],[CodiceCategoria2Liv],[Prezzo],[PrezzoListino],[Vetrina],[Abilitacontatto],linkVideo,campo1I,campo2I,campo1GB,campo2GB,Caratteristica1,Caratteristica2,Caratteristica3,Caratteristica4,Caratteristica5,Caratteristica6,Anno,Archiviato,Id_collegato,Id_dts_collegato,Autore,xmlValue,DENOMINAZIONERU,DescrizioneRU,DATITECNICIRU,campo1RU,campo2RU,DENOMINAZIONEFR,DescrizioneFR,DATITECNICIFR,campo1FR,campo2FR,DENOMINAZIONEDE,DescrizioneDE,DATITECNICIDE,campo1DE,campo2DE,DENOMINAZIONEES,DescrizioneES,DATITECNICIES,campo1ES,campo2ES,Qta_vendita,Peso,Promozione,urlcustomI,urlcustomGB,urlcustomRU,urlcustomFR,urlcustomDE,urlcustomES,canonicalI,canonicalGB,canonicalRU,canonicalFR,canonicalDE,canonicalES,robots  ) VALUES (@CodiceTIPOLOGIA,@DENOMINAZIONEI,@DENOMINAZIONEGB,@DescrizioneI,@DescrizioneGB,@FotoSchema,@FotoValori,@CodiceNAZIONE,@CodiceCOMUNE,@CodicePROVINCIA,@CodiceREGIONE,@DATITECNICII,@DATITECNICIGB,@EMAIL,@FAX,@INDIRIZZO,@TELEFONO,@WEBSITE,@Data,@data1,@CodiceProdotto,@CodiceCategoria,@CodiceCategoria2Liv,@Prezzo,@PrezzoListino,@Vetrina,@Abilitacontatto,@linkVideo,@Campo1I,@Campo2I,@Campo1GB,@Campo2GB,@Caratteristica1,@Caratteristica2,@Caratteristica3,@Caratteristica4,@Caratteristica5,@Caratteristica6,@Anno,@Archiviato,@Id_collegato,@Id_dts_collegato,@Autore,@xmlValue,@DENOMINAZIONERU,@DescrizioneRU,@DATITECNICIRU,@Campo1RU,@Campo2RU,@DENOMINAZIONEFR,@DescrizioneFR,@DATITECNICIFR,@Campo1FR,@Campo2FR,@DENOMINAZIONEDE,@DescrizioneDE,@DATITECNICIDE,@Campo1DE,@Campo2DE,@DENOMINAZIONEES,@DescrizioneES,@DATITECNICIES,@Campo1ES,@Campo2ES,@Qta_vendita,@Peso,@Promozione,@urlcustomI,@urlcustomGB,@urlcustomRU,@urlcustomFR,@urlcustomDE,@urlcustomES,@canonicalI,@canonicalGB,@canonicalRU,@canonicalFR,@canonicalDE,@canonicalES,@robots )";
             try
             {
                 long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -4727,8 +5095,6 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pcampo2ru = new SQLiteParameter("@Campo2RU", item.Campo2RU);
             parColl.Add(pcampo2ru);
 
-
-
             SQLiteParameter p3FR = new SQLiteParameter("@DENOMINAZIONEFR", item.DenominazioneFR);
             parColl.Add(p3FR);
             SQLiteParameter p5FR = new SQLiteParameter("@DescrizioneFR", item.DescrizioneFR);
@@ -4739,6 +5105,28 @@ namespace WelcomeLibrary.DAL
             parColl.Add(pcampo1FR);
             SQLiteParameter pcampo2FR = new SQLiteParameter("@Campo2FR", item.Campo2FR);
             parColl.Add(pcampo2FR);
+
+            SQLiteParameter p3DE = new SQLiteParameter("@DENOMINAZIONEDE", item.DenominazioneDE);
+            parColl.Add(p3DE);
+            SQLiteParameter p5DE = new SQLiteParameter("@DescrizioneDE", item.DescrizioneDE);
+            parColl.Add(p5DE);
+            SQLiteParameter p12DE = new SQLiteParameter("@DATITECNICIDE", item.DatitecniciDE);
+            parColl.Add(p12DE);
+            SQLiteParameter pcampo1DE = new SQLiteParameter("@Campo1DE", item.Campo1DE);
+            parColl.Add(pcampo1DE);
+            SQLiteParameter pcampo2DE = new SQLiteParameter("@Campo2DE", item.Campo2DE);
+            parColl.Add(pcampo2DE);
+
+            SQLiteParameter p3ES = new SQLiteParameter("@DENOMINAZIONEES", item.DenominazioneES);
+            parColl.Add(p3ES);
+            SQLiteParameter p5ES = new SQLiteParameter("@DescrizioneES", item.DescrizioneES);
+            parColl.Add(p5ES);
+            SQLiteParameter p12ES = new SQLiteParameter("@DATITECNICIES", item.DatitecniciES);
+            parColl.Add(p12ES);
+            SQLiteParameter pcampo1ES = new SQLiteParameter("@Campo1ES", item.Campo1ES);
+            parColl.Add(pcampo1ES);
+            SQLiteParameter pcampo2ES = new SQLiteParameter("@Campo2ES", item.Campo2ES);
+            parColl.Add(pcampo2ES);
 
             SQLiteParameter pqtavendita = new SQLiteParameter();
             if (item.Qta_vendita == null)
@@ -4766,6 +5154,10 @@ namespace WelcomeLibrary.DAL
             parColl.Add(puca3);
             SQLiteParameter puca4 = new SQLiteParameter("@urlcustomFR", item.UrlcustomFR);
             parColl.Add(puca4);
+            SQLiteParameter puca5 = new SQLiteParameter("@urlcustomDE", item.UrlcustomDE);
+            parColl.Add(puca5);
+            SQLiteParameter puca6 = new SQLiteParameter("@urlcustomES", item.UrlcustomES);
+            parColl.Add(puca6);
 
             SQLiteParameter pca1 = new SQLiteParameter("@canonicalI", item.CanonicalI);
             parColl.Add(pca1);
@@ -4775,13 +5167,17 @@ namespace WelcomeLibrary.DAL
             parColl.Add(pca3);
             SQLiteParameter pca4 = new SQLiteParameter("@canonicalFR", item.CanonicalFR);
             parColl.Add(pca4);
+            SQLiteParameter pca5 = new SQLiteParameter("@canonicalDE", item.CanonicalDE);
+            parColl.Add(pca5);
+            SQLiteParameter pca6 = new SQLiteParameter("@canonicalES", item.CanonicalES);
+            parColl.Add(pca6);
 
             SQLiteParameter pr1 = new SQLiteParameter("@robots", item.Robots);
             parColl.Add(pr1);
 
             SQLiteParameter p16 = new SQLiteParameter("@Id", item.Id);
             parColl.Add(p16);
-            string query = "UPDATE " + _tblarchivio + " SET [DENOMINAZIONEI]=@DENOMINAZIONEI , [DENOMINAZIONEGB]= @DENOMINAZIONEGB , [DescrizioneI]=@DescrizioneI , [DescrizioneGB]= @DescrizioneGB , [FotoSchema]=@FotoSchema, [FotoValori]=@FotoValori,[CodiceNAZIONE]=@CodiceNAZIONE , [CodiceCOMUNE]=@CodiceCOMUNE ,[CodicePROVINCIA]=@CodicePROVINCIA , [CodiceREGIONE]= @CodiceREGIONE , [DATITECNICII]=@DATITECNICII , [DATITECNICIGB]= @DATITECNICIGB , [EMAIL]=@EMAIL , [FAX]=@FAX , [INDIRIZZO]= @INDIRIZZO , [TELEFONO]=@TELEFONO , [WEBSITE]=@WEBSITE , [Datainserimento]= @data , [Data1]= @data1, [CodiceProdotto]=@CodiceProdotto  , [CodiceCategoria]= @CodiceCategoria  , [CodiceCategoria2Liv]= @CodiceCategoria2Liv , [Prezzo]= @Prezzo ,  [PrezzoListino]= @PrezzoListino  , [Vetrina]= @Vetrina , [Abilitacontatto]= @Abilitacontatto  , [linkVideo]= @linkVideo , [Campo1I]= @Campo1I, [Campo2I]= @Campo2I, [Campo1GB]= @Campo1GB, [Campo2GB]= @Campo2GB ,[Caratteristica1]=@Caratteristica1,[Caratteristica2]=@Caratteristica2,[Caratteristica3]=@Caratteristica3,[Caratteristica4]=@Caratteristica4,[Caratteristica5]=@Caratteristica5,[Caratteristica6]=@Caratteristica6,[Anno]=@Anno, [Archiviato]=@Archiviato, [Id_collegato]=@Id_collegato, [Id_dts_collegato]=@Id_dts_collegato,[Autore]=@Autore,[Xmlvalue]=@Xmlvalue, DenominazioneRU=@DENOMINAZIONERU,DescrizioneRU=@DescrizioneRU,DATITECNICIRU=@DATITECNICIRU,Campo1RU=@Campo1RU,Campo2RU=@Campo2RU, DenominazioneFR=@DENOMINAZIONEFR,DescrizioneFR=@DescrizioneFR,DATITECNICIFR=@DATITECNICIFR,Campo1FR=@Campo1FR,Campo2FR=@Campo2FR,  [Qta_vendita]=@Qta_vendita,[Peso]=@Peso,[Promozione]=@Promozione,urlcustomI=@urlcustomI,urlcustomGB=@urlcustomGB,urlcustomRU=@urlcustomRU,urlcustomFR=@urlcustomFR ,canonicalI=@canonicalI,canonicalGB=@canonicalGB,canonicalRU=@canonicalRU,canonicalFR=@canonicalFR,robots=@robots   WHERE [Id]=@Id ";
+            string query = "UPDATE " + _tblarchivio + " SET [DENOMINAZIONEI]=@DENOMINAZIONEI , [DENOMINAZIONEGB]= @DENOMINAZIONEGB , [DescrizioneI]=@DescrizioneI , [DescrizioneGB]= @DescrizioneGB , [FotoSchema]=@FotoSchema, [FotoValori]=@FotoValori,[CodiceNAZIONE]=@CodiceNAZIONE , [CodiceCOMUNE]=@CodiceCOMUNE ,[CodicePROVINCIA]=@CodicePROVINCIA , [CodiceREGIONE]= @CodiceREGIONE , [DATITECNICII]=@DATITECNICII , [DATITECNICIGB]= @DATITECNICIGB , [EMAIL]=@EMAIL , [FAX]=@FAX , [INDIRIZZO]= @INDIRIZZO , [TELEFONO]=@TELEFONO , [WEBSITE]=@WEBSITE , [Datainserimento]= @data , [Data1]= @data1, [CodiceProdotto]=@CodiceProdotto  , [CodiceCategoria]= @CodiceCategoria  , [CodiceCategoria2Liv]= @CodiceCategoria2Liv , [Prezzo]= @Prezzo ,  [PrezzoListino]= @PrezzoListino  , [Vetrina]= @Vetrina , [Abilitacontatto]= @Abilitacontatto  , [linkVideo]= @linkVideo , [Campo1I]= @Campo1I, [Campo2I]= @Campo2I, [Campo1GB]= @Campo1GB, [Campo2GB]= @Campo2GB ,[Caratteristica1]=@Caratteristica1,[Caratteristica2]=@Caratteristica2,[Caratteristica3]=@Caratteristica3,[Caratteristica4]=@Caratteristica4,[Caratteristica5]=@Caratteristica5,[Caratteristica6]=@Caratteristica6,[Anno]=@Anno, [Archiviato]=@Archiviato, [Id_collegato]=@Id_collegato, [Id_dts_collegato]=@Id_dts_collegato,[Autore]=@Autore,[Xmlvalue]=@Xmlvalue, DenominazioneRU=@DENOMINAZIONERU,DescrizioneRU=@DescrizioneRU,DATITECNICIRU=@DATITECNICIRU,Campo1RU=@Campo1RU,Campo2RU=@Campo2RU, DenominazioneFR=@DENOMINAZIONEFR,DescrizioneFR=@DescrizioneFR,DATITECNICIFR=@DATITECNICIFR,Campo1FR=@Campo1FR,Campo2FR=@Campo2FR, DenominazioneDE=@DENOMINAZIONEDE,DescrizioneDE=@DescrizioneDE,DATITECNICIDE=@DATITECNICIDE,Campo1DE=@Campo1DE,Campo2DE=@Campo2DE, DenominazioneES=@DENOMINAZIONEES,DescrizioneES=@DescrizioneES,DATITECNICIES=@DATITECNICIES,Campo1ES=@Campo1ES,Campo2ES=@Campo2ES, [Qta_vendita]=@Qta_vendita,[Peso]=@Peso,[Promozione]=@Promozione,urlcustomI=@urlcustomI,urlcustomGB=@urlcustomGB,urlcustomRU=@urlcustomRU,urlcustomFR=@urlcustomFR,urlcustomDE=@urlcustomDE,urlcustomES=@urlcustomES ,canonicalI=@canonicalI,canonicalGB=@canonicalGB,canonicalRU=@canonicalRU,canonicalFR=@canonicalFR,canonicalDE=@canonicalDE,canonicalES=@canonicalES,robots=@robots   WHERE [Id]=@Id ";
 
             try
             {
@@ -5783,6 +6179,16 @@ namespace WelcomeLibrary.DAL
                         testotitolo = _o.DenominazioneFR;
                         descrizione = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DescrizioneFR, 300000, true));
                         datitecnici = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DatitecniciFR, 300000, true));
+                        break;
+                    case "DE":
+                        testotitolo = _o.DenominazioneDE;
+                        descrizione = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DescrizioneDE, 300000, true));
+                        datitecnici = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DatitecniciDE, 300000, true));
+                        break;
+                    case "ES":
+                        testotitolo = _o.DenominazioneES;
+                        descrizione = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DescrizioneES, 300000, true));
+                        datitecnici = ReplaceLinks(WelcomeLibrary.UF.SitemapManager.ConteggioCaratteri(_o.DatitecniciES, 300000, true));
                         break;
                     default:
                         testotitolo = _o.DenominazioneI;
@@ -7021,6 +7427,12 @@ namespace WelcomeLibrary.DAL
                 case "fr":
                     lingua = "FR";
                     break;
+                case "es":
+                    lingua = "ES";
+                    break;
+                case "de":
+                    lingua = "DE";
+                    break;
                 default:
                     lingua = "GB";
                     break;
@@ -7611,6 +8023,37 @@ namespace WelcomeLibrary.DAL
                 CreaRssFeed("FR", item.Codice);
             }
         }
+
+        /// <summary>
+        /// Wrapper per lingua inglese per la creazione del feed in inglese
+        /// </summary>
+        public void CreaRssFeed_DE()
+        {
+            CreaRssFeed("DE");
+        }
+        public void CreaRssFeedPerCategoria_DE()
+        {
+            foreach (TipologiaOfferte item in Utility.TipologieOfferte)
+            {
+                CreaRssFeed("DE", item.Codice);
+            }
+        }
+
+        /// <summary>
+        /// Wrapper per lingua inglese per la creazione del feed in inglese
+        /// </summary>
+        public void CreaRssFeed_ES()
+        {
+            CreaRssFeed("ES");
+        }
+        public void CreaRssFeedPerCategoria_ES()
+        {
+            foreach (TipologiaOfferte item in Utility.TipologieOfferte)
+            {
+                CreaRssFeed("ES", item.Codice);
+            }
+        }
+
 
         /// <summary>
         /// Creo un feed rss con tutti gli immobili per ogni lingua ( inglese , italiano )

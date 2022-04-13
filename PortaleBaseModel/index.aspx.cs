@@ -90,6 +90,14 @@ public partial class index : CommonPage
                     customdesc = content.CustomdescFR;
                     customtitle = content.CustomtitleFR;
                     break;
+                case "DE":
+                    customdesc = content.CustomdescDE;
+                    customtitle = content.CustomtitleDE;
+                    break;
+                case "ES":
+                    customdesc = content.CustomdescES;
+                    customtitle = content.CustomtitleES;
+                    break;
             }
             if (!string.IsNullOrEmpty(customtitle))
                 ((HtmlTitle)Master.FindControl("metaTitle")).Text = (customtitle).Replace("<br/>", "\r\n");
@@ -120,6 +128,8 @@ public partial class index : CommonPage
         string linken = "";
         string linkru = "";
         string linkfr = "";
+        string linkde = "";
+        string linkes = "";
 
         //CANONICAL DEFAULT /////////////////////////////////////////////
         string linkcanonico = "~";
@@ -199,8 +209,8 @@ public partial class index : CommonPage
         }
         if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatefr").ToLower() == "true")
         {
-            //danese
-            hreflang = " hreflang=\"da\" ";
+            //francese
+            hreflang = " hreflang=\"fr\" ";
             linkcanonicoalt = "~/" + SitemapManager.getCulturenamefromlingua("FR") + "/home";
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "FR")
                 linkcanonicoalt = "~";
@@ -218,7 +228,51 @@ public partial class index : CommonPage
             }
         }
 
-        SettaLinkCambioLingua(linki, linken, linkru, linkfr);
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatede").ToLower() == "true")
+        {
+            //tedesco
+            hreflang = " hreflang=\"de\" ";
+            linkcanonicoalt = "~/" + SitemapManager.getCulturenamefromlingua("DE") + "/home";
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "DE")
+                linkcanonicoalt = "~";
+            //Forzatura canonical alternate
+            if (!string.IsNullOrEmpty(content.CanonicalbyLingua("DE").Trim()))
+                linkcanonicoalt = (content.CanonicalbyLingua("DE").Trim());
+            linkde = ReplaceAbsoluteLinks(linkcanonicoalt);
+
+            litgenericalt = ((Literal)Master.FindControl("litgeneric5"));
+            litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "DE")
+            {
+                Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
+                litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            }
+        }
+
+
+        if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activatees").ToLower() == "true")
+        {
+            //spagnolo
+            hreflang = " hreflang=\"es\" ";
+            linkcanonicoalt = "~/" + SitemapManager.getCulturenamefromlingua("ES") + "/home";
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "ES")
+                linkcanonicoalt = "~";
+            //Forzatura canonical alternate
+            if (!string.IsNullOrEmpty(content.CanonicalbyLingua("ES").Trim()))
+                linkcanonicoalt = (content.CanonicalbyLingua("ES").Trim());
+            linkes = ReplaceAbsoluteLinks(linkcanonicoalt);
+
+            litgenericalt = ((Literal)Master.FindControl("litgeneric6"));
+            litgenericalt.Text = "<link  rel=\"alternate\" " + hreflang + " href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            if (WelcomeLibrary.UF.ConfigManagement.ReadKey("deflanguage") == "ES")
+            {
+                Literal litdefault = ((Literal)Master.FindControl("litgeneric0"));
+                litdefault.Text = "<link rel=\"alternate\" hreflang=\"x-default\"  href=\"" + ReplaceAbsoluteLinks(linkcanonicoalt) + "\"/>";
+            }
+        }
+
+
+        SettaLinkCambioLingua(Lingua, linki, "home", linken, "home", linkru, "home", linkfr, "home", linkde, "home", linkes, "home");
 
 
         HtmlGenericControl ulbr = (HtmlGenericControl)Master.FindControl("ulBreadcrumb");
@@ -234,170 +288,6 @@ public partial class index : CommonPage
         //ulbr.InnerHtml = BreadcrumbConstruction(links);
     }
 
-    private void SettaLinkCambioLingua(string linki, string linken, string linkru, string linkfr)
-    {
-        //SET LINK PER CAMBIO LINGUA
-        HtmlGenericControl divCambioLingua1 = (HtmlGenericControl)Master.FindControl("divCambioLingua1");
-        HtmlGenericControl divCambioLingua2 = (HtmlGenericControl)Master.FindControl("divCambioLingua2");
-        HtmlGenericControl divCambioLingua3 = (HtmlGenericControl)Master.FindControl("divCambioLingua3");
-        divCambioLingua1.Visible = false;
-        divCambioLingua2.Visible = false;
-        divCambioLingua3.Visible = false;
 
-        //valori di default non dall'activate language
-        HtmlGenericControl divCambioLinguadef1 = (HtmlGenericControl)Master.FindControl("divCambioLinguadef1");
-        HtmlGenericControl divCambioLinguadef2 = (HtmlGenericControl)Master.FindControl("divCambioLinguadef2");
-        HtmlGenericControl divCambioLinguadef3 = (HtmlGenericControl)Master.FindControl("divCambioLinguadef3");
-        divCambioLinguadef1.Visible = false;
-        divCambioLinguadef2.Visible = false;
-        divCambioLinguadef3.Visible = false;
 
-        switch (Lingua.ToLower())
-        {
-            case "i":
-                if (!string.IsNullOrEmpty(linken))
-                {
-                    divCambioLingua1.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua1.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua1.InnerHtml += "href=\"";
-                    divCambioLingua1.InnerHtml += linken;
-                    divCambioLingua1.InnerHtml += "\" >";
-                    divCambioLingua1.InnerHtml += references.ResMan("Common", Lingua, "testoCambio1").ToUpper();
-                    divCambioLingua1.InnerHtml += "</a>";
-                    divCambioLingua1.Visible = true;
-                }
-                if (!string.IsNullOrEmpty(linkru))
-                {
-                    divCambioLingua2.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua2.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua2.InnerHtml += "href=\"";
-                    divCambioLingua2.InnerHtml += linkru;
-                    divCambioLingua2.InnerHtml += "\" >";
-                    divCambioLingua2.InnerHtml += references.ResMan("Common", Lingua, "testoCambio2").ToUpper();
-                    divCambioLingua2.InnerHtml += "</a>";
-                    divCambioLingua2.Visible = true;
-                }
-                if (!string.IsNullOrEmpty(linkfr))
-                {
-                    divCambioLingua3.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua3.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua3.InnerHtml += "href=\"";
-                    divCambioLingua3.InnerHtml += linkfr;
-                    divCambioLingua3.InnerHtml += "\" >";
-                    divCambioLingua3.InnerHtml += references.ResMan("Common", Lingua, "testoCambio3").ToUpper();
-                    divCambioLingua3.InnerHtml += "</a>";
-                    divCambioLingua3.Visible = true;
-                }
-
-                break;
-            case "gb":
-                if (!string.IsNullOrEmpty(linki))
-                {
-                    divCambioLingua1.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua1.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua1.InnerHtml += "href=\"";
-                    divCambioLingua1.InnerHtml += linki;
-                    divCambioLingua1.InnerHtml += "\" >";
-                    divCambioLingua1.InnerHtml += references.ResMan("Common", Lingua, "testoCambio1").ToUpper();
-                    divCambioLingua1.InnerHtml += "</a>";
-                    divCambioLingua1.Visible = true;
-                }
-                if (!string.IsNullOrEmpty(linkru))
-                {
-                    divCambioLingua2.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua2.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua2.InnerHtml += "href=\"";
-                    divCambioLingua2.InnerHtml += linkru;
-                    divCambioLingua2.InnerHtml += "\" >";
-                    divCambioLingua2.InnerHtml += references.ResMan("Common", Lingua, "testoCambio2").ToUpper();
-                    divCambioLingua2.InnerHtml += "</a>";
-                    divCambioLingua2.Visible = true;
-                }
-                if (!string.IsNullOrEmpty(linkfr))
-                {
-                    divCambioLingua3.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua3.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua3.InnerHtml += "href=\"";
-                    divCambioLingua3.InnerHtml += linkfr;
-                    divCambioLingua3.InnerHtml += "\" >";
-                    divCambioLingua3.InnerHtml += references.ResMan("Common", Lingua, "testoCambio3").ToUpper();
-                    divCambioLingua3.InnerHtml += "</a>";
-                    divCambioLingua3.Visible = true;
-                }
-                break;
-            case "ru":
-                if (!string.IsNullOrEmpty(linken))
-                {
-                    divCambioLingua1.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua1.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua1.InnerHtml += "href=\"";
-                    divCambioLingua1.InnerHtml += linken;
-                    divCambioLingua1.InnerHtml += "\" >";
-                    divCambioLingua1.InnerHtml += references.ResMan("Common", Lingua, "testoCambio1").ToUpper();
-                    divCambioLingua1.InnerHtml += "</a>";
-                    divCambioLingua1.Visible = true;
-                }
-                if (!string.IsNullOrEmpty(linki))
-                {
-                    divCambioLingua2.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua2.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua2.InnerHtml += "href=\"";
-                    divCambioLingua2.InnerHtml += linki;
-                    divCambioLingua2.InnerHtml += "\" >";
-                    divCambioLingua2.InnerHtml += references.ResMan("Common", Lingua, "testoCambio2").ToUpper();
-                    divCambioLingua2.InnerHtml += "</a>";
-                    divCambioLingua2.Visible = true;
-                }
-                if (!string.IsNullOrEmpty(linkfr))
-                {
-                    divCambioLingua3.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua3.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua3.InnerHtml += "href=\"";
-                    divCambioLingua3.InnerHtml += linkfr;
-                    divCambioLingua3.InnerHtml += "\" >";
-                    divCambioLingua3.InnerHtml += references.ResMan("Common", Lingua, "testoCambio3").ToUpper();
-                    divCambioLingua3.InnerHtml += "</a>";
-                    divCambioLingua3.Visible = true;
-                }
-                break;
-            case "fr":
-                if (!string.IsNullOrEmpty(linken))
-                {
-                    divCambioLingua1.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua1.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua1.InnerHtml += "href=\"";
-                    divCambioLingua1.InnerHtml += linken;
-                    divCambioLingua1.InnerHtml += "\" >";
-                    divCambioLingua1.InnerHtml += references.ResMan("Common", Lingua, "testoCambio1").ToUpper();
-                    divCambioLingua1.InnerHtml += "</a>";
-                    divCambioLingua1.Visible = true;
-                }
-                if (!string.IsNullOrEmpty(linki))
-                {
-                    divCambioLingua2.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua2.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua2.InnerHtml += "href=\"";
-                    divCambioLingua2.InnerHtml += linki;
-                    divCambioLingua2.InnerHtml += "\" >";
-                    divCambioLingua2.InnerHtml += references.ResMan("Common", Lingua, "testoCambio2").ToUpper();
-                    divCambioLingua2.InnerHtml += "</a>";
-                    divCambioLingua2.Visible = true;
-                }
-                if (!string.IsNullOrEmpty(linkru))
-                {
-                    divCambioLingua3.InnerHtml = "<a style=\"color: White; padding: 8px\" ";
-                    divCambioLingua3.InnerHtml += (" onclick=\"javascript:JsSvuotaSession(this)\"  ");
-                    divCambioLingua3.InnerHtml += "href=\"";
-                    divCambioLingua3.InnerHtml += linkru;
-                    divCambioLingua3.InnerHtml += "\" >";
-                    divCambioLingua3.InnerHtml += references.ResMan("Common", Lingua, "testoCambio3").ToUpper();
-                    divCambioLingua3.InnerHtml += "</a>";
-                    divCambioLingua3.Visible = true;
-                }
-                break;
-        }
-
-    }
-
-     
 }

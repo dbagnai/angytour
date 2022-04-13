@@ -73,7 +73,6 @@ namespace WelcomeLibrary.DOM
             set { _NavigateUrlRU = value; }
         }
 
-
         private string _AlternateTextFR;
         public string AlternateTextFR
         {
@@ -92,6 +91,49 @@ namespace WelcomeLibrary.DOM
             get { return _NavigateUrlFR; }
             set { _NavigateUrlFR = value; }
         }
+
+
+
+        private string _AlternateTextES;
+        public string AlternateTextES
+        {
+            get { return _AlternateTextES; }
+            set { _AlternateTextES = value; }
+        }
+        private string _ImageUrlES;
+        public string ImageUrlES
+        {
+            get { return _ImageUrlES; }
+            set { _ImageUrlES = value; }
+        }
+        private string _NavigateUrlES;
+        public string NavigateUrlES
+        {
+            get { return _NavigateUrlES; }
+            set { _NavigateUrlES = value; }
+        }
+
+
+        private string _AlternateTextDE;
+        public string AlternateTextDE
+        {
+            get { return _AlternateTextDE; }
+            set { _AlternateTextDE = value; }
+        }
+        private string _ImageUrlDE;
+        public string ImageUrlDE
+        {
+            get { return _ImageUrlDE; }
+            set { _ImageUrlDE = value; }
+        }
+        private string _NavigateUrlDE;
+        public string NavigateUrlDE
+        {
+            get { return _NavigateUrlDE; }
+            set { _NavigateUrlDE = value; }
+        }
+
+
 
         private string _sezione;
         public string sezione
@@ -140,6 +182,19 @@ namespace WelcomeLibrary.DOM
             set { _altimgtextFR = value; }
         }
 
+        private string _altimgtextDE;
+        public string AltimgtextDE
+        {
+            get { return _altimgtextDE; }
+            set { _altimgtextDE = value; }
+        }
+
+        private string _altimgtextES;
+        public string AltimgtextES
+        {
+            get { return _altimgtextES; }
+            set { _altimgtextES = value; }
+        }
 
 
         public string altimgtextbyLingua(string Lingua)
@@ -156,6 +211,12 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "FR":
                     ret = (!string.IsNullOrEmpty(this._altimgtextFR)) ? this._altimgtextFR : this._altimgtextI;
+                    break;
+                case "ES":
+                    ret = (!string.IsNullOrEmpty(this._altimgtextES)) ? this._altimgtextES : this._altimgtextI;
+                    break;
+                case "DE":
+                    ret = (!string.IsNullOrEmpty(this._altimgtextDE)) ? this._altimgtextDE : this._altimgtextI;
                     break;
                 default:
                     ret = this._altimgtextI;
@@ -175,6 +236,12 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "FR":
                     this._altimgtextFR = value;
+                    break;
+                case "ES":
+                    this._altimgtextES = value;
+                    break;
+                case "DE":
+                    this._altimgtextDE = value;
                     break;
                 default:
                     this._altimgtextI = value;
@@ -198,6 +265,12 @@ namespace WelcomeLibrary.DOM
                 case "FR":
                     ret = this.AlternateTextFR;
                     break;
+                case "DE":
+                    ret = this.AlternateTextDE;
+                    break;
+                case "ES":
+                    ret = this.AlternateTextES;
+                    break;
                 default:
                     ret = this._AlternateText;
                     break;
@@ -216,6 +289,12 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "FR":
                     this.AlternateTextFR = value;
+                    break;
+                case "ES":
+                    this.AlternateTextES = value;
+                    break;
+                case "DE":
+                    this.AlternateTextDE = value;
                     break;
                 default:
                     this._AlternateText = value;
@@ -236,6 +315,12 @@ namespace WelcomeLibrary.DOM
                 case "FR":
                     ret = this.ImageUrlFR;
                     break;
+                case "DE":
+                    ret = this.ImageUrlDE;
+                    break;
+                case "ES":
+                    ret = this.ImageUrlES;
+                    break;
                 default:
                     ret = this.ImageUrl;
                     break;
@@ -254,6 +339,12 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "FR":
                     this.ImageUrlFR = value;
+                    break;
+                case "ES":
+                    this.ImageUrlES = value;
+                    break;
+                case "DE":
+                    this.ImageUrlDE = value;
                     break;
                 default:
                     this.ImageUrl = value;
@@ -274,6 +365,12 @@ namespace WelcomeLibrary.DOM
                 case "FR":
                     ret = this.NavigateUrlFR;
                     break;
+                case "DE":
+                    ret = this.NavigateUrlDE;
+                    break;
+                case "ES":
+                    ret = this.NavigateUrlES;
+                    break;
                 default:
                     ret = this.NavigateUrl;
                     break;
@@ -292,6 +389,12 @@ namespace WelcomeLibrary.DOM
                     break;
                 case "FR":
                     this.NavigateUrlFR = value;
+                    break;
+                case "ES":
+                    this.NavigateUrlES = value;
+                    break;
+                case "DE":
+                    this.NavigateUrlDE = value;
                     break;
                 default:
                     this.NavigateUrl = value;
@@ -318,10 +421,21 @@ namespace WelcomeLibrary.DOM
             this.ImageUrlFR = "";
             this.NavigateUrlFR = "";
 
+
+            this.AlternateTextDE = "";
+            this.ImageUrlDE = "";
+            this.NavigateUrlDE = "";
+
+            this.AlternateTextES = "";
+            this.ImageUrlES = "";
+            this.NavigateUrlES = "";
+
             this.AltimgtextI = string.Empty;
             this.AltimgtextGB = string.Empty;
             this.AltimgtextRU = string.Empty;
             this.AltimgtextFR = string.Empty;
+            this.AltimgtextDE = string.Empty;
+            this.AltimgtextES = string.Empty;
 
 
             this.sezione = "";
@@ -337,7 +451,7 @@ namespace WelcomeLibrary.DOM
 
             this.AlternateTextGB = tmp.AlternateTextGB;
             this.ImageUrlGB = tmp.ImageUrlGB;
-            this.NavigateUrlGB = tmp.NavigateUrlGB; 
+            this.NavigateUrlGB = tmp.NavigateUrlGB;
 
 
             this.AlternateTextRU = tmp.AlternateTextRU;
@@ -346,12 +460,22 @@ namespace WelcomeLibrary.DOM
 
             this.AlternateTextFR = tmp.AlternateTextFR;
             this.ImageUrlFR = tmp.ImageUrlFR;
-            this.NavigateUrlFR = tmp.NavigateUrlFR; 
+            this.NavigateUrlFR = tmp.NavigateUrlFR;
+
+            this.AlternateTextES = tmp.AlternateTextES;
+            this.ImageUrlES = tmp.ImageUrlES;
+            this.NavigateUrlES = tmp.NavigateUrlES;
+
+            this.AlternateTextDE = tmp.AlternateTextDE;
+            this.ImageUrlDE = tmp.ImageUrlDE;
+            this.NavigateUrlDE = tmp.NavigateUrlDE;
 
             this.AltimgtextI = tmp.AltimgtextI;
             this.AltimgtextGB = tmp.AltimgtextGB;
             this.AltimgtextRU = tmp.AltimgtextRU;
             this.AltimgtextFR = tmp.AltimgtextFR;
+            this.AltimgtextDE = tmp.AltimgtextDE;
+            this.AltimgtextES = tmp.AltimgtextES;
 
 
 
@@ -366,6 +490,7 @@ namespace WelcomeLibrary.DOM
             _tmp["progressivo"] = this.progressivo.ToString();
             _tmp["Id"] = this.Id.ToString();
             _tmp["ImageUrl"] = this.ImageUrl;
+            _tmp["sezione"] = this.sezione;
             _tmp["NavigateUrl"] = this.NavigateUrl;
             _tmp["AlternateText"] = this.AlternateText;
             _tmp["AlternateTextGB"] = this.AlternateTextGB;
@@ -377,12 +502,23 @@ namespace WelcomeLibrary.DOM
             _tmp["AlternateTextFR"] = this.AlternateTextFR;
             _tmp["ImageUrlFR"] = this.ImageUrlFR;
             _tmp["NavigateUrlFR"] = this.NavigateUrlFR;
-
-            _tmp["sezione"] = this.sezione;
+            _tmp["AltimgtextFR"] = this.AltimgtextFR;
             _tmp["AltimgtextI"] = this.AltimgtextI;
             _tmp["AltimgtextGB"] = this.AltimgtextGB;
             _tmp["AltimgtextRU"] = this.AltimgtextRU;
-            _tmp["AltimgtextFR"] = this.AltimgtextFR;
+
+
+            _tmp["AlternateTextDE"] = this.AlternateTextDE;
+            _tmp["ImageUrlDE"] = this.ImageUrlDE;
+            _tmp["NavigateUrlDE"] = this.NavigateUrlDE;
+            _tmp["AltimgtextDE"] = this.AltimgtextDE;
+
+
+            _tmp["AlternateTextES"] = this.AlternateTextES;
+            _tmp["ImageUrlES"] = this.ImageUrlES;
+            _tmp["NavigateUrlES"] = this.NavigateUrlES;
+            _tmp["AltimgtextES"] = this.AltimgtextES;
+
             _tmp["DataInserimento"] = string.Format("{0:dd/MM/yyyy HH:mm:ss}", new object[] { this.DataInserimento });
             return _tmp;
         }

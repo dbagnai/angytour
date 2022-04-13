@@ -23,7 +23,7 @@ namespace WelcomeLibrary.UF
             // TODO: aggiungere qui la logica del costruttore
             //
         }
-        public static string ModificaFile(string idrecord, string nomefile, string DescrizioneFileI, string progressivofile, string descrizionefileGB = "", string descrizionefileRU = "", string descrizionefileFR = "")
+        public static string ModificaFile(string idrecord, string nomefile, string DescrizioneFileI, string progressivofile, string descrizionefileGB = "", string descrizionefileRU = "", string descrizionefileFR = "", string descrizionefileDE = "", string descrizionefileES = "")
         {
             string ret = "";
             try
@@ -31,7 +31,7 @@ namespace WelcomeLibrary.UF
                 offerteDM offDM = new offerteDM();
                 long i = 0;
                 long.TryParse(idrecord, out i);
-                if (!offDM.modificaFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, i, nomefile, DescrizioneFileI, progressivofile, descrizionefileGB, descrizionefileRU, descrizionefileFR))
+                if (!offDM.modificaFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, i, nomefile, DescrizioneFileI, progressivofile, descrizionefileGB, descrizionefileRU, descrizionefileFR, descrizionefileDE, descrizionefileES))
                     ret = "Errore Modifica file";
             }
             catch (Exception errins)
@@ -41,7 +41,7 @@ namespace WelcomeLibrary.UF
             return ret;
         }
 
-        public static string CaricaFile(HttpServerUtility Server, HttpPostedFile file, string descrizionefileI, string idrecord, string tipologia, string progressivofile, string descrizionefileGB = "", string descrizionefileRU = "", string descrizionefileFR = "")
+        public static string CaricaFile(HttpServerUtility Server, HttpPostedFile file, string descrizionefileI, string idrecord, string tipologia, string progressivofile, string descrizionefileGB = "", string descrizionefileRU = "", string descrizionefileFR = "", string descrizionefileDE = "", string descrizionefileES = "")
         {
             string ret = "";
             try
@@ -114,7 +114,7 @@ namespace WelcomeLibrary.UF
                                     {
                                         try
                                         {
-                                            bool tmpret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, descrizionefileI, progressivofile, descrizionefileGB, descrizionefileRU, descrizionefileFR);
+                                            bool tmpret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, descrizionefileI, progressivofile, descrizionefileGB, descrizionefileRU, descrizionefileFR, descrizionefileDE, descrizionefileES);
                                         }
                                         catch (Exception errins)
                                         {
@@ -145,7 +145,7 @@ namespace WelcomeLibrary.UF
                                 {
                                     try
                                     {
-                                        bool tmpret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, descrizionefileI, progressivofile, descrizionefileGB, descrizionefileRU, descrizionefileFR);
+                                        bool tmpret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, descrizionefileI, progressivofile, descrizionefileGB, descrizionefileRU, descrizionefileFR, descrizionefileDE, descrizionefileES);
                                     }
                                     catch (Exception errins)
                                     {
@@ -172,7 +172,7 @@ namespace WelcomeLibrary.UF
                                 {
                                     try
                                     {
-                                        bool tmpret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, descrizionefileI, progressivofile, descrizionefileGB, descrizionefileRU, descrizionefileFR);
+                                        bool tmpret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, descrizionefileI, progressivofile, descrizionefileGB, descrizionefileRU, descrizionefileFR, descrizionefileDE, descrizionefileES);
                                     }
                                     catch (Exception errins)
                                     {
@@ -204,7 +204,7 @@ namespace WelcomeLibrary.UF
             }
             return ret;
         }
-        public static string CaricaFile(HttpServerUtility Server, FileUpload UploadControl, string descrizionefileI, string idrecord, string tipologia, string progressivofile, string descrizionefileGB = "", string descrizionefileRU = "", string descrizionefileFR = "")
+        public static string CaricaFile(HttpServerUtility Server, FileUpload UploadControl, string descrizionefileI, string idrecord, string tipologia, string progressivofile, string descrizionefileGB = "", string descrizionefileRU = "", string descrizionefileFR = "", string descrizionefileDE = "", string descrizionefileES = "")
         {
             string ret = "";
             try
@@ -276,7 +276,7 @@ namespace WelcomeLibrary.UF
                                     {
                                         try
                                         {
-                                            bool tmpret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, descrizionefileI, progressivofile, descrizionefileGB, descrizionefileRU, descrizionefileFR);
+                                            bool tmpret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, descrizionefileI, progressivofile, descrizionefileGB, descrizionefileRU, descrizionefileFR, descrizionefileDE, descrizionefileES);
                                         }
                                         catch (Exception errins)
                                         {
@@ -307,7 +307,7 @@ namespace WelcomeLibrary.UF
                                 {
                                     try
                                     {
-                                        bool tmpret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, descrizionefileI, progressivofile, descrizionefileGB, descrizionefileRU, descrizionefileFR);
+                                        bool tmpret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, descrizionefileI, progressivofile, descrizionefileGB, descrizionefileRU, descrizionefileFR, descrizionefileDE, descrizionefileES);
                                     }
                                     catch (Exception errins)
                                     {
@@ -334,7 +334,7 @@ namespace WelcomeLibrary.UF
                                 {
                                     try
                                     {
-                                        bool tmpret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, descrizionefileI, progressivofile, descrizionefileGB, descrizionefileRU, descrizionefileFR);
+                                        bool tmpret = offDM.insertFoto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, idSelected, NomeCorretto, descrizionefileI, progressivofile, descrizionefileGB, descrizionefileRU, descrizionefileFR, descrizionefileDE, descrizionefileES);
                                     }
                                     catch (Exception errins)
                                     {
@@ -1070,6 +1070,8 @@ namespace WelcomeLibrary.UF
                                     o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-eng")); //elimino le foto anteprima per tutte le lingue
                                     o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-ru")); //elimino le foto anteprima per tutte le lingue
                                     o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-fr")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-es")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-de")); //elimino le foto anteprima per tutte le lingue
                                     o.FotoCollection_M.FotoAnteprima = agb.NomeAnteprima;
                                     //if (o.FotoCollection_M.Count > 0)
                                     //    o.FotoCollection_M.RemoveAt(0);//elimino il primo elemento che era la foto di anteprima per la lingua italiana //aggiungo nuovamente l'immagine per la lingua richiesta
@@ -1098,6 +1100,8 @@ namespace WelcomeLibrary.UF
                                     o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-eng")); //elimino le foto anteprima per tutte le lingue
                                     o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-ru")); //elimino le foto anteprima per tutte le lingue
                                     o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-fr")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-es")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-de")); //elimino le foto anteprima per tutte le lingue
                                     o.FotoCollection_M.FotoAnteprima = aru.NomeAnteprima;
                                     //if (o.FotoCollection_M.Count > 0)
                                     //    o.FotoCollection_M.RemoveAt(0);//elimino il primo elemento che era la foto di anteprima per la lingua italiana //aggiungo nuovamente l'immagine per la lingua richiesta
@@ -1126,6 +1130,8 @@ namespace WelcomeLibrary.UF
                                     o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-eng")); //elimino le foto anteprima per tutte le lingue
                                     o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-ru")); //elimino le foto anteprima per tutte le lingue
                                     o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-fr")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-es")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-de")); //elimino le foto anteprima per tutte le lingue
                                     o.FotoCollection_M.FotoAnteprima = afr.NomeAnteprima;
                                     //if (o.FotoCollection_M.Count > 0)
                                     //    o.FotoCollection_M.RemoveAt(0);//elimino il primo elemento che era la foto di anteprima per la lingua italiana //aggiungo nuovamente l'immagine per la lingua richiesta
@@ -1136,6 +1142,68 @@ namespace WelcomeLibrary.UF
                                 }
                             }
                             break;
+
+                        case "DE":
+                            Allegato ade = o.FotoCollection_M.Find(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-fa-de"));
+                            if (ade != null)
+                            {
+                                o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf("-") + 1).EndsWith("-fa-")); //elimino le foto anteprima per tutte le lingue
+                                o.FotoCollection_M.Insert(0, ade);
+                                o.FotoCollection_M.FotoAnteprima = ade.NomeAnteprima;
+                                o.FotoCollection_M.NomeImmobile = ade.DescrizionebyLingua(Lingua);
+                            }
+                            else
+                            {
+                                ade = o.FotoCollection_M.Find(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-de"));
+                                if (ade != null)
+                                {
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-ita")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-eng")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-ru")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-fr")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-es")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-de")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.FotoAnteprima = ade.NomeAnteprima;
+                                    //if (o.FotoCollection_M.Count > 0)
+                                    //    o.FotoCollection_M.RemoveAt(0);//elimino il primo elemento che era la foto di anteprima per la lingua italiana //aggiungo nuovamente l'immagine per la lingua richiesta
+
+                                    o.FotoCollection_M.Insert(0, ade);
+                                    o.FotoCollection_M.FotoAnteprima = ade.NomeAnteprima;
+                                    o.FotoCollection_M.NomeImmobile = ade.DescrizionebyLingua(Lingua);
+                                }
+                            }
+                            break;
+                        case "ES":
+                            Allegato aes = o.FotoCollection_M.Find(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-fa-es"));
+                            if (aes != null)
+                            {
+                                o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf("-") + 1).EndsWith("-fa-")); //elimino le foto anteprima per tutte le lingue
+                                o.FotoCollection_M.Insert(0, aes);
+                                o.FotoCollection_M.FotoAnteprima = aes.NomeAnteprima;
+                                o.FotoCollection_M.NomeImmobile = aes.DescrizionebyLingua(Lingua);
+                            }
+                            else
+                            {
+                                aes = o.FotoCollection_M.Find(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-es"));
+                                if (aes != null)
+                                {
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-ita")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-eng")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-ru")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-fr")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-es")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-de")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.FotoAnteprima = aes.NomeAnteprima;
+                                    //if (o.FotoCollection_M.Count > 0)
+                                    //    o.FotoCollection_M.RemoveAt(0);//elimino il primo elemento che era la foto di anteprima per la lingua italiana //aggiungo nuovamente l'immagine per la lingua richiesta
+
+                                    o.FotoCollection_M.Insert(0, aes);
+                                    o.FotoCollection_M.FotoAnteprima = aes.NomeAnteprima;
+                                    o.FotoCollection_M.NomeImmobile = aes.DescrizionebyLingua(Lingua);
+                                }
+                            }
+                            break;
+
                         default:
                             Allegato ait = o.FotoCollection_M.Find(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-fa-it"));
                             if (ait != null)
@@ -1154,6 +1222,8 @@ namespace WelcomeLibrary.UF
                                     o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-eng")); //elimino le foto anteprima per tutte le lingue
                                     o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-ru")); //elimino le foto anteprima per tutte le lingue
                                     o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-fr")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-es")); //elimino le foto anteprima per tutte le lingue
+                                    o.FotoCollection_M.RemoveAll(f => f.NomeFile.ToLower().Substring(0, f.NomeFile.ToLower().LastIndexOf(".")).EndsWith("-de")); //elimino le foto anteprima per tutte le lingue
                                     o.FotoCollection_M.FotoAnteprima = ait.NomeAnteprima;
                                     //if (o.FotoCollection_M.Count > 0)
                                     //    o.FotoCollection_M.RemoveAt(0);//elimino il primo elemento che era la foto di anteprima per la lingua italiana //aggiungo nuovamente l'immagine per la lingua richiesta
