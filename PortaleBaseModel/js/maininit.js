@@ -142,14 +142,14 @@ jQuery(document).ready(function ($) {
     /*--------GESTIONE MODIFICA MENUZORD CON SCORRIMENTO Home fullscrean ---------------*/
     if (true) {
         var ishome = false;
-        if (window.location.pathname.toLowerCase() == "/" || window.location.pathname.toLowerCase() == "/home"
-            || window.location.pathname.toLowerCase() == "/it/home" ||
-            window.location.pathname.toLowerCase() == "/en/home" ||
-            window.location.pathname.toLowerCase() == "/ru/home" ||
-            window.location.pathname.toLowerCase() == "/fr/home" ||
-            window.location.pathname.toLowerCase() == "/de/home" ||
-            window.location.pathname.toLowerCase() == "/es/home" ||
-            window.location.pathname.toLowerCase() == "/index.aspx") ishome = true;
+        //if (window.location.pathname.toLowerCase() == "/" || window.location.pathname.toLowerCase() == "/home"
+        //    || window.location.pathname.toLowerCase() == "/it/home" ||
+        //    window.location.pathname.toLowerCase() == "/en/home" ||
+        //    window.location.pathname.toLowerCase() == "/ru/home" ||
+        //    window.location.pathname.toLowerCase() == "/fr/home" ||
+        //    window.location.pathname.toLowerCase() == "/de/home" ||
+        //    window.location.pathname.toLowerCase() == "/es/home" ||
+        //    window.location.pathname.toLowerCase() == "/index.aspx") ishome = true;
 
         var fulliimageheader = false;
         if ($('body').find('.setfullscreenheader').length > 0) fulliimageheader = true;

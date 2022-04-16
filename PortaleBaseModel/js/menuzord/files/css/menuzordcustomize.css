@@ -163,16 +163,15 @@
     background-repeat: no-repeat;
     margin: 0 auto;
 }
-
+/*
 .fulllogobckdark {
-    /*width: 400px;
-    height: 119px;*/
     padding: 5px;
     background: url(/images/main_logo_d.png) center center;
     background-size: 100%;
     background-repeat: no-repeat;
     margin: 0 auto;
 }
+*/
 /*.shrinklogo {
     width: 206px;
     height: 61px;
@@ -365,9 +364,9 @@
     padding-right: 5px;
 }
 
-.menuzord-menu > li {
-    /*margin-top: 50px;*/
-    margin-top: 15px;
+.menuzord-menu > li { /* altezza iniziale fascia menu non scrolled*/
+    margin-top: 50px;
+    /*margin-top: 15px;*/
 }
 
 .logotop .menuzord-menu > li {
@@ -424,7 +423,9 @@
 
 
 @media (max-width: 1179px) {
-    .fulllogobckdark {
+    
+    /*
+        .fulllogobckdark {
         width: 206px;
         height: 61px;
         padding: 5px;
@@ -433,11 +434,12 @@
         margin: 0 auto;
         margin-left: calc(100% - 170px);
     }
-
     .shrinklogo {
         width: 206px;
         height: 61px;
     }
+
+    */
 
 
 
@@ -506,14 +508,15 @@
         }
 }
 
+
 .menuzord .showhide {
-  /*  float: left;*/
+    float: left;
     height: 27px;
     padding: 15px 0px 20px 0px;
     margin-bottom: 20px;
-    position:absolute;
-    z-index:99;
-    left:10px;
+    /*position:absolute;*/
+    z-index: 99;
+    /*left:10px;*/
 }
 
 .menuzord.sec-menu .showhide {

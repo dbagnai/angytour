@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Data.SQLite;
 using WelcomeLibrary.DAL;
 using Newtonsoft.Json;
+using System.Xml;
 
 namespace WelcomeLibrary.UF
 {
@@ -34,39 +35,83 @@ namespace WelcomeLibrary.UF
                 parColl = new List<SQLiteParameter>();
                 //SQLiteParameter ptipo = new SQLiteParameter("@CodiceTIPOLOGIA", "rif000001"); //Catalogo prodotti unico
                 //parColl.Add(ptipo);
-
                 //VA' CREATO UN FILTRO PER LA GENERAZIONE
                 //rif000001-rif000050 ( rubriche da 0 a 50 ) ( elenco tipo blog + scheda ) -> CreaLinkAScheda href='<%# CreaLinkAScheda(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,true) %>'
                 //rif000051 -rif000060 -> non ci sono le schede ma solo le liste con i pdf (lista elenco!!) NON CI SONO LE SCHEDE SINGOLE!! MA SOLO LE LISTE
                 //rif000061 -> per  i comunicati stmapa come blog -> CreaLinkAScheda href='<%# CreaLinkAScheda(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,true) %>'
                 //rif000100 soci -> schede CreaLinkGenerico //CreaLinkGenerico(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","","","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,true) %>'
                 //rif000101 -> trattaemtni   schede indirizzabili a  href='<%# CreaLinkRicercaprodotti(Eval("Id").ToString(),Eval("CodiceTipologia").ToString(), Eval("CodiceCategoria").ToString(),"","","","" ,CleanUrl(Eval("Denominazione" + Lingua).ToString()),Lingua,Session,false) %>'
-
                 //rif000199 -> partners SOLO ELENCO NON CI SONO LE SCHEDE singole i link mandano fuori
-                List<string> Tmp_linksite = new List<string>();
+
                 string Lingua = "I";
+
+#if false
+                List<string> Tmp_linksite = new List<string>();
                 Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));
                 references.CreazioneSitemap("sitemapLinkBaselinks" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
-                Tmp_linksite = new List<string>();
+                Tmp_linksite = new List<string>(); 
+#endif
+                //alternativa con scrittura in diretta sul file
+                Dictionary<string, string> sitemapgeneration = new Dictionary<string, string>();
+                sitemapgeneration.Add("filename", "sitemapLinkBaselinks" + Lingua + host);
+                sitemapgeneration.Add("pathfile", PathSitemap);
+                sitemapgeneration.Add("lastmod", System.DateTime.Today.ToString("yyyy-MM-dd"));
+                sitemapgeneration.Add("changefreq", "monthly");
+                sitemapgeneration.Add("priority", "1");
+                WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewritedSitemap(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666", sitemapgeneration);
+                /////////////////////////////////
 
 
                 WelcomeLibrary.DOM.OfferteCollection offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "20000", Lingua);
+#if false
+                Tmp_linksite = new List<string>(); 
                 Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true));
                 references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
                 Tmp_linksite = new List<string>();
+#endif
+                //alternativa con scrittura in diretta sul file
+                sitemapgeneration = new Dictionary<string, string>();
+                sitemapgeneration.Add("filename", "sitemapLink" + Lingua + host);
+                sitemapgeneration.Add("pathfile", PathSitemap);
+                sitemapgeneration.Add("lastmod", System.DateTime.Today.ToString("yyyy-MM-dd"));
+                sitemapgeneration.Add("changefreq", "monthly");
+                sitemapgeneration.Add("priority", "1");
+                WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferteSitemap(offerte, Lingua, percorsoBase, "", true, sitemapgeneration);
 
                 if (WelcomeLibrary.UF.ConfigManagement.ReadKey("activategb").ToLower() == "true")
                 {
                     Lingua = "GB";
+
+#if false
                     Tmp_linksite = new List<string>();
                     Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666"));
                     references.CreazioneSitemap("sitemapLinkBaselinks" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
-                    Tmp_linksite = new List<string>();
-
-                    offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "10000", Lingua);
+                    Tmp_linksite = new List<string>(); 
+                    offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "20000", Lingua);
                     Tmp_linksite.AddRange(WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferte(offerte, Lingua, percorsoBase, "", true));
                     references.CreazioneSitemap("sitemapLink" + Lingua + host, PathSitemap, Tmp_linksite, System.DateTime.Today.ToString("yyyy-MM-dd"), "monthly", "1");
-                    Tmp_linksite = new List<string>();
+                    Tmp_linksite = new List<string>(); 
+#endif
+
+                    //alternativa con scrittura in diretta sul file
+                    sitemapgeneration = new Dictionary<string, string>();
+                    sitemapgeneration.Add("filename", "sitemapLinkBaselinks" + Lingua + host);
+                    sitemapgeneration.Add("pathfile", PathSitemap);
+                    sitemapgeneration.Add("lastmod", System.DateTime.Today.ToString("yyyy-MM-dd"));
+                    sitemapgeneration.Add("changefreq", "monthly");
+                    sitemapgeneration.Add("priority", "1");
+                    WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewritedSitemap(Lingua, "rif000012,rif000051,rif000061,rif000062,rif000101,rif000666", sitemapgeneration);
+                    /////////////////////////////////
+
+                    offerte = offDM.CaricaOfferteFiltrate(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, parColl, "20000", Lingua);
+                    //alternativa con scrittura in diretta sul file
+                    sitemapgeneration = new Dictionary<string, string>();
+                    sitemapgeneration.Add("filename", "sitemapLink" + Lingua + host);
+                    sitemapgeneration.Add("pathfile", PathSitemap);
+                    sitemapgeneration.Add("lastmod", System.DateTime.Today.ToString("yyyy-MM-dd"));
+                    sitemapgeneration.Add("changefreq", "monthly");
+                    sitemapgeneration.Add("priority", "1");
+                    WelcomeLibrary.UF.SitemapManager.CreaLinksSchedeProdottoDaOfferteSitemap(offerte, Lingua, percorsoBase, "", true, sitemapgeneration);
 
                 }
 #if false
@@ -97,6 +142,7 @@ namespace WelcomeLibrary.UF
             }
             finally
             {
+
                 //Rimuovo il file di accesso per la concorrenza
                 string retfa = WelcomeLibrary.UF.MemoriaDisco.EliminaFileAccesso(WelcomeLibrary.STATIC.Global.percorsoFisicoComune, "NowTrasferingIndirectMode.txt");
                 //Creare un file di log con il successo/fallimento di tutte le operazioni
@@ -339,6 +385,245 @@ namespace WelcomeLibrary.UF
 
 
         /// <summary>
+        /// Rigenera tutti i link nella tabella di urlrewriting per le tipologie e per le categorie 1 e 2 livello
+        /// </summary>
+        public static void RigeneraLinkSezioniUrlrewritedSitemap(string Lingua = "", string removetipologie = "", Dictionary<string, string> sitemapgeneration = null)
+        {
+            long counterecs = 0; long block = 500; long tmpstop = 0;
+            bool modositemapgeneration = false;
+            if (sitemapgeneration != null
+                && sitemapgeneration.ContainsKey("filename") && !string.IsNullOrEmpty(sitemapgeneration["filename"])
+                && sitemapgeneration.ContainsKey("pathfile") && !string.IsNullOrEmpty(sitemapgeneration["pathfile"])
+                && sitemapgeneration.ContainsKey("changefreq")
+                && sitemapgeneration.ContainsKey("lastmod")
+                && sitemapgeneration.ContainsKey("priority")
+                )
+                modositemapgeneration = true;
+            if (modositemapgeneration)
+            {
+                System.IO.FileStream SitMap = new System.IO.FileStream(sitemapgeneration["pathfile"] + "\\" + sitemapgeneration["filename"] + ".xml", System.IO.FileMode.Create);
+                string lastmod = sitemapgeneration["lastmod"];
+                string changefreq = sitemapgeneration["changefreq"];
+                string priority = sitemapgeneration["priority"];
+                string txttowrite = "";
+
+                using (SitMap)
+                {
+                    // List<string> listalinks = new List<string>();
+                    //Inizio a scrivere il file
+                    System.Xml.XmlTextWriter writer = new System.Xml.XmlTextWriter(SitMap, Encoding.Default);
+                    writer.Formatting = System.Xml.Formatting.Indented;
+                    // aggiungo l'intestazione XML 
+                    writer.WriteRaw("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
+                    //writer.WriteRaw("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
+                    //Qui ci metto l'apertura dell'elemento
+                    writer.WriteStartElement("urlset");
+                    writer.WriteAttributeString("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9");
+
+                    List<TipologiaOfferte> listfiltered = WelcomeLibrary.UF.Utility.TipologieOfferte;
+                    if (!string.IsNullOrEmpty(Lingua))
+                        listfiltered = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == Lingua);
+                    if (!string.IsNullOrEmpty(removetipologie))
+                    {
+                        string[] arrtipologie = removetipologie.ToLower().Split(',');
+                        List<string> ltipidarimuovere = arrtipologie.ToList<string>();
+                        if (ltipidarimuovere != null)
+                        {
+                            foreach (string _t in ltipidarimuovere)
+                            {
+                                listfiltered.RemoveAll(t => t.Codice == _t);
+                            }
+                        }
+                    }
+
+                    foreach (TipologiaOfferte tipologia in listfiltered)
+                    {
+                        //WelcomeLibrary.DOM.TipologiaOfferte sezione =
+                        //    WelcomeLibrary.UF.Utility.TipologieOfferte.Find(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == tipologia.Lingua && tmp.Codice == tipologia.Codice); });
+                        //Genero il link per la tipologia
+
+                        writetofile(writer, WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, tipologia.Descrizione, "", tipologia.Codice, "", "", "", "", "", true, true), lastmod, changefreq, priority);
+                        //listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, tipologia.Descrizione, "", tipologia.Codice, "", "", "", "", "", true, true));
+
+                        List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == tipologia.Lingua && (tmp.CodiceTipologia == tipologia.Codice)); });
+                        foreach (Prodotto p in prodotti)
+                        {
+                            //Genero il link per la categoria
+                            //listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, p.Descrizione, "", tipologia.Codice, p.CodiceProdotto, "", "", "", "", true, true));
+                            writetofile(writer, WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, p.Descrizione, "", tipologia.Codice, p.CodiceProdotto, "", "", "", "", true, true), lastmod, changefreq, priority);
+                            List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == tipologia.Lingua && (tmp.CodiceProdotto == p.CodiceProdotto)); });
+                            foreach (SProdotto s in sprodotti)
+                            {
+                                //Genero il link per la sotto categoria
+                                //listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, s.Descrizione, "", tipologia.Codice, p.CodiceProdotto, s.CodiceSProdotto, "", "", "", true, true));
+                                writetofile(writer, WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, s.Descrizione, "", tipologia.Codice, p.CodiceProdotto, s.CodiceSProdotto, "", "", "", true, true), lastmod, changefreq, priority);
+
+                                counterecs++;
+                                tmpstop++;
+                                if (tmpstop > block)
+                                {
+                                    writer.Flush();
+                                    tmpstop = 0;
+                                    System.Threading.Thread.Sleep(800);
+                                }
+
+                            }
+                        }
+                    }
+#if true
+                    TipologiaOfferte tipologiapercatalogo = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(t => t.Codice == "rif000001" && t.Lingua == Lingua);
+                    /*GENERAZIONE LINK PER CARATTERISTICHE   ( da estendere la generazione per caratteristiche e combinazioni usate nei menu si fa solo per il catalogo )*/
+                    if (Utility.Caratteristiche.Count >= 1)
+                        foreach (Tabrif elem in Utility.Caratteristiche[0])
+                        {
+                            Dictionary<string, string> addpars = new Dictionary<string, string>();
+                            if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
+                            {
+                                addpars.Add("Caratteristica1", elem.Codice);
+                                //foreach (TipologiaOfferte tipologia in listfiltered)
+                                if (tipologiapercatalogo != null)
+                                {
+                                    //Genero il link per la tipologia
+                                    //listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologiapercatalogo.Lingua, tipologiapercatalogo.Descrizione, "", tipologiapercatalogo.Codice, "", "", "", "", "", true, true, addpars));
+                                    writetofile(writer, WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologiapercatalogo.Lingua, tipologiapercatalogo.Descrizione, "", tipologiapercatalogo.Codice, "", "", "", "", "", true, true, addpars), lastmod, changefreq, priority);
+
+                                    List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == tipologiapercatalogo.Lingua && (tmp.CodiceTipologia == tipologiapercatalogo.Codice)); });
+                                    foreach (Prodotto p in prodotti)
+                                    {
+                                        //Genero il link per la categoria
+                                        //listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologiapercatalogo.Lingua, p.Descrizione, "", tipologiapercatalogo.Codice, p.CodiceProdotto, "", "", "", "", true, true, addpars));
+                                        writetofile(writer, WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologiapercatalogo.Lingua, p.Descrizione, "", tipologiapercatalogo.Codice, p.CodiceProdotto, "", "", "", "", true, true, addpars), lastmod, changefreq, priority);
+                                        List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == tipologiapercatalogo.Lingua && (tmp.CodiceProdotto == p.CodiceProdotto)); });
+                                        foreach (SProdotto s in sprodotti)
+                                        {
+                                            //Genero il link per la sotto categoria
+                                            //listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologiapercatalogo.Lingua, s.Descrizione, "", tipologiapercatalogo.Codice, p.CodiceProdotto, s.CodiceSProdotto, "", "", "", true, true, addpars));
+                                            writetofile(writer, WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologiapercatalogo.Lingua, s.Descrizione, "", tipologiapercatalogo.Codice, p.CodiceProdotto, s.CodiceSProdotto, "", "", "", true, true, addpars), lastmod, changefreq, priority);
+
+                                            counterecs++;
+                                            tmpstop++;
+                                            if (tmpstop > block)
+                                            {
+                                                writer.Flush();
+                                                tmpstop = 0;
+                                                System.Threading.Thread.Sleep(800);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+
+                    if (Utility.Caratteristiche.Count >= 2)
+                        foreach (Tabrif elem in Utility.Caratteristiche[1])
+                        {
+                            Dictionary<string, string> addpars = new Dictionary<string, string>();
+                            if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
+                            {
+                                addpars.Add("Caratteristica2", elem.Codice);
+                                //foreach (TipologiaOfferte tipologia in listfiltered)
+                                if (tipologiapercatalogo != null)
+                                {
+                                    //Genero il link per la tipologia
+                                    //listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologiapercatalogo.Lingua, tipologiapercatalogo.Descrizione, "", tipologiapercatalogo.Codice, "", "", "", "", "", true, true, addpars));
+                                    writetofile(writer, WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologiapercatalogo.Lingua, tipologiapercatalogo.Descrizione, "", tipologiapercatalogo.Codice, "", "", "", "", "", true, true, addpars), lastmod, changefreq, priority);
+
+                                    List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == tipologiapercatalogo.Lingua && (tmp.CodiceTipologia == tipologiapercatalogo.Codice)); });
+                                    foreach (Prodotto p in prodotti)
+                                    {
+                                        //Genero il link per la categoria
+                                        //listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologiapercatalogo.Lingua, p.Descrizione, "", tipologiapercatalogo.Codice, p.CodiceProdotto, "", "", "", "", true, true, addpars));
+                                        writetofile(writer, WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologiapercatalogo.Lingua, p.Descrizione, "", tipologiapercatalogo.Codice, p.CodiceProdotto, "", "", "", "", true, true, addpars), lastmod, changefreq, priority);
+
+                                        List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == tipologiapercatalogo.Lingua && (tmp.CodiceProdotto == p.CodiceProdotto)); });
+                                        foreach (SProdotto s in sprodotti)
+                                        {
+                                            //Genero il link per la sotto categoria
+                                            writetofile(writer, WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologiapercatalogo.Lingua, s.Descrizione, "", tipologiapercatalogo.Codice, p.CodiceProdotto, s.CodiceSProdotto, "", "", "", true, true, addpars), lastmod, changefreq, priority);
+                                            //listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologiapercatalogo.Lingua, s.Descrizione, "", tipologiapercatalogo.Codice, p.CodiceProdotto, s.CodiceSProdotto, "", "", "", true, true, addpars));
+
+                                            counterecs++;
+                                            tmpstop++;
+                                            if (tmpstop > block)
+                                            {
+                                                writer.Flush();
+                                                tmpstop = 0;
+                                                System.Threading.Thread.Sleep(800);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+#endif
+#if FALSE
+            if (Utility.Caratteristiche.Count >= 3)
+                foreach (Tabrif elem in Utility.Caratteristiche[2])
+                {
+                    Dictionary<string, string> addpars = new Dictionary<string, string>();
+                   if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
+                    {
+                        addpars.Add("Caratteristica3", elem.Codice);
+                        foreach (TipologiaOfferte tipologia in listfiltered)
+                        {
+                            //Genero il link per la tipologia
+                            listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, tipologia.Descrizione, "", tipologia.Codice, "", "", "", "", "", true, true, addpars));
+                            List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == tipologia.Lingua && (tmp.CodiceTipologia == tipologia.Codice)); });
+                            foreach (Prodotto p in prodotti)
+                            {
+                                //Genero il link per la categoria
+                                listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, p.Descrizione, "", tipologia.Codice, p.CodiceProdotto, "", "", "", "", true, true, addpars));
+                                List<SProdotto> sprodotti = Utility.ElencoSottoProdotti.FindAll(delegate (WelcomeLibrary.DOM.SProdotto tmp) { return (tmp.Lingua == tipologia.Lingua && (tmp.CodiceProdotto == p.CodiceProdotto)); });
+                                foreach (SProdotto s in sprodotti)
+                                {
+                                    //Genero il link per la sotto categoria
+                                    listalinks.Add(WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(tipologia.Lingua, s.Descrizione, "", tipologia.Codice, p.CodiceProdotto, s.CodiceSProdotto, "", "", "", true, true, addpars));
+                                }
+                            }
+                        }
+                    }
+                } 
+#endif
+
+
+                    //Chiudo l'elemento 
+                    writer.WriteEndElement();
+                    //// scrivo a video e chiudo lo stream 
+                    writer.Flush();
+                    writer.Close();
+                    SitMap.Close();
+                }
+            }
+            return;
+        }
+        private static void writetofile(XmlTextWriter writer, string txttowrite, string lastmod, string changefreq, string priority)
+        {
+            if (string.IsNullOrEmpty(txttowrite)) return;
+            //Apro l'elemento interno URL
+            writer.WriteStartElement("url");
+            //Apro l'elemento loc
+            writer.WriteStartElement("loc");
+            writer.WriteRaw(txttowrite);
+            writer.WriteEndElement();
+            //Apro l'elemento lastmod
+            writer.WriteStartElement("lastmod");
+            writer.WriteRaw(lastmod);
+            writer.WriteEndElement();
+            //apro l'elemento changefreq
+            writer.WriteStartElement("changefreq");
+            writer.WriteRaw(changefreq);
+            writer.WriteEndElement();
+            //Apro lelemento priority
+            writer.WriteStartElement("priority");
+            writer.WriteRaw(priority);
+            writer.WriteEndElement();
+            //Chiudo l'url
+            writer.WriteEndElement();
+        }
+
+
+        /// <summary>
         /// Crea i link urlrewrited usando il dictionarty dei parametri aggiuntivi a partre da tipologia, categoria e sottocategoria
         /// aggiungendo i parametri aggiuntivi di filtro
         /// </summary>
@@ -439,6 +724,71 @@ namespace WelcomeLibrary.UF
                     ListaLink.Add(UrlCompleto);
                 }
             return ListaLink;
+        }
+        public static void CreaLinksSchedeProdottoDaOfferteSitemap(OfferteCollection Collection, string Lingua, string percorsoBase, string stringabase, bool rigeneraUrlrewritetable = false, Dictionary<string, string> sitemapgeneration = null)
+        {
+            bool modositemapgeneration = false;
+            if (sitemapgeneration != null
+                && sitemapgeneration.ContainsKey("filename") && !string.IsNullOrEmpty(sitemapgeneration["filename"])
+                && sitemapgeneration.ContainsKey("pathfile") && !string.IsNullOrEmpty(sitemapgeneration["pathfile"])
+                && sitemapgeneration.ContainsKey("changefreq")
+                && sitemapgeneration.ContainsKey("lastmod")
+                && sitemapgeneration.ContainsKey("priority")
+                )
+                modositemapgeneration = true;
+            if (modositemapgeneration)
+            {
+                System.IO.FileStream SitMap = new System.IO.FileStream(sitemapgeneration["pathfile"] + "\\" + sitemapgeneration["filename"] + ".xml", System.IO.FileMode.Create);
+                string lastmod = sitemapgeneration["lastmod"];
+                string changefreq = sitemapgeneration["changefreq"];
+                string priority = sitemapgeneration["priority"];
+
+                using (SitMap)
+                {
+                    // List<string> listalinks = new List<string>();
+                    //Inizio a scrivere il file
+                    System.Xml.XmlTextWriter writer = new System.Xml.XmlTextWriter(SitMap, Encoding.Default);
+                    writer.Formatting = System.Xml.Formatting.Indented;
+                    // aggiungo l'intestazione XML 
+                    writer.WriteRaw("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
+                    //writer.WriteRaw("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
+                    //Qui ci metto l'apertura dell'elemento
+                    writer.WriteStartElement("urlset");
+                    writer.WriteAttributeString("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9");
+
+
+                    // List<string> ListaLink = new List<string>();
+                    //Mi Prendo la collection di immobili e mi ricavo una lista di stringhe
+                    long counterecs = 0; long block = 500; long tmp = 0;
+                    if (Collection != null)
+                        foreach (Offerte _o in Collection)
+                        {
+                            //string UrlCompleto = "";
+                            //UrlCompleto = CreaLinkRoutes(Lingua, _o.UrltextforlinkbyLingua(Lingua), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria, "", "", "", "", true, rigeneraUrlrewritetable);
+                            // ListaLink.Add(UrlCompleto);
+
+                            writetofile(writer, CreaLinkRoutes(Lingua, _o.UrltextforlinkbyLingua(Lingua), _o.Id.ToString(), _o.CodiceTipologia, _o.CodiceCategoria, "", "", "", "", true, rigeneraUrlrewritetable), lastmod, changefreq, priority);
+
+                            counterecs++;
+                            tmp++;
+                            if (tmp > block)
+                            {
+                                writer.Flush();
+                                tmp = 0;
+                                System.Threading.Thread.Sleep(1000);
+                            }
+                        }
+
+
+                    //Chiudo l'elemento 
+                    writer.WriteEndElement();
+                    //// scrivo a video e chiudo lo stream 
+                    writer.Flush();
+                    writer.Close();
+                    SitMap.Close();
+                }
+            }
+            return;
         }
 
         public static string CreaLinkRoutes(string Lingua, string denominazione, string id, string codicetipologia, string codicecategoria = "", string codicecat2liv = "",
