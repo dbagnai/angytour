@@ -186,6 +186,137 @@ namespace WelcomeLibrary.UF
             }//end of catch
         }//end of Main
 
+        /// <summary>
+        /// Conversione da csv a xls
+        /// </summary>
+        /// <param name="csvfilepath"></param>
+        /// <exception cref="ApplicationException"></exception>
+        public static void Csv_to_xlsx_lowmem(string csvfilepath)
+        {
+            System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
+            Messaggi.Add("Messaggio", "");
+            Messaggi["Messaggio"] = "Conversione a csv file " + System.DateTime.Now.ToString() + " \r\n";
+
+            const int MAX_NUM_ROW = 33; // num of days in month + id + label =33
+            const int MAX_NUM_COLUMN = 16;// num of labels =16
+            try
+            {
+                string myFnameCsv = csvfilepath;
+                string myFnameXlsx = myFnameCsv.Replace(".csv", ".xlsx");
+                //string mySheetName = myFnameCsv.Replace(".csv", "");
+                string mySheetName = Path.GetFileName(myFnameCsv).Replace(".csv", "");
+
+                //System.Text.Encoding myEncoding = System.Text.Encoding.GetEncoding("Shift_JIS");
+                System.Text.Encoding myEncoding = System.Text.Encoding.GetEncoding(1252);//ISO-8859-1 ANSI
+                                                                                         //System.Text.Encoding.UTF8
+
+                // string[,] myAryStr = new string[MAX_NUM_ROW, MAX_NUM_COLUMN];
+                //Dictionary<UInt32, Dictionary<UInt32, string>> myAryDict = new Dictionary<UInt32, Dictionary<UInt32, string>>();
+                Dictionary<UInt32, Dictionary<UInt32, string>> myAryDictSingleRow = new Dictionary<UInt32, Dictionary<UInt32, string>>();
+                UInt32 uiMaxRow = 0;
+                UInt32 uiMaxColumn = 0;
+
+
+                // write xlsx file
+                using (var myBook = new ClosedXML.Excel.XLWorkbook(ClosedXML.Excel.XLEventTracking.Disabled))
+                {
+                    var mySheet1 = myBook.AddWorksheet(mySheetName);
+                    myBook.SaveAs(myFnameXlsx);
+                }//end of using xlsx file
+                 // write xlsx file
+                long maxrowinmemory = 1000;
+                long blockwrite = 1;
+                using (var myBook = new ClosedXML.Excel.XLWorkbook(myFnameXlsx))
+                {
+                    var mySheet1 = myBook.Worksheet(mySheetName);
+
+                    // read csv file
+                    using (StreamReader myrd = new StreamReader(myFnameCsv, myEncoding))
+                    {
+                        UInt32 uiR = 0;
+                        while (!myrd.EndOfStream)
+                        {
+                            string linecvs = myrd.ReadLine();
+                            string[] tmpStAry = linecvs.Split(';');
+                            int i = 0;
+                            while (tmpStAry.Length < 85)
+                            {
+                                linecvs += myrd.ReadLine();
+                                tmpStAry = linecvs.Split(';');
+                                i++;
+                                if (i > 50)
+                                {
+                                    throw new ApplicationException("Errore conversione da csv  TOO MANY carriage return");
+                                }
+                            }
+
+                            //carico le colonne della riga attuale nel dictionary temporaneo
+                            UInt32 uiC = 0;
+                            foreach (string tmpstr in tmpStAry)
+                            {
+                                string tmpstr2 = tmpstr.Replace("\"", "").Replace("\0", "").Trim();
+
+                                //if (!myAryDict.ContainsKey(uiR))
+                                //    myAryDict.Add(uiR, new Dictionary<UInt32, string>());
+                                //myAryDict[uiR].Add(uiC, tmpstr2);
+
+                                //alternativa a sigola riga
+                                if (!myAryDictSingleRow.ContainsKey(0))
+                                    myAryDictSingleRow.Add(0, new Dictionary<UInt32, string>());
+                                myAryDictSingleRow[0].Add(uiC, tmpstr2);
+
+                                //Console.Write(tmpstr2 + "\t");
+                                uiC += 1;
+                            }//end of foreach
+
+
+                            //scriviamo su excel la riga attuale da myAryDictSingleRow scorrendo le colonne
+                            foreach (KeyValuePair<UInt32, string> colonna in myAryDictSingleRow[0])
+                            {
+                                string tmpcolval = colonna.Value;
+                                if (colonna.Key == 2 || colonna.Key == 3 || colonna.Key >= 25) tmpcolval = tmpcolval.Replace(".", ",");
+                                mySheet1.Cell((int)(uiR + 1), (int)(colonna.Key + 1)).Value = tmpcolval;
+                                if (colonna.Key == 1)
+                                    mySheet1.Cell((int)(uiR + 1), (int)(colonna.Key + 1)).SetDataType(ClosedXML.Excel.XLCellValues.Text);
+                            }
+
+                            if (uiR > maxrowinmemory * blockwrite)
+                            {
+                                myBook.SaveAs(myFnameXlsx); //salvo il file excel
+                                blockwrite += 1;
+                            }
+
+
+                            //resetto la tabella a sigola riga
+                            myAryDictSingleRow = new Dictionary<UInt32, Dictionary<UInt32, string>>();
+
+                            //uiMaxColumn = uiMaxColumn < uiC ? uiC : uiMaxColumn;
+                            uiR += 1;
+                            //Console.WriteLine("");
+                        }// end while
+                        uiMaxRow = uiR;
+                    }//end using csv file
+
+
+
+                    myBook.SaveAs(myFnameXlsx);
+
+                }//end of using xlsx file
+
+            }//end of try
+            catch (Exception e)
+            {
+                //Devi scrivere l'errore in un file di log (per gli errori) sennò nessuno lo vede!!!!
+                Messaggi["Messaggio"] += " Errore conversione file csv: " + e.Message + " " + System.DateTime.Now.ToString();
+                if (e.InnerException != null)
+                    Messaggi["Messaggio"] += " Errore interno conversione csv : " + e.InnerException.Message.ToString() + " " + System.DateTime.Now.ToString();
+                WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune);
+                throw new ApplicationException("Errore conversione da csv  :" + e.Message, e);
+
+            }//end of catch
+        }//end of Main
+
+
     }
 
 
