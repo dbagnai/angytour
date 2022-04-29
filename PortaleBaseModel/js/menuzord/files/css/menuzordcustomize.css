@@ -409,6 +409,7 @@
     margin: 0px;
     left: 0px;
     top: 0px;
+    z-index: 98;
 }
 
     .menuzord-responsive .menuzord-brand img {
@@ -490,19 +491,19 @@
     .menuzord-responsive .menuzord-brand {
         font-size: 20px;
         line-height: 1.55;
-        max-width: 160px;
+        /*max-width: calc(100% - 100px );*/
+        width: auto;
         float: none;
-        position: absolute;
+        position: relative;
         /*margin: 0px 35% !important;*/
         /*left: 0px;*/
         margin-top: 0px;
-        margin-left: -103px !important;
-        left: 50%;
+        left: 30px;
         top: 0px;
     }
 
         .menuzord-responsive .menuzord-brand img {
-            max-width: 140px;
+           /* max-width: 140px;*/
             /*width: 100%;*/
             display: inline-block;
         }

@@ -495,11 +495,10 @@ a {
 
 /*LOGO*/
 .fulllogobckdark {
-    width: @larghezza-logo; 
-    max-width: 100%;
- 
-    /*in caso di menù tipo e-commerce*/
+    width: @larghezza-logo;
     height: 94px;
+    max-width: 100%;
+    /*in caso di menù tipo e-commerce*/
     webkit-transition: all .35s ease;
     transition: all .35s ease;
     /*AGGIUNTI PER LOGO DOPPIA POSIZIONE*/
@@ -540,7 +539,8 @@ a {
     .fulllogobckdark {
         width: @larghezza-logo-smart;
         max-width: 100%;
-        margin-left: calc(100% - ((170 * @larghezza-logo-smart) / 206));
+      /*  margin-left: calc(100% - ((170 * @larghezza-logo-smart) / 206));*/
+      margin-left:30px;
         /*AGGIUNTI PER LOGO DOPPIA POSIZIONEE*/
         background: url(/images/main_logo_d.png) center center;
         background-size: 100%;
@@ -5328,7 +5328,9 @@ button.js-roundedpush:hover {
         -webkit-transition: all 0.35s ease;
         transition: all 0.35s ease;
     }
-
+    .menuzord-menu a {
+        position: relative;
+    }
     /*in caso dialog sottomenu normale*/
     /*.menuzord-menu a:not(.btn):not(.product-thumb) {
             position: relative;
