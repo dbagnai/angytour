@@ -1,43 +1,36 @@
-﻿ <style>
-     .work-image.noafter:hover::after {
-    z-index: 0 !important;
-    opacity: 0 !important;
-    transition: all 0s ease 0s;
-    background: none !important;
-}
- </style>
-    
-    <!-- Scroller  -->
-    <div>
-        <div class="row py-0 text-center">
-            <div class="col-md-12 col-sm-12 col-12 px-0">
-
-                <div class="owl-carousel-v1 owl-work-v1 margin-bottom-40">
-                    <div class="owl-slider-v2" id="replaceid">
-                        <div class="item box">
-                            <div style="border: none; box-shadow: none">
-                                <div style="border: none; box-shadow: none" class="feature">
-
-                                    <a target="_self" href="link" class="bind" title="titolo" mybind="Id">
-                                        <!--<div class="work-image img-overlay">-->
-                                        <div class="work-image noafter px-5 px-sm-0">
-                                            <img src="/images/dummylogo.png" alt="" class="bind lazyOwl" mybind="Id" />
-                                            <!--<div class="item-img-overlay">-->
-                                        </div>
-                                    </a>
-                                    <div class="body-banner-slider px-3" style="height:auto;">
-                                        <h3 class="title-banner-slider mb-0">
-                                            <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
-                                        </h3>
-                                        <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-0">
-                                            <p class="bind mb-0" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></p>
-                                        </h4>
-                                        </div>
-                                    </div>
-                                </div>
+﻿<style>
+    .work-image.noafter:hover::after {
+        z-index: 0 !important;
+        opacity: 0 !important;
+        transition: all 0s ease 0s;
+        background: none !important;
+    }
+</style>
+<!-- Scroller  -->
+<div>
+    <div class="row py-2 text-center">
+        <div class="col-md-12 col-sm-12 col-12 px-0">
+            <div class="owl-carousel-v1 owl-work-v1">
+                <div class="owl-slider-v2" id="replaceid">
+                    <div class="item box border-tipo2 m-2">
+                        <a target="_self" href="link" class="bind" title="titolo" mybind="Id">
+                            <!--<div class="work-image img-overlay">-->
+                            <div class="work-image noafter px-5 px-sm-0">
+                                <img src="/images/dummylogo.png" alt="" class="bind lazyOwl" mybind="Id" />
+                                <!--<div class="item-img-overlay">-->
+                            </div>
+                        </a>
+                        <div class="body-banner-slider px-3" style="height:auto;">
+                            <h3 class="scalablefont-medium font-weight-strong primary-font mb-2 mt-3">
+                                <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                            </h3>
+                            <h4 class="scalablefont-small-medium font-weight-medium primary-font  tx-sottomenu-color  mt-0 mb-1">
+                                <span class="bind mb-0" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
+                            </h4>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

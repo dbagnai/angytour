@@ -234,49 +234,18 @@
                             </li>
                         </ul>
                     </div>
-                    <%-- <div runat="server" visible="true"  id="divlngchange" >
-
-                        <div id="divCambioLingua1" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                        </div>
-                        <div id="divCambioLinguadef1" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="true">
-                            <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio1")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio1") %>'><%= references.ResMan("Common", Lingua,"testoCambio1").ToUpper() %></a>
-                        </div>
-
-                        <div id="divCambioLingua2" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                        </div>
-                        <div id="divCambioLinguadef2" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                            <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio2")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio2") %>'><%= references.ResMan("Common", Lingua,"testoCambio2").ToUpper() %></a>
-                        </div>
-
-                        <div id="divCambioLingua3" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                        </div>
-                        <div id="divCambioLinguadef3" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                            <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio3")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio3") %>'><%= references.ResMan("Common", Lingua,"testoCambio3").ToUpper() %></a>
-                        </div>
-
-                        <div id="divCambioLingua4" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                        </div>
-                        <div id="divCambioLinguadef4" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                            <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio4")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio4") %>'><%= references.ResMan("Common", Lingua,"testoCambio4").ToUpper() %></a>
-                        </div>
-
-                        <div id="divCambioLingua5" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                        </div>
-                        <div id="divCambioLinguadef5" class="float-right px-2 px-lg-3 bd-secondary-color font-primary" style="padding-top: 6px; padding-bottom: 6px; border-left: 1px solid; font-size: 0.8rem;" runat="server" visible="false">
-                            <a style="color: White; padding: 8px" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkHomeCambio5")) %>' title='<%= references.ResMan("Common", Lingua,"testoCambio5") %>'><%= references.ResMan("Common", Lingua,"testoCambio5").ToUpper() %></a>
-                        </div>
-                    </div>--%>
+                   
                 </div>
             </div>
         </div>
         <div class="fixednav bckColor2" id="mainnav" style="padding-left: 20px; padding-right: 20px">
 
             <!-- ICONA CALL RESPONSIVE -->
-            <div class="d-block d-sm-none" style="position: absolute; top: 15px; right: 5px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
+            <div class="d-block d-sm-none" style="position: absolute; top: 15px; right: 5px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 99">
                 <a style="padding-top: 0px;" class="float-right" href='<%=  references.ResMan("Common", Lingua,"iconcelltext") %>'>
                     <i class="fas fas-2x fa-phone" style="font-size: 24px; margin-top: 5px;"></i></a>
             </div>
-            <div class="d-none" style="position: absolute; top: 10px; right: 45px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 1">
+            <div class="d-none" style="position: absolute; top: 10px; right: 45px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 99">
                 <a style="padding-top: 0px;" class="float-right" href='<%=  references.ResMan("Common", Lingua,"iconwhatsapp") %>'>
                     <i class="fa fa-2x fa-whatsapp" style="color: #2f7b40; font-size: 30px; font-weight: 900; margin-top: 5px;"></i></a>
             </div>
