@@ -2,6 +2,8 @@
 using System.Web;
 using System.Linq;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace WelcomeLibrary.UF
 {
@@ -32,8 +34,13 @@ namespace WelcomeLibrary.UF
             //	<urlCompression doStaticCompression="false" doDynamicCompression="false" />
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("enablecontentcompression").ToLower() == "true")
                 enablecompression = true;
+
+
             if (enablecompression)
                 context.PostRequestHandlerExecute += this.SetCompressionHnd;
+
+            //context.PostRequestHandlerExecute += this.SetCacheCheck;
+
             context.PostRequestHandlerExecute += this.SetAdditionalheaders;
             
             //attività che avvengono prima del rendering dei contenuti per la renspnse
@@ -41,22 +48,62 @@ namespace WelcomeLibrary.UF
             context.EndRequest += new EventHandler(PagecacheModule_EndRequest);
         }
 
-        #endregion
-        void PagecacheModule_EndRequest(object sender, EventArgs e)
-        {
-            //HttpContext context = HttpContext.Current;
-            //String path = HttpContext.Current.Request.Url.AbsolutePath; //in base a questo path posso fare check della cache di pagina e tornare quella
-            //HttpContext.Current.Response.Write(cotenutodallacache);
-            //HttpContext.Current.Response.End();
+      private void SetCacheCheck(object sender, EventArgs eventArgs)
+      {
+         
+         if (HttpContext.Current.Request.RawUrl == "/")
+         {
+            var f = new ResponseFilterStream(HttpContext.Current.Response.Filter);
 
+            f.CaptureStream += F_CaptureStream;
+            HttpContext.Current.Response.Filter = f;
+         }
+      }
+
+      private void F_CaptureStream(MemoryStream ms)
+      {
+         string content = HttpContext.Current.Response.ContentEncoding.GetString(ms.ToArray());
+         //HttpContext.Current.Items["tocompress"] = "false";
+
+         File.WriteAllText(HttpContext.Current.Server.MapPath("/public") + "\\test.txt", content);
+
+         int a = 0;
+      }
+
+
+
+      #endregion
+      void PagecacheModule_EndRequest(object sender, EventArgs e)
+        {
+         //HttpContext context = HttpContext.Current;
+         //String path = HttpContext.Current.Request.Url.AbsolutePath; //in base a questo path posso fare check della cache di pagina e tornare quella
+         //HttpContext.Current.Response.Write(cotenutodallacache);
+         //HttpContext.Current.Response.End();
+         
+         //using (MemoryStream ms = new MemoryStream())
+         //{
+            
+         //   //HttpContext.Current.Response.OutputStream.CopyTo(ms);
+         //   HttpContext.Current.Response.Filter.CopyTo(ms);
+         //   //string sz = Encoding.ASCII.GetString(ms.ToArray());
+         //   string content = HttpContext.Current.Response.ContentEncoding.GetString(ms.ToArray());
+         //}
+         int a = 0;
         }
         void RewriteModule_BeginRequest(object sender, EventArgs e)
         {
-            //HttpContext context = HttpContext.Current;
-            //String path = HttpContext.Current.Request.Url.AbsolutePath; //in base a questo path posso fare check della cache di pagina e tornare quella
-            //HttpContext.Current.Response.Write(cotenutodallacache);
-            //HttpContext.Current.Response.End();
-            //da completare salvando le pagine in una tabella al primo rendering e aggiungendo la politica di gestione cache
+
+         // gestione Cache
+         //if (HttpContext.Current.Request.RawUrl == "/")
+         //{
+         //   if (File.Exists(HttpContext.Current.Server.MapPath("/public") + "\\test.txt"))
+         //   {
+         //      string sz = File.ReadAllText(HttpContext.Current.Server.MapPath("/public") + "\\test.txt");
+         //      HttpContext.Current.Response.ContentType = "text/html";
+         //      HttpContext.Current.Response.Write(sz);
+         //      HttpContext.Current.Response.End();
+         //   }
+         //}
 
         }
         private void SetAdditionalheaders(object sender, EventArgs eventArgs)
@@ -108,6 +155,8 @@ namespace WelcomeLibrary.UF
 
             if (encoding.Contains("gzip"))
             {
+               //if (HttpContext.Current.Items["tocompress"] == "false")
+               //   return;
                 //context.Response.Filter = new System.IO.Compression.GZipStream(context.Response.Filter, System.IO.Compression.CompressionMode.Compress);
                 //context.Response.Filter = new System.IO.Compression.GZipStream(context.Response.Filter, System.IO.Compression.CompressionLevel.Fastest);
                 context.Response.Filter = new System.IO.Compression.GZipStream(context.Response.Filter, System.IO.Compression.CompressionLevel.Optimal);
@@ -178,8 +227,7 @@ namespace WelcomeLibrary.UF
         }
     }
 
-#if false
-
+#if true
     /// <summary>
     /// A semi-generic Stream implementation for Response.Filter with
     /// an event interface for handling Content transformations via
