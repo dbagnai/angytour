@@ -34,12 +34,10 @@ namespace WelcomeLibrary.UF
             //	<urlCompression doStaticCompression="false" doDynamicCompression="false" />
             if (WelcomeLibrary.UF.ConfigManagement.ReadKey("enablecontentcompression").ToLower() == "true")
                 enablecompression = true;
-
-
             if (enablecompression)
                 context.PostRequestHandlerExecute += this.SetCompressionHnd;
 
-            //context.PostRequestHandlerExecute += this.SetCacheCheck;
+            //context.PostRequestHandlerExecute += this.SetCacheCheck; //nuovo sistema cache pagine ( da ultimare )
 
             context.PostRequestHandlerExecute += this.SetAdditionalheaders;
             
@@ -50,7 +48,8 @@ namespace WelcomeLibrary.UF
 
       private void SetCacheCheck(object sender, EventArgs eventArgs)
       {
-         
+         //da modificar eper inserire condizioni di memorizzazione della cache solo se non presente per la pagina indicata
+         //fare filtro per pagne da cachare e non!!!!!
          if (HttpContext.Current.Request.RawUrl == "/")
          {
             var f = new ResponseFilterStream(HttpContext.Current.Response.Filter);
@@ -92,9 +91,11 @@ namespace WelcomeLibrary.UF
         }
         void RewriteModule_BeginRequest(object sender, EventArgs e)
         {
-
-         // gestione Cache
-         //if (HttpContext.Current.Request.RawUrl == "/")
+            ////////////////////////////////////////////////////////////////////////////////////////////
+            // gestione Cache nuova da abilitare per nuovo sistema di cache e inserire condizioni per filtro di pagine da cachare
+            // e test di presenza del contenuto buono della chache
+            ////////////////////////////////////////////////////////////////////////////////////////////
+           //if (HttpContext.Current.Request.RawUrl == "/")
          //{
          //   if (File.Exists(HttpContext.Current.Server.MapPath("/public") + "\\test.txt"))
          //   {
