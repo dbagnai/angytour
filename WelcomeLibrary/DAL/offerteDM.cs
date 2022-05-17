@@ -8,6 +8,7 @@ using System.Xml;
 using WelcomeLibrary.UF;
 using System.Data.SQLite;
 using Newtonsoft.Json;
+using System.Linq;
 using ActiveUp.Net.Mail;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
@@ -5682,6 +5683,164 @@ namespace WelcomeLibrary.DAL
                 }
             }
             return idlist;
+        }
+
+
+        /// <summary>
+        /// torna la lista degli id per la caratteristica indicata in base ai filtri passati
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="nomecaratteristica"></param>
+        /// <param name="filtri"></param>
+        /// <returns></returns>
+        public static List<string> getidpresentibyfilters(string connection, string nomecaratteristica, Dictionary<string, string> filtri)
+        {
+            List<string> idlist = new List<string>();
+            Dictionary<string, string> subfiltri = new Dictionary<string, string>();
+            string completekey = "";
+            if (filtri.ContainsKey("tipologia") && !string.IsNullOrEmpty(filtri["tipologia"]))
+            {
+                subfiltri.Add("tipologia", filtri["tipologia"]);
+                completekey += filtri["tipologia"];
+            }
+            string categoria = ""; string categoria2Liv = "";
+
+            if (filtri.ContainsKey("categoria") && !string.IsNullOrEmpty(filtri["categoria"]))
+            {
+                categoria = filtri["categoria"];
+                completekey += filtri["categoria"];
+            }
+
+            if (filtri.ContainsKey("categoria2Liv") && !string.IsNullOrEmpty(filtri["categoria2Liv"]))
+            {
+                categoria2Liv = filtri["categoria2Liv"];
+                completekey += filtri["categoria2Liv"];
+            }
+
+            //Carico la lista completa per la tipologia passata
+            List<Tabrif> reftable = ReftableCaratteristichebyTipologia(connection, nomecaratteristica, subfiltri);
+            //Prendo la lista degli id 
+            string concatid = "";
+            reftable.ForEach(o => concatid += o.Codice.Contains(completekey) ? o.Campo1 + "," : "");
+            idlist = concatid.Split(',').ToList<string>();
+
+
+            return idlist;
+
+        }
+
+
+        /// <summary>
+        /// Estrae per una serie di valori tipologia,categoria,sottocategoria la lista degli id della caratteristica presenti nel database es.Key | Value (rif000001,prod000026,sprod000001 | 3,5,14,36,47,49,50,51,70,85), attenzione nelle permutazioni di  tipologia,categoria,sottocategoria ci sono anche eventuali combinazioni con valori vuoti!
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="nomecaratteristica"></param>
+        /// <param name="filtri"></param>
+        /// <returns></returns>
+        public static List<Tabrif> ReftableCaratteristichebyTipologia(string connection, string nomecaratteristica, Dictionary<string, string> filtri = null)
+        {
+            List<Tabrif> listresult = new List<Tabrif>();
+            Tabrif item = new Tabrif();
+            //OrderedDictionary orddicresult = new OrderedDictionary();
+            //KeyValuePair<string, string> item = new KeyValuePair<string, string>();
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            //SQLiteParameter p1 = new SQLiteParameter("@Titolo", "%" + testoricerca + "%"); 
+            //parColl.Add(p1);
+            //string query = "SELECT   CodiceTIPOLOGIA || ','||  CodiceCategoria || ',' ||  CodiceCategoria2Liv as grouped_categorie, group_concat(" + nomecaratteristica + " ) as grouped_caratteristica from ( ";
+            string query = "SELECT  CodiceTIPOLOGIA ||  CodiceCategoria ||  CodiceCategoria2Liv as grouped_categorie,  CodiceTIPOLOGIA , CodiceCategoria , CodiceCategoria2Liv , group_concat(" + nomecaratteristica + " ) as grouped_caratteristica from ( ";
+            query += " SELECT CodiceTIPOLOGIA,CodiceCategoria,CodiceCategoria2Liv,  " + nomecaratteristica;
+            query += " FROM TBL_ATTIVITA  ";
+
+            string queryfilter = "";
+
+            //if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceTIPOLOGIA"; }))
+            if (filtri.ContainsKey("tipologia") && !string.IsNullOrEmpty(filtri["tipologia"]))
+            {
+                SQLiteParameter pctip = new SQLiteParameter("@CodiceTIPOLOGIA", filtri["tipologia"]);
+                parColl.Add(pctip);
+                if (!queryfilter.ToLower().Contains("where"))
+                    queryfilter += " WHERE CodiceTIPOLOGIA like @CodiceTIPOLOGIA ";
+                else
+                    queryfilter += " AND CodiceTIPOLOGIA like @CodiceTIPOLOGIA  ";
+            }
+            if (filtri.ContainsKey("categoria") && !string.IsNullOrEmpty(filtri["categoria"]))
+            {
+                SQLiteParameter pctip = new SQLiteParameter("@CodiceCategoria", filtri["categoria"]);
+                parColl.Add(pctip);
+                if (!queryfilter.ToLower().Contains("where"))
+                    queryfilter += " WHERE CodiceCategoria like @CodiceCategoria ";
+                else
+                    queryfilter += " AND CodiceCategoria like @CodiceCategoria  ";
+            }
+            if (filtri.ContainsKey("categoria2Liv") && !string.IsNullOrEmpty(filtri["categoria2Liv"]))
+            {
+                SQLiteParameter pctip = new SQLiteParameter("@CodiceCategoria2Liv", filtri["categoria2Liv"]);
+                parColl.Add(pctip);
+                if (!queryfilter.ToLower().Contains("where"))
+                    queryfilter += " WHERE CodiceCategoria2Liv like @CodiceCategoria2Liv ";
+                else
+                    queryfilter += " AND CodiceCategoria2Liv like @CodiceCategoria2Liv  ";
+            }
+
+            //solo non archiviati
+            if (!queryfilter.ToLower().Contains("where"))
+                queryfilter += " WHERE Archiviato = 0 ";
+            else
+                queryfilter += " AND Archiviato = 0 ";
+            //solo disponibili filtradisponibili
+            if (!queryfilter.ToLower().Contains("where"))
+                queryfilter += " WHERE (Qta_vendita > 0 or Qta_vendita is null) ";
+            else
+                queryfilter += " AND (Qta_vendita > 0 or Qta_vendita is null) ";
+
+            query += queryfilter;
+            query += " group by CodiceTIPOLOGIA,CodiceCategoria,CodiceCategoria2Liv, " + nomecaratteristica;
+            query += " ) ";
+            query += " group by CodiceTIPOLOGIA,CodiceCategoria,CodiceCategoria2Liv ";
+            // query += " order by CodiceTIPOLOGIA,CodiceCategoria,CodiceCategoria2Liv ";
+
+            SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+            using (reader)
+            {
+                if (reader == null) { return null; };
+                if (reader.HasRows == false)
+                    return null;
+
+                while (reader.Read())
+                {
+                    item = new Tabrif();
+                    if (!reader["grouped_categorie"].Equals(DBNull.Value))
+                        item.Codice = reader.GetString(reader.GetOrdinal("grouped_categorie"));
+                    string value = string.Empty;
+                    if (!reader["grouped_caratteristica"].Equals(DBNull.Value))
+                        item.Campo1 = reader.GetString(reader.GetOrdinal("grouped_caratteristica"));
+
+                    if (!reader["CodiceTIPOLOGIA"].Equals(DBNull.Value))
+                    {
+                        item.Campo2 = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
+                    }
+                    if (!reader["CodiceCategoria"].Equals(DBNull.Value))
+                    {
+                        item.Campo3 = reader.GetString(reader.GetOrdinal("CodiceCategoria"));
+                    }
+                    if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value))
+                    {
+                        item.Campo4 = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
+                    }
+
+                    listresult.Add(item);
+
+                    //item = new KeyValuePair<string, string>();
+                    //string key = string.Empty; string value = string.Empty;
+                    //if (!reader["grouped_categorie"].Equals(DBNull.Value))
+                    //    key = reader.GetString(reader.GetOrdinal("grouped_categorie"));
+                    //if (!dicresult.ContainsKey("grouped_categorie"))
+                    //    dicresult.Add(key, value);
+                    //else
+                    //    dicresult[key] =value;
+                }
+            }
+            return listresult;
         }
 
 

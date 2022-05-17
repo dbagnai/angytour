@@ -216,6 +216,9 @@ namespace WelcomeLibrary.UF
                 UInt32 uiMaxRow = 0;
                 UInt32 uiMaxColumn = 0;
 
+                // write xlsx file ogni tot righe per allocare meno menoria
+                long maxrowinmemory = 500;
+                long blockwrite = 1;
 
                 // write xlsx file
                 using (var myBook = new ClosedXML.Excel.XLWorkbook(ClosedXML.Excel.XLEventTracking.Disabled))
@@ -223,9 +226,7 @@ namespace WelcomeLibrary.UF
                     var mySheet1 = myBook.AddWorksheet(mySheetName);
                     myBook.SaveAs(myFnameXlsx);
                 }//end of using xlsx file
-                 // write xlsx file
-                long maxrowinmemory = 1000;
-                long blockwrite = 1;
+             
                 using (var myBook = new ClosedXML.Excel.XLWorkbook(myFnameXlsx))
                 {
                     var mySheet1 = myBook.Worksheet(mySheetName);
@@ -279,11 +280,19 @@ namespace WelcomeLibrary.UF
                                 if (colonna.Key == 1)
                                     mySheet1.Cell((int)(uiR + 1), (int)(colonna.Key + 1)).SetDataType(ClosedXML.Excel.XLCellValues.Text);
                             }
-
                             if (uiR > maxrowinmemory * blockwrite)
                             {
                                 myBook.SaveAs(myFnameXlsx); //salvo il file excel
                                 blockwrite += 1;
+                                System.Threading.Thread.Sleep(5);
+                                System.GC.Collect();
+                                //try
+                                //{
+                                //    string tmp = WelcomeLibrary.UF.SharedStatic.MakeHttpHtmlGet(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/keepalive.aspx", 1252);
+                                //    Messaggi["Messaggio"] += "CAlled page  (" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/keepalive.aspx" + ")  : " + System.DateTime.Now.ToString() + " \r\n";
+
+                                //}
+                                //catch { };
                             }
 
 

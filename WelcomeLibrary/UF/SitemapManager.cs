@@ -464,7 +464,8 @@ namespace WelcomeLibrary.UF
                                 {
                                     writer.Flush();
                                     tmpstop = 0;
-                                    System.Threading.Thread.Sleep(800);
+                                    System.GC.Collect();
+                                    System.Threading.Thread.Sleep(100);
                                 }
 
                             }
@@ -506,7 +507,8 @@ namespace WelcomeLibrary.UF
                                             {
                                                 writer.Flush();
                                                 tmpstop = 0;
-                                                System.Threading.Thread.Sleep(800);
+                                                System.GC.Collect();
+                                                System.Threading.Thread.Sleep(100);
                                             }
                                         }
                                     }
@@ -549,7 +551,8 @@ namespace WelcomeLibrary.UF
                                             {
                                                 writer.Flush();
                                                 tmpstop = 0;
-                                                System.Threading.Thread.Sleep(800);
+                                                System.GC.Collect();
+                                                System.Threading.Thread.Sleep(100);
                                             }
                                         }
                                     }
@@ -645,7 +648,8 @@ namespace WelcomeLibrary.UF
                 {
                     tipologiatmp = kv.Value;
                     TipologiaOfferte tipologiafound = WelcomeLibrary.UF.Utility.TipologieOfferte.Find(t => t.Codice == tipologiatmp && t.Lingua == lingua);
-                    testourl += tipologiafound.Descrizione;
+                    if (tipologiafound != null)
+                        testourl += tipologiafound.Descrizione;
                 }
                 else if (kv.Key.ToLower() == ("categoria"))
                 {
@@ -775,7 +779,8 @@ namespace WelcomeLibrary.UF
                             {
                                 writer.Flush();
                                 tmp = 0;
-                                System.Threading.Thread.Sleep(1000);
+                                System.GC.Collect();
+                                System.Threading.Thread.Sleep(100);
                             }
                         }
 
@@ -790,6 +795,7 @@ namespace WelcomeLibrary.UF
             }
             return;
         }
+
 
         public static string CreaLinkRoutes(string Lingua, string denominazione, string id, string codicetipologia, string codicecategoria = "", string codicecat2liv = "",
             string regione = "", string annofiltro = "", string mesefiltro = "", bool generaUrlrewrited = true, bool updateTableurlrewriting = false, Dictionary<string, string> addparms = null)

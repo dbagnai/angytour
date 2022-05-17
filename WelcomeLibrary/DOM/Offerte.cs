@@ -5,8 +5,36 @@ using System.Text;
 namespace WelcomeLibrary.DOM
 {
     [Serializable]
-    public class Offerte
+    public class Offerte : IDisposable
     {
+        #region IDisposable Membri di
+
+        //Implement IDisposable.
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // Free other state (managed objects).
+
+            }
+            // Free your own state (unmanaged objects).
+            // Set large fields to null.
+        }
+
+        // Use C# destructor syntax for finalization code.
+        ~Offerte()
+        {
+            // Simply call Dispose(false).
+            Dispose(false);
+        }
+
+        #endregion
 
         public string Autorenome
         {

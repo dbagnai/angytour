@@ -2177,6 +2177,75 @@ function frmcaratteristica3(localObjects, valore, prop, callback) {
     //    selvalue = selvalue[0].toLowerCase();
     callback(selvalue);
 }
+
+
+function frmcaratteristica4(localObjects, valore, prop, callback) {
+    //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
+    //dataroot += "}";
+    //dataroot = JSON.parse(dataroot);
+
+    var dataroot = {};
+    dataroot.data = JSONcar4;
+    var selvalue = "";
+    //var selvalue = JSON.search(dataroot, '//data[Codice="' + valore[0] + '"]/Campo1');
+    for (var j = 0; j < dataroot["data"].length; j++) {
+        if (dataroot["data"][j].Codice == valore[0] && dataroot["data"][j].Lingua == lng) {
+            selvalue = dataroot["data"][j].Campo1;
+            break;
+
+        }
+    }
+
+    //if (selvalue != null && selvalue != undefined && selvalue.length > 0)
+    //    selvalue = selvalue[0].toLowerCase();
+    callback(selvalue);
+}
+
+
+function frmcaratteristica5(localObjects, valore, prop, callback) {
+    //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
+    //dataroot += "}";
+    //dataroot = JSON.parse(dataroot);
+
+    var dataroot = {};
+    dataroot.data = JSONcar5;
+    var selvalue = "";
+    //var selvalue = JSON.search(dataroot, '//data[Codice="' + valore[0] + '"]/Campo1');
+    for (var j = 0; j < dataroot["data"].length; j++) {
+        if (dataroot["data"][j].Codice == valore[0] && dataroot["data"][j].Lingua == lng) {
+            selvalue = dataroot["data"][j].Campo1;
+            break;
+
+        }
+    }
+
+    //if (selvalue != null && selvalue != undefined && selvalue.length > 0)
+    //    selvalue = selvalue[0].toLowerCase();
+    callback(selvalue);
+}
+
+
+function frmcaratteristica6(localObjects, valore, prop, callback) {
+    //var dataroot = "{ \"data\":" + JSON.stringify(JSONtipologia);
+    //dataroot += "}";
+    //dataroot = JSON.parse(dataroot);
+
+    var dataroot = {};
+    dataroot.data = JSONcar6;
+    var selvalue = "";
+    //var selvalue = JSON.search(dataroot, '//data[Codice="' + valore[0] + '"]/Campo1');
+    for (var j = 0; j < dataroot["data"].length; j++) {
+        if (dataroot["data"][j].Codice == valore[0] && dataroot["data"][j].Lingua == lng) {
+            selvalue = dataroot["data"][j].Campo1;
+            break;
+
+        }
+    }
+
+    //if (selvalue != null && selvalue != undefined && selvalue.length > 0)
+    //    selvalue = selvalue[0].toLowerCase();
+    callback(selvalue);
+}
 function frmprovincia(localObjects, valore, prop, callback) {
     //var dataroot = "{ \"data\":" + JSON.stringify(JSONgeogenerale);
     //dataroot += "}";

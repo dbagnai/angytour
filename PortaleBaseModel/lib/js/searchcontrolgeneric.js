@@ -405,6 +405,14 @@ function FillSearchControls(objfiltro) {
                 frmcaratteristica3('', selectedvalueact, '', function (ret) {
                     $("#" + idcontrollotxt).val(ret);
                 });
+            if (idcontrollo.includes('Caratteristica4'))
+                frmcaratteristica4('', selectedvalueact, '', function (ret) {
+                    $("#" + idcontrollotxt).val(ret);
+                });
+            if (idcontrollo.includes('Caratteristica6'))
+                frmcaratteristica6('', selectedvalueact, '', function (ret) {
+                    $("#" + idcontrollotxt).val(ret);
+                });
 
         } catch (e) { }
     });

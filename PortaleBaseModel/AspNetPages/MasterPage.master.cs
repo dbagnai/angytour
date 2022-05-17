@@ -77,6 +77,11 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         get { return ViewState["Caratteristica5"] != null ? (string)(ViewState["Caratteristica5"]) : ""; }
         set { ViewState["Caratteristica5"] = value; }
     }
+    public string Caratteristica6
+    {
+        get { return ViewState["Caratteristica6"] != null ? (string)(ViewState["Caratteristica6"]) : ""; }
+        set { ViewState["Caratteristica6"] = value; }
+    }
     public string idOfferta
     {
         get { return ViewState["idOfferta"] != null ? (string)(ViewState["idOfferta"]) : ""; }
@@ -151,7 +156,10 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             Caratteristica2 = CommonPage.CaricaValoreMaster(Request, Session, "Caratteristica2", false);
             Caratteristica3 = CommonPage.CaricaValoreMaster(Request, Session, "Caratteristica3", false);
             Caratteristica4 = CommonPage.CaricaValoreMaster(Request, Session, "Caratteristica4", false);
-            Caratteristica5 = CommonPage.CaricaValoreMaster(Request, Session, "Caratteristica5", false); idContenuto = CommonPage.CaricaValoreMaster(Request, Session, "idContenuto", true);
+            Caratteristica5 = CommonPage.CaricaValoreMaster(Request, Session, "Caratteristica5", false);
+            Caratteristica6 = CommonPage.CaricaValoreMaster(Request, Session, "Caratteristica6", false);
+            
+            idContenuto = CommonPage.CaricaValoreMaster(Request, Session, "idContenuto", true);
             idOfferta = CommonPage.CaricaValoreMaster(Request, Session, "idOfferta", true);
             Vetrina = CommonPage.CaricaValoreMaster(Request, Session, "vetrina", true, "");
             Page.ClientScript.GetPostBackEventReference(this, string.Empty);
@@ -497,13 +505,15 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         return sb.ToString();
     }
 
-    public string CrealinkCaratteristica(int min, int max, int progressivocaratteristica, string classoop = "", bool noli = false, string fileteredcarcodes = "")
+    public string CrealinkCaratteristica(int min, int max, int progressivocaratteristica, string classoop = "", bool noli = false, string fileteredcarcodes = "", bool autofiltercar = false, string filtrocategoria = "")
     {
+
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         List<WelcomeLibrary.DOM.TipologiaOfferte> sezioni = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte tmp) { return (tmp.Lingua == Lingua); });
+
+
         sezioni.RemoveAll(t => Convert.ToInt32(t.Codice.Substring(3)) < min || Convert.ToInt32(t.Codice.Substring(3)) > max);
         sezioni.Sort(new GenericComparer<TipologiaOfferte>("Codice", System.ComponentModel.ListSortDirection.Descending));
-
         List<string> list = new List<string>();
         if (fileteredcarcodes != "")
         {
@@ -511,22 +521,40 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             list = codes.ToList<string>();
         }
 
-
         if (sezioni != null)
             foreach (TipologiaOfferte o in sezioni)
             {
+
+                Prodotto prodotto = Utility.ElencoProdotti.Find(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == o.Codice && tmp.CodiceProdotto == filtrocategoria)); });
+                string addtestolink = "";
+                if (prodotto != null && !string.IsNullOrEmpty(filtrocategoria))
+                {
+                    addtestolink = prodotto.Descrizione;
+                }
+
+                //if(autofiltercar) //qui devo testare se nella sezione/filtrocategoria esistono prodotti se non esistono salto il link!!!
+                //da fare una funzione che dato tipologia,categoria,sottocategoria,nomecaratteristica,valorecar mi dice se ci sono prodotti a qty>0 (filtrodisponibili) o no!
+                List<string> idpresenti = new List<string>();
+                if (autofiltercar)
+                    idpresenti = offerteDM.getidpresentibyfilters(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, "Caratteristica" + progressivocaratteristica, new Dictionary<string, string>() { { "tipologia", o.Codice }, { "categoria", filtrocategoria } });
+
                 if (progressivocaratteristica == 1)
+                {
+
                     foreach (Tabrif elem in Utility.Caratteristiche[0])
                     {
                         Dictionary<string, string> addpars = new Dictionary<string, string>();
                         if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
                         {
+
+                            if (idpresenti.Count > 0 && !idpresenti.Exists(c => c == elem.Codice)) continue; //salto i codici se richiesto il filtraggio per presenti
                             if (list.Count > 0 && !list.Exists(c => c == elem.Codice)) continue; //salto i codici se richiesto il filtraggio
+                            //da saltare/filtrare le caratteristiche non presenti  per tipologia,categoria,sottocategoria attuale
 
                             addpars.Add("Caratteristica1", elem.Codice);
                             //Genero il link per la tipologia
                             string testo = elem.Campo1;
-                            string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.Codice, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
+                            string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.Codice, filtrocategoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
                             link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                             if (!noli)
                                 sb.Append("<li>");
@@ -546,7 +574,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                                 sb.Append("</li>");
                         }
                     }
-
+                }
 
                 if (progressivocaratteristica == 2)
                     foreach (Tabrif elem in Utility.Caratteristiche[1])
@@ -554,12 +582,13 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                         Dictionary<string, string> addpars = new Dictionary<string, string>();
                         if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
                         {
+                            if (idpresenti.Count > 0 && !idpresenti.Exists(c => c == elem.Codice)) continue; //salto i codici se richiesto il filtraggio per presenti
                             if (list.Count > 0 && !list.Exists(c => c == elem.Codice)) continue; //salto i codici se richiesto il filtraggio
 
                             addpars.Add("Caratteristica2", elem.Codice);
                             //Genero il link per la tipologia
                             string testo = elem.Campo1;
-                            string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.Codice, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
+                            string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.Codice, filtrocategoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
                             link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
                             if (!noli)
                                 sb.Append("<li>");
@@ -579,9 +608,152 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                                 sb.Append("</li>");
                         }
                     }
+
+
+
+                if (progressivocaratteristica == 3)
+                    foreach (Tabrif elem in Utility.Caratteristiche[2])
+                    {
+                        Dictionary<string, string> addpars = new Dictionary<string, string>();
+                        if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
+                        {
+                            if (idpresenti.Count > 0 && !idpresenti.Exists(c => c == elem.Codice)) continue; //salto i codici se richiesto il filtraggio per presenti
+                            if (list.Count > 0 && !list.Exists(c => c == elem.Codice)) continue; //salto i codici se richiesto il filtraggio
+
+                            addpars.Add("Caratteristica3", elem.Codice);
+                            //Genero il link per la tipologia
+                            string testo = elem.Campo1;
+                            string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.Codice, filtrocategoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
+                            link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                            if (!noli)
+                                sb.Append("<li>");
+                            sb.Append("<a href=\"");
+                            sb.Append(link);
+                            sb.Append("\"");
+                            if (!string.IsNullOrEmpty(classoop))
+                                sb.Append(" class=\"" + classoop + "\"  ");
+                            if (o.Codice == CodiceTipologia && Caratteristica3 == elem.Codice)
+                                sb.Append(" style=\"font-weight:600 !important\"  ");
+                            sb.Append(" >");
+                            string testoforced = references.ResMan("Common", Lingua, "testolink" + elem.Codice);
+                            if (!string.IsNullOrEmpty(testoforced)) testo = testoforced;
+                            sb.Append(testo);
+                            sb.Append("</a>");
+                            if (!noli)
+                                sb.Append("</li>");
+                        }
+                    }
+
+
+                if (progressivocaratteristica == 4)
+                    foreach (Tabrif elem in Utility.Caratteristiche[3])
+                    {
+                        Dictionary<string, string> addpars = new Dictionary<string, string>();
+                        if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
+                        {
+                            if (idpresenti.Count > 0 && !idpresenti.Exists(c => c == elem.Codice)) continue; //salto i codici se richiesto il filtraggio per presenti
+                            if (list.Count > 0 && !list.Exists(c => c == elem.Codice)) continue; //salto i codici se richiesto il filtraggio
+
+                            addpars.Add("Caratteristica4", elem.Codice);
+                            //Genero il link per la tipologia
+                            string testo = elem.Campo1;
+                            string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.Codice, filtrocategoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
+                            link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                            if (!noli)
+                                sb.Append("<li>");
+                            sb.Append("<a href=\"");
+                            sb.Append(link);
+                            sb.Append("\"");
+                            if (!string.IsNullOrEmpty(classoop))
+                                sb.Append(" class=\"" + classoop + "\"  ");
+                            if (o.Codice == CodiceTipologia && Caratteristica4 == elem.Codice)
+                                sb.Append(" style=\"font-weight:600 !important\"  ");
+                            sb.Append(" >");
+                            string testoforced = references.ResMan("Common", Lingua, "testolink" + elem.Codice);
+                            if (!string.IsNullOrEmpty(testoforced)) testo = testoforced;
+                            sb.Append(testo);
+                            sb.Append("</a>");
+                            if (!noli)
+                                sb.Append("</li>");
+                        }
+                    }
+
+
+                if (progressivocaratteristica == 5)
+                    foreach (Tabrif elem in Utility.Caratteristiche[4])
+                    {
+                        Dictionary<string, string> addpars = new Dictionary<string, string>();
+                        if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
+                        {
+                            if (idpresenti.Count > 0 && !idpresenti.Exists(c => c == elem.Codice)) continue; //salto i codici se richiesto il filtraggio per presenti
+                            if (list.Count > 0 && !list.Exists(c => c == elem.Codice)) continue; //salto i codici se richiesto il filtraggio
+
+                            addpars.Add("Caratteristica5", elem.Codice);
+                            //Genero il link per la tipologia
+                            string testo = elem.Campo1;
+                            string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.Codice, filtrocategoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
+                            link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                            if (!noli)
+                                sb.Append("<li>");
+                            sb.Append("<a href=\"");
+                            sb.Append(link);
+                            sb.Append("\"");
+                            if (!string.IsNullOrEmpty(classoop))
+                                sb.Append(" class=\"" + classoop + "\"  ");
+                            if (o.Codice == CodiceTipologia && Caratteristica5 == elem.Codice)
+                                sb.Append(" style=\"font-weight:600 !important\"  ");
+                            sb.Append(" >");
+                            string testoforced = references.ResMan("Common", Lingua, "testolink" + elem.Codice);
+                            if (!string.IsNullOrEmpty(testoforced)) testo = testoforced;
+                            sb.Append(testo);
+                            sb.Append("</a>");
+                            if (!noli)
+                                sb.Append("</li>");
+                        }
+                    }
+
+
+                if (progressivocaratteristica == 6)
+                    foreach (Tabrif elem in Utility.Caratteristiche[5])
+                    {
+                        Dictionary<string, string> addpars = new Dictionary<string, string>();
+                        if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
+                        {
+                            if (idpresenti.Count > 0 && !idpresenti.Exists(c => c == elem.Codice)) continue; //salto i codici se richiesto il filtraggio per presenti
+                            if (list.Count > 0 && !list.Exists(c => c == elem.Codice)) continue; //salto i codici se richiesto il filtraggio
+
+                            addpars.Add("Caratteristica6", elem.Codice);
+                            //Genero il link per la tipologia
+                            string testo = elem.Campo1;
+                            string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.Codice, filtrocategoria, "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
+                            link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                            if (!noli)
+                                sb.Append("<li>");
+                            sb.Append("<a href=\"");
+                            sb.Append(link);
+                            sb.Append("\"");
+                            if (!string.IsNullOrEmpty(classoop))
+                                sb.Append(" class=\"" + classoop + "\"  ");
+                            if (o.Codice == CodiceTipologia && Caratteristica6 == elem.Codice)
+                                sb.Append(" style=\"font-weight:600 !important\"  ");
+                            sb.Append(" >");
+                            testo += " " + addtestolink;
+
+                            string testoforced = references.ResMan("Common", Lingua, "testolink" + elem.Codice);
+                            if (!string.IsNullOrEmpty(testoforced)) testo = testoforced;
+                            sb.Append(testo);
+                            sb.Append("</a>");
+                            if (!noli)
+                                sb.Append("</li>");
+                        }
+                    }
+
+
+
             }
         return sb.ToString();
     }
+
 
     public string CrealinkCaratteristicaAutocolumn(int min, int max, int progressivocaratteristica, string classoop = "", bool noli = false, int maxrighepercolonna = 10)
     {

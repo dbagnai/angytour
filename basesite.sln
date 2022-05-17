@@ -25,7 +25,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PortaleBaseModel(2)", "Port
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "true"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "60010"
+		VWDPort = "61010"
 		SlnRelativePath = "PortaleBaseModel\"
 	EndProjectSection
 EndProject

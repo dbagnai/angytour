@@ -1,0 +1,75 @@
+﻿<style>
+
+    .squarevariable {
+        position: relative;
+    }
+
+    @media (min-width: 992px) {
+
+        .squarevariable {
+            margin: 0 -2px;
+        }
+    }
+
+    .squarevariable .card {
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 0px;
+    }
+
+    .imgbackstyle {
+        min-height: 300px !important;
+    }
+    /* TAGLIA LE IMMAGINI IN BASE ALL'ALTEZZA DELLO SCHERMO - può essere disabilitato */
+
+    /* .squarevariable item .work-image img {
+        height: 100% !important;
+        width: auto !important;
+    }
+
+    .squarevariable item .work-image {
+        overflow: hidden;
+    }
+
+    @media (max-width: 992px) {
+
+
+        .squarevariable .card-img-overlay {
+            height: 100% !important;
+            width: 100% !important;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .squarevariable {
+            height: 90vh !important;
+            overflow: hidden;
+        }
+    }*/
+
+    /*FINE TAGLIO IMMAGINI*/
+
+
+</style>
+
+<div class="grid squarevariable" id="replaceid">
+    <div class="grid-sizer"></div>
+    <item class="grid-item">
+        <div class="card m-0 mx-md-1 my-md-1">
+            <a class="bind primary-color" rel="prettyPhoto[pp_gal]" href="link" mybind="Id" style="overflow:hidden;">
+                <div class=" d-flex justify-content-center  m-0  work-image  position-relative imgbackstyle imgback bind align-items-center" mybind="Id">
+                </div>
+            </a>
+            <div class="bg-white-solid " style="top:auto;min-height:140px">
+                <div class="card-body text-center">
+                    <div class="font-weight-strong scalablefont-small primary-font mb-2">
+                        <span class="bind p-2" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                    </div>
+                    <div class=" scalablefont-smallest font-weight-medium mt-0 mb-3">
+                        <span class="bind p-2" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </item>
+</div>
