@@ -18,7 +18,6 @@
     </div>
     <asp:Literal Text="" runat="server" ID="litTextHeadPage" />
     <script type="text/javascript">
-        makeRevLower = true;
         function goBack() {
             window.history.back()
         }
@@ -232,7 +231,15 @@
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
-    <%--ALTRI ARTICOLI--%>
+   
+        <%--RECENSIONI CLIENTI--%>
+    <div runat="server" visible="true">
+        <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
+            <div id="divCommenti" class="inject py-5 commenti-details-page bg-white" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
+        </asp:Panel>
+    </div>
+
+     <%--ALTRI ARTICOLI--%>
     <%--<div class="bd-light-color" style="position: relative; border-top: 10px dotted; background-color:#fff;" id="divSuggeritiContainer">--%>
     <div class="bg-light-color" id="divSuggeritiContainer">
         <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 30px 25px;">
@@ -401,12 +408,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <%--RECENSIONI CLIENTI--%>
-    <div runat="server" visible="false">
-        <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
-            <div id="divCommenti" class="inject py-5 commenti-details-page bg-white" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
-        </asp:Panel>
     </div>
 
 
