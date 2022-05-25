@@ -8785,8 +8785,19 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 }
 .btn-carrello-esaurito,
 .btn-carrello-esaurito:hover {
+  /* opacity: 0;*/
+  font-size: 0.8rem;
+  /*font-weight:300;*/
+  width: auto;
+  background-color: transparent !important;
+  color: #000 !important;
+  border: none !important;
+  letter-spacing: 0 !important;
+  cursor: unset;
+}
+.btn-carrello-esaurito .fa,
+.btn-carrello-esaurito1 .fa {
   opacity: 0;
-  /*width:initial;*/
 }
 .button-carrello-animate {
   color: #fff !important;
