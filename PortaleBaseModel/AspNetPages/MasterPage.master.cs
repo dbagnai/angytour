@@ -1107,6 +1107,101 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         return sb.ToString();
     }
 
+    /// <summary>
+    /// Creazione lista li delle categorie e sottocategorie per la tipologia indicata
+    /// </summary>
+    /// <param name="tipologia"></param>
+    /// <param name="filtercode"></param>
+    /// <param name="ulvisibility"></param>
+    /// <returns></returns>
+    public string CreaLinkCategorieNestedSimplemenu(string tipologia, string filtercode = "", bool ulvisibility = false)
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        List<Prodotto> prodotti = Utility.ElencoProdotti.FindAll(delegate (WelcomeLibrary.DOM.Prodotto tmp) { return (tmp.Lingua == Lingua && (tmp.CodiceTipologia == tipologia)); });
+        //prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
+
+
+        if (filtercode != "")
+        {
+            string[] codes = filtercode.Split(',');
+            List<string> list = new List<string>();
+            list = codes.ToList<string>();
+            prodotti = prodotti.FindAll(i => list.Exists(l => l == i.CodiceProdotto));
+        }
+        if (prodotti != null)
+        {
+            prodotti.Sort(new GenericComparer<Prodotto>("Descrizione", System.ComponentModel.ListSortDirection.Ascending));
+            //prodotti.Sort(new GenericComparer<Prodotto>("CodiceProdotto", System.ComponentModel.ListSortDirection.Ascending));
+            if (tipologia == "rif000001")
+                prodotti = RiordinaSpeciale(prodotti, "prod000020,prod000013,prod000014,prod000015,prod000017,prod000016,prod000021,prod000022,prod000042,prod000043,prod000044,prod000023,prod000027,prod000024,prod000026,prod000001");
+            int prog = 0;
+            foreach (Prodotto o in prodotti)
+            {
+                string testo = o.Descrizione;
+                string link = CommonPage.CreaLinkRoutes(Session, true, Lingua, CommonPage.CleanUrl(testo), "", o.CodiceTipologia, o.CodiceProdotto);
+                link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+                string sottomenu = CreaLinkSottoCategorie(o.CodiceTipologia, o.CodiceProdotto, "", "dropdown-item");
+
+                /*Nested level*/
+                if (!string.IsNullOrEmpty(sottomenu))
+                {
+                    sb.Append("<li class=\"nav-item dropdown\">");
+                    sb.Append("<a  class=\"nav-link dropdown-toggle\"  href=\"");
+                    //sb.Append(link);
+                    sb.Append("#");
+                    sb.Append("\"");
+                    if (o.CodiceProdotto == Categoria)
+                        sb.Append(" style=\"font-weight:600 !important;\"  ");
+                    sb.Append(" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" ");
+                    sb.Append(" id=\"");
+                    sb.Append("dmenu");
+                    sb.Append(prog);
+                    sb.Append("\"  >");
+                    sb.Append(testo);
+                    sb.Append("</a>");
+
+
+                    sb.Append("<ul class=\"dropdown-menu border-0 shadow\"  ");
+                    sb.Append(" aria-labelledby=\"dmenu");
+                    sb.Append(prog);
+                    sb.Append("\" >");
+
+                    ///////////////
+                    //qui puoi aggiungereil link alla tipologia col dividere
+                    ///////////////
+                    sb.Append("<li class=\"nav-item\">");
+                    sb.Append("<a  class=\"nav-link\"  href=\"");
+                    sb.Append(link);
+                    sb.Append("\" >");
+                    sb.Append(testo);
+                    sb.Append("</a>");
+                    sb.Append("</li>");
+                    sb.Append("<li class=\"dropdown-divider\"></li>");
+                    ///////////////
+
+                    sb.Append(sottomenu);
+
+                    sb.Append("</ul>");
+                    sb.Append("</li>");
+                    prog++;
+                }
+                else
+                {
+                    ///////////////
+                    sb.Append("<li class=\"nav-item\">");
+                    sb.Append("<a  class=\"nav-link\"  href=\"");
+                    sb.Append(link);
+                    sb.Append("\" >");
+                    sb.Append(testo);
+                    sb.Append("</a>");
+                    sb.Append("</li>");
+                    ///////////////
+                }
+            }
+        }
+
+        return sb.ToString();
+    }
 
     // <summary>
     /// 

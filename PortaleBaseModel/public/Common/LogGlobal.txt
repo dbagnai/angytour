@@ -363,3 +363,19 @@
 <Messaggio>httplocalhost60010Generato sitemap  13/04/2022 17:23:20</Messaggio>
  <Data>13/04/2022 17:23:20</Data>
 <Messaggio>httplocalhost60010Generato sitemap  13/04/2022 17:23:20Terminato Aggiornamento  13/04/2022 17:23:20</Messaggio>
+ <Data>26/05/2022 09:12:16</Data>
+<Messaggio> Application start : 26/05/2022 09:12:14</Messaggio>
+ <Data>26/05/2022 09:12:16</Data>
+<Messaggio> Global init original path: http://localhost:61010/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:61010</Messaggio>
+ <Data>26/05/2022 09:24:29</Data>
+<Messaggio> Application start : 26/05/2022 09:24:29</Messaggio>
+ <Data>26/05/2022 09:24:29</Data>
+<Messaggio> Global init original path: http://localhost:61010/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:61010</Messaggio>
+ <Data>26/05/2022 09:25:30</Data>
+<Messaggio>httplocalhost61010Generato sitemap  26/05/2022 09:25:30</Messaggio>
+ <Data>26/05/2022 09:25:30</Data>
+<Messaggio>httplocalhost61010Generato sitemap  26/05/2022 09:25:30Terminato Aggiornamento  26/05/2022 09:25:30</Messaggio>
+ <Data>26/05/2022 09:47:34</Data>
+<Messaggio> Application start : 26/05/2022 09:47:33</Messaggio>
+ <Data>26/05/2022 09:47:34</Data>
+<Messaggio> Global init original path: http://localhost:61010/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:61010</Messaggio>

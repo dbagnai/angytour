@@ -2,12 +2,12 @@
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
     <title>Nome Sito Ceramiche Ficola</title>
-    <link>http://localhost:60010</link>
+    <link>http://localhost:61010</link>
     <description>Nome Sito</description>
-    <lastBuildDate>Wed, 13 Apr 2022 17:23:20 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 26 May 2022 09:25:30 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2022-04-13T17:23+02:00</sy:updateBase>
+    <sy:updateBase>2022-05-26T09:25+02:00</sy:updateBase>
     <language>it-IT</language>
   </channel>
 </rss>
