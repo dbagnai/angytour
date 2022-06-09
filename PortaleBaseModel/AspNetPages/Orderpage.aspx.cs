@@ -672,6 +672,13 @@ public partial class AspNetPages_Orderpage : CommonPage
                 totali.Denominazionecliente += cliente.Ragsoc + "<br/>";
             totali.Indirizzofatturazione += "P.Iva: " + cliente.Pivacf + "<br/>";
             totali.Indirizzofatturazione += "CodiceDestinatario/Pec: " + cliente.Emailpec + "<br/>";
+
+
+            if (chkRichiedifattura.Checked)
+                totali.Indirizzofatturazione += "Richiesta emissione fattura:  SI <br/>";
+            else
+                totali.Indirizzofatturazione += "Richiesta emissione fattura:  NO <br/>";
+
             //SE INDIRIZZO SPEDIIZONE DIVERSO -> LO MEMORIZZO NEI TOTALI ( E serializzo il dettaglio nel cliente nel campo serialized )
             string indirizzospedizione = "";
             if (!chkSpedizione.Checked && !string.IsNullOrEmpty(cliente.Serialized))

@@ -226,6 +226,22 @@
                                         <input type="text" enableviewstate="true" class="form-control" runat="server" id="inpPec" placeholder='<%# references.ResMan("Common", Lingua,"FormTestoPec") %>' />
                                     </div>
                                 </div>
+
+
+                                <div class="form-row row">
+                                    <div class="col-lg-12 form-group">
+                                        <div style="display: none; margin-top: 15px; text-align: left">
+                                            <label class="checkbox" style="margin: 5px 0 0 -2.5px;">
+                                                <asp:CheckBox EnableViewState="true" runat="server" CssClass="pull-left" ForeColor="Red" Font-Bold="true"
+                                                    ID="chkRichiedifattura" Checked="false" Text='<%# references.ResMan("Common", Lingua,"txtRichiestafattura") %>' />
+                                            </label>
+                                            <%--    <div style="color: red; font-size: 1rem" class="pull-left">
+                                                <%= references.ResMan("Common", Lingua,"txtRichiestafattura") %>
+                                            </div>--%>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 

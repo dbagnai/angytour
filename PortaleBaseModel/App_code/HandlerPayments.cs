@@ -747,6 +747,13 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
         bool.TryParse(supplementocontrassegno, out btmp);
         parametriordine.Add("supplementocontrassegno", btmp);
         parametriordine.Add("note", note);
+
+
+        string richiedifattura = (data.GetValueOrDefault("richiedifattura") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+        btmp = false;
+        bool.TryParse(richiedifattura, out btmp);
+        parametriordine.Add("richiedifattura", btmp);
+
         string chkspedizione = (data.GetValueOrDefault("chkSpedizione") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
         var bspediz = true;
         bool.TryParse(chkspedizione, out bspediz);
@@ -858,7 +865,10 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
             totali.Indirizzofatturazione += "Telefono: " + cliente.Telefono + "<br/>";
             totali.Indirizzofatturazione += "P.Iva: " + cliente.Pivacf + "<br/>";
             totali.Indirizzofatturazione += "CodiceDestinatario/Pec: " + cliente.Emailpec + "<br/>";
-
+            if (parametri.ContainsKey("richiedifattura") && (bool)parametri["richiedifattura"])
+                totali.Indirizzofatturazione += "Richiesta emissione fattura:  SI <br/>";
+            else
+                totali.Indirizzofatturazione += "Richiesta emissione fattura:  NO <br/>";
             //SE INDIRIZZO SPEDIIZONE DIVERSO -> LO MEMORIZZO NEI TOTALI ( E serializzo il dettaglio nel cliente nel campo serialized )
             string indirizzospedizione = "";
             if (parametri.ContainsKey("chkspedizione") && !(bool)parametri["chkspedizione"] && !string.IsNullOrEmpty(cliente.Serialized))

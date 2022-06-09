@@ -309,6 +309,7 @@ function getcontactdataformorder(contactdatas, callback) {
     //altre selezioni 
     contactdatas.Note = $("[id$='inpNote']").val();
     contactdatas.supplementoisole = $("[id$='chkSupplemento']")[0].checked;
+    contactdatas.richiedifattura = $("[id$='chkRichiedifattura']")[0].checked;
 
     //Modalità di pagamenti
     contactdatas.supplementocontrassegno = false;
