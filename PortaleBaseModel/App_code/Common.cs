@@ -2299,7 +2299,12 @@ public class CommonPage : Page
             /////////////////////////////////////////////////////////////////////
             String scriptRegVariables = "";
             string jsoncarrelloordine = "";
+
+            //passaggio eventi con gtag
             //https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce
+
+            // inalternativa puoi usare GTM per passare gli eventi https://developers.google.com/analytics/devguides/collection/ua/gtm/enhanced-ecommerce tamite data.layer
+
             // qui devo inserire i dati del carrello e dei prodotti e serializzari per gtag
             // da fare con totali e prodotti DOM.jsongtagpurchase DOM.jsongtagitem //.....
 

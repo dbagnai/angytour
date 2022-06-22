@@ -1156,6 +1156,48 @@ a.btn-black-outline.restaurant-menu:nth-child(5):focus {
         width: 80vw;
     }
 }*/
+/*   .slider {
+        width: 50%;
+        margin: 100px auto;
+    } */
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}
+.slick-slide {
+  margin: 0px 5px;
+}
+.slick-slide {
+  transition: all ease-in-out 0.3s;
+  opacity: 1;
+}
+.slick-cloned {
+  opacity: 1;
+}
+.slick-active {
+  opacity: 1;
+}
+.slick-current {
+  opacity: 1;
+}
+.slick-prev,
+.slick-next {
+  top: -15px;
+  width: 40px;
+  height: 40px;
+}
+.slick-next {
+  right: 0px;
+}
+.slick-prev {
+  left: unset;
+  right: 50px;
+}
+.slick-prev:before,
+.slick-next:before {
+  font-size: 40px;
+  color: black;
+}
 /*----------------------------------
 ////////| IMPORTAZIONE FONT |/////// 
     ATTENZIONE QUANDO SI COMBINANO GLI SCRIPT CSS

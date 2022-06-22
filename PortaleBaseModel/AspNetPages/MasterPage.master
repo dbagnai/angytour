@@ -98,7 +98,7 @@
                     <%-- MENU TOP LEFT (after social) --%>
                     <div class="simplemenu">
                         <ul>
-                            <!-- DOVE SIAMO --->
+                            <!-- DOVE SIAMO -->
                             <%--  <li runat="server" class="px-2 px-lg-4 d-block">
                             <a id="googlemap" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"googleurl1")) %>' target='_blank'>
                                 <i class="fa fa-map-marker mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"testoid5") %></span>
@@ -116,13 +116,13 @@
                                     <%= CreaLinkCategorie("rif000002") %>
                                 </ul>
                             </li>
-                            <!-- CONTATTI --->
+                            <!-- CONTATTI -->
                             <li runat="server" class="px-2 px-lg-4 d-none d-sm-block">
                                 <a id="linkContattiHigh" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
                                     <i class="fa fa-envelope-o mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"TestoContatti") %></span>
                                 </a>
                             </li>
-                            <!-- TELEFONO --->
+                            <!-- TELEFONO -->
                             <%--   <li runat="server" class="px-2 px-lg-4 d-none d-sm-block">
                                 <a href="<%= "tel:" + references.ResMan("Common", Lingua,"testoTelfisso") %>">
                                     <i class="fas fa-phone fa-flip-horizontal mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"testoTelfisso") %>
@@ -196,7 +196,7 @@
                         </asp:PlaceHolder>
                         <%-- CARRELLO END --%>
                     </div>
-                    <!-- LINGUE --->
+                    <!-- LINGUE -->
 
                     <div runat="server" visible="false" class="simplemenu" id="divlngchange">
                         <ul>
@@ -529,7 +529,7 @@
                 </ul>
             </div>
         </div>
-        <!-- FINE MENU --->
+        <!-- FINE MENU -->
         <!--  MAIN CONTENT -->
         <section class="body-wrapper">
             <div id="VerticalSpacer" clientidmode="static" class="headerspacer" runat="server"></div>

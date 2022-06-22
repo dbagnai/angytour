@@ -1,20 +1,20 @@
-﻿<section class="slider-for-1 slider" id="replaceid">
+﻿<section class="slider-for-1-b slider" id="replaceid">
     <div class="">
-        <div class="card m-2 border-tipo1" style="overflow:hidden">
-            <a class="bind primary-color" preload target="_self" href="link" title="titolo" mybind="Id">
+        <div class="card m-2" style="overflow:hidden;background:transparent;border:none">
+            <a class="bind primary-color border-tipo2" preload target="_self" href="link" title="titolo" mybind="Id">
                 <div class="position-relative imgovercontainer work-image">
-                    <img src="/images/dummylogo.png" alt="" class="bind card-img-top lazy" mybind="Id" />
+                    <img src="/images/dummylogo.png" alt="" class="bind card-img-top" mybind="Id" />
                     <div class="card-img-overlay">
                     </div>
                 </div>
             </a>
-            <div class="card-body text-center">
+            <div class="card-body text-left">
                 <!--<div class="work-subcaption text-center position-absolute p-0 w-100" style="z-index: 96; bottom: 0; height: auto; overflow: visible; margin-bottom:0px !important">-->
                 <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
-                    <h3 class="card-title titolo-offerta mb-2">
+                    <h3 class="scalablefont-small-medium font-weight-strong primary-font b-2">
                         <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
                     </h3>
-                    <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-3">
+                    <h4 class="scalablefont-small font-weight-light primary-font  mt-0 mb-3">
                         <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
                     </h4>
                 </a>
@@ -24,12 +24,12 @@
 </section>
 <script type="text/javascript">
     $(document).on('ready', function () {
-        $(".slider-for-1").slick({
+        $(".slider-for-1-b").slick({
             dots: true,
             infinite: true,
             centerMode: true,
-            slidesToShow: 4,
-            slidesToScroll: 4,
+            slidesToShow: 3,
+            slidesToScroll: 1,
             responsive: [
                 {
                     breakpoint: 1600,
