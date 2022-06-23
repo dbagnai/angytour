@@ -87,6 +87,11 @@ path.bg-light-color-path {
     background-color: @bg-secondarylight-color !important;
 }
 
+.bg-light-sottomenu-color {
+    background-color: @bg-light-sottomenu-color !important;
+}
+
+
 .bg-light-color {
     background-color: @bg-light-color !important;
     background-image: @pattern-image-light;
@@ -739,7 +744,10 @@ i .fa {
 }
 
 .mbr-section-title, a .mbr-section-title, .title-block {
-    color: @title-color;
+    &:extend(.scalablefont-big, .font-weight-medium, .primary-font);
+    text-align: center;
+
+    /*  color: @title-color;
     font-family: @tite-font;
     font-size: @scalable-medium-font-size;
     font-weight: @title-weight;
@@ -752,6 +760,7 @@ i .fa {
     word-break: break-word;
     word-wrap: break-word;
     padding-bottom: 10px;
+*/
     /*Start svg decorazione sotto il titolo*/
     /*  padding-bottom: 21px;
     background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='@{color-sottomeu-rgba}' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
@@ -822,7 +831,10 @@ h3.mbr-section-title.display-5.bg-dark-color.noafter {
 }
 
 .mbr-section-subtitle {
+    &:extend(.scalablefont-small-medium, .font-light, .base-font);
+    text-align: center;
     color: @subtitle-color !important;
+    /*  color: @subtitle-color !important;
     font-family: @subtite-font !important;
     font-size: @subtite-size !important;
     font-weight: @subtitle-weight;
@@ -830,7 +842,7 @@ h3.mbr-section-title.display-5.bg-dark-color.noafter {
     text-align: center;
     line-height: 36px;
     margin-top: .25rem !important;
-    display: block;
+    display: block;*/
 }
 
 b, strong {
@@ -843,7 +855,7 @@ b, strong {
     font-size: @body-size;
     font-weight: @body-weight;
     /* line-height: 1.4 !important;*/
-    line-height: 135% !important;
+/*    line-height: 135% !important;*/
 }
 
 html {
@@ -1497,7 +1509,7 @@ ul.footer-category-list {
         content: "";
     }
 }
-
+/*
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(1) {
     background: @icon-nav-6 center left no-repeat !important;
     background-size: 20px !important;
@@ -1532,7 +1544,7 @@ ul.footer-category-list {
     background: @icon-nav-1 center left no-repeat !important;
     background-size: 20px !important;
     padding-left: 42px;
-}
+}*/
 
 /*FOOTER ICON CATALOGO END*/
 
@@ -2676,11 +2688,12 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
 }
 
 .cart-product, .cart-quantity, .cart-total {
-    &:extend(.mbr-section-title);
+    /*&:extend(.mbr-section-title);*/
     text-align: left !important;
     font-size: 0.8rem;
     letter-spacing: 2px;
     font-family: @base-font;
+    font-weight: @font-weight-medium;
 }
 
 .table-cart .cart-total {
@@ -3650,7 +3663,7 @@ button.js-roundedpush:hover {
 }
 
 .mbr-section-title + .mbr-section-subtitle {
-    margin-top: -21px;
+    /*margin-top: -21px;*/
 }
 
 .mbr-section-hero::before {
@@ -6378,7 +6391,7 @@ Modify  class per jqxcalendar
 
 .scalablefont-huge, .scalablefont-huge:hover {
     font-size: @scalable-huge-font-size !important;
-    line-height: 125% !important;
+    /* line-height: 125% !important;*/
 }
 
 
@@ -6389,7 +6402,7 @@ Modify  class per jqxcalendar
 
 .scalablefont-testata-extrime, .scalablefont-testata-extrime:hover {
     font-size: @scalable-testata-extrime-font-size !important;
-    line-height: 125% !important;
+    /*line-height: 125% !important;*/
 }
 
 /*.scalablefont-medium2-extrime, .scalablefont-medium2-extrime:hover {
@@ -6399,13 +6412,13 @@ Modify  class per jqxcalendar
 
 .scalablefont-medium-extrime, .scalablefont-medium-extrime:hover {
     font-size: @scalable-medium-extrime-font-size !important;
-    line-height: 125% !important;
+    /*line-height: 125% !important;*/
 }
 
 
 .scalablefont-big, .scalablefont-big:hover {
     font-size: @scalable-big-font-size !important;
-    line-height: 100% !important;
+    /*line-height: 100% !important;*/
 }
 
 .scalablefont-big.testo-banner-offerta {
@@ -6415,34 +6428,34 @@ Modify  class per jqxcalendar
 
 .scalablefont-medium-big, .scalablefont-medium-big:hover {
     font-size: @scalable-medium-big-font-size !important;
-    line-height: 125% !important;
+    /*line-height: 125% !important;*/
 }
 
 .scalablefont-medium, .scalablefont-medium:hover {
     font-size: @scalable-medium-font-size !important;
-    line-height: 125% !important;
+    /*line-height: 125% !important;*/
 }
 
 .scalablefont-small-medium, .scalablefont-small-medium:hover {
     font-size: @scalable-small-medium-font-size !important;
-    line-height: normal !important;
+    /*line-height: normal !important;*/
 }
 
 
 .scalablefont-small, .scalablefont-small:hover {
     font-size: @scalable-small-font-size !important;
     line-height: normal !important;
-    line-height: 150% !important;
+    /*line-height: 150% !important;*/
 }
 
 .scalablefont-smallest, .scalablefont-smallest:hover {
     font-size: @scalable-smallest-font-size !important;
-    line-height: normal !important;
+    /*line-height: normal !important;*/
 }
 
 .scalablefont-minimal, .scalablefont-minimal:hover {
     font-size: @scalable-minimal-font-size !important;
-    line-height: normal !important;
+    /*line-height: normal !important;*/
 }
 
 
@@ -6452,64 +6465,59 @@ Modify  class per jqxcalendar
 
     .scalablefont-huge, .scalablefont-huge:hover {
         font-size: @scalable-huge-font-size-600 !important;
-        line-height: 105% !important;
+        /*line-height: 105% !important;*/
     }
 
 
     .scalable-extrime, .scalablefont-extrim, .scalable-extrime:hover, .scalablefont-extrim:hover {
         font-size: @scalable-extrime-font-size-600 !important;
-        line-height: 105% !important;
+        /*line-height: 105% !important;*/
     }
 
     .scalablefont-testata-extrime, .scalablefont-testata-extrime:hover {
         font-size: @scalable-testata-extrime-font-size-600 !important;
-        line-height: 105% !important;
+        /*line-height: 105% !important;*/
     }
 
-    .scalablefont-medium2-extrime, .scalablefont-medium2-extrime:hover {
-        font-size: @scalable-medium2-extrime-font-size-600 !important;
-        line-height: 105% !important;
-    }
+
 
     .scalablefont-medium-extrime, .scalablefont-medium-extrime:hover {
         font-size: @scalable-medium-extrime-font-size-600 !important;
-        line-height: 105% !important;
+        /*line-height: 105% !important;*/
     }
 
     .scalablefont-big, .scalablefont-big:hover {
         font-size: @scalable-big-font-size-600 !important;
-        line-height: 105% !important;
+        /*line-height: 105% !important;*/
     }
 
     .scalablefont-medium-big, .scalablefont-medium-big:hover {
         font-size: @scalable-medium-big-font-size-600 !important;
-        line-height: 105% !important;
+        /*line-height: 105% !important;*/
     }
 
     .scalablefont-medium, .scalablefont-medium:hover {
         font-size: @scalable-medium-font-size-600 !important;
-        line-height: 105% !important;
+        /*line-height: 105% !important;*/
     }
 
     .scalablefont-small-medium, .scalablefont-small-medium:hover {
         font-size: @scalable-small-medium-font-size-600 !important;
-        line-height: 105% !important;
+        /*line-height: 105% !important;*/
     }
 
 
     .scalablefont-small, .scalablefont-small:hover {
         font-size: @scalable-small-font-size-600 !important;
         line-height: normal !important;
-        line-height: 150% !important;
+        /*line-height: 150% !important;*/
     }
 
     .scalablefont-smallest, .scalablefont-smallest:hover {
         font-size: @scalable-smallest-font-size-600 !important;
-        line-height: 105% !important;
+        /*line-height: 105% !important;*/
     }
 }
-
-
 
 .shadowedtext {
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3) !important;

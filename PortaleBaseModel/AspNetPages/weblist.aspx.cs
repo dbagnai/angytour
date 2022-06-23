@@ -383,18 +383,11 @@ public partial class AspNetPages_weblist : CommonPage
 
                     //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
                     string svetrina = "";
-                    //if (Vetrina) svetrina = "true";
-                    //sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                    //sb.Append("injectPortfolioAndLoad,isotopeProdotti1b.html,divPortfolioList, portlist1, 1, 42, true, \'\', \'" + cattipo + "\', \'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\',\'" + svetrina + "\',\'" + Promozioni + "\',\'\', '" + Categoria2liv + "\'");
-                    //sb.Append("\"></div>");
-                    //sb.Append("<div id=\"divPortfolioListPager\"></div>");
-
-
-
                     sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                    sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioProdotti4Card.html,divPortfolioList,portlist1, 1, 55,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',false,true,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'" + Categoria2liv + "\',\'\'");
+                    sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioProdotti4Card-a.html,divPortfolioList,portlist1, 1, 55,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',false,true,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'" + Categoria2liv + "\',\'\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
+
 
 
 
@@ -472,7 +465,6 @@ public partial class AspNetPages_weblist : CommonPage
             //   break;
 
             case "rif000003":
-            case "rif000005":
 
                 column1.Visible = false;
                 column2.Visible = false;
@@ -499,6 +491,32 @@ public partial class AspNetPages_weblist : CommonPage
                 }
 
                 //CaricaMenuContenuti(1, 20, rptContenutiLink); //Carico la lista laterale link del blog
+                break;
+
+            case "rif000005":
+
+
+                column1.Visible = false;
+                column2.Visible = false;
+                column3.Visible = false;
+                columnsingle.Attributes["class"] = "col-12";
+                //column2.Attributes["class"] = "col-md-1 col-sm-1";
+                //column3.Attributes["class"] = "col-md-3 col-sm-3";
+                //ContaArticoliPerperiodo(Tipologia);
+                divSearch.Visible = false;
+                if (!JavaInjection)
+                {
+                    if (string.IsNullOrEmpty(Tipologia)) cattipo = "%";
+
+                    //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
+                    sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
+                    sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioSinglerow-alternate.html,divPortfolioList,portlist1, 1, 42,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\', false, true, \'\',\'" + testoricerca + "\'");
+                    sb.Append("\"></div>");
+                    sb.Append("<div id=\"divPortfolioListPager\"></div>");
+
+
+                    placeholderrisultatinocontainer.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request);// sb.ToString();
+                }
                 break;
             case "rif000004":
             case "rif000006":

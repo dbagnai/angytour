@@ -25,7 +25,7 @@
                     <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
                 </div>-->
 
-                <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="16000" format="formatdescrizione"></span>
+                <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="16000" format="formatdescrizione"></span>
             </div>
         </div>
 
@@ -33,7 +33,7 @@
         ------ COLONNA 2 TITOLO ------
         ----------------------------->
         <div class="col-12 col-md-4 pl-md-0">
-            <div class="w-100 px-3 py-4 bg-light-color position-sticky" style="top:120px">
+            <div class="w-100 px-3 py-4 bg-lightgray-color position-sticky" style="top:120px">
                 <h1 itemprop="name" class="text-md-left text-center mb-4">
                     <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
                         <span class="bind tx-primary-color" mybind="Id" myvalue="titolo" format="formattitle"></span><br />
@@ -46,10 +46,10 @@
                 ----------------------------------------------->
                 <div class="blog-post-details">
 
-                    <div class="blog-post-details-item blog-post-details-item-right pl-0 pb-2">
+                    <div class="blog-post-details-item blog-post-details-item-right">
                         <div class="text-center text-sm-left tx-primary-color mb-2" style="font-weight: 600; font-size: 1.9em; line-height: normal">
                             <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
-                            <span style="text-decoration: line-through;font-weight: 300;font-size:80%" class="pl-3 bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                            <span style="text-decoration: line-through;font-weight: 300;font-size:80%" class="bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                         </div>
                         <!--<div class="float-left px-2 tx-secondary-color mb-2" style="font-weight: 200; font-size: 1.4em; line-height: normal; text-decoration: line-through;">
                             <span style="font-size: 1.4em;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
@@ -76,7 +76,7 @@
                 ------ COLONNA 2 DESCRIZIONE ------
                 ---------------------------------->
                 <div class="blog-post-body text-center text-md-left py-3 border-top border-bottom-0 bd-secondary-color" style="line-height: 1.6rem;" itemprop="description">
-                    <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="600" format="formatdescrizione"></span>
+                    <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="600" format="formatdescrizione"></span>
                 </div>
 
                 <div class="row">
@@ -98,7 +98,7 @@
                 <!---------------------------------
                 ------ COLONNA 2 CALL TO ACTION ------
                 ---------------------------------->
-                <div class="formbackground  bg-light-color-pattern-1 my-3 p-3" style="background-size: 140px">
+                <div class="formbackground bg-light-sottomenu-color my-3 p-3" style="background-size: 140px">
                     <div class="w-100 p-1" style="border:1px solid #ccc;border-radius: 10px;">
                         <div class="bind" mybind="Id" myvalue="testocall1" format="formatlabelresource"></div>
                     </div>
@@ -107,13 +107,10 @@
                 <!----------------------------
                 ------ COLONNA 2 SOCIAL ------
                 ----------------------------->
-                <p>
+                <!--<p>
                     <div class="bind" mybind="Id" myvalue="common" myvalue1="social_condividi" format="formatstringfromresource"></div>
-
-                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                    <!--<div class="addthis_inline_share_toolbox text-md-left text-center"></div>--><div class="share42init" data-path="/js/share42/"></div>
-                </p>
-
+                    <div class="share42init" data-path="/js/share42/"></div>
+                </p>-->
                 <!------------------------------
                 ------ COLONNA 2 PULSANTI ------
                 ------------------------------->
@@ -127,38 +124,12 @@
         ----------------------------------->
         <div class="col-12 col-md-8 d-block d-md-none">
             <div class="blog-post-body text-center text-md-left m-0 pb-0 border-0" style="line-height: 1.6rem;" itemprop="description">
-
-                <!--<nav id="navbar-example2" class="navbar navbar-light bg-light">
-                    <a class="navbar-brand" href="#">Navbar</a>
-                    <ul class="nav nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#fat">@fat</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#mdo">@mdo</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#one">one</a>
-                                <a class="dropdown-item" href="#two">two</a>
-                                <div role="separator" class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#three">three</a>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
-
-                <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
-                    <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione"></span>
-                </div>-->
-
-                <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="16000" format="formatdescrizione"></span>
+                <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="16000" format="formatdescrizione"></span>
             </div>
         </div>
 
         <!---------------------------------------------------
-        ------ COLONNA 1 SERVIZI (DOTAZIONI IN CAMERA) ------
+        ------ COLONNA 1 SERVIZI  ------
         ---------------------------------------------------->
         <div class="col-12 mt-3 mt-md-4">
             <span class="bind" mybind="Id" myvalue="bannerevidenza" format="formatlabelresource"></span>
@@ -172,7 +143,11 @@
             <div class="clearfix"></div>
 
             <div class="float-none mr-0 mb-3 float-sm-left mr-sm-3 mb-sm-0 d-none d-md-block">
-                <a rel="nofollow, noindex" class="btn-black-outline bind w-100" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
+                <!--<a rel="nofollow, noindex" class="btn-black-outline bind w-100" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>-->
+                <p>
+                    <div class="bind" mybind="Id" myvalue="common" myvalue1="social_condividi" format="formatstringfromresource"></div>
+                    <div class="share42init" data-path="/js/share42/"></div>
+                </p>
             </div>
 
             <!--<div class="clearfix" style="margin:40px"></div>-->

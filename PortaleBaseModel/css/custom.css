@@ -27,8 +27,11 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /**/
 /*#d8e056;*/
 /* fascia catalogo */
+/*footer-social e banner*/
+/*#f5f0e5;*/
 /* fascia catalogo link active */
 /* colore sotto-menu per decorazione titoli*/
+/* sottomenù molto tenue */
 /* sottomenù molto tenue */
 /*----------------------------------
 ////| COLORI BLOCCHI GRADIENTE |////
@@ -1507,12 +1510,14 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   font-family: 'Raleway', sans-serif !important;
 }
 .prezzo-responsive {
-  font-size: 1.8vw;
-  line-height: 1vw !important;
+  /*font-size: 1.8vw;*/
+  /*line-height: 1vw !important;*/
+  font-size: 1.8rem;
+  line-height: 2rem !important;
 }
 @media (max-width: 1200px) {
   .prezzo-responsive {
-    font-size: 2rem;
+    font-size: 1.3rem;
     line-height: 2rem !important;
   }
 }
@@ -1708,7 +1713,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   width: 100%;
   height: 100% !important;
   /*    padding: 0.9rem 2rem !important;*/
-  padding: 1rem 2rem !important;
+  padding: 0.8rem 1rem;
   line-height: 1.1 !important;
   font-family: 'Raleway', sans-serif;
   font-size: 0.8rem !important;
@@ -1827,7 +1832,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 2px;
-  padding: 1rem 2rem;
+  padding: 0.8rem 1rem;
   display: inline-block;
   text-align: center;
   margin: 0 auto;
@@ -2168,7 +2173,7 @@ li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
   position: relative;
   line-height: 1.3;
   letter-spacing: 2px;
-  padding: 1rem 2rem;
+  padding: 0.8rem 1rem;
   margin: 0 auto;
   display: inline-block;
   -moz-box-shadow: none;
@@ -2411,7 +2416,7 @@ li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
   position: relative;
   line-height: 1.3;
   letter-spacing: 2px;
-  padding: 1rem 2rem;
+  padding: 0.8rem 1rem;
   margin: 0 auto;
   display: inline-block;
   -moz-box-shadow: none;
@@ -2504,7 +2509,7 @@ li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 2px;
-  padding: 1rem 2rem;
+  padding: 0.8rem 1rem;
   display: inline-block;
   text-align: center;
   margin: 0 auto;
@@ -3065,6 +3070,74 @@ a.btn-black-outline.restaurant-menu:nth-child(5):focus {
   border: 1px solid #098f8f;
   box-shadow: none;
 }
+/* NEW BUTTONS REVISIONE (DANIELE )*/
+.btnnew-outline-bdblack,
+.btnnew-outline-bdblack:active,
+.btnnew-outline-bdblack:visited,
+.btnnew-outline-bdblack:focus,
+.btnnew-transparent-outline-bdblack,
+.btnnew-transparent-outline-bdblack:active,
+.btnnew-transparent-outline-bdblack:visited,
+.btnnew-transparent-outline-bdblack:focus,
+.btnnew-transparent-outline-bdwhite,
+.btnnew-transparent-outline-bdwhite:active,
+.btnnew-transparent-outline-bdwhite:visited,
+.btnnew-transparent-outline-bdwhite:focus {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #032f2f;
+  background: #fff;
+  line-height: 1.3;
+  letter-spacing: 2px;
+  padding: 1rem 2rem;
+  margin: 0 auto;
+  display: inline-block;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  text-shadow: none;
+  text-align: center;
+  white-space: normal;
+  height: auto !important;
+  border: 1px solid #032f2f;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px #032f2f;
+  -webkit-transition: color 0.25s 0.08333333s;
+  transition: color 0.25s 0.08333333s;
+  /*
+    -webkit-border-radius: 1.4rem;
+    -moz-border-radius: 1.4rem;
+    border-radius: 1.4rem;
+    */
+}
+.btnnew-outline-bdblack:hover,
+.btnnew-transparent-outline-bdblack:hover,
+.btnnew-transparent-outline-bdwhite:hover {
+  background-color: #032f2f;
+  border-color: #0ed7d7;
+  color: #fff;
+  opacity: 1;
+}
+.btnnew-transparent-outline-bdblack,
+.btnnew-transparent-outline-bdblack:active,
+.btnnew-transparent-outline-bdblack:visited,
+.btnnew-transparent-outline-bdblack:focus {
+  background-color: transparent;
+}
+.btnnew-transparent-outline-bdwhite,
+.btnnew-transparent-outline-bdwhite:active,
+.btnnew-transparent-outline-bdwhite:visited,
+.btnnew-transparent-outline-bdwhite:focus {
+  border-color: #fff;
+  box-shadow: inset 0 0 0 1px #fff;
+  background-color: transparent;
+}
+.btnnew-transparent-outline-bdwhite:hover {
+  border-color: #fff;
+  box-shadow: inset 0 0 0 1px #fff;
+}
+/* NEW BUTTONS REVISIONE (DANIELE )*/
 #payment-form-div {
   width: 100%;
   min-width: 300px;
@@ -3265,13 +3338,19 @@ a.btn-black-outline.restaurant-menu:nth-child(5):focus {
 /*sotto-titoli-principali*/
 /*menu - body*/
 /*'Roboto Condensed', sans-serif;*/
-.primary-font {
+.primary-font,
+.mbr-section-title,
+a .mbr-section-title,
+.title-block,
+h1 span:nth-child(1).mbr-section-title {
   font-family: 'Lora', serif !important;
 }
 .secondary-font {
   font-family: 'Lora', sans-serif !important;
 }
-.base-font {
+.base-font,
+.mbr-section-subtitle,
+h1 span .mbr-section-subtitle {
   font-family: 'Raleway', sans-serif !important;
 }
 .alternative-font {
@@ -3307,6 +3386,9 @@ path.bg-light-color-path {
 }
 .bg-secondarylight-color {
   background-color: #e6f4f4 !important;
+}
+.bg-light-sottomenu-color {
+  background-color: #fdf6e4 !important;
 }
 .bg-light-color {
   background-color: #ebf6f6 !important;
@@ -3517,7 +3599,11 @@ hr {
 .font-weight-light {
   font-weight: 400 !important;
 }
-.font-weight-medium {
+.font-weight-medium,
+.mbr-section-title,
+a .mbr-section-title,
+.title-block,
+h1 span:nth-child(1).mbr-section-title {
   font-weight: 600 !important;
 }
 .font-weight-strong {
@@ -3849,23 +3935,22 @@ i .fa {
 .mbr-section-title,
 a .mbr-section-title,
 .title-block,
-h1 span:nth-child(1).mbr-section-title,
-.cart-product,
-.cart-quantity,
-.cart-total {
-  color: #032f2f;
-  font-family: 'Lora', serif;
-  font-size: calc(20px + 0.25vw + 0.18vh + 0.1vmin);
-  font-weight: 400;
-  text-transform: none;
-  font-style: normal;
+h1 span:nth-child(1).mbr-section-title {
   text-align: center;
-  letter-spacing: 0px;
-  line-height: 100% !important;
-  margin: 0;
-  word-break: break-word;
-  word-wrap: break-word;
-  padding-bottom: 10px;
+  /*  color: @title-color;
+    font-family: @tite-font;
+    font-size: @scalable-medium-font-size;
+    font-weight: @title-weight;
+    text-transform: @title-text-transform;
+    font-style: normal;
+    text-align: center;
+    letter-spacing: 0px;
+    line-height: 100% !important;
+    margin: 0;
+    word-break: break-word;
+    word-wrap: break-word;
+    padding-bottom: 10px;
+*/
   /*Start svg decorazione sotto il titolo*/
   /*  padding-bottom: 21px;
     background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='@{color-sottomeu-rgba}' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
@@ -3907,10 +3992,7 @@ h3.mbr-section-title.display-5.bg-dark-color.noafter {
 }
 .mbr-section-title,
 .title-block,
-h1 span:nth-child(1).mbr-section-title,
-.cart-product,
-.cart-quantity,
-.cart-total {
+h1 span:nth-child(1).mbr-section-title {
   padding-top: 20px;
   /*padding-bottom: 3rem;*/
   /*Svg decorazione sotto i titoli auto-generati*/
@@ -3934,15 +4016,17 @@ h1 span:nth-child(1).mbr-section-title,
 }
 .mbr-section-subtitle,
 h1 span .mbr-section-subtitle {
-  color: #077777 !important;
-  font-family: 'Lora', serif !important;
-  font-size: 1.8rem !important;
-  font-weight: 400;
-  font-style: normal;
   text-align: center;
-  line-height: 36px;
-  margin-top: 0.25rem !important;
-  display: block;
+  color: #077777 !important;
+  /*  color: @subtitle-color !important;
+    font-family: @subtite-font !important;
+    font-size: @subtite-size !important;
+    font-weight: @subtitle-weight;
+    font-style: normal;
+    text-align: center;
+    line-height: 36px;
+    margin-top: .25rem !important;
+    display: block;*/
 }
 b,
 strong {
@@ -3960,10 +4044,10 @@ p.lead,
 .lead p {
   color: #032f2f;
   font-family: 'Raleway', sans-serif;
-  font-size: calc(14px + 0.07vw + 0.03vh + 0.05vmin);
+  font-size: calc(15px + 0.15vw + 0.08vh + 0.05vmin);
   font-weight: 300;
   /* line-height: 1.4 !important;*/
-  line-height: 135% !important;
+  /*    line-height: 135% !important;*/
 }
 html {
   -webkit-text-size-adjust: 100%;
@@ -4006,10 +4090,7 @@ textarea {
 @media screen and (max-width: 415px) {
   .mbr-section-title,
   .title-block,
-  h1 span:nth-child(1).mbr-section-title,
-  .cart-product,
-  .cart-quantity,
-  .cart-total {
+  h1 span:nth-child(1).mbr-section-title {
     font-size: 2rem;
     font-weight: normal !important;
     line-height: 110% !important;
@@ -4112,7 +4193,7 @@ h1 span {
   column-count: 2;
   column-gap: 30px;
   /*font-size: 1.35rem;*/
-  font-size: calc(14px + 0.07vw + 0.03vh + 0.05vmin);
+  font-size: calc(15px + 0.15vw + 0.08vh + 0.05vmin);
   line-height: 135% !important;
 }
 @media (max-width: 768px) {
@@ -4514,36 +4595,42 @@ ul.footer-category-list {
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li a:before {
   content: "";
 }
+/*
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(1) {
-  background: none center left no-repeat !important;
-  background-size: 20px !important;
-  padding-left: 42px;
+    background: @icon-nav-6 center left no-repeat !important;
+    background-size: 20px !important;
+    padding-left: 42px;
 }
+
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(2) {
-  background: none center left no-repeat !important;
-  background-size: 20px !important;
-  padding-left: 42px;
+    background: @icon-nav-5 center left no-repeat !important;
+    background-size: 20px !important;
+    padding-left: 42px;
 }
+
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(3) {
-  background: none center left no-repeat !important;
-  background-size: 20px !important;
-  padding-left: 42px;
+    background: @icon-nav-4 center left no-repeat !important;
+    background-size: 20px !important;
+    padding-left: 42px;
 }
+
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(4) {
-  background: none center left no-repeat !important;
-  background-size: 20px !important;
-  padding-left: 42px;
+    background: @icon-nav-3 center left no-repeat !important;
+    background-size: 20px !important;
+    padding-left: 42px;
 }
+
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(5) {
-  background: none center left no-repeat !important;
-  background-size: 20px !important;
-  padding-left: 42px;
+    background: @icon-nav-2 center left no-repeat !important;
+    background-size: 20px !important;
+    padding-left: 42px;
 }
+
 .footer .footer-col .footer-content .footer-category-list.catalogo-footer li:nth-child(6) {
-  background: none center left no-repeat !important;
-  background-size: 20px !important;
-  padding-left: 42px;
-}
+    background: @icon-nav-1 center left no-repeat !important;
+    background-size: 20px !important;
+    padding-left: 42px;
+}*/
 /*FOOTER ICON CATALOGO END*/
 .footer .footer-col .footer-title {
   color: #098f8f;
@@ -5582,10 +5669,12 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
 .cart-product,
 .cart-quantity,
 .cart-total {
+  /*&:extend(.mbr-section-title);*/
   text-align: left !important;
   font-size: 0.8rem;
   letter-spacing: 2px;
   font-family: 'Raleway', sans-serif;
+  font-weight: 600;
 }
 .table-cart .cart-total {
   min-width: 100px;
@@ -6421,7 +6510,7 @@ button.js-roundedpush:hover {
   padding-bottom: 0;
 }
 .mbr-section-title + .mbr-section-subtitle {
-  margin-top: -21px;
+  /*margin-top: -21px;*/
 }
 .mbr-section-hero::before {
   display: none !important;
@@ -8893,7 +8982,7 @@ Modify  class per jqxcalendar
 .scalablefont-huge,
 .scalablefont-huge:hover {
   font-size: calc(40px + 2.5vw + 1.6vh + 1vmin) !important;
-  line-height: 125% !important;
+  /* line-height: 125% !important;*/
 }
 .scalable-extrime,
 .scalablefont-extrim,
@@ -8905,7 +8994,7 @@ Modify  class per jqxcalendar
 .scalablefont-testata-extrime,
 .scalablefont-testata-extrime:hover {
   font-size: calc(30px + 2vw + 0.8vh + 1vmin) !important;
-  line-height: 125% !important;
+  /*line-height: 125% !important;*/
 }
 /*.scalablefont-medium2-extrime, .scalablefont-medium2-extrime:hover {
     font-size: @scalable-medium2-extrime-font-size !important;
@@ -8914,12 +9003,16 @@ Modify  class per jqxcalendar
 .scalablefont-medium-extrime,
 .scalablefont-medium-extrime:hover {
   font-size: calc(28px + 1vw + 0.7vh + 1vmin) !important;
-  line-height: 125% !important;
+  /*line-height: 125% !important;*/
 }
 .scalablefont-big,
-.scalablefont-big:hover {
+.scalablefont-big:hover,
+.mbr-section-title,
+a .mbr-section-title,
+.title-block,
+h1 span:nth-child(1).mbr-section-title {
   font-size: calc(24px + 0.5vw + 0.4vh + 0.3vmin) !important;
-  line-height: 100% !important;
+  /*line-height: 100% !important;*/
 }
 .scalablefont-big.testo-banner-offerta {
   line-height: 100% !important;
@@ -8928,98 +9021,103 @@ Modify  class per jqxcalendar
 .scalablefont-medium-big,
 .scalablefont-medium-big:hover {
   font-size: calc(22px + 0.35vw + 0.24vh + 0.15vmin) !important;
-  line-height: 125% !important;
+  /*line-height: 125% !important;*/
 }
 .scalablefont-medium,
 .scalablefont-medium:hover {
   font-size: calc(20px + 0.25vw + 0.18vh + 0.1vmin) !important;
-  line-height: 125% !important;
+  /*line-height: 125% !important;*/
 }
 .scalablefont-small-medium,
-.scalablefont-small-medium:hover {
+.scalablefont-small-medium:hover,
+.mbr-section-subtitle,
+h1 span .mbr-section-subtitle {
   font-size: calc(18px + 0.18vw + 0.1vh + 0.05vmin) !important;
-  line-height: normal !important;
+  /*line-height: normal !important;*/
 }
 .scalablefont-small,
 .scalablefont-small:hover {
   font-size: calc(15px + 0.15vw + 0.08vh + 0.05vmin) !important;
   line-height: normal !important;
-  line-height: 150% !important;
+  /*line-height: 150% !important;*/
 }
 .scalablefont-smallest,
 .scalablefont-smallest:hover {
   font-size: calc(14px + 0.07vw + 0.03vh + 0.05vmin) !important;
-  line-height: normal !important;
+  /*line-height: normal !important;*/
 }
 .scalablefont-minimal,
 .scalablefont-minimal:hover {
   font-size: calc(10px + 0.04vw + 0.02vh + 0.02vmin) !important;
-  line-height: normal !important;
+  /*line-height: normal !important;*/
 }
 @media screen and (max-width: 600px) {
   .scalablefont-huge,
   .scalablefont-huge:hover {
     font-size: calc(28px + 1vw + 1vh + 0.5vmin) !important;
-    line-height: 105% !important;
+    /*line-height: 105% !important;*/
   }
   .scalable-extrime,
   .scalablefont-extrim,
   .scalable-extrime:hover,
   .scalablefont-extrim:hover {
     font-size: calc(30px + 0.7vw + 0.7vh + 0.3vmin) !important;
-    line-height: 105% !important;
+    /*line-height: 105% !important;*/
   }
   .scalablefont-testata-extrime,
   .scalablefont-testata-extrime:hover {
     font-size: calc(24px + 0.6vw + 0.6vh + 0.3vmin) !important;
-    line-height: 105% !important;
-  }
-  .scalablefont-medium2-extrime,
-  .scalablefont-medium2-extrime:hover {
-    font-size: calc(22px + 0.4vw + 0.4vh + 0.2vmin) !important;
-    line-height: 105% !important;
+    /*line-height: 105% !important;*/
   }
   .scalablefont-medium-extrime,
   .scalablefont-medium-extrime:hover {
     font-size: calc(22px + 0.4vw + 0.4vh + 0.2vmin) !important;
-    line-height: 105% !important;
+    /*line-height: 105% !important;*/
   }
   .scalablefont-big,
-  .scalablefont-big:hover {
+  .scalablefont-big:hover,
+  .mbr-section-title,
+  a .mbr-section-title,
+  .title-block,
+  h1 span:nth-child(1).mbr-section-title {
     font-size: calc(22px + 0.4vw + 0.4vh + 0.2vmin) !important;
-    line-height: 105% !important;
+    /*line-height: 105% !important;*/
   }
   .scalablefont-medium-big,
   .scalablefont-medium-big:hover {
     font-size: calc(20px + 0.3vw + 0.3vh + 0.15vmin) !important;
-    line-height: 105% !important;
+    /*line-height: 105% !important;*/
   }
   .scalablefont-medium,
   .scalablefont-medium:hover {
     font-size: calc(20px + 0.3vw + 0.3vh + 0.15vmin) !important;
-    line-height: 105% !important;
+    /*line-height: 105% !important;*/
   }
   .scalablefont-small-medium,
-  .scalablefont-small-medium:hover {
+  .scalablefont-small-medium:hover,
+  .mbr-section-subtitle,
+  h1 span .mbr-section-subtitle {
     font-size: calc(18px + 0.2vw + 0.2vh + 0.1vmin) !important;
-    line-height: 105% !important;
+    /*line-height: 105% !important;*/
   }
   .scalablefont-small,
   .scalablefont-small:hover {
     font-size: calc(16px + 0.18vw + 0.18vh + 0.09vmin) !important;
     line-height: normal !important;
-    line-height: 150% !important;
+    /*line-height: 150% !important;*/
   }
   .scalablefont-smallest,
   .scalablefont-smallest:hover {
     font-size: calc(16px + 0.18vw + 0.18vh + 0.09vmin) !important;
-    line-height: 105% !important;
+    /*line-height: 105% !important;*/
   }
 }
 .shadowedtext {
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3) !important;
 }
-.font-light {
+.font-light,
+.mbr-section-subtitle,
+h1 span .mbr-section-subtitle {
   font-weight: 300;
 }
 .font-light-medium {
@@ -9037,7 +9135,11 @@ Modify  class per jqxcalendar
 .font-weight-light {
   font-weight: 400 !important;
 }
-.font-weight-medium {
+.font-weight-medium,
+.mbr-section-title,
+a .mbr-section-title,
+.title-block,
+h1 span:nth-child(1).mbr-section-title {
   font-weight: 600 !important;
 }
 .font-weight-strong {

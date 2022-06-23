@@ -42,9 +42,9 @@
                             <span class="bind" style="font-size:0.8rem" mybind="CodiceCategoria2Liv" format="frmcategoria2liv"></span>
                         </div>
                         <!--<a class="bind" target="_self" href="link" title="titolo" mybind="Id">-->
-                        <h1 itemprop="name" class="w-100 text-center text-lg-left" style="margin-bottom:4px">
-                            <span class="bind scalablefont-medium font-medium primary-font" mybind="Id" myvalue="titolo" format="formattitle"></span><br />
-                            <span class="bind tx-sottomenu-color scalablefont-small" mybind="Id" myvalue="titolo" format="formatsubtitle">
+                        <h1 itemprop="name" class="w-100 text-left" style="margin-bottom:4px">
+                            <span class="bind scalablefont-small-medium font-weight-medium primary-font" mybind="Id" myvalue="titolo" format="formattitle"></span><br />
+                            <span class="bind scalablefont-small primary-font font-weight-light" mybind="Id" myvalue="titolo" format="formatsubtitle">
                             </span>
                         </h1>
                         <!--</a>-->
@@ -53,17 +53,17 @@
                         <span class="bind" style="font-size:0.7rem" mybind="Id" myvalue="basetext" myvalue1="Codice" format="formatstringfromresource"></span>:
                         <span class="bind" style="font-size:0.7rem" mybind="CodiceProdotto"></span><br />
                         <meta itemprop="sku" class="bind" mybind="CodiceProdotto" format="formatstringvalue">
-                        <div class="w-100 py-2 d-flex justify-content-between">
+                        <div class="w-100 py-2 d-flex justify-content-between border-bottom bd-secondary-color">
                             <div class="" itemprop="offers" itemscope="" itemtype="http://schema.org/AggregateOffer">
                                 <meta itemprop="lowPrice" class="bind" mybind="Prezzo" format="formatvalue">
                                 <meta itemprop="highPrice" class="bind" mybind="PrezzoListino" format="formatvalue">
                                 <meta itemprop="priceCurrency" content="EUR">
                                 <meta itemprop="availability" content="https://schema.org/InStock">
                                 <span class="bind primary-font primary-color scalablefont-smallest font-medium" mybind="Id" myvalue="prezzo" myvalue1="Prezzo" format="formatlabelresource"></span>
-                                <span class=" primary-font primary-color scalablefont-small font-medium" style="  line-height: normal;">
+                                <span class=" primary-font primary-color scalablefont-small-medium font-medium" style="  line-height: normal;">
                                     <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                                 </span>
-                                <span class="py-0  primary-font primary-color" style="  text-decoration: line-through;">
+                                <span class="py-0  primary-font darkgray-color" style="  text-decoration: line-through;">
                                     <span style="padding-left:10px; padding-right:5px;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
                                 </span>
                             </div>
@@ -79,7 +79,9 @@
                         <!--<div id="prenotalinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>-->
                         <!-- SEZIONE GESTIONE CARRELLO -->
                         <div id="carrellos1" class="bind carellotool w-100 mt-0 px-1 px-lg-0" mybind="Id" myvalue="Prezzo">
-
+                            <div class="m-1 bind" mybind="Id" mybind1="Qta_vendita" mybind2="Xmlvalue" mybind3="Prezzo" format="formatcarrelloavailable">
+                                <div class="bind" mybind="Id" myvalue="common" myvalue1="txtcarrellodisp" format="formatstringfromresource"></div>
+                            </div>
                             <!--<div class="float-right table-col ecomctr" id="carrellos1messages"></div>
                             <div class="float-right table-col ecomctr" id="carrellos1selectdate" style="display:none">
                                 <div style="display:table;margin: 10px auto 0px auto;position:relative">
@@ -98,7 +100,7 @@
                                 <div class="float-right table-col bind" mybind="Id" myvalue="vaialcarrello" format="formatlabelresource"></div>
                             </div>-->
                             <div class="" style="background-size: 140px">
-                                <div class="w-100 p-3 bg-secondary-color" style="border:1px solid #ccc;border-radius: 10px;">
+                                <div class="w-100 p-3 bg-medium-color" style="border:1px solid #ccc;border-radius: 10px;">
                                     <div class="bind" mybind="Id" myvalue="testocarrelloacquisto" format="formatlabelresource"></div>
                                     <div class="w-100 d-flex justify-content-center align-items-center ">
                                         <div id="carrellos1minus"></div>
@@ -126,9 +128,7 @@
                         <!-- FINE SEZIONE GESTIONE CARRELLO -->
                         <!-- Sezione Contatti CTA -->
                         <div class="mt-3" style="background-size: 400px">
-                            <div class="w-100 p-3 bg-color-sottomeu-tenue " style="border:1px solid #ccc;border-radius: 10px;">
-                                <div class="bind" mybind="Id" myvalue="testocall1" format="formatlabelresource"></div>
-                            </div>
+                            <div class="bind" mybind="Id" myvalue="testocall1" format="formatlabelresource"></div>
                             <!--<div class="bind mb-3 text-center" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>-->
                         </div>
 

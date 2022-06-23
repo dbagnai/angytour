@@ -33,9 +33,12 @@
 @tonal-quaternary-color: mix(@bg-primary-color, mintcream);
 /**/
 @color-sottomeu: #f3c649; /*#d8e056;*/ /* fascia catalogo */
+
+@bg-light-sottomenu-color: mix(@color-sottomeu, #fff, 15%); /*footer-social e banner*/ /*#f5f0e5;*/
 @color-sottomeu-active: mix(@color-sottomeu, #fff, 85%); /* fascia catalogo link active */
 @color-sottomeu-rgba: rgba(red(@color-sottomeu), green(@color-sottomeu), blue(@color-sottomeu), 0.8); /* colore sotto-menu per decorazione titoli*/
 @color-sottomeu-tenue: mix(@color-sottomeu, #fff, 28%); /* sottomenù molto tenue */
+@color-sottomeu-dark: mix(@color-sottomeu, #000, 60%); /* sottomenù molto tenue */
 /*----------------------------------
 ////| COLORI BLOCCHI GRADIENTE |////
 ----------------------------------*/
@@ -113,6 +116,9 @@
 @bg-button-outline-hover-color: @primary-color;
 @button-outline-color: @primary-color;
 @button-outline-hover-color: @white-color;
+@bd-button-outline-color: @primary-color;
+@bd-button-outline-hover-color: @lighten-color;
+
 /*----------------------------------
 ///////////| FONT PAGE |///////////
 ----------------------------------*/
@@ -158,7 +164,7 @@
 @subtitle-weight: 400;
 /**/
 /*@body-size: 1.35rem;*/
-@body-size: @scalable-smallest-font-size;
+@body-size: @scalable-small-font-size;
 @body-color: @primary-color;
 /*@body-color: @secondary-color;*/
 @body-font: @base-font;
