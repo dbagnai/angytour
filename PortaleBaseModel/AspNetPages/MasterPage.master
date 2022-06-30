@@ -274,7 +274,7 @@
                     </a>
                 </div>
                 <ul class="menuzord-menu menuzord-indented scrollable menuzord-right outofsight">
-                    <%= CreaLinkPaginastatica(2) %>
+                    <%= CreaLinkPaginastatica(8) %>
 
                     <%--                     <li runat="server">
                         <%= CreaLinkTipologie(1,1,"a-dropdown tx-sottomenu-color",true) %>
@@ -306,7 +306,16 @@
                         </div>
                     </li>
 
-
+                  <%--     <li runat="server" class="d-block">
+                        <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%=  TestoSezione("rif000004",true,true) %> </a>
+                        <ul class="dropdown">
+                            <%= CreaLinkTipologie(4,4,"",false) %>
+                            <li>
+                                <hr />
+                            </li>
+                            <%= CreaLinkCategorie("rif000004") %>
+                        </ul>
+                    </li>--%>
 
 
                     <%--MEGAMENU  --%>
@@ -576,133 +585,125 @@
 
             <%--END BANNER E_COMMERCE_ VENDITA IN BASSO--%>
             <div id="divContattiMaster" runat="server" visible="true">
-                <section class="mbr-section mbr-parallax-background p-0" style="padding-top: 80px; padding-bottom: 80px; background-image: url('/public/Files/con001000/1/contact-back.jpg')">
-                    <div class="mbr-overlay mbr-overlay-white"></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <%--    <div class="col-6 p-0 pr-5 d-none d-lg-block text-center bg-figura-contatti" style="background-repeat: no-repeat !important; background-position: left bottom !important; background-size: 95% auto !important;">
-                               <div class="big2 text-white pt-5 my-5 text-right position-sticky" style="font-size: 3rem; line-height: 4rem !important; top: 150px; margin-bottom: 240px; text-shadow: rgba(0, 0, 0, 0.5) -1px 2px 5px;">
-                                    <div><%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
-                                    <span class="d-block d-lg-none text-white"><%= references.ResMan("Common", Lingua,"iconEmailtext") %></span></div>
-                                   <div class="w-100 mt-5 indice-movie" style="background: url('/images/indice.png');background-size: auto 90%;background-repeat: no-repeat;background-position-x: right;height: 170px;"></div>
-                                </div>
-                            </div>--%>
-                            <div class="col-12 col-lg-8 py-1 px-3 px-sm-5 pt-5 text-center bg-manual-secondary-color-fade">
-                                <!-- SCRITTA FORM A DESTRA -->
-                                <div class="big2 text-white">
-                                    <%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
-                                </div>
-                                <span class="text-white"><%= references.ResMan("Common", Lingua,"iconEmailtext") %></span>
-                                <!-- END SCRITTA FORM A DESTRA -->
-                                <%-- <a href="<%= references.ResMan("Common", Lingua,"iconCelltext") %>"><%= references.ResMan("Common", Lingua,"iconCelltex") %></a> --%>
-                                <%-- <a href="<%= references.ResMan("Common", Lingua,"GoogleUrl1") %>" target="_blank"><%= references.ResMan("Common", Lingua,"iconMaptext") %></a> --%>
-                                <br />
-                                <br />
-                                <asp:RequiredFieldValidator CssClass="errorvalidateclass" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactName" runat="server" />
-                                <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' runat="server" id="txtContactName" />
-                                <asp:RequiredFieldValidator CssClass="errorvalidateclass" ErrorMessage='<%# references.ResMan("Common", Lingua,"formtesto3Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactCognome" runat="server" />
-                                <input style="background-color: rgba(255, 255, 255, 0.9);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' runat="server" id="txtContactCognome" />
-                                <asp:RequiredFieldValidator CssClass="errorvalidateclass" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactEmail" runat="server" />
-                                <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.6s" validationgroup="contattifooter" placeholder="Email .." runat="server" id="txtContactEmail" />
-                                <br />
-                                <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.7s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"formtesto11") %>' runat="server" id="txtContactTelefono" />
-                                <br />
-                                <textarea style="background-color: rgba(255, 255, 255, 0.80);" rows="4" cols="5" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.8s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' runat="server" id="txtContactMessage" />
-                                <br />
-                                <div style="clear: both"></div>
+                <section class="mbr-section  p-0" style="background-image: url('/public/Files/con001000/1/contact-back.jpg');">
+                    <div class="mbr-overlay mbr-overlay-black"></div>
+                    <div class="m-auto py-4 px-4" style="max-width: 1400px;">
+                        <div class="row align-items-center py-0 pt-4 py-sm-5">
+                            <div class="col-12 col-sm-7">
+                                <%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
+                            </div>
+                            <div class="col-12 col-sm-5">
+                                <div class=" formbackground bg-light-color p-4 border-tipo2 rounded" style="overflow: hidden;">
 
-                                <div class="row" style="text-align: left">
-                                    <div class="col-sm-12 text-white">
-                                        <%= references.ResMan("basetext", Lingua,"privacytext") %>
-                                        <div class="checkbox mt-3 mb-2">
-                                            <label>
-                                                <input id="chkContactPrivacy" runat="server" type="checkbox" />
-                                                <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso") %>
-                                            </label>
-                                        </div>
-                                        <div class="checkbox" style="margin-bottom: 0px">
-                                            <label>
-                                                <input type="checkbox" id="chkNewsletter" runat="server" />
-                                                <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso1") %>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="clear: both"></div>
-                                <div>
-                                    <script>
-                                        function ConfirmValidationFormMaster(elembtn) {
-                                            var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
-                                            var out1 = document.getElementById("outputContactMasterDiv");
-                                            if (!chk1.checked) {
-                                                out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
-                                                return false;
-                                            } else { out1.innerHTML = ''; }
-                                            if (Page_ClientValidate("contattifooter")) {
-                                                /*do work and go for postback*/
-                                                console.log('ok validated');
-                                                $(elembtn).attr("disabled", "")
+                                    <div class="row justify-content-center">
+                                        <div class="col-12" id="formbtniscrivi">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <%= references.ResMan("Common", Lingua,"TestoContattaciFooter1") %>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 pr-xl-2">
 
-                                                //invio nopostback con handler////////////////////////////////////////////////////
-                                                var contactdatas = {};
-                                                contactdatas.chkprivacy = chk1.checked;
-                                                contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
+                                                    <asp:RequiredFieldValidator CssClass="errorvalidateclass" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactName" runat="server" />
+                                                    <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' runat="server" id="txtContactName" />
+                                                    <asp:RequiredFieldValidator CssClass="errorvalidateclass" ErrorMessage='<%# references.ResMan("Common", Lingua,"formtesto3Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactCognome" runat="server" />
+                                                    <input style="background-color: rgba(255, 255, 255, 0.9);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto3") %>' runat="server" id="txtContactCognome" />
+                                                    <asp:RequiredFieldValidator CssClass="errorvalidateclass" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto4Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactEmail" runat="server" />
+                                                    <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.6s" validationgroup="contattifooter" placeholder="Email .." runat="server" id="txtContactEmail" />
+                                                    <br />
+                                                    <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.7s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"formtesto11") %>' runat="server" id="txtContactTelefono" />
+                                                    <br />
+                                                    <textarea style="background-color: rgba(255, 255, 255, 0.80);" rows="4" cols="5" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.8s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' runat="server" id="txtContactMessage" />
+                                                    <br />
+                                                </div>
+                                                <div class="col-sm-12 pr-xl-2">
+                                                    <%= references.ResMan("basetext", Lingua,"privacytext") %>
+                                                    <div class="checkbox mt-3 mb-2">
+                                                        <label>
+                                                            <input id="chkContactPrivacy" runat="server" type="checkbox" />
+                                                            <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso") %>
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox" style="margin-bottom: 0px">
+                                                        <label>
+                                                            <input type="checkbox" id="chkNewsletter" runat="server" />
+                                                            <span class="cr"><i class="cr-icon fa fa-check" style="color: #000"></i></span><%= references.ResMan("basetext", Lingua,"privacyconsenso1") %>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 pr-xl-2">
+                                                    <script>
+                                                        function ConfirmValidationFormMaster(elembtn) {
+                                                            var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
+                                                            var out1 = document.getElementById("outputContactMasterDiv");
+                                                            if (!chk1.checked) {
+                                                                out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
+                                                                return false;
+                                                            } else { out1.innerHTML = ''; }
+                                                            if (Page_ClientValidate("contattifooter")) {
+                                                                /*do work and go for postback*/
+                                                                console.log('ok validated');
+                                                                $(elembtn).attr("disabled", "")
 
-                                                getcontactdata(contactdatas, function (contactdatas) {
-                                                    var tastotxt = $(elembtn).html();
-                                                    $(elembtn).html("Wait ..");
-                                                    inviamessaggiomail(lng, contactdatas, function (result) {
-                                                        if (result) {
-                                                            //in caso di errore visualizzo
-                                                            out1.innerHTML = result;
-                                                            $(elembtn).removeAttr("disabled")
-                                                            $(elembtn).html(tastotxt);
+                                                                //invio nopostback con handler////////////////////////////////////////////////////
+                                                                var contactdatas = {};
+                                                                contactdatas.chkprivacy = chk1.checked;
+                                                                contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
+
+                                                                getcontactdata(contactdatas, function (contactdatas) {
+                                                                    var tastotxt = $(elembtn).html();
+                                                                    $(elembtn).html("Wait ..");
+                                                                    inviamessaggiomail(lng, contactdatas, function (result) {
+                                                                        if (result) {
+                                                                            //in caso di errore visualizzo
+                                                                            out1.innerHTML = result;
+                                                                            $(elembtn).removeAttr("disabled")
+                                                                            $(elembtn).html(tastotxt);
+                                                                        }
+                                                                    }, tastotxt);
+                                                                }, $(elembtn));
+                                                    ///////////////////////////////////////////////////////////////////////
+                                                    ///////////////////////////////////////////////////////////////////////
+                                                    //Invio con post back (metodo originale)
+                                                    //var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
+                                                                // $(elembtn).html("Wait ..");
+                                                                // buttpost.click();
+                                                                ////////////////////////////////////////////////////////////////////////
+                                                            } else {
+                                                                $('html,body').animate({
+                                                                    scrollTop: $("#ctl00_divContattiMaster").offset().top - 20
+                                                                }, 'fast');
+                                                                console.log('not  validated');
+                                                                return false;
+                                                            }
                                                         }
-                                                    }, tastotxt);
-                                                }, $(elembtn));
-                                                ///////////////////////////////////////////////////////////////////////
-
-                                                ///////////////////////////////////////////////////////////////////////
-                                                //Invio con post back (metodo originale)
-                                               <%-- var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
-                                                $(elembtn).html("Wait ..");
-                                                buttpost.click();--%>
-                                                ////////////////////////////////////////////////////////////////////////
-                                            } else {
-
-
-                                                $('html,body').animate({
-                                                    scrollTop: $("#ctl00_divContattiMaster").offset().top - 20
-                                                }, 'fast');
-
-                                                console.log('not  validated');
-                                                return false;
-                                            }
-                                        }
-
-                                        function getcontactdata(contactdatas, callback) {
-                                            var contactdatas = contactdatas || {};
-                                            contactdatas.idofferta = '<%= idOfferta %>';
-                                            contactdatas.name = $("[id$='txtContactName']").val();
-                                            contactdatas.cognome = $("[id$='txtContactCognome']").val();
-                                            contactdatas.email = $("[id$='txtContactEmail']").val();
-                                            contactdatas.telefono = $("[id$='txtContactTelefono']").val();
-                                            contactdatas.message = $("[id$='txtContactMessage']").val();
-                                            contactdatas.tipo = "informazioni";
-                                            callback(contactdatas);
-                                        }
-                                    </script>
-                                    <br />
-                                    <button id="btnInvia" type="button" class="divbuttonstyle" style="width: 200px" runat="server" validationgroup="contattifooter" onclick="ConfirmValidationFormMaster(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
-                                    <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />
-
-                                </div>
-                                <div class="lead py-3" style="height: 120px;">
-                                    <div style="font-weight: 300; color: #d2ac67" id="outputContactMasterDiv">
-                                        <asp:Literal Text="" ID="outputContact" runat="server" />
+                                                        function getcontactdata(contactdatas, callback) {
+                                                            var contactdatas = contactdatas || {};
+                                                            contactdatas.idofferta = '<%= idOfferta %>';
+                                                            contactdatas.name = $("[id$='txtContactName']").val();
+                                                            contactdatas.cognome = $("[id$='txtContactCognome']").val();
+                                                            contactdatas.email = $("[id$='txtContactEmail']").val();
+                                                            contactdatas.telefono = $("[id$='txtContactTelefono']").val();
+                                                            contactdatas.message = $("[id$='txtContactMessage']").val();
+                                                            contactdatas.tipo = "informazioni";
+                                                            callback(contactdatas);
+                                                        }
+                                                    </script>
+                                                    <br />
+                                                    <button id="btnInvia" type="button" class="divbuttonstyle" style="width: 200px" runat="server" validationgroup="contattifooter" onclick="ConfirmValidationFormMaster(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
+                                                    <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12" style="height: 120px;">
+                                            <div style="font-weight: 300; color: #d2ac67" id="outputContactMasterDiv">
+                                                <asp:Literal Text="" ID="outputContact" runat="server" />
+                                            </div>
+                                            <asp:ValidationSummary ID="validsummary" ValidationGroup="contattifooter" runat="server" BackColor="#cccccc" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="false"
+                                                HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<br/><style> span.errorvalidateclass + * {  border: 2px solid red; }  </style>" %>' />
+                                        </div>
                                     </div>
-                                    <asp:ValidationSummary ID="validsummary" ValidationGroup="contattifooter" runat="server" BackColor="#cccccc" DisplayMode="SingleParagraph" Font-Size="Medium" ShowValidationErrors="false" HeaderText='<%# references.ResMan("Common", Lingua,"ValidationError") +  "<br/><style> span.errorvalidateclass + * {  border: 2px solid red; }  </style>" %>' />
-
                                 </div>
                             </div>
                         </div>
@@ -786,7 +787,7 @@
                                             </a>
                                         </li>
 
-                                        <%= CreaLinkPaginastatica(2) %>
+                                        <%= CreaLinkPaginastatica(8) %>
                                         <%= CreaLinkTipologie(3,3) %>
                                         <%= CreaLinkPaginastatica(4) %>
                                         <%= CreaLinkTipologie(8,8) %>
