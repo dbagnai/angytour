@@ -3090,7 +3090,7 @@ a.btn-black-outline.restaurant-menu:nth-child(5):focus {
   background: #fff;
   line-height: 1.3;
   letter-spacing: 2px;
-  padding: 1rem 2rem;
+  padding: 0.8rem 1rem;
   margin: 0 auto;
   display: inline-block;
   -moz-box-shadow: none;
@@ -3323,7 +3323,10 @@ a.btn-black-outline.restaurant-menu:nth-child(5):focus {
 .slick-prev:before,
 .slick-next:before {
   font-size: 40px;
-  color: black;
+  color: white;
+}
+.slick-dots li.slick-active button:before {
+  font-size: 14px;
 }
 /*----------------------------------
 ////////| IMPORTAZIONE FONT |/////// 
@@ -4017,7 +4020,7 @@ h1 span:nth-child(1).mbr-section-title {
 .mbr-section-subtitle,
 h1 span .mbr-section-subtitle {
   text-align: center;
-  color: #077777 !important;
+  color: #077777;
   /*  color: @subtitle-color !important;
     font-family: @subtite-font !important;
     font-size: @subtite-size !important;
@@ -5856,6 +5859,10 @@ select.form-control:not([size]):not([multiple]) {
   background-color: rgba(255, 255, 255, 0.6);
   /*background: @bg-testata-opacity-white-gradient;*/
 }
+.mbr-overlay-black {
+  background-color: rgba(0, 0, 0, 0.2);
+  /*background: @bg-testata-opacity-white-gradient;*/
+}
 .mbr-overlay-sfumato {
   opacity: 1;
   bottom: 0;
@@ -6758,7 +6765,7 @@ button.js-roundedpush:hover {
   /*senza sottomenu a vista con icone*/
   /*padding-top: calc(141px + 82px);*/
   /*con sottomenu a vista con icone*/
-  padding-top: calc(134px);
+  padding-top: calc(141px);
   /*con sottomenu a vista con icone + testate pagine*/
   /*padding-top: 95px;*/
   /*senza menù top, tipo dolore di achille*/
@@ -6774,7 +6781,7 @@ button.js-roundedpush:hover {
 @media (max-width: 1179px) {
   .headerspacer,
   .headerspacer-home {
-    padding-top: 100px !important;
+    padding-top: 134px !important;
   }
 }
 /*TESTATA CHE MANTIENE legend PROPORZIONI TIPO VIDEO*/
@@ -7480,7 +7487,7 @@ button.js-roundedpush:hover {
     width: 400px;
     height: 119px;
     padding: 5px;
-    background: url(/images/main_logo_d_b.png) center center;
+    background: url(/images/main_logo_d.png) center center;
     background-size: 95% 95%;
     background-repeat: no-repeat;
     margin: 0 auto;

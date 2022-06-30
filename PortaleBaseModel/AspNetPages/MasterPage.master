@@ -64,6 +64,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <%-- <%= references.ResMan("Common", Lingua,"tastoprenota") %> --%>
         <%= references.ResMan("Common", Lingua,"pulsantecontattipopup") %>
+          <%= references.ResMan("Common", Lingua,"pulsantecontattibottom") %>
+      
         <!-- MENU -->
         <div class="fixedtop" id="divTop" runat="server" visible="true">
             <div class="row d-flex justify-content-between " style="padding: 5px 0px; margin: 0px;">

@@ -833,7 +833,7 @@ h3.mbr-section-title.display-5.bg-dark-color.noafter {
 .mbr-section-subtitle {
     &:extend(.scalablefont-small-medium, .font-light, .base-font);
     text-align: center;
-    color: @subtitle-color !important;
+    color: @subtitle-color;
     /*  color: @subtitle-color !important;
     font-family: @subtite-font !important;
     font-size: @subtite-size !important;
@@ -2903,7 +2903,10 @@ select.form-control:not([size]):not([multiple]) {
     background-color: @bg-testata-opacity-white;
     /*background: @bg-testata-opacity-white-gradient;*/
 }
-
+.mbr-overlay-black {
+    background-color: @bg-testata-opacity;
+    /*background: @bg-testata-opacity-white-gradient;*/
+}
 .mbr-overlay-sfumato {
     opacity: 1;
     bottom: 0;
@@ -3971,7 +3974,7 @@ button.js-roundedpush:hover {
     /*padding-top: calc(141px + 48px);*/
     /*padding-top: 135px;*/ /*senza sottomenu a vista con icone*/
     /*padding-top: calc(141px + 82px);*/ /*con sottomenu a vista con icone*/
-    padding-top: calc(134px); /*con sottomenu a vista con icone + testate pagine*/
+    padding-top: calc(141px); /*con sottomenu a vista con icone + testate pagine*/
     /*padding-top: 95px;*/ /*senza menù top, tipo dolore di achille*/
 }
 /*--------- END ---------*/
@@ -3985,7 +3988,7 @@ button.js-roundedpush:hover {
 
 @media (max-width:1179px) {
     .headerspacer, .headerspacer-home {
-        padding-top: 100px !important;
+        padding-top: 134px !important;
     }
 }
 
@@ -4663,7 +4666,7 @@ button.js-roundedpush:hover {
         width: @larghezza-logo;
          height: 119px;
         padding: 5px;
-        background: url(/images/main_logo_d_b.png) center center;
+        background: url(/images/main_logo_d.png) center center;
         background-size: 95% 95%;
         background-repeat: no-repeat;
         margin: 0 auto;
