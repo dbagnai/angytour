@@ -1,6 +1,68 @@
 "use strict";
 
 
+//////////////////// ACTIVATE POPUP  //////////////////////////////
+$(document).ready(function () {
+
+    var activatepopuponlyhome = false;
+    if ($('body').find('.activatepopuponlyhome').length > 0) activatepopuponlyhome = true;
+    var activatepopupallsite = false;
+    if ($('body').find('.activatepopupallsite').length > 0) activatepopupallsite = true;
+
+    if (activatepopupallsite) {
+        var ishome = false;
+        //if (window.location.pathname.toLowerCase() == "/" || window.location.pathname.toLowerCase() == "/home"
+        //    || window.location.pathname.toLowerCase() == "/it/home" ||
+        //    window.location.pathname.toLowerCase() == "/en/home" ||
+        //    window.location.pathname.toLowerCase() == "/ru/home" ||
+        //    window.location.pathname.toLowerCase() == "/fr/home" ||
+        //    window.location.pathname.toLowerCase() == "/index.aspx") ishome = true;
+        // if (ishome) {
+        var cookienamenewsletter = 'subscriptiorequest3';
+        var cookiepopup = CookiesPolicy.GetCookie(cookienamenewsletter);
+        var popopen = false;
+        if (cookiepopup != 'subscribed') popopen = true;
+        if (popopen)
+            $('#popupModal').modal('show');
+        $('#popupModal').on('hide.bs.modal', function (e) {
+            CookiesPolicy.SetCookie(cookienamenewsletter, 'subscribed', '0.002', '/');
+        })
+        //}
+
+        //funzione disattivazione popou su pulsante in html
+        $('.dismissmodal').on('click', function (e) {
+            CookiesPolicy.SetCookie(cookienamenewsletter, 'subscribed', '0.002', '/');
+        })
+
+    }
+    else if (activatepopuponlyhome) {
+        var ishome = false;
+        if (window.location.pathname.toLowerCase() == "/" || window.location.pathname.toLowerCase() == "/home"
+            || window.location.pathname.toLowerCase() == "/it/home" ||
+            window.location.pathname.toLowerCase() == "/en/home" ||
+            window.location.pathname.toLowerCase() == "/ru/home" ||
+            window.location.pathname.toLowerCase() == "/fr/home" ||
+            window.location.pathname.toLowerCase() == "/index.aspx") ishome = true;
+        if (ishome) {
+            var cookienamenewsletter = 'subscriptiorequest3';
+            var cookiepopup = CookiesPolicy.GetCookie(cookienamenewsletter);
+            var popopen = false;
+            if (cookiepopup != 'subscribed') popopen = true;
+            if (popopen)
+                $('#popupModal').modal('show');
+            $('#popupModal').on('hide.bs.modal', function (e) {
+                CookiesPolicy.SetCookie(cookienamenewsletter, 'subscribed', '0.002', '/');
+            })
+            //funzione disattivazione popou su pulsante in html
+            $('.dismissmodal').on('click', function (e) {
+                CookiesPolicy.SetCookie(cookienamenewsletter, 'subscribed', '0.002', '/');
+            })
+        }
+    }
+});
+//////////////////// ACTIVATE POPUP ALL SITE //////////////////////////////
+
+
 jQuery(document).ready(function ($) {
     //$(".sticker").sticky({ topSpacing: 120 });
     //setInterval(function () { if ($('#divnavigazioneJs0').isOnScreen()) { $(".sticker").unstick() } }, 1000);
