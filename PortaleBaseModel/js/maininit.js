@@ -365,7 +365,9 @@ jQuery(document).ready(function ($) {
     //$(function () {
     //    $(".video-player").mb_YTPlayer();
     //});
-    $(".video-player").mb_YTPlayer();
+
+    if (typeof $.fn.mb_YTPlayer !== 'undefined' && $(".video-player").length != 0)
+        $(".video-player").mb_YTPlayer();
     //  'onStateChange': onPlayerStateChange
     setInterval(function () {
         testifvideoinview();
