@@ -794,6 +794,17 @@
                                         <%= CreaLinkPaginastatica(4) %>
                                         <%= CreaLinkTipologie(8,8) %>
                                         <%= CreaLinkTipologie(9,9) %>
+
+                                        <%= CreaLinkPaginastatica(9) %>
+                                        <%= CreaLinkPaginastatica(12) %>
+                                        <%= CreaLinkPaginastatica(17) %>
+                                        <%= CreaLinkPaginastatica(18) %>
+                                        <%= CreaLinkPaginastatica(19) %>
+                                        <%= CreaLinkPaginastatica(20) %>
+
+
+
+
                                         <%-- Contatti --%>
                                         <li>
                                             <a id="linkContatti" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"LinkContatti")) %>' title='<%= references.ResMan("Common", Lingua,"testoContatti") %>'>
