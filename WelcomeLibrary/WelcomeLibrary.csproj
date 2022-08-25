@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WelcomeLibrary</RootNamespace>
     <AssemblyName>WelcomeLibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
     </SccProjectName>
@@ -186,7 +186,7 @@
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml" />
     <Reference Include="WebPush, Version=1.0.11.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebPush.1.0.12\lib\net471\WebPush.dll</HintPath>
+      <HintPath>..\packages\WebPush.1.0.12\lib\net48\WebPush.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
