@@ -288,25 +288,34 @@
                             </div>
                         </div>
                     </li>--%>
-
+                         <li runat="server">
+                        <%= CreaLinkTipologie(1,1,"a-dropdown tx-sottomenu-color buttonmenu",true) %>
+                        <ul class="dropdown" style="max-height: 500px; overflow: auto">
+                            <%= CreaLinkTipologie(1,1) %>
+                            <li>
+                                <hr style="margin: 0 !important;" />
+                            </li>
+                            <%= CreaLinkCategorie("rif000001","","") %>
+                        </ul>
+                    </li>
 
                     <%--MEGAMENU DANY--%>
-                    <li runat="server">
+               <%--     <li runat="server">
                         <%= CreaLinkTipologie(1,1,"a-dropdown tx-sottomenu-color",true) %>
                         <div class="megamenu megamenu-full-width">
                             <div class="megamenu-row">
                                 <div class="col4 text-left text-md-right megamenu-menulist">
                                     <%= CreaLinkCategorie("rif000001","","",true) %>
                                 </div>
-                                <%-- <div class="col4 text-left text-md-right megamenu-menulist">
+                                <div class="col4 text-left text-md-right megamenu-menulist">
                                     <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000032,prod000033","menutext-1 menutext-bold",true) %>
                                 </div>
                                 <div class="col4 text-left text-md-right megamenu-menulist">
                                     <%= CreaLinkCategorieNestedNodropdown("rif000001","prod000034,prod000035","menutext-1 menutext-bold",true) %>
-                                </div>--%>
+                                </div> 
                             </div>
                         </div>
-                    </li>
+                    </li>--%>
 
                   <%--     <li runat="server" class="d-block">
                         <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%=  TestoSezione("rif000004",true,true) %> </a>
