@@ -8652,35 +8652,34 @@ namespace WelcomeLibrary.DAL
 
                             ////////////////////////////////////////////////////////////////
                             //                         < g:shipping >
-
-
                             //< g:country > US </ g:country >
-
-
                             //     < g:region > MA </ g:region >
-
-
                             //          < g:service > Ground </ g:service >
-
-
                             //               < g:price > 6.49 USD </ g:price >
-
-
                             //                  </ g:shipping >
 
+                            double pesoarticolo = 0;
+                            if (_new.Peso != null)
+                                pesoarticolo = _new.Peso.Value;
+                            if (pesoarticolo != 0)
+                            {
+                                writer.WriteStartElement("g:shipping_weight");
+                                writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { tmpprezzo }) + " KG");
+                                writer.WriteEndElement();
+                            }
+
+
+#if false // le spese di spedizione le mettiamo in merchant center.
                             writer.WriteStartElement("g:shipping");
-
-
                             writer.WriteStartElement("g:country");
                             writer.WriteValue("IT"); //prezzo spedizione
                             writer.WriteEndElement();
                             writer.WriteStartElement("g:price");
                             writer.WriteValue("0.00 EUR"); //prezzo spedizione
                             writer.WriteEndElement();
-
                             writer.WriteEndElement();
 
-
+#endif
 
                             writer.WriteStartElement("g:availability");
                             writer.WriteValue("in stock"); //out of stock | preorder
