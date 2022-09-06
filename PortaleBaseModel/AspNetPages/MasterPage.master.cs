@@ -734,7 +734,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
                             sb.Append("\"");
                             if (!string.IsNullOrEmpty(classoop))
                                 sb.Append(" class=\"" + classoop + "\"  ");
-                            if (o.Codice == CodiceTipologia && Caratteristica6 == elem.Codice)
+                            if (o.Codice == CodiceTipologia && Categoria == filtrocategoria && Caratteristica6 == elem.Codice)
                                 sb.Append(" style=\"font-weight:600 !important\"  ");
                             sb.Append(" >");
                             testo += " " + addtestolink;
@@ -764,6 +764,60 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         if (sezioni != null)
             foreach (TipologiaOfferte o in sezioni)
             {
+                if (progressivocaratteristica == 1)
+                {
+
+                    List<Tabrif> gruppocompleto = Utility.Caratteristiche[0].FindAll(e => e.Lingua == Lingua);
+
+                    //Incolonniamo automaticamente
+                    int nlink = gruppocompleto.Count;
+                    int resto = 0;
+                    int colonne = Math.DivRem(nlink, maxrighepercolonna, out resto);
+                    if (resto > 0) colonne += 1;
+
+                    for (int i = 1; i <= colonne; i++)
+                    {
+                        int elementrange = maxrighepercolonna;
+                        if (i == colonne && resto != 0) elementrange = resto;
+                        else if (i == colonne && resto == 0) continue;
+                        List<Tabrif> gruppoattuale = gruppocompleto.GetRange((i - 1) * maxrighepercolonna, elementrange);
+                        sb.Append("<div class=\"col-auto text-left megamenu-menulist\">");
+                        foreach (Tabrif elem in gruppoattuale)
+                        {
+                            Dictionary<string, string> addpars = new Dictionary<string, string>();
+                            if (elem != null && !string.IsNullOrEmpty(elem.Codice) && elem.Lingua == Lingua)
+                            {
+                                addpars.Add("Caratteristica1", elem.Codice);
+                                //Genero il link per la tipologia
+                                string testo = elem.Campo1;
+                                string link = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CommonPage.CleanUrl(testo), "", o.Codice, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
+                                link = link.Replace("~", WelcomeLibrary.STATIC.Global.percorsobaseapplicazione);
+
+                                sb.Append("<ul>");
+                                if (!noli)
+                                    sb.Append("<li>");
+                                sb.Append("<a href=\"");
+                                sb.Append(link);
+                                sb.Append("\"");
+                                if (!string.IsNullOrEmpty(classoop))
+                                    sb.Append(" class=\"" + classoop + "\"  ");
+                                if (o.Codice == CodiceTipologia && Caratteristica1 == elem.Codice)
+                                    sb.Append(" style=\"font-weight:600 !important\"  ");
+                                sb.Append(" >");
+                                string testoforced = references.ResMan("Common", Lingua, "testolink" + elem.Codice);
+                                if (!string.IsNullOrEmpty(testoforced)) testo = testoforced;
+                                sb.Append(testo);
+                                sb.Append("</a>");
+                                if (!noli)
+                                    sb.Append("</li>");
+                                sb.Append("</ul>");
+
+                            }
+                        }
+                        sb.Append("</div>");
+                    }
+                }
+
                 if (progressivocaratteristica == 2)
                 {
 
@@ -819,11 +873,13 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
 
                     }
                 }
+
+
+
+
             }
         return sb.ToString();
     }
-
-
     /// <summary>
     /// Creazione lista li per tipologie da min a max
     /// </summary>

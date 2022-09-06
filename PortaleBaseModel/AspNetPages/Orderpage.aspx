@@ -732,12 +732,17 @@
                                             /*do work and go for postback*/
                                             console.log('ok validated');
                                             $(elembtn).attr("disabled", "")
+                                            var tastotxt = $(elembtn).html();
+                                            $(elembtn).html("Wait ..");
+
                                             ///////////////////////////////////////////////////////////////////////
                                             //Invio con post back (metodo originale)
                                             var buttpost = document.getElementById("<%= btnConvalidaSrv.ClientID  %>");
                                             //$(elembtn).html("Wait ..");
                                             document.getElementById("<%= btnConvalidaSrv.ClientID  %>").click();
                                             ////////////////////////////////////////////////////////////////////////
+                                              //$(elembtn).removeAttr("disabled")
+                                            //$(elembtn).html(tastotxt);
                                         } else {
                                             $('html,body').animate({
                                                 scrollTop: $("#" + "<%= validsummary.ClientID  %>").offset().top - 160
