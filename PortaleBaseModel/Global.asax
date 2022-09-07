@@ -4,6 +4,7 @@
 <%@ Import Namespace="System.Web.Routing" %>
 <%@ Import Namespace="System.Data.SQLite" %>
 <%@ Import Namespace="WelcomeLibrary.UF" %>
+<%@ Import Namespace="System.Web.Http" %>
 
 <script RunAt="server">
 
@@ -203,7 +204,7 @@
         OpTimer.Interval = (Double)GetInterval();
         OpTimer.Start();
     }
-    
+
     void Application_Start(object sender, EventArgs e)
     {
         System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
@@ -596,6 +597,8 @@
     void RegisterRoutes(System.Web.Routing.RouteCollection routes)
     {
         RegisterBundles(routes); // Bundles da iniettare css/js
+        //Routes per webapi
+        RouteTable.Routes.MapHttpRoute("API Default", "api/{controller}/{action}/{id}", new { id = System.Web.Http.RouteParameter.Optional });
 
         //routes.Add("Generic", new System.Web.Routing.Route("{Lingua}", new GenericRouteHandler()));
         routes.Add("Generic1", new System.Web.Routing.Route("{Lingua}/{textmatch}", new GenericRouteHandler()));
