@@ -1426,6 +1426,20 @@ namespace WelcomeLibrary.DAL
         /// <param name="item"></param>
         public void InserisciAggiornaCliente(string connessione, ref Cliente item)
         {
+
+#if false
+
+            if (!string.IsNullOrEmpty(item.Email))
+            {
+                bool validemail = ActiveUp.Net.Mail.Validator.ValidateSyntax(item.Email);
+                if (!validemail)
+                {
+                    //  output.CssClass = "alert alert-danger"; output.Text = "Email errata|Invalid Email!";
+                    return;
+                }
+            } 
+#endif
+
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (connessione == null || connessione == "") return;
             SQLiteParameter p1 = new SQLiteParameter("@Id_card", item.Id_card);//OleDbType.VarChar
