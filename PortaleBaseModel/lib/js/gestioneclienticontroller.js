@@ -177,6 +177,7 @@ var ClientiManager = new function () {
                     caricaDati();
                 },
                 filtraDati() {
+                    this.vm.Pager.CurrentPage = 1;
                     this.vm.idselected = 0;
                     if (this.vm.filterparams.Id_cliente == '') this.vm.filterparams.Id_cliente = 0;
                     caricaDati();
