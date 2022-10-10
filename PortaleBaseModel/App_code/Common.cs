@@ -2361,7 +2361,7 @@ public class CommonPage : Page
                 string jsongoogleadsconversione = Newtonsoft.Json.JsonConvert.SerializeObject(jtaggoogleadseevent);
                 scriptRegVariables += ";\r\n " + string.Format("gtag('event', 'conversion', {0});console.log('gtag called;');", jsongoogleadsconversione);
             }
-            scriptRegVariables = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariables); //wrapper fo waiting
+            scriptRegVariables = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariables, "300", true); //wrapper fo waiting
             /////////////////////////////////////////////////////
 
             /////////////////////////////////////////////////////
@@ -2383,7 +2383,7 @@ public class CommonPage : Page
             }
             string fbpeventpurchase = Newtonsoft.Json.JsonConvert.SerializeObject(jtagpurchafbq);
             string scriptRegVariablesfbq = ";\r\n " + string.Format("fbq('track', 'Purchase', {0});console.log('fbq track purchase called;');", fbpeventpurchase);
-            scriptRegVariablesfbq = WelcomeLibrary.UF.Utility.waitwrappercall("fbq", scriptRegVariablesfbq); //wrapper fo waiting
+            scriptRegVariablesfbq = WelcomeLibrary.UF.Utility.waitwrappercall("fbq", scriptRegVariablesfbq, "300", true); //wrapper fo waiting
             /////////////////////////////////////////////////////
 
             string scriptvariablesfinal = "";
@@ -2437,7 +2437,7 @@ public class CommonPage : Page
         //torniamo il codice da inisettare
         string serializedstringgoogle = Newtonsoft.Json.JsonConvert.SerializeObject(cartcontainer);
         string scriptRegVariablesgoogle = ";\r\n " + string.Format("gtag('event', 'add_to_cart', {0});console.log('google track adttocart called;');", serializedstringgoogle);
-        scriptRegVariablesgoogle = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariablesgoogle); //wrapper fo waiting
+        scriptRegVariablesgoogle = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariablesgoogle, "300", true); //wrapper fo waiting
                                                                                                                 //google add tocart
 
         ////facebook ///////////////////
@@ -2455,7 +2455,7 @@ public class CommonPage : Page
         //torniamo il codice da inisettare
         string serializedstringfbq = Newtonsoft.Json.JsonConvert.SerializeObject(itemfbq);
         string scriptRegVariablesfbq = ";\r\n " + string.Format("fbq('track', 'AddToCart', {0});console.log('fbq track adttocart called;');", serializedstringfbq);
-        scriptRegVariablesfbq = WelcomeLibrary.UF.Utility.waitwrappercall("fbq", scriptRegVariablesfbq); //wrapper fo waiting
+        scriptRegVariablesfbq = WelcomeLibrary.UF.Utility.waitwrappercall("fbq", scriptRegVariablesfbq, "300", true); //wrapper fo waiting
                                                                                                          ////fbq ///////////////////////
         string scriptvariablesfinal = "";
         scriptvariablesfinal += scriptRegVariablesgoogle;

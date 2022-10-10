@@ -1,3 +1,4 @@
+var cookieconsentinitialized = false;
 
 window.addEventListener('load', function () {
 
@@ -64,7 +65,6 @@ window.addEventListener('load', function () {
             // callback triggered only once on the first accept/reject action
             if (consolemsgactivate) console.log('onFirstAction fired');
             update_registro();
-
         },
 
         onAccept: function (cookie) {
@@ -91,7 +91,12 @@ window.addEventListener('load', function () {
                 });
             }
             //END FOR GTM CONSENT MODE -----
-
+             //cookieconsentinitialized = true;
+            (function () {
+                setTimeout(function () {
+                    cookieconsentinitialized = true;
+                }, 1500);
+            })();
         },
 
         onChange: function (cookie, changed_preferences) {
@@ -119,6 +124,12 @@ window.addEventListener('load', function () {
                 });
             }
             //END FOR GTM CONSENT MODE -----
+            //cookieconsentinitialized = true;
+            (function () {
+                setTimeout(function () {
+                    cookieconsentinitialized = true;
+                }, 1500);
+            })();
             update_registro();
 
         },
