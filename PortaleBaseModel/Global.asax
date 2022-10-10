@@ -428,6 +428,8 @@
             //"~/js/moment-with-locales.min.js", //versione grande con string locali (pesa)!!!
             "~/js/moment.min.js", //no locales!!!
             "~/js/googleMaps.js"
+        //"~/js/orestbrida/cookieconsent.js",
+        //"~/js/orestbrida/initconsent.js"
         );
 
         BundleEngine.AddBundleJS("bundlejslib1",
@@ -460,7 +462,7 @@
             "~/js/jQuery.XDomainRequest.js",
             "~/js/back-to-top.js",
             "~/js/flexslider/jquery.flexslider-min.js",
-            "~/js/it-cookies-policy.js",
+            //"~/js/it-cookies-policy.js",
             "~/js/YTPlayer328/jquery.mb.YTPlayer.js",
             "~/js/simplestarrating/SimpleStarRating.js",
             "~/js/jquery.fitvids.js",
@@ -537,6 +539,7 @@
               "~/js/lightGallery-master/dist/css/lightgallery-bundle.css",
               "~/js/lightGallery-master/dist/plugins/justifiedgallery/justifiedGallery.css",
 
+             //"~/js/orestbrida/cookieconsent.css",
 
              "~/css/custom.css"
           );

@@ -3,7 +3,38 @@
 <!DOCTYPE html>
 <html runat="server" id="htmltag">
 <head runat="server" id="masterHead">
-    <%--<meta http-equiv="X-UA-Compatible" content="IE=10" />--%>
+
+    <script>
+        // Initialize the data layer for Google Tag Manager (this should mandatorily be done before the Cookie Solution is loaded)
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        // Default consent mode is "denied" for both ads and analytics, but delay for 2 seconds until the Cookie Solution is loaded
+        gtag("consent", "default", {
+            ad_storage: "denied",
+            analytics_storage: "denied",
+            wait_for_update: 2000 // milliseconds
+        });
+        // Improve ad click measurement quality (optional)
+        gtag('set', 'url_passthrough', true);
+        // Further redact your ads data (optional)
+        gtag("set", "ads_data_redaction", true);
+
+        // Google Tag Manager
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5257TWS');
+
+    </script>
+    <script type="text/javascript" src="/js/orestbrida/cookieconsent.js" async></script>
+
+
     <title runat="server" id="metaTitle"></title>
     <meta id="metaDesc" runat="server" name="Description" content="" />
     <meta id="metaKeyw" runat="server" name="Keywords" content="" />
@@ -49,6 +80,15 @@
 </head>
 <%--<body class="bckGray">--%>
 <body>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5257TWS"
+            height="0" width="0" style="display: none; visibility: hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
     <div class="loader">
         <div class="spinner"></div>
     </div>
@@ -64,8 +104,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <%-- <%= references.ResMan("Common", Lingua,"tastoprenota") %> --%>
         <%= references.ResMan("Common", Lingua,"pulsantecontattipopup") %>
-          <%= references.ResMan("Common", Lingua,"pulsantecontattibottom") %>
-      
+        <%= references.ResMan("Common", Lingua,"pulsantecontattibottom") %>
+
         <!-- MENU -->
         <div class="fixedtop" id="divTop" runat="server" visible="true">
             <div class="row d-flex justify-content-between " style="padding: 5px 0px; margin: 0px;">
@@ -288,7 +328,7 @@
                             </div>
                         </div>
                     </li>--%>
-                         <li runat="server">
+                    <li runat="server">
                         <%= CreaLinkTipologie(1,1,"a-dropdown tx-sottomenu-color buttonmenu",true) %>
                         <ul class="dropdown" style="max-height: 500px; overflow: auto">
                             <%= CreaLinkTipologie(1,1) %>
@@ -300,7 +340,7 @@
                     </li>
 
                     <%--MEGAMENU DANY--%>
-               <%--     <li runat="server">
+                    <%--     <li runat="server">
                         <%= CreaLinkTipologie(1,1,"a-dropdown tx-sottomenu-color",true) %>
                         <div class="megamenu megamenu-full-width">
                             <div class="megamenu-row">
@@ -317,7 +357,7 @@
                         </div>
                     </li>--%>
 
-                  <%--     <li runat="server" class="d-block">
+                    <%--     <li runat="server" class="d-block">
                         <a class="a-dropdown" href="javascript:void(0)" style="cursor: pointer;"><%=  TestoSezione("rif000004",true,true) %> </a>
                         <ul class="dropdown">
                             <%= CreaLinkTipologie(4,4,"",false) %>
@@ -647,20 +687,20 @@
                                                     <script>
                                                         function ConfirmValidationFormMaster(elembtn) {
                                                             var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
-                                                            var out1 = document.getElementById("outputContactMasterDiv");
-                                                            if (!chk1.checked) {
-                                                                out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
-                                                                return false;
-                                                            } else { out1.innerHTML = ''; }
-                                                            if (Page_ClientValidate("contattifooter")) {
-                                                                /*do work and go for postback*/
-                                                                console.log('ok validated');
-                                                                $(elembtn).attr("disabled", "")
+                var out1 = document.getElementById("outputContactMasterDiv");
+                if (!chk1.checked) {
+                    out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
+                    return false;
+                } else { out1.innerHTML = ''; }
+                if (Page_ClientValidate("contattifooter")) {
+                    /*do work and go for postback*/
+                    console.log('ok validated');
+                    $(elembtn).attr("disabled", "")
 
-                                                                //invio nopostback con handler////////////////////////////////////////////////////
-                                                                var contactdatas = {};
-                                                                contactdatas.chkprivacy = chk1.checked;
-                                                                contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
+                    //invio nopostback con handler////////////////////////////////////////////////////
+                    var contactdatas = {};
+                    contactdatas.chkprivacy = chk1.checked;
+                    contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
 
                                                                 getcontactdata(contactdatas, function (contactdatas) {
                                                                     var tastotxt = $(elembtn).html();
@@ -824,6 +864,9 @@
                                         </li>
                                         <%--<%= CreaLinkSottoCategorie("rif000002","prod000018") %>--%>
                                         <%= CreaLinkPaginastatica(100) %>
+
+                                 <%--       <li> <button type="button" data-cc="c-settings" >Modifica preferenze cookie</button></li>--%>
+                                        <li> <a href="#" data-cc="c-settings" >Modifica preferenze cookie</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -933,6 +976,10 @@
     <div id="testzoom" style="position: fixed; bottom: 0px; left: 0px;"></div>
     <%= InjectedEndPageScripts() %>
     <span id="endspaceforjs"></span>
+
+    <link rel="stylesheet" href="/js/orestbrida/cookieconsent.css" />
+    <script type="text/javascript" src="/js/orestbrida/initconsent.js" async></script>
+
     <%--SERVICE WORKER--%>
     <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>  --%>
     <%--   <script src='https://www.google.com/recaptcha/api.js'></script>--%>

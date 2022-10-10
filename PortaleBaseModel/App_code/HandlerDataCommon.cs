@@ -16,6 +16,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Data.SQLite;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 public class jreturncontainerdata
 {
@@ -428,6 +429,42 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         result = references.ResMan("Common", lingua, "txtPrivacyError") + " <br/> Mancata Autorizzazione privacy"; ;
                         throw new ApplicationException(result);
                     }
+
+                    break;
+                case "updateregistrocookie":
+                    string dataforregistro = pars.ContainsKey("data") ? pars["data"] : "";
+                    Dictionary<string, string> datatowrite = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(dataforregistro);
+                    string cccookie = (datatowrite.GetValueOrDefault("cc_cookie") ?? "");
+                    string pageurl = (datatowrite.GetValueOrDefault("pageurl") ?? "");
+                    string clientip = (datatowrite.GetValueOrDefault("clientip") ?? "");
+                    string useragent = (datatowrite.GetValueOrDefault("useragent") ?? "");
+                    if (context.Request != null)
+                    {
+                        clientip = "";
+                        string ip = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                        if (!string.IsNullOrEmpty(ip))
+                        {
+                            string[] ipRange = ip.Split(',');
+                            clientip = ipRange[0].Trim();
+                        }
+                        else
+                        {
+                            clientip = context.Request.ServerVariables["REMOTE_ADDR"].Trim();
+                        }
+                    }
+                    datatowrite["clientip"] = clientip;
+                    string updatedtextforreg = Newtonsoft.Json.JsonConvert.SerializeObject(datatowrite, Newtonsoft.Json.Formatting.Indented);
+
+                    // Registro la statistica di contatto
+                    Statistiche stat_cookie = new Statistiche();
+                    stat_cookie.Data = DateTime.Now;
+                    stat_cookie.EmailDestinatario = "";
+                    stat_cookie.EmailMittente = "";
+                    stat_cookie.Idattivita = 0;
+                    stat_cookie.Testomail = updatedtextforreg;
+                    stat_cookie.TipoContatto = "cookieprefs";
+                    stat_cookie.Url = pageurl;
+                    statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat_cookie);
 
                     break;
                 case "insertanagraficaeinviamail":
