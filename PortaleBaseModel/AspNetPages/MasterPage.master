@@ -4,6 +4,10 @@
 <html runat="server" id="htmltag">
 <head runat="server" id="masterHead">
 
+
+      <script type="text/javascript" src="/js/orestbrida/cookieconsent.js" async></script>
+    <script type="text/javascript" src="/js/orestbrida/initconsent.js" async></script>
+
     <script>
         // Initialize the data layer for Google Tag Manager (this should mandatorily be done before the Cookie Solution is loaded)
         window.dataLayer = window.dataLayer || [];
@@ -32,8 +36,16 @@
         })(window, document, 'script', 'dataLayer', 'GTM-5257TWS');
 
     </script>
-    <script type="text/javascript" src="/js/orestbrida/cookieconsent.js" async></script>
-
+  
+    <%--CASO ECOMMERCE PER GTAG --%>
+<%--    
+    <script async type="text/plain" data-cookiecategory="analytics" src="https://www.googletagmanager.com/gtag/js?id=G-QR7JK7C5NE" defer></script>
+    <script type="text/plain" data-cookiecategory="analytics" defer> 
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-QR7JK7C5NE');
+    </script>--%>
 
     <title runat="server" id="metaTitle"></title>
     <meta id="metaDesc" runat="server" name="Description" content="" />
@@ -978,7 +990,6 @@
     <span id="endspaceforjs"></span>
 
     <link rel="stylesheet" href="/js/orestbrida/cookieconsent.css" />
-    <script type="text/javascript" src="/js/orestbrida/initconsent.js" async></script>
 
     <%--SERVICE WORKER--%>
     <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>  --%>

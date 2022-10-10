@@ -342,13 +342,18 @@ namespace WelcomeLibrary.UF
             return ret;
         }
 
-        public static string waitwrappercall(string functionname, string functioncall, string mseconds = "300")
+        public static string waitwrappercall(string functionname, string functioncall, string mseconds = "300", bool waitconsent = false)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("(function wait() {");
+            string addedcondition = "";
+            if (waitconsent)
+            {
+                addedcondition = " &&  typeof cookieconsentinitialized !== 'undefined' && cookieconsentinitialized == true  ";
+            }
 
+            sb.Append("(function wait() {");
             if (!functionname.Contains("."))
-                sb.Append("  if (typeof " + functionname + " === \"function\")");
+                sb.Append("  if (typeof " + functionname + " === \"function\" " + addedcondition + ")");
             else
             {
                 string functionitem1 = functionname;
@@ -359,7 +364,7 @@ namespace WelcomeLibrary.UF
                     functionitem1 = listaarray[0];
                     functionitem2 = listaarray[1];
                 }
-                sb.Append("  if ( typeof " + functionitem1 + " !== 'undefined' &&  " + functionitem1 + " != null  &&  typeof " + functionname + " === \"function\")");
+                sb.Append("  if ( typeof " + functionitem1 + " !== 'undefined' &&  " + functionitem1 + " != null  &&  typeof " + functionname + " === \"function\" " + addedcondition + ")");
 
             }
             sb.Append("    {");
@@ -368,6 +373,8 @@ namespace WelcomeLibrary.UF
             sb.Append("   else  {");
             sb.Append("  setTimeout(wait, " + mseconds + ");");
             sb.Append("  }  })();");
+
+
             return sb.ToString();
 
         }
