@@ -121,7 +121,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
                     //{
                     //    File.Delete(pathDestinazione + "\\" + NomeCorretto);
                     //}
-                    if (fileupload.PostedFile.ContentType == "image/jpeg" || fileupload.PostedFile.ContentType == "image/pjpeg" ||   fileupload.PostedFile.ContentType == "image/png")
+                    if (fileupload.PostedFile.ContentType == "image/jpeg" || fileupload.PostedFile.ContentType == "image/pjpeg" || fileupload.PostedFile.ContentType == "image/png")
                     {
                         bool ridimensiona = true;
                         //RIDIMENSIONO E FACCIO L'UPLOAD DELLA FOTO!!!
@@ -567,19 +567,19 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
         if (newsletter != null)
         {
             txtSoggetto.Text = newsletter.SoggettoMail;
-
             txtInvito.Text = ""; //Non è salvato nei campi mail
-
             txtAdesione.Text = newsletter.NoteInvio;
             ddlLingua.SelectedValue = newsletter.Lingua;
 
             string contenutomail = newsletter.TestoMail;
             //<div id=\"divinziocontenuti\"></div>
-            try
+            try  //prende solo i contenuti tra i tag di contenuto
             {
-                contenutomail = contenutomail.Substring(contenutomail.IndexOf("<div id=\"divinziocontenuti\"></div>") + 34);
-                //<div id=\"divfinecontenuti\"></div>
+#if true
+                if (contenutomail.IndexOf("<div id=\"divinziocontenuti\"></div>") != -1)
+                    contenutomail = contenutomail.Substring(contenutomail.IndexOf("<div id=\"divinziocontenuti\"></div>") + 34);
                 contenutomail = contenutomail.Remove(contenutomail.IndexOf("<div id=\"divfinecontenuti\"></div>"));
+#endif
             }
             catch { }
             try
@@ -654,16 +654,37 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
         try
         {
             mailingDM mDM = new mailingDM();
+            //puliza iniziale per inserimento newsletter non complete nell'editor ( sono tag che mette in automatico l'editor )
+            if (tinyhtmlEdit.InnerText.Contains("<!DOCTYPE html>"))
+            {
+                tinyhtmlEdit.InnerText = tinyhtmlEdit.InnerText.Replace("<!DOCTYPE html>", "");
+                tinyhtmlEdit.InnerText = tinyhtmlEdit.InnerText.Replace("<html>", "");
+                tinyhtmlEdit.InnerText = tinyhtmlEdit.InnerText.Replace("<head>", "");
+                tinyhtmlEdit.InnerText = tinyhtmlEdit.InnerText.Replace("</head>", "");
+                tinyhtmlEdit.InnerText = tinyhtmlEdit.InnerText.Replace("<body>", "");
+                tinyhtmlEdit.InnerText = tinyhtmlEdit.InnerText.Replace("</body>", "");
+                tinyhtmlEdit.InnerText = tinyhtmlEdit.InnerText.Replace("</html>", "");
+            }
+
+            bool fullpage = false;
+            if (tinyhtmlEdit.InnerText.ToLower().Contains("!doctype"))
+                fullpage = true;
 
             //Prepariamo la newsletter
             string htmlNewsletter = "";
 
-            htmlNewsletter += "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional //EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">";
-            //INSERIMENTO TAG PER HEADER MAIL
-            htmlNewsletter += "<html  xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\"><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><title>Newsletter</title></head>";
-            htmlNewsletter += "<body yahoo=fix scroll=\"auto\"  style=\"margin:0;padding:0;FONT-SIZE: 12px; FONT-FAMILY: Arial, Helvetica, sans-serif; cursor:auto;\">";
-            htmlNewsletter += "<table border=\"0\" cellpadding=\"0\" align=\"center\" cellspacing=\"0\" width=\"900\" style=\"\"> <tr><td>";
-            htmlNewsletter += "<div id=\"divinziocontenuti\"></div>";
+            if (!fullpage)
+            {
+                htmlNewsletter += "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional //EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">";
+                htmlNewsletter += "<html  xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\"><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"format-detection\" content=\"telephone=no\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Newsletter</title></head>";
+                htmlNewsletter += "<body yahoo=fix style=\"\">";
+                //htmlNewsletter += "<table border=\"0\" cellpadding=\"0\" align=\"center\" cellspacing=\"0\" width=\"900\" style=\"\"> <tr><td>";
+                htmlNewsletter += "<div id=\"divinziocontenuti\"></div>";  //serve a delimitare solo il contenuto della mail
+            }
+            else
+            {
+
+            }
 
             //htmlNewsletter += htmlEdit.Content; // Content.Value;//  
             htmlNewsletter += tinyhtmlEdit.InnerText; // Content.Value;//  
@@ -763,17 +784,26 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
                 newsletter.Id = identity;
             if (newsletter.Id != 0)
             {
-                //INSERIMENTO TAG DI CHIUSURA DELLA MAIL    
-                htmlNewsletter += "<div id=\"divfinecontenuti\"></div>";
+                //INSERIMENTO TAG DI CHIUSURA DELLA MAIL    ( serve a delimitare l'area solo contenuti senza il body
+                //htmlNewsletter += "<div id=\"divfinecontenuti\"></div>";
+                if (!fullpage)
+                    htmlNewsletter = htmlNewsletter += "<div id=\"divfinecontenuti\"></div>"; ;
+
 
                 if (!string.IsNullOrWhiteSpace(txtInvito.Text.Trim())) //Se specificato un testo nel link di adesione -> inserisco il link
                 {
                     //Mettiamo anche il link alla pagina specifica dell'offerta appena inserita ( qui devo rimandare al form di iscrizione con i param. di contatto )
                     string link = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/Aspnetpages/Iscriviti_adesione.aspx?ID_cliente=&ID_mail=&Lingua=" + newsletter.Lingua + "&idNewsletter=" + newsletter.Id;
-                    htmlNewsletter += "<br/><a href=\"" + link + "\" target=\"_blank\" style=\"font-size:18px;color:#b13c4e\">" + txtInvito.Text + "</a><br/>";
+                    // htmlNewsletter += "<br/><a href=\"" + link + "\" target=\"_blank\" style=\"font-size:18px;color:#b13c4e\">" + txtInvito.Text + "</a><br/>";
+
+                    htmlNewsletter = htmlNewsletter.Insert(htmlNewsletter.IndexOf("</body>"), "<br/><a href=\"" + link + "\" target=\"_blank\" style=\"font-size:18px;color:#b13c4e\">" + txtInvito.Text + "</a><br/>");
+
                 }
 
-                htmlNewsletter += "</td></tr></table></body></html>";
+                //htmlNewsletter += "</td></tr></table></body></html>";
+                if (!fullpage)
+                    htmlNewsletter += "</body></html>";
+
                 newsletter.TestoMail = htmlNewsletter;
                 mDM.InserisciAggiornaNewsletter(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, newsletter);
 
@@ -785,7 +815,7 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             }
             //item.CodiceContenuto = CodiceContenuto;
             //DateTime _tmpdate = System.DateTime.Now;
-        
+
             // DateTime.TryParseExact(txtData.Text, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out _tmpdate);
             //item.DataInserimento = _tmpdate;
             //int _i = 0;
@@ -1105,11 +1135,18 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
 
             string value = references.ResMan("CommonBase", m.Lingua, "TestoUnsubscribe");
 
-            //Devo prendere la risorsa per la lingua in base a m.lingua non alla lungua di visualizzazione della pagina
-            if (Descrizione.IndexOf("</td></tr></table></body></html>") != -1)
-                Descrizione = Descrizione.Insert(Descrizione.IndexOf("</td></tr></table></body></html>"), "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>");
+            if (Descrizione.ToLower().Contains("|unsubscribe|"))
+                Descrizione = Descrizione.Replace("|unsubscribe|", "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>");
             else
-                Descrizione += "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>";
+            {
+                //Devo prendere la risorsa per la lingua in base a m.lingua non alla lungua di visualizzazione della pagina
+                if (Descrizione.IndexOf("</body>") != -1)
+                    //if (Descrizione.IndexOf("</td></tr></table></body></html>") != -1)
+                    //Descrizione = Descrizione.Insert(Descrizione.IndexOf("</td></tr></table></body></html>"), "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>");
+                    Descrizione = Descrizione.Insert(Descrizione.IndexOf("</body>"), "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>");
+                else
+                    Descrizione += "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>";
+            }
 
             Utility.invioMailGenerico(Nome, Email, SoggettoMail, Descrizione, Mailcliente, nomecliente, null, "", true, Server);
             m.NoteInvio += " | Invio eseguito correttamente.";

@@ -422,19 +422,26 @@ public partial class _executetasks : CommonPage
             string culturename = "it";
             if (m.Lingua != "I")
                 culturename = "en";
+
+
             System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(culturename);
             //string value = HttpContext.references.ResMan("Common", m.Lingua,"TestoUnsubscribe", ci).ToString();
             string value = references.ResMan("Common", m.Lingua, "TestoUnsubscribe");
-
             //Variazione denominazione del mittente per l'unsubscribe ( se richiesto )
             value = value.ToLower().Replace(Nome.ToLower(), nomemittente.ToLower());
 
-            //Devo prendere la risorsa per la lingua in base a m.lingua non alla lungua di visualizzazione della pagina
-            if (Descrizione.IndexOf("</td></tr></table></body></html>") != -1)
-                Descrizione = Descrizione.Insert(Descrizione.IndexOf("</td></tr></table></body></html>"), "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>");
+            if (Descrizione.ToLower().Contains("|unsubscribe|"))
+                Descrizione = Descrizione.Replace("|unsubscribe|", "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>");
             else
-                Descrizione += "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>";
-
+            {
+                //Devo prendere la risorsa per la lingua in base a m.lingua non alla lungua di visualizzazione della pagina
+                //if (Descrizione.IndexOf("</td></tr></table></body></html>") != -1)
+                //    Descrizione = Descrizione.Insert(Descrizione.IndexOf("</td></tr></table></body></html>"), "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>");
+                if (Descrizione.IndexOf("</body>") != -1)
+                    Descrizione = Descrizione.Insert(Descrizione.IndexOf("</body>"), "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>");
+                else
+                    Descrizione += "<br/><a href=\"" + linkUnsubscribe + "\" target=\"_blank\" style=\"font-size:13px;color:#909090\">" + value + "</a><br/>";
+            }
             Utility.invioMailGenerico(nomemittente, mailmittente, SoggettoMail, Descrizione, Mailcliente, nomecliente, null, "", false, Server, false, null, "mailing");
             m.NoteInvio += " | Invio eseguito correttamente.";
             m.DataInvio = System.DateTime.Now;

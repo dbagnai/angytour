@@ -12,7 +12,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div style="background-color: White; padding: 20px">
- 
+
         <%--  <asp:UpdateProgress ID="UpdateProgress8" runat="server" DisplayAfter="0" DynamicLayout="false"
                         AssociatedUpdatePanelID="updNewsletter">
                         <ProgressTemplate>
@@ -109,11 +109,13 @@
                         convert_urls: false,
                         relative_urls: false,
                         allow_html_in_named_anchor: true,
+                        allow_conditional_comments: true,
+                        schema: 'html5',
                         valid_children: "+a[div|i|span|h1|h2|h3|h4|h5|h6|p|#text],+body[style]",
                         plugins: [
                             "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
                             "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                            "save table directionality emoticons template paste textcolor"
+                            "save table directionality emoticons template paste textcolor fullpage"
                         ],
                         menubar: false,
                         toolbar_items_size: 'small',
@@ -299,8 +301,8 @@
             </div>
             <div style="float: left">
                 <asp:Literal ID="Literal7" Text="Clienti In archivio: " runat="server" /><br />
-                 <asp:CheckBox ID="chkCaricamentolista" ToolTip="Se selezionata questa voce viene caricata nel box sottostante tutta la lista clienti per la gestione dei gruppi, altrimenti viene solo selezionata la lista per la preparazione delle mail senza visualizzarla in pagina" Text="Visualizza lista" runat="server" Enabled="true" Checked="false" />
-                            <br />
+                <asp:CheckBox ID="chkCaricamentolista" ToolTip="Se selezionata questa voce viene caricata nel box sottostante tutta la lista clienti per la gestione dei gruppi, altrimenti viene solo selezionata la lista per la preparazione delle mail senza visualizzarla in pagina" Text="Visualizza lista" runat="server" Enabled="true" Checked="false" />
+                <br />
                 <asp:ListBox runat="server" Width="325" Height="150" ID="listAnagraficaClienti" AutoPostBack="true"
                     OnSelectedIndexChanged="listAnagraficaClientiitemchange"></asp:ListBox>
             </div>
@@ -356,8 +358,8 @@
                     Enabled="true" /><br />
                 <asp:Button ID="Button10" runat="server" Text="Svuota tabella mail" OnClick="SvuotaMail" Width="200"
                     Enabled="true" /><br />
-                  <asp:Button ID="btnComprimi" Visible="false" runat="server" Text="Comprimi db tabella mail" OnClick="ComprimiDatabase" Width="200"
-                                Enabled="true" /><br />
+                <asp:Button ID="btnComprimi" Visible="false" runat="server" Text="Comprimi db tabella mail" OnClick="ComprimiDatabase" Width="200"
+                    Enabled="true" /><br />
                 <asp:Literal ID="outputmailing" runat="server"></asp:Literal>
             </div>
             <%-- <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="0" DynamicLayout="false"
