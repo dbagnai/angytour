@@ -462,7 +462,7 @@
             "~/js/jQuery.XDomainRequest.js",
             "~/js/back-to-top.js",
             "~/js/flexslider/jquery.flexslider-min.js",
-            //"~/js/it-cookies-policy.js",
+            "~/js/it-cookies-policy.js",
             "~/js/YTPlayer328/jquery.mb.YTPlayer.js",
             "~/js/simplestarrating/SimpleStarRating.js",
             "~/js/jquery.fitvids.js",

@@ -1570,9 +1570,10 @@ public class CommonPage : Page
                 quantita = 0;
                 return ret;
             }
+            else Item.Offerta = off; //aggiorno i dati dell'offerta dal catalogo nel carrello (CORREZIONE X ADD TO CART CORRETTO !! )
 
             //controlli sulla disponibilità articolo ( disponibilitò generale )
-            if (off.Qta_vendita != null)
+            if (off != null && off.Qta_vendita != null)
             {
                 if (quantita > off.Qta_vendita)
                 {
