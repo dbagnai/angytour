@@ -15,13 +15,13 @@ window.addEventListener('load', function () {
     if (lng != null && lng != undefined) {
         if (lng == 'I') {
             locallng = 'it';
-            privacypage = "/it/privacy-policy-6";
-            cookiepage = "/it/politica-cookie-5";
+            privacypage = "/it/web/privacy-policy-6";
+            cookiepage = "/it/web/politica-cookie-5";
         }
         if (lng == 'GB') {
             locallng = 'en';
-            privacypage = "/en/privacy-policy-6";
-            cookiepage = "/en/politica-cookie-5";
+            privacypage = "/en/web/privacy-policy-6";
+            cookiepage = "/en/web/politica-cookie-5";
         }
     }
 
@@ -31,7 +31,7 @@ window.addEventListener('load', function () {
         current_lang: locallng,
         autoclear_cookies: true,                   // default: false
         cookie_name: 'cc_cookie',             // default: 'cc_cookie'
-        cookie_expiration: 365,                    // default: 182
+        cookie_expiration: 182,                    // default: 182
         page_scripts: true,                         // default: false
 
         // mode: 'opt-in'                          // default: 'opt-in'; value: 'opt-in' or 'opt-out'
@@ -50,8 +50,8 @@ window.addEventListener('load', function () {
 
         gui_options: {
             consent_modal: {
-                layout: 'box',                      // box,cloud,bar
-                position: 'bottom right',           // bottom,middle,top + left,right,center
+                layout: 'cloud',                      // box,cloud,bar
+                position: 'middle center',           // bottom,middle,top + left,right,center
                 transition: 'slide'                 // zoom,slide
             },
             settings_modal: {
@@ -138,19 +138,19 @@ window.addEventListener('load', function () {
             'it': {
                 consent_modal: {
                     title: cookie + ' Utilizziamo i cookies ',
-                    description: 'Questo sito utilizza cookie essenziali per garantirne il corretto funzionamento e cookie di tracciamento per capire come interagisci con esso. Questi ultimi saranno impostati solo previo consenso. <button type="button" data-cc="c-settings" class="cc-link">Scopri di Più</button>',
+                    description: 'Questo sito utilizza cookie essenziali per garantirne il corretto funzionamento e cookie di tracciamento per capire come interagisci con esso. Questi ultimi saranno impostati solo previo consenso. <button type="button" data-cc="c-settings" class="cc-link">Scopri e personalizza</button>',
                     primary_btn: {
                         text: 'Accetta tutti',
                         role: 'accept_all'              // 'accept_selected' or 'accept_all'
                     },
-                    secondary_btn: {
-                        text: 'Scopri di più e personalizza',
-                        role: 'settings'        // 'settings' or 'accept_necessary'
-                    }
-                    // secondary_btn: {
-                    // text: 'Rifiuta tutti',
-                    // role: 'accept_necessary'        // 'settings' or 'accept_necessary'
-                    // }
+                    //secondary_btn: {
+                    //    text: 'Scopri di più e personalizza',
+                    //    role: 'settings'        // 'settings' or 'accept_necessary'
+                    //}
+                     secondary_btn: {
+                     text: 'Rifiuta tutti',
+                     role: 'accept_necessary'        // 'settings' or 'accept_necessary'
+                     }
                 },
                 settings_modal: {
                     title: titolomodal,
@@ -450,19 +450,19 @@ window.addEventListener('load', function () {
             'en': {
                 consent_modal: {
                     title: cookie + 'We use cookies ',
-                    description: 'This site uses essential cookies to ensure its proper functioning and tracking cookies to understand how you interact with it. The latter will be set only with prior consent. <button type="button" data-cc="c-settings" class="cc-link">More</button>',
+                    description: 'This site uses essential cookies to ensure its proper functioning and tracking cookies to understand how you interact with it. The latter will be set only with prior consent. <button type="button" data-cc="c-settings" class="cc-link">Discover and personalize</button>',
                     primary_btn: {
                         text: 'Accept all',
                         role: 'accept_all'              // 'accept_selected' or 'accept_all'
                     },
-                    secondary_btn: {
-                        text: 'Personalize',
-                        role: 'settings'        // 'settings' or 'accept_necessary'
-                    }
-                    // secondary_btn: {
-                    // text: 'Rifiuta tutti',
-                    // role: 'accept_necessary'        // 'settings' or 'accept_necessary'
-                    // }
+                    //secondary_btn: {
+                    //    text: 'Personalize',
+                    //    role: 'settings'        // 'settings' or 'accept_necessary'
+                    //}
+                     secondary_btn: {
+                     text: 'Reject all',
+                     role: 'accept_necessary'        // 'settings' or 'accept_necessary'
+                     }
                 },
                 settings_modal: {
                     title: titolomodal,
@@ -800,3 +800,44 @@ window.addEventListener('load', function () {
     }
 
 });
+
+
+
+function GetCookie(name) {
+
+    var start = document.cookie.indexOf(name + "=");
+    var len = start + name.length + 1;
+    if ((!start) && (name != document.cookie.substring(0, name.length))) {
+        return null;
+    }
+    if (start == -1) return null;
+    var end = document.cookie.indexOf(";", len);
+    if (end == -1) end = document.cookie.length;
+    return unescape(document.cookie.substring(len, end));
+};
+
+function SetCookie(name, value, expires, path, domain, secure) {
+
+    // set time, it's in milliseconds
+    var today = new Date();
+    today.setTime(today.getTime());
+
+    /*
+    if the expires variable is set, make the correct
+    expires time, the current script below will set
+    it for x number of days, to make it for hours,
+    delete * 24, for minutes, delete * 60 * 24
+    */
+    if (expires) {
+        expires = expires * 1000 * 60 * 60 * 24;
+    }
+    var expires_date = new Date(today.getTime() + (expires));
+
+    document.cookie = name + "=" + escape(value) +
+        ((expires) ? ";expires=" + expires_date.toGMTString() : "") +
+        ((path) ? ";path=" + path : "") +
+        ((domain) ? ";domain=" + domain : "") +
+        ((secure) ? ";secure" : "");
+};
+
+
