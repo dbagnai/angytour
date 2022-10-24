@@ -8664,7 +8664,7 @@ namespace WelcomeLibrary.DAL
                             if (pesoarticolo != 0)
                             {
                                 writer.WriteStartElement("g:shipping_weight");
-                                writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { tmpprezzo }) + " KG");
+                                writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { pesoarticolo }) + " KG");
                                 writer.WriteEndElement();
                             }
 
