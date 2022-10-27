@@ -8638,14 +8638,14 @@ namespace WelcomeLibrary.DAL
                             if (tmpprezzo != 0)
                             {
                                 writer.WriteStartElement("g:price");
-                                writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { tmpprezzo }) + " EUR");
+                                writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:##0.00}", new object[] { tmpprezzo }) + " EUR");
                                 //  ret = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { _new.Prezzo });
                                 writer.WriteEndElement();
                             }
                             if (tmpprezzoscontato != 0)
                             {
                                 writer.WriteStartElement("g:sale_price");
-                                writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { tmpprezzoscontato }) + " EUR");
+                                writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:##0.00}", new object[] { tmpprezzoscontato }) + " EUR");
                                 //  ret = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { _new.Prezzo });
                                 writer.WriteEndElement();
                             }
@@ -8664,7 +8664,7 @@ namespace WelcomeLibrary.DAL
                             if (pesoarticolo != 0)
                             {
                                 writer.WriteStartElement("g:shipping_weight");
-                                writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { pesoarticolo }) + " KG");
+                                writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:##0.00}", new object[] { pesoarticolo }) + " KG");
                                 writer.WriteEndElement();
                             }
 
@@ -9026,14 +9026,14 @@ namespace WelcomeLibrary.DAL
                         if (tmpprezzo != 0)
                         {
                             writer.WriteStartElement("g:price");
-                            writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { tmpprezzo }) + " EUR");
+                            writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:##0.00}", new object[] { tmpprezzo }) + " EUR");
                             //  ret = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { _new.Prezzo });
                             writer.WriteEndElement();
                         }
                         if (tmpprezzoscontato != 0)
                         {
                             writer.WriteStartElement("g:sale_price");
-                            writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { tmpprezzoscontato }) + " EUR");
+                            writer.WriteValue(String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:##0.00}", new object[] { tmpprezzoscontato }) + " EUR");
                             //  ret = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:#.00}", new object[] { _new.Prezzo });
                             writer.WriteEndElement();
                         }

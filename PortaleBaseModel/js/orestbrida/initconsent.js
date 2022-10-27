@@ -15,13 +15,13 @@ window.addEventListener('load', function () {
     if (lng != null && lng != undefined) {
         if (lng == 'I') {
             locallng = 'it';
-            privacypage = "/it/web/privacy-policy-6";
-            cookiepage = "/it/web/politica-cookie-5";
+            privacypage = "/it/privacy-policy-6";
+            cookiepage = "/it/politica-cookie-5";
         }
         if (lng == 'GB') {
             locallng = 'en';
-            privacypage = "/en/web/privacy-policy-6";
-            cookiepage = "/en/web/politica-cookie-5";
+            privacypage = "/en/privacy-policy-6";
+            cookiepage = "/en/politica-cookie-5";
         }
     }
 
@@ -91,7 +91,7 @@ window.addEventListener('load', function () {
                 });
             }
             //END FOR GTM CONSENT MODE -----
-             //cookieconsentinitialized = true;
+            //cookieconsentinitialized = true;
             (function () {
                 setTimeout(function () {
                     cookieconsentinitialized = true;
@@ -140,17 +140,33 @@ window.addEventListener('load', function () {
                     title: cookie + ' Utilizziamo i cookies ',
                     description: 'Questo sito utilizza cookie essenziali per garantirne il corretto funzionamento e cookie di tracciamento per capire come interagisci con esso. Questi ultimi saranno impostati solo previo consenso. <button type="button" data-cc="c-settings" class="cc-link">Scopri e personalizza</button>',
                     primary_btn: {
-                        text: 'Accetta tutti',
+                        text: 'Accetta',
                         role: 'accept_all'              // 'accept_selected' or 'accept_all'
                     },
                     //secondary_btn: {
                     //    text: 'Scopri di più e personalizza',
                     //    role: 'settings'        // 'settings' or 'accept_necessary'
                     //}
-                     secondary_btn: {
-                     text: 'Rifiuta tutti',
-                     role: 'accept_necessary'        // 'settings' or 'accept_necessary'
-                     }
+                    secondary_btn: {
+                        text: 'Rifiuta',
+                        role: 'accept_necessary'        // 'settings' or 'accept_necessary'
+                    },
+                    //accept_all_btn: {
+                    //    text: 'Accetta tutti',
+                    //    role: 'accept_all' // 'accept_selected' or 'accept_all'
+                    //},
+                    //reject_all_btn: {
+                    //    text: 'Rifiuta tutti',
+                    //    role: 'accept_necessary' // 'settings' or 'accept_necessary'
+                    //},
+                    //settings_btn: {
+                    //    text: 'Preferenze',
+                    //    role: 'settings' //'settings' or 'accept_necessary'
+                    //},
+                    //close_btn: {
+                    //    text: 'Chiudi',
+                    //    role: 'save_settings'
+                    //}
                 },
                 settings_modal: {
                     title: titolomodal,
@@ -459,10 +475,10 @@ window.addEventListener('load', function () {
                     //    text: 'Personalize',
                     //    role: 'settings'        // 'settings' or 'accept_necessary'
                     //}
-                     secondary_btn: {
-                     text: 'Reject all',
-                     role: 'accept_necessary'        // 'settings' or 'accept_necessary'
-                     }
+                    secondary_btn: {
+                        text: 'Reject all',
+                        role: 'accept_necessary'        // 'settings' or 'accept_necessary'
+                    }
                 },
                 settings_modal: {
                     title: titolomodal,
@@ -683,7 +699,7 @@ window.addEventListener('load', function () {
                                     col1: 'UULE',
                                     col2: 'google.com',
                                     col3: '6 hours',
-                                    col4:  'Sends precise location information from your browser to Google’s servers so that Google can show you results that are relevant to your location. The use of this cookie depends on your browser settings and whether you have chosen to have location turned on for your browser',
+                                    col4: 'Sends precise location information from your browser to Google’s servers so that Google can show you results that are relevant to your location. The use of this cookie depends on your browser settings and whether you have chosen to have location turned on for your browser',
                                     col5: 'marketing, tracking'
                                 },
                                 {
