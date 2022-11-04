@@ -8220,7 +8220,7 @@ namespace WelcomeLibrary.DAL
         public void CreaRssFeed(string Lng, string FiltroTipologia = "", string titolo = "", string descrizione = "", bool gmerchant = false)
         {
 
-          
+
             WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();
 
             titolo = (ConfigManagement.ReadKey("Nome") ?? "");
@@ -8246,6 +8246,7 @@ namespace WelcomeLibrary.DAL
             if (string.IsNullOrEmpty(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione))
             {
                 Messaggi["Messaggio"] += "Skip sitemap gen , app not yet initialized";
+                WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
                 return;
             }
 
@@ -8793,6 +8794,7 @@ namespace WelcomeLibrary.DAL
             if (string.IsNullOrEmpty(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione))
             {
                 Messaggi["Messaggio"] += "Skip sitemap gen , app not yet initialized";
+                WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
                 return;
             }
 
@@ -9644,7 +9646,7 @@ namespace WelcomeLibrary.DAL
             }
             catch (Exception error)
             {
-                throw new ApplicationException("Errore Caricamento scaglioni :" + error.Message, error);
+              //  throw new ApplicationException("Errore Caricamento scaglioni :" + error.Message, error);
             }
             return list;
         }
