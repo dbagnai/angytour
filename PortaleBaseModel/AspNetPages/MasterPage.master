@@ -33,17 +33,17 @@
             }); var f = d.getElementsByTagName(s)[0],
                 j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-5257TWS');
+        })(window, document, 'script', 'dataLayer', 'GTM-xxxxxxxxxx');
     </script>
   
     <%--CASO ECOMMERCE PER GTAG --%>
 <%--    
-    <script async type="text/plain" data-cookiecategory="analytics" src="https://www.googletagmanager.com/gtag/js?id=G-QR7JK7C5NE" defer></script>
+    <script async type="text/plain" data-cookiecategory="analytics" src="https://www.googletagmanager.com/gtag/js?id=G-xxxxxxxxxx" defer></script>
     <script type="text/plain" data-cookiecategory="analytics" defer> 
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-        gtag('config', 'G-QR7JK7C5NE');
+        gtag('config', 'G-xxxxxxxxxx');
     </script>--%>
 
     <title runat="server" id="metaTitle"></title>
@@ -94,9 +94,8 @@
 
     <!-- Google Tag Manager (noscript) -->
     <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5257TWS"
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-xxxxxxxxxx"
             height="0" width="0" style="display: none; visibility: hidden"></iframe>
-    </noscript>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
 

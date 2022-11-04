@@ -8219,6 +8219,8 @@ namespace WelcomeLibrary.DAL
         /// </summary>
         public void CreaRssFeed(string Lng, string FiltroTipologia = "", string titolo = "", string descrizione = "", bool gmerchant = false)
         {
+
+          
             WelcomeLibrary.HtmlToText html = new WelcomeLibrary.HtmlToText();
 
             titolo = (ConfigManagement.ReadKey("Nome") ?? "");
@@ -8239,7 +8241,14 @@ namespace WelcomeLibrary.DAL
 
             //string NomeAgenzia = ConfigManagement.ReadKey("NomeAgenzia");
             Messaggi.Add("Messaggio", "");
-            Messaggi["Messaggio"] = "Creazione rss feed xml " + System.DateTime.Now.ToString() + " \r\n";
+            Messaggi["Messaggio"] = "Creazione rss feed xml " + FiltroTipologia + " " + System.DateTime.Now.ToString() + " \r\n";
+
+            if (string.IsNullOrEmpty(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione))
+            {
+                Messaggi["Messaggio"] += "Skip sitemap gen , app not yet initialized";
+                return;
+            }
+
 
             WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
 
@@ -8722,10 +8731,10 @@ namespace WelcomeLibrary.DAL
             }
             catch (Exception error)
             {
-                Messaggi["Messaggio"] = " &nbsp; <br/> Errore creazione file rss xml : " + error.Message + " \r\n";
+                Messaggi["Messaggio"] = " &nbsp; <br/> Errore creazione file rss xml : " + FiltroTipologia + " " + error.Message + " \r\n";
                 WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
             }
-            Messaggi["Messaggio"] = "Fine Creazione feed xml rss " + System.DateTime.Now.ToString() + " \r\n";
+            Messaggi["Messaggio"] = "Fine Creazione feed xml rss " + FiltroTipologia + " " + System.DateTime.Now.ToString() + " \r\n";
             WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
 
         }
@@ -8780,7 +8789,12 @@ namespace WelcomeLibrary.DAL
 
             //string NomeAgenzia = ConfigManagement.ReadKey("NomeAgenzia");
             Messaggi.Add("Messaggio", "");
-            Messaggi["Messaggio"] = "Creazione rss feed xml facebook " + System.DateTime.Now.ToString() + " \r\n";
+            Messaggi["Messaggio"] = "Creazione rss feed xml facebook  " + FiltroTipologia + " " + System.DateTime.Now.ToString() + " \r\n";
+            if (string.IsNullOrEmpty(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione))
+            {
+                Messaggi["Messaggio"] += "Skip sitemap gen , app not yet initialized";
+                return;
+            }
 
             WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
 
@@ -9195,10 +9209,10 @@ namespace WelcomeLibrary.DAL
             }
             catch (Exception error)
             {
-                Messaggi["Messaggio"] = " &nbsp; <br/> Errore creazione file feed facebook  xml : " + error.Message + " \r\n";
+                Messaggi["Messaggio"] = " &nbsp; <br/> Errore creazione file feed facebook  xml : " + FiltroTipologia + " " + error.Message + " \r\n";
                 WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
             }
-            Messaggi["Messaggio"] = "Fine Creazione feed facebook xml   rss " + System.DateTime.Now.ToString() + " \r\n";
+            Messaggi["Messaggio"] = "Fine Creazione feed facebook xml   rss  " + FiltroTipologia + " " + System.DateTime.Now.ToString() + " \r\n";
             WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
 
         }

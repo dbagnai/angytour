@@ -22,6 +22,11 @@ namespace WelcomeLibrary.UF
 
             try
             {
+                if (string.IsNullOrEmpty(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione))
+                {
+                    Messaggi["Messaggio"] += "Skip sitemap gen , app not yet initialized";
+                    return;
+                }
                 string percorsoBase = WelcomeLibrary.STATIC.Global.percorsobaseapplicazione;
                 string PathSitemap = WelcomeLibrary.UF.MemoriaDisco.physiclogdir;//.Replace("\\Common", "");
                 string host = percorsoBase.Replace(".", "");

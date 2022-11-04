@@ -238,13 +238,13 @@
             //-----------------------------------------------------------------------
             //Inizializzazione Timer per gestione attvità schedulate da applicazione
             //-----------------------------------------------------------------------
-            When = DateTime.Parse(DateTime.Now.AddMinutes(1).ToString());
+            When = DateTime.Parse(DateTime.Now.AddMinutes(3).ToString());
             //Every = 0.01; //Ciclo di esecuzione in ore
             Every = 4; //Ciclo di esecuzione in ore
             StartTimer();
 
             //TIMER2 -> PER KEEP ALIVE ( blocca idle timeout brevi di IIS )
-            When1 = DateTime.Parse(DateTime.Now.AddMinutes(2).ToString());
+            When1 = DateTime.Parse(DateTime.Now.AddMinutes(6).ToString());
             //Every = 0.01; //Ciclo di esecuzione in ore
             Every1 = 0.03; //Ciclo di esecuzione in ore
             StartTimer1();
