@@ -1202,9 +1202,24 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                 case "verificalogin":
                     string usernamelog = pars.ContainsKey("username") ? pars["username"] : "";
                     string passwordlog = pars.ContainsKey("password") ? pars["password"] : "";
-                    if (System.Web.Security.Membership.ValidateUser(usernamelog, passwordlog))
+                    bool esito = System.Web.Security.Membership.ValidateUser(usernamelog, passwordlog);
+
+                    if (esito == false) //provo la login con l'id davanti
                     {
-                        System.Web.Security.FormsAuthentication.SetAuthCookie(usernamelog, false);
+                        ClientiDM cliDM = new ClientiDM();
+                        Cliente clienteinanagraficaperemail = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, usernamelog);
+                        if (clienteinanagraficaperemail != null && clienteinanagraficaperemail.Id_cliente != 0)
+                        {
+                            usernamelog = clienteinanagraficaperemail.Id_cliente + "-" + usernamelog;
+                            esito = System.Web.Security.Membership.ValidateUser(usernamelog, passwordlog);
+                        }
+                    }
+                    if (esito)
+                    {
+                        string authpersistentcookie = ConfigManagement.ReadKey("authpersistentcookie");
+                        bool b_authpersistentcookie = false;
+                        bool.TryParse(authpersistentcookie, out b_authpersistentcookie);
+                        System.Web.Security.FormsAuthentication.SetAuthCookie(usernamelog, b_authpersistentcookie);
                         result = "";
                     }
                     else

@@ -5,7 +5,7 @@
 <head runat="server" id="masterHead">
 
 
-      <script type="text/javascript" src="/js/orestbrida/cookieconsent.js" async></script>
+    <script type="text/javascript" src="/js/orestbrida/cookieconsent.js" async></script>
     <script type="text/javascript" src="/js/orestbrida/initconsent.js" async></script>
 
     <script>
@@ -225,7 +225,7 @@
                                 <ul class="dropdown-menu dropdown-cart float-right">
                                     <li>
                                         <ul class="carrelloelemslist products-list-mini"
-                                            runat="server" title="" style="height: 400px; width: 100%; overflow-y: auto; overflow-x: hidden">
+                                            runat="server" title="" style="height: 300px; width: 100%; overflow-y: auto; overflow-x: hidden">
                                         </ul>
                                     </li>
                                     <li class="divider"></li>
@@ -498,7 +498,7 @@
                                 <ul class="dropdown-menu dropdown-cart">
                                     <li>
                                         <ul class="carrelloelemslist products-list-mini"
-                                            runat="server" title="" style="height: 400px; width: 100%; overflow-y: auto; overflow-x: hidden">
+                                            runat="server" title="" style="height:300px; width: 100%; overflow-y: auto; overflow-x: hidden">
                                         </ul>
                                     </li>
                                     <li class="divider"></li>

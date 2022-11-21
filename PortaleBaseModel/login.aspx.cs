@@ -59,11 +59,26 @@ public partial class login : CommonPage
             outlogin.Text = "Accesso non consentito. Contattare l'amministratore!";
             return;
         }
-        if (Membership.ValidateUser(username, password))
+        bool esito = Membership.ValidateUser(username, password);
+        if (esito == false) //provo la login con l'id davanti
+        {
+            ClientiDM cliDM = new ClientiDM();
+            Cliente clienteinanagraficaperemail = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, username);
+            if (clienteinanagraficaperemail != null && clienteinanagraficaperemail.Id_cliente != 0)
+            {
+                username = clienteinanagraficaperemail.Id_cliente + "-" + username;
+                esito = Membership.ValidateUser(username, password);
+            }
+        }
+
+        if (esito)
         {
             //FormsAuthentication.LoginUrl = references.ResMan("Common",Lingua,"Linklogin");
             //FormsAuthentication.DefaultUrl
-            FormsAuthentication.RedirectFromLoginPage(username, false);
+            string authpersistentcookie = ConfigManagement.ReadKey("authpersistentcookie");
+            bool b_authpersistentcookie = false;
+            bool.TryParse(authpersistentcookie, out b_authpersistentcookie);
+            FormsAuthentication.RedirectFromLoginPage(username, b_authpersistentcookie); //true per persistent cookie
             //FormsAuthentication.Authenticate(username, password);
         }
         else

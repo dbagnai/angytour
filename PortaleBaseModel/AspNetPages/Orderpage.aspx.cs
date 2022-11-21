@@ -1934,13 +1934,28 @@ public partial class AspNetPages_Orderpage : CommonPage
     {
         string username = inputName.Value;
         string password = inputPassword.Value;
-        if (Membership.ValidateUser(username, password))
+        bool esito = Membership.ValidateUser(username, password);
+        if (esito == false) //provo la login con l'id davanti
+        {
+            ClientiDM cliDM = new ClientiDM();
+            Cliente clienteinanagraficaperemail = cliDM.CaricaClientePerEmail(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, username);
+            if (clienteinanagraficaperemail != null && clienteinanagraficaperemail.Id_cliente != 0)
+            {
+                username = clienteinanagraficaperemail.Id_cliente + "-" + username;
+                esito = Membership.ValidateUser(username, password);
+            }
+        }
+
+        if (esito)
         {
             //FormsAuthentication.LoginUrl = references.ResMan("Common",Lingua,"Linklogin");
             //FormsAuthentication.DefaultUrl
             //FormsAuthentication.RedirectFromLoginPage(username, false);
             //FormsAuthentication.Authenticate(username, password);
-            FormsAuthentication.SetAuthCookie(username, false);
+            string authpersistentcookie = ConfigManagement.ReadKey("authpersistentcookie");
+            bool b_authpersistentcookie = false;
+            bool.TryParse(authpersistentcookie, out b_authpersistentcookie);
+            FormsAuthentication.SetAuthCookie(username, b_authpersistentcookie);
             Response.Redirect(System.Web.HttpContext.Current.Request.Url.ToString());
             outputlogin.Text = "Accesso riuscito.";
             CaricaCarrello(true);
