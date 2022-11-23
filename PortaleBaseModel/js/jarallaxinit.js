@@ -161,12 +161,12 @@ $(function () {
     if ($.fn.jarallax && !$.isMobile()) {
 
         $(document).on('destroy.parallax', function (event) {
-            $(event.target).outerFind('.mbr-parallax-background')
+            $(event.target).outerFind('.mbr-parallax-background-old')
                 .jarallax('destroy')
                 .css('position', '');
         });
         $(document).on('add.cards change.cards', function (event) {
-            $(event.target).outerFind('.mbr-parallax-background')
+            $(event.target).outerFind('.mbr-parallax-background-old')
                 .jarallax({
                     speed: 0.6
                 })
@@ -182,7 +182,7 @@ $(function () {
         }
 
         $(window).on('update.parallax', function (event) {
-            var $jarallax = $('.mbr-parallax-background');
+            var $jarallax = $('.mbr-parallax-background-old');
 
             $jarallax.jarallax('coverImage');
             $jarallax.jarallax('clipContainer');

@@ -119,17 +119,15 @@ function InitGenericBanner(controlid, container) {
     $('#' + container).show();
     $('#' + container + 'Title').show();
     $(function () {
-        //$('.mbr-parallax-background').jarallax({
-        //    speed: 0.2
-        //});
-        (function wait() {
-            if ($.fn.jarallax) {
-                $('.mbr-parallax-background').jarallax({
-                    speed: 0.2
-                });
-            } else {
-                setTimeout(wait, 500);
-            }
-        })();
+     
+        //(function wait() {
+        //    if ($.fn.jarallax) {
+        //        $('.mbr-parallax-background').jarallax({
+        //            speed: 0.2
+        //        });
+        //    } else {
+        //        setTimeout(wait, 500);
+        //    }
+        //})();
     });
 };
