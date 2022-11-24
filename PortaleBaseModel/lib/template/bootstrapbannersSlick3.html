@@ -19,22 +19,27 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).on('ready', function () {
-        $('.slider-for-3').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: true,
-            fade: true,
-            asNavFor: '.slider-nav'
-        });
-        $('.slider-nav').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            asNavFor: '.slider-for',
-            dots: true,
-            centerMode: true,
-            focusOnSelect: true
-        });
+
+
+    // $(document).on('ready', function () {
+    (function wait() {
+        if ($.fn.slick) {
+            //insert function slick to call
+            $('.slider-for-3').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: true,
+                fade: true,
+                asNavFor: '.slider-nav'
+            });
+            $('.slider-nav').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                asNavFor: '.slider-for',
+                dots: true,
+                centerMode: true,
+                focusOnSelect: true
+            });
             responsive: [
                 {
                     breakpoint: 1200,
@@ -53,5 +58,11 @@
                     }
                 }
             ]
-        });
+
+        } else {
+            setTimeout(wait, 300);
+        }
+    })();
+
+   // });
 </script> 
