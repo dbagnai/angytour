@@ -141,7 +141,7 @@
             //qui devo fare l'aggiornamento del db In remoto
             WelcomeLibrary.DAL.offerteDM offDM = new WelcomeLibrary.DAL.offerteDM();
 
-            if (!WelcomeLibrary.UF.MemoriaDisco.EsisteFileAccesso(WelcomeLibrary.STATIC.Global.percorsoFisicoComune, "NowTrasferingIndirectMode.txt"))
+            if (!WelcomeLibrary.UF.MemoriaDisco.EsisteFileAccesso(WelcomeLibrary.STATIC.Global.percorsoFisicoComune, "NowTrasferingIndirectMode.txt") && !string.IsNullOrEmpty(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione))
             {
                 //Creo il file di controllo per avitare avvi multipli del processo
                 string ret = WelcomeLibrary.UF.MemoriaDisco.CreaFileAccesso(WelcomeLibrary.STATIC.Global.percorsoFisicoComune, System.DateTime.Now.ToString(), "NowTrasferingIndirectMode.txt");
@@ -216,7 +216,10 @@
             //CaricaMemoriaStatica();
             references.CaricaMemoriaStatica(Server);
             if (false)
-                WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited();//rigenera i link per le tipologie/categorie e sottocategorie per url rewriting PER tutte le lingue!!
+                //rigenera i link per le tipologie/categorie e sottocategorie per url rewriting PER tutte le lingue!!  (PROBLEMA QUI WelcomeLibrary.STATIC.Global.percorsobaseapplicazione NON è VALORIZZATO FINO ALLA FirstRequestInitialization CHE PARTE DOPO ( VEDI SOTTO ) )
+                WelcomeLibrary.UF.SitemapManager.RigeneraLinkSezioniUrlrewrited();
+
+
             //Carico la memoria statica per la modalità trial del portale
             //se suparato la data di scadenza di prova allora ativo lamodalità trial del prodotto
             //Calcolo l'hash
@@ -238,15 +241,16 @@
             //-----------------------------------------------------------------------
             //Inizializzazione Timer per gestione attvità schedulate da applicazione
             //-----------------------------------------------------------------------
+             //ATTENDERE AD ESEGUIRE IL TIMER ALMENO 3 MIN PER EVITARE CHE VENGA CHIAMATA PRIMA DELLA FirstRequestInitialization ( ALTRIMENTI  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione è nullorempty )
             When = DateTime.Parse(DateTime.Now.AddMinutes(3).ToString());
             //Every = 0.01; //Ciclo di esecuzione in ore
             Every = 4; //Ciclo di esecuzione in ore
             StartTimer();
 
             //TIMER2 -> PER KEEP ALIVE ( blocca idle timeout brevi di IIS )
-            When1 = DateTime.Parse(DateTime.Now.AddMinutes(6).ToString());
+            When1 = DateTime.Parse(DateTime.Now.AddMinutes(1).ToString());
             //Every = 0.01; //Ciclo di esecuzione in ore
-            Every1 = 0.03; //Ciclo di esecuzione in ore
+            Every1 = 0.01; //Ciclo di esecuzione in ore
             StartTimer1();
 
             //Creo una variabile per la scrittura dei messaggi nel file di log

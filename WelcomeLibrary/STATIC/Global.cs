@@ -53,6 +53,7 @@ namespace WelcomeLibrary.STATIC
             get { return _PercorsoFisicoComune; }
             set { _PercorsoFisicoComune = value; }
         }
+        //private static string _percorsobaseapplicazione = string.Empty; //sarebbe da attivare previa verifica 
         private static string _percorsobaseapplicazione;
         public static string percorsobaseapplicazione
         {
