@@ -128,10 +128,6 @@ namespace WelcomeLibrary.DAL
                             offerta.DenominazioneGB = reader.GetString(reader.GetOrdinal("DENOMINAZIONEGB"));
                             if (!(reader["DescrizioneFR"]).Equals(DBNull.Value)) offerta.DescrizioneFR = reader.GetString(reader.GetOrdinal("DescrizioneFR"));
                             if (!(reader["DenominazioneFR"]).Equals(DBNull.Value)) offerta.DenominazioneFR = reader.GetString(reader.GetOrdinal("DENOMINAZIONEFR"));
-                            if (!(reader["DescrizioneDE"]).Equals(DBNull.Value)) offerta.DescrizioneDE = reader.GetString(reader.GetOrdinal("DescrizioneDE"));
-                            if (!(reader["DenominazioneDE"]).Equals(DBNull.Value)) offerta.DenominazioneDE = reader.GetString(reader.GetOrdinal("DENOMINAZIONEDE"));
-                            if (!(reader["DescrizioneES"]).Equals(DBNull.Value)) offerta.DescrizioneES = reader.GetString(reader.GetOrdinal("DescrizioneES"));
-                            if (!(reader["DenominazioneES"]).Equals(DBNull.Value)) offerta.DenominazioneES = reader.GetString(reader.GetOrdinal("DENOMINAZIONEES"));
                             if (!(reader["DescrizioneRU"]).Equals(DBNull.Value)) offerta.DescrizioneRU = reader.GetString(reader.GetOrdinal("DescrizioneRU"));
                             if (!(reader["DenominazioneRU"]).Equals(DBNull.Value)) offerta.DenominazioneRU = reader.GetString(reader.GetOrdinal("DENOMINAZIONERU"));
                             offerta.DescrizioneI = reader.GetString(reader.GetOrdinal("DescrizioneI"));
@@ -148,10 +144,6 @@ namespace WelcomeLibrary.DAL
                                 offerta.UrlcustomRU = reader.GetString(reader.GetOrdinal("urlcustomRU"));
                             if (!(reader["urlcustomFR"]).Equals(DBNull.Value))
                                 offerta.UrlcustomFR = reader.GetString(reader.GetOrdinal("urlcustomFR"));
-                            if (!(reader["urlcustomES"]).Equals(DBNull.Value))
-                                offerta.UrlcustomES = reader.GetString(reader.GetOrdinal("urlcustomES"));
-                            if (!(reader["urlcustomDE"]).Equals(DBNull.Value))
-                                offerta.UrlcustomDE = reader.GetString(reader.GetOrdinal("urlcustomDE"));
 
 
                             if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
@@ -189,10 +181,6 @@ namespace WelcomeLibrary.DAL
                                 offerta.DatitecniciGB = reader.GetString(reader.GetOrdinal("DATITECNICIGB"));
                             if (!reader["DATITECNICIFR"].Equals(DBNull.Value))
                                 offerta.DatitecniciFR = reader.GetString(reader.GetOrdinal("DATITECNICIFR"));
-                            if (!reader["DATITECNICIDE"].Equals(DBNull.Value))
-                                offerta.DatitecniciDE = reader.GetString(reader.GetOrdinal("DATITECNICIDE"));
-                            if (!reader["DATITECNICIES"].Equals(DBNull.Value))
-                                offerta.DatitecniciES = reader.GetString(reader.GetOrdinal("DATITECNICIES"));
                             if (!reader["DATITECNICIRU"].Equals(DBNull.Value))
                                 offerta.DatitecniciRU = reader.GetString(reader.GetOrdinal("DATITECNICIRU"));
                             if (!reader["EMAIL"].Equals(DBNull.Value))
@@ -343,7 +331,6 @@ namespace WelcomeLibrary.DAL
 
                             if (!(reader["DescrizioneDE"]).Equals(DBNull.Value)) offerta.DescrizioneDE = reader.GetString(reader.GetOrdinal("DescrizioneDE"));
                             if (!(reader["DenominazioneDE"]).Equals(DBNull.Value)) offerta.DenominazioneDE = reader.GetString(reader.GetOrdinal("DENOMINAZIONEDE"));
-
                             if (!(reader["DescrizioneRU"]).Equals(DBNull.Value)) offerta.DescrizioneRU = reader.GetString(reader.GetOrdinal("DescrizioneRU"));
                             if (!(reader["DenominazioneRU"]).Equals(DBNull.Value)) offerta.DenominazioneRU = reader.GetString(reader.GetOrdinal("DENOMINAZIONERU"));
 
@@ -406,7 +393,6 @@ namespace WelcomeLibrary.DAL
                                 offerta.DatitecniciES = reader.GetString(reader.GetOrdinal("DATITECNICIES"));
                             if (!reader["DATITECNICIDE"].Equals(DBNull.Value))
                                 offerta.DatitecniciDE = reader.GetString(reader.GetOrdinal("DATITECNICIDE"));
-
                             if (!reader["EMAIL"].Equals(DBNull.Value))
                                 offerta.Email = reader.GetString(reader.GetOrdinal("EMAIL"));
                             if (!reader["FAX"].Equals(DBNull.Value))
@@ -1821,8 +1807,6 @@ namespace WelcomeLibrary.DAL
             return dettagliordini;
         }
 
-
-
         /// <summary>
         /// Carica la lista completa degli elementi del carrello in base al codice ordine passato 
         /// </summary>
@@ -2235,7 +2219,6 @@ namespace WelcomeLibrary.DAL
             return retString;
         }
 
-
         public static double Getivabycodice2liv(string codice2liv, string refivacategorie)
         {
             double ret = 0;
@@ -2643,7 +2626,6 @@ namespace WelcomeLibrary.DAL
             return sb.ToString();
         }
 
-
         /// <summary>
         /// CArica l'intera lista codici sconto 
         /// opp
@@ -2730,6 +2712,17 @@ namespace WelcomeLibrary.DAL
                         queryfilter += " AND codicifiltro like @codicifiltro  ";
                 }
 
+                if (!string.IsNullOrEmpty(_params.caratteristica1filtro))
+                {
+                    //SQLiteParameter pCodiceordine = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@codicifiltro"; });
+                    SQLiteParameter pcaratteristica1filtro = new SQLiteParameter("@caratteristica1filtro", _params.caratteristica1filtro);
+                    _parUsed.Add(pcaratteristica1filtro);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE caratteristica1filtro like @caratteristica1filtro ";
+                    else
+                        queryfilter += " AND caratteristica1filtro like @caratteristica1filtro  ";
+                }
+
                 //if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@datascadenza"; }))
                 if (_params.Datascadenza != null)
                 {
@@ -2775,6 +2768,11 @@ namespace WelcomeLibrary.DAL
                         item.Id = reader.GetInt64(reader.GetOrdinal("id"));
                         if (!reader["usosingolo"].Equals(DBNull.Value))
                             item.Usosingolo = reader.GetBoolean(reader.GetOrdinal("usosingolo"));
+
+                        if (!reader["applicaancheascontati"].Equals(DBNull.Value))
+                            item.applicaancheascontati = reader.GetBoolean(reader.GetOrdinal("applicaancheascontati"));
+
+
                         if (!reader["datascadenza"].Equals(DBNull.Value))
                             item.Datascadenza = reader.GetDateTime(reader.GetOrdinal("datascadenza"));
                         if (!reader["idcliente"].Equals(DBNull.Value))
@@ -2785,6 +2783,9 @@ namespace WelcomeLibrary.DAL
                             item.Idscaglione = reader.GetInt64(reader.GetOrdinal("idscaglione"));
                         if (!reader["codicifiltro"].Equals(DBNull.Value))
                             item.Codicifiltro = reader.GetString(reader.GetOrdinal("codicifiltro"));
+
+                        if (!reader["caratteristica1filtro"].Equals(DBNull.Value))
+                            item.caratteristica1filtro = reader.GetString(reader.GetOrdinal("caratteristica1filtro"));
                         if (!reader["testocodicesconto"].Equals(DBNull.Value))
                             item.Testocodicesconto = reader.GetString(reader.GetOrdinal("testocodicesconto"));
                         if (!reader["scontonum"].Equals(DBNull.Value))
@@ -2804,7 +2805,6 @@ namespace WelcomeLibrary.DAL
 
             return list;
         }
-
         public Codicesconto CaricaPerId(string connection, long Id)
         {
             if (connection == null || connection == "") return null;
@@ -2829,6 +2829,8 @@ namespace WelcomeLibrary.DAL
                         item.Id = reader.GetInt64(reader.GetOrdinal("id"));
                         if (!reader["usosingolo"].Equals(DBNull.Value))
                             item.Usosingolo = reader.GetBoolean(reader.GetOrdinal("usosingolo"));
+                        if (!reader["applicaancheascontati"].Equals(DBNull.Value))
+                            item.applicaancheascontati = reader.GetBoolean(reader.GetOrdinal("applicaancheascontati"));
                         if (!reader["datascadenza"].Equals(DBNull.Value))
                             item.Datascadenza = reader.GetDateTime(reader.GetOrdinal("datascadenza"));
                         if (!reader["idcliente"].Equals(DBNull.Value))
@@ -2839,6 +2841,8 @@ namespace WelcomeLibrary.DAL
                             item.Idscaglione = reader.GetInt64(reader.GetOrdinal("idscaglione"));
                         if (!reader["codicifiltro"].Equals(DBNull.Value))
                             item.Codicifiltro = reader.GetString(reader.GetOrdinal("codicifiltro"));
+                        if (!reader["caratteristica1filtro"].Equals(DBNull.Value))
+                            item.caratteristica1filtro = reader.GetString(reader.GetOrdinal("caratteristica1filtro"));
                         if (!reader["testocodicesconto"].Equals(DBNull.Value))
                             item.Testocodicesconto = reader.GetString(reader.GetOrdinal("testocodicesconto"));
                         if (!reader["scontonum"].Equals(DBNull.Value))
@@ -2889,6 +2893,10 @@ namespace WelcomeLibrary.DAL
 
             SQLiteParameter p1 = new SQLiteParameter("@usosingolo", item.Usosingolo);//OleDbType.VarChar
             parColl.Add(p1);
+
+            SQLiteParameter p1b = new SQLiteParameter("@applicaancheascontati", item.applicaancheascontati);//OleDbType.VarChar
+            parColl.Add(p1b);
+
             SQLiteParameter p2 = null;
             //p4 = new SQLiteParameter("@datascadenza", ((item.Datascadenza) == null) ? item.Datascadenza : dbDataAccess.CorrectDatenow(item.Datascadenza.Value));
             p2 = new SQLiteParameter("@datascadenza", item.Datascadenza);
@@ -2902,6 +2910,8 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p4b);
             SQLiteParameter p5 = new SQLiteParameter("@codicifiltro", item.Codicifiltro);
             parColl.Add(p5);
+            SQLiteParameter p5b = new SQLiteParameter("@caratteristica1filtro", item.caratteristica1filtro);
+            parColl.Add(p5b);
             SQLiteParameter p6 = new SQLiteParameter("@scontonum", item.Scontonum);
             parColl.Add(p6);
             SQLiteParameter p7 = new SQLiteParameter("@scontoperc", item.Scontoperc);
@@ -2913,15 +2923,15 @@ namespace WelcomeLibrary.DAL
             if (item.Id != 0)
             {
                 //Update
-                query = "UPDATE [TBL_SCONTI] SET usosingolo=@usosingolo,datascadenza=@datascadenza,idcliente=@idcliente,idprodotto=@idprodotto,idscaglione=@idscaglione,codicifiltro=@codicifiltro,scontonum=@scontonum,scontoperc=@scontoperc,testocodicesconto=@testocodicesconto";
+                query = "UPDATE [TBL_SCONTI] SET usosingolo=@usosingolo,applicaancheascontati=@applicaancheascontati,datascadenza=@datascadenza,idcliente=@idcliente,idprodotto=@idprodotto,idscaglione=@idscaglione,codicifiltro=@codicifiltro,caratteristica1filtro=@caratteristica1filtro,scontonum=@scontonum,scontoperc=@scontoperc,testocodicesconto=@testocodicesconto";
                 query += " WHERE [Id] = " + item.Id;
             }
             else
             {
                 //Insert
-                query = "INSERT INTO TBL_SCONTI (usosingolo,datascadenza,idcliente,idprodotto,idscaglione,codicifiltro,scontonum,scontoperc,testocodicesconto)";
+                query = "INSERT INTO TBL_SCONTI (usosingolo,applicaancheascontati,datascadenza,idcliente,idprodotto,idscaglione,codicifiltro,caratteristica1filtro,scontonum,scontoperc,testocodicesconto)";
                 query += " values ( ";
-                query += " @usosingolo,@datascadenza,@idcliente,@idprodotto,@idscaglione,@codicifiltro,@scontonum,@scontoperc,@testocodicesconto )";
+                query += " @usosingolo,@applicaancheascontati,@datascadenza,@idcliente,@idprodotto,@idscaglione,@codicifiltro,@caratteristica1filtro,@scontonum,@scontoperc,@testocodicesconto )";
             }
 
             try
@@ -2935,8 +2945,6 @@ namespace WelcomeLibrary.DAL
             }
             return;
         }
-
-
 
     }
 }

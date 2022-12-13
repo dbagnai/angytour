@@ -192,12 +192,12 @@ var ScontiManager = new function () {
                 },
                 filtraDati() {
                     this.vm.idselected = 0;
-                    
+
 
                     var d = new Date();
                     if (this.im.chkvediscaduti == 1)
                         this.vm.filterparams.Datascadenza = d.toUTCString();
-                    else  this.vm.filterparams.Datascadenza = null;
+                    else this.vm.filterparams.Datascadenza = null;
                     if (this.vm.filterparams.Id == '') this.vm.filterparams.Id = 0;
                     caricaDati();
                 },
@@ -256,10 +256,13 @@ var ScontiManager = new function () {
         if (vuecontroller.im.selectedcategoria != '') vuecontroller.vm.itemselected.Codicifiltro = vuecontroller.im.selectedcategoria;
         else vuecontroller.vm.itemselected.Codicifiltro = "";
         if (vuecontroller.im.selectedsottocategoria != '') vuecontroller.vm.itemselected.Codicifiltro = vuecontroller.im.selectedsottocategoria;
+
+        if (vuecontroller.im.selectedcaratteristica1 != '') vuecontroller.vm.itemselected.caratteristica1filtro = vuecontroller.im.selectedcaratteristica1;
     }
     function ressetcodicefiltro() {
         vuecontroller.im.selectedcategoria = "";
         vuecontroller.im.selectedsottocategoria = "";
+        vuecontroller.im.selectedcaratteristica1 = "";
     }
     // Date Range Picker
     // function datePickerInit(txtBox, controllername, model) {

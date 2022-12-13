@@ -2109,6 +2109,7 @@ public class CommonPage : Page
         return codiciscontosuscaglioni;
     }
 
+
     private static double CalcolaSconto(System.Web.SessionState.HttpSessionState Session, CarrelloCollection ColItem, TotaliCarrello totali)
     {
         double valoresconto = 0;
@@ -2119,16 +2120,21 @@ public class CommonPage : Page
         //////////////////////////////////////
         List<long> idcarrellotoexclude = new List<long>();
         double totalenonscontabile = 0;
-#if false   //abilitare per escludere i prezzi scontati dal calcolo degli sconti
-        foreach (Carrello itemcarrello in ColItem)
-        {
-            if (itemcarrello.Offerta != null)
-                if (itemcarrello.Offerta.PrezzoListino != 0 && itemcarrello.Prezzo < itemcarrello.Offerta.PrezzoListino)
-                {
-                    totalenonscontabile += (itemcarrello.Numero * itemcarrello.Prezzo);
-                    idcarrellotoexclude.Add(itemcarrello.ID);
-                }
-        } 
+
+#if true   //abilitare per escludere i prezzi scontati dal calcolo degli sconti onlyfullpricediscountable
+        string onlyfullpricediscountable = ConfigManagement.ReadKey("onlyfullpricediscountable");
+        bool _tmlofpd = true;
+        bool.TryParse(onlyfullpricediscountable, out _tmlofpd);
+        if (_tmlofpd)
+            foreach (Carrello itemcarrello in ColItem)
+            {
+                if (itemcarrello.Offerta != null)
+                    if (itemcarrello.Offerta.PrezzoListino != 0 && itemcarrello.Prezzo < itemcarrello.Offerta.PrezzoListino)
+                    {
+                        totalenonscontabile += (itemcarrello.Numero * itemcarrello.Prezzo);
+                        idcarrellotoexclude.Add(itemcarrello.ID);
+                    }
+            }
 #endif
         //////////////////////////////////////////
 
@@ -2215,6 +2221,16 @@ public class CommonPage : Page
             totali.Codicesconto = Session["codicesconto"].ToString().Trim(); // memorizzo i codici che vengono applicati nel totale !!!
             foreach (Codicesconto codattuale in listcodetoapply)
             {
+                //////////////////// NON CONSIDERO LE LISTE DI ESCLUSIONE PRODOTTI SCONTATI IN CASO DI CODICE SCONTO CUMULABILE /////
+                double tmp_totalenonscontabile = totalenonscontabile;
+                List<long> tmp_idcarrellotoexclude = new List<long>(idcarrellotoexclude);
+                if (codattuale.applicaancheascontati) //codice da applicare anche a prodotti scontati
+                {
+                    tmp_totalenonscontabile = 0;
+                    tmp_idcarrellotoexclude = new List<long>();
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
                 //ATTENZIONE Memorizzo nei totali il commerciale associato( possibile uno solo, se presenti due , prendo l'ultimo codice )
                 if (codattuale.Idcliente != null)
                     totali.Id_commerciale = codattuale.Idcliente.Value;
@@ -2223,58 +2239,108 @@ public class CommonPage : Page
                 double scontonum = (codattuale.Scontonum != null) ? codattuale.Scontonum.Value : 0;
                 double scontoper = (codattuale.Scontoperc != null) ? codattuale.Scontoperc.Value : 0;
 
-                //vediamo se ci sono riferimenti a prodotto o categoria/sottocategoria di prodotto che limitano l'applicazione degli sconti
-                long idprodottodascontare = (codattuale.Idprodotto != null) ? codattuale.Idprodotto.Value : 0;
-                string codicifiltrodascontare = (!string.IsNullOrEmpty(codattuale.Codicifiltro)) ? codattuale.Codicifiltro : "";
                 // campo nel codice sconto per associazione a idscaglione per associazione di sconto a scaglioni!!! 
                 long idscaglionedascontare = (codattuale.Idscaglione != null) ? codattuale.Idscaglione.Value : 0;
-                if (idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare) && idscaglionedascontare == 0)
+                //vediamo se ci sono riferimenti a prodotto o categoria/sottocategoria di prodotto che limitano l'applicazione degli sconti
+                long idprodottodascontare = (codattuale.Idprodotto != null) ? codattuale.Idprodotto.Value : 0;
+
+                string codicifiltrodascontare = (!string.IsNullOrEmpty(codattuale.Codicifiltro)) ? codattuale.Codicifiltro : "";
+                string[] _tmplist = codicifiltrodascontare.Split(',');
+                List<string> listcodicifiltro = (_tmplist != null) ? _tmplist.ToList() : new List<string>();
+                listcodicifiltro.RemoveAll(i => string.IsNullOrEmpty(i));
+
+                //vediare i riferimenti a limiti su carattereistiche dello sconto
+                string caratteristica1filtrodascontare = (!string.IsNullOrEmpty(codattuale.caratteristica1filtro)) ? codattuale.caratteristica1filtro : "";
+                string[] _tmpcarlist = caratteristica1filtrodascontare.Split(',');
+                List<string> listcaratteristica1filtro = (_tmpcarlist != null) ? _tmpcarlist.ToList() : new List<string>();
+                listcaratteristica1filtro.RemoveAll(i => string.IsNullOrEmpty(i));
+
+
+                if (idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare) && string.IsNullOrEmpty(caratteristica1filtrodascontare) && idscaglionedascontare == 0)
                 {
+                    double importodascontare = ((double)totali.TotaleOrdine - tmp_totalenonscontabile);
                     //sconto percentuale sul totale generale carrello
                     if (scontoper != 0)
-                        valoresconto += Math.Round((((double)totali.TotaleOrdine - totalenonscontabile) * scontoper / 100), 2, MidpointRounding.ToEven);
+                    {
+                        valoresconto += Math.Round((importodascontare * scontoper / 100), 2, MidpointRounding.ToEven);
+                    }
                     //sconto numerico sul totale generale carrello ( alternativo  )
                     else if (scontonum != 0)
                     {
                         /////////////////
                         //lo sconto numerico non puo superare il valore di ordine detratto del valore non scontabile
                         /////////////////
-                        double totalescontabile = (double)totali.TotaleOrdine - totalenonscontabile;
-                        if (scontonum > totalescontabile) scontonum = totalescontabile;
+                        if (scontonum > importodascontare) scontonum = importodascontare;
                         //sommo lo sconto
                         valoresconto += scontonum;
                     }
                 }
                 else
                 {
-                    string[] _tmplist = codicifiltrodascontare.Split(',');
-                    List<string> listcodicifiltro = (_tmplist != null) ? _tmplist.ToList() : new List<string>();
 
                     //Calcolare valore da scontare su (ColItem) elementi a carrello per applicare gli sconti riguardanti idposdotto o categorie
                     //calcoliamo il valore su cui applicare lo sconto sulla base dell'idprodotto del codice sconto e/o sul codice categoria o sottocategoria del codice sconto escludendo quelli che sono già scontati sul listino
                     double importodascontare = 0;
+
+                    //sconto su scaglione , verifico la presenza nel carrello dello scaglione specificato nello sconto ( ce ne dovrebbe essere sempre solo 1 ) per tirare fuori l'importo da scontare per gli scaglioni!
+                    if (idscaglionedascontare != 0)
+                        ColItem.ForEach(c => importodascontare += (((String)eCommerceDM.Selezionadajson(c.jsonfield1, "idscaglione", "I")) == idscaglionedascontare.ToString()) ? (c.Numero * c.Prezzo) : 0);
                     //Sconto su prodotto ( se non tra articoli/prodotti gia scontati )
-                    if (idprodottodascontare != 0)
-                        ColItem.ForEach(c => importodascontare += (c.id_prodotto == idprodottodascontare && !idcarrellotoexclude.Contains(c.ID)) ? (c.Numero * c.Prezzo) : 0);
+                    else if (idprodottodascontare != 0)
+                        ColItem.ForEach(c => importodascontare += (c.id_prodotto == idprodottodascontare && !tmp_idcarrellotoexclude.Contains(c.ID)) ? (c.Numero * c.Prezzo) : 0);
+
+#if false //versione esclusiva che prevede solo un tipo di filtro alla volta
+
                     //Sconto su categoria/sottocategoria articolo ( se non tra articoli/prodotti gia scontati )
                     else if (listcodicifiltro.Count > 0)
-                        ColItem.ForEach(c => importodascontare += ((listcodicifiltro.Contains(c.Offerta.CodiceCategoria) || listcodicifiltro.Contains(c.Offerta.CodiceCategoria2Liv)) && !idcarrellotoexclude.Contains(c.ID)) ? (c.Numero * c.Prezzo) : 0);
-                    //sconto su scaglione , verifico la presenza nel carrello dello scaglione specificato nello sconto ( ce ne dovrebbe essere sempre solo 1 ) per tirare fuori l'importo da scontare per gli scaglioni!
-                    else if (idscaglionedascontare != 0)
-                        ColItem.ForEach(c => importodascontare += (((String)eCommerceDM.Selezionadajson(c.jsonfield1, "idscaglione", "I")) == idscaglionedascontare.ToString()) ? (c.Numero * c.Prezzo) : 0);
-                    //sconto percentuale sull'importo calcolato
+                        ColItem.ForEach(c => importodascontare += ((listcodicifiltro.Contains(c.Offerta.CodiceCategoria) || listcodicifiltro.Contains(c.Offerta.CodiceCategoria2Liv)) && !tmp_idcarrellotoexclude.Contains(c.ID)) ? (c.Numero * c.Prezzo) : 0);
+                    //sconto su caratterisrica1 ( marca o altro )
+                    else if (listcaratteristica1filtro.Count > 0)
+                        ColItem.ForEach(c => importodascontare += (listcaratteristica1filtro.Contains(c.Offerta.Caratteristica1.ToString()) && !tmp_idcarrellotoexclude.Contains(c.ID)) ? (c.Numero * c.Prezzo) : 0);
+#endif
+
+#if true //versione combianta in and categorie e caratteristica ( devo prendere dal carrello gli elementi che soddisfano entrambe le condizioni )!!!!! 
+                    else if (listcodicifiltro.Count > 0 || listcaratteristica1filtro.Count > 0) //sconto su categorie o caratteristica1 escludendo entrambe le liste vuote
+                    {
+
+                        if ((listcodicifiltro.Count > 0 && listcaratteristica1filtro.Count > 0))
+                            ColItem.ForEach(c => importodascontare += (
+                        (listcodicifiltro.Contains(c.Offerta.CodiceCategoria) || listcodicifiltro.Contains(c.Offerta.CodiceCategoria2Liv)) //Sconto su categoria/sottocategoria articolo 
+                        && listcaratteristica1filtro.Contains(c.Offerta.Caratteristica1.ToString()) //sconto su caratterisrica1 ( marca o altro )
+                        && !tmp_idcarrellotoexclude.Contains(c.ID)) //( se non in lista esclusione tra articoli/prodotti gia scontati )
+                        ? (c.Numero * c.Prezzo) : 0);
+
+                        if ((listcodicifiltro.Count == 0 && listcaratteristica1filtro.Count > 0))
+                            ColItem.ForEach(c => importodascontare += (
+                        listcaratteristica1filtro.Contains(c.Offerta.Caratteristica1.ToString())
+                        && !tmp_idcarrellotoexclude.Contains(c.ID))
+                        ? (c.Numero * c.Prezzo) : 0);
+
+                        if ((listcodicifiltro.Count > 0 && listcaratteristica1filtro.Count == 0))
+                            ColItem.ForEach(c => importodascontare += (
+                        (listcodicifiltro.Contains(c.Offerta.CodiceCategoria) || listcodicifiltro.Contains(c.Offerta.CodiceCategoria2Liv))
+                        && !tmp_idcarrellotoexclude.Contains(c.ID))
+                        ? (c.Numero * c.Prezzo) : 0);
+
+
+                    }
+
+#endif
+
+                    //////////////////CALCOLIAMO IL VALORE DELLO SCONTO ////////////////////////
+                    //Sconto percentuale sull'importo calcolato
                     if (scontoper != 0)
                         valoresconto += Math.Round(((double)importodascontare * scontoper / 100), 2, MidpointRounding.ToEven);
                     //sconto numerico  sull'importo calcolato ( alternativo  )
-                    else if (scontonum != 0 && importodascontare != 0) //lo sconto numerico lo devo applicare solo se ho trovato elementi a carrello a costo diverso da zero
+                    else if (scontonum != 0 && importodascontare != 0)
+                    //lo sconto numerico lo devo applicare solo se ho trovato elementi a carrello a costo diverso da zero
                     {
                         //impongo che lo sconto numerico non superi mai il valore a carrello per il totale articoli da scontare
-                        if (scontonum > importodascontare) scontonum = importodascontare;//limito il massimo sconto su 1 articolo al valore totale del rigo di carrello non di piu
+                        if (scontonum > importodascontare) scontonum = importodascontare;
+                        //limito il massimo sconto su 1 articolo al valore totale del rigo di carrello non di piu
                         valoresconto += scontonum;
                     }
-
                 }
-                //codattuale.Usosingolo //serve solo nella registrazione ordine per eliminare i codici una tantum dalla tabella 
             }
 
             //controllo massimo sconto per sconti con importo fisso
@@ -2282,9 +2348,9 @@ public class CommonPage : Page
             scontocalcolato = true;
         }
 
-
         return valoresconto;
     }
+
 
 
     public static string Creaeventopurchaseagooglegtag(TotaliCarrello totali, CarrelloCollection prodotti)

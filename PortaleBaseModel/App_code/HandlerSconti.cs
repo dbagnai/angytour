@@ -87,7 +87,7 @@ public class HandlerSconti : IHttpHandler, IRequiresSessionState
                     //INIZIALIZZO EVENTUALI LISTE USATE NEL MODELLO DI PAGINA ....
                     List<Prodotto> listprod = WelcomeLibrary.UF.Utility.ElencoProdotti.FindAll(p => p.CodiceTipologia == "rif000001" && p.Lingua == lingua);
                     List<SProdotto> listsprod = WelcomeLibrary.UF.Utility.ElencoSottoProdotti.FindAll(p => p.Lingua == lingua && p.CodiceProdotto == inim.selectedcategoria);
-
+                    List<Tabrif> listcar1 = WelcomeLibrary.UF.Utility.Caratteristiche[0].FindAll(p => p.Lingua == lingua);
 
                     inim.categoria = new OrderedDictionary();
                     inim.categoria.Add("", references.ResMan("Common", lingua, "selProdotti"));
@@ -101,6 +101,12 @@ public class HandlerSconti : IHttpHandler, IRequiresSessionState
                         inim.selectedsottocategoria = (listsprod.Exists(s => s.CodiceSProdotto == inim.selectedsottocategoria)) ? inim.selectedsottocategoria : "";
                         listsprod.ForEach(p => inim.sottocategoria.Add(p.CodiceSProdotto, p.Descrizione));
                     }
+
+                    inim.caratteristica1 = new OrderedDictionary();
+                    inim.caratteristica1.Add("", references.ResMan("Common", lingua, "selcaratteristica1"));
+                    if (listcar1 != null)
+                        listcar1.ForEach(p => inim.caratteristica1.Add(p.Codice, p.Campo1));
+
 
                     //context.Response.ContentType = "application/json";
                     result = Newtonsoft.Json.JsonConvert.SerializeObject(inim); // devo tornare il serializzato del model di pagina con i valori riempiti che mi servono
@@ -152,14 +158,19 @@ public class HandlerSconti : IHttpHandler, IRequiresSessionState
 
                     //filtro sconti  
                     Codicesconto _localfilter = new Codicesconto(scontivm.filterparams);
-                    if (!string.IsNullOrEmpty(_localfilter.Codicifiltro.Trim()))
+                    if (!string.IsNullOrEmpty(_localfilter.Codicifiltro.Trim())) //modificatore per filtro codici categoria
                         _localfilter.Codicifiltro = "%" + _localfilter.Codicifiltro.Trim() + "%"; //filtro esteso codici
+
+
+                    if (!string.IsNullOrEmpty(_localfilter.caratteristica1filtro.Trim())) //modificatore per filtro codici caratteristica1
+                        _localfilter.caratteristica1filtro = "%" + _localfilter.caratteristica1filtro.Trim() + "%"; //filtro esteso caratteristica1
+
                     //List<SQLiteParameter> parsconti = new List<SQLiteParameter>();
                     //SQLiteParameter ps1 = new SQLiteParameter("@Id_cliente", clim.filterparams.xxxxxxx);//OleDbType.VarChar
                     //parsconti.Add(ps1);
                     //scontivm.filterparams.Codicifiltro  = ""; //vanno passati dai valori dei filtri presenti in initpagemodelsconti al momento del click di filtro inserendoli in  scontivm.filterparams e nella lista parametri di filtro parsconti
                     scontivm.list = ecDM.CaricaListaSconti(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _localfilter, scontivm.Pager.CurrentPage, scontivm.Pager.PageSize);
-                    
+
                     long nrecordfiltrati = scontivm.list.Totrecs;
                     scontivm.Pager.TotalRecords = ((long)scontivm.list.Totrecs);
                     scontivm.Pager.GeneratePages();
@@ -223,11 +234,13 @@ public class HandlerSconti : IHttpHandler, IRequiresSessionState
                         if (scontivm2.itemselected.Codicifiltro != null)
                             scontivm2.itemselected.Codicifiltro = scontivm2.itemselected.Codicifiltro.Trim();
 
+                        if (scontivm2.itemselected.caratteristica1filtro != null)
+                            scontivm2.itemselected.caratteristica1filtro = scontivm2.itemselected.caratteristica1filtro.Trim();
 
                         if (validadati)
                         {
                             ecDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, scontivm2.itemselected);
-                    
+
                             scontivm2.idselected = scontivm2.itemselected.Id;
                             scontivm2.list = ecDM.CaricaListaSconti(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, scontivm2.filterparams, scontivm2.Pager.CurrentPage, scontivm2.Pager.PageSize);//Passando null -> prende tutti i clienti, inoltre baypasso il filtro 
                             long nrecordfiltrati2 = scontivm2.list.Totrecs;
@@ -297,7 +310,11 @@ public class initpagemodelsconti
     public OrderedDictionary sottocategoria = new OrderedDictionary();
     public string selectedcategoria = "";
     public string selectedsottocategoria = "";
-   
+
+    public OrderedDictionary caratteristica1 = new OrderedDictionary();
+    public string selectedcaratteristica1 = "";
+
+
 }
 
 public class scontivuemodel
@@ -312,7 +329,7 @@ public class scontivuemodel
     public Codicesconto itemselected = new Codicesconto();
     public Codicesconto filterparams = new Codicesconto();
     //public Tabrif utente = new Tabrif();
-   
+
     public scontivuemodel()
     {
         //filterparams.Datascadenza = System.DateTime.Now();

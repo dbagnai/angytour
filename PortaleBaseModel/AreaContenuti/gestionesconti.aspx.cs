@@ -21,7 +21,7 @@ public partial class AreaContenuti_gestionesconti : CommonPage
             if (Request.QueryString["idsconto"] != null && Request.QueryString["idsconto"] != "")
             { idsconto = Request.QueryString["idsconto"].ToString(); hididselected.Value = idsconto; }
 
-        
+
         }
         else
         {
@@ -30,7 +30,7 @@ public partial class AreaContenuti_gestionesconti : CommonPage
             }
         }
 
-     
+
 
     }
 

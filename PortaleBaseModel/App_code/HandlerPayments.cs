@@ -406,12 +406,32 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
         ////////////////////////////////////////
 
 
+
         /////////////////////////////////////////////////////////////////////////////
         //controllo se presenti CODICISCONTO con uso una tantum e li cancello dalla tabella sconti in modo da impedire riutilizzo
         /////////////////////////////////////////////////////////////////////////////
         try
         {
-            string codiciscontousati = totali.Codicesconto;
+            string codiciscontousati = totali.Codicesconto.Trim();
+
+            /////////////////////////////////////////////////////////// ( vediamo se abbiamo articoli non scontabili )
+            List<long> idcarrellotoexclude = new List<long>();
+            double totalenonscontabile = 0;
+            string onlyfullpricediscountable = ConfigManagement.ReadKey("onlyfullpricediscountable");
+            bool _tmlofpd = true;
+            bool.TryParse(onlyfullpricediscountable, out _tmlofpd);
+            if (_tmlofpd)
+                foreach (Carrello itemcarrello in prodotti)
+                {
+                    if (itemcarrello.Offerta != null)
+                        if (itemcarrello.Offerta.PrezzoListino != 0 && itemcarrello.Prezzo < itemcarrello.Offerta.PrezzoListino)
+                        {
+                            totalenonscontabile += (itemcarrello.Numero * itemcarrello.Prezzo);
+                            idcarrellotoexclude.Add(itemcarrello.ID);
+                        }
+                }
+            ///////////////////////////////////////////////////////////
+
             eCommerceDM ecmDM = new eCommerceDM();
             Codicesconto _params = new Codicesconto();
             CodicescontoList listcode = new CodicescontoList(); //codici da applicare
@@ -425,32 +445,158 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
                         CodicescontoList _tmpcode = ecmDM.CaricaListaSconti(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _params);
                         if (_tmpcode != null && _tmpcode.Count == 1)
                         {
-                            //eliminiamo gli sconti uso singolo (  condizionato alla presenza del prodotto o categoria nel carrello )
+                            //eliminiamo gli sconti uso singolo (  verifico se il codice sconto usosingolo è stato applicato a prodotti a carrello o meno in base alle condizioni di applicazione degli sconti )
                             if (_tmpcode[0].Usosingolo)
                             {
+                                bool bruciacodiceusosingolo = false;
+
+                                //////////////////// NON CONSIDERO LE LISTE DI ESCLUSIONE PRODOTTI SCONTATI IN CASO DI CODICE SCONTO CUMULABILE /////
+                                double tmp_totalenonscontabile = totalenonscontabile;
+                                List<long> tmp_idcarrellotoexclude = new List<long>(idcarrellotoexclude);
+                                if (_tmpcode[0].applicaancheascontati) //codice da applicare anche a prodotti scontati
+                                {
+                                    tmp_totalenonscontabile = 0;
+                                    tmp_idcarrellotoexclude = new List<long>();
+                                }
+                                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                long idscaglionedascontare = (_tmpcode[0].Idscaglione != null) ? _tmpcode[0].Idscaglione.Value : 0;
                                 //Vediamo se il codicesconto ha riferimenti a prodotto o categoria/sottocategoria presenti nel carrello
                                 long idprodottodascontare = (_tmpcode[0].Idprodotto != null) ? _tmpcode[0].Idprodotto.Value : 0;
-                                long idscaglionedascontare = (_tmpcode[0].Idscaglione != null) ? _tmpcode[0].Idscaglione.Value : 0;
+
                                 string codicifiltrodascontare = (!string.IsNullOrEmpty(_tmpcode[0].Codicifiltro)) ? _tmpcode[0].Codicifiltro : "";
                                 string[] _tmplist = codicifiltrodascontare.Split(',');
                                 List<string> listcodicifiltro = (_tmplist != null) ? _tmplist.ToList() : new List<string>();
+                                listcodicifiltro.RemoveAll(i => string.IsNullOrEmpty(i));
 
+                                string caratteristica1filtrodascontare = (!string.IsNullOrEmpty(_tmpcode[0].caratteristica1filtro)) ? _tmpcode[0].caratteristica1filtro : "";
+                                string[] _tmpcarlist = caratteristica1filtrodascontare.Split(',');
+                                List<string> listcaratteristica1filtro = (_tmpcarlist != null) ? _tmpcarlist.ToList() : new List<string>();
+                                listcaratteristica1filtro.RemoveAll(i => string.IsNullOrEmpty(i));
+
+#if true   //Calcolo l'importo da scontare in base alle condizioni ( come nella procedura di calcolo degli sconti ) per vedere se il codice è stato usato o meno verifico che l'importo da scontare risulti maggiore di zero ( altrimenti il codice non è statao applicato )
+                                if (idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare) && string.IsNullOrEmpty(caratteristica1filtrodascontare) && idscaglionedascontare == 0)
+                                {
+                                    double importodascontare = ((double)totali.TotaleOrdine - tmp_totalenonscontabile);
+                                    if (importodascontare > 0) bruciacodiceusosingolo = true;
+                                }
+                                else
+                                {
+                                    //Calcolare valore da scontare sugli elementi a carrello per applicare gli sconti riguardanti idposdotto o categorie
+                                    //calcoliamo il valore su cui applicare lo sconto sulla base dell'idprodotto del codice sconto e/o sul codice categoria o sottocategoria del codice sconto escludendo quelli che sono già scontati sul listino
+                                    double importodascontare = 0;
+
+                                    //sconto su scaglione , verifico la presenza nel carrello dello scaglione specificato nello sconto ( ce ne dovrebbe essere sempre solo 1 ) per tirare fuori l'importo da scontare per gli scaglioni!
+                                    if (idscaglionedascontare != 0)
+                                        prodotti.ForEach(c => importodascontare += (((String)eCommerceDM.Selezionadajson(c.jsonfield1, "idscaglione", "I")) == idscaglionedascontare.ToString()) ? (c.Numero * c.Prezzo) : 0);
+                                    //Sconto su prodotto ( se non tra articoli/prodotti gia scontati )
+                                    else if (idprodottodascontare != 0)
+                                        prodotti.ForEach(c => importodascontare += (c.id_prodotto == idprodottodascontare && !tmp_idcarrellotoexclude.Contains(c.ID)) ? (c.Numero * c.Prezzo) : 0);
+
+                                    //versione combianta in and categorie e caratteristica ( devo prendere dal carrello gli elementi che soddisfano entrambe le condizioni )!!!!! 
+                                    else if (listcodicifiltro.Count > 0 || listcaratteristica1filtro.Count > 0) //sconto su categorie o caratteristica1 escludendo entrambe le liste vuote
+                                    {
+
+                                        if ((listcodicifiltro.Count > 0 && listcaratteristica1filtro.Count > 0))
+                                            prodotti.ForEach(c => importodascontare += (
+                                        (listcodicifiltro.Contains(c.Offerta.CodiceCategoria) || listcodicifiltro.Contains(c.Offerta.CodiceCategoria2Liv)) //Sconto su categoria/sottocategoria articolo 
+                                        && listcaratteristica1filtro.Contains(c.Offerta.Caratteristica1.ToString()) //sconto su caratterisrica1 ( marca o altro )
+                                        && !tmp_idcarrellotoexclude.Contains(c.ID)) //( se non in lista esclusione tra articoli/prodotti gia scontati )
+                                        ? (c.Numero * c.Prezzo) : 0);
+
+                                        if ((listcodicifiltro.Count == 0 && listcaratteristica1filtro.Count > 0))
+                                            prodotti.ForEach(c => importodascontare += (
+                                        listcaratteristica1filtro.Contains(c.Offerta.Caratteristica1.ToString())
+                                        && !tmp_idcarrellotoexclude.Contains(c.ID))
+                                        ? (c.Numero * c.Prezzo) : 0);
+
+                                        if ((listcodicifiltro.Count > 0 && listcaratteristica1filtro.Count == 0))
+                                            prodotti.ForEach(c => importodascontare += (
+                                        (listcodicifiltro.Contains(c.Offerta.CodiceCategoria) || listcodicifiltro.Contains(c.Offerta.CodiceCategoria2Liv))
+                                        && !tmp_idcarrellotoexclude.Contains(c.ID))
+                                        ? (c.Numero * c.Prezzo) : 0);
+
+                                    }
+                                    if (importodascontare > 0) bruciacodiceusosingolo = true;
+
+                                }
+
+#endif
+
+#if false //versione precedente per verifica se il codice è stato usato nel calcolo degli sconti
+                                ////////////////////////////////////////////////////////
+                                //(ATTENZIONE) controllare che se codicesconto di tipo NON CUMULABILE
+                                //deve essere invalidato solo se a carrello presente almeno un articolo a prezzo pieno 
+                                //e previsto non applicazione sconti ad articoli scontati ( onlyfullpricediscountable == true )
+                                //Comanda la tipologia di codicesconto se cumulabile o no, considero solo il caso non cumulabile per vedere se mantenere il codice buono
+                                // (se il codicesconto cumulabile qualisiasi prodotto scontato o meno mi invalida il codicesconto )
+                                //////
+                                // Il codicesconto resta valido solo se codicesconto non cumulabile -> scontabili solo prodotti a prezzo pieno (onlyfullpricediscountable) -> 
+                                // non deve esistere nemmeno un prodotto a carrello con prezzo pieno ( tutti scontati ) solo allora il codicesconto è sempre buono
+                                ////////////////////////////////////////////////////////
+                                ///
+                                ///////////////////////////////////////////////////////
+                                bool prodottoprezzopienoincarrello = prodotti.Exists(c => (c.Offerta != null && c.Offerta.PrezzoListino == 0 && c.Prezzo != 0));
+                                bool consentieliminazione = true;
+                                if (!_tmpcode[0].applicaancheascontati && _tmlofpd && !prodottoprezzopienoincarrello)
+                                    consentieliminazione = false; //blocco l'invalidazione del codice solo in questo caso
                                 bool bruciacodiceusosingolo = false;
-                                //codice senza riferimento a prodotto o categoria -> da bruciare SEMPRE
-                                if (!bruciacodiceusosingolo && idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare) && idscaglionedascontare == 0) bruciacodiceusosingolo = true;
+                                //codice senza riferimento a prodotto o categoria -> da bruciare SEMPRE ( a meno caso particolare sopra indicato )
+                                if (!bruciacodiceusosingolo && idprodottodascontare == 0 && string.IsNullOrEmpty(codicifiltrodascontare) && string.IsNullOrEmpty(caratteristica1filtrodascontare) && idscaglionedascontare == 0 && consentieliminazione) bruciacodiceusosingolo = true;
+                                ///////////////////////////////////////////////////////
 
-                                //controllo presenza prodotto in carrello associato al codice sconto caso id -> da bruciare
-                                if (!bruciacodiceusosingolo && idprodottodascontare != 0)
-                                    bruciacodiceusosingolo = prodotti.Exists(c => c.id_prodotto == idprodottodascontare);
 
                                 ///CONTROLLO presenza scaglione a carrello associato al codice sconto caso idscaglione -> da bruciare
                                 if (!bruciacodiceusosingolo && idscaglionedascontare != 0)
                                     bruciacodiceusosingolo = prodotti.Exists(c => (((String)eCommerceDM.Selezionadajson(c.jsonfield1, "idscaglione", "I")) == idscaglionedascontare.ToString()));
 
+
+                                //controllo presenza prodotto in carrello associato al codice sconto caso id -> da bruciare
+                                if (!bruciacodiceusosingolo && idprodottodascontare != 0)
+                                {
+                                    bruciacodiceusosingolo = prodotti.Exists(c => c.id_prodotto == idprodottodascontare);
+
+                                    //Ulteriore verifica in base ai flag esclusione sconti su prodotti gia scontati a carrello
+                                    //Se codicesconto non cumulabile e scontabili solo articoli prezzo pieno e id associato relativo a prodotto a prezzo scontato -> non brucio
+                                    if (bruciacodiceusosingolo)
+                                    {
+                                        bool presenteprodottoprezzopieno = prodotti.Exists(c => c.id_prodotto == idprodottodascontare && (c.Offerta != null && c.Offerta.PrezzoListino == 0 && c.Prezzo != 0));
+                                        if (!_tmpcode[0].applicaancheascontati && _tmlofpd && !presenteprodottoprezzopieno) bruciacodiceusosingolo = false;
+                                    }
+                                }
+
+
                                 //oppure presenza prodotto in carrello associato al codice sconto caso categorie -> da bruciare
-                                if (!bruciacodiceusosingolo && listcodicifiltro.Count > 0)
+                                if (!bruciacodiceusosingolo && listcodicifiltro.Count > 0 && listcaratteristica1filtro.Count == 0)
+                                {
                                     bruciacodiceusosingolo = prodotti.Exists(c => listcodicifiltro.Contains(c.Offerta.CodiceCategoria) || listcodicifiltro.Contains(c.Offerta.CodiceCategoria2Liv));
 
+                                    //Ulteriore verifica in base ai flag esclusione sconti su prodotti gia scontati a carrello
+                                    //Se codicesconto non cumulabile e scontabili solo articoli prezzo pieno e nessun articolo a prezzo pieno nelle categorie associate -> non brucio
+                                    if (bruciacodiceusosingolo)
+                                    {
+                                        bool presenteprodottoprezzopieno = prodotti.Exists(c => (listcodicifiltro.Contains(c.Offerta.CodiceCategoria) || listcodicifiltro.Contains(c.Offerta.CodiceCategoria2Liv)) && (c.Offerta != null && c.Offerta.PrezzoListino == 0 && c.Prezzo != 0));
+
+                                        if (!_tmpcode[0].applicaancheascontati && _tmlofpd && !presenteprodottoprezzopieno) bruciacodiceusosingolo = false;
+                                    }
+                                }
+                                //oppure presenza prodotto in carrello associato al codice sconto caso caratteristica1/marca -> da bruciare
+                                if (!bruciacodiceusosingolo && listcaratteristica1filtro.Count > 0 && listcodicifiltro.Count == 0)
+                                {
+                                    bruciacodiceusosingolo = prodotti.Exists(c => listcaratteristica1filtro.Contains(c.Offerta.Caratteristica1.ToString()));
+
+                                    //Ulteriore verifica in base ai flag esclusione sconti su prodotti gia scontati a carrello
+                                    //Se codicesconto non cumulabile e scontabili solo articoli prezzo pieno e nessun articolo a prezzo pieno con caratteristica associata -> non brucio
+                                    if (bruciacodiceusosingolo)
+                                    {
+                                        bool presenteprodottoprezzopieno = prodotti.Exists(c => (listcaratteristica1filtro.Contains(c.Offerta.Caratteristica1.ToString())) && (c.Offerta != null && c.Offerta.PrezzoListino == 0 && c.Prezzo != 0));
+                                        if (!_tmpcode[0].applicaancheascontati && _tmlofpd && !presenteprodottoprezzopieno) bruciacodiceusosingolo = false;
+                                    }
+                                }
+
+#endif
+
+                                //METTO IL CODICE COME SCADUTO
                                 if (bruciacodiceusosingolo)
                                 {    //cancellazione codice
                                      // ecmDM.CancellaSconto(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, _tmpcode[0].Id);

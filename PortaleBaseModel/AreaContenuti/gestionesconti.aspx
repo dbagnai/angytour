@@ -28,12 +28,12 @@
               <div class="row">
               <div class="col-xs-12 col-sm-4" > <input class="form-control" placeholder="filtro codicesconto .." type="text" v-model="vm.filterparams.Testocodicesconto"   />  </div>
               <div class="col-xs-12 col-sm-4" > <input class="form-control" placeholder="filtro clienti .." type="text" v-model="vm.filterparams.Idcliente"   />  </div>
-              <div class="col-xs-12 col-sm-4" > &nbsp;</div>
+              <div class="col-xs-12 col-sm-4" >  <input class="form-control" placeholder="filtro codici marca .." type="text" v-model="vm.filterparams.caratteristica1filtro"   />  </div>
                </div>
               <div class="row">
               <div class="col-xs-12 col-sm-4" > <input class="form-control" placeholder="filtro codici categorie .." type="text" v-model="vm.filterparams.Codicifiltro"   />  </div>
               <div class="col-xs-12 col-sm-4" > <input class="form-control" placeholder="filtro prodotti .." type="text" v-model="vm.filterparams.Idprodotto"   />  </div>
-              <div class="col-xs-12 col-sm-4" > <input class="form-control" placeholder="filtro scaglioni .." type="text" v-model="vm.filterparams.Idscaglione"   />  </div>
+             <%-- <div class="col-xs-12 col-sm-4" > <input class="form-control" placeholder="filtro scaglioni .." type="text" v-model="vm.filterparams.Idscaglione"   />  </div>--%>
                </div>
               <div class="row">
               <div class="col-xs-12 col-sm-4" ><input type="button" class="btn btn-info" value="Filtra Sconti"   v-on:click="filtraDati()"/> </div>
@@ -201,17 +201,17 @@
                         </div>
 
                         </div>
-                            <div class="col-sm-3 item-text">
+                      <%--   <div class="col-sm-3 item-text">
                             <strong>Id Scaglione Sconto<br />(facoltativo) </strong>
                             <br />
                              <input type="text" class="form-control"
                                     @keypress="isNumber($event)"
                                     v-bind:value="vm.itemselected.Idscaglione | formatNumber"
                                     v-on:blur="vm.itemselected.Idscaglione = formatNumberforvue($event.target.value)" /> 
-                        </div>
+                        </div>--%>
 
 
-
+                            <!--   SCONTO CATEGORIE/SOTTOCATEGORIE -->
                           <div class="col-sm-3 item-text text-left">
                             <strong>Filtro Categorie prod.<br />(facoltativo)</strong><br />
                             <input type="text" class="form-control" v-model="vm.itemselected.Codicifiltro" />
@@ -226,12 +226,26 @@
 
                         </div>
 
+                        <!--   SCONTO MARCA -->
+                          <div class="col-sm-3 item-text text-left">
+                            <strong>Filtro Marca prod.<br />(facoltativo)</strong><br />
+                            <input type="text" class="form-control" v-model="vm.itemselected.caratteristica1filtro" />
+
+                              <select class="width-100" id="ddlCaratteristica1" v-model="im.selectedcaratteristica1" @change="updateinitmodel($event.target.value)">
+                                <option v-for="(value,key) in im.caratteristica1" :value="key">{{ value }}</option>
+                            </select>
+                        </div>
 
                       
 
                     </div>
                     <div class="row" style="padding-bottom: 10px">
                         <div class="col-sm-6 item-text  text-left">
+                           
+                            <strong>Applica sconto anche a prodotti scontati</strong><br />
+                            <input type="checkbox" v-model:checked="vm.itemselected.applicaancheascontati" />
+                            <br />
+                            <br />
                             <strong>Singolo Utilizzo</strong><br />
                             <input type="checkbox" v-model:checked="vm.itemselected.Usosingolo" />
                         </div>

@@ -8,22 +8,26 @@ namespace WelcomeLibrary.DOM
     {
         long _id;
         bool _usosingolo;
+        bool _applicaancheascontati;
         DateTime? _datascadenza;
         long? _idcliente;
         long? _idprodotto;
         long? _idscaglione;
         string _codicifiltro;
+        string _caratteristica1filtro;
         double? _scontonum;
         double? _scontoperc;
         string _testocodicesconto;
 
         public long Id { get => _id; set => _id = value; }
         public bool Usosingolo { get => _usosingolo; set => _usosingolo = value; }
+        public bool applicaancheascontati { get => _applicaancheascontati; set => _applicaancheascontati = value; }
         public DateTime? Datascadenza { get => _datascadenza; set => _datascadenza = value; }
         public long? Idcliente { get => _idcliente; set => _idcliente = value; }
         public long? Idprodotto { get => _idprodotto; set => _idprodotto = value; }
         public long? Idscaglione { get => _idscaglione; set => _idscaglione = value; }
         public string Codicifiltro { get => _codicifiltro; set => _codicifiltro = value; }
+        public string caratteristica1filtro { get => _caratteristica1filtro; set => _caratteristica1filtro = value; }
         public double? Scontonum { get => _scontonum; set => _scontonum = value; }
         public double? Scontoperc { get => _scontoperc; set => _scontoperc = value; }
         public string Testocodicesconto { get => _testocodicesconto; set => _testocodicesconto = value; }
@@ -40,17 +44,21 @@ namespace WelcomeLibrary.DOM
             _scontoperc = null;
             _testocodicesconto = "";
             _codicifiltro = "";
+            _caratteristica1filtro = "";
+            _applicaancheascontati = false;
         }
 
         public Codicesconto(Codicesconto tmp)
         {
             _id = tmp.Id;
             _usosingolo = tmp.Usosingolo;
+            _applicaancheascontati = tmp.applicaancheascontati;
             _datascadenza = tmp.Datascadenza;
             _idcliente = tmp.Idcliente;
             _idprodotto = tmp.Idprodotto;
             _idscaglione = tmp.Idscaglione;
             _codicifiltro = tmp.Codicifiltro;
+            _caratteristica1filtro = tmp._caratteristica1filtro;
             _scontonum = tmp.Scontonum;
             _scontoperc = tmp.Scontoperc;
             _testocodicesconto = tmp.Testocodicesconto;
