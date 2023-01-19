@@ -1,13 +1,14 @@
-<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="AspNetPages_MasterPage" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="AspNetPages_MasterPage" %>
 
 <!DOCTYPE html>
 <html runat="server" id="htmltag">
 <head runat="server" id="masterHead">
-
-
+    <%--      <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0",null," async ") %>--%>
+    <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejsib0") %>
+    <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1",null," rel=\"preload\" as=\"style\" onload=\"this.rel='stylesheet'\" ") %>
+    <%--    <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>--%>
     <script type="text/javascript" src="/js/orestbrida/cookieconsent.js" async></script>
     <script type="text/javascript" src="/js/orestbrida/initconsent.js" async></script>
-
     <script>
         // Initialize the data layer for Google Tag Manager (this should mandatorily be done before the Cookie Solution is loaded)
         window.dataLayer = window.dataLayer || [];
@@ -35,9 +36,10 @@
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-xxxxxxxxxx');
     </script>
-  
+
+
     <%--CASO ECOMMERCE PER GTAG --%>
-<%--    
+    <%--    
     <script async type="text/plain" data-cookiecategory="analytics" src="https://www.googletagmanager.com/gtag/js?id=G-xxxxxxxxxx" defer></script>
     <script type="text/plain" data-cookiecategory="analytics" defer> 
         window.dataLayer = window.dataLayer || [];
@@ -45,6 +47,10 @@
         gtag('js', new Date());
         gtag('config', 'G-xxxxxxxxxx');
     </script>--%>
+
+
+    <link rel="preload" as="font">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <title runat="server" id="metaTitle"></title>
     <meta id="metaDesc" runat="server" name="Description" content="" />
@@ -88,6 +94,67 @@
     <meta name="msapplication-TileImage" content="/images/icons/icon-144x144.png" />
     <meta name="msapplication-TileColor" content="#000000" />
     <link rel="manifest" href="~/site.webmanifest" runat="server">
+    <style>
+        @media screen and (min-width: 1025px) {
+            .loader {
+                position: fixed;
+                left: 0px;
+                top: 0px;
+                width: 100%;
+                height: 100%;
+                z-index: 10000;
+                background: #fff;
+            }
+
+            .loaderabsolute {
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                width: 100%;
+                height: 100%;
+                z-index: 99999;
+                background: #fff;
+            }
+
+            .loaderrelative {
+                position: relative;
+                left: 0px;
+                top: 0px;
+                width: 100%;
+                height: auto;
+                z-index: 99999;
+                background: #fff;
+            }
+
+
+            .spinner {
+                min-width: 24px;
+                min-height: 24px;
+            }
+
+                .spinner:before {
+                    content: 'Loading…';
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 40px;
+                    height: 40px;
+                    margin-top: -20px;
+                    margin-left: -20px;
+                }
+
+                .spinner:not(:required):before {
+                    content: '';
+                    border-radius: 50%;
+                    -moz-border-radius: 50%;
+                    -webkit-border-radius: 50%;
+                    border-top: 2px solid #333;
+                    border-right: 2px solid transparent;
+                    animation: page-loader .6s linear infinite;
+                    -webkit-animation: page-loader .6s linear infinite;
+                }
+        }
+    </style>
 </head>
 <%--<body class="bckGray">--%>
 <body>
@@ -106,13 +173,13 @@
     <form id="form1" runat="server">
         <%= InjectedStartPageScripts() %>
         <%--  <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1",null," rel=\"preload\" as=\"style\" onload=\"this.rel='stylesheet'\" ") %>--%>
-        <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>
-        <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss2",null," rel=\"preload\" as=\"style\" onload=\"this.rel='stylesheet'\" ") %>
+        <%--    <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss1") %>--%>
         <%-- <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss2") %>--%>
-        <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>
+        <%--  <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0") %>--%>
         <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejslib0",null," async ") %>--%>
-        <link rel="preload" as="font">
-        <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <%= WelcomeLibrary.UF.BundleEngine.RenderCSS("bundlecss2",null," rel=\"preload\" as=\"style\" onload=\"this.rel='stylesheet'\" ") %>
+
         <%-- <%= references.ResMan("Common", Lingua,"tastoprenota") %> --%>
         <%= references.ResMan("Common", Lingua,"pulsantecontattipopup") %>
         <%= references.ResMan("Common", Lingua,"pulsantecontattibottom") %>
@@ -498,7 +565,7 @@
                                 <ul class="dropdown-menu dropdown-cart">
                                     <li>
                                         <ul class="carrelloelemslist products-list-mini"
-                                            runat="server" title="" style="height:300px; width: 100%; overflow-y: auto; overflow-x: hidden">
+                                            runat="server" title="" style="height: 300px; width: 100%; overflow-y: auto; overflow-x: hidden">
                                         </ul>
                                     </li>
                                     <li class="divider"></li>
@@ -698,20 +765,20 @@
                                                     <script>
                                                         function ConfirmValidationFormMaster(elembtn) {
                                                             var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
-                var out1 = document.getElementById("outputContactMasterDiv");
-                if (!chk1.checked) {
-                    out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
-                    return false;
-                } else { out1.innerHTML = ''; }
-                if (Page_ClientValidate("contattifooter")) {
-                    /*do work and go for postback*/
-                    console.log('ok validated');
-                    $(elembtn).attr("disabled", "")
+                                                            var out1 = document.getElementById("outputContactMasterDiv");
+                                                            if (!chk1.checked) {
+                                                                out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
+                                                                return false;
+                                                            } else { out1.innerHTML = ''; }
+                                                            if (Page_ClientValidate("contattifooter")) {
+                                                                /*do work and go for postback*/
+                                                                console.log('ok validated');
+                                                                $(elembtn).attr("disabled", "")
 
-                    //invio nopostback con handler////////////////////////////////////////////////////
-                    var contactdatas = {};
-                    contactdatas.chkprivacy = chk1.checked;
-                    contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
+                                                                //invio nopostback con handler////////////////////////////////////////////////////
+                                                                var contactdatas = {};
+                                                                contactdatas.chkprivacy = chk1.checked;
+                                                                contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
 
                                                                 getcontactdata(contactdatas, function (contactdatas) {
                                                                     var tastotxt = $(elembtn).html();
@@ -876,8 +943,8 @@
                                         <%--<%= CreaLinkSottoCategorie("rif000002","prod000018") %>--%>
                                         <%= CreaLinkPaginastatica(100) %>
 
-                                 <%--       <li> <button type="button" data-cc="c-settings" >Modifica preferenze cookie</button></li>--%>
-                                        <li> <a href="#" data-cc="c-settings" >Modifica preferenze cookie</a></li>
+                                        <%--       <li> <button type="button" data-cc="c-settings" >Modifica preferenze cookie</button></li>--%>
+                                        <li><a href="#" data-cc="c-settings">Modifica preferenze cookie</a></li>
                                     </ul>
                                 </div>
                             </div>

@@ -336,7 +336,8 @@ jQuery(document).ready(function ($) {
     //InitIsotope();
     /*-----------------------*/
     //$.datepicker.setDefaults($.datepicker.regional['']);
-    jQuery('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
+    if (typeof $.fn.datepicker !== 'undefined' && $(".datepicker").length != 0)
+        jQuery('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
     inizializzasimplestars(); /*inizio gli oggetti rating per la visualizzazione con le telle*/
 
     /*Jquery Carousel*/

@@ -432,8 +432,8 @@
             //"~/js/moment-with-locales.min.js", //versione grande con string locali (pesa)!!!
             "~/js/moment.min.js", //no locales!!!
             "~/js/googleMaps.js"
-        //"~/js/orestbrida/cookieconsent.js",
-        //"~/js/orestbrida/initconsent.js"
+            //"~/js/orestbrida/cookieconsent.js",
+            //"~/js/orestbrida/initconsent.js"
         );
 
         BundleEngine.AddBundleJS("bundlejslib1",
@@ -473,7 +473,7 @@
             "~/js/detect-zoom.min.js",
             "~/js/landing/jarallax.min.js",
             "~/js/jarallaxinit.js",
-                    "~/css/bcomponents/ui-259.js",
+            "~/css/bcomponents/ui-259.js",
             //"~/js/odometer/odometer.js",
             "~/js/masonry.pkgd.min.js",
             "~/lib/js/usermng.js",
@@ -494,16 +494,14 @@
             "~/lib/js/videoBanner.js",
             "~/lib/js/feedbacks.js",
             "~/lib/js/formmng.js",
-             "~/lib/js/paymentmng.js",
+            "~/lib/js/paymentmng.js",
             "~/js/aos/aos.js",
             "~/js/share42/share42.js",
-              "~/js/slick181/slick/slick.min.js",
+            "~/js/slick181/slick/slick.min.js",
             "~/js/lightGallery-master/dist/lightgallery.min.js",
             "~/js/lightGallery-master/dist/plugins/thumbnail/lg-thumbnail.min.js",
             "~/js/lightGallery-master/dist/plugins/zoom/lg-zoom.min.js",
             "~/js/lightGallery-master/dist/plugins/justifiedgallery/jquery.justifiedGallery.min.js",
-
-
             "~/js/maininit.js"
         );
 
@@ -537,14 +535,11 @@
             "~/css/ui-personalization.css",
              //"~/js/odometer/themes/odometer-theme-custom.css",
              "~/js/aos/aos.css",
-
               "~/js/slick181/slick/slick.css",
               "~/js/slick181/slick/slick-theme.css",
               "~/js/lightGallery-master/dist/css/lightgallery-bundle.css",
               "~/js/lightGallery-master/dist/plugins/justifiedgallery/justifiedGallery.css",
-
              //"~/js/orestbrida/cookieconsent.css",
-
              "~/css/custom.css"
           );
 
@@ -552,7 +547,7 @@
               "~/css/tipsy.css",
             "~/css/prettyPhoto.css",
             "~/js/flexslider/flexslider.css",
-       "~/css/fontawesome541/css/all.min.css",
+       "~/css/fontawesome541/css/all.css",
        "~/css/fontawesome541/css/v4-shims.min.css",
                  "~/js/bootstrap-notify-master/css/bootstrap-notify1.css",
             "~/js/bootstrap-notify-master/css/styles/alert-bangtidy.css",
