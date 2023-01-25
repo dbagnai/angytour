@@ -8599,16 +8599,7 @@ namespace WelcomeLibrary.DAL
                                 <g:custom_label_1><![CDATA[True]]></g:custom_label_1>
                              */
 
-                            if (string.IsNullOrEmpty(brand) && string.IsNullOrEmpty(gtinean) && string.IsNullOrEmpty(gtinmpn))
-                            {
-                                //Identifier_exists ( indica che non sono presenti brand,mpn o gtin ( occhio a non inserirli se metti a false il default è true )
-                                writer.WriteStartElement("g:identifier_exists");
-                                writer.WriteValue("false");
-                                writer.WriteEndElement();
-                            }
-
-
-
+                            bool identifier = false;
                             //BRAND
                             if (!string.IsNullOrEmpty(brand))
                             {
@@ -8617,19 +8608,31 @@ namespace WelcomeLibrary.DAL
                                 writer.WriteEndElement();
                             }
                             //CODIE  EAN / ISBN / UPC / JAN / ITF-14 (barcode )
-                            if (!string.IsNullOrEmpty(gtinean))
+                            if (!string.IsNullOrEmpty(gtinean) && !string.IsNullOrEmpty(brand))
                             {
                                 writer.WriteStartElement("g:gtin");
                                 writer.WriteCData(gtinean);
                                 writer.WriteEndElement();
+                                identifier = true;
                             }
                             //MANUFACTURER PART NUMBER  ( qui ci va lo sku )
-                            if (!string.IsNullOrEmpty(gtinmpn))
+                            if (!string.IsNullOrEmpty(gtinmpn) && !string.IsNullOrEmpty(brand))
                             {
                                 writer.WriteStartElement("g:mpn");
                                 writer.WriteCData(gtinmpn);
                                 writer.WriteEndElement();
+                                identifier = true;
                             }
+
+                            if (!identifier)
+                            //if (string.IsNullOrEmpty(brand) && string.IsNullOrEmpty(gtinean) && string.IsNullOrEmpty(gtinmpn))
+                            {
+                                //Identifier_exists ( indica che non sono presenti brand,mpn o gtin ( occhio a non inserirli se metti a false il default è true )
+                                writer.WriteStartElement("g:identifier_exists");
+                                writer.WriteValue("false");
+                                writer.WriteEndElement();
+                            }
+
                             //Specifico che non fornisco codice gtin o mpn per il prodotto ( che sarebbero meglio)
                             //writer.WriteStartElement("g:identifier_​exists");
                             //writer.WriteValue("no"); //yes
