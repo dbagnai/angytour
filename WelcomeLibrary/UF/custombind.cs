@@ -5184,6 +5184,18 @@ namespace WelcomeLibrary.UF
                         string controllo = null;
                         if (resultinfo.ContainsKey(prop[1]))
                             controllo = resultinfo[prop[1]];
+
+
+                        //modifica con relpace binding del valore Id nella stringa dalle risorse
+                        string Id = valore[0];
+                        var link = Id;
+                        if (linkloaded.ContainsKey(Id) && linkloaded[Id].ContainsKey("link"))
+                            link = linkloaded[Id]["link"];
+                        if (Id != "0")
+                            testodarisorsa = testodarisorsa.Replace("|Id|", link);
+                        /////////////////////
+
+
                         if ((controllo == "true" || controllo == null) && attiva)
                             ret = testodarisorsa;
                     }
@@ -5268,14 +5280,26 @@ namespace WelcomeLibrary.UF
                 case "formatstringfromresource":
                     try
                     {
+                        string testo = "";
                         string gruppo = "basetext";
                         if (prop[0] != null && prop[0] != "")
                         { gruppo = prop[0]; }
                         if (prop[1] != null && !string.IsNullOrEmpty(prop[1]))
                         {
-                            string testo = WelcomeLibrary.UF.ResourceManagement.ReadKey(gruppo, Lingua, prop[1]).Valore;
-                            ret = testo;
+                            testo = WelcomeLibrary.UF.ResourceManagement.ReadKey(gruppo, Lingua, prop[1]).Valore;
                         }
+
+                        /////////////////////
+                        //modifica con replace binding del valore Id nella stringa dalle risorse
+                        string Id = valore[0];
+                        var link = Id;
+                        if (linkloaded.ContainsKey(Id) && linkloaded[Id].ContainsKey("link"))
+                            link = linkloaded[Id]["link"];
+                        if (Id != "0")
+                            testo = testo.Replace("|Id|", link);
+                        /////////////////////
+
+                        ret = testo;
                     }
                     catch { }
                     break;
