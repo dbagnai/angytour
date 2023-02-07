@@ -32,13 +32,41 @@ namespace WelcomeLibrary.DAL
         {
             if (useJSON)
             {
-                //string extpath = Hosting.OSPath( Hosting.WebRootDir + "\\SQLite.Interop.dll");//  "D:\\ORC\\WebMouse\\P4ALL\\progetto4all\\CorePortaleBaseModel\\SQLite.Interop.dll";
-                ////   WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\bin\\SQLite.Interop.dll"
-                //string extpath = "D:\\ORC\\WebMouse\\P4ALL\\progetto4all\\CorePortaleBaseModel\\SQLite.Interop.dll";
-                //string extpath = WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\bin\\SQLite.Interop.dll";
                 conn.EnableExtensions(true);
-                conn.LoadExtension("SQLite.Interop.dll", "sqlite3_json_init");
+
+                //Controllo di versione sqlite per  JSON1 loadable extension
+                //( dalla versione 3.37 in poi non server caricare l'estesione, è compresa di default nella connessione)
+                string actualversion = conn.ServerVersion;
+                string versionchange = "3.37";
+                //char searchChar = '.';
+                //if( actualversion.Count(t => t == searchChar) <2)
+                //     actualversion = actualversion + ".0";
+                int firstDotIndex = actualversion.IndexOf(".");
+                int secondDotIndex = actualversion.IndexOf(".", firstDotIndex + 1);
+                if (secondDotIndex != -1)
+                    actualversion = actualversion.Substring(0, secondDotIndex);
+
+                Version v1 = new Version(actualversion);
+                Version v2 = new Version(versionchange);
+                bool upper = false;
+                int comparison = v1.CompareTo(v2);
+                if (comparison > 0) upper = true;
+
+                if (!upper)
+                {
+
+                    //string extpath = Hosting.OSPath( Hosting.WebRootDir + "\\SQLite.Interop.dll");//  "D:\\ORC\\WebMouse\\P4ALL\\progetto4all\\CorePortaleBaseModel\\SQLite.Interop.dll";
+                    ////   WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\bin\\SQLite.Interop.dll"
+                    //string extpath = "D:\\ORC\\WebMouse\\P4ALL\\progetto4all\\CorePortaleBaseModel\\SQLite.Interop.dll";
+                    //string extpath = WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "\\bin\\SQLite.Interop.dll";
+                    conn.LoadExtension("SQLite.Interop.dll", "sqlite3_json_init"); //versione inziale
+
+                    //string librarypath = WelcomeLibrary.STATIC.Global.percorsofisicoapplicazione + "Bin\\SQLite.Interop.dll";// typeof(SQLiteConnection).Assembly.Location;
+                    //conn.LoadExtension(librarypath, "sqlite3_json_init");  
+                }
+
             }
+
 
         }
 

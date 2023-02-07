@@ -5534,9 +5534,10 @@
             <c>de-DE</c>, <c>en-DE</c>, <c>da-DK</c>, <c>en-DK</c>, <c>es-ES</c>, <c>en-ES</c>,
             <c>fi-FI</c>, <c>sv-FI</c>, <c>en-FI</c>, <c>en-GB</c>, <c>en-IE</c>, <c>it-IT</c>,
             <c>en-IT</c>, <c>nl-NL</c>, <c>en-NL</c>, <c>nb-NO</c>, <c>en-NO</c>, <c>sv-SE</c>,
-            <c>en-SE</c>, <c>en-US</c>, <c>es-US</c>, <c>fr-FR</c>, <c>en-FR</c>, <c>en-AU</c>,
-            <c>en-NZ</c>, <c>en-CA</c>, <c>fr-CA</c>, <c>pl-PL</c>, <c>en-PL</c>, <c>pt-PT</c>,
-            <c>en-PT</c>, <c>de-CH</c>, <c>fr-CH</c>, <c>it-CH</c>, or <c>en-CH</c>.
+            <c>en-SE</c>, <c>en-US</c>, <c>es-US</c>, <c>fr-FR</c>, <c>en-FR</c>, <c>cs-CZ</c>,
+            <c>en-CZ</c>, <c>el-GR</c>, <c>en-GR</c>, <c>en-AU</c>, <c>en-NZ</c>, <c>en-CA</c>,
+            <c>fr-CA</c>, <c>pl-PL</c>, <c>en-PL</c>, <c>pt-PT</c>, <c>en-PT</c>, <c>de-CH</c>,
+            <c>fr-CH</c>, <c>it-CH</c>, or <c>en-CH</c>.
             </summary>
         </member>
         <member name="P:Stripe.ChargePaymentMethodDetailsKonbini.Store">
@@ -6619,8 +6620,8 @@
         <member name="P:Stripe.Checkout.SessionPaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer.Country">
             <summary>
             The desired country code of the bank account information. Permitted values include:
-            <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
-            One of: <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
+            <c>BE</c>, <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
+            One of: <c>BE</c>, <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
             </summary>
         </member>
         <member name="P:Stripe.Checkout.SessionPaymentMethodOptionsEps.SetupFutureUsage">
@@ -8012,7 +8013,7 @@
         <member name="P:Stripe.Checkout.SessionPaymentMethodOptionsCustomerBalanceBankTransferEuBankTransferOptions.Country">
             <summary>
             The desired country code of the bank account information. Permitted values include:
-            <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
+            <c>BE</c>, <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
             </summary>
         </member>
         <member name="P:Stripe.Checkout.SessionPaymentMethodOptionsCustomerBalanceBankTransferOptions.EuBankTransfer">
@@ -8722,6 +8723,11 @@
             the first time. Has to be at least 1.
             </summary>
         </member>
+        <member name="P:Stripe.Checkout.SessionSubscriptionDataOptions.TrialSettings">
+            <summary>
+            Settings related to subscription trials.
+            </summary>
+        </member>
         <member name="P:Stripe.Checkout.SessionSubscriptionDataTransferDataOptions.AmountPercent">
             <summary>
             A non-negative decimal between 0 and 100, with at most two decimal places. This
@@ -8733,6 +8739,18 @@
         <member name="P:Stripe.Checkout.SessionSubscriptionDataTransferDataOptions.Destination">
             <summary>
             ID of an existing, connected Stripe account.
+            </summary>
+        </member>
+        <member name="P:Stripe.Checkout.SessionSubscriptionDataTrialSettingsEndBehaviorOptions.MissingPaymentMethod">
+            <summary>
+            Indicates how the subscription should change when the trial ends if the user did not
+            provide a payment method.
+            One of: <c>cancel</c>, <c>create_invoice</c>, or <c>pause</c>.
+            </summary>
+        </member>
+        <member name="P:Stripe.Checkout.SessionSubscriptionDataTrialSettingsOptions.EndBehavior">
+            <summary>
+            Defines how the subscription should behave when the user's free trial ends.
             </summary>
         </member>
         <member name="P:Stripe.Checkout.SessionTaxIdCollectionOptions.Enabled">
@@ -9045,6 +9063,11 @@
             tax.
             </summary>
         </member>
+        <member name="P:Stripe.CreditNote.AmountShipping">
+            <summary>
+            This is the sum of all the shipping amounts.
+            </summary>
+        </member>
         <member name="P:Stripe.CreditNote.Created">
             <summary>
             Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -9170,6 +9193,11 @@
              For more information, see the <a href="https://stripe.com/docs/expand">expand documentation</a>.
              </summary>
         </member>
+        <member name="P:Stripe.CreditNote.ShippingCost">
+            <summary>
+            The details of the cost of shipping, including the ShippingRate applied to the invoice.
+            </summary>
+        </member>
         <member name="P:Stripe.CreditNote.Status">
             <summary>
             Status of this credit note, one of <c>issued</c> or <c>void</c>. Learn more about <a
@@ -9237,6 +9265,56 @@
              The discount that was applied to get this discount amount.
             
              For more information, see the <a href="https://stripe.com/docs/expand">expand documentation</a>.
+             </summary>
+        </member>
+        <member name="P:Stripe.CreditNoteShippingCost.AmountSubtotal">
+            <summary>
+            Total shipping cost before any taxes are applied.
+            </summary>
+        </member>
+        <member name="P:Stripe.CreditNoteShippingCost.AmountTax">
+            <summary>
+            Total tax amount applied due to shipping costs. If no tax was applied, defaults to 0.
+            </summary>
+        </member>
+        <member name="P:Stripe.CreditNoteShippingCost.AmountTotal">
+            <summary>
+            Total shipping cost after taxes are applied.
+            </summary>
+        </member>
+        <member name="P:Stripe.CreditNoteShippingCost.ShippingRateId">
+            <summary>
+            (ID of the ShippingRate)
+            The ID of the ShippingRate for this invoice.
+            </summary>
+        </member>
+        <member name="P:Stripe.CreditNoteShippingCost.ShippingRate">
+             <summary>
+             (Expanded)
+             The ID of the ShippingRate for this invoice.
+            
+             For more information, see the <a href="https://stripe.com/docs/expand">expand documentation</a>.
+             </summary>
+        </member>
+        <member name="P:Stripe.CreditNoteShippingCost.Taxes">
+            <summary>
+            The taxes applied to the shipping rate.
+            </summary>
+        </member>
+        <member name="P:Stripe.CreditNoteShippingCostTax.Amount">
+            <summary>
+            Amount of tax applied for this rate.
+            </summary>
+        </member>
+        <member name="P:Stripe.CreditNoteShippingCostTax.Rate">
+             <summary>
+             Tax rates can be applied to <a
+             href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
+             href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
+             href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
+             Sessions</a> to collect tax.
+            
+             Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax Rates</a>.
              </summary>
         </member>
         <member name="P:Stripe.CreditNoteTaxAmount.Amount">
@@ -9459,8 +9537,9 @@
             <c>return_initiated</c>, or <c>return_canceled</c>. New types may be added in future.
             See <a href="https://stripe.com/docs/payments/customer-balance#types">Customer
             Balance</a> to learn more about these types.
-            One of: <c>applied_to_payment</c>, <c>funded</c>, <c>refunded_from_payment</c>,
-            <c>return_canceled</c>, <c>return_initiated</c>, or <c>unapplied_from_payment</c>.
+            One of: <c>applied_to_payment</c>, <c>funded</c>, <c>funding_reversed</c>,
+            <c>refunded_from_payment</c>, <c>return_canceled</c>, <c>return_initiated</c>, or
+            <c>unapplied_from_payment</c>.
             </summary>
         </member>
         <member name="P:Stripe.CustomerCashBalanceTransactionAppliedToPayment.PaymentIntentId">
@@ -12366,6 +12445,11 @@
             The difference between amount_due and amount_paid, in %s.
             </summary>
         </member>
+        <member name="P:Stripe.Invoice.AmountShipping">
+            <summary>
+            This is the sum of all the shipping amounts.
+            </summary>
+        </member>
         <member name="P:Stripe.Invoice.ApplicationId">
             <summary>
             (ID of the Application)
@@ -12787,6 +12871,18 @@
             Options for invoice PDF rendering.
             </summary>
         </member>
+        <member name="P:Stripe.Invoice.ShippingCost">
+            <summary>
+            The details of the cost of shipping, including the ShippingRate applied on the invoice.
+            </summary>
+        </member>
+        <member name="P:Stripe.Invoice.ShippingDetails">
+            <summary>
+            Shipping details for the invoice. The Invoice PDF will use the <c>shipping_details</c>
+            value if it is set, otherwise the PDF will render the shipping address from the
+            customer.
+            </summary>
+        </member>
         <member name="P:Stripe.Invoice.StartingBalance">
             <summary>
             Starting customer balance before the invoice is finalized. If the invoice has not been
@@ -13083,8 +13179,8 @@
         <member name="P:Stripe.InvoicePaymentSettingsPaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer.Country">
             <summary>
             The desired country code of the bank account information. Permitted values include:
-            <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
-            One of: <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
+            <c>BE</c>, <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
+            One of: <c>BE</c>, <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
             </summary>
         </member>
         <member name="P:Stripe.InvoicePaymentSettingsPaymentMethodOptionsUsBankAccount.VerificationMethod">
@@ -13102,6 +13198,78 @@
         <member name="P:Stripe.InvoiceRenderingOptions.AmountTaxDisplay">
             <summary>
             How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCost.AmountSubtotal">
+            <summary>
+            Total shipping cost before any taxes are applied.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCost.AmountTax">
+            <summary>
+            Total tax amount applied due to shipping costs. If no tax was applied, defaults to 0.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCost.AmountTotal">
+            <summary>
+            Total shipping cost after taxes are applied.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCost.ShippingRateId">
+            <summary>
+            (ID of the ShippingRate)
+            The ID of the ShippingRate for this invoice.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCost.ShippingRate">
+             <summary>
+             (Expanded)
+             The ID of the ShippingRate for this invoice.
+            
+             For more information, see the <a href="https://stripe.com/docs/expand">expand documentation</a>.
+             </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCost.Taxes">
+            <summary>
+            The taxes applied to the shipping rate.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostTax.Amount">
+            <summary>
+            Amount of tax applied for this rate.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostTax.Rate">
+             <summary>
+             Tax rates can be applied to <a
+             href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
+             href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
+             href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
+             Sessions</a> to collect tax.
+            
+             Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax Rates</a>.
+             </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingDetails.Carrier">
+            <summary>
+            The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingDetails.Name">
+            <summary>
+            Recipient name.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingDetails.Phone">
+            <summary>
+            Recipient phone (including extension).
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingDetails.TrackingNumber">
+            <summary>
+            The tracking number for a physical product, obtained from the delivery service. If
+            multiple tracking numbers were generated for this purchase, please separate them with
+            commas.
             </summary>
         </member>
         <member name="P:Stripe.InvoiceStatusTransitions.FinalizedAt">
@@ -13636,12 +13804,16 @@
         </member>
         <member name="P:Stripe.Issuing.CardholderIndividual.FirstName">
             <summary>
-            The first name of this cardholder.
+            The first name of this cardholder. This field cannot contain any numbers, special
+            characters (except periods, commas, hyphens, spaces and apostrophes) or non-latin
+            letters.
             </summary>
         </member>
         <member name="P:Stripe.Issuing.CardholderIndividual.LastName">
             <summary>
-            The last name of this cardholder.
+            The last name of this cardholder. This field cannot contain any numbers, special
+            characters (except periods, commas, hyphens, spaces and apostrophes) or non-latin
+            letters.
             </summary>
         </member>
         <member name="P:Stripe.Issuing.CardholderIndividual.Verification">
@@ -17225,8 +17397,8 @@
         <member name="P:Stripe.PaymentIntentPaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer.Country">
             <summary>
             The desired country code of the bank account information. Permitted values include:
-            <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
-            One of: <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
+            <c>BE</c>, <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
+            One of: <c>BE</c>, <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
             </summary>
         </member>
         <member name="P:Stripe.PaymentIntentPaymentMethodOptionsEps.SetupFutureUsage">
@@ -17756,6 +17928,11 @@
             One of: <c>always</c>, or <c>if_required</c>.
             </summary>
         </member>
+        <member name="P:Stripe.PaymentLink.InvoiceCreation">
+            <summary>
+            Configuration for creating invoice for payment mode payment links.
+            </summary>
+        </member>
         <member name="P:Stripe.PaymentLink.LineItems">
             <summary>
             The line items representing what is being sold.
@@ -17899,6 +18076,72 @@
         <member name="P:Stripe.PaymentLinkCustomTextSubmit.Message">
             <summary>
             Text may be up to 1000 characters in length.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreation.Enabled">
+            <summary>
+            Enable creating an invoice on successful payment.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreation.InvoiceData">
+            <summary>
+            Configuration for the invoice. Default invoice values will be used if unspecified.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceData.AccountTaxIdIds">
+            <summary>
+            (IDs of the AccountTaxIds)
+            The account tax IDs associated with the invoice.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceData.AccountTaxIds">
+             <summary>
+             (Expanded)
+             The account tax IDs associated with the invoice.
+            
+             For more information, see the <a href="https://stripe.com/docs/expand">expand documentation</a>.
+             </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceData.CustomFields">
+            <summary>
+            A list of up to 4 custom fields to be displayed on the invoice.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceData.Description">
+            <summary>
+            An arbitrary string attached to the object. Often useful for displaying to users.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceData.Footer">
+            <summary>
+            Footer to be displayed on the invoice.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceData.Metadata">
+            <summary>
+            Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+            attach to an object. This can be useful for storing additional information about the
+            object in a structured format.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceData.RenderingOptions">
+            <summary>
+            Options for invoice PDF rendering.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceDataCustomField.Name">
+            <summary>
+            The name of the custom field.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceDataCustomField.Value">
+            <summary>
+            The value of the custom field.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceDataRenderingOptions.AmountTaxDisplay">
+            <summary>
+            How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
             </summary>
         </member>
         <member name="P:Stripe.PaymentLinkPaymentIntentData.CaptureMethod">
@@ -21428,17 +21671,17 @@
             <c>America/Cambridge_Bay</c>, <c>America/Campo_Grande</c>, <c>America/Cancun</c>,
             <c>America/Caracas</c>, <c>America/Catamarca</c>, <c>America/Cayenne</c>,
             <c>America/Cayman</c>, <c>America/Chicago</c>, <c>America/Chihuahua</c>,
-            <c>America/Coral_Harbour</c>, <c>America/Cordoba</c>, <c>America/Costa_Rica</c>,
-            <c>America/Creston</c>, <c>America/Cuiaba</c>, <c>America/Curacao</c>,
-            <c>America/Danmarkshavn</c>, <c>America/Dawson</c>, <c>America/Dawson_Creek</c>,
-            <c>America/Denver</c>, <c>America/Detroit</c>, <c>America/Dominica</c>,
-            <c>America/Edmonton</c>, <c>America/Eirunepe</c>, <c>America/El_Salvador</c>,
-            <c>America/Ensenada</c>, <c>America/Fort_Nelson</c>, <c>America/Fort_Wayne</c>,
-            <c>America/Fortaleza</c>, <c>America/Glace_Bay</c>, <c>America/Godthab</c>,
-            <c>America/Goose_Bay</c>, <c>America/Grand_Turk</c>, <c>America/Grenada</c>,
-            <c>America/Guadeloupe</c>, <c>America/Guatemala</c>, <c>America/Guayaquil</c>,
-            <c>America/Guyana</c>, <c>America/Halifax</c>, <c>America/Havana</c>,
-            <c>America/Hermosillo</c>, <c>America/Indiana/Indianapolis</c>,
+            <c>America/Ciudad_Juarez</c>, <c>America/Coral_Harbour</c>, <c>America/Cordoba</c>,
+            <c>America/Costa_Rica</c>, <c>America/Creston</c>, <c>America/Cuiaba</c>,
+            <c>America/Curacao</c>, <c>America/Danmarkshavn</c>, <c>America/Dawson</c>,
+            <c>America/Dawson_Creek</c>, <c>America/Denver</c>, <c>America/Detroit</c>,
+            <c>America/Dominica</c>, <c>America/Edmonton</c>, <c>America/Eirunepe</c>,
+            <c>America/El_Salvador</c>, <c>America/Ensenada</c>, <c>America/Fort_Nelson</c>,
+            <c>America/Fort_Wayne</c>, <c>America/Fortaleza</c>, <c>America/Glace_Bay</c>,
+            <c>America/Godthab</c>, <c>America/Goose_Bay</c>, <c>America/Grand_Turk</c>,
+            <c>America/Grenada</c>, <c>America/Guadeloupe</c>, <c>America/Guatemala</c>,
+            <c>America/Guayaquil</c>, <c>America/Guyana</c>, <c>America/Halifax</c>,
+            <c>America/Havana</c>, <c>America/Hermosillo</c>, <c>America/Indiana/Indianapolis</c>,
             <c>America/Indiana/Knox</c>, <c>America/Indiana/Marengo</c>,
             <c>America/Indiana/Petersburg</c>, <c>America/Indiana/Tell_City</c>,
             <c>America/Indiana/Vevay</c>, <c>America/Indiana/Vincennes</c>,
@@ -23673,7 +23916,7 @@
              created, but then immediately automatically closed). After receiving updated payment
              information from a customer, you may choose to reopen and pay their closed invoices.
              One of: <c>active</c>, <c>canceled</c>, <c>incomplete</c>, <c>incomplete_expired</c>,
-             <c>past_due</c>, <c>trialing</c>, or <c>unpaid</c>.
+             <c>past_due</c>, <c>paused</c>, <c>trialing</c>, or <c>unpaid</c>.
              </summary>
         </member>
         <member name="P:Stripe.Subscription.TestClockId">
@@ -23700,6 +23943,11 @@
         <member name="P:Stripe.Subscription.TrialEnd">
             <summary>
             If the subscription has a trial, the end of that trial.
+            </summary>
+        </member>
+        <member name="P:Stripe.Subscription.TrialSettings">
+            <summary>
+            Settings related to subscription trials.
             </summary>
         </member>
         <member name="P:Stripe.Subscription.TrialStart">
@@ -23873,8 +24121,8 @@
         <member name="P:Stripe.SubscriptionPaymentSettingsPaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer.Country">
             <summary>
             The desired country code of the bank account information. Permitted values include:
-            <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
-            One of: <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
+            <c>BE</c>, <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
+            One of: <c>BE</c>, <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
             </summary>
         </member>
         <member name="P:Stripe.SubscriptionPaymentSettingsPaymentMethodOptionsUsBankAccount.VerificationMethod">
@@ -23958,6 +24206,18 @@
             
              For more information, see the <a href="https://stripe.com/docs/expand">expand documentation</a>.
              </summary>
+        </member>
+        <member name="P:Stripe.SubscriptionTrialSettings.EndBehavior">
+            <summary>
+            Defines how a subscription behaves when a free trial ends.
+            </summary>
+        </member>
+        <member name="P:Stripe.SubscriptionTrialSettingsEndBehavior.MissingPaymentMethod">
+            <summary>
+            Indicates how the subscription should change when the trial ends if the user did not
+            provide a payment method.
+            One of: <c>cancel</c>, <c>create_invoice</c>, or <c>pause</c>.
+            </summary>
         </member>
         <member name="T:Stripe.SubscriptionSchedule">
              <summary>
@@ -32729,6 +32989,12 @@
             set, a refund will be created for the charge associated with the invoice.
             </summary>
         </member>
+        <member name="P:Stripe.CreditNoteCreateOptions.ShippingCost">
+            <summary>
+            When shipping_cost contains the shipping_rate from the invoice, the shipping_cost is
+            included in the credit note.
+            </summary>
+        </member>
         <member name="P:Stripe.CreditNoteLineOptions.Amount">
             <summary>
             The line item amount to credit. Only valid when <c>type</c> is <c>invoice_line_item</c>.
@@ -32776,6 +33042,11 @@
             Same as <c>unit_amount</c>, but accepts a decimal value in cents (or local equivalent)
             with at most 12 decimal places. Only one of <c>unit_amount</c> and
             <c>unit_amount_decimal</c> can be set.
+            </summary>
+        </member>
+        <member name="P:Stripe.CreditNoteShippingCostOptions.ShippingRate">
+            <summary>
+            The ID of the shipping rate to use for this order.
             </summary>
         </member>
         <member name="P:Stripe.CreditNoteUpdateOptions.Memo">
@@ -32836,7 +33107,7 @@
         <member name="P:Stripe.CustomerBankTransferEuBankTransferOptions.Country">
             <summary>
             The desired country code of the bank account information. Permitted values include:
-            <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
+            <c>BE</c>, <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
             </summary>
         </member>
         <member name="P:Stripe.CustomerBankTransferOptions.EuBankTransfer">
@@ -34020,6 +34291,18 @@
             Options for invoice PDF rendering.
             </summary>
         </member>
+        <member name="P:Stripe.InvoiceCreateOptions.ShippingCost">
+            <summary>
+            Settings for the cost of shipping for this invoice.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceCreateOptions.ShippingDetails">
+            <summary>
+            Shipping details for the invoice. The Invoice PDF will use the <c>shipping_details</c>
+            value if it is set, otherwise the PDF will render the shipping address from the
+            customer.
+            </summary>
+        </member>
         <member name="P:Stripe.InvoiceCreateOptions.StatementDescriptor">
             <summary>
             Extra information about a charge for the customer's credit card statement. It must
@@ -34312,7 +34595,7 @@
         <member name="P:Stripe.InvoicePaymentSettingsPaymentMethodOptionsCustomerBalanceBankTransferEuBankTransferOptions.Country">
             <summary>
             The desired country code of the bank account information. Permitted values include:
-            <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
+            <c>BE</c>, <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
             </summary>
         </member>
         <member name="P:Stripe.InvoicePaymentSettingsPaymentMethodOptionsCustomerBalanceBankTransferOptions.EuBankTransfer">
@@ -34444,6 +34727,140 @@
             will include inclusive tax (and exclude exclusive tax) in invoice PDF amounts.
             <c>exclude_tax</c> will exclude all tax (inclusive and exclusive alike) from invoice PDF
             amounts.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostOptions.ShippingRate">
+            <summary>
+            The ID of the shipping rate to use for this order.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostOptions.ShippingRateData">
+            <summary>
+            Parameters to create a new ad-hoc shipping rate for this order.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataDeliveryEstimateMaximumOptions.Unit">
+            <summary>
+            A unit of time.
+            One of: <c>business_day</c>, <c>day</c>, <c>hour</c>, <c>month</c>, or <c>week</c>.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataDeliveryEstimateMaximumOptions.Value">
+            <summary>
+            Must be greater than 0.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataDeliveryEstimateMinimumOptions.Unit">
+            <summary>
+            A unit of time.
+            One of: <c>business_day</c>, <c>day</c>, <c>hour</c>, <c>month</c>, or <c>week</c>.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataDeliveryEstimateMinimumOptions.Value">
+            <summary>
+            Must be greater than 0.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataDeliveryEstimateOptions.Maximum">
+            <summary>
+            The upper bound of the estimated range. If empty, represents no upper bound i.e.,
+            infinite.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataDeliveryEstimateOptions.Minimum">
+            <summary>
+            The lower bound of the estimated range. If empty, represents no lower bound.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataFixedAmountCurrencyOptionsOptions.Amount">
+            <summary>
+            A non-negative integer in cents representing how much to charge.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataFixedAmountCurrencyOptionsOptions.TaxBehavior">
+            <summary>
+            Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One
+            of <c>inclusive</c>, <c>exclusive</c>, or <c>unspecified</c>.
+            One of: <c>exclusive</c>, <c>inclusive</c>, or <c>unspecified</c>.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataFixedAmountOptions.Amount">
+            <summary>
+            A non-negative integer in cents representing how much to charge.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataFixedAmountOptions.Currency">
+            <summary>
+            Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+            code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+            currency</a>.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataFixedAmountOptions.CurrencyOptions">
+            <summary>
+            Shipping rates defined in each available currency option. Each key must be a
+            three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+            code</a> and a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataOptions.DeliveryEstimate">
+            <summary>
+            The estimated range for how long shipping will take, meant to be displayable to the
+            customer. This will appear on CheckoutSessions.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataOptions.DisplayName">
+            <summary>
+            The name of the shipping rate, meant to be displayable to the customer. This will appear
+            on CheckoutSessions.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataOptions.FixedAmount">
+            <summary>
+            Describes a fixed amount to charge for shipping. Must be present if type is
+            <c>fixed_amount</c>.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataOptions.Metadata">
+            <summary>
+            Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+            attach to an object. This can be useful for storing additional information about the
+            object in a structured format. Individual keys can be unset by posting an empty value to
+            them. All keys can be unset by posting an empty value to <c>metadata</c>.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataOptions.TaxBehavior">
+            <summary>
+            Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One
+            of <c>inclusive</c>, <c>exclusive</c>, or <c>unspecified</c>.
+            One of: <c>exclusive</c>, <c>inclusive</c>, or <c>unspecified</c>.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataOptions.TaxCode">
+            <summary>
+            A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax
+            code is <c>txcd_92010001</c>.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingCostShippingRateDataOptions.Type">
+            <summary>
+            The type of calculation to use on the shipping rate. Can only be <c>fixed_amount</c> for
+            now.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingDetailsOptions.Address">
+            <summary>
+            Shipping address.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingDetailsOptions.Name">
+            <summary>
+            Recipient name.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceShippingDetailsOptions.Phone">
+            <summary>
+            Recipient phone (including extension).
             </summary>
         </member>
         <member name="P:Stripe.InvoiceSubscriptionItemBillingThresholdsOptions.UsageGte">
@@ -34693,6 +35110,18 @@
         <member name="P:Stripe.InvoiceUpdateOptions.RenderingOptions">
             <summary>
             Options for invoice PDF rendering.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceUpdateOptions.ShippingCost">
+            <summary>
+            Settings for the cost of shipping for this invoice.
+            </summary>
+        </member>
+        <member name="P:Stripe.InvoiceUpdateOptions.ShippingDetails">
+            <summary>
+            Shipping details for the invoice. The Invoice PDF will use the <c>shipping_details</c>
+            value if it is set, otherwise the PDF will render the shipping address from the
+            customer.
             </summary>
         </member>
         <member name="P:Stripe.InvoiceUpdateOptions.StatementDescriptor">
@@ -36408,7 +36837,7 @@
         <member name="P:Stripe.PaymentIntentPaymentMethodOptionsCustomerBalanceBankTransferEuBankTransferOptions.Country">
             <summary>
             The desired country code of the bank account information. Permitted values include:
-            <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
+            <c>BE</c>, <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
             </summary>
         </member>
         <member name="P:Stripe.PaymentIntentPaymentMethodOptionsCustomerBalanceBankTransferOptions.EuBankTransfer">
@@ -36591,13 +37020,14 @@
         <member name="P:Stripe.PaymentIntentPaymentMethodOptionsKlarnaOptions.PreferredLocale">
             <summary>
             Preferred language of the Klarna authorization page that the customer is redirected to.
-            One of: <c>da-DK</c>, <c>de-AT</c>, <c>de-CH</c>, <c>de-DE</c>, <c>en-AT</c>,
-            <c>en-AU</c>, <c>en-BE</c>, <c>en-CA</c>, <c>en-CH</c>, <c>en-DE</c>, <c>en-DK</c>,
-            <c>en-ES</c>, <c>en-FI</c>, <c>en-FR</c>, <c>en-GB</c>, <c>en-IE</c>, <c>en-IT</c>,
-            <c>en-NL</c>, <c>en-NO</c>, <c>en-NZ</c>, <c>en-PL</c>, <c>en-PT</c>, <c>en-SE</c>,
-            <c>en-US</c>, <c>es-ES</c>, <c>es-US</c>, <c>fi-FI</c>, <c>fr-BE</c>, <c>fr-CA</c>,
-            <c>fr-CH</c>, <c>fr-FR</c>, <c>it-CH</c>, <c>it-IT</c>, <c>nb-NO</c>, <c>nl-BE</c>,
-            <c>nl-NL</c>, <c>pl-PL</c>, <c>pt-PT</c>, <c>sv-FI</c>, or <c>sv-SE</c>.
+            One of: <c>cs-CZ</c>, <c>da-DK</c>, <c>de-AT</c>, <c>de-CH</c>, <c>de-DE</c>,
+            <c>el-GR</c>, <c>en-AT</c>, <c>en-AU</c>, <c>en-BE</c>, <c>en-CA</c>, <c>en-CH</c>,
+            <c>en-CZ</c>, <c>en-DE</c>, <c>en-DK</c>, <c>en-ES</c>, <c>en-FI</c>, <c>en-FR</c>,
+            <c>en-GB</c>, <c>en-GR</c>, <c>en-IE</c>, <c>en-IT</c>, <c>en-NL</c>, <c>en-NO</c>,
+            <c>en-NZ</c>, <c>en-PL</c>, <c>en-PT</c>, <c>en-SE</c>, <c>en-US</c>, <c>es-ES</c>,
+            <c>es-US</c>, <c>fi-FI</c>, <c>fr-BE</c>, <c>fr-CA</c>, <c>fr-CH</c>, <c>fr-FR</c>,
+            <c>it-CH</c>, <c>it-IT</c>, <c>nb-NO</c>, <c>nl-BE</c>, <c>nl-NL</c>, <c>pl-PL</c>,
+            <c>pt-PT</c>, <c>sv-FI</c>, or <c>sv-SE</c>.
             </summary>
         </member>
         <member name="P:Stripe.PaymentIntentPaymentMethodOptionsKlarnaOptions.SetupFutureUsage">
@@ -37468,6 +37898,11 @@
             One of: <c>always</c>, or <c>if_required</c>.
             </summary>
         </member>
+        <member name="P:Stripe.PaymentLinkCreateOptions.InvoiceCreation">
+            <summary>
+            Generate a post-purchase Invoice for one-time payments.
+            </summary>
+        </member>
         <member name="P:Stripe.PaymentLinkCreateOptions.LineItems">
             <summary>
             The line items representing what is being sold. Each line item represents an item being
@@ -37579,6 +38014,68 @@
         <member name="P:Stripe.PaymentLinkCustomTextSubmitOptions.Message">
             <summary>
             Text may be up to 1000 characters in length.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceDataCustomFieldOptions.Name">
+            <summary>
+            The name of the custom field. This may be up to 30 characters.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceDataCustomFieldOptions.Value">
+            <summary>
+            The value of the custom field. This may be up to 30 characters.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceDataOptions.AccountTaxIds">
+            <summary>
+            The account tax IDs associated with the invoice.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceDataOptions.CustomFields">
+            <summary>
+            Default custom fields to be displayed on invoices for this customer.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceDataOptions.Description">
+            <summary>
+            An arbitrary string attached to the object. Often useful for displaying to users.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceDataOptions.Footer">
+            <summary>
+            Default footer to be displayed on invoices for this customer.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceDataOptions.Metadata">
+            <summary>
+            Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+            attach to an object. This can be useful for storing additional information about the
+            object in a structured format. Individual keys can be unset by posting an empty value to
+            them. All keys can be unset by posting an empty value to <c>metadata</c>.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceDataOptions.RenderingOptions">
+            <summary>
+            Default options for invoice PDF rendering for this customer.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationInvoiceDataRenderingOptionsOptions.AmountTaxDisplay">
+            <summary>
+            How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
+            One of <c>exclude_tax</c> or <c>include_inclusive_tax</c>. <c>include_inclusive_tax</c>
+            will include inclusive tax (and exclude exclusive tax) in invoice PDF amounts.
+            <c>exclude_tax</c> will exclude all tax (inclusive and exclusive alike) from invoice PDF
+            amounts.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationOptions.Enabled">
+            <summary>
+            Whether the feature is enabled.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkInvoiceCreationOptions.InvoiceData">
+            <summary>
+            Invoice PDF configuration.
             </summary>
         </member>
         <member name="P:Stripe.PaymentLinkLineItemAdjustableQuantityOptions.Enabled">
@@ -37736,6 +38233,11 @@
             sessions</a> created by this payment link create a <a
             href="https://stripe.com/docs/api/customers">Customer</a>.
             One of: <c>always</c>, or <c>if_required</c>.
+            </summary>
+        </member>
+        <member name="P:Stripe.PaymentLinkUpdateOptions.InvoiceCreation">
+            <summary>
+            Generate a post-purchase Invoice for one-time payments.
             </summary>
         </member>
         <member name="P:Stripe.PaymentLinkUpdateOptions.LineItems">
@@ -42067,10 +42569,9 @@
         <member name="P:Stripe.SubscriptionCreateOptions.TrialEnd">
             <summary>
             Unix timestamp representing the end of the trial period the customer will get before
-            being charged for the first time. This will always overwrite any trials that might apply
-            via a subscribed plan. If set, trial_end will override the default trial period of the
-            plan the customer is being subscribed to. The special value <c>now</c> can be provided
-            to end the customer's trial immediately. Can be at most two years from
+            being charged for the first time. If set, trial_end will override the default trial
+            period of the plan the customer is being subscribed to. The special value <c>now</c> can
+            be provided to end the customer's trial immediately. Can be at most two years from
             <c>billing_cycle_anchor</c>. See <a
             href="https://stripe.com/docs/billing/subscriptions/trials">Using trial periods on
             subscriptions</a> to learn more.
@@ -42091,6 +42592,11 @@
             the first time. This will always overwrite any trials that might apply via a subscribed
             plan. See <a href="https://stripe.com/docs/billing/subscriptions/trials">Using trial
             periods on subscriptions</a> to learn more.
+            </summary>
+        </member>
+        <member name="P:Stripe.SubscriptionCreateOptions.TrialSettings">
+            <summary>
+            Settings related to subscription trials.
             </summary>
         </member>
         <member name="P:Stripe.SubscriptionItemBillingThresholdsOptions.UsageGte">
@@ -42319,7 +42825,7 @@
         <member name="P:Stripe.SubscriptionPaymentSettingsPaymentMethodOptionsCustomerBalanceBankTransferEuBankTransferOptions.Country">
             <summary>
             The desired country code of the bank account information. Permitted values include:
-            <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
+            <c>BE</c>, <c>DE</c>, <c>ES</c>, <c>FR</c>, <c>IE</c>, or <c>NL</c>.
             </summary>
         </member>
         <member name="P:Stripe.SubscriptionPaymentSettingsPaymentMethodOptionsCustomerBalanceBankTransferOptions.EuBankTransfer">
@@ -42414,6 +42920,34 @@
             year, 12 months, or 52 weeks).
             </summary>
         </member>
+        <member name="P:Stripe.SubscriptionResumeOptions.BillingCycleAnchor">
+            <summary>
+            Either <c>now</c> or <c>unchanged</c>. Setting the value to <c>now</c> resets the
+            subscription's billing cycle anchor to the current time (in UTC). Setting the value to
+            <c>unchanged</c> advances the subscription's billing cycle anchor to the period that
+            surrounds the current time. For more information, see the billing cycle <a
+            href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+            One of: <c>now</c>, or <c>unchanged</c>.
+            </summary>
+        </member>
+        <member name="P:Stripe.SubscriptionResumeOptions.ProrationBehavior">
+            <summary>
+            Determines how to handle <a
+            href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a>
+            when the billing cycle changes (e.g., when switching plans, resetting
+            <c>billing_cycle_anchor=now</c>, or starting a trial), or if an item's <c>quantity</c>
+            changes. The default value is <c>create_prorations</c>.
+            One of: <c>always_invoice</c>, <c>create_prorations</c>, or <c>none</c>.
+            </summary>
+        </member>
+        <member name="P:Stripe.SubscriptionResumeOptions.ProrationDate">
+            <summary>
+            If set, the proration will be calculated as though the subscription was resumed at the
+            given time. This can be used to apply exactly the same proration that was previewed with
+            <a href="https://stripe.com/docs/api#retrieve_customer_invoice">upcoming invoice</a>
+            endpoint.
+            </summary>
+        </member>
         <member name="P:Stripe.SubscriptionTransferDataOptions.AmountPercent">
             <summary>
             A non-negative decimal between 0 and 100, with at most two decimal places. This
@@ -42429,6 +42963,18 @@
         </member>
         <member name="F:Stripe.SubscriptionTrialEnd.Now">
             <summary>Special value used to end a customer's trial immediately.</summary>
+        </member>
+        <member name="P:Stripe.SubscriptionTrialSettingsEndBehaviorOptions.MissingPaymentMethod">
+            <summary>
+            Indicates how the subscription should change when the trial ends if the user did not
+            provide a payment method.
+            One of: <c>cancel</c>, <c>create_invoice</c>, or <c>pause</c>.
+            </summary>
+        </member>
+        <member name="P:Stripe.SubscriptionTrialSettingsOptions.EndBehavior">
+            <summary>
+            Defines how the subscription should behave when the user's free trial ends.
+            </summary>
         </member>
         <member name="P:Stripe.SubscriptionUpdateOptions.AddInvoiceItems">
             <summary>
@@ -42661,6 +43207,11 @@
             <c>false</c>. Setting this flag to <c>true</c> together with <c>trial_end</c> is not
             allowed. See <a href="https://stripe.com/docs/billing/subscriptions/trials">Using trial
             periods on subscriptions</a> to learn more.
+            </summary>
+        </member>
+        <member name="P:Stripe.SubscriptionUpdateOptions.TrialSettings">
+            <summary>
+            Settings related to subscription trials.
             </summary>
         </member>
         <member name="P:Stripe.SubscriptionScheduleCancelOptions.InvoiceNow">
