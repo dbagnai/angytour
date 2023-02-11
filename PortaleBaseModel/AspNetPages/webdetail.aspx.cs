@@ -491,9 +491,10 @@ public partial class _webdetail : CommonPage
                 {
                     sb.Clear();
                     sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo-ombra.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
+                    sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-bordino-notext.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
                     sb.Append("\"></div>");
                     plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");
@@ -521,9 +522,10 @@ public partial class _webdetail : CommonPage
                 {
                     //sb.Clear();
                     //sb.Append("<div id=\"divScrollerSuggeritiJs\" class=\"inject\" params=\"");
-                    //sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-no-prezzo-ombra.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
+                    //sb.Append("injectScrollerAndLoad,owlscrollerOfferte-m-bordino-notext.html,divScrollerSuggeritiJs, scrollersuggeriti,'', '" + CodiceTipologia + "', '" + Categoria + "', false, true, 12,''\"");
                     //sb.Append("\"></div>");
                     //plhSuggeritiJs.Text = cb.bind(sb.ToString(), Lingua, Page.User.Identity.Name, Session, null, null, Request); //sb.ToString();
+
 
                     sb.Clear();
                     sb.Append("<div id=\"divItemContainter2\" style=\"position: relative; display: none\" class=\"inject\" params=\"");

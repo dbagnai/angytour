@@ -7,8 +7,6 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
 
-    
-
     <asp:Literal Text="" ID="litNomePagina" runat="server" />
     <asp:Literal Text="" ID="litTextHeadPage" runat="server" />
 

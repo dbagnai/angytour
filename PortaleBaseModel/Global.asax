@@ -241,7 +241,7 @@
             //-----------------------------------------------------------------------
             //Inizializzazione Timer per gestione attvità schedulate da applicazione
             //-----------------------------------------------------------------------
-             //ATTENDERE AD ESEGUIRE IL TIMER ALMENO 3 MIN PER EVITARE CHE VENGA CHIAMATA PRIMA DELLA FirstRequestInitialization ( ALTRIMENTI  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione è nullorempty )
+            //ATTENDERE AD ESEGUIRE IL TIMER ALMENO 3 MIN PER EVITARE CHE VENGA CHIAMATA PRIMA DELLA FirstRequestInitialization ( ALTRIMENTI  WelcomeLibrary.STATIC.Global.percorsobaseapplicazione è nullorempty )
             When = DateTime.Parse(DateTime.Now.AddMinutes(3).ToString());
             //Every = 0.01; //Ciclo di esecuzione in ore
             Every = 4; //Ciclo di esecuzione in ore
@@ -432,8 +432,8 @@
             //"~/js/moment-with-locales.min.js", //versione grande con string locali (pesa)!!!
             "~/js/moment.min.js", //no locales!!!
             "~/js/googleMaps.js"
-            //"~/js/orestbrida/cookieconsent.js",
-            //"~/js/orestbrida/initconsent.js"
+        //"~/js/orestbrida/cookieconsent.js",
+        //"~/js/orestbrida/initconsent.js"
         );
 
         BundleEngine.AddBundleJS("bundlejslib1",
@@ -471,8 +471,8 @@
             "~/js/simplestarrating/SimpleStarRating.js",
             "~/js/jquery.fitvids.js",
             "~/js/detect-zoom.min.js",
-            "~/js/landing/jarallax.min.js",
-            "~/js/jarallaxinit.js",
+            //"~/js/landing/jarallax.min.js",
+            //"~/js/jarallaxinit.js",
             "~/css/bcomponents/ui-259.js",
             //"~/js/odometer/odometer.js",
             "~/js/masonry.pkgd.min.js",
