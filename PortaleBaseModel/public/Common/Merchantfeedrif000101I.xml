@@ -2,9 +2,9 @@
 <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
   <channel>
     <title>Nome Sito Commenti</title>
-    <link>http://localhost:61010</link>
+    <link>http://localhost:60100</link>
     <description>Nome Sito</description>
-    <lastBuildDate>Thu, 26 May 2022 09:25:33 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 13 Feb 2023 09:28:40 GMT</lastBuildDate>
     <language>it-IT</language>
   </channel>
 </rss>

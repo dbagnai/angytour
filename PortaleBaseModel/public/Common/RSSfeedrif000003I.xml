@@ -2,60 +2,60 @@
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
     <title>Nome Sito Ceramiche Ficola</title>
-    <link>http://localhost:61010</link>
+    <link>http://localhost:60100</link>
     <description>Nome Sito</description>
-    <lastBuildDate>Thu, 26 May 2022 09:25:33 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 13 Feb 2023 09:28:40 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2022-05-26T09:25+02:00</sy:updateBase>
+    <sy:updateBase>2023-02-13T09:28+01:00</sy:updateBase>
     <language>it-IT</language>
     <item>
-      <title><![CDATA[servizio1 sottotitolo servizio
+      <title><![CDATA[titolo sottotitolo
 ]]></title>
-      <link><![CDATA[http://localhost:61010/it/ceramiche-ficola/servizio1-sottotitolo-servizio-29]]></link>
-      <guid isPermaLink="true">http://localhost:61010/it/ceramiche-ficola/servizio1-sottotitolo-servizio-29</guid>
+      <link><![CDATA[http://localhost:60100/it/ceramiche-ficola/titolo-sottotitolo-29]]></link>
+      <guid isPermaLink="true">http://localhost:60100/it/ceramiche-ficola/titolo-sottotitolo-29</guid>
       <pubDate>Tue, 29 May 2018 11:12:03 +02:00</pubDate>
       <category>Ceramiche Ficola</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:61010/public/Files/rif000003/29/sample-banner.jpg" alt="servizio1
-sottotitolo servizio" width="350" />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet.
-<p>Continua a leggere / Read More <a href="http://localhost:61010/it/ceramiche-ficola/servizio1-sottotitolo-servizio-29"><em>servizio1
-sottotitolo servizio</em></a>.</p>]]></description>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:60100/public/Files/rif000003/29/sample-banner.jpg" alt="titolo
+sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet.
+<p>Continua a leggere / Read More <a href="http://localhost:60100/it/ceramiche-ficola/titolo-sottotitolo-29"><em>titolo
+sottotitolo</em></a>.</p>]]></description>
     </item>
     <item>
-      <title><![CDATA[servizio2 sottotitolo servizio
+      <title><![CDATA[titolo sottotitolo
 ]]></title>
-      <link><![CDATA[http://localhost:61010/it/ceramiche-ficola/servizio2-sottotitolo-servizio-28]]></link>
-      <guid isPermaLink="true">http://localhost:61010/it/ceramiche-ficola/servizio2-sottotitolo-servizio-28</guid>
+      <link><![CDATA[http://localhost:60100/it/ceramiche-ficola/titolo-sottotitolo-28]]></link>
+      <guid isPermaLink="true">http://localhost:60100/it/ceramiche-ficola/titolo-sottotitolo-28</guid>
       <pubDate>Tue, 29 May 2018 11:11:34 +02:00</pubDate>
       <category>Ceramiche Ficola</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:61010/public/Files/rif000003/28/sample-banner.jpg" alt="servizio2
-sottotitolo servizio" width="350" />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet.
-<p>Continua a leggere / Read More <a href="http://localhost:61010/it/ceramiche-ficola/servizio2-sottotitolo-servizio-28"><em>servizio2
-sottotitolo servizio</em></a>.</p>]]></description>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:60100/public/Files/rif000003/28/sample-banner.jpg" alt="titolo
+sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet.
+<p>Continua a leggere / Read More <a href="http://localhost:60100/it/ceramiche-ficola/titolo-sottotitolo-28"><em>titolo
+sottotitolo</em></a>.</p>]]></description>
     </item>
     <item>
-      <title><![CDATA[servizio3 sottotitolo servizio
+      <title><![CDATA[titolo sottotitolo
 ]]></title>
-      <link><![CDATA[http://localhost:61010/it/ceramiche-ficola/servizio3-sottotitolo-servizio-27]]></link>
-      <guid isPermaLink="true">http://localhost:61010/it/ceramiche-ficola/servizio3-sottotitolo-servizio-27</guid>
+      <link><![CDATA[http://localhost:60100/it/ceramiche-ficola/titolo-sottotitolo-27]]></link>
+      <guid isPermaLink="true">http://localhost:60100/it/ceramiche-ficola/titolo-sottotitolo-27</guid>
       <pubDate>Tue, 29 May 2018 11:11:02 +02:00</pubDate>
       <category>Ceramiche Ficola</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:61010/public/Files/rif000003/27/sample-banner.jpg" alt="servizio3
-sottotitolo servizio" width="350" />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet.
-<p>Continua a leggere / Read More <a href="http://localhost:61010/it/ceramiche-ficola/servizio3-sottotitolo-servizio-27"><em>servizio3
-sottotitolo servizio</em></a>.</p>]]></description>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:60100/public/Files/rif000003/27/sample-banner.jpg" alt="titolo
+sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet.
+<p>Continua a leggere / Read More <a href="http://localhost:60100/it/ceramiche-ficola/titolo-sottotitolo-27"><em>titolo
+sottotitolo</em></a>.</p>]]></description>
     </item>
     <item>
-      <title><![CDATA[servizio4 sottotitolo servizio
+      <title><![CDATA[titolo sottotitolo
 ]]></title>
-      <link><![CDATA[http://localhost:61010/it/ceramiche-ficola/servizio4-sottotitolo-servizio-26]]></link>
-      <guid isPermaLink="true">http://localhost:61010/it/ceramiche-ficola/servizio4-sottotitolo-servizio-26</guid>
+      <link><![CDATA[http://localhost:60100/it/ceramiche-ficola/titolo-sottotitolo-26]]></link>
+      <guid isPermaLink="true">http://localhost:60100/it/ceramiche-ficola/titolo-sottotitolo-26</guid>
       <pubDate>Tue, 29 May 2018 11:10:15 +02:00</pubDate>
       <category>Ceramiche Ficola</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:61010/public/Files/rif000003/26/sample-banner.jpg" alt="servizio4
-sottotitolo servizio" width="350" />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet.
-<p>Continua a leggere / Read More <a href="http://localhost:61010/it/ceramiche-ficola/servizio4-sottotitolo-servizio-26"><em>servizio4
-sottotitolo servizio</em></a>.</p>]]></description>
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:60100/public/Files/rif000003/26/sample-banner.jpg" alt="titolo
+sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet.
+<p>Continua a leggere / Read More <a href="http://localhost:60100/it/ceramiche-ficola/titolo-sottotitolo-26"><em>titolo
+sottotitolo</em></a>.</p>]]></description>
     </item>
   </channel>
 </rss>

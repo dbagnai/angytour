@@ -19,19 +19,19 @@ $(document).ready(function () {
         //    window.location.pathname.toLowerCase() == "/index.aspx") ishome = true;
         // if (ishome) {
         var cookienamenewsletter = 'subscriptiorequest3';
-        var cookiepopup = CookiesPolicy.GetCookie(cookienamenewsletter);
+        var cookiepopup = GetCookie(cookienamenewsletter);
         var popopen = false;
         if (cookiepopup != 'subscribed') popopen = true;
         if (popopen)
             $('#popupModal').modal('show');
         $('#popupModal').on('hide.bs.modal', function (e) {
-            CookiesPolicy.SetCookie(cookienamenewsletter, 'subscribed', '0.002', '/');
+            SetCookie(cookienamenewsletter, 'subscribed', '0.002', '/');
         })
         //}
 
         //funzione disattivazione popou su pulsante in html
         $('.dismissmodal').on('click', function (e) {
-            CookiesPolicy.SetCookie(cookienamenewsletter, 'subscribed', '0.002', '/');
+            SetCookie(cookienamenewsletter, 'subscribed', '0.002', '/');
         })
 
     }
@@ -45,17 +45,17 @@ $(document).ready(function () {
             window.location.pathname.toLowerCase() == "/index.aspx") ishome = true;
         if (ishome) {
             var cookienamenewsletter = 'subscriptiorequest3';
-            var cookiepopup = CookiesPolicy.GetCookie(cookienamenewsletter);
+            var cookiepopup = GetCookie(cookienamenewsletter);
             var popopen = false;
             if (cookiepopup != 'subscribed') popopen = true;
             if (popopen)
                 $('#popupModal').modal('show');
             $('#popupModal').on('hide.bs.modal', function (e) {
-                CookiesPolicy.SetCookie(cookienamenewsletter, 'subscribed', '0.002', '/');
+                SetCookie(cookienamenewsletter, 'subscribed', '0.002', '/');
             })
             //funzione disattivazione popou su pulsante in html
             $('.dismissmodal').on('click', function (e) {
-                CookiesPolicy.SetCookie(cookienamenewsletter, 'subscribed', '0.002', '/');
+                SetCookie(cookienamenewsletter, 'subscribed', '0.002', '/');
             })
         }
     }

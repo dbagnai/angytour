@@ -379,3 +379,11 @@
 <Messaggio> Application start : 26/05/2022 09:47:33</Messaggio>
  <Data>26/05/2022 09:47:34</Data>
 <Messaggio> Global init original path: http://localhost:61010/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:61010</Messaggio>
+ <Data>13/02/2023 09:25:36</Data>
+<Messaggio> Application start : 13/02/2023 09:25:35</Messaggio>
+ <Data>13/02/2023 09:25:36</Data>
+<Messaggio> Global init original path: http://localhost:60100/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:60100</Messaggio>
+ <Data>13/02/2023 09:28:36</Data>
+<Messaggio>httplocalhost60100Generato sitemap  13/02/2023 09:28:36</Messaggio>
+ <Data>13/02/2023 09:28:36</Data>
+<Messaggio>httplocalhost60100Generato sitemap  13/02/2023 09:28:36Terminato Aggiornamento  13/02/2023 09:28:36</Messaggio>
