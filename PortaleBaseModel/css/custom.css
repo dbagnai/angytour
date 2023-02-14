@@ -4569,6 +4569,18 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
 }
+.border-tipo3 {
+  border: none;
+  -webkit-box-shadow: 6px 7px 14px -5px rgba(0, 0, 0, 0.56);
+  box-shadow: 6px 7px 14px -5px rgba(0, 0, 0, 0.56);
+  border-radius: 30px !important;
+}
+.border-tipo3:hover {
+  border: none;
+  -webkit-box-shadow: 6px 7px 14px -5px rgba(0, 0, 0, 0.56);
+  box-shadow: 6px 7px 14px -5px rgba(0, 0, 0, 0.56);
+  border-radius: 30px !important;
+}
 .card-body {
   padding: 5px;
 }
