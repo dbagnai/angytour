@@ -194,7 +194,7 @@ namespace WelcomeLibrary.UF
         /// </summary>
         /// <param name="csvfilepath"></param>
         /// <exception cref="ApplicationException"></exception>
-        public static void Csv_to_xlsx_lowmem(string csvfilepath)
+        public static void Csv_to_xlsx_lowmem(string csvfilepath, List<string> limitacodici = null)
         {
             System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
             Messaggi.Add("Messaggio", "");
@@ -229,7 +229,7 @@ namespace WelcomeLibrary.UF
                     var mySheet1 = myBook.AddWorksheet(mySheetName);
                     myBook.SaveAs(myFnameXlsx);
                 }//end of using xlsx file
-             
+
                 using (var myBook = new ClosedXML.Excel.XLWorkbook(myFnameXlsx))
                 {
                     var mySheet1 = myBook.Worksheet(mySheetName);
@@ -243,7 +243,7 @@ namespace WelcomeLibrary.UF
                             string linecvs = myrd.ReadLine();
                             string[] tmpStAry = linecvs.Split(';');
                             int i = 0;
-                            while (tmpStAry.Length < 85)
+                            while (tmpStAry.Length < 85) // qui va impostato il numero di colonne giusto del CSV!!!!!! ( occhio da modificare a mano )
                             {
                                 linecvs += myrd.ReadLine();
                                 tmpStAry = linecvs.Split(';');
@@ -256,6 +256,7 @@ namespace WelcomeLibrary.UF
 
                             //carico le colonne della riga attuale nel dictionary temporaneo
                             UInt32 uiC = 0;
+                            bool saltariga = false;
                             foreach (string tmpstr in tmpStAry)
                             {
                                 string tmpstr2 = tmpstr.Replace("\"", "").Replace("\0", "").Trim();
@@ -269,52 +270,58 @@ namespace WelcomeLibrary.UF
                                     myAryDictSingleRow.Add(0, new Dictionary<UInt32, string>());
                                 myAryDictSingleRow[0].Add(uiC, tmpstr2);
 
+                                if (limitacodici != null) //riduce il file excel di output a solo le righe con i condici preenti su ecommerce
+                                    if (uiC == 2)
+                                    {
+                                        if (!limitacodici.Contains(tmpstr2.ToLower())) saltariga = true;
+                                    }
+
+
                                 //Console.Write(tmpstr2 + "\t");
                                 uiC += 1;
                             }//end of foreach
 
-
-                            //scriviamo su excel la riga attuale da myAryDictSingleRow scorrendo le colonne
-                            foreach (KeyValuePair<UInt32, string> colonna in myAryDictSingleRow[0])
+                            if (!saltariga)
                             {
-                                string tmpcolval = colonna.Value;
-                                if (colonna.Key == 2 || colonna.Key == 3 || colonna.Key >= 25) tmpcolval = tmpcolval.Replace(".", ",");
-                                mySheet1.Cell((int)(uiR + 1), (int)(colonna.Key + 1)).Value = tmpcolval;
-                                if (colonna.Key == 1)
-                                    mySheet1.Cell((int)(uiR + 1), (int)(colonna.Key + 1)).SetDataType(ClosedXML.Excel.XLCellValues.Text);
+                                //scriviamo su excel la riga attuale da myAryDictSingleRow scorrendo le colonne
+                                foreach (KeyValuePair<UInt32, string> colonna in myAryDictSingleRow[0])
+                                {
+                                    string tmpcolval = colonna.Value;
+                                    if (colonna.Key == 2 || colonna.Key == 3 || colonna.Key >= 25) tmpcolval = tmpcolval.Replace(".", ",");
+                                    mySheet1.Cell((int)(uiR + 1), (int)(colonna.Key + 1)).Value = tmpcolval;
+                                    if (colonna.Key == 1)
+                                        mySheet1.Cell((int)(uiR + 1), (int)(colonna.Key + 1)).SetDataType(ClosedXML.Excel.XLCellValues.Text);
+                                }
+                                if (uiR > maxrowinmemory * blockwrite)
+                                {
+                                    myBook.SaveAs(myFnameXlsx); //salvo il file excel
+                                    blockwrite += 1;
+                                    System.Threading.Thread.Sleep(5);
+                                    System.GC.Collect();
+                                    //try
+                                    //{
+                                    //    string tmp = WelcomeLibrary.UF.SharedStatic.MakeHttpHtmlGet(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/keepalive.aspx", 1252);
+                                    //    Messaggi["Messaggio"] += "CAlled page  (" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/keepalive.aspx" + ")  : " + System.DateTime.Now.ToString() + " \r\n";
+
+                                    //}
+                                    //catch { };
+
+                                }
+                                //uiMaxColumn = uiMaxColumn < uiC ? uiC : uiMaxColumn;
+                                uiR += 1;
+                                //Console.WriteLine("");
                             }
-                            if (uiR > maxrowinmemory * blockwrite)
-                            {
-                                myBook.SaveAs(myFnameXlsx); //salvo il file excel
-                                blockwrite += 1;
-                                System.Threading.Thread.Sleep(5);
-                                System.GC.Collect();
-                                //try
-                                //{
-                                //    string tmp = WelcomeLibrary.UF.SharedStatic.MakeHttpHtmlGet(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/keepalive.aspx", 1252);
-                                //    Messaggi["Messaggio"] += "CAlled page  (" + WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/keepalive.aspx" + ")  : " + System.DateTime.Now.ToString() + " \r\n";
-
-                                //}
-                                //catch { };
-                            }
-
-
                             //resetto la tabella a sigola riga
                             myAryDictSingleRow = new Dictionary<UInt32, Dictionary<UInt32, string>>();
-
-                            //uiMaxColumn = uiMaxColumn < uiC ? uiC : uiMaxColumn;
-                            uiR += 1;
-                            //Console.WriteLine("");
                         }// end while
                         uiMaxRow = uiR;
                     }//end using csv file
 
-
-
                     myBook.SaveAs(myFnameXlsx);
 
                 }//end of using xlsx file
-
+                Messaggi["Messaggio"] += "(csv_to_xlsx_lowmem) Fine Conversione a csv file " + System.DateTime.Now.ToString() + " \r\n";
+                WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune);
             }//end of try
             catch (Exception e)
             {
