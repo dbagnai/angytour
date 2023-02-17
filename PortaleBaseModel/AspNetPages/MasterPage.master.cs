@@ -265,6 +265,16 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         //scriptRegVariables += ";\r\n " + string.Format("moment.locale('{0}') ", "it");
         scriptRegVariables += ";\r\n";
 
+        // LEGGE SE PRSENTE CODICE DA ESEGUIRE IN PAGINA DALLA SESSIONE PER LE CONVErSIONI "jscodeconversion"
+        //( SOLO SULLA PAGINA DI CONVERSIONE THANKYOU! )
+        if (Request != null && Request.QueryString["conversione"] != null && Request.QueryString["conversione"].ToString() == "true")
+        {
+            if (Session != null && Session["jscodeconversion"] != null)
+                scriptRegVariables += ";\r\n" + Session["jscodeconversion"].ToString();
+            Session.Remove("jscodeconversion");
+        }
+        ////////////////////////////////////
+        
         if (addelements == null) addelements = new Dictionary<string, string>();
         addelements.Add("jsvarfrommasterend", scriptRegVariables);
 

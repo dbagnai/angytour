@@ -423,6 +423,14 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         result = CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", lingua, "LinkContatti"));
                         if (idofferta != "") result += "&idOfferta=" + idofferta.ToString();
                         result += "&conversione=true";
+
+
+                        //  conversion advanced
+                        //Creaimo in sessione la chiamata javascript per le conversioni di ritorno
+                        // nella pagina MASTER devi testare se in sessione presente del codice da eseguire 
+                        context.Session.Remove("jscodeconversion");
+                        context.Session.Add("jscodeconversion", CommonPage.Creaeventtrackconversion(stat));
+
                     }
                     else
                     {
@@ -669,6 +677,13 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat1);
                     if (string.IsNullOrEmpty(result))
                     {
+                        //Conversion advanced
+                        //Creaimo in sessione la chiamata javascript per le conversioni di ritorno
+                        // nella pagina MASTER devi testare se in sessione presente del codice da eseguire 
+                        context.Session.Remove("jscodeconversion");
+                        context.Session.Add("jscodeconversion", CommonPage.Creaeventtrackconversion(stat1));
+
+
                         result = CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", lingua, "LinkContatti"));
                         // if (idofferta != "") result += "&idOfferta=" + idofferta.ToString();
                         result += "&conversione=true";

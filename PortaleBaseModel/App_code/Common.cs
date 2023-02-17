@@ -2538,6 +2538,24 @@ public class CommonPage : Page
         return ret;
     }
 
+    public static string Creaeventtrackconversion(Statistiche item)
+    {
+        string ret = "";
+        //item.offerte contiene i dettagli dell'oggetto aggiunto a carrello
+        bool waitforconsent = false;
+        bool.TryParse(ConfigManagement.ReadKey("waitforconsent"), out waitforconsent);
+
+        // da testare per conversion advanced
+        //da creare la chiamata .. da iniettare in sessione
+        //     <script>
+        //dataLayer.push({ 'customerEmail': ’sostituire con comando dinamico’});
+        //</script>
+
+        string scriptRegVariablesgoogle = ";\r\n " + string.Format("dataLayer.push({{'customerEmail': '{0}'}});console.log('google datalayer push conversion;');", item.EmailMittente);
+        scriptRegVariablesgoogle = WelcomeLibrary.UF.Utility.waitwrappercall("dataLayer.push", scriptRegVariablesgoogle, "300", waitforconsent);
+        ret = scriptRegVariablesgoogle;
+        return ret;
+    }
 
 
     private static double CalcolaSpeseSpedizione(CarrelloCollection ColItem, string codicenazione, string codiceprovincia, TotaliCarrello totali)
