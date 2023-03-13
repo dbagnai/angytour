@@ -9223,8 +9223,6 @@ namespace WelcomeLibrary.DAL
         }
 
 
-
-
         public static string Getvaluebytag(string tag, string text)
         {
             string ret = "";

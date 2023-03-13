@@ -22,11 +22,11 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*#232323;*/
 /*sotto-titoli-principali - body*/
 /*#555;*/
+/*#d8e056;*/
+/* fascia catalogo */
 /* sistema di colori a triade */
 /* sistema di colori tonali */
 /**/
-/*#d8e056;*/
-/* fascia catalogo */
 /*footer-social e banner*/
 /*#f5f0e5;*/
 /* fascia catalogo link active */
@@ -3568,7 +3568,7 @@ h1 span:nth-child(1).mbr-section-title {
   font-family: 'Lora', serif !important;
 }
 .secondary-font {
-  font-family: 'Lora', sans-serif !important;
+  font-family: 'Lora', serif !important;
 }
 .base-font,
 .mbr-section-subtitle,
@@ -3894,7 +3894,7 @@ a:hover {
   font-family: 'Lora', serif !important;
 }
 .font-secondary {
-  font-family: 'Lora', sans-serif !important;
+  font-family: 'Lora', serif !important;
 }
 .font-base,
 .font-base a {
