@@ -3290,7 +3290,7 @@ namespace WelcomeLibrary.UF
                                 {
                                     if (skipfirst && j == 0)
                                         continue; //salto la prima
-                                    if (itemclass == "grid-item" && j == 0)
+                                    if (itemclass == "grid-item" && (j == 0 || (skipfirst && j == 1)))
                                         sb.Append("<div class=\"grid-sizer\"></div>");
 
                                     /*
@@ -3339,7 +3339,7 @@ namespace WelcomeLibrary.UF
                                                     {
                                                         //imgstyle = "max-width:100%;width:auto;height:" + maxheight + "px;";
                                                         //imgstyle = "width:auto;max-width:100%;height:" + calcheight + "px;";
-                                                        imgstyle = "width:auto;height:" + calcheight + "px;";
+                                                        imgstyle = "width:auto;max-height:" + calcheight + "px;";
                                                     }
                                             }
                                             catch
