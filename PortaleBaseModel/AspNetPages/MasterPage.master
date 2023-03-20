@@ -367,7 +367,7 @@
                 </div>
             </div>
         </div>
-        <div class="fixednav bckColor2" id="mainnav" style="padding-left: 20px; padding-right: 20px">
+        <div class="fixednav bckColor2" id="mainnav" style="padding-left: 0px; padding-right: 0px">
 
             <!-- ICONA CALL RESPONSIVE -->
             <div class="d-block d-sm-none" style="position: absolute; top: 15px; right: 5px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 99">

@@ -265,7 +265,7 @@
 
 /*White ---------------------------------*/
 .menuzord.white {
-    background: transparent;
+  /*  background: transparent;*/
 }
 
     .menuzord.white .menuzord-brand {
@@ -497,7 +497,7 @@
         /*margin: 0px 35% !important;*/
         /*left: 0px;*/
         margin-top: 0px;
-        left: 70px;
+        left: calc(100vw/2 - 140px);
         top: 0px;
     }
 
