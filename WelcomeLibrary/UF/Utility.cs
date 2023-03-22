@@ -12,9 +12,6 @@ using System.IO;
 using System.Configuration;
 using System.Net.Configuration;
 using System.Xml;
-using ActiveUp.Net;
-using ActiveUp.Net.Mail;
-using ActiveUp.Net.Security;
 using Newtonsoft.Json;
 using System.Collections.Specialized;
 using MailKit.Net.Smtp;
@@ -934,9 +931,9 @@ namespace WelcomeLibrary.UF
                   destinatarioMail1, destinatarioNome, foto, percorsofoto, incorporaimmagini, server, plaintext, emaildestbcc, sectionName);
                         break;
 
-                    case "mailsystem":
-                        ret = invioMailGenericomailsystem(mittenteNome, mittenteMail, SoggettoMail, Descrizione,
-                 destinatarioMail1, destinatarioNome, foto, percorsofoto, incorporaimmagini, server, plaintext, emaildestbcc, sectionName);
+                 //   case "mailsystem":
+                 //       ret = invioMailGenericomailsystem(mittenteNome, mittenteMail, SoggettoMail, Descrizione,
+                 //destinatarioMail1, destinatarioNome, foto, percorsofoto, incorporaimmagini, server, plaintext, emaildestbcc, sectionName);
                         break;
                     case "mimekit":
                         ret = invioMailGenericomimekit(mittenteNome, mittenteMail, SoggettoMail, Descrizione,
@@ -1565,6 +1562,7 @@ namespace WelcomeLibrary.UF
             }
             return ret;
         }
+#if false
 
         public static bool invioMailGenericomailsystem(string mittenteNome, string mittenteMail, string SoggettoMail, string Descrizione,
        string destinatarioMail1, string destinatarioNome, List<string> foto = null, string percorsofoto = "", bool incorporaimmagini = false, System.Web.HttpServerUtility server = null, bool plaintext = false, List<string> emaildestbcc = null, string sectionName = "smtpbase")
@@ -1814,13 +1812,13 @@ namespace WelcomeLibrary.UF
         }
 
 
+#endif
         public static bool invioMailGenericomimekit(string mittenteNome, string mittenteMail, string SoggettoMail, string Descrizione,
       string destinatarioMail1, string destinatarioNome, List<string> foto = null, string percorsofoto = "", bool incorporaimmagini = false, System.Web.HttpServerUtility server = null, bool plaintext = false, List<string> emaildestbcc = null, string sectionName = "smtpbase")
         {
             bool ret = false;
             var mimeMessage = new MimeKit.MimeMessage(); //http://www.mimekit.net/docs/html/Creating-Messages.htm
 
-            ActiveUp.Net.Mail.Message mailMessage = new ActiveUp.Net.Mail.Message();
             try
             {
                 mimeMessage.From.Add(new MailboxAddress(mittenteNome, mittenteMail));
@@ -1971,10 +1969,13 @@ namespace WelcomeLibrary.UF
                 mimeMessage.Body = builder.ToMessageBody();
 
                 //mimeMessage.From.ForEach(a => ((MailboxAddress)a).)
+          
 
                 foreach (MailboxAddress a in mimeMessage.From)
                 {
-                    bool validemail = Validator.ValidateSyntax(a.Address);
+                  
+                    //bool validemail = Validator.ValidateSyntax(a.Address);
+                    bool validemail = IsValidEmail(a.Address);
                     if (!validemail) throw new ApplicationException("Email errata|Invalid Email");
                 }
 
@@ -2040,7 +2041,12 @@ namespace WelcomeLibrary.UF
 
             return ret;
         }
-
+        public static bool IsValidEmail(this string email)
+        {
+            const string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+            var regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            return regex.IsMatch(email);
+        }
 
         public static string HtmlEncode(string text)
         {

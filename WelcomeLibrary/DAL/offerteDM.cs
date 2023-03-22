@@ -9,7 +9,6 @@ using WelcomeLibrary.UF;
 using System.Data.SQLite;
 using Newtonsoft.Json;
 using System.Linq;
-using ActiveUp.Net.Mail;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 
