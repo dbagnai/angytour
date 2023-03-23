@@ -736,7 +736,8 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
         ////////////////////////////////////////////////////
         //CHECK CORRETTZZA DELLA MAIL INSERITA ( USARE VALIDATORE DELLE MAIL )
         ////////////////////////////////////////////////////
-        bool validemail = ActiveUp.Net.Mail.Validator.ValidateSyntax(clitmp.Email);
+        //bool validemail = ActiveUp.Net.Mail.Validator.ValidateSyntax(clitmp.Email);
+        bool validemail = Utility.IsValidEmail(clitmp.Email);
         if (!validemail)
         {
             valuefororder["messages"] = "Email errata | Invalid Email"; //output.Text = references.ResMan("Common", Lingua, "txtPagamento").ToString();

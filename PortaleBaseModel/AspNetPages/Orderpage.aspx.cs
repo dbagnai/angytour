@@ -1928,7 +1928,8 @@ public partial class AspNetPages_Orderpage : CommonPage
         ////////////////////////////////////////////////////
         //CHECK CORRETTZZA DELLA MAIL INSERITA ( USARE VALIDATORE DELLE MAIL )
         ////////////////////////////////////////////////////
-        bool validemail = ActiveUp.Net.Mail.Validator.ValidateSyntax(clitmp.Email);
+        //bool validemail = ActiveUp.Net.Mail.Validator.ValidateSyntax(clitmp.Email);
+        bool validemail = Utility.IsValidEmail(clitmp.Email);
         if (!validemail)
         {
             output.CssClass = "alert alert-danger"; output.Text = "Email errata|Invalid Email!"; //output.Text = references.ResMan("Common", Lingua, "txtPagamento").ToString();
