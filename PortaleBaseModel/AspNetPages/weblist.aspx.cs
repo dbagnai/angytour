@@ -251,6 +251,7 @@ public partial class AspNetPages_weblist : CommonPage
                 Regione = CaricaValoreMaster(Request, Session, "regione", false);
                 Nazione = CaricaValoreMaster(Request, Session, "nazione", false);
                 Provincia = CaricaValoreMaster(Request, Session, "Provincia", false, "");
+                Provincia = CaricaValoreMaster(Request, Session, "provincia", false, "");
                 Comune = CaricaValoreMaster(Request, Session, "Comune", false);
                 prezzofilter = CaricaValoreMaster(Request, Session, "prezzofilter", false);
                 datapartenzafilter = CaricaValoreMaster(Request, Session, "datapartenzafilter", false);
@@ -849,7 +850,7 @@ public partial class AspNetPages_weblist : CommonPage
         //}
         if (Provincia != "")
         {
-            objvalue["Provincia"] = Provincia;
+            objvalue["provincia"] = Provincia;
             //objvalue["ddlProvincia"] = Provincia;
             //objvalue["ddlProvinciaSearch"] = Provincia;
         }

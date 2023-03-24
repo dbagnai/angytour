@@ -9,3 +9,37 @@ Update-Package -reinstall
 update-package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r
 https://dotnet.microsoft.com/download/dotnet-core/2.2
 
+--------- pulizia iniziale tabelle db sqllite
+
+
+DELETE FROM dbo_TBLRIF_CARATTERISTICA1;
+delete from sqlite_sequence where name='dbo_TBLRIF_CARATTERISTICA1';
+
+DELETE FROM dbo_TBLRIF_CARATTERISTICA2;
+delete from sqlite_sequence where name='dbo_TBLRIF_CARATTERISTICA2';
+
+DELETE FROM TBL_ATTIVITA_DETAIL;
+delete from sqlite_sequence where name='TBL_ATTIVITA_DETAIL';
+
+DELETE FROM TBL_ATTIVITA_SCAGLIONI;
+delete from sqlite_sequence where name='TBL_ATTIVITA_SCAGLIONI';
+
+DELETE FROM TBL_CARRELLO;
+delete from sqlite_sequence where name='TBL_CARRELLO';
+
+DELETE FROM TBL_CARRELLO_ORDINI;
+delete from sqlite_sequence where name='TBL_CARRELLO_ORDINI';
+
+DELETE FROM TBL_CLIENTI;
+delete from sqlite_sequence where name='TBL_CLIENTI';
+
+DELETE FROM TBL_MAILING;
+delete from sqlite_sequence where name='TBL_MAILING';
+
+DELETE FROM TBL_STATISTICHE;
+delete from sqlite_sequence where name='TBL_STATISTICHE';
+
+DELETE FROM TBL_URLREWRITING;
+delete from sqlite_sequence where name='TBL_URLREWRITING';
+
+
