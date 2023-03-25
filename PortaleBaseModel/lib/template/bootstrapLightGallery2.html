@@ -1,13 +1,23 @@
 ﻿<div class="container-sm inline-gallery-container" id="replaceid">
-    <a class="bind primary-color" href="link" mybind="Id">
-        <img src="/images/dummylogo.png" alt="" class="bind" mybind="Id" />
+    <a class="bind primary-color" href="link" mybind="Id" >
+        <img src="/images/dummylogo.png" alt="" class="bind d-none" mybind="Id"  />
     </a>
 </div>
 <style>
     .inline-gallery-container {
         width: 100%;
-        height: 500px;
+        height: 800px;
         position: relative;
+        overflow: hidden;
+        background-color: white !important;
+    }
+
+    .lg-backdrop {
+        background-color: transparent;
+    }
+
+    .lg-outer .lg-thumb-outer {
+        background-color: transparent;
     }
 </style>
 
