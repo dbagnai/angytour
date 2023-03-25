@@ -501,6 +501,7 @@
             "~/js/lightGallery-master/dist/lightgallery.min.js",
             "~/js/lightGallery-master/dist/plugins/thumbnail/lg-thumbnail.min.js",
             "~/js/lightGallery-master/dist/plugins/zoom/lg-zoom.min.js",
+            "~/js/lightGallery-master/dist/plugins/video/lg-video.min.js",
             "~/js/lightGallery-master/dist/plugins/justifiedgallery/jquery.justifiedGallery.min.js",
             "~/js/maininit.js"
         );
