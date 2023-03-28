@@ -1,0 +1,86 @@
+﻿<section class="slider-for-1-c slider" id="replaceid">
+    <div class="">
+        <div class="card  border-tipo2 rounded m-1" style="overflow:hidden;background:transparent;border:none">
+            <a class="bind primary-color " preload target="_self" href="link" title="titolo" mybind="Id">
+                <div class="position-relative imgovercontainer work-image">
+                    <img src="/images/dummylogo.png" alt="" class="bind card-img-top" mybind="Id" />
+                    <div class="card-img-overlay">
+                    </div>
+                </div>
+            </a>
+            <div class="card-body text-center">
+                <a class="bind" target="_self" href="link" title="titolo" mybind="Id">
+                    <h3 class="scalablefont-medium font-weight-strong primary-font b-2">
+                        <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                    </h3>
+                    <h4 class="scalablefont-small font-weight-light  mt-0 mb-3">
+                        <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
+                    </h4>
+                    <p style="font-size:1rem" class="bind" mybind="Id" myvalue="descrizione" myvalue1="175" format="formatdescrizione"></p>
+                </a>
+            </div>
+            <div class="card-footer bg-light-color no-image">
+                <!--<div class="float-right">
+                    <a class="bind btn btn-primary" target="_self" href="link" title="titolo" mybind="Id">
+                        <div class="float-right bind" mybind="Id" myvalue="vedi" format="formatlabelresource"></div>
+                    </a>
+                </div>-->
+                <div class="row no-gutters justify-content-center py-2">
+                    <div class="col-12 text-center  text-center pr-0 pr-sm-2 pb-2 pb-sm-0">
+                        <a class="bind w-100" target="_self" href="link" title="titolo" mybind="Id">
+                            <div class="bind divbuttonstyle w-100" mybind="Id" myvalue="veditxt" format="formatlabelresource"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    // $(document).on('ready', function () {
+    (function wait() {
+        if ($.fn.slick) {
+            $(".slider-for-1-c").slick({
+                dots: true,
+                infinite: true,
+                centerMode: true,
+                centerPadding: '30px',
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                responsive: [
+                    {
+                        breakpoint: 1600,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1,
+                            centerPadding: '20px',
+                            infinite: true,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            centerPadding: '20px',
+                            slidesToShow: 2,
+                            slidesToScroll: 2,
+                        }
+                    },
+                    {
+                        breakpoint: 800,
+                        settings: {
+                            centerPadding: '20px',
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+
+        } else {
+            setTimeout(wait, 300);
+        }
+    })();
+   // });
+</script> 

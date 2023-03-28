@@ -108,7 +108,7 @@ li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
 .polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore:hover {
   font-family: 'Roboto', sans-serif;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #fff !important;
   background-color: #f3c649;
   position: relative;
@@ -351,7 +351,7 @@ li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
 .btn .btn-banner:hover {
   font-family: 'Roboto', sans-serif;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #032f2f !important;
   background: #fff !important;
   position: relative;
@@ -998,7 +998,7 @@ a.btn-black-outline.restaurant-menu:nth-child(5):focus {
 .btnnew-transparent-outline-bdwhite:focus {
   font-family: 'Roboto', sans-serif;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #032f2f;
   background: #fff;
   line-height: 1.3;
@@ -1472,6 +1472,12 @@ svg.svgicon-color2 path {
 .slick-dots li.slick-active button:before {
   font-size: 14px;
 }
+.slick-dots > li {
+  display: inline-block;
+}
+.slick-dots > li:only-child {
+  display: none;
+}
 /*----------------------------------
 ////////| IMPORTAZIONE FONT |/////// 
     ATTENZIONE QUANDO SI COMBINANO GLI SCRIPT CSS
@@ -1742,19 +1748,6 @@ hr {
   padding: 0px;
   border-top: 0px;
   border-bottom: 1px solid #000;
-}
-.font-weight-light {
-  font-weight: 400 !important;
-}
-.font-weight-medium,
-.mbr-section-title,
-a .mbr-section-title,
-.title-block,
-h1 span:nth-child(1).mbr-section-title {
-  font-weight: 600 !important;
-}
-.font-weight-strong {
-  font-weight: 800 !important;
 }
 .font-italic {
   font-style: italic;
@@ -3842,7 +3835,7 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
   font-size: 0.8rem;
   letter-spacing: 2px;
   font-family: 'Roboto', sans-serif;
-  font-weight: 600;
+  font-weight: 500;
 }
 .table-cart .cart-total {
   min-width: 100px;
@@ -7281,7 +7274,7 @@ h1 span .mbr-section-subtitle {
 a .mbr-section-title,
 .title-block,
 h1 span:nth-child(1).mbr-section-title {
-  font-weight: 600 !important;
+  font-weight: 500 !important;
 }
 .font-weight-strong {
   font-weight: 800 !important;
@@ -9096,7 +9089,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   /*&:extend(.btn-primary);*/
   font-family: 'Roboto', sans-serif;
   font-size: 0.8rem !important;
-  font-weight: 600;
+  font-weight: 500;
   color: #fff !important;
   background-color: #f3c649;
   /*font-size: 1rem;*/
@@ -9286,7 +9279,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   line-height: 1.1 !important;
   font-family: 'Roboto', sans-serif;
   font-size: 0.8rem !important;
-  font-weight: 600;
+  font-weight: 500;
 }
 .carrellocustomoutline i.fa.fa-cart-plus {
   padding: 0;
