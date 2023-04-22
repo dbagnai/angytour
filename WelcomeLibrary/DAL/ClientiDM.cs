@@ -1431,7 +1431,8 @@ namespace WelcomeLibrary.DAL
 
             if (!string.IsNullOrEmpty(item.Email))
             {
-                bool validemail = ActiveUp.Net.Mail.Validator.ValidateSyntax(item.Email);
+                //bool validemail = ActiveUp.Net.Mail.Validator.ValidateSyntax(item.Email);
+                bool validemail = IsValidEmail(item.Email);
                 if (!validemail)
                 {
                     //  output.CssClass = "alert alert-danger"; output.Text = "Email errata|Invalid Email!";

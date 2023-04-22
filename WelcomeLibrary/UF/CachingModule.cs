@@ -27,7 +27,7 @@ namespace WelcomeLibrary.UF
             // Segue un esempio di come gestire l'evento LogRequest e fornire la relativa 
             // implementazione della registrazione personalizzata
             context.PreSendRequestHeaders += this.SetDefaultCacheHeader;
-           
+
             //ABILITAZIONE COMPRESSIONE CONTENUTI CON VARIABILE DI CONFIG
             //ATTENZIONE!!! disabilitare la static e dinamic conpression su web.config sennoo con la doppia compressione non funziona 
             //METTERE SU WEB.CONFIG ( SE IMPOSTI enablecontentcompression=true)
@@ -36,75 +36,85 @@ namespace WelcomeLibrary.UF
                 enablecompression = true;
             if (enablecompression)
                 context.PostRequestHandlerExecute += this.SetCompressionHnd;
+#if false
 
-            //context.PostRequestHandlerExecute += this.SetCacheCheck; //nuovo sistema cache pagine ( da ultimare )
+            /////////////////////////////////////////////////////////
+            //1. ABILITARE per memorizzazione in cache della pagina in apposito file e/o database
+            /////////////////////////////////////////////////////////
+            context.PostRequestHandlerExecute += this.SetCacheCheck; //nuovo sistema cache pagine ( da ultimare )  
+#endif
 
             context.PostRequestHandlerExecute += this.SetAdditionalheaders;
-            
+
             //attività che avvengono prima del rendering dei contenuti per la renspnse
             context.BeginRequest += new EventHandler(RewriteModule_BeginRequest);
             context.EndRequest += new EventHandler(PagecacheModule_EndRequest);
         }
 
-      private void SetCacheCheck(object sender, EventArgs eventArgs)
-      {
-         //da modificar eper inserire condizioni di memorizzazione della cache solo se non presente per la pagina indicata
-         //fare filtro per pagne da cachare e non!!!!!
-         if (HttpContext.Current.Request.RawUrl == "/")
-         {
-            var f = new ResponseFilterStream(HttpContext.Current.Response.Filter);
-
-            f.CaptureStream += F_CaptureStream;
-            HttpContext.Current.Response.Filter = f;
-         }
-      }
-
-      private void F_CaptureStream(MemoryStream ms)
-      {
-         string content = HttpContext.Current.Response.ContentEncoding.GetString(ms.ToArray());
-         //HttpContext.Current.Items["tocompress"] = "false";
-
-         File.WriteAllText(HttpContext.Current.Server.MapPath("/public") + "\\test.txt", content);
-
-         int a = 0;
-      }
-
-
-
-      #endregion
-      void PagecacheModule_EndRequest(object sender, EventArgs e)
+        private void SetCacheCheck(object sender, EventArgs eventArgs)
         {
-         //HttpContext context = HttpContext.Current;
-         //String path = HttpContext.Current.Request.Url.AbsolutePath; //in base a questo path posso fare check della cache di pagina e tornare quella
-         //HttpContext.Current.Response.Write(cotenutodallacache);
-         //HttpContext.Current.Response.End();
-         
-         //using (MemoryStream ms = new MemoryStream())
-         //{
-            
-         //   //HttpContext.Current.Response.OutputStream.CopyTo(ms);
-         //   HttpContext.Current.Response.Filter.CopyTo(ms);
-         //   //string sz = Encoding.ASCII.GetString(ms.ToArray());
-         //   string content = HttpContext.Current.Response.ContentEncoding.GetString(ms.ToArray());
-         //}
-         int a = 0;
+            //da modificar eper inserire condizioni di memorizzazione della cache solo se non presente per la pagina indicata
+            //fare filtro per pagne da cachare e non!!!!!
+            if (HttpContext.Current.Request.RawUrl == "/")
+            {
+                var f = new ResponseFilterStream(HttpContext.Current.Response.Filter);
+
+                f.CaptureStream += F_CaptureStream;
+                HttpContext.Current.Response.Filter = f;
+            }
+        }
+
+        private void F_CaptureStream(MemoryStream ms)
+        {
+            string content = HttpContext.Current.Response.ContentEncoding.GetString(ms.ToArray());
+            //HttpContext.Current.Items["tocompress"] = "false";
+
+            File.WriteAllText(HttpContext.Current.Server.MapPath("/public") + "\\test.txt", content);
+
+            int a = 0;
+        }
+
+
+
+        #endregion
+        void PagecacheModule_EndRequest(object sender, EventArgs e)
+        {
+            //HttpContext context = HttpContext.Current;
+            //String path = HttpContext.Current.Request.Url.AbsolutePath; //in base a questo path posso fare check della cache di pagina e tornare quella
+            //HttpContext.Current.Response.Write(cotenutodallacache);
+            //HttpContext.Current.Response.End();
+
+            //using (MemoryStream ms = new MemoryStream())
+            //{
+
+            //   //HttpContext.Current.Response.OutputStream.CopyTo(ms);
+            //   HttpContext.Current.Response.Filter.CopyTo(ms);
+            //   //string sz = Encoding.ASCII.GetString(ms.ToArray());
+            //   string content = HttpContext.Current.Response.ContentEncoding.GetString(ms.ToArray());
+            //}  
+
         }
         void RewriteModule_BeginRequest(object sender, EventArgs e)
         {
+
+#if false
             ////////////////////////////////////////////////////////////////////////////////////////////
-            // gestione Cache nuova da abilitare per nuovo sistema di cache e inserire condizioni per filtro di pagine da cachare
-            // e test di presenza del contenuto buono della chache
+            // 2. ABILITARE per servire il contenuto della cache !!!!
+            // Gestione Cache nuova da abilitare per nuovo sistema di cache.
+            // Resta da ultimare per inserire condizioni per filtro di pagine da cachare senno viene fatto su tutte 
+            // è inoltre necessario fare test di presenza del contenuto buono della cache altrimenti non è mai aggiornate
             ////////////////////////////////////////////////////////////////////////////////////////////
-           //if (HttpContext.Current.Request.RawUrl == "/")
-         //{
-         //   if (File.Exists(HttpContext.Current.Server.MapPath("/public") + "\\test.txt"))
-         //   {
-         //      string sz = File.ReadAllText(HttpContext.Current.Server.MapPath("/public") + "\\test.txt");
-         //      HttpContext.Current.Response.ContentType = "text/html";
-         //      HttpContext.Current.Response.Write(sz);
-         //      HttpContext.Current.Response.End();
-         //   }
-         //}
+            if (HttpContext.Current.Request.RawUrl == "/")
+            {
+                if (File.Exists(HttpContext.Current.Server.MapPath("/public") + "\\test.txt"))
+                {
+                    string sz = File.ReadAllText(HttpContext.Current.Server.MapPath("/public") + "\\test.txt");
+                    HttpContext.Current.Response.ContentType = "text/html";
+                    HttpContext.Current.Response.Write(sz);
+                    HttpContext.Current.Response.End();
+                }
+            } 
+#endif
 
         }
         private void SetAdditionalheaders(object sender, EventArgs eventArgs)
@@ -156,8 +166,8 @@ namespace WelcomeLibrary.UF
 
             if (encoding.Contains("gzip"))
             {
-               //if (HttpContext.Current.Items["tocompress"] == "false")
-               //   return;
+                //if (HttpContext.Current.Items["tocompress"] == "false")
+                //   return;
                 //context.Response.Filter = new System.IO.Compression.GZipStream(context.Response.Filter, System.IO.Compression.CompressionMode.Compress);
                 //context.Response.Filter = new System.IO.Compression.GZipStream(context.Response.Filter, System.IO.Compression.CompressionLevel.Fastest);
                 context.Response.Filter = new System.IO.Compression.GZipStream(context.Response.Filter, System.IO.Compression.CompressionLevel.Optimal);

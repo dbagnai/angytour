@@ -934,7 +934,7 @@ namespace WelcomeLibrary.UF
                  //   case "mailsystem":
                  //       ret = invioMailGenericomailsystem(mittenteNome, mittenteMail, SoggettoMail, Descrizione,
                  //destinatarioMail1, destinatarioNome, foto, percorsofoto, incorporaimmagini, server, plaintext, emaildestbcc, sectionName);
-                        break;
+                      //  break;
                     case "mimekit":
                         ret = invioMailGenericomimekit(mittenteNome, mittenteMail, SoggettoMail, Descrizione,
                  destinatarioMail1, destinatarioNome, foto, percorsofoto, incorporaimmagini, server, plaintext, emaildestbcc, sectionName);

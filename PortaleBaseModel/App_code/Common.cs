@@ -2389,6 +2389,8 @@ public class CommonPage : Page
             jtagpurchaseevent.tax = 0;// qui dovresti scorporare l'iva
             jtagpurchaseevent.shipping = totali.TotaleSpedizione;
             jtagpurchaseevent.currency = "EUR";
+            //Mailcliente per conversioni avanzate
+            jtagpurchaseevent.customerEmail = totali.Mailcliente;
             jtagpurchaseevent.items = new List<jsongtagitem>();
             foreach (Carrello c in prodotti)
             {
