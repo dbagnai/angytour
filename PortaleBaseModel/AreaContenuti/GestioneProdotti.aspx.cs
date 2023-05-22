@@ -512,6 +512,7 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
     {
         //testoricerca
         testoricerca = Server.HtmlEncode(txtinputCerca.Text);
+        PagerRisultati.CurrentPage = 1;
         //mese = txtinputmese.Text;
         //anno = txtinputanno.Text;
         CaricaDati();

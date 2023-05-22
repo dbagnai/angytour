@@ -453,6 +453,7 @@ public partial class AreaContenuti_Default3 : CommonPage
     protected void ImgBtnCerca_Click(object sender, EventArgs e)
     {
         //testoricerca
+        PagerRisultati.CurrentPage = 1;
         testoricerca = Server.HtmlEncode(txtinputCerca.Text);
         mese = txtinputmese.Text;
         anno = txtinputanno.Text;
