@@ -5,11 +5,14 @@ using System.Text;
 using WelcomeLibrary.DOM;
 using System.Data.OleDb;
 using System.Data.SQLite;
+using NUglify.JavaScript.Syntax;
+using WelcomeLibrary.UF;
 
 namespace WelcomeLibrary.DAL
 {
     public class mailingDM
     {
+        bool enablecompress = true;
 
         /// <summary>
         /// Carica le email filtrando per tipomailing e prendendo quelle relative agli ID_CARD delle card passati in collection e non in errore
@@ -68,8 +71,17 @@ namespace WelcomeLibrary.DAL
                             item.SoggettoMail = reader.GetString(reader.GetOrdinal("SoggettoMail"));
                         if (!reader["TestoErrore"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.TestoErrore = reader.GetString(reader.GetOrdinal("TestoErrore"));
+
                         if (!reader["TestoMail"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
-                            item.TestoMail = reader.GetString(reader.GetOrdinal("TestoMail"));
+                        {
+                            string txtfromdb = reader.GetString(reader.GetOrdinal("TestoMail"));
+                            if (enablecompress)
+                                txtfromdb = Utility.DecompressString(txtfromdb);
+                            item.TestoMail = txtfromdb;
+                        }
+
+
+
                         item.Tipomailing = reader.GetInt64(reader.GetOrdinal("Tipomailing"));
                         if (!reader["DataInserimento"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
@@ -147,8 +159,15 @@ namespace WelcomeLibrary.DAL
                             item.SoggettoMail = reader.GetString(reader.GetOrdinal("SoggettoMail"));
                         if (!reader["TestoErrore"].Equals(DBNull.Value))
                             item.TestoErrore = reader.GetString(reader.GetOrdinal("TestoErrore"));
+
                         if (!reader["TestoMail"].Equals(DBNull.Value))
-                            item.TestoMail = reader.GetString(reader.GetOrdinal("TestoMail"));
+                        {
+                            string txtfromdb = reader.GetString(reader.GetOrdinal("TestoMail"));
+                            if (enablecompress)
+                                txtfromdb = Utility.DecompressString(txtfromdb);
+                            item.TestoMail = txtfromdb;
+                        }
+
                         item.Tipomailing = reader.GetInt64(reader.GetOrdinal("Tipomailing"));
                         if (!reader["M_DataInserimento"].Equals(DBNull.Value))
                             item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("M_DataInserimento"));
@@ -363,7 +382,15 @@ namespace WelcomeLibrary.DAL
                         if (!reader["TestoErrore"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.TestoErrore = reader.GetString(reader.GetOrdinal("TestoErrore"));
                         if (!reader["TestoMail"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
-                            item.TestoMail = reader.GetString(reader.GetOrdinal("TestoMail"));
+                        {
+                            string txtfromdb = reader.GetString(reader.GetOrdinal("TestoMail"));
+                            if (enablecompress)
+                                txtfromdb = Utility.DecompressString(txtfromdb);
+                            item.TestoMail = txtfromdb;
+                        }
+
+
+
                         item.Tipomailing = reader.GetInt64(reader.GetOrdinal("Tipomailing"));
                         if (!reader["DataInserimento"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
@@ -432,7 +459,12 @@ namespace WelcomeLibrary.DAL
                         if (!reader["TestoErrore"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.TestoErrore = reader.GetString(reader.GetOrdinal("TestoErrore"));
                         if (!reader["TestoMail"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
-                            item.TestoMail = reader.GetString(reader.GetOrdinal("TestoMail"));
+                        {
+                            string txtfromdb = reader.GetString(reader.GetOrdinal("TestoMail"));
+                            if (enablecompress)
+                                txtfromdb = Utility.DecompressString(txtfromdb);
+                            item.TestoMail = txtfromdb;
+                        }
                         item.Tipomailing = reader.GetInt64(reader.GetOrdinal("Tipomailing"));
                         if (!reader["DataInserimento"].Equals(DBNull.Value)) //Email presa dalla tabella clienti
                             item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
@@ -537,7 +569,10 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter p3 = new SQLiteParameter("@TipoMailing", item.Tipomailing);//OleDbType.VarChar
             parColl.Add(p3);
 
-            SQLiteParameter p5 = new SQLiteParameter("@TestoMail", item.TestoMail);//OleDbType.VarChar
+            string txttodb = item.TestoMail;
+            if (enablecompress)
+                txttodb = Utility.CompressString(txttodb);
+            SQLiteParameter p5 = new SQLiteParameter("@TestoMail", txttodb);//OleDbType.VarChar
             parColl.Add(p5);
             SQLiteParameter p6 = new SQLiteParameter("@SoggettoMail", item.SoggettoMail);//OleDbType.VarChar
             parColl.Add(p6);
@@ -622,7 +657,11 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter p3 = new SQLiteParameter("@TipoMailing", item.Tipomailing);//OleDbType.VarChar
             parColl.Add(p3);
 
-            SQLiteParameter p5 = new SQLiteParameter("@TestoMail", item.TestoMail);//OleDbType.VarChar
+
+            string txttodb = item.TestoMail;
+            if (enablecompress)
+                txttodb = Utility.CompressString(txttodb);
+            SQLiteParameter p5 = new SQLiteParameter("@TestoMail", txttodb);//OleDbType.VarChar
             parColl.Add(p5);
             SQLiteParameter p6 = new SQLiteParameter("@SoggettoMail", item.SoggettoMail);//OleDbType.VarChar
             parColl.Add(p6);
@@ -704,8 +743,13 @@ namespace WelcomeLibrary.DAL
 
             SQLiteParameter p3 = new SQLiteParameter("@TipoMailing", item.Tipomailing);//OleDbType.VarChar
             parColl.Add(p3);
-            SQLiteParameter p5 = new SQLiteParameter("@TestoMail", item.TestoMail);//OleDbType.VarChar
+
+            string txttodb = item.TestoMail;
+            //if (enablecompress)
+            //    txttodb = Utility.CompressString(txttodb);
+            SQLiteParameter p5 = new SQLiteParameter("@TestoMail", txttodb);//OleDbType.VarChar
             parColl.Add(p5);
+
             SQLiteParameter p6 = new SQLiteParameter("@SoggettoMail", item.SoggettoMail);//OleDbType.VarChar
             parColl.Add(p6);
             SQLiteParameter p7 = new SQLiteParameter("@NoteInvio", item.NoteInvio);//OleDbType.VarChar
@@ -801,7 +845,12 @@ namespace WelcomeLibrary.DAL
                         item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
                         item.Tipomailing = reader.GetInt64(reader.GetOrdinal("TipoMailing"));
                         if (!reader["TestoMail"].Equals(DBNull.Value))
-                            item.TestoMail = reader.GetString(reader.GetOrdinal("TestoMail"));
+                        {
+                            string txtfromdb = reader.GetString(reader.GetOrdinal("TestoMail"));
+                            //if (enablecompress)
+                            //    txtfromdb = Utility.DecompressString(txtfromdb);
+                            item.TestoMail = txtfromdb;
+                        }
                         if (!reader["SoggettoMail"].Equals(DBNull.Value))
                             item.SoggettoMail = reader.GetString(reader.GetOrdinal("SoggettoMail"));
                         if (!reader["NoteInvio"].Equals(DBNull.Value))
@@ -859,7 +908,15 @@ namespace WelcomeLibrary.DAL
                         item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
                         item.Tipomailing = reader.GetInt64(reader.GetOrdinal("TipoMailing"));
                         if (!reader["TestoMail"].Equals(DBNull.Value))
-                            item.TestoMail = reader.GetString(reader.GetOrdinal("TestoMail"));
+                        {
+                            string txtfromdb = reader.GetString(reader.GetOrdinal("TestoMail"));
+                            //if (enablecompress)
+                            //    txtfromdb = Utility.DecompressString(txtfromdb);
+                            item.TestoMail = txtfromdb;
+                        }
+
+
+
                         if (!reader["SoggettoMail"].Equals(DBNull.Value))
                             item.SoggettoMail = reader.GetString(reader.GetOrdinal("SoggettoMail"));
                         if (!reader["NoteInvio"].Equals(DBNull.Value))
