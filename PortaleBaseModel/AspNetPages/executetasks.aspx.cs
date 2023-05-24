@@ -87,6 +87,9 @@ public partial class _executetasks : CommonPage
                     //case "modiximport":
                     //    ModixImport("rif000100");
                     //    break;
+                    case "cleanandcompressmailing":
+                        cleanandcompressmailing();
+                        break;
                     default:
                         //VerificaScadenzeCard();
                         EseguiMailing();
@@ -203,6 +206,37 @@ public partial class _executetasks : CommonPage
     //                      , ConfigManagement.ReadKey("Web_Numerocontenuti"));
 
     //}
+
+
+    private string cleanandcompressmailing()
+    {
+        ////Creo una variabile per la scrittura dei messaggi nel file di log
+        System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
+        Messaggi.Add("Messaggio", "cleanandcompressmailing() : " + " " + System.DateTime.Now.ToString());
+        string ret = "";
+        try
+        {
+            mailingDM mDM = new mailingDM();
+            int giornipercancellazione = 0;
+            mDM.CancellaMailPerPulizia(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, System.DateTime.Now.AddDays(-giornipercancellazione));
+
+            ret += dbDataAccess.comprimiSQLiteDB(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
+        }
+        catch (Exception err)
+        {
+            //DEVI LOGGARE EVENTUALI ERRORI IN OPPORTUNO FILE DI LOG
+            Messaggi["Messaggio"] += " cleanandcompressmailing() - Errore puliziadb: " + err.Message + " " + System.DateTime.Now.ToString();
+            WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
+        }
+        finally
+        {
+            Messaggi["Messaggio"] += " cleanandcompressmailing(): Ended " + System.DateTime.Now.ToString();
+            WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
+
+        }
+        return ret;
+
+    }
 
     void AggiornaContenutiDaWeb(string UrlSorgente, string codicedestinazione)
     {
