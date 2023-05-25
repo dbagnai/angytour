@@ -2494,7 +2494,7 @@ namespace WelcomeLibrary.DAL
                         #region Valori totali relativi all'ordine dalla tabella carrello ordini
                         //dati solo sulla prima riga di ordine
                         ws.Cell(i, 1).Value = dataordine;
-                        ws.Cell(i, 2).Value = codiceordine;
+                        ws.Cell(i, 2).SetValue(codiceordine.ToString());
                         ws.Cell(i, 3).Value = idcliente;
                         ws.Cell(i, 4).Value = mailcliente;
                         ws.Cell(i, 5).Value = telefonocliente;
@@ -2509,7 +2509,7 @@ namespace WelcomeLibrary.DAL
                         ws.Cell(i, 16).Value = pagatoacconto;
                         ws.Cell(i, 17).Value = pagato;
                         ws.Cell(i, 18).Value = idcommerciale;
-                        ws.Cell(i, 19).Value = codicesconto;
+                        ws.Cell(i, 19).SetValue(codicesconto.ToString());
                         #endregion
 
                         //Imponibile ed iva totale dell'ordine
