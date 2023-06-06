@@ -762,15 +762,8 @@
                                     <%= references.ResMan("Common", Lingua,"notespedizioni1") %>
                                 </div>
                             </div>
-
-
-
-
-
                         </div>
                     </div>
-
-
                 </div>
                 <!--end:.row-->
             </div>

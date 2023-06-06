@@ -1,0 +1,71 @@
+﻿<style>
+    .border-impagination img {
+        border-radius: calc(.25rem - 1px);
+    }
+
+    @media (max-width: 750px) {
+        .alternatecolor .bg-light-color {
+            background-color: #fff !important;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .border-impagination {
+            overflow: hidden;
+            margin: 0 15px 15px;
+            border-radius: .25rem !important;
+/*            border: 1px solid #dee2e6 !important;
+*/        }
+
+            .border-impagination img {
+                border-radius: calc(.25rem - 1px) 0 0;
+            }
+    }
+</style>
+<div class="alternatecolor" id="replaceid">
+    <item>
+        <div class="row no-gutters even border-impagination my-5">
+            <div class="col-12 col-md-8">
+                <h3 class="text-0 pb-4">
+                    <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                </h3>
+            </div>
+            <div class="col-12">
+                <div class="spacer"></div>
+            </div>
+            <div class="col-12 col-md-8">
+                <img src="/images/dummylogo.png" alt="" class=" bind gs_pan_left imgBanner w-100 lazy" mybind="Id" />
+            </div>
+            <div class="col-12 col-md-4 ">
+                <p class="text-3">
+                    <span class="bind card-subtitle mbr-section-subtitle text-left" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                </p>
+            </div>
+        </div>
+    </item>
+    <item>
+            <div class="row  my-5 no-gutters odd border-impagination">
+                <div class="col-12 col-md-8">
+                    <h3 class="text-0 pb-4">
+                        <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                    </h3>
+                </div>
+                <div class="col-12 ">
+                    <div class="spacer"></div>
+                </div>
+                <div class="col-12 col-md-8">
+                    <img src="/images/dummylogo.png" alt="" class="bind  gs_pan_right imgBanner w-100 lazy" mybind="Id" />
+                </div>
+                <div class="col-12 col-md-4 ">
+                    <p class="text-3">
+                        <span class="bind card-subtitle mbr-section-subtitle text-left" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                    </p>
+                </div>
+            </div>
+    </item>
+</div>
+
+
+
+
+

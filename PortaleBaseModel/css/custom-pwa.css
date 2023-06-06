@@ -1478,6 +1478,110 @@ svg.svgicon-color2 path {
 .slick-dots > li:only-child {
   display: none;
 }
+/* ! GSAP custom css */
+.spacer {
+  height: 20vh;
+}
+.text-0 {
+  font-size: 5rem;
+  line-height: 1;
+}
+/* ! Animations */
+.gs_fade_up {
+  opacity: 0;
+  transform: translateY(5rem);
+}
+.gs_scale_min {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.gs_start_blur {
+  /* background: url(../images/new/ipad-1.png) no-repeat center center; */
+  height: 100%;
+  width: 100%;
+  padding: 10% 30px;
+  background-size: 60%;
+}
+/* ! Background Animations */
+.bg-black {
+  background: #000;
+  transition: all 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.panel-white .bg-black {
+  background: #fff;
+  color: #000 !important;
+}
+.panel-white .bg-black {
+  background: #fff;
+  color: #000 !important;
+}
+.panel-white .white-color .mbr-overlay-black {
+  color: #fff !important;
+}
+/* ! Elements */
+.text-gradient {
+  background: #fff;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background-image: linear-gradient(-270deg, #3eacc8, #636363);
+}
+.panel-text {
+  z-index: 1;
+  position: relative;
+}
+.gs_video_panel {
+  opacity: 0;
+  z-index: 0;
+  position: relative;
+}
+@media (max-width: 768px) {
+  .gs_video_panel {
+    margin-top: 0vh;
+  }
+  .gs_video_panel.video-res video {
+    height: 70vh;
+    padding-top: 15vh;
+  }
+  .text-0 {
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+  .spacer {
+    height: 10vh;
+  }
+}
+.gs_pan_clockwise {
+  width: 100%;
+  z-index: 0;
+}
+.gs_pan_cclockwise {
+  width: 80%;
+  z-index: 0;
+}
+@media (max-width: 768px) {
+  .gs_pan_clockwise,
+  .gs_pan_cclockwise {
+    width: 120%;
+  }
+}
+.img-res {
+  width: 100%;
+}
+.video-res {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.video-res video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 /*----------------------------------
 ////////| IMPORTAZIONE FONT |/////// 
     ATTENZIONE QUANDO SI COMBINANO GLI SCRIPT CSS

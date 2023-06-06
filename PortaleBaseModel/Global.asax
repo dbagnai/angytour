@@ -473,6 +473,7 @@
             "~/js/detect-zoom.min.js",
             //"~/js/landing/jarallax.min.js",
             //"~/js/jarallaxinit.js",
+            "~/js/smoothscroll.js",
             "~/css/bcomponents/ui-259.js",
             //"~/js/odometer/odometer.js",
             "~/js/masonry.pkgd.min.js",
@@ -503,6 +504,8 @@
             "~/js/lightGallery-master/dist/plugins/zoom/lg-zoom.min.js",
             "~/js/lightGallery-master/dist/plugins/video/lg-video.min.js",
             "~/js/lightGallery-master/dist/plugins/justifiedgallery/jquery.justifiedGallery.min.js",
+             "~/js/gsap/gsap.min.js",
+            "~/js/gsap/ScrollTrigger.min.js",
             "~/js/maininit.js"
         );
 

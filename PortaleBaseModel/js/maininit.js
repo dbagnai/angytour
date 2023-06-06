@@ -290,6 +290,248 @@ jQuery(document).ready(function ($) {
         }
     }
 
+    /*--------GESTIONE GSAP INIT---------------*/
+    //(function wait() {
+    //    if (typeof gsap !== 'undefined' && $(".intro").length != 0) {
+
+
+
+    //    } else {
+    //        setTimeout(wait, 300);
+    //    }
+    //})();
+
+
+    if (typeof gsap !== 'undefined' && $(".gs_reveal").length != 0) {
+
+        function animateFrom(elem) {
+            var x = 0;
+            var y = 0;
+            /*   var direction = direction || 1;*/
+
+
+            if (elem.classList.contains("gs_reveal_fromleft")) {
+                x = -100;
+                y = 0;
+            } else if (elem.classList.contains("gs_reveal_fromright")) {
+                x = 100;
+                y = 0;
+            }
+            else if (elem.classList.contains("gs_reveal_fromtop")) {
+                x = 0;
+                y = -100;
+            } else if (elem.classList.contains("gs_reveal_frombottom")) {
+                x = 0;
+                y = 100;
+            }
+
+            elem.style.transform = "translate(" + x + "px, " + y + "px)";
+            elem.style.opacity = "0";
+            gsap.fromTo(elem, { x: x, y: y, autoAlpha: 0 }, {
+                duration: 2.50,
+                x: 0,
+                y: 0,
+                autoAlpha: 1,
+                ease: "expo",
+                overwrite: "auto",
+                stagger: 0.3,
+                delay: 0.2,
+            });
+        }
+
+        function hide(elem) {
+            gsap.to(elem, {
+                opacity: 0,
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top -20%",
+                    end: "bottom top",
+                    //markers: true,
+                }
+            });
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray(".gs_reveal").forEach(function (elem) {
+            hide(elem); // assure that the element is hidden when scrolled into view 
+            ScrollTrigger.create({
+                trigger: elem,
+                //markers: true,
+                onEnter: function () { animateFrom(elem) },
+                onEnterBack: function () { animateFrom(elem) },
+                onLeave: function () { hide(elem) }, // assure that the element is hidden when scrolled into view
+                stagger: 0.3,
+                delay: 0.2,
+            });
+        });
+    }
+
+
+    if (typeof gsap !== 'undefined' && $(".gs_start_blur").length != 0) {
+        //intro
+        gsap.from(".gs_start_blur", {
+            scale: 0.6,
+            duration: 0.8,
+            opacity: 0,
+            ease: Power2.easeOut,
+            delay: 0.2,
+            filter: "blur(100px)"
+        });
+
+    }
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && $(".gs_scale_min").length != 0) {
+
+        // parallax
+        gsap.to(".gs_scale_min", {
+            yPercent: 19,
+            scale: 0.6,
+            opacity: 0,
+            scrollTrigger: {
+                trigger: ".gs_scale-min",
+                scrub: true,
+                start: "top top",
+                end: "bottom top",
+                //markers: true,
+            }
+        });
+
+
+    }
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && $(".gs_video").length != 0) {
+
+        // video
+        let video_bg = document.querySelector('.gs_video');
+        video_bg.pause();
+        let tl = gsap.timeline();
+        tl.to(".gs_video_panel", {
+            yPercent: -10,
+            opacity: 1,
+            scrollTrigger: {
+                trigger: ".gs_video_panel",
+                scrub: true,
+                start: "top 50%",
+                end: "bottom 60%",
+                //markers: true,
+                onEnter: function () { video_bg.play() },
+                onEnterBack: function () { video_bg.play() },
+                onLeave: function () {
+                    video_bg.pause();
+                    tl.to(".gs_video_panel", { opacity: 0 });
+                },
+            }
+        });
+
+
+    }
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && $(".gs_panel_invert").length != 0) {
+
+        gsap.to(".gs_panel_invert", {
+            scrollTrigger: {
+                trigger: ".gs_panel_invert",
+                start: "top 100%",
+                end: "bottom 30%",
+                scrub: true,
+                toggleClass: {
+                    targets: "body",
+                    className: "panel-white"
+                },
+                //markers: true,
+            }
+        });
+    }
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && $(".gs_pan_clockwise").length != 0) {
+        let banners = document.querySelectorAll("item");
+
+        banners.forEach((banner) => {
+            // create a scoped selector
+            const q = banner.querySelector(".gs_pan_clockwise");
+            gsap.to(q, {
+                yPercent: -40,
+                xPercent: -40,
+                scale: 0.8,
+                rotate: 45,
+                scrollTrigger: {
+                    trigger: banner,
+                    scrub: true,
+                    start: "top 20%",
+                    end: "bottom top",
+                    stagger: 1,
+                    /* markers: true*/
+                }
+            });
+
+        });
+    }
+
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && $(".gs_pan_cclockwise").length != 0) {
+        let banners = document.querySelectorAll("item");
+
+        banners.forEach((banner) => {
+            // create a scoped selector
+            const q = banner.querySelector(".gs_pan_cclockwise");
+            gsap.to(q, {
+                yPercent: -60,
+                xPercent: -20,
+                scale: 0.8,
+                rotate: -45,
+                scrollTrigger: {
+                    trigger: banner,
+                    scrub: true,
+                    start: "top 20%",
+                    end: "bottom top",
+                    stagger: 1,
+                    /*markers: true,*/
+                }
+            });
+        });
+    }
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && $(".gs_pan_left").length != 0) {
+        let banners = document.querySelectorAll("item");
+
+        banners.forEach((banner) => {
+            // create a scoped selector
+            const q = banner.querySelector(".gs_pan_left");
+            gsap.from(q, {
+                yPercent: -150,
+                xPercent: -110,
+                scale: 0.2,
+                scrollTrigger: {
+                    trigger: banner,
+                    scrub: true,
+                    start: "top 80%",
+                    end: "bottom 10%",
+                    stagger: 1,
+                    //     markers: true
+                }
+            });
+
+        });
+    }
+
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && $(".gs_pan_right").length != 0) {
+        let banners = document.querySelectorAll("item");
+
+        banners.forEach((banner) => {
+            // create a scoped selector
+            const q = banner.querySelector(".gs_pan_right");
+            gsap.from(q, {
+                yPercent: 120,
+                xPercent: 50,
+                scale: 0.2,
+                scrollTrigger: {
+                    trigger: banner,
+                    scrub: true,
+                    start: "top 60%",
+                    end: "bottom 20%",
+                    stagger: 0.8,
+                    //    markers: true,
+                }
+            });
+        });
+    }
+    /*--------GESTIONE GSAP INIT---------------*/
+
     /*----------------------- inizializzazione elementi portfolio con masonry.js   --------------- */
     (function wait() {
         if (typeof $.fn.masonry !== 'undefined') {
