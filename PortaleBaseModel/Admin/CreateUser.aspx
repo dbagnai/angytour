@@ -28,7 +28,7 @@
                                         </tr>
                                         <tr>
                                             <td align="right" colspan="2">
-                                                <asp:Button ID="ContinueButton" runat="server" BackColor="#1f1f1f" BorderColor="#cccccc"
+                                                <asp:Button ID="ContinueButton" runat="server" BackColor="#fff" BorderColor="#cccccc"
                                                     BorderStyle="Solid" BorderWidth="1px" CausesValidation="False" CommandName="Continue"
                                                     Font-Names="Verdana" ForeColor="#000000" OnClick="ContinueButton_Click" Text="Continua"
                                                     ValidationGroup="CreateUserWizard1" />
@@ -39,15 +39,15 @@
                             </asp:CompleteWizardStep>
                         </WizardSteps>
                         <SideBarStyle BackColor="#EDFCC3" BorderWidth="0px" Font-Size="0.9em" VerticalAlign="Top" />
-                        <TitleTextStyle BackColor="#1f1f1f" Font-Bold="True" ForeColor="White" />
+                        <TitleTextStyle BackColor="#fff" Font-Bold="True" ForeColor="White" />
                         <SideBarButtonStyle BorderWidth="0px" Font-Names="Verdana" ForeColor="Black" />
-                        <NavigationButtonStyle BackColor="#1f1f1f" BorderColor="#CCCCCC" BorderStyle="Solid"
+                        <NavigationButtonStyle BackColor="#fff" BorderColor="#CCCCCC" BorderStyle="Solid"
                             BorderWidth="1px" Font-Names="Verdana" ForeColor="#000000" />
                         <HeaderStyle BackColor="#5D7B9D" BorderStyle="Solid" Font-Bold="True" Font-Size="0.9em"
                             ForeColor="Black" HorizontalAlign="Center" />
-                        <CreateUserButtonStyle BackColor="#1f1f1f" BorderColor="#CCCCCC" BorderStyle="Solid"
+                        <CreateUserButtonStyle BackColor="#fff" BorderColor="#CCCCCC" BorderStyle="Solid"
                             BorderWidth="1px" Font-Names="Verdana" ForeColor="#000000" />
-                        <ContinueButtonStyle BackColor="#1f1f1f" BorderColor="#CCCCCC" BorderStyle="Solid"
+                        <ContinueButtonStyle BackColor="#fff" BorderColor="#CCCCCC" BorderStyle="Solid"
                             BorderWidth="1px" Font-Names="Verdana" ForeColor="#000000" />
                         <StepStyle BorderWidth="0px" />
                     </asp:CreateUserWizard>

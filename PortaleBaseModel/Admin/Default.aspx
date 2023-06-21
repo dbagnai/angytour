@@ -13,8 +13,8 @@
         <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
         <EditRowStyle BackColor="#999999" />
         <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-        <PagerStyle BackColor="#1f1f1f" ForeColor="Black" HorizontalAlign="Center"  Font-Names="Arial" />
-        <HeaderStyle BackColor="#1f1f1f" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="#fff" ForeColor="Black" HorizontalAlign="Center"  Font-Names="Arial" />
+        <HeaderStyle BackColor="#fff" Font-Bold="True" ForeColor="White" />
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />

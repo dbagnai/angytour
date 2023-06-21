@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-12 mt-2">
                 <div style="margin-right: auto; margin-left: auto; width: 400px;">
-                    <asp:Button ID="Button1" runat="server" Text="Crea Ruolo" BackColor="#1f1f1f" OnClick="Button1_Click" />
+                    <asp:Button ID="Button1" runat="server" Text="Crea Ruolo" BackColor="#fff" OnClick="Button1_Click" />
                     <b>Ruolo:</b>
                     <asp:TextBox ID="RoleName" runat="server" Width="160px"></asp:TextBox>
                     <br />
@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-12 mt-2">
                 <div style="margin-right: auto; margin-left: auto; width: 400px;">
-                    <asp:Button ID="Button2" runat="server" Text="Elimina Ruolo" BackColor="#1f1f1f" OnClick="Button2_Click" />
+                    <asp:Button ID="Button2" runat="server" Text="Elimina Ruolo" BackColor="#fff" OnClick="Button2_Click" />
                     <br />
                 </div>
             </div>
