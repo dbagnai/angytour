@@ -399,3 +399,23 @@
 <Messaggio>httplocalhost60100Generato sitemap  17/02/2023 16:05:25</Messaggio>
  <Data>17/02/2023 16:05:25</Data>
 <Messaggio>httplocalhost60100Generato sitemap  17/02/2023 16:05:25Terminato Aggiornamento  17/02/2023 16:05:25</Messaggio>
+ <Data>22/06/2023 14:31:06</Data>
+<Messaggio> Application start : 22/06/2023 14:31:03</Messaggio>
+ <Data>22/06/2023 14:31:06</Data>
+<Messaggio> Global init original path: http://localhost:60100/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:60100</Messaggio>
+ <Data>22/06/2023 14:34:06</Data>
+<Messaggio>httplocalhost60100Generato sitemap  22/06/2023 14:34:06</Messaggio>
+ <Data>22/06/2023 14:34:06</Data>
+<Messaggio>httplocalhost60100Generato sitemap  22/06/2023 14:34:06Terminato Aggiornamento  22/06/2023 14:34:06</Messaggio>
+ <Data>22/06/2023 14:59:21</Data>
+<Messaggio> Application start : 22/06/2023 14:59:21</Messaggio>
+ <Data>22/06/2023 14:59:21</Data>
+<Messaggio> Global init original path: http://localhost:60100/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:60100</Messaggio>
+ <Data>22/06/2023 15:02:21</Data>
+<Messaggio>httplocalhost60100Generato sitemap  22/06/2023 15:02:21</Messaggio>
+ <Data>22/06/2023 15:02:21</Data>
+<Messaggio>httplocalhost60100Generato sitemap  22/06/2023 15:02:21Terminato Aggiornamento  22/06/2023 15:02:21</Messaggio>
+ <Data>22/06/2023 16:08:08</Data>
+<Messaggio> Application start : 22/06/2023 16:08:07</Messaggio>
+ <Data>22/06/2023 16:08:08</Data>
+<Messaggio> Global init original path: http://localhost:60100/it/catalogo/offerte-p42 Global init AbsolutePath : /it/catalogo/offerte-p42 Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:60100</Messaggio>

@@ -36,12 +36,12 @@
                 <asp:TextBox ID="txtprova" BackColor="#ffffff" CssClass="form-control" runat="server"></asp:TextBox>
 
 
-                <asp:Button ID="Button1" runat="server"  BackColor="#fff" Text="Registra" OnClick="Button1_Click"  CssClass="mt-1"/>
+                <asp:Button ID="Button1" runat="server"  BackColor="#888888" ForeColor="White" Text="Registra" OnClick="Button1_Click"  CssClass="mt-1"/>
                 <p>
                     <b>Ricordarsi che per memorizzare qualsiasi modifica è necessario salvare premendo
                     il tasto "Registra" dopo le variazioni!!!!</b>
                 </p>
-                   <asp:Button Text="Restart" ID="reset" OnClick="reset_Click" runat="server" BackColor="#fff"/>
+                   <asp:Button Text="Restart" ID="reset" OnClick="reset_Click" runat="server"   BackColor="#888888" ForeColor="White" />
             </div>
             <asp:Label ID="Results" runat="server"></asp:Label>
             <p>
@@ -51,12 +51,12 @@
             </p>
             <b>Vecchia Password:</b><asp:TextBox ID="txtPasswordold" BackColor="#ffffff"  CssClass="form-control" runat="server"></asp:TextBox>
             <b>Nuova Password:</b><asp:TextBox ID="txtPasswordnew" BackColor="#ffffff" CssClass="form-control" runat="server"></asp:TextBox>
-            <asp:Button ID="Button2" runat="server" Text="Cambio Password" OnClick="Button2_Click" BackColor="#fff" />
+            <asp:Button ID="Button2" runat="server" Text="Cambio Password" OnClick="Button2_Click"  BackColor="#888888" ForeColor="White"  />
             <br />
             <asp:Label ID="lblquestion" runat="server" />
             <br />
             <asp:TextBox ID="txtanswer" BackColor="#ffffff"  CssClass="form-control" runat="server"></asp:TextBox>
-            <asp:Button ID="Button3" runat="server" Text="Reset Password" Enabled="true" OnClick="Button3_Click" BackColor="#fff"/>
+            <asp:Button ID="Button3" runat="server" Text="Reset Password" Enabled="true" OnClick="Button3_Click"   BackColor="#888888" ForeColor="White" />
             <br />
             <asp:Label ID="lblResultsPsw" runat="server" />
                         </div>

@@ -21,7 +21,7 @@
                         <EditRowStyle BackColor="#999999" />
                         <SelectedRowStyle Font-Bold="True" />
                         <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                        <HeaderStyle BackColor="#fff" Font-Bold="True" ForeColor="#ffffff" />
+                        <HeaderStyle BackColor="#888888" Font-Bold="True" ForeColor="#ffffff" />
                         <AlternatingRowStyle BackColor="White" ForeColor="Black" />
                         <Columns>
                             <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />
@@ -60,10 +60,10 @@
                    <b>Comandi:</b> </div>
                     <div style="margin-left:auto; margin-right:auto; width:350px;">
                        <div style="float:left; width:50%">
-                    <asp:Button ID="Button1"  CssClass="btn" runat="server" Text="Associa a Ruolo"  BackColor="#fff" OnClick="Button1_Click" />
+                    <asp:Button ID="Button1"  CssClass="btn" runat="server" Text="Associa a Ruolo"  BackColor="#888888" ForeColor="White" OnClick="Button1_Click" />
                            </div>
                           <div style="float:left; width:50%">
-                    <asp:Button ID="Button2" CssClass="btn ml-1" runat="server" Text="Rimuovi da Ruolo" BackColor="#fff" OnClick="Button2_Click" />
+                    <asp:Button ID="Button2" CssClass="btn ml-1" runat="server" Text="Rimuovi da Ruolo" BackColor="#888888" ForeColor="White" OnClick="Button2_Click" />
                               </div>
                     <br />
                     <asp:Label ID="Results" runat="server"></asp:Label>

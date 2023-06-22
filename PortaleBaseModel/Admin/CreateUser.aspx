@@ -28,9 +28,9 @@
                                         </tr>
                                         <tr>
                                             <td align="right" colspan="2">
-                                                <asp:Button ID="ContinueButton" runat="server" BackColor="#fff" BorderColor="#cccccc"
+                                                <asp:Button ID="ContinueButton" runat="server" BackColor="#888888" BorderColor="#cccccc"
                                                     BorderStyle="Solid" BorderWidth="1px" CausesValidation="False" CommandName="Continue"
-                                                    Font-Names="Verdana" ForeColor="#000000" OnClick="ContinueButton_Click" Text="Continua"
+                                                    Font-Names="Verdana" ForeColor="#ffffff" OnClick="ContinueButton_Click" Text="Continua"
                                                     ValidationGroup="CreateUserWizard1" />
                                             </td>
                                         </tr>
@@ -39,16 +39,16 @@
                             </asp:CompleteWizardStep>
                         </WizardSteps>
                         <SideBarStyle BackColor="#EDFCC3" BorderWidth="0px" Font-Size="0.9em" VerticalAlign="Top" />
-                        <TitleTextStyle BackColor="#fff" Font-Bold="True" ForeColor="White" />
+                        <TitleTextStyle BackColor="#888888" Font-Bold="True" ForeColor="White" />
                         <SideBarButtonStyle BorderWidth="0px" Font-Names="Verdana" ForeColor="Black" />
-                        <NavigationButtonStyle BackColor="#fff" BorderColor="#CCCCCC" BorderStyle="Solid"
-                            BorderWidth="1px" Font-Names="Verdana" ForeColor="#000000" />
+                        <NavigationButtonStyle BackColor="#888888" BorderColor="#CCCCCC" BorderStyle="Solid"
+                            BorderWidth="1px" Font-Names="Verdana" ForeColor="#ffffff" />
                         <HeaderStyle BackColor="#5D7B9D" BorderStyle="Solid" Font-Bold="True" Font-Size="0.9em"
                             ForeColor="Black" HorizontalAlign="Center" />
-                        <CreateUserButtonStyle BackColor="#fff" BorderColor="#CCCCCC" BorderStyle="Solid"
-                            BorderWidth="1px" Font-Names="Verdana" ForeColor="#000000" />
-                        <ContinueButtonStyle BackColor="#fff" BorderColor="#CCCCCC" BorderStyle="Solid"
-                            BorderWidth="1px" Font-Names="Verdana" ForeColor="#000000" />
+                        <CreateUserButtonStyle BackColor="#888888" BorderColor="#CCCCCC" BorderStyle="Solid"
+                            BorderWidth="1px" Font-Names="Verdana" ForeColor="#ffffff" />
+                        <ContinueButtonStyle BackColor="#888888" BorderColor="#ffffff" BorderStyle="Solid"
+                            BorderWidth="1px" Font-Names="Verdana" ForeColor="#ffffff" />
                         <StepStyle BorderWidth="0px" />
                     </asp:CreateUserWizard>
                 </div>
@@ -76,7 +76,7 @@
                     &nbsp;<br />
                     &nbsp;<br />
                     <asp:Button ID="Button1" runat="server" ValidationGroup="Elimina" Text="Elimina Utente"
-                        OnClick="Button1_Click" BackColor="#1f1f1f" />
+                        OnClick="Button1_Click" BackColor="#888888" ForeColor="White" />
                     <br />
                     <asp:Label ID="lbl_results" runat="server" Text=""></asp:Label>
                 </div>

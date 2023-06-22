@@ -480,10 +480,11 @@ i .fa {
 
 @media (max-width: 1179px) {
     .menuzord.white .menuzord-menu > li > a {
+        color: #444 !important;
         background-color: #fff;
-        border-bottom: solid 1px #555;
-        border-left: solid 1px #555;
-        border-right: solid 1px #555;
+        border-bottom: solid 1px #555 !important;
+        border-left: solid 1px #555 !important;
+        border-right: solid 1px #555 !important;
     }
 
     .menuzord.white .menuzord-menu > li:first-child > a:first-child {
@@ -517,6 +518,8 @@ i .fa {
     height: 32px;
     padding: 0px;
 }
+
+
 
 .menuzord {
     text-align: center;
@@ -770,6 +773,40 @@ i .fa {
 .menuzord-tabs-content {
     width: 65%;
     font-size: 0.9rem;
+}
+
+
+
+@media screen and (min-width: 1179px) {
+
+    /*PULSANTI menu STILE PULSANTE BORDER*/
+    .menuzord.white .menuzord-menu > li > a {
+        min-width: 140px !important;
+        height: 37px !important;
+        line-height: 20px;
+        border-radius: 2px !important;
+        font-size: 0.8rem !important;
+        background-color: rgba(255, 255, 255, 0.5)
+    }
+
+    #menuzord.menuzord.white .menuzord-menu > li > a {
+        border: 1px solid rgba(0, 0, 0, 0.32) !important;
+    }
+
+    #menuzord.menuzord.white .menuzord-menu > li > a:not(:hover) {
+        color: @primary-color !important;
+        text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.0);
+    }
+
+    #menuzord.menuzord.white .menuzord-menu > li > a.buttonmenu:not(:hover) {
+        color: #fff !important;
+        text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.0);
+    }
+
+    #menuzord.menuzord.white .menuzord-menu > li > a:active, #menuzord.menuzord.white .menuzord-menu > li > a:active span, #menuzord.menuzord.white .menuzord-menu > li > a:hover, #menuzord.menuzord.white .menuzord-menu > li > a:hover span {
+        background-color: rgba(255, 255, 255, 0.0) !important;
+        border: 1px solid rgba(0, 0, 0, 0.0) !important;
+    }
 }
 
 
@@ -1644,6 +1681,9 @@ i .fa {
     .menuzord-menu .current a:after {
         width: 100%;
     }*/
+    .buttonmenu {
+        border-radius: 0 !important;
+    } 
 
     .buttonmenu, a .buttonmenu {
         background: @bg-button-color !important;
