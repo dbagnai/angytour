@@ -6609,6 +6609,11 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
   /*width:100%;
     height:auto;*/
 }
+.card-shadow {
+  -webkit-box-shadow: 0px 0px 10px 4px rgba(0, 0, 20, 0.2) !important;
+  -moz-box-shadow: 0px 0px 10px 4px rgba(0, 0, 20, 0.2) !important;
+  box-shadow: 0px 0px 10px 4px rgba(0, 0, 20, 0.2) !important;
+}
 .work-image:after,
 .imgovercontainer:after {
   background-position: center center !important;
@@ -8149,9 +8154,6 @@ button.js-roundedpush:hover {
 /*.headerspacer {
     padding-top: calc(141px + 14px);
 }*/
-#divContainerb3 {
-  height: calc(80vh - 95px - 40px) !important;
-}
 @media (max-width: 1179px) {
   .headerspacer,
   .headerspacer-home {
@@ -8165,6 +8167,9 @@ button.js-roundedpush:hover {
 /*.headerspacer-home {
     padding-top: 0;
 }*/
+#divContainerb3 {
+  height: calc(80vh - 95px - 40px) !important;
+}
 @media (max-width: 1179px) {
   #divContainerb1,
   #divContainerb3,
@@ -8183,10 +8188,29 @@ button.js-roundedpush:hover {
     height: 100vh !important;
   }
 }
-/*SOLO TESTATA HOME*/
-#divContainerb1 .tp-caption.very_big_white {
-  /*&:extend(.gradient-overlay-top-bottom);*/
+@media screen and (min-width: 1179px) {
+  #divContainerb1 {
+    background-color: #eee;
+    height: calc(100vh - 95px - 40px - 70px) !important;
+  }
+  #divContainerb2 {
+    background-color: #eee;
+    /*height: calc(100vh - 95px - 40px - 70px) !important;
+        height: calc(80vh - 141px) !important;*/
+    height: calc((80vw*105)/250) !important;
+  }
+  #divContainermobile {
+    background-color: transparent;
+    height: calc(100vh - 98px - 40px) !important;
+  }
 }
+/*BANNER TESTATA HOME - 55% ON*/
+/*.tp-caption.sft.slidelink.hasclicklistener {
+    display: none;
+}
+.rev-slider-full .slotholder:after {
+    background: -webkit-linear-gradient(@bg-color-top-opacity, @bg-color-bottom-opacity);
+}*/
 .rev-slider-full {
   /*max-height: 480px;*/
   /*height: calc(100vh - 225px) !important;*/
@@ -8729,13 +8753,6 @@ button.js-roundedpush:hover {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#e09c8a60', GradientType=0);
   /* IE6-9 */
 }
-/*BANNER TESTATA HOME - 55% ON*/
-/*.tp-caption.sft.slidelink.hasclicklistener {
-    display: none;
-}
-.rev-slider-full .slotholder:after {
-    background: -webkit-linear-gradient(@bg-color-top-opacity, @bg-color-bottom-opacity);
-}*/
 /*BANNER TESTATA BOTTOM - ECOMMERCE*/
 .banner-offerta {
   width: 50%;
@@ -8812,85 +8829,9 @@ button.js-roundedpush:hover {
     overflow: hidden;
     overflow-wrap: break-word;
 }*/
-@media screen and (min-width: 1179px) {
-  #divContainerb1 {
-    background-color: #eee;
-    height: calc(100vh - 95px - 40px - 70px) !important;
-  }
-  #divContainerb2 {
-    background-color: #eee;
-    /*height: calc(100vh - 95px - 40px - 70px) !important;
-        height: calc(80vh - 141px) !important;*/
-    height: calc((80vw*105)/250) !important;
-  }
-  #divContainermobile {
-    background-color: transparent;
-    height: calc(100vh - 98px - 40px) !important;
-  }
-}
-.card-shadow {
-  -webkit-box-shadow: 0px 0px 10px 4px rgba(0, 0, 20, 0.2) !important;
-  -moz-box-shadow: 0px 0px 10px 4px rgba(0, 0, 20, 0.2) !important;
-  box-shadow: 0px 0px 10px 4px rgba(0, 0, 20, 0.2) !important;
-}
 /* ----------------------------------------------------
 - TEMPLATE BOOTSTRAP BANNER e PORTFOLIO MANSONRY CARD -
 ---------------------------------------------------- */
-.firstbig li {
-  list-style-type: none;
-}
-.grid-shape-polygon .work-image {
-  border-radius: 5px;
-}
-.grid-shape-polygon .card-body {
-  /*background-color: rgba(0, 0, 0, 0.50);*/
-  background-color: rgba(9, 143, 143, 0.75);
-  clip-path: polygon(0% 40px, 101% 0%, 101% 101%, 0% 101%);
-  padding-top: 45px;
-}
-.grid-shape-polygon item:nth-of-type(odd) .card-body {
-  background-color: rgba(243, 198, 73, 0.75);
-}
-.grid-shape-polygon .card-body:after {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  content: "";
-  /*background: @color-sottomeu;*/
-  background: #fff;
-  right: 0;
-  left: 0;
-  transform-origin: top left;
-  z-index: 12;
-  top: 0px;
-  clip-path: polygon(0% 0px, 101% 0%, 101% 6px, 0% calc(101% - 48px));
-}
-.grid-shape-polygon .work-image:after {
-  clip-path: polygon(0% 0%, 101% 0%, 101% calc(101% - 97px), 0% calc(101% - 56.6px));
-}
-.grid-shape-polygon .work-image span {
-  color: white;
-  font-weight: bold;
-  font-family: 'Raleway', sans-serif, sans-serif;
-  font-size: 1.2rem;
-  letter-spacing: 4px;
-}
-.grid-shape-polygon .imgovercontainer:hover.work-image > img,
-.image-polygon-b3.imgovercontainer:hover > img,
-.zoomimg.imgovercontainer:hover > img {
-  -webkit-transform: scale(1.2);
-  /*scale(1.3) rotate(2deg);*/
-  -moz-transform: scale(1.2);
-  /* scale(1.3) rotate(2deg);*/
-  -ms-transform: scale(1.2);
-  /* scale(1.3) rotate(2deg);*/
-  -o-transform: scale(1.2);
-  /*scale(1.3) rotate(2deg);*/
-  transform: scale(1.2);
-  /* scale(1.3) rotate(2deg);*/
-  -webkit-transition: all 0.35s ease;
-  transition: all 0.35s ease;
-}
 /* fluid 4 columns */
 .grid-sizer,
 .grid-item {
@@ -8906,6 +8847,9 @@ button.js-roundedpush:hover {
   .grid-sizer,
   .grid-item {
     width: 25%;
+  }
+  .firstbig li {
+    list-style-type: none;
   }
   .firstbig item:nth-of-type(1),
   .firstbig item:nth-of-type(9n+1) {
@@ -8944,6 +8888,21 @@ button.js-roundedpush:hover {
   background: none center calc((100% - 0.1px) / 2) no-repeat !important;
   background-size: 20% !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.image-polygon-b3.imgovercontainer:hover > img,
+.zoomimg.imgovercontainer:hover > img {
+  -webkit-transform: scale(1.2);
+  /*scale(1.3) rotate(2deg);*/
+  -moz-transform: scale(1.2);
+  /* scale(1.3) rotate(2deg);*/
+  -ms-transform: scale(1.2);
+  /* scale(1.3) rotate(2deg);*/
+  -o-transform: scale(1.2);
+  /*scale(1.3) rotate(2deg);*/
+  transform: scale(1.2);
+  /* scale(1.3) rotate(2deg);*/
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
 }
 /* SCHEDA DETAILS CATALOGO CATALOGO */
 /*.flexslider .slides img {
@@ -9387,10 +9346,10 @@ Modify  class per jqxcalendar
   font-weight: 600;
 }
 .font-bold {
-  font-weight: 700;
+  font-weight: 800;
 }
 .font-weight-light {
-  font-weight: 400 !important;
+  font-weight: 300 !important;
 }
 .font-weight-medium,
 .mbr-section-title,
