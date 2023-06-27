@@ -8,6 +8,795 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*@import "custom-bicromo2.less";*/
 /*@import "custom-colore-complementare.less";*/
 /*----------------------------------
+VARI STILI DA VERIFICARE
+----------------------------------*/
+.card-block .numero-chiavi-in-mano-top {
+  width: 75px;
+  height: 75px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #666;
+  line-height: 75px;
+  margin: 10px auto;
+  font-size: 36px;
+}
+.card-block .numero-chiavi-in-mano-top,
+.card-block .numero-chiavi-in-mano-bottom {
+  background-color: #642a14 !important;
+  color: #fff !important;
+}
+.image-polygon-b3.imgovercontainer:hover:after {
+  z-index: 2 !important;
+  background: none !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  opacity: 1 !important;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+.image-polygon-b3.imgovercontainer:hover:after,
+.zoomimg.imgovercontainer:hover:after {
+  z-index: 2 !important;
+  background: none !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  opacity: 1 !important;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+/*----------------------------------------------------------------------
+---- BANNER NAVIGAZIONE METODO LAVORO 1 -> 2 -> 3 tipo hospitality -----
+------------------------------------------------------------------------*/
+#divContainerNavCampionatura {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+@media (max-width: 579px) {
+  #divContainerNavCampionatura .works-grid-4 .work-item,
+  #divContainerNavMetodo .works-grid-4 .work-item {
+    width: 49.999%;
+  }
+  #divContainerNavMetodo .img-overlay {
+    border: none !important;
+    border-radius: 0% !important;
+  }
+  #divContainerNavMetodo img {
+    padding: 5% !important;
+  }
+  #divContainerNavCampionatura li:nth-child(2),
+  #divContainerNavCampionatura li:nth-child(4),
+  #divContainerNavMetodo li:nth-child(2),
+  #divContainerNavMetodo li:nth-child(4) {
+    padding: 5px !important;
+  }
+}
+@media (min-width: 579px) {
+  #divContainerNavCampionatura li:nth-child(n+1)::after,
+  #divContainerNavMetodo li:nth-child(n+1)::after {
+    position: absolute;
+    top: 25px;
+    left: 75px;
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    border-radius: 50%;
+    background-color: #f3c649;
+    color: white;
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    box-shadow: 0 4px 6px -6px #000;
+  }
+  #divContainerNavMetodo li:nth-child(n+1)::after {
+    top: 0px;
+  }
+  #divContainerNavCampionatura li:nth-child(1)::after,
+  #divContainerNavMetodo li:nth-child(1)::after {
+    content: "1";
+  }
+  #divContainerNavCampionatura li:nth-child(2)::after,
+  #divContainerNavMetodo li:nth-child(2)::after {
+    content: "2";
+  }
+  #divContainerNavCampionatura li:nth-child(3)::after,
+  #divContainerNavMetodo li:nth-child(3)::after {
+    content: "3";
+    line-height: 40px;
+  }
+  #divContainerNavCampionatura li:nth-child(4)::after,
+  #divContainerNavMetodo li:nth-child(4)::after {
+    content: "4";
+  }
+}
+@media (max-width: 1200px) and (min-width: 768px) {
+  #divContainerNavNavCampionatura .works-grid-4 .work-item,
+  #divContainerNavMetodo .works-grid-4 .work-item {
+    width: 24.999%;
+  }
+}
+@media screen and (min-width: 1023px) {
+  #divContainerNavCampionatura li:nth-child(n+1) {
+    background-repeat: no-repeat;
+    /*usare con icona ->*/
+    background-image: url(/images/freccia-dx.png), url(/images/freccia-sx.png);
+    background-position: top 75px left 0, top 75px right 0px;
+    background-size: 15%;
+    /*usare con icona +*/
+    /*background-image: url(/images/plus-dx.png), url(/images/plus-sx.png);*/
+    /*background-size: 7.5%;
+        background-position: top 35% left 0, top 35% right 0px;*/
+  }
+  #divContainerNavCampionatura li:first-child {
+    background-position-x: right;
+    background-repeat: no-repeat;
+    /*usare con icona ->*/
+    background-image: url(/images/freccia-sx.png);
+    background-position-y: 75px;
+    background-size: 15%;
+    /*usare con icona +*/
+    /*background-image: url(/images/plus-sx.png);*/
+    /*background-size: 7.5%;
+        background-position-y: 35%;*/
+  }
+  #divContainerNavCampionatura li:last-child {
+    background-position-x: left;
+    background-repeat: no-repeat;
+    margin-left: -1px;
+    /*usare con icona ->*/
+    background-image: url(/images/freccia-dx.png);
+    background-position-y: 75px;
+    background-size: 15%;
+    /*usare con icona +*/
+    /*background-image: url(/images/plus-dx.png);*/
+    /*background-size: 7.5%;
+        background-position-y: 35%;*/
+  }
+}
+/* METODO 1 -> 2 -> 3 tipo colosseo */
+#divContainerNavMetodo .img-overlay {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+@media screen and (min-width: 1023px) {
+  #divContainerNavMetodo li:nth-child(n+1) {
+    background-repeat: no-repeat;
+    /*usare con icona ->*/
+    /*background-image: url(/images/freccia-dx.png), url(/images/freccia-sx.png);
+        background-position: top 75px left 0, top 75px right 0px;
+        background-size: 15%;*/
+    /*usare con icona +*/
+    background-image: url(/images/plus-dx.png), url(/images/plus-sx.png);
+    background-size: 7.5%;
+    background-position: top 35% left 0, top 35% right 0px;
+  }
+  #divContainerNavMetodo li:first-child {
+    background-position-x: right;
+    background-repeat: no-repeat;
+    /*usare con icona ->*/
+    /*background-image: url(/images/freccia-sx.png);
+        background-position-y: 75px;
+        background-size: 15%;*/
+    /*usare con icona +*/
+    background-image: url(/images/plus-sx.png);
+    background-size: 7.5%;
+    background-position-y: 35%;
+  }
+  #divContainerNavMetodo li:last-child {
+    background-position-x: left;
+    background-repeat: no-repeat;
+    margin-left: -1px;
+    /*usare con icona ->*/
+    /*background-image: url(/images/freccia-dx.png);
+        background-position-y: 75px;
+        background-size: 15%;*/
+    /*usare con icona +*/
+    background-image: url(/images/plus-dx.png);
+    background-size: 7.5%;
+    background-position-y: 35%;
+  }
+}
+/*----------------------------------
+-------- BANNER NAV --------
+----------------------------------*/
+.isotope-navigation a .rounded {
+  width: 100%;
+  background-color: #fff;
+  padding: inherit;
+  border-radius: 0.25rem !important;
+  text-align: center;
+  margin: 5%;
+  margin-left: 0;
+}
+.isotope-navigation .work-subcaption .work-title,
+.titolo-offerta {
+  color: #032f2f;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-style: normal;
+  margin-bottom: 0px;
+}
+.isotope-navigation .work-subcaption .work-desc,
+.sottotitolo-offerta {
+  color: #032f2f;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  /*font-style: italic;*/
+  margin-bottom: 0px;
+}
+.isotope-navigation .work-subcaption .work-desc br {
+  line-height: 2.5rem;
+}
+#isoBannav1 li .work-image:after {
+  background: url(/images/link1.png) center calc((100% - 0.1px) / 2) no-repeat !important;
+  background-size: 10% !important;
+}
+#isoBannav1 li .work-image:hover:after,
+#isoBannav1 div .work-image:hover:after {
+  background: url(/images/link1.png) center calc((100% - 0.1px) / 2) no-repeat !important;
+  background-size: 20% !important;
+}
+/* PERSONALIZZAZIONI SINGOLI (li) BUTTON OVER CATALOGO */
+.navigazione-home #isoBannav1 li:nth-child(n+1) .work-image:after,
+.navigazione-home #isoBannav1 div:nth-child(n+1) .work-image:after {
+  background-position: center calc((100% - 0.1px) / 2) !important;
+  background-size: 10% !important;
+}
+.navigazione-home #isoBannav1 li:nth-child(1) .work-image:hover:after,
+.navigazione-home #isoBannav1 div:nth-child(1) .work-image:hover:after {
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
+  background-size: 20% !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.navigazione-home #isoBannav1 li:nth-child(2) .work-image:hover:after,
+.navigazione-home #isoBannav1 div:nth-child(2) .work-image:hover:after {
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
+  background-size: 20% !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.navigazione-home #isoBannav1 li:nth-child(3) .work-image:hover:after,
+.navigazione-home #isoBannav1 div:nth-child(3) .work-image:hover:after {
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
+  background-size: 20% !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.navigazione-home #isoBannav1 li:nth-child(4) .work-image:hover:after,
+.navigazione-home #isoBannav1 div:nth-child(4) .work-image:hover:after {
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
+  background-size: 20% !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.navigazione-home #isoBannav1 li:nth-child(5) .work-image:hover:after,
+.navigazione-home #isoBannav1 div:nth-child(5) .work-image:hover:after {
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
+  background-size: 20% !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.navigazione-home #isoBannav1 li:nth-child(6) .work-image:hover:after,
+.navigazione-home #isoBannav1 div:nth-child(6) .work-image:hover:after {
+  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
+  background-size: 20% !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+/*------------------------------------------------------
+------ BANNER PROCESSO ACQUISTO & ISOTOPE FUNNEL -------
+------------------------------------------------------*/
+li:nth-child(1).work-item.funnel-fasce .work-div-noborder,
+div:nth-child(1).funnel-fasce {
+  border-radius: 50px 50px 0 0;
+}
+li:nth-last-child(1).work-item.funnel-fasce .work-div-noborder,
+div:nth-last-child(1).funnel-fasce {
+  border-radius: 0 0 50px 50px;
+}
+li:nth-child(-n+4).work-item.funnel-fasce .title-isotope::after,
+div:nth-child(-n+4).funnel-fasce .title-isotope::after {
+  position: absolute;
+  top: -10px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50%;
+  background-color: #f3c649;
+  color: white;
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  box-shadow: 0 4px 6px -6px #000;
+}
+li:nth-child(odd).work-item.funnel-fasce .title-isotope::after,
+div:nth-child(odd).funnel-fasce .title-isotope::after {
+  left: -25px;
+}
+li:nth-child(even).work-item.funnel-fasce .title-isotope::after,
+div:nth-child(even).funnel-fasce .title-isotope::after {
+  right: -25px;
+}
+li:nth-child(1).work-item.funnel-fasce .title-isotope::after,
+div:nth-child(1).funnel-fasce .title-isotope::after {
+  content: "1";
+}
+li:nth-child(2).work-item.funnel-fasce .title-isotope::after,
+div:nth-child(2).funnel-fasce .title-isotope::after {
+  content: "2";
+}
+li:nth-child(3).work-item.funnel-fasce .title-isotope::after,
+div:nth-child(3).funnel-fasce .title-isotope::after {
+  content: "3";
+}
+li:nth-child(4).work-item.funnel-fasce .title-isotope::after,
+div:nth-child(4).funnel-fasce .title-isotope::after {
+  content: "4";
+}
+@media screen and (max-width: 768px) {
+  li:nth-child(-n+4).work-item.funnel-fasce .title-isotope::after,
+  div:nth-child(-n+4).funnel-fasce .title-isotope::after {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: inline-block;
+    margin-top: 15px;
+  }
+}
+/*------------------------------------------------
+----------- BANNER NAVIGAZIONE FUNNEL ------------
+--------------------------------------------------*/
+.works-grid-2 li:nth-child(1).work-item.funnel {
+  width: 99.999%;
+}
+.works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation {
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: normal !important;
+  -ms-flex-direction: row !important;
+  flex-direction: row !important;
+}
+.works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation .work-subcaption,
+.works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation a.funnel-buton {
+  width: 50% !important;
+}
+.works-grid-2 li.work-item.funnel .isotope-navigation a.funnel-buton {
+  width: 75% !important;
+}
+.work-item.funnel .isotope-navigation .work-subcaption .work-title {
+  font-size: 2.6rem;
+}
+@media (min-width: 580px) and (max-width: 768px) {
+  .works-grid-2 li:nth-child(1).work-item.funnel {
+    width: 99.999%;
+  }
+  .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation .work-subcaption,
+  .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation a.funnel-buton {
+    width: auto !important;
+  }
+  .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation {
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
+  }
+}
+@media (max-width: 579px) {
+  .works-grid-2 li:nth-child(1).work-item.funnel {
+    width: 99.999%;
+  }
+  .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation .work-subcaption,
+  .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation a.funnel-buton {
+    width: auto !important;
+  }
+  .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation {
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
+  }
+}
+/*----------------------------------
+---------- ISOTOPE STAFF -----------
+----------------------------------*/
+.isotope-staff a .rounded {
+  background-color: #fff;
+  padding: inherit;
+  border-radius: 0 !important;
+  text-align: center;
+  margin: 5% 5% 0 0;
+}
+.isotope-staff .work-subcaption {
+  background-color: #ebf6f6;
+  height: 168px;
+}
+.isotope-staff .work-subcaption .work-title {
+  color: #032f2f;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-style: normal;
+  margin-bottom: 0px;
+}
+.isotope-staff .work-subcaption .work-desc {
+  color: #032f2f;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-bottom: 0px;
+}
+/* -------------------------
+  Stili from landing.css ( da verificare utilizzo )
+--------------------------- */
+.mbr-section-full {
+  height: calc(100vh - 60px) !important;
+}
+.mbr-section-full .mbr-overlay {
+  min-height: calc(100vh - 60px) !important;
+}
+.mbr-section-full {
+  display: table;
+  height: 100vh;
+  padding-bottom: 0;
+  padding-top: 0;
+  table-layout: fixed;
+  width: 100%;
+}
+.mbr-section-full > .mbr-table-cell {
+  width: 100%;
+}
+.mbr-section-small {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.mbr-section__container--first {
+  padding-top: 120px;
+  padding-bottom: 40px;
+}
+.mbr-section__container--middle {
+  padding-top: 0;
+  padding-bottom: 40px;
+}
+.mbr-section__container--last {
+  padding-top: 0;
+  padding-bottom: 120px;
+}
+.mbr-section-sm-padding {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.mbr-section-md-padding {
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
+.mbr-section-nopadding {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.mbr-section-full .mbr-overlay {
+  min-height: 100vh;
+}
+.mbr-overlay ~ * {
+  z-index: 2;
+}
+.mbr-section-full .mbr-background-video,
+.mbr-section-full .mbr-background-video-preview {
+  min-height: 100vh;
+}
+.mbr-table {
+  display: table;
+  width: 100%;
+}
+.mbr-table-full {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+.mbr-table-cell {
+  display: table-cell;
+  float: none;
+  padding-bottom: 0;
+  padding-top: 0;
+  position: relative;
+  vertical-align: middle;
+}
+.mbr-table-md-up {
+  width: 100%;
+}
+.mbr-table-md-up .mbr-table-cell {
+  display: block;
+}
+.mbr-table-md-up .mbr-table-cell + .mbr-table-cell {
+  padding-top: 40px;
+}
+@media (min-width: 768px) {
+  .mbr-table-md-up {
+    display: table;
+  }
+  .mbr-table-md-up .mbr-table-cell {
+    display: table-cell;
+  }
+  .mbr-table-md-up .mbr-table-cell + .mbr-table-cell {
+    padding-top: 0;
+  }
+}
+@media (min-width: 768px) {
+  .mbr-right-padding-md-up {
+    padding-right: 60px;
+  }
+}
+@media (min-width: 768px) {
+  .mbr-left-padding-md-up {
+    padding-left: 60px;
+  }
+}
+.mbr-valign-top {
+  vertical-align: top;
+}
+.content-size {
+  width: auto;
+}
+.image-size {
+  vertical-align: middle;
+  margin: auto;
+  text-align: center;
+}
+.image-size .mbr-figure {
+  padding-top: 3px;
+}
+@media (max-width: 768px) {
+  .image-size {
+    width: 100% !important;
+  }
+}
+.mbr-figure {
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+.mbr-figure img,
+.mbr-figure iframe {
+  display: block;
+  width: 100%;
+}
+.mbr-figure .mbr-figure-caption {
+  background: #2e2e2e;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  padding: 1.5rem 0;
+  text-align: center;
+  width: 100%;
+}
+.mbr-figure .mbr-figure-caption-over {
+  background: -moz-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
+  background: -ms-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
+  background: -o-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
+  background: -webkit-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
+  background: linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
+  bottom: 0;
+  position: absolute;
+}
+/* ---------------------------------
+--------- TEMPLATE POLYGON ---------
+--------------------------------- */
+/*Quando si attiva vanno disattivati gli altri bigtext e smalltext di questo file*/
+/*-- BANNER TESTATA HOME POLYGON -*/
+/*.tp-caption.very_big_white {
+    width: @bg-width !important;
+    max-width: @bg-max-width !important;
+    background-size: @bg-size !important;
+    -webkit-clip-path: @bg-path;
+    clip-path: @bg-path;
+    background: @bg-testata-color;
+    padding: 20px 20px;
+    padding-right: calc(14% - 3rem);
+}
+@media (max-width: 768px) {
+    .tp-caption.very_big_white {
+        width: @bg-width-768 !important;
+        max-width: @bg-max-width-768 !important;
+        -webkit-clip-path: @bg-path-768;
+        clip-path: @bg-path-768;
+    }
+}
+.bigtext {
+    color: @title-testata-home-color;
+    font-family: @title-testata-home-font;
+    font-size: @title-testata-home-size !important;
+    font-weight: @title-testata-home-weight;
+    text-align: left;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
+    line-height: normal !important;
+    white-space: pre-wrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+.smalltext {
+    color: @subtitle-testata-home-color;
+    font-family: @subtitle-testata-home-font;
+    font-size: @subtitle-testata-home-size !important;
+    font-weight: @subtitle-testata-home-weight !important;
+    text-align: left;
+    line-height: normal !important;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
+    white-space: pre-wrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+.prezzotext {
+    color: @prezzo-testata-home-color;
+    font-family: @prezzo-testata-home-font;
+    font-size: @prezzo-testata-home-size !important;
+    font-weight: @prezzo-testata-home-weight !important;
+    text-align: left;
+    line-height: normal !important;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
+    white-space: pre-wrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}*/
+/*-- BANNER NAVIGAZIONE POLYGON --*/
+.image-polygon-b3 {
+  padding-left: 0;
+  padding-top: 25%;
+}
+.polygon-backdrop-b3 {
+  background-size: cover;
+  -webkit-clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
+  clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
+  position: absolute;
+  width: calc(100% + 2px);
+  height: auto;
+  min-height: 40%;
+  top: -1px;
+}
+.polygon-backdrop-b3 .titolo-offerta,
+.polygon-backdrop .sottotitolo-offerta,
+.polygon-backdrop .descrizione {
+  color: white !important;
+}
+.polygon-backdrop-b3 .titolo-offerta {
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin-bottom: 20px !important;
+  line-height: 2rem;
+  text-transform: uppercase;
+}
+.polygon-backdrop-b3 .sottotitolo-offerta {
+  font-size: 1.3rem;
+  font-weight: 400 !important;
+  line-height: 1.6rem;
+  color: white;
+}
+li:nth-child(2n) .polygon-backdrop-b3,
+.polygonblock > div:nth-child(2n) .polygon-backdrop-b3 {
+  background: linear-gradient(45deg, #f1bf31, #f6d26f);
+}
+li:nth-child(2n+1) .polygon-backdrop-b3,
+.polygonblock > div:nth-child(2n+1) .polygon-backdrop-b3 {
+  background: linear-gradient(45deg, #076969, #0bb5b5);
+}
+/*---- MULTIBANNER HOME POLYGON PARI MONOCOLRE  ----*/
+li:nth-child(2n) .rounded-responsive .polygon-backdrop,
+.polygonblock > div:nth-child(2n) .rounded-responsive .polygon-backdrop {
+  background: linear-gradient(45deg, #076969, #0bb5b5);
+}
+li:nth-child(2n+1) .rounded-responsive .polygon-backdrop,
+.polygonblock > div:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
+  background: linear-gradient(45deg, #076969, #0bb5b5);
+}
+/*---- MULTIBANNER HOME POLYGON PARI MOULTICOLORE  ----*/
+li:nth-child(n) .rounded-responsive .polygon-backdrop.parimulticolore,
+.polygonblock > div:nth-child(n) .rounded-responsive .polygon-backdrop.parimulticolore {
+  background: linear-gradient(45deg, #076969, #0bb5b5) !important;
+}
+li:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore,
+.polygonblock > div:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore {
+  background: linear-gradient(45deg, #f1bf31, #f6d26f) !important;
+}
+li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
+.polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore:hover {
+  color: #000 !important;
+  opacity: 0.78;
+  background-color: #f0b719;
+  text-decoration: none !important;
+}
+li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
+.polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover {
+  color: #fff !important;
+  background: #032f2f !important;
+  border-color: #032f2f;
+  opacity: 0.78;
+  text-decoration: none !important;
+  border: 1px solid #f3c649;
+}
+@media screen and (max-width: 720px) {
+  li:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore,
+  .polygonblock > div:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore {
+    background: linear-gradient(45deg, #076969, #0bb5b5) !important;
+  }
+}
+@media screen and (max-width: 540px) {
+  .card.rounded-responsive {
+    border-radius: 0 !important;
+  }
+}
+/*----ISOTOPE RISULTATI POLYGON ----*/
+.image-polygon {
+  padding-left: 0;
+  padding-top: 35%;
+}
+.image-polygon-fascia {
+  padding-left: 0;
+  padding-top: 75%;
+}
+.polygon-backdrop {
+  background-size: cover;
+  -webkit-clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
+  clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
+  position: absolute;
+  width: 100%;
+  height: auto;
+  min-height: 40%;
+  top: 0px;
+}
+.polygon-backdrop .titolo-offerta,
+.polygon-backdrop .sottotitolo-offerta,
+.polygon-backdrop .descrizione {
+  color: white !important;
+}
+.polygon-backdrop .titolo-offerta {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 20px !important;
+  line-height: 2.1rem;
+}
+.polygon-backdrop .sottotitolo-offerta {
+  font-size: 1.3rem;
+  font-weight: 400 !important;
+  line-height: 2rem;
+}
+li:nth-child(2n) .polygon-backdrop,
+.polygonblock > div:nth-child(2n) .polygon-backdrop {
+  background: linear-gradient(45deg, #f1bf31, #f6d26f);
+}
+.polygon-backdrop .prezzo-responsive {
+  color: white;
+  font-size: 2rem;
+  font-weight: 900;
+}
+li:nth-child(2n) .polygon-backdrop {
+  background: linear-gradient(45deg, #f1bf31, #f6d26f);
+}
+li:nth-child(2n+1) .polygon-backdrop,
+.polygonblock > div:nth-child(2n+1) .polygon-backdrop {
+  background: linear-gradient(45deg, #076969, #0bb5b5);
+}
+li:nth-child(2n) .polygon-backdrop .prezzo-responsive:before {
+  content: "/KWh";
+  font-weight: 300;
+  float: right;
+}
+li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
+  content: "/Smc";
+  font-weight: 300;
+  float: right;
+}
+@media screen and (min-width: 1024px) {
+  .image-polygon,
+  .image-polygon-fascia {
+    padding-left: 45%;
+    /*padding-left: 0%;*/
+    padding-top: 0;
+  }
+  .polygon-backdrop {
+    background-size: cover;
+    -webkit-clip-path: polygon(0 0%, 100% 0%, 80% 101%, 0% 101%);
+    clip-path: polygon(0 0%, 100% 0%, 80% 101%, 0% 101%);
+    position: absolute;
+    width: 65%;
+    /*width: 60%;*/
+    height: 100%;
+    top: 0px;
+  }
+}
+/* ---------------------------------
+------- END TEMPLATE POLYGON -------
+--------------------------------- */
+/*----------------------------------
 -------------- PULSANTI --------------
 ----------------------------------*/
 .btnnew-base,
@@ -23,6 +812,10 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .divbuttonstyle:hover,
 .divbuttonstyle:visited,
 .divbuttonstyle a,
+li:nth-child(n) .rounded-responsive .btn.parimulticolore,
+.polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore,
+li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
+.polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
 .btn-white-outline,
 .btn-white-outline:active,
 .btn-white-outline:visited,
@@ -30,11 +823,7 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .btn-primary-color,
 .btn-primary-color:active,
 .btn-primary-color:visited,
-.btn-primary-color:focus,
-li:nth-child(n) .rounded-responsive .btn.parimulticolore,
-.polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore,
-li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
-.polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore:hover {
+.btn-primary-color:focus {
   font-family: 'Roboto', sans-serif;
   font-size: 0.8rem;
   font-weight: 500;
@@ -61,6 +850,10 @@ li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
   box-shadow: none;
 }
 .divbuttonstyle,
+li:nth-child(n) .rounded-responsive .btn.parimulticolore,
+.polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore,
+li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
+.polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
 .btn-white-outline,
 .btn-white-outline:active,
 .btn-white-outline:visited,
@@ -68,11 +861,7 @@ li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
 .btn-primary-color,
 .btn-primary-color:active,
 .btn-primary-color:visited,
-.btn-primary-color:focus,
-li:nth-child(n) .rounded-responsive .btn.parimulticolore,
-.polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore,
-li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
-.polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore:hover {
+.btn-primary-color:focus {
   margin: 0px !important;
   /*-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
         box-shadow: 0px 3px 6px rgba(0,0,0,0.6);*/
@@ -195,15 +984,15 @@ button:hover {
 .btn-black-outline:active,
 .btn-black-outline:visited,
 .btn-black-outline:focus,
+li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore,
+.polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore,
+li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
+.polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
 a.btn-black-outline:active,
 a.btn-black-outline:focus,
 a.btn-transparent-outline:hover,
 .btn-transparent-outline:hover,
-.btn-transparent:hover,
-li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore,
-.polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore,
-li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
-.polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover {
+.btn-transparent:hover {
   font-family: 'Roboto', sans-serif;
   font-size: 0.8rem;
   font-weight: 500;
@@ -2310,13 +3099,6 @@ i .fa {
     font-weight: 900;
     content: "\f0de";
   }
-  /*.menuzord-menu li.catalogo-menu .fa {
-        display: none;
-    }*/
-  /*.menuzord-menu ul.dropdown li a {
-        font-weight: @submenu-weight;
-        color: @black-color;
-    }*/
   .menuzord-menu li.catalogo-menu ul {
     /*display: block !important;*/
     width: calc(100% + 40px);
@@ -2778,17 +3560,14 @@ div#btn-menumobile {
 /*'Roboto Condensed', sans-serif;*/
 .primary-font,
 .mbr-section-title,
-a .mbr-section-title,
-.title-block,
-h1 span:nth-child(1).mbr-section-title {
+.title-block {
   font-family: 'Fira Sans', sans-serif !important;
 }
 .secondary-font {
   font-family: 'Raleway', sans-serif !important;
 }
 .base-font,
-.mbr-section-subtitle,
-h1 span .mbr-section-subtitle {
+.mbr-section-subtitle {
   font-family: 'Roboto', sans-serif !important;
 }
 .alternative-font {
@@ -3079,10 +3858,6 @@ textarea.inputgray:focus {
   color: #fff;
   border: none;
 }
-/*::-webkit-scrollbar {
-    width: 0.5em;
-    height: 0.5em
-}*/
 /*---------------------------------
 --------------- FONT --------------
 ----------------------------------*/
@@ -3124,21 +3899,6 @@ a:hover {
 /*---------------------------------
 ---------- TESTI PAGINA -----------
 ----------------------------------*/
-.card-block .numero-chiavi-in-mano-top {
-  width: 75px;
-  height: 75px;
-  text-align: center;
-  border-radius: 50%;
-  background-color: #666;
-  line-height: 75px;
-  margin: 10px auto;
-  font-size: 36px;
-}
-.card-block .numero-chiavi-in-mano-top,
-.card-block .numero-chiavi-in-mano-bottom {
-  background-color: #642a14 !important;
-  color: #fff !important;
-}
 .catalogo_img_shadow img {
   transform: scale(1);
   -webkit-transform: scale(1);
@@ -3207,25 +3967,18 @@ a:hover {
   padding-right: 1.2rem;
   display: inline-block;
 }
+.mbr-section {
+  position: relative;
+  padding-top: 120px;
+  padding-bottom: 120px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .mbr-section-title,
-a .mbr-section-title,
-.title-block,
-h1 span:nth-child(1).mbr-section-title {
+.title-block {
   text-align: center;
-  /*  color: @title-color;
-    font-family: @tite-font;
-    font-size: @scalable-medium-font-size;
-    font-weight: @title-weight;
-    text-transform: @title-text-transform;
-    font-style: normal;
-    text-align: center;
-    letter-spacing: 0px;
-    line-height: 100% !important;
-    margin: 0;
-    word-break: break-word;
-    word-wrap: break-word;
-    padding-bottom: 10px;
-*/
+  padding-top: 20px;
   /*Start svg decorazione sotto il titolo*/
   /*  padding-bottom: 21px;
     background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='@{color-sottomeu-rgba}' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
@@ -3250,6 +4003,11 @@ h1 span:nth-child(1).mbr-section-title {
     }*/
   /*End svg decorazione sotto il titolo*/
 }
+.mbr-section-title::after,
+.title-block::after {
+  top: 75px;
+  margin-top: 0;
+}
 h3.mbr-section-title.display-5.bg-dark-color.noafter {
   letter-spacing: 1px !important;
   font-weight: normal !important;
@@ -3259,27 +4017,12 @@ h3.mbr-section-title.display-5.bg-dark-color.noafter {
 }
 .title-block {
   padding-bottom: 3rem !important;
+  padding-top: 20px;
 }
 @media screen and (max-width: 720px) {
   .title-block {
     padding-bottom: 1rem !important;
   }
-}
-.mbr-section-title,
-.title-block,
-h1 span:nth-child(1).mbr-section-title {
-  padding-top: 20px;
-  /*padding-bottom: 3rem;*/
-  /*Svg decorazione sotto i titoli auto-generati*/
-}
-.mbr-section-title::after,
-.title-block::after {
-  top: 75px;
-  margin-top: 0;
-}
-/*Svg decorazione sotto i titoli scroll schede*/
-.title-block {
-  padding-top: 20px;
 }
 .subtitle-block a {
   font-size: 1.4rem;
@@ -3289,19 +4032,9 @@ h1 span:nth-child(1).mbr-section-title {
   font-size: 1.4rem;
   color: #1d1b1e;
 }
-.mbr-section-subtitle,
-h1 span .mbr-section-subtitle {
+.mbr-section-subtitle {
   text-align: center;
   color: #077777;
-  /*  color: @subtitle-color !important;
-    font-family: @subtite-font !important;
-    font-size: @subtite-size !important;
-    font-weight: @subtitle-weight;
-    font-style: normal;
-    text-align: center;
-    line-height: 36px;
-    margin-top: .25rem !important;
-    display: block;*/
 }
 b,
 strong {
@@ -3364,8 +4097,7 @@ textarea {
 }
 @media screen and (max-width: 415px) {
   .mbr-section-title,
-  .title-block,
-  h1 span:nth-child(1).mbr-section-title {
+  .title-block {
     font-size: 2rem;
     font-weight: normal !important;
     line-height: 110% !important;
@@ -3374,8 +4106,7 @@ textarea {
   .title-block::after {
     margin-top: 15px;
   }
-  .mbr-section-subtitle,
-  h1 span .mbr-section-subtitle {
+  .mbr-section-subtitle {
     font-size: 1.5rem !important;
     line-height: 2rem !important;
   }
@@ -3384,16 +4115,6 @@ textarea {
     font-size: 1.8rem !important;
     line-height: 2.3rem !important;
   }
-}
-h1 span:nth-child(1) {
-  /*font-family: @tite-font !important;
-    color: @title-color !important;
-    font-size: 100% !important;*/
-}
-h1 span {
-  /*font-family: @subtite-font !important;
-    color: @subtitle-color !important;
-    font-size: 90% !important;*/
 }
 .section-content {
   border-top: none;
@@ -3477,7 +4198,7 @@ h1 span {
   }
 }
 /*----------------------------------
------------ ISOTOPE BLOG -----------
+----------- PAGINAZIONE -----------
 ----------------------------------*/
 .linksmall a,
 .linksmall-blog a {
@@ -3688,23 +4409,6 @@ ul li .work-image.video:hover:after,
   width: calc(100% - 40px);
   height: calc(100% - 40px);
   z-index: 3;
-}
-.image-polygon-b3.imgovercontainer:hover:after {
-  z-index: 2 !important;
-  background: none !important;
-  background-color: rgba(0, 0, 0, 0) !important;
-  opacity: 1 !important;
-  -webkit-transition: all 0.35s ease;
-  transition: all 0.35s ease;
-}
-.image-polygon-b3.imgovercontainer:hover:after,
-.zoomimg.imgovercontainer:hover:after {
-  z-index: 2 !important;
-  background: none !important;
-  background-color: rgba(0, 0, 0, 0) !important;
-  opacity: 1 !important;
-  -webkit-transition: all 0.35s ease;
-  transition: all 0.35s ease;
 }
 /*----------------------------------
 ---------- PARALAX IMAGE -----------
@@ -4386,242 +5090,9 @@ ul.footer-category-list {
     margin-bottom: 0px !important;
   }
 }
-/*----------------------------------
--------- BANNER NAVIGAZIONE --------
-----------------------------------*/
 .work-subcaption {
   width: 100%;
   height: auto;
-}
-.isotope-navigation a .rounded {
-  width: 100%;
-  background-color: #fff;
-  padding: inherit;
-  border-radius: 0.25rem !important;
-  text-align: center;
-  margin: 5%;
-  margin-left: 0;
-}
-.isotope-navigation .work-subcaption .work-title,
-.titolo-offerta {
-  color: #032f2f;
-  font-family: 'Fira Sans', sans-serif;
-  font-size: 1.4rem;
-  font-weight: 400;
-  font-style: normal;
-  margin-bottom: 0px;
-}
-.isotope-navigation .work-subcaption .work-desc,
-.sottotitolo-offerta {
-  color: #032f2f;
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.2rem;
-  /*font-style: italic;*/
-  margin-bottom: 0px;
-}
-.isotope-navigation .work-subcaption .work-desc br {
-  line-height: 2.5rem;
-}
-#isoBannav1 li .work-image:after {
-  background: url(/images/link1.png) center calc((100% - 0.1px) / 2) no-repeat !important;
-  background-size: 10% !important;
-}
-#isoBannav1 li .work-image:hover:after,
-#isoBannav1 div .work-image:hover:after {
-  background: url(/images/link1.png) center calc((100% - 0.1px) / 2) no-repeat !important;
-  background-size: 20% !important;
-}
-/* PERSONALIZZAZIONI SINGOLI (li) BUTTON OVER CATALOGO */
-.navigazione-home #isoBannav1 li:nth-child(n+1) .work-image:after,
-.navigazione-home #isoBannav1 div:nth-child(n+1) .work-image:after {
-  background-position: center calc((100% - 0.1px) / 2) !important;
-  background-size: 10% !important;
-}
-.navigazione-home #isoBannav1 li:nth-child(1) .work-image:hover:after,
-.navigazione-home #isoBannav1 div:nth-child(1) .work-image:hover:after {
-  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
-  background-size: 20% !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
-.navigazione-home #isoBannav1 li:nth-child(2) .work-image:hover:after,
-.navigazione-home #isoBannav1 div:nth-child(2) .work-image:hover:after {
-  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
-  background-size: 20% !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
-.navigazione-home #isoBannav1 li:nth-child(3) .work-image:hover:after,
-.navigazione-home #isoBannav1 div:nth-child(3) .work-image:hover:after {
-  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
-  background-size: 20% !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
-.navigazione-home #isoBannav1 li:nth-child(4) .work-image:hover:after,
-.navigazione-home #isoBannav1 div:nth-child(4) .work-image:hover:after {
-  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
-  background-size: 20% !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
-.navigazione-home #isoBannav1 li:nth-child(5) .work-image:hover:after,
-.navigazione-home #isoBannav1 div:nth-child(5) .work-image:hover:after {
-  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
-  background-size: 20% !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
-.navigazione-home #isoBannav1 li:nth-child(6) .work-image:hover:after,
-.navigazione-home #isoBannav1 div:nth-child(6) .work-image:hover:after {
-  background: none center calc((100% - 0.1px) / 2) no-repeat !important;
-  background-size: 20% !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
-/*----------------------------------------------------------------------
----- BANNER NAVIGAZIONE METODO LAVORO 1 -> 2 -> 3 tipo hospitality -----
-------------------------------------------------------------------------*/
-#divContainerNavCampionatura {
-  background-color: rgba(255, 255, 255, 0.5);
-}
-@media (max-width: 579px) {
-  #divContainerNavCampionatura .works-grid-4 .work-item,
-  #divContainerNavMetodo .works-grid-4 .work-item {
-    width: 49.999%;
-  }
-  .img-overlay,
-  #divContainerNavMetodo .img-overlay {
-    border: none !important;
-    border-radius: 0% !important;
-  }
-  #divContainerNavMetodo img {
-    padding: 5% !important;
-  }
-  #divContainerNavCampionatura li:nth-child(2),
-  #divContainerNavCampionatura li:nth-child(4),
-  #divContainerNavMetodo li:nth-child(2),
-  #divContainerNavMetodo li:nth-child(4) {
-    padding: 5px !important;
-  }
-}
-@media (min-width: 579px) {
-  #divContainerNavCampionatura li:nth-child(n+1)::after,
-  #divContainerNavMetodo li:nth-child(n+1)::after {
-    position: absolute;
-    top: 25px;
-    left: 75px;
-    width: 50px;
-    height: 50px;
-    line-height: 45px;
-    border-radius: 50%;
-    background-color: #f3c649;
-    color: white;
-    font-size: 2rem;
-    font-weight: 400;
-    text-align: center;
-    box-shadow: 0 4px 6px -6px #000;
-  }
-  #divContainerNavMetodo li:nth-child(n+1)::after {
-    top: 0px;
-  }
-  #divContainerNavCampionatura li:nth-child(1)::after,
-  #divContainerNavMetodo li:nth-child(1)::after {
-    content: "1";
-  }
-  #divContainerNavCampionatura li:nth-child(2)::after,
-  #divContainerNavMetodo li:nth-child(2)::after {
-    content: "2";
-  }
-  #divContainerNavCampionatura li:nth-child(3)::after,
-  #divContainerNavMetodo li:nth-child(3)::after {
-    content: "3";
-    line-height: 40px;
-  }
-  #divContainerNavCampionatura li:nth-child(4)::after,
-  #divContainerNavMetodo li:nth-child(4)::after {
-    content: "4";
-  }
-}
-@media (max-width: 1200px) and (min-width: 768px) {
-  #divContainerNavNavCampionatura .works-grid-4 .work-item,
-  #divContainerNavMetodo .works-grid-4 .work-item {
-    width: 24.999%;
-  }
-}
-@media screen and (min-width: 1023px) {
-  #divContainerNavCampionatura li:nth-child(n+1) {
-    background-repeat: no-repeat;
-    /*usare con icona ->*/
-    background-image: url(/images/freccia-dx.png), url(/images/freccia-sx.png);
-    background-position: top 75px left 0, top 75px right 0px;
-    background-size: 15%;
-    /*usare con icona +*/
-    /*background-image: url(/images/plus-dx.png), url(/images/plus-sx.png);*/
-    /*background-size: 7.5%;
-        background-position: top 35% left 0, top 35% right 0px;*/
-  }
-  #divContainerNavCampionatura li:first-child {
-    background-position-x: right;
-    background-repeat: no-repeat;
-    /*usare con icona ->*/
-    background-image: url(/images/freccia-sx.png);
-    background-position-y: 75px;
-    background-size: 15%;
-    /*usare con icona +*/
-    /*background-image: url(/images/plus-sx.png);*/
-    /*background-size: 7.5%;
-        background-position-y: 35%;*/
-  }
-  #divContainerNavCampionatura li:last-child {
-    background-position-x: left;
-    background-repeat: no-repeat;
-    margin-left: -1px;
-    /*usare con icona ->*/
-    background-image: url(/images/freccia-dx.png);
-    background-position-y: 75px;
-    background-size: 15%;
-    /*usare con icona +*/
-    /*background-image: url(/images/plus-dx.png);*/
-    /*background-size: 7.5%;
-        background-position-y: 35%;*/
-  }
-}
-/* METODO 1 -> 2 -> 3 tipo colosseo */
-#divContainerNavMetodo .img-overlay {
-  background-color: rgba(255, 255, 255, 0.5);
-}
-@media screen and (min-width: 1023px) {
-  #divContainerNavMetodo li:nth-child(n+1) {
-    background-repeat: no-repeat;
-    /*usare con icona ->*/
-    /*background-image: url(/images/freccia-dx.png), url(/images/freccia-sx.png);
-        background-position: top 75px left 0, top 75px right 0px;
-        background-size: 15%;*/
-    /*usare con icona +*/
-    background-image: url(/images/plus-dx.png), url(/images/plus-sx.png);
-    background-size: 7.5%;
-    background-position: top 35% left 0, top 35% right 0px;
-  }
-  #divContainerNavMetodo li:first-child {
-    background-position-x: right;
-    background-repeat: no-repeat;
-    /*usare con icona ->*/
-    /*background-image: url(/images/freccia-sx.png);
-        background-position-y: 75px;
-        background-size: 15%;*/
-    /*usare con icona +*/
-    background-image: url(/images/plus-sx.png);
-    background-size: 7.5%;
-    background-position-y: 35%;
-  }
-  #divContainerNavMetodo li:last-child {
-    background-position-x: left;
-    background-repeat: no-repeat;
-    margin-left: -1px;
-    /*usare con icona ->*/
-    /*background-image: url(/images/freccia-dx.png);
-        background-position-y: 75px;
-        background-size: 15%;*/
-    /*usare con icona +*/
-    background-image: url(/images/plus-dx.png);
-    background-size: 7.5%;
-    background-position-y: 35%;
-  }
 }
 /*--------------------------------------------
 ----------- BANNER TESTATA FUNNEL ------------
@@ -4658,125 +5129,6 @@ ul.footer-category-list {
   .smalltext-funnel {
     font-size: 1.5rem !important;
   }
-}
-/*------------------------------------------------------
------- BANNER PROCESSO ACQUISTO & ISOTOPE FUNNEL -------
-------------------------------------------------------*/
-li:nth-child(1).work-item.funnel-fasce .work-div-noborder,
-div:nth-child(1).funnel-fasce {
-  border-radius: 50px 50px 0 0;
-}
-li:nth-last-child(1).work-item.funnel-fasce .work-div-noborder,
-div:nth-last-child(1).funnel-fasce {
-  border-radius: 0 0 50px 50px;
-}
-li:nth-child(-n+4).work-item.funnel-fasce .title-isotope::after,
-div:nth-child(-n+4).funnel-fasce .title-isotope::after {
-  position: absolute;
-  top: -10px;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
-  border-radius: 50%;
-  background-color: #f3c649;
-  color: white;
-  font-size: 2rem;
-  font-weight: 400;
-  text-align: center;
-  box-shadow: 0 4px 6px -6px #000;
-}
-li:nth-child(odd).work-item.funnel-fasce .title-isotope::after,
-div:nth-child(odd).funnel-fasce .title-isotope::after {
-  left: -25px;
-}
-li:nth-child(even).work-item.funnel-fasce .title-isotope::after,
-div:nth-child(even).funnel-fasce .title-isotope::after {
-  right: -25px;
-}
-li:nth-child(1).work-item.funnel-fasce .title-isotope::after,
-div:nth-child(1).funnel-fasce .title-isotope::after {
-  content: "1";
-}
-li:nth-child(2).work-item.funnel-fasce .title-isotope::after,
-div:nth-child(2).funnel-fasce .title-isotope::after {
-  content: "2";
-}
-li:nth-child(3).work-item.funnel-fasce .title-isotope::after,
-div:nth-child(3).funnel-fasce .title-isotope::after {
-  content: "3";
-}
-li:nth-child(4).work-item.funnel-fasce .title-isotope::after,
-div:nth-child(4).funnel-fasce .title-isotope::after {
-  content: "4";
-}
-@media screen and (max-width: 768px) {
-  li:nth-child(-n+4).work-item.funnel-fasce .title-isotope::after,
-  div:nth-child(-n+4).funnel-fasce .title-isotope::after {
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: inline-block;
-    margin-top: 15px;
-  }
-}
-/*------------------------------------------------
------------ BANNER NAVIGAZIONE FUNNEL ------------
---------------------------------------------------*/
-.works-grid-2 li:nth-child(1).work-item.funnel {
-  width: 99.999%;
-}
-.works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation {
-  -webkit-box-orient: horizontal !important;
-  -webkit-box-direction: normal !important;
-  -ms-flex-direction: row !important;
-  flex-direction: row !important;
-}
-.works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation .work-subcaption,
-.works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation a.funnel-buton {
-  width: 50% !important;
-}
-.works-grid-2 li.work-item.funnel .isotope-navigation a.funnel-buton {
-  width: 75% !important;
-}
-.work-item.funnel .isotope-navigation .work-subcaption .work-title {
-  font-size: 2.6rem;
-}
-@media (min-width: 580px) and (max-width: 768px) {
-  .works-grid-2 li:nth-child(1).work-item.funnel {
-    width: 99.999%;
-  }
-  .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation .work-subcaption,
-  .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation a.funnel-buton {
-    width: auto !important;
-  }
-  .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation {
-    -webkit-box-orient: vertical !important;
-    -webkit-box-direction: normal !important;
-    -ms-flex-direction: column !important;
-    flex-direction: column !important;
-  }
-}
-@media (max-width: 579px) {
-  .works-grid-2 li:nth-child(1).work-item.funnel {
-    width: 99.999%;
-  }
-  .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation .work-subcaption,
-  .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation a.funnel-buton {
-    width: auto !important;
-  }
-  .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation {
-    -webkit-box-orient: vertical !important;
-    -webkit-box-direction: normal !important;
-    -ms-flex-direction: column !important;
-    flex-direction: column !important;
-  }
-}
-/*------------------------------------
--------- BANNER DICONO DI NOI --------
-------------------------------------*/
-.a-bg-petrol {
-  background-color: #098f8f;
 }
 /*------------------------------------
 ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
@@ -4898,93 +5250,6 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
 }
-/*CARRELLO - MENU - FIXEDTOP*/
-.dropdown-cart .products-list-mini li {
-  padding: 5px !important;
-  background: #ebf6f6;
-  margin-top: 2px !important;
-}
-/*.dropdown-menu {
-    color: @primary-color;
-    border: 1px solid @secondary-color;
-}
-*/
-.products-list-mini li + li {
-  border: none;
-}
-.products-list-mini li:nth-child(1) {
-  display: none;
-}
-.products-list-mini li:nth-child(2) {
-  margin-top: 0px !important;
-}
-.products-list-mini li:nth-child(n+1) .work-image:after {
-  background-position: center calc((100% - 61px) / 2) !important;
-  background-size: 15% !important;
-}
-.products-list-mini li:nth-child(n+1) .work-image:hover:after {
-  background-size: 25% !important;
-}
-/*TABELLA RIEPILOGO - CARRELLO*/
-.table td,
-.table th {
-  padding: 0.5rem;
-  vertical-align: top;
-  border-top: none;
-  background: #ebf6f6;
-  vertical-align: middle;
-}
-.table-cart thead td,
-.table-cart thead th {
-  color: #fff;
-  font-weight: normal;
-  background: #098f8f;
-}
-.table-cart tbody tr td,
-.table-cart tbody tr th {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-top: 4px solid #fff;
-}
-.table-cart tbody tr td span,
-.table-cart tbody tr th span {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  vertical-align: middle;
-}
-.cart-product,
-.cart-quantity,
-.cart-total {
-  /*&:extend(.mbr-section-title);*/
-  text-align: left !important;
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-}
-.table-cart .cart-total {
-  min-width: 100px;
-}
-.table-cart .cart-product .product-thumb {
-  border: none;
-  margin: 0 10px 0 0;
-}
-.cart-total {
-  font-size: 1rem;
-}
-.table-cart .cart-remove {
-  width: 50px;
-  padding-right: 0;
-}
-select.form-control:not([size]):not([multiple]) {
-  height: auto;
-}
-.cart-product .work-image:after {
-  background-size: 30% !important;
-}
-.cart-product .work-image:hover:after {
-  background-size: 40% !important;
-}
 /*--- PAGINA  ACQUSITO PRODOTTO ---*/
 .bill-address label {
   margin-bottom: 0.2rem;
@@ -5004,35 +5269,6 @@ select.form-control:not([size]):not([multiple]) {
   border-radius: 50%;
   color: #fff;
   text-align: center;
-}
-/*----------------------------------
----------- ISOTOPE STAFF -----------
-----------------------------------*/
-.isotope-staff a .rounded {
-  background-color: #fff;
-  padding: inherit;
-  border-radius: 0 !important;
-  text-align: center;
-  margin: 5% 5% 0 0;
-}
-.isotope-staff .work-subcaption {
-  background-color: #ebf6f6;
-  height: 168px;
-}
-.isotope-staff .work-subcaption .work-title {
-  color: #032f2f;
-  font-family: 'Fira Sans', sans-serif;
-  font-size: 1.4rem;
-  font-weight: bold;
-  font-style: normal;
-  margin-bottom: 0px;
-}
-.isotope-staff .work-subcaption .work-desc {
-  color: #032f2f;
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.2rem;
-  font-style: italic;
-  margin-bottom: 0px;
 }
 /*----------------------------------
 ---------- ISOTOPE OFFERTA ---------
@@ -5057,73 +5293,6 @@ select.form-control:not([size]):not([multiple]) {
   background-attachment: scroll;
   overflow: hidden;
   min-height: 370px;
-}
-/*----------------------------------
----------- OWL SLIDER ----------
-----------------------------------*/
-.owl-carousel-v1.owl-work-v1.margin-bottom-40 {
-  margin-top: 20px;
-}
-.body-banner-slider a p {
-  font-size: 1.1rem;
-}
-.owl-slider-v2 .box {
-  margin: 14px;
-  /*background-color: @bg-box-banner-slider;*/
-}
-.owl-slider-v2 .box .work-image,
-.owl-slider-v2 .box .work-image-no-button {
-  height: auto;
-  padding: 0;
-  width: 100%;
-  margin: 0 5% 5%;
-  text-align: center;
-  margin-left: 0;
-  border-radius: 0;
-  position: relative;
-  overflow: hidden;
-}
-.title-banner-slider {
-  color: #032f2f;
-  font-family: 'Fira Sans', sans-serif;
-  font-size: 1.4rem;
-  font-weight: bold;
-  font-style: normal;
-  margin-bottom: 0px;
-}
-.subtitle-banner-slider {
-  color: #032f2f;
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.2rem;
-  font-style: normal;
-  margin-bottom: 0px;
-}
-.body-banner-slider {
-  height: 190px;
-  border-top: none;
-  text-align: center;
-  overflow: hidden;
-}
-.owl-theme .owl-controls .owl-page span {
-  background: #098f8f;
-  filter: alpha(opacity=50);
-  -webkit-border-radius: 50% !important;
-  -moz-border-radius: 50% !important;
-  border-radius: 50% !important;
-}
-.owl-theme .owl-controls .owl-page.active span,
-.owl-theme .owl-controls.clickable .owl-page:hover span {
-  opacity: 1;
-  filter: alpha(opacity=100);
-}
-.owl-controls {
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  margin-top: 20px;
 }
 /*----------------------------------
 ---- ISOTOPE news-letter e mail ----
@@ -5165,20 +5334,6 @@ select.form-control:not([size]):not([multiple]) {
   top: 0;
   z-index: 0;
   background: linear-gradient(180deg, rgba(235, 246, 246, 0.5), rgba(235, 246, 246, 0.5));
-}
-/*-------LOADER-------*/
-/* ==========================================================================
-   Page Loader
-============================================================================= */
-@keyframes page-loader {
-  to {
-    transform: rotate(360deg);
-  }
-}
-@-webkit-keyframes page-loader {
-  to {
-    -webkit-transform: rotate(360deg);
-  }
 }
 /*----------------------------------
 ---------- SCHEDA DETAILS ----------
@@ -5263,24 +5418,6 @@ select.form-control:not([size]):not([multiple]) {
 ----------------------------------*/
 .staff-image img {
   height: auto !important;
-}
-/*----------------------------------
---- CARUSEL SCHEDA DETAILS BLOG ----
-----------------------------------*/
-.owl-carousel-v1 .item {
-  margin: 0 15px;
-  background-color: #fff;
-  border: none;
-}
-.owl-carousel-v1 .item:hover {
-  box-shadow: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  /* -webkit-filter: drop-shadow(0 7px 14px .35px); */
-  -moz-filter: d none;
-}
-.body-banner-slider a p {
-  font-size: 1.1rem;
 }
 /*----------------------------------
 ---------------- FAQ ---------------
@@ -5651,7 +5788,7 @@ button.js-roundedpush:hover {
   color: #098f8f !important;
 }
 /* -------------------------
-    INDICE ANIMETED CONTACT
+    INDICE ANIMATED CONTACT
     ------------------*/
 .indice-movie {
   animation: animation-indice-movie 1s ease-in-out infinite;
@@ -5689,242 +5826,6 @@ button.js-roundedpush:hover {
 }
 .searchbar-container select input button {
   padding: 14px 14px 14px 40px !important;
-}
-/* -------------------------
-  Stili from landing.css ( da verificare utilizzo )
---------------------------- */
-.mbr-section-full {
-  height: calc(100vh - 60px) !important;
-}
-.mbr-section-full .mbr-overlay {
-  min-height: calc(100vh - 60px) !important;
-}
-.mbr-section {
-  position: relative;
-  padding-top: 120px;
-  padding-bottom: 120px;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.mbr-section-full {
-  display: table;
-  height: 100vh;
-  padding-bottom: 0;
-  padding-top: 0;
-  table-layout: fixed;
-  width: 100%;
-}
-.mbr-section-full > .mbr-table-cell {
-  width: 100%;
-}
-.mbr-section-small {
-  padding-top: 60px;
-  padding-bottom: 60px;
-}
-.mbr-section__container--first {
-  padding-top: 120px;
-  padding-bottom: 40px;
-}
-.mbr-section__container--middle {
-  padding-top: 0;
-  padding-bottom: 40px;
-}
-.mbr-section__container--last {
-  padding-top: 0;
-  padding-bottom: 120px;
-}
-.mbr-section-sm-padding {
-  padding-top: 40px;
-  padding-bottom: 40px;
-}
-.mbr-section-md-padding {
-  padding-top: 90px;
-  padding-bottom: 90px;
-}
-.mbr-section-nopadding {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.mbr-section-title + .mbr-section-subtitle {
-  /*margin-top: -21px;*/
-}
-.mbr-section-hero::before {
-  display: none !important;
-}
-.mbr-section-hero .mbr-section-title {
-  color: #fff;
-  margin-bottom: 1.6875rem;
-}
-.mbr-section-hero .mbr-section-lead {
-  color: #fff;
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.5rem;
-  font-style: italic;
-  margin-top: -1em;
-}
-.mbr-section-hero .mbr-section-text {
-  color: #fff;
-}
-@media (max-width: 767px) {
-  .mbr-section {
-    padding-top: 60px;
-    padding-bottom: 60px;
-  }
-  .mbr-section-full {
-    padding-bottom: 0;
-    padding-top: 0;
-  }
-  .mbr-section__container--first {
-    padding-top: 60px;
-    padding-bottom: 40px;
-  }
-  .mbr-section__container--middle {
-    padding-top: 0;
-    padding-bottom: 40px;
-  }
-  .mbr-section__container--last {
-    padding-top: 0;
-    padding-bottom: 60px;
-  }
-  .mbr-section-sm-padding {
-    padding-top: 40px;
-    padding-bottom: 40px;
-  }
-  .mbr-section-md-padding {
-    padding-top: 60px;
-    padding-bottom: 60px;
-  }
-  .mbr-section-nopadding {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .mbr-section-subtitle,
-  h1 span .mbr-section-subtitle {
-    margin-bottom: 0;
-  }
-  .mbr-section-hero.mbr-after-navbar .mbr-section {
-    padding-top: 120px;
-  }
-  .mbr-section-hero.mbr-section-with-arrow .mbr-section {
-    padding-bottom: 120px;
-  }
-  .mbr-section-hero .mbr-section-title {
-    font-size: 3.125rem !important;
-  }
-  .mbr-section-hero .mbr-section-lead {
-    font-size: 1.125rem !important;
-  }
-  .mbr-section-hero .mbr-section-btn .btn {
-    font-size: 0.75rem !important;
-    line-height: 1.5;
-    padding: 0.75rem 2.1875rem;
-  }
-}
-.mbr-section-full .mbr-overlay {
-  min-height: 100vh;
-}
-.mbr-overlay ~ * {
-  z-index: 2;
-}
-.mbr-section-full .mbr-background-video,
-.mbr-section-full .mbr-background-video-preview {
-  min-height: 100vh;
-}
-.mbr-table {
-  display: table;
-  width: 100%;
-}
-.mbr-table-full {
-  height: 100%;
-  position: relative;
-  width: 100%;
-}
-.mbr-table-cell {
-  display: table-cell;
-  float: none;
-  padding-bottom: 0;
-  padding-top: 0;
-  position: relative;
-  vertical-align: middle;
-}
-.mbr-table-md-up {
-  width: 100%;
-}
-.mbr-table-md-up .mbr-table-cell {
-  display: block;
-}
-.mbr-table-md-up .mbr-table-cell + .mbr-table-cell {
-  padding-top: 40px;
-}
-@media (min-width: 768px) {
-  .mbr-table-md-up {
-    display: table;
-  }
-  .mbr-table-md-up .mbr-table-cell {
-    display: table-cell;
-  }
-  .mbr-table-md-up .mbr-table-cell + .mbr-table-cell {
-    padding-top: 0;
-  }
-}
-@media (min-width: 768px) {
-  .mbr-right-padding-md-up {
-    padding-right: 60px;
-  }
-}
-@media (min-width: 768px) {
-  .mbr-left-padding-md-up {
-    padding-left: 60px;
-  }
-}
-.mbr-valign-top {
-  vertical-align: top;
-}
-.content-size {
-  width: auto;
-}
-.image-size {
-  vertical-align: middle;
-  margin: auto;
-  text-align: center;
-}
-.image-size .mbr-figure {
-  padding-top: 3px;
-}
-@media (max-width: 768px) {
-  .image-size {
-    width: 100% !important;
-  }
-}
-.mbr-figure {
-  display: block;
-  margin: 0;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-}
-.mbr-figure img,
-.mbr-figure iframe {
-  display: block;
-  width: 100%;
-}
-.mbr-figure .mbr-figure-caption {
-  background: #2e2e2e;
-  color: #fff;
-  font-family: 'Roboto', sans-serif;
-  padding: 1.5rem 0;
-  text-align: center;
-  width: 100%;
-}
-.mbr-figure .mbr-figure-caption-over {
-  background: -moz-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
-  background: -ms-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
-  background: -o-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
-  background: -webkit-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
-  background: linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
-  bottom: 0;
-  position: absolute;
 }
 /* ---------------------------------
 ---------- SKILLS ANIMATE ----------
@@ -6592,7 +6493,7 @@ button.js-roundedpush:hover {
 .rev-slider-full .slotholder:after {
     background: -webkit-linear-gradient(@bg-color-top-opacity, @bg-color-bottom-opacity);
 }*/
-/*BANNER TESTATA BOTTOM - ECOMMERCE_ TIPO EDOARDO MONDI*/
+/*BANNER TESTATA BOTTOM - ECOMMERCE*/
 .banner-offerta {
   width: 50%;
   border-right: 8px solid #fff;
@@ -6684,238 +6585,11 @@ button.js-roundedpush:hover {
     height: calc(100vh - 98px - 40px) !important;
   }
 }
-/* ---------------------------------
---------- TEMPLATE POLYGON ---------
---------------------------------- */
-/*Quando si attiva vanno disattivati gli altri bigtext e smalltext di questo file*/
-/*-- BANNER TESTATA HOME POLYGON -*/
-/*.tp-caption.very_big_white {
-    width: @bg-width !important;
-    max-width: @bg-max-width !important;
-    background-size: @bg-size !important;
-    -webkit-clip-path: @bg-path;
-    clip-path: @bg-path;
-    background: @bg-testata-color;
-    padding: 20px 20px;
-    padding-right: calc(14% - 3rem);
-}
-@media (max-width: 768px) {
-    .tp-caption.very_big_white {
-        width: @bg-width-768 !important;
-        max-width: @bg-max-width-768 !important;
-        -webkit-clip-path: @bg-path-768;
-        clip-path: @bg-path-768;
-    }
-}
-.bigtext {
-    color: @title-testata-home-color;
-    font-family: @title-testata-home-font;
-    font-size: @title-testata-home-size !important;
-    font-weight: @title-testata-home-weight;
-    text-align: left;
-    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
-    line-height: normal !important;
-    white-space: pre-wrap;
-    overflow: hidden;
-    overflow-wrap: break-word;
-}
-.smalltext {
-    color: @subtitle-testata-home-color;
-    font-family: @subtitle-testata-home-font;
-    font-size: @subtitle-testata-home-size !important;
-    font-weight: @subtitle-testata-home-weight !important;
-    text-align: left;
-    line-height: normal !important;
-    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
-    white-space: pre-wrap;
-    overflow: hidden;
-    overflow-wrap: break-word;
-}
-.prezzotext {
-    color: @prezzo-testata-home-color;
-    font-family: @prezzo-testata-home-font;
-    font-size: @prezzo-testata-home-size !important;
-    font-weight: @prezzo-testata-home-weight !important;
-    text-align: left;
-    line-height: normal !important;
-    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
-    white-space: pre-wrap;
-    overflow: hidden;
-    overflow-wrap: break-word;
-}*/
-/*-- BANNER NAVIGAZIONE POLYGON --*/
 .card-shadow {
   -webkit-box-shadow: 0px 0px 10px 4px rgba(0, 0, 20, 0.2) !important;
   -moz-box-shadow: 0px 0px 10px 4px rgba(0, 0, 20, 0.2) !important;
   box-shadow: 0px 0px 10px 4px rgba(0, 0, 20, 0.2) !important;
 }
-.image-polygon-b3 {
-  padding-left: 0;
-  padding-top: 25%;
-}
-.polygon-backdrop-b3 {
-  background-size: cover;
-  -webkit-clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
-  clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
-  position: absolute;
-  width: calc(100% + 2px);
-  height: auto;
-  min-height: 40%;
-  top: -1px;
-}
-.polygon-backdrop-b3 .titolo-offerta,
-.polygon-backdrop .sottotitolo-offerta,
-.polygon-backdrop .descrizione {
-  color: white !important;
-}
-.polygon-backdrop-b3 .titolo-offerta {
-  font-size: 1.6rem;
-  font-weight: 900;
-  margin-bottom: 20px !important;
-  line-height: 2rem;
-  text-transform: uppercase;
-}
-.polygon-backdrop-b3 .sottotitolo-offerta {
-  font-size: 1.3rem;
-  font-weight: 400 !important;
-  line-height: 1.6rem;
-  color: white;
-}
-li:nth-child(2n) .polygon-backdrop-b3,
-.polygonblock > div:nth-child(2n) .polygon-backdrop-b3 {
-  background: linear-gradient(45deg, #f1bf31, #f6d26f);
-}
-li:nth-child(2n+1) .polygon-backdrop-b3,
-.polygonblock > div:nth-child(2n+1) .polygon-backdrop-b3 {
-  background: linear-gradient(45deg, #076969, #0bb5b5);
-}
-/*---- MULTIBANNER HOME POLYGON PARI MONOCOLRE  ----*/
-li:nth-child(2n) .rounded-responsive .polygon-backdrop,
-.polygonblock > div:nth-child(2n) .rounded-responsive .polygon-backdrop {
-  background: linear-gradient(45deg, #076969, #0bb5b5);
-}
-li:nth-child(2n+1) .rounded-responsive .polygon-backdrop,
-.polygonblock > div:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
-  background: linear-gradient(45deg, #076969, #0bb5b5);
-}
-/*---- MULTIBANNER HOME POLYGON PARI MOULTICOLORE  ----*/
-li:nth-child(n) .rounded-responsive .polygon-backdrop.parimulticolore,
-.polygonblock > div:nth-child(n) .rounded-responsive .polygon-backdrop.parimulticolore {
-  background: linear-gradient(45deg, #076969, #0bb5b5) !important;
-}
-li:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore,
-.polygonblock > div:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore {
-  background: linear-gradient(45deg, #f1bf31, #f6d26f) !important;
-}
-li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover,
-.polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore:hover {
-  color: #000 !important;
-  opacity: 0.78;
-  background-color: #f0b719;
-  text-decoration: none !important;
-}
-li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover,
-.polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover {
-  color: #fff !important;
-  background: #032f2f !important;
-  border-color: #032f2f;
-  opacity: 0.78;
-  text-decoration: none !important;
-  border: 1px solid #f3c649;
-}
-@media screen and (max-width: 720px) {
-  li:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore,
-  .polygonblock > div:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore {
-    background: linear-gradient(45deg, #076969, #0bb5b5) !important;
-  }
-}
-@media screen and (max-width: 540px) {
-  .card.rounded-responsive {
-    border-radius: 0 !important;
-  }
-}
-/*----ISOTOPE RISULTATI POLYGON ----*/
-.image-polygon {
-  padding-left: 0;
-  padding-top: 35%;
-}
-.image-polygon-fascia {
-  padding-left: 0;
-  padding-top: 75%;
-}
-.polygon-backdrop {
-  background-size: cover;
-  -webkit-clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
-  clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
-  position: absolute;
-  width: 100%;
-  height: auto;
-  min-height: 40%;
-  top: 0px;
-}
-.polygon-backdrop .titolo-offerta,
-.polygon-backdrop .sottotitolo-offerta,
-.polygon-backdrop .descrizione {
-  color: white !important;
-}
-.polygon-backdrop .titolo-offerta {
-  font-size: 1.8rem;
-  font-weight: 900;
-  margin-bottom: 20px !important;
-  line-height: 2.1rem;
-}
-.polygon-backdrop .sottotitolo-offerta {
-  font-size: 1.3rem;
-  font-weight: 400 !important;
-  line-height: 2rem;
-}
-li:nth-child(2n) .polygon-backdrop,
-.polygonblock > div:nth-child(2n) .polygon-backdrop {
-  background: linear-gradient(45deg, #f1bf31, #f6d26f);
-}
-.polygon-backdrop .prezzo-responsive {
-  color: white;
-  font-size: 2rem;
-  font-weight: 900;
-}
-li:nth-child(2n) .polygon-backdrop {
-  background: linear-gradient(45deg, #f1bf31, #f6d26f);
-}
-li:nth-child(2n+1) .polygon-backdrop,
-.polygonblock > div:nth-child(2n+1) .polygon-backdrop {
-  background: linear-gradient(45deg, #076969, #0bb5b5);
-}
-li:nth-child(2n) .polygon-backdrop .prezzo-responsive:before {
-  content: "/KWh";
-  font-weight: 300;
-  float: right;
-}
-li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
-  content: "/Smc";
-  font-weight: 300;
-  float: right;
-}
-@media screen and (min-width: 1024px) {
-  .image-polygon,
-  .image-polygon-fascia {
-    padding-left: 45%;
-    /*padding-left: 0%;*/
-    padding-top: 0;
-  }
-  .polygon-backdrop {
-    background-size: cover;
-    -webkit-clip-path: polygon(0 0%, 100% 0%, 80% 101%, 0% 101%);
-    clip-path: polygon(0 0%, 100% 0%, 80% 101%, 0% 101%);
-    position: absolute;
-    width: 65%;
-    /*width: 60%;*/
-    height: 100%;
-    top: 0px;
-  }
-}
-/* ---------------------------------
-------- END TEMPLATE POLYGON -------
---------------------------------- */
 /* ----------------------------------------------------
 - TEMPLATE BOOTSTRAP BANNER e PORTFOLIO MANSONRY CARD -
 ---------------------------------------------------- */
@@ -7036,10 +6710,10 @@ li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
 }
 */
 /*CENTRA legend immagni nella gallery*/
-.flexslider .slides .slide-content {
-  display: flex;
-  justify-content: center;
-}
+/*.flexslider .slides .slide-content {
+    display: flex;
+    justify-content: center;
+}*/
 /****************************
 Modify  class per datepicker
 ****************************/
@@ -7116,7 +6790,7 @@ Modify  class per jqxcalendar
   cursor: pointer;
 }
 /* ---------------------------------    */
-/*SEZIONE AGGIUNTA TRATTAMENTI ...*/
+/*SEZIONE AGGIUNTA TRATTAMENTI */
 /*BOX SEMITRAPARENTE*/
 .treatment-search {
   border-radius: 10px;
@@ -7355,9 +7029,7 @@ Modify  class per jqxcalendar
 .scalablefont-big,
 .scalablefont-big:hover,
 .mbr-section-title,
-a .mbr-section-title,
-.title-block,
-h1 span:nth-child(1).mbr-section-title {
+.title-block {
   font-size: calc(24px + 0.5vw + 0.4vh + 0.3vmin) !important;
   /*line-height: 100% !important;*/
 }
@@ -7377,8 +7049,7 @@ h1 span:nth-child(1).mbr-section-title {
 }
 .scalablefont-small-medium,
 .scalablefont-small-medium:hover,
-.mbr-section-subtitle,
-h1 span .mbr-section-subtitle {
+.mbr-section-subtitle {
   font-size: calc(18px + 0.18vw + 0.1vh + 0.05vmin) !important;
   /*line-height: normal !important;*/
 }
@@ -7424,9 +7095,7 @@ h1 span .mbr-section-subtitle {
   .scalablefont-big,
   .scalablefont-big:hover,
   .mbr-section-title,
-  a .mbr-section-title,
-  .title-block,
-  h1 span:nth-child(1).mbr-section-title {
+  .title-block {
     font-size: calc(22px + 0.4vw + 0.4vh + 0.2vmin) !important;
     /*line-height: 105% !important;*/
   }
@@ -7442,8 +7111,7 @@ h1 span .mbr-section-subtitle {
   }
   .scalablefont-small-medium,
   .scalablefont-small-medium:hover,
-  .mbr-section-subtitle,
-  h1 span .mbr-section-subtitle {
+  .mbr-section-subtitle {
     font-size: calc(18px + 0.2vw + 0.2vh + 0.1vmin) !important;
     /*line-height: 105% !important;*/
   }
@@ -7463,8 +7131,7 @@ h1 span .mbr-section-subtitle {
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3) !important;
 }
 .font-light,
-.mbr-section-subtitle,
-h1 span .mbr-section-subtitle {
+.mbr-section-subtitle {
   font-weight: 300;
 }
 .font-light-medium {
@@ -7484,9 +7151,7 @@ h1 span .mbr-section-subtitle {
 }
 .font-weight-medium,
 .mbr-section-title,
-a .mbr-section-title,
-.title-block,
-h1 span:nth-child(1).mbr-section-title {
+.title-block {
   font-weight: 500 !important;
 }
 .font-weight-strong {
@@ -9005,6 +8670,88 @@ img.aimg {
     font-size: 1rem !important;
   }
 }
+/*----------------------------------
+---------- OWL SLIDER ----------
+----------------------------------*/
+.owl-carousel-v1.owl-work-v1.margin-bottom-40 {
+  margin-top: 20px;
+}
+.body-banner-slider a p {
+  font-size: 1.1rem;
+}
+.owl-slider-v2 .box {
+  margin: 14px;
+  /*background-color: @bg-box-banner-slider;*/
+}
+.owl-slider-v2 .box .work-image,
+.owl-slider-v2 .box .work-image-no-button {
+  height: auto;
+  padding: 0;
+  width: 100%;
+  margin: 0 5% 5%;
+  text-align: center;
+  margin-left: 0;
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+}
+.title-banner-slider {
+  color: #032f2f;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-style: normal;
+  margin-bottom: 0px;
+}
+.subtitle-banner-slider {
+  color: #032f2f;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  font-style: normal;
+  margin-bottom: 0px;
+}
+.body-banner-slider {
+  height: 190px;
+  border-top: none;
+  text-align: center;
+  overflow: hidden;
+}
+.owl-theme .owl-controls .owl-page span {
+  background: #098f8f;
+  filter: alpha(opacity=50);
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.owl-controls {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  margin-top: 20px;
+}
+/*----------------------------------
+--- CARUSEL SCHEDA DETAILS BLOG ----
+----------------------------------*/
+.owl-carousel-v1 .item {
+  margin: 0 15px;
+  background-color: #fff;
+  border: none;
+}
+.owl-carousel-v1 .item:hover {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  /* -webkit-filter: drop-shadow(0 7px 14px .35px); */
+  -moz-filter: d none;
+}
 /*------------------------------------*/
 /*Carousel
 ------------------------------------*/
@@ -9784,6 +9531,33 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 .products-list-mini .product-details h3 {
   margin: 0;
 }
+/*CARRELLO - MENU - FIXEDTOP*/
+.dropdown-cart .products-list-mini li {
+  padding: 5px !important;
+  background: #ebf6f6;
+  margin-top: 2px !important;
+}
+/*.dropdown-menu {
+    color: @primary-color;
+    border: 1px solid @secondary-color;
+}
+*/
+.products-list-mini li + li {
+  border: none;
+}
+.products-list-mini li:nth-child(1) {
+  display: none;
+}
+.products-list-mini li:nth-child(2) {
+  margin-top: 0px !important;
+}
+.products-list-mini li:nth-child(n+1) .work-image:after {
+  background-position: center calc((100% - 61px) / 2) !important;
+  background-size: 15% !important;
+}
+.products-list-mini li:nth-child(n+1) .work-image:hover:after {
+  background-size: 25% !important;
+}
 .table-cart td {
   vertical-align: middle;
   line-height: normal !important;
@@ -9834,6 +9608,65 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
   vertical-align: middle;
   text-align: right;
   padding-right: 15px;
+}
+/*TABELLA RIEPILOGO - CARRELLO*/
+.table td,
+.table th {
+  padding: 0.5rem;
+  vertical-align: top;
+  border-top: none;
+  background: #ebf6f6;
+  vertical-align: middle;
+}
+.table-cart thead td,
+.table-cart thead th {
+  color: #fff;
+  font-weight: normal;
+  background: #098f8f;
+}
+.table-cart tbody tr td,
+.table-cart tbody tr th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 4px solid #fff;
+}
+.table-cart tbody tr td span,
+.table-cart tbody tr th span {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  vertical-align: middle;
+}
+.cart-product,
+.cart-quantity,
+.cart-total {
+  text-align: left !important;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+.table-cart .cart-total {
+  min-width: 100px;
+}
+.table-cart .cart-product .product-thumb {
+  border: none;
+  margin: 0 10px 0 0;
+}
+.cart-total {
+  font-size: 1rem;
+}
+.table-cart .cart-remove {
+  width: 50px;
+  padding-right: 0;
+}
+select.form-control:not([size]):not([multiple]) {
+  height: auto;
+}
+.cart-product .work-image:after {
+  background-size: 30% !important;
+}
+.cart-product .work-image:hover:after {
+  background-size: 40% !important;
 }
 ul.unstyled,
 ol.unstyled {
@@ -9929,8 +9762,7 @@ a .mbr-section-title,
 h1 span:nth-child(1).mbr-section-title,
 .cart-product,
 .cart-quantity,
-.cart-total,
-h1 span:nth-child(1).mbr-section-title {
+.cart-total {
   font-size: 1.5rem !important;
   line-height: 1.8rem !important;
   padding-bottom: 0 !important;

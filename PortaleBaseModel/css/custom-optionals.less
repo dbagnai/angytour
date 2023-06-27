@@ -1,0 +1,896 @@
+﻿/*----------------------------------
+VARI STILI DA VERIFICARE
+----------------------------------*/
+@import "custom-monocromo.less"; 
+
+.card-block .numero-chiavi-in-mano-top {
+    width: 75px;
+    height: 75px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #666;
+    line-height: 75px;
+    margin: 10px auto;
+    font-size: 36px;
+}
+
+.card-block .numero-chiavi-in-mano-top, .card-block .numero-chiavi-in-mano-bottom {
+    background-color: #642a14 !important;
+    color: #fff !important;
+}
+
+
+.image-polygon-b3.imgovercontainer:hover:after {
+    z-index: 2 !important;
+    background: none !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    opacity: 1 !important;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
+}
+
+.image-polygon-b3.imgovercontainer:hover:after, .zoomimg.imgovercontainer:hover:after {
+    z-index: 2 !important;
+    background: none !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    opacity: 1 !important;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
+}
+
+/*----------------------------------------------------------------------
+---- BANNER NAVIGAZIONE METODO LAVORO 1 -> 2 -> 3 tipo hospitality -----
+------------------------------------------------------------------------*/
+#divContainerNavCampionatura {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 579px) {
+    #divContainerNavCampionatura .works-grid-4 .work-item, #divContainerNavMetodo .works-grid-4 .work-item {
+        width: 49.999%;
+    }
+
+    #divContainerNavMetodo .img-overlay {
+        border: none !important;
+        border-radius: 0% !important;
+    }
+
+    #divContainerNavMetodo img {
+        padding: 5% !important;
+    }
+
+    #divContainerNavCampionatura li:nth-child(2), #divContainerNavCampionatura li:nth-child(4), #divContainerNavMetodo li:nth-child(2), #divContainerNavMetodo li:nth-child(4) {
+        padding: 5px !important;
+    }
+}
+
+@media (min-width: 579px) {
+    #divContainerNavCampionatura li:nth-child(n+1)::after, #divContainerNavMetodo li:nth-child(n+1)::after {
+        position: absolute;
+        top: 25px;
+        left: 75px;
+        width: 50px;
+        height: 50px;
+        line-height: 45px;
+        border-radius: 50%;
+        background-color: @color-sottomeu;
+        color: white;
+        font-size: 2rem;
+        font-weight: 400;
+        text-align: center;
+        box-shadow: 0 4px 6px -6px #000;
+    }
+
+    #divContainerNavMetodo li:nth-child(n+1)::after {
+        top: 0px;
+    }
+
+    #divContainerNavCampionatura li:nth-child(1)::after, #divContainerNavMetodo li:nth-child(1)::after {
+        content: "1";
+    }
+
+    #divContainerNavCampionatura li:nth-child(2)::after, #divContainerNavMetodo li:nth-child(2)::after {
+        content: "2";
+    }
+
+    #divContainerNavCampionatura li:nth-child(3)::after, #divContainerNavMetodo li:nth-child(3)::after {
+        content: "3";
+        line-height: 40px;
+    }
+
+    #divContainerNavCampionatura li:nth-child(4)::after, #divContainerNavMetodo li:nth-child(4)::after {
+        content: "4";
+    }
+}
+
+@media (max-width: 1200px) and (min-width: 768px) {
+    #divContainerNavNavCampionatura .works-grid-4 .work-item, #divContainerNavMetodo .works-grid-4 .work-item {
+        width: 24.999%;
+    }
+}
+
+@media screen and (min-width: 1023px) {
+    #divContainerNavCampionatura li:nth-child(n+1) {
+        background-repeat: no-repeat;
+        /*usare con icona ->*/
+        background-image: url(/images/freccia-dx.png), url(/images/freccia-sx.png);
+        background-position: top 75px left 0, top 75px right 0px;
+        background-size: 15%;
+        /*usare con icona +*/
+        /*background-image: url(/images/plus-dx.png), url(/images/plus-sx.png);*/
+        /*background-size: 7.5%;
+        background-position: top 35% left 0, top 35% right 0px;*/
+    }
+
+    #divContainerNavCampionatura li:first-child {
+        background-position-x: right;
+        background-repeat: no-repeat;
+        /*usare con icona ->*/
+        background-image: url(/images/freccia-sx.png);
+        background-position-y: 75px;
+        background-size: 15%;
+        /*usare con icona +*/
+        /*background-image: url(/images/plus-sx.png);*/
+        /*background-size: 7.5%;
+        background-position-y: 35%;*/
+    }
+
+    #divContainerNavCampionatura li:last-child {
+        background-position-x: left;
+        background-repeat: no-repeat;
+        margin-left: -1px;
+        /*usare con icona ->*/
+        background-image: url(/images/freccia-dx.png);
+        background-position-y: 75px;
+        background-size: 15%;
+        /*usare con icona +*/
+        /*background-image: url(/images/plus-dx.png);*/
+        /*background-size: 7.5%;
+        background-position-y: 35%;*/
+    }
+}
+
+/* METODO 1 -> 2 -> 3 tipo colosseo */
+#divContainerNavMetodo .img-overlay {
+    background-color: rgba(255, 255, 255, 0.50);
+}
+
+@media screen and (min-width: 1023px) {
+    #divContainerNavMetodo li:nth-child(n+1) {
+        background-repeat: no-repeat;
+        /*usare con icona ->*/
+        /*background-image: url(/images/freccia-dx.png), url(/images/freccia-sx.png);
+        background-position: top 75px left 0, top 75px right 0px;
+        background-size: 15%;*/
+        /*usare con icona +*/
+        background-image: url(/images/plus-dx.png), url(/images/plus-sx.png);
+        background-size: 7.5%;
+        background-position: top 35% left 0, top 35% right 0px;
+    }
+
+    #divContainerNavMetodo li:first-child {
+        background-position-x: right;
+        background-repeat: no-repeat;
+        /*usare con icona ->*/
+        /*background-image: url(/images/freccia-sx.png);
+        background-position-y: 75px;
+        background-size: 15%;*/
+        /*usare con icona +*/
+        background-image: url(/images/plus-sx.png);
+        background-size: 7.5%;
+        background-position-y: 35%;
+    }
+
+    #divContainerNavMetodo li:last-child {
+        background-position-x: left;
+        background-repeat: no-repeat;
+        margin-left: -1px;
+        /*usare con icona ->*/
+        /*background-image: url(/images/freccia-dx.png);
+        background-position-y: 75px;
+        background-size: 15%;*/
+        /*usare con icona +*/
+        background-image: url(/images/plus-dx.png);
+        background-size: 7.5%;
+        background-position-y: 35%;
+    }
+}
+
+
+/*----------------------------------
+-------- BANNER NAV --------
+----------------------------------*/
+
+.isotope-navigation a .rounded {
+    width: @banner-navigazione-width;
+    background-color: @banner-navigazione-background;
+    padding: @banner-navigazione-padding;
+    border-radius: @banner-navigazione-radius !important;
+    text-align: center;
+    margin: 5%;
+    margin-left: 0;
+}
+
+.isotope-navigation .work-subcaption .work-title {
+    color: @title-banner-color;
+    font-family: @title-banner-font;
+    font-size: @title-banner-navigazione-size;
+    font-weight: @title-weight;
+    font-style: normal;
+    margin-bottom: 0px;
+}
+
+.isotope-navigation .work-subcaption .work-desc {
+    color: @subtitle-banner-color;
+    font-family: @subtitle-banner-font;
+    font-size: @subtitle-banner-navigazione-size;
+    /*font-style: italic;*/
+    margin-bottom: 0px;
+}
+
+.isotope-navigation .work-subcaption .work-desc br {
+    line-height: 2.5rem;
+}
+
+
+#isoBannav1 li .work-image:after {
+    background: url(/images/link1.png) center calc(~'(100% - 0.1px) / 2') no-repeat !important;
+    background-size: 10% !important;
+}
+
+#isoBannav1 li .work-image:hover:after, #isoBannav1 div .work-image:hover:after {
+    background: url(/images/link1.png) center calc(~'(100% - 0.1px) / 2') no-repeat !important;
+    background-size: 20% !important;
+}
+
+/* PERSONALIZZAZIONI SINGOLI (li) BUTTON OVER CATALOGO */
+.navigazione-home #isoBannav1 li:nth-child(n+1) .work-image:after, .navigazione-home #isoBannav1 div:nth-child(n+1) .work-image:after {
+    background-position: center calc(~'(100% - 0.1px) / 2') !important;
+    background-size: 10% !important;
+}
+
+.navigazione-home #isoBannav1 li:nth-child(1) .work-image:hover:after, .navigazione-home #isoBannav1 div:nth-child(1) .work-image:hover:after {
+    background: @icon-nav-6 center calc(~'(100% - 0.1px) / 2') no-repeat !important;
+    background-size: 20% !important;
+    background-color: rgba(0, 0, 0, 0.50) !important;
+}
+
+.navigazione-home #isoBannav1 li:nth-child(2) .work-image:hover:after, .navigazione-home #isoBannav1 div:nth-child(2) .work-image:hover:after {
+    background: @icon-nav-5 center calc(~'(100% - 0.1px) / 2') no-repeat !important;
+    background-size: 20% !important;
+    background-color: rgba(0, 0, 0, 0.50) !important;
+}
+
+.navigazione-home #isoBannav1 li:nth-child(3) .work-image:hover:after, .navigazione-home #isoBannav1 div:nth-child(3) .work-image:hover:after {
+    background: @icon-nav-4 center calc(~'(100% - 0.1px) / 2') no-repeat !important;
+    background-size: 20% !important;
+    background-color: rgba(0, 0, 0, 0.50) !important;
+}
+
+.navigazione-home #isoBannav1 li:nth-child(4) .work-image:hover:after, .navigazione-home #isoBannav1 div:nth-child(4) .work-image:hover:after {
+    background: @icon-nav-3 center calc(~'(100% - 0.1px) / 2') no-repeat !important;
+    background-size: 20% !important;
+    background-color: rgba(0, 0, 0, 0.50) !important;
+}
+
+.navigazione-home #isoBannav1 li:nth-child(5) .work-image:hover:after, .navigazione-home #isoBannav1 div:nth-child(5) .work-image:hover:after {
+    background: @icon-nav-2 center calc(~'(100% - 0.1px) / 2') no-repeat !important;
+    background-size: 20% !important;
+    background-color: rgba(0, 0, 0, 0.50) !important;
+}
+
+.navigazione-home #isoBannav1 li:nth-child(6) .work-image:hover:after, .navigazione-home #isoBannav1 div:nth-child(6) .work-image:hover:after {
+    background: @icon-nav-1 center calc(~'(100% - 0.1px) / 2') no-repeat !important;
+    background-size: 20% !important;
+    background-color: rgba(0, 0, 0, 0.50) !important;
+}
+
+
+/*------------------------------------------------------
+------ BANNER PROCESSO ACQUISTO & ISOTOPE FUNNEL -------
+------------------------------------------------------*/
+li:nth-child(1).work-item.funnel-fasce .work-div-noborder, div:nth-child(1).funnel-fasce {
+    border-radius: 50px 50px 0 0;
+}
+
+li:nth-last-child(1).work-item.funnel-fasce .work-div-noborder, div:nth-last-child(1).funnel-fasce {
+    border-radius: 0 0 50px 50px;
+}
+
+li:nth-child(-n+4).work-item.funnel-fasce .title-isotope::after, div:nth-child(-n+4).funnel-fasce .title-isotope::after {
+    position: absolute;
+    top: -10px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    background-color: @color-sottomeu;
+    color: white;
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    box-shadow: 0 4px 6px -6px #000;
+}
+
+li:nth-child(odd).work-item.funnel-fasce .title-isotope::after, div:nth-child(odd).funnel-fasce .title-isotope::after {
+    left: -25px;
+}
+
+li:nth-child(even).work-item.funnel-fasce .title-isotope::after, div:nth-child(even).funnel-fasce .title-isotope::after {
+    right: -25px;
+}
+
+li:nth-child(1).work-item.funnel-fasce .title-isotope::after, div:nth-child(1).funnel-fasce .title-isotope::after {
+    content: "1";
+}
+
+li:nth-child(2).work-item.funnel-fasce .title-isotope::after, div:nth-child(2).funnel-fasce .title-isotope::after {
+    content: "2";
+}
+
+li:nth-child(3).work-item.funnel-fasce .title-isotope::after, div:nth-child(3).funnel-fasce .title-isotope::after {
+    content: "3";
+}
+
+li:nth-child(4).work-item.funnel-fasce .title-isotope::after, div:nth-child(4).funnel-fasce .title-isotope::after {
+    content: "4";
+}
+
+@media screen and (max-width: 768px) {
+    li:nth-child(-n+4).work-item.funnel-fasce .title-isotope::after, div:nth-child(-n+4).funnel-fasce .title-isotope::after {
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: inline-block;
+        margin-top: 15px;
+    }
+}
+
+/*------------------------------------------------
+----------- BANNER NAVIGAZIONE FUNNEL ------------
+--------------------------------------------------*/
+.works-grid-2 li:nth-child(1).work-item.funnel {
+    width: 99.999%;
+}
+
+.works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation {
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: row !important;
+    flex-direction: row !important;
+}
+
+.works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation .work-subcaption, .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation a.funnel-buton {
+    width: 50% !important;
+}
+
+.works-grid-2 li.work-item.funnel .isotope-navigation a.funnel-buton {
+    width: 75% !important;
+}
+
+.work-item.funnel .isotope-navigation .work-subcaption .work-title {
+    font-size: 2.6rem;
+}
+
+@media (min-width: 580px) and (max-width: 768px) {
+    .works-grid-2 li:nth-child(1).work-item.funnel {
+        width: 99.999%;
+    }
+
+    .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation .work-subcaption, .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation a.funnel-buton {
+        width: auto !important;
+    }
+
+    .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation {
+        -webkit-box-orient: vertical !important;
+        -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+        flex-direction: column !important;
+    }
+}
+
+@media (max-width: 579px) {
+    .works-grid-2 li:nth-child(1).work-item.funnel {
+        width: 99.999%;
+    }
+
+    .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation .work-subcaption, .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation a.funnel-buton {
+        width: auto !important;
+    }
+
+    .works-grid-2 li:nth-child(1).work-item.funnel .isotope-navigation {
+        -webkit-box-orient: vertical !important;
+        -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+        flex-direction: column !important;
+    }
+}
+
+
+/*----------------------------------
+---------- ISOTOPE STAFF -----------
+----------------------------------*/
+.isotope-staff a .rounded {
+    background-color: @banner-navigazione-background;
+    padding: @banner-navigazione-padding;
+    border-radius: 0 !important;
+    text-align: center;
+    margin: 5% 5% 0 0;
+}
+
+.isotope-staff .work-subcaption {
+    background-color: @bg-light-color;
+    height: 168px;
+}
+
+.isotope-staff .work-subcaption .work-title {
+    color: @title-banner-color;
+    font-family: @title-banner-font;
+    font-size: @title-banner-navigazione-size;
+    font-weight: bold;
+    font-style: normal;
+    margin-bottom: 0px;
+}
+
+.isotope-staff .work-subcaption .work-desc {
+    color: @subtitle-banner-color;
+    font-family: @subtitle-banner-font;
+    font-size: @subtitle-banner-navigazione-size;
+    font-style: italic;
+    margin-bottom: 0px;
+}
+
+
+/* -------------------------
+  Stili from landing.css ( da verificare utilizzo )
+--------------------------- */
+
+.mbr-section-full {
+    height: calc(100vh - 60px) !important;
+}
+
+.mbr-section-full .mbr-overlay {
+    min-height: calc(100vh - 60px) !important;
+}
+
+.mbr-section-full {
+    display: table;
+    height: 100vh;
+    padding-bottom: 0;
+    padding-top: 0;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.mbr-section-full > .mbr-table-cell {
+    width: 100%;
+}
+
+.mbr-section-small {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.mbr-section__container--first {
+    padding-top: 120px;
+    padding-bottom: 40px;
+}
+
+.mbr-section__container--middle {
+    padding-top: 0;
+    padding-bottom: 40px;
+}
+
+.mbr-section__container--last {
+    padding-top: 0;
+    padding-bottom: 120px;
+}
+
+.mbr-section-sm-padding {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.mbr-section-md-padding {
+    padding-top: 90px;
+    padding-bottom: 90px;
+}
+
+
+.mbr-section-nopadding {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+
+
+.mbr-section-full .mbr-overlay {
+    min-height: 100vh;
+}
+
+
+.mbr-overlay ~ * {
+    z-index: 2;
+}
+
+.mbr-section-full .mbr-background-video,
+.mbr-section-full .mbr-background-video-preview {
+    min-height: 100vh;
+}
+
+.mbr-table {
+    display: table;
+    width: 100%;
+}
+
+.mbr-table-full {
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.mbr-table-cell {
+    display: table-cell;
+    float: none;
+    padding-bottom: 0;
+    padding-top: 0;
+    position: relative;
+    vertical-align: middle;
+}
+
+.mbr-table-md-up {
+    width: 100%;
+}
+
+.mbr-table-md-up .mbr-table-cell {
+    display: block;
+}
+
+.mbr-table-md-up .mbr-table-cell + .mbr-table-cell {
+    padding-top: 40px;
+}
+
+@media (min-width: 768px) {
+    .mbr-table-md-up {
+        display: table;
+    }
+
+    .mbr-table-md-up .mbr-table-cell {
+        display: table-cell;
+    }
+
+    .mbr-table-md-up .mbr-table-cell + .mbr-table-cell {
+        padding-top: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .mbr-right-padding-md-up {
+        padding-right: 60px;
+    }
+}
+
+@media (min-width: 768px) {
+    .mbr-left-padding-md-up {
+        padding-left: 60px;
+    }
+}
+
+.mbr-valign-top {
+    vertical-align: top;
+}
+
+
+.content-size {
+    width: auto;
+}
+
+.image-size {
+    vertical-align: middle;
+    margin: auto;
+    text-align: center;
+}
+
+.image-size .mbr-figure {
+    padding-top: 3px;
+}
+
+@media (max-width: 768px) {
+    .image-size {
+        width: 100% !important;
+    }
+}
+
+
+.mbr-figure {
+    display: block;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.mbr-figure img, .mbr-figure iframe {
+    display: block;
+    width: 100%;
+}
+
+.mbr-figure .mbr-figure-caption {
+    background: #2e2e2e;
+    color: #fff;
+    font-family: @base-font;
+    padding: 1.5rem 0;
+    text-align: center;
+    width: 100%;
+}
+
+.mbr-figure .mbr-figure-caption-over {
+    background: -moz-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
+    background: -ms-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
+    background: -o-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
+    background: -webkit-linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
+    background: linear-gradient(left, rgba(67, 76, 99, 0.85), rgba(188, 155, 114, 0.85)) !important;
+    bottom: 0;
+    position: absolute;
+}
+
+
+
+
+/* ---------------------------------
+--------- TEMPLATE POLYGON ---------
+--------------------------------- */
+/*Quando si attiva vanno disattivati gli altri bigtext e smalltext di questo file*/
+/*-- BANNER TESTATA HOME POLYGON -*/
+/*.tp-caption.very_big_white {
+    width: @bg-width !important;
+    max-width: @bg-max-width !important;
+    background-size: @bg-size !important;
+    -webkit-clip-path: @bg-path;
+    clip-path: @bg-path;
+    background: @bg-testata-color;
+    padding: 20px 20px;
+    padding-right: calc(14% - 3rem);
+}
+@media (max-width: 768px) {
+    .tp-caption.very_big_white {
+        width: @bg-width-768 !important;
+        max-width: @bg-max-width-768 !important;
+        -webkit-clip-path: @bg-path-768;
+        clip-path: @bg-path-768;
+    }
+}
+.bigtext {
+    color: @title-testata-home-color;
+    font-family: @title-testata-home-font;
+    font-size: @title-testata-home-size !important;
+    font-weight: @title-testata-home-weight;
+    text-align: left;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
+    line-height: normal !important;
+    white-space: pre-wrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+.smalltext {
+    color: @subtitle-testata-home-color;
+    font-family: @subtitle-testata-home-font;
+    font-size: @subtitle-testata-home-size !important;
+    font-weight: @subtitle-testata-home-weight !important;
+    text-align: left;
+    line-height: normal !important;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
+    white-space: pre-wrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+.prezzotext {
+    color: @prezzo-testata-home-color;
+    font-family: @prezzo-testata-home-font;
+    font-size: @prezzo-testata-home-size !important;
+    font-weight: @prezzo-testata-home-weight !important;
+    text-align: left;
+    line-height: normal !important;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5);
+    white-space: pre-wrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}*/
+
+/*-- BANNER NAVIGAZIONE POLYGON --*/
+
+
+.image-polygon-b3 {
+    padding-left: 0;
+    padding-top: 25%;
+}
+
+.polygon-backdrop-b3 {
+    background-size: cover;
+    -webkit-clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
+    clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
+    position: absolute;
+    width: calc(100% + 2px);
+    height: auto;
+    min-height: 40%;
+    top: -1px;
+}
+
+.polygon-backdrop-b3 .titolo-offerta, .polygon-backdrop .sottotitolo-offerta, .polygon-backdrop .descrizione {
+    color: white !important;
+}
+
+.polygon-backdrop-b3 .titolo-offerta {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 20px !important;
+    line-height: 2rem;
+    text-transform: uppercase;
+}
+
+.polygon-backdrop-b3 .sottotitolo-offerta {
+    font-size: 1.3rem;
+    font-weight: 400 !important;
+    line-height: 1.6rem;
+    color: white;
+}
+
+li:nth-child(2n) .polygon-backdrop-b3, .polygonblock > div:nth-child(2n) .polygon-backdrop-b3 {
+    background: @bg-sottomenu-color-sfumato;
+}
+
+li:nth-child(2n+1) .polygon-backdrop-b3, .polygonblock > div:nth-child(2n+1) .polygon-backdrop-b3 {
+    background: @bg-primary-color-sfumato;
+}
+
+/*---- MULTIBANNER HOME POLYGON PARI MONOCOLRE  ----*/
+li:nth-child(2n) .rounded-responsive .polygon-backdrop, .polygonblock > div:nth-child(2n) .rounded-responsive .polygon-backdrop {
+    background: @bg-primary-color-sfumato;
+}
+
+li:nth-child(2n+1) .rounded-responsive .polygon-backdrop, .polygonblock > div:nth-child(2n+1) .rounded-responsive .polygon-backdrop {
+    background: @bg-primary-color-sfumato;
+}
+
+/*---- MULTIBANNER HOME POLYGON PARI MOULTICOLORE  ----*/
+li:nth-child(n) .rounded-responsive .polygon-backdrop.parimulticolore, .polygonblock > div:nth-child(n) .rounded-responsive .polygon-backdrop.parimulticolore {
+    background: @bg-primary-color-sfumato !important;
+}
+
+li:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore, .polygonblock > div:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore {
+    background: @bg-sottomenu-color-sfumato !important;
+}
+
+li:nth-child(n) .rounded-responsive .btn.parimulticolore, .polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore {
+    &:extend(.divbuttonstyle);
+}
+
+li:nth-child(n) .rounded-responsive .btn.parimulticolore:hover, .polygonblock > div:nth-child(n) .rounded-responsive .btn.parimulticolore:hover {
+    &:extend(.divbuttonstyle);
+    color: @button-hover-color !important;
+    opacity: 0.78;
+    background-color: @bg-button-hover-color;
+    text-decoration: none !important;
+}
+
+li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore, .polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore {
+    &:extend(.btn-black-outline);
+}
+
+li:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover, .polygonblock > div:nth-child(3n+1) .rounded-responsive .btn.parimulticolore:hover {
+    &:extend(.btn-black-outline);
+    color: @button-outline-hover-color !important;
+    background: @bg-button-outline-hover-color !important;
+    border-color: @bg-button-outline-hover-color;
+    opacity: 0.78;
+    text-decoration: none !important;
+    border: 1px solid @bg-button-color;
+}
+
+@media screen and (max-width: 720px) {
+    li:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore, .polygonblock > div:nth-child(3n+1) .rounded-responsive .polygon-backdrop.parimulticolore {
+        background: @bg-primary-color-sfumato !important;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .card.rounded-responsive {
+        border-radius: 0 !important;
+    }
+}
+
+/*----ISOTOPE RISULTATI POLYGON ----*/
+
+
+.image-polygon {
+    padding-left: 0;
+    padding-top: 35%;
+}
+
+.image-polygon-fascia {
+    padding-left: 0;
+    padding-top: 75%;
+}
+
+.polygon-backdrop {
+    background-size: cover;
+    -webkit-clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
+    clip-path: polygon(0% 100%, 100% 80%, 101% 0%, 0% 0%);
+    position: absolute;
+    width: 100%;
+    height: auto;
+    min-height: 40%;
+    top: 0px;
+}
+
+.polygon-backdrop .titolo-offerta, .polygon-backdrop .sottotitolo-offerta, .polygon-backdrop .descrizione {
+    color: white !important;
+}
+
+.polygon-backdrop .titolo-offerta {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 20px !important;
+    line-height: 2.1rem;
+}
+
+.polygon-backdrop .sottotitolo-offerta {
+    font-size: 1.3rem;
+    font-weight: 400 !important;
+    line-height: 2rem;
+}
+
+
+li:nth-child(2n) .polygon-backdrop, .polygonblock > div:nth-child(2n) .polygon-backdrop {
+    background: @bg-sottomenu-color-sfumato;
+}
+
+.polygon-backdrop .prezzo-responsive {
+    color: white;
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+li:nth-child(2n) .polygon-backdrop {
+    background: @bg-sottomenu-color-sfumato;
+}
+
+
+li:nth-child(2n+1) .polygon-backdrop, .polygonblock > div:nth-child(2n+1) .polygon-backdrop {
+    background: @bg-primary-color-sfumato;
+}
+
+li:nth-child(2n) .polygon-backdrop .prezzo-responsive:before {
+    content: "/KWh";
+    font-weight: 300;
+    float: right
+}
+
+li:nth-child(2n+1) .polygon-backdrop .prezzo-responsive:before {
+    content: "/Smc";
+    font-weight: 300;
+    float: right
+}
+
+@media screen and (min-width: 1024px) {
+    .image-polygon, .image-polygon-fascia {
+        padding-left: 45%;
+        /*padding-left: 0%;*/
+        padding-top: 0;
+    }
+
+    .polygon-backdrop {
+        background-size: cover;
+        -webkit-clip-path: polygon(0 0%, 100% 0%, 80% 101%, 0% 101%);
+        clip-path: polygon(0 0%, 100% 0%, 80% 101%, 0% 101%);
+        position: absolute;
+        width: 65%;
+        /*width: 60%;*/
+        height: 100%;
+        top: 0px;
+    }
+}
+/* ---------------------------------
+------- END TEMPLATE POLYGON -------
+--------------------------------- */

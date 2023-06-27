@@ -61,7 +61,6 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     line-height: 1.9rem;
 }
 
-
 .dropdown-cart .btn {
     font-size: 0.8rem !important;
     padding: 1rem 2rem !important;
@@ -610,6 +609,43 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     margin: 0;
 }
 
+
+    /*CARRELLO - MENU - FIXEDTOP*/
+    .dropdown-cart .products-list-mini li {
+        padding: 5px !important;
+        background: @bg-light-color;
+        margin-top: 2px !important;
+    }
+
+
+    /*.dropdown-menu {
+    color: @primary-color;
+    border: 1px solid @secondary-color;
+}
+*/
+    .products-list-mini li + li {
+        border: none;
+    }
+
+    .products-list-mini li:nth-child(1) {
+        display: none;
+    }
+
+    .products-list-mini li:nth-child(2) {
+        margin-top: 0px !important;
+    }
+
+    .products-list-mini li:nth-child(n+1) .work-image:after {
+        background-position: center calc(~'(100% - 61px) / 2') !important;
+        background-size: 15% !important;
+    }
+
+    .products-list-mini li:nth-child(n+1) .work-image:hover:after {
+        background-size: 25% !important;
+    }
+
+
+
 .table-cart td {
     vertical-align: middle;
     line-height: normal !important;
@@ -672,6 +708,72 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
     vertical-align: middle;
     text-align: right;
     padding-right: 15px;
+}
+
+
+/*TABELLA RIEPILOGO - CARRELLO*/
+.table td, .table th {
+    padding: .5rem;
+    vertical-align: top;
+    border-top: none;
+    background: @bg-light-color;
+    vertical-align: middle;
+}
+
+.table-cart thead td, .table-cart thead th {
+    color: #fff;
+    font-weight: normal;
+    background: @bg-dark-color;
+}
+
+.table-cart tbody tr td, .table-cart tbody tr th {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 4px solid #fff;
+}
+
+.table-cart tbody tr td span, .table-cart tbody tr th span {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    vertical-align: middle;
+}
+
+.cart-product, .cart-quantity, .cart-total {
+    text-align: left !important;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    font-family: @base-font;
+    font-weight: @font-weight-medium;
+}
+
+.table-cart .cart-total {
+    min-width: 100px;
+}
+
+.table-cart .cart-product .product-thumb {
+    border: none;
+    margin: 0 10px 0 0;
+}
+
+.cart-total {
+    font-size: 1rem;
+}
+
+.table-cart .cart-remove {
+    width: 50px;
+    padding-right: 0;
+}
+
+select.form-control:not([size]):not([multiple]) {
+    height: auto;
+}
+
+.cart-product .work-image:after {
+    background-size: 30% !important;
+}
+
+.cart-product .work-image:hover:after {
+    background-size: 40% !important;
 }
 
 ul.unstyled,

@@ -154,6 +154,17 @@
                     -webkit-animation: page-loader .6s linear infinite;
                 }
         }
+        @keyframes page-loader {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes page-loader {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
     </style>
 </head>
 <%--<body class="bckGray">--%>
