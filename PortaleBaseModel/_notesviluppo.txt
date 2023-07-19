@@ -1,9 +1,7 @@
 
 strumenti -> gestione pacchetti nuget -> console di gesione pacchetti
-
 Update-Package -reinstall
  
-
  -------
  
 update-package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r
