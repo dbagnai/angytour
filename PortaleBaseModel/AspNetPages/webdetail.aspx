@@ -170,7 +170,6 @@
                                                             return false;
                                                         }
                                                     }
-
                                                     function getcontactdata1(contactdatas, callback) {
                                                         var contactdatas = contactdatas || {};
                                                         contactdatas.idofferta = '<%= idOfferta %>';

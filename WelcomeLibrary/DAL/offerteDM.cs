@@ -8709,9 +8709,7 @@ namespace WelcomeLibrary.DAL
                         if (_new.FotoCollection_M != null && !gmerchant)
                             sb.Append("<img style=\"margin-right: 10px; float: left\" src=\"" + linkimmagine + "\" alt=\"" + testotitolo + "\" width=\"350\" />");
 
-                        //sb.Append(RemoveTroublesomeCharacters(html.Convert(descrizioneitem)));
-                        // da rimuovere eventuali ripetizioni finali di \r\n alla fine della descrizione .. creamo problemi sull'xml !!! da fare
-                        sb.Append(RemoveTrailingNewlines(RemoveTroublesomeCharacters(html.Convert(descrizioneitem))));
+                        sb.Append(RemoveTroublesomeCharacters(html.Convert(descrizioneitem)));
 
                         if (!gmerchant)
                             sb.Append("<p>Continua a leggere / Read More <a href=\"" + UrlCompleto + "\"><em>" + testotitolo + "</em></a>.</p>");
@@ -8742,12 +8740,6 @@ namespace WelcomeLibrary.DAL
             Messaggi["Messaggio"] = "Fine Creazione feed xml rss " + FiltroTipologia + " " + System.DateTime.Now.ToString() + " \r\n";
             WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi, WelcomeLibrary.STATIC.Global.percorsoFisicoComune, logfilename);
 
-        }
-
-
-        public static string RemoveTrailingNewlines(string input)
-        {
-            return Regex.Replace(input, @"\s+$", "");
         }
 
         /// <summary>

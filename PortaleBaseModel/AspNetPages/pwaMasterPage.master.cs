@@ -175,10 +175,10 @@ public partial class _pwaMasterPage : System.Web.UI.MasterPage
         String scriptRegVariables = "";
         scriptRegVariables += ";\r\n" + string.Format("var GooglePosizione1 = '{0}'", references.ResMan("Common", Lingua, "GooglePosizione1").Replace("'", "\\'"));
         scriptRegVariables += ";\r\n" + string.Format("var googleurl1 = '{0}'", references.ResMan("Common", Lingua, "GoogleUrl1").Replace("'", "\\'"));
-        scriptRegVariables += ";\r\n" + string.Format("var googlepin1 = '{0}'", references.ResMan("Common", Lingua, "GooglePin1").Replace("'", "\\'").Replace("\r\n", "<br/>")); ;
+        scriptRegVariables += ";\r\n" + string.Format("var googlepin1 = '{0}'", references.ResMan("Common", Lingua, "GooglePin1").Replace("'", "\\'"));
         scriptRegVariables += ";\r\n" + string.Format("var GooglePosizione2 = '{0}'", references.ResMan("Common", Lingua, "GooglePosizione2").Replace("'", "\\'"));
         scriptRegVariables += ";\r\n" + string.Format("var googleurl2 = '{0}'", references.ResMan("Common", Lingua, "GoogleUrl2").Replace("'", "\\'"));
-        scriptRegVariables += ";\r\n" + string.Format("var googlepin2 = '{0}'", references.ResMan("Common", Lingua, "GooglePin2").Replace("'", "\\'").Replace("\r\n", "<br/>")); ;
+        scriptRegVariables += ";\r\n" + string.Format("var googlepin2 = '{0}'", references.ResMan("Common", Lingua, "GooglePin2").Replace("'", "\\'"));
         scriptRegVariables += ";\r\n" + string.Format("var idmapcontainer = 'map'");
         scriptRegVariables += ";\r\n" + string.Format("var idmapcontainer1 = 'map1'");
         scriptRegVariables += ";\r\n" + string.Format("var iddirectionpanelcontainer = 'directionpanel'");

@@ -270,7 +270,7 @@ namespace WelcomeLibrary.UF
                                 if (limitacodici != null) //riduce il file excel di output a solo le righe con i condici preenti su ecommerce
                                     if (uiC == 2)
                                     {
-                                        if (!limitacodici.Contains(tmpstr2.ToLower())) { saltariga = true; break; }//interrompo il parsing della riga non necessaria 
+                                        if (!limitacodici.Contains(tmpstr2.ToLower())) saltariga = true;
                                     }
 
 
