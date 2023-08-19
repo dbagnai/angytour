@@ -196,7 +196,7 @@ namespace WelcomeLibrary.DAL
             if (item.Id != 0)
             {
                 //Update
-                query = "UPDATE [TBL_STATISTICHE] SET Idattivita=@Idattivita,EmailDestinatario=@EmailDestinatario,EmailMitttente=@EmailMitttente,TipoContatto=@TipoContatto,Url=@Url,Data=@Data,Testomail=@Testomail";
+                query = "UPDATE [TBL_STATISTICHE] SET Idattivita=@Idattivita,EmailDestinatario=@EmailDestinatario,EmailMittente=@EmailMittente,TipoContatto=@TipoContatto,Url=@Url,Data=@Data,Testomail=@Testomail";
                 query += " WHERE [Id] = " + item.Id;
             }
             else
