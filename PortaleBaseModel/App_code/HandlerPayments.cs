@@ -66,7 +66,7 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
 
             switch (q)
             {
-                case "register-complete-order":
+                case "register-complete-order": //chiamata dopo il completamento ordine per aggiornare il database ecommerce e finalizzare i dati transazione nel carrello ( usato )
                     //funzione nell'handler alla chiusura dell'ordine se pagamento ok viene chiamata per registrare l'ordine nel database facendo le attivita collegate
                     //(da replicare quanto fatto nella funzione  RegistrazioneOrdinePaypal di ordineok)
                     string sconfirmpaymentdata = pars.ContainsKey("confirmpaymentdata") ? pars["confirmpaymentdata"] : "";
@@ -94,7 +94,7 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
                     });
 
                     break;
-                case "create-and-update-payment-intent":
+                case "create-and-update-payment-intent": //Funzione primaria di creazione e aggiornamento intento di pagamento ( usato )
                     Dictionary<string, string> retdictcu = new Dictionary<string, string>(); //parametri di ritorno per utilizzo del javascript chiamante
                     UpdateDataForOrder(pars, retdictcu, lingua, context); //prepariamo tutto per fare il pagamento
                     string nomeutente = "";
