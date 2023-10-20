@@ -2982,6 +2982,12 @@ namespace WelcomeLibrary.UF
                             {
                                 link = linkloaded[idscheda][bindprophref];
                                 nodetobind.Attributes["href"].Value = link;
+
+
+                                ///////////////////////////////////////////////////////
+                                //tolgo il path base del sito ( MODIFICA OTTOBRE 2023 DA CONTROLLARE  )
+                                link = link.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/", "");
+                                /////////////////////////////////////////////////////
                                 if (!string.IsNullOrEmpty(link))
                                 {
                                     if (nodetobind.Attributes.Contains("style"))
@@ -4996,11 +5002,41 @@ namespace WelcomeLibrary.UF
                     {
                         ret = "false";
                         if (linkloaded.ContainsKey(valore[0]) && linkloaded[valore[0]].ContainsKey(prop[0]))
+                        {
                             ret = linkloaded[valore[0]][prop[0]];
+                            ///////////////////////////////////////////////////////
+                            //tolgo il path base del sito ( TEST )
+                            if (prop[0] == "link")
+                                ret = ret.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/", "");
+                            /////////////////////////////////////////////////////
+                        }
+
+                        ///
+
                         if (ret != null && ret.Trim() != "")
                             ret = "true";
                         else
                             ret = "false";
+                    }
+                    catch { }
+                    break;
+                case "frmvisibilityinverted":
+                    try
+                    {
+                        ret = "false";
+                        if (linkloaded.ContainsKey(valore[0]) && linkloaded[valore[0]].ContainsKey(prop[0]))
+                        {
+                            ret = linkloaded[valore[0]][prop[0]];
+                            ///////////////////////////////////////////////////////
+                            //tolgo il path base del sito ( TEST )
+                            if (prop[0] == "link")
+                                ret = ret.Replace(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione + "/", "");
+                            /////////////////////////////////////////////////////
+                        }
+                        if (ret != null && ret.Trim() != "")
+                            ret = "false";
+                        else
+                            ret = "true";
                     }
                     catch { }
                     break;

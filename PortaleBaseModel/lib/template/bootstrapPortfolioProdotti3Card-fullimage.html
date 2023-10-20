@@ -49,8 +49,9 @@
                     <a class="bind primary-color" preload target="_self" href="link" title="titolo" mybind="Id">
                         <div class="position-relative imgovercontainer d-flex justify-content-center">
                             <img src="/images/dummylogo.png" alt="" class="bind card-img lazy" mybind="Id" />
-                            <div class="mbr-overlay" style="background: linear-gradient(360deg,rgba(0,0,0,.70)15%,rgba(0,0,0,.0)50%);"></div>
-                            <!--<div class="card-img-overlay"></div>-->
+                            <div class="overlayforlink bind" mybind="Id" myvalue="link" format="frmvisibilityinverted">
+                                <a class="bind" target="_self" href="link" title="" mybind="Id" style="width:100%;height:100%"></a>
+                            </div>
                         </div>
                     </a>
 

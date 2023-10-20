@@ -2902,7 +2902,7 @@ i .fa {
     padding-left: 15px !important;
   }
   .menuzord-menu ul.dropdown li {
-    font-size: 0.8rem;
+    font-size: 1rem;
     padding: 12px 0;
   }
   .menuzord-menu ul.dropdown li a {
@@ -7336,6 +7336,13 @@ svg path {
   left: 0px;
   width: 100%;
   height: 32px;
+}
+.overlayforlink {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
+  z-index: 97;
 }
 /*************************************************************************************************/
 .mbr-overlay-white1 {
