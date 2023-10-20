@@ -43,6 +43,7 @@
             color: red;
             border: 1px solid red;
         }
+
         .divColTagl {
             background: #fff;
             padding: 20px;
@@ -184,15 +185,15 @@
         .blue {
             color: #428bca !important;
         }
-       
+
         .table > thead > tr > th {
             background-color: #428bca;
             color: #fff;
         }
-         
 
 
-      
+
+
         /* ==========================================================================
    Page Loader
 ============================================================================= */
@@ -281,7 +282,6 @@
             }
     </style>
     <style>
-
         /* STILI PER TABELLE a TESTATA FISSA*/
         .table-fixed tbody {
             height: 300px;
@@ -297,23 +297,23 @@
             display: block;
         }
 
-        .table-fixed > thead   > tr  {
-              background:none;
+        .table-fixed > thead > tr {
+            background: none;
             background-color: #51596a !important;
-           
             color: #fff;
         }
-            .table-fixed tr:after {
-                content: "";
-                display: block;
-                visibility: hidden;
-                clear: both;
-            }
 
-            .table-fixed tbody td,
-            .table-fixed thead > tr > th {
-                float: left;
-            }
+        .table-fixed tr:after {
+            content: "";
+            display: block;
+            visibility: hidden;
+            clear: both;
+        }
+
+        .table-fixed tbody td,
+        .table-fixed thead > tr > th {
+            float: left;
+        }
 
         .table > thead > tr > th,
         .table > thead > tr > td {
@@ -328,18 +328,18 @@
             color: #ffffff;
         }
 
-       /* RETTIFICHE PER DATEPICKER*/
+        /* RETTIFICHE PER DATEPICKER*/
         .ui-datepicker {
             width: auto;
         }
 
-        .ui-datepicker td {
-            padding: 0px !important;
-        }
+            .ui-datepicker td {
+                padding: 0px !important;
+            }
 
-        .ui-datepicker td a {
-            padding: 0.1em !important;
-        }
+                .ui-datepicker td a {
+                    padding: 0.1em !important;
+                }
 
         table.ui-datepicker-calendar {
             border-collapse: collapse !important;
@@ -1006,7 +1006,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                           <div style="display: block">
+                                        <div style="display: block">
                                             <ul class="submenu display-active">
                                                 <li id="toggle-landing" class="newLi hover" role="tab">
                                                     <a id="chevron-toggle-landing" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" data-core="" href="#menu-landing" aria-expanded="false"><i class="fa fa-chevron-down" aria-hidden="true"></i>Landing Page</a>
@@ -1015,7 +1015,7 @@
                                             <div id="menu-landing" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
                                                 <div class="panel-body" style="padding: 0 0 0 15px;">
                                                     <ul class="submenu display-active">
-                                                         <li class="newLi hover">
+                                                        <li class="newLi hover">
                                                             <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-feeds">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
                                                                 <span class="menu-text">Land Feedbacks  1</span></a>
@@ -1161,7 +1161,7 @@
                                     </span></a>
                                 <b class="arrow"></b>
                             </li>
-                               <li class="hover">
+                            <li class="hover">
                                 <a href="gestionesconti.aspx">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     <span class="menu-text">Gestione Sconti
@@ -1196,6 +1196,9 @@
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     <span class="menu-text">Risorse</span></a>
                                 <b class="arrow"></b>
+                            </li>
+                            <li  class="hover">
+                                <a href="https://codebeautify.org/htmlviewer#" target="_blank" class="btn btn-primary btn-sm">Html Formatter</a>
                             </li>
                         </ul>
                     </li>

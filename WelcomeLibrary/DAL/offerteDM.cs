@@ -774,13 +774,51 @@ namespace WelcomeLibrary.DAL
                 }
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCategoria"; }))
                 {
+                    ///////////////////////////////////
+                    //singola selezione di categoria
+                    ///////////////////////////////////
+                    //SQLiteParameter pcat = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCategoria"; });
+                    //_parUsed.Add(pcat);
+                    //if (!queryfilter.ToLower().Contains("where"))
+                    //    queryfilter += " WHERE CodiceCategoria like @CodiceCategoria ";
+                    //else
+                    //    queryfilter += " AND CodiceCategoria like @CodiceCategoria  ";
+
+                    ///////////////////////////////////
+                    //selezione multipla di categoria
+                    ////////////////////////////////////
                     SQLiteParameter pcat = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCategoria"; });
-                    _parUsed.Add(pcat);
-                    if (!queryfilter.ToLower().Contains("where"))
-                        queryfilter += " WHERE CodiceCategoria like @CodiceCategoria ";
+                    pcat.Value = pcat.Value.ToString().Trim().Replace("|", ",");
+
+                    if (!pcat.Value.ToString().Contains(","))
+                    {
+                        _parUsed.Add(pcat);
+                        if (!queryfilter.ToLower().Contains("where"))
+                            queryfilter += " WHERE CodiceCategoria like @CodiceCategoria ";
+                        else
+                            queryfilter += " AND CodiceCategoria like @CodiceCategoria  ";
+                    }
                     else
-                        queryfilter += " AND CodiceCategoria like @CodiceCategoria  ";
+                    {
+                        string[] codici = pcat.Value.ToString().Split(',');
+                        if (codici != null && codici.Length > 0)
+                        {
+                            if (!queryfilter.ToLower().Contains("where"))
+                                queryfilter += " WHERE CodiceCategoria in (    ";
+                            else
+                                queryfilter += " AND  CodiceCategoria in (      ";
+                            foreach (string codice in codici)
+                            {
+                                if (!string.IsNullOrEmpty(codice.Trim()))
+                                    queryfilter += " '" + codice + "' ,";
+                            }
+                            queryfilter = queryfilter.TrimEnd(',') + " ) ";
+                        }
+                    }
+                    ////////////////////////////////////
+
                 }
+
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCategoria2Liv"; }))
                 {
                     SQLiteParameter pcat2liv = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCategoria2Liv"; });
@@ -8506,7 +8544,7 @@ namespace WelcomeLibrary.DAL
                         }
 
                         ///////////////////////////////////////////
-                        ///PER FEED MERCHANT GOOGLE //////////////////////////////////////
+                        ///PER FEED MERCHANT GOOGLE ///////////////
                         ///////////////////////////////////////////
                         if (gmerchant)
                         {
@@ -8524,9 +8562,6 @@ namespace WelcomeLibrary.DAL
                             }
 
                             //eventuale aggiunta di  <g:google_product_category> .. da vedere
-
-
-
                             writer.WriteStartElement("g:image_link");
                             writer.WriteCData(linkimmagine);
                             writer.WriteEndElement();
