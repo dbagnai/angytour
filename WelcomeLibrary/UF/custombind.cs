@@ -3049,10 +3049,15 @@ namespace WelcomeLibrary.UF
                                 //    nodetobind.Attributes.Add("style", "display:block");
                             }
 
-                            if (link.ToLower().IndexOf(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) != -1)
-                                nodetobind.SetAttributeValue("target", "_self");
-                            else
+                            if (link.ToLower().StartsWith("http"))
                                 nodetobind.SetAttributeValue("target", "_blank");
+                            else
+                                nodetobind.SetAttributeValue("target", "_self");
+
+                            //if (link.ToLower().IndexOf(WelcomeLibrary.STATIC.Global.percorsobaseapplicazione.ToLower()) != -1)
+                            //    nodetobind.SetAttributeValue("target", "_self");
+                            //else
+                            //    nodetobind.SetAttributeValue("target", "_blank");
 
                         }
                         else
