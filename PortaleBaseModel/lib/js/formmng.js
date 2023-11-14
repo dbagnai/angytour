@@ -39,11 +39,13 @@ function ConfirmValidationFormGeneral(btnid, serveroperation) {
     ////////////////////////////////////////////////////////////////
     /////ABILITARE PER CONTROLLO CAPTCHA
     ////////////////////////////////////////////////////////////////
-    var response = grecaptcha.getResponse();
-    if (response.length == 0)  //reCaptcha not verified
-    {
-        out1.innerHTML = localmessagegeneral.captcha;
-        return false;
+    if (grecaptcha != null && grecaptcha != undefined) {
+        var response = grecaptcha.getResponse();
+        if (response.length == 0)  //reCaptcha not verified
+        {
+            out1.innerHTML = localmessagegeneral.captcha;
+            return false;
+        }
     }
     //else {
     if (true) { //fare controllo di validazione ...
@@ -67,7 +69,7 @@ function ConfirmValidationFormGeneral(btnid, serveroperation) {
                             out1.innerHTML = (localmessagegeneral.successmsg);
                             $("#form" + btnid.id).hide();
                         }
-                        else  { out1.innerHTML = (result); location.replace(result); }
+                        else { out1.innerHTML = (result); location.replace(result); }
                         $(btnid).removeAttr("disabled");
                         $(btnid).html(tastotxt);
                     }, tastotxt);
@@ -192,9 +194,9 @@ function getcontactdataformgeneral(serveroperation, contactdatas, btnid, callbac
     }
     else if (serveroperation == "inviamessaggiomail") {
         //Specifici per messaggio richiesta via mail
-        contactdatas.name = $("[id$='nome" + (btnid).id + "']").val(); 
-        contactdatas.cognome = $("[id$='cognome" + (btnid).id + "']").val(); 
-        contactdatas.message = $("[id$='descrizione" + (btnid).id + "']").val(); 
+        contactdatas.name = $("[id$='nome" + (btnid).id + "']").val();
+        contactdatas.cognome = $("[id$='cognome" + (btnid).id + "']").val();
+        contactdatas.message = $("[id$='descrizione" + (btnid).id + "']").val();
         contactdatas.tipo = "informazioni";
         contactdatas.tipocontenuto = "informazioni"; // prenota o altro che voglio specificare
 
