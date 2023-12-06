@@ -83,11 +83,15 @@ window.addEventListener('load', function () {
             }
             if (cc.allowedCategory('targeting')) {
                 gtag('consent', 'update', {
-                    'ad_storage': 'granted'
+                    'ad_storage': 'granted',
+                    'ad_user_data': 'granted',
+                    'ad_personalization': 'granted'
                 });
             } else {
                 gtag('consent', 'update', {
-                    'ad_storage': 'denied'
+                    'ad_storage': 'denied',
+                    'ad_user_data': 'denied',
+                    'ad_personalization': 'denied'
                 });
             }
             //END FOR GTM CONSENT MODE -----
@@ -116,11 +120,15 @@ window.addEventListener('load', function () {
             }
             if (cc.allowedCategory('targeting')) {
                 gtag('consent', 'update', {
-                    'ad_storage': 'granted'
+                    'ad_storage': 'granted',
+                    'ad_user_data': 'granted',
+                    'ad_personalization': 'granted'
                 });
             } else {
                 gtag('consent', 'update', {
-                    'ad_storage': 'denied'
+                    'ad_storage': 'denied',
+                    'ad_user_data': 'denied',
+                    'ad_personalization': 'granted'
                 });
             }
             //END FOR GTM CONSENT MODE -----
