@@ -128,7 +128,7 @@ window.addEventListener('load', function () {
                 gtag('consent', 'update', {
                     'ad_storage': 'denied',
                     'ad_user_data': 'denied',
-                    'ad_personalization': 'granted'
+                    'ad_personalization': 'denied'
                 });
             }
             //END FOR GTM CONSENT MODE -----
