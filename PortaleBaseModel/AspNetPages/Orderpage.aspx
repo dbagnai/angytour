@@ -8,6 +8,20 @@
     <%--<script src="https://js.stripe.com/v3/"></script>--%>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+     <script>
+         //rileva la navigazione con cronologia se effettuata ricarica la pagina completamente
+         window.addEventListener("pageshow", function (event) {
+             const entries = window.performance.getEntriesByType("navigation");
+             var historyTraversal = event.persisted
+                 //  ||  (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
+                 || (entries[0].type === "back_forward");
+             if (historyTraversal) {
+                 // Handle page restore.
+                 window.location.reload();
+                 console.log('page reload by hystory nav');
+             }
+         });
+     </script>
     <div class="container">
         <div class="row">
             <div class="col-12">
