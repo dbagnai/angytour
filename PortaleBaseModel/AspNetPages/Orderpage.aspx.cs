@@ -1881,7 +1881,7 @@ public partial class AspNetPages_Orderpage : CommonPage
         if (!string.IsNullOrEmpty(inpTelS.Value.Trim()))
             clispediz.Telefono = inpTelS.Value.Trim();
         //Proviamo a cercare i codici geografici e settarli in base al testo
-        references.SearchGeoCodesByText(cliente, Lingua);
+        references.SearchGeoCodesByText(clispediz, Lingua);
 
 
         string datispedizione = Newtonsoft.Json.JsonConvert.SerializeObject(clispediz);
