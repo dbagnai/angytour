@@ -9,7 +9,10 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
      <script>
-         //rileva la navigazione con cronologia se effettuata ricarica la pagina completamente
+         //////////////////////////////////////////////////////////////////////////////////////
+         //Rileva la navigazione con cronologia se effettuata ricarica la pagina completamente
+         //per evitare errori dovuti a valori dei campi in cache che non impostano la visualizzazione corretta
+         //////////////////////////////////////////////////////////////////////////////////////
          window.addEventListener("pageshow", function (event) {
              const entries = window.performance.getEntriesByType("navigation");
              var historyTraversal = event.persisted
