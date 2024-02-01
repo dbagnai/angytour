@@ -74,11 +74,13 @@ window.addEventListener('load', function () {
             //FOR GTM CONSENT MODE -----------------
             if (cc.allowedCategory('analytics')) {
                 gtag('consent', 'update', {
-                    'analytics_storage': 'granted'
+                    'analytics_storage': 'granted',
+                    'ad_user_data': 'granted'
                 });
             } else {
                 gtag('consent', 'update', {
-                    'analytics_storage': 'denied'
+                    'analytics_storage': 'denied',
+                    'ad_user_data': 'denied'
                 });
             }
             if (cc.allowedCategory('targeting')) {
@@ -111,11 +113,13 @@ window.addEventListener('load', function () {
             //FOR GTM CONSENT MODE ----------------------
             if (cc.allowedCategory('analytics')) {
                 gtag('consent', 'update', {
-                    'analytics_storage': 'granted'
+                    'analytics_storage': 'granted',
+                    'ad_user_data': 'granted'
                 });
             } else {
                 gtag('consent', 'update', {
-                    'analytics_storage': 'denied'
+                    'analytics_storage': 'denied',
+                    'ad_user_data': 'denied'
                 });
             }
             if (cc.allowedCategory('targeting')) {
