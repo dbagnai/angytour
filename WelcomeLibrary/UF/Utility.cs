@@ -1822,8 +1822,19 @@ namespace WelcomeLibrary.UF
             try
             {
                 mimeMessage.From.Add(new MailboxAddress(mittenteNome, mittenteMail));
+
                 //Set del reply to in base al mittente passato se questo non è quello del sito necessario per non fare relaying
-                if (mittenteMail.ToLower().Trim() != ConfigManagement.ReadKey("Email").ToLower().Trim())
+                //lacio la possibilità di usare un mittente con lo stesso dominio della mail principale del sito anche se mail diversa
+                string dominiomailmittente = "";
+                string dominiomailmittenteb = "";
+                int indice = mittenteMail.ToLower().Trim().IndexOf("@");
+                int indiceb = ConfigManagement.ReadKey("Email").ToLower().Trim().IndexOf("@");
+                if (indice != -1 && indiceb != -1)
+                {
+                    dominiomailmittente = mittenteMail.Substring(indice + 1);
+                    dominiomailmittenteb = ConfigManagement.ReadKey("Email").ToLower().Trim().Substring(indiceb + 1);
+                }
+                if (mittenteMail.ToLower().Trim() != ConfigManagement.ReadKey("Email").ToLower().Trim() && dominiomailmittente != dominiomailmittenteb)
                 {
                     mimeMessage.From.Clear();
                     mimeMessage.From.Add(new MailboxAddress(ConfigManagement.ReadKey("Nome"), ConfigManagement.ReadKey("Email")));

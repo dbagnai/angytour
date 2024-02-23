@@ -673,9 +673,12 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
     {
         string scontactdatas = pars.ContainsKey("contactdatas") ? pars["contactdatas"] : "";
         Dictionary<string, string> data = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(scontactdatas);
-        string username = (data.GetValueOrDefault("username") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
         valuefororder.Add("messages", "");
         valuefororder.Add("stoperror", "");
+        if (data == null) { valuefororder["stoperror"] = "true"; valuefororder["messages"] = "dati ordine non presenti"; return; }
+
+        string username = (data.GetValueOrDefault("username") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+
 
         //////////////////////////////////////////////////////////////////
         // CaricaDatiClienteDaForm
@@ -999,7 +1002,7 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
             totali = CommonPage.CalcolaTotaliCarrello(context.Request, context.Session, codicenazione, "", supplementoisole, supplementocontrassegno);
 
             //PRENDIAMO I DATI DAL FORM PER LA PREPARAZIONE ORDINE //////////////////////////////////////////////////////////////////
-            totali.Denominazionecliente = cliente.Cognome + " " + cliente.Nome;
+            totali.Denominazionecliente = " " + cliente.Cognome + " " + cliente.Nome;
             if (!string.IsNullOrEmpty(cliente.Ragsoc))
                 totali.Denominazionecliente += cliente.Ragsoc + "<br/>";
             totali.Mailcliente = cliente.Email;
