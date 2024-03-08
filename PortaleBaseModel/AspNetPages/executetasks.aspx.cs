@@ -90,6 +90,9 @@ public partial class _executetasks : CommonPage
                     case "cleanandcompressmailing":
                         cleanandcompressmailing();
                         break;
+                    case "cleanstatistics":
+                        cleanstatistics();
+                        break;
                     default:
                         //VerificaScadenzeCard();
                         EseguiMailing();
@@ -206,6 +209,46 @@ public partial class _executetasks : CommonPage
     //                      , ConfigManagement.ReadKey("Web_Numerocontenuti"));
 
     //}
+
+    private string cleanstatistics()
+    {
+        ////Creo una variabile per la scrittura dei messaggi nel file di log
+        System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
+        Messaggi.Add("Messaggio", "cleanstatisticsandsave() : " + " " + System.DateTime.Now.ToString());
+        string ret = "";
+        try
+        {
+
+            statisticheDM statisticheDM = new statisticheDM();
+            string csvName = "export-statistiche-" + string.Format("{0:dd-MM-yyyy}", System.DateTime.Now) + ".csv";
+            string pathFile = WelcomeLibrary.STATIC.Global.percorsoFisicoComune + "\\_temp\\";
+            if (!System.IO.Directory.Exists(pathFile))
+                System.IO.Directory.CreateDirectory(pathFile);
+
+            int giornipercancellazione = 60;//imposto un anno di permanenza max delle statistiche nel db
+            string retString = statisticheDM.CleanStatisticheAndExport(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, System.DateTime.Now.AddDays(-giornipercancellazione).Date,
+                 pathFile, csvName);
+            if (!string.IsNullOrEmpty(retString))
+                Messaggi["Messaggio"] += " cleanstatisticsandsave() - Info Error Pulizia: " + retString + " " + System.DateTime.Now.ToString();
+
+            //compress del db
+            ret += dbDataAccess.comprimiSQLiteDB(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
+        }
+        catch (Exception err)
+        {
+            //DEVI LOGGARE EVENTUALI ERRORI IN OPPORTUNO FILE DI LOG
+            Messaggi["Messaggio"] += " cleanstatisticsandsave() - Errore puliziastatistiche: " + err.Message + " " + System.DateTime.Now.ToString();
+            WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
+        }
+        finally
+        {
+            Messaggi["Messaggio"] += " cleanstatisticsandsave(): Ended " + System.DateTime.Now.ToString();
+            WelcomeLibrary.UF.MemoriaDisco.scriviFileLog(Messaggi);
+
+        }
+        return ret;
+
+    }
 
 
     private string cleanandcompressmailing()

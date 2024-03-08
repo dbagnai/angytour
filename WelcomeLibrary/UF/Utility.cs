@@ -62,6 +62,7 @@ namespace WelcomeLibrary.UF
             if (s == null) return s;
 
             s = s.Replace("\r\n", "\n");
+            s = s.Replace("\"", "``");
             s = QUOTE + s + QUOTE;
             //foreach (string c in CHARACTERS_THAT_MUST_BE_QUOTED)
             //{

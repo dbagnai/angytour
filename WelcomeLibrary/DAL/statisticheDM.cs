@@ -37,7 +37,7 @@ namespace WelcomeLibrary.DAL
 
                 query += " Group by Idattivita order by visite DESC  ";
 
-                if(limitresults!=0)
+                if (limitresults != 0)
                     query += " limit  " + limitresults;
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
@@ -154,6 +154,191 @@ namespace WelcomeLibrary.DAL
             }
 
             return ret;
+        }
+
+        public string CleanStatisticheAndExport(string connection, DateTime data, string DestinationPath, string CsvFilename)
+        {
+            string retString = "";
+            try
+            {
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                parColl.Add(new SQLiteParameter("@Data", dbDataAccess.CorrectDatenow(data)));
+                //parColl.Add(new SQLiteParameter("@TipoContatto", enumclass.TipoContatto.visitaurl.ToString()));
+                StatisticheCollection list = CaricaStatiticheFiltered(connection, parColl);
+                if (list.Count > 0)
+                    retString = ExportOrdersToCsv(DestinationPath, CsvFilename, list);
+                if (string.IsNullOrEmpty(retString))
+                    PulisciTabellaStatistiche(connection, data);
+            }
+            catch (Exception err)
+            {
+                retString = err.Message;
+                if (err.InnerException != null)
+                    retString += err.InnerException.Message;
+            }
+            return retString;
+        }
+
+        public StatisticheCollection CaricaStatiticheFiltered(string connection, List<SQLiteParameter> parColl)
+        {
+            StatisticheCollection list = new StatisticheCollection();
+            string errorString = "";
+            if (connection == null || connection == "") return list;
+            Statistiche item;
+            try
+            {
+                string query = "";
+                string queryfilter = "";
+                if (parColl != null && parColl.Count > 0)
+                {
+                    queryfilter = " WHERE ";
+                    //foreach (SQLiteParameter p in parColl)
+                    //{
+                    //    queryfilter += p.ParameterName + " = " + p.Value + " AND ";
+                    //}
+                    if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Data"; }))
+                    {
+                        queryfilter += "  ( Data <= @Data ) AND ";
+                    }
+                    if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@TipoContatto"; }))
+                    {
+                        queryfilter += "  ( TipoContatto = @TipoContatto ) AND ";
+                    }
+
+
+
+                    queryfilter = queryfilter.TrimEnd(" AND ".ToCharArray());
+                }
+
+                query = "SELECT  * FROM TBL_STATISTICHE " + queryfilter;
+                SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                using (reader)
+                {
+                    if (reader == null) { return list; };
+                    if (reader.HasRows == false)
+                        return list;
+
+                    while (reader.Read())
+                    {
+                        item = new Statistiche();
+                        item.TipoContatto = reader.GetString(reader.GetOrdinal("TipoContatto"));
+                        item.EmailDestinatario = reader.GetString(reader.GetOrdinal("EmailDestinatario"));
+                        item.EmailMittente = reader.GetString(reader.GetOrdinal("EmailMittente"));
+                        item.Url = reader.GetString(reader.GetOrdinal("Url"));
+                        item.Id = reader.GetInt64(reader.GetOrdinal("ID"));
+                        item.Data = reader.GetDateTime(reader.GetOrdinal("Data"));
+                        item.Testomail = reader.GetString(reader.GetOrdinal("Testomail"));
+                        item.Idattivita = reader.GetInt64(reader.GetOrdinal("Idattivita"));
+
+                        list.Add(item);
+                    }
+                }
+
+            }
+            catch (Exception err)
+            {
+                errorString = err.Message;
+                if (err.InnerException != null)
+                    errorString += err.InnerException.Message;
+                //da ritornare eventualemente!!!
+            }
+
+            return list;
+        }
+
+        public string ExportOrdersToCsv(string DestinationPath, string CsvFilename, StatisticheCollection list)
+        {
+            string retString = "";
+            try
+            {
+                System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("it-IT");
+                WelcomeLibrary.UF.SharedStatic.WriteToFile(CsvFilename, DestinationPath, "", true);
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                if (list != null)
+                {
+                    sb = new StringBuilder();
+                    ///TRACCIATO USATO ---------------------------------------------
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Id"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Data"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Tipocontatto"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Idattivita"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("Url"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("EmailDestinatario"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("EmailMittente"));
+                    sb.Append(";");
+                    sb.Append(WelcomeLibrary.UF.Csv.Escape("TestoMail"));
+                    sb.Append(";");
+                    WelcomeLibrary.UF.SharedStatic.WriteToFile(CsvFilename, DestinationPath, sb.ToString(), false);
+
+                    foreach (Statistiche t in list)
+                    {
+
+                        sb = new StringBuilder();
+
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(t.Id.ToString()));
+                        sb.Append(";");
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(string.Format("{0:dd/MM/yyyy HH:mm:ss}", t.Data)));
+                        sb.Append(";");
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(t.TipoContatto));
+                        sb.Append(";");
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(t.Idattivita.ToString()));
+                        sb.Append(";");
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(t.Url));
+                        sb.Append(";");
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(t.EmailDestinatario));
+                        sb.Append(";");
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(t.EmailMittente));
+                        sb.Append(";");
+                        sb.Append(WelcomeLibrary.UF.Csv.Escape(t.Testomail.Replace("<br/>", "\r\n")));
+                        sb.Append(";");
+
+                        //    sb.Append(WelcomeLibrary.UF.Csv.Escape(String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("it-IT"), "{0:N2}",
+                        //new object[] { t.TotaleSmaltimento + t.TotaleOrdine + t.TotaleSpedizione + t.TotaleAssicurazione - t.TotaleSconto }) + " €")); 
+
+                        WelcomeLibrary.UF.SharedStatic.WriteToFile(CsvFilename, DestinationPath, sb.ToString(), false);
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                retString = err.Message;
+                if (err.InnerException != null)
+                    retString += err.InnerException.Message;
+            }
+            return retString;
+        }
+
+
+
+        /// <summary>
+        /// Cancelle le statistiche antecedenti una data
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="data"></param>
+        public void PulisciTabellaStatistiche(string connection, DateTime data)
+        {
+            if (connection == null || connection == "") return;
+            string query = "DELETE FROM TBL_STATISTICHE WHERE ( Data < @Data ) ";
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            SQLiteParameter pdmin;
+            pdmin = new SQLiteParameter("@Data", dbDataAccess.CorrectDatenow(data));
+            parColl.Add(pdmin);
+
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connection);
+            }
+            catch
+            {
+                //throw new ApplicationException("Errore, cancellazione mail prese in carico vecchie :" + error.Message, error);
+            }
+            return;
         }
 
 

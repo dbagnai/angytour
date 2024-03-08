@@ -6,7 +6,7 @@ using System.Text;
 namespace WelcomeLibrary.DOM
 {
     [Serializable]
-    class StatisticheCollection:List<Statistiche>
+    public class StatisticheCollection:List<Statistiche>
     {
 
          private List<Statistiche> _StatisticheCollection;

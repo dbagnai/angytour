@@ -120,15 +120,16 @@ public class NVPAPICaller
         //ALLOWNOTE
 
 
-        double totaleforcheck = 0; //totale precalcolato da richiedere
-        double totalamount = 0;
+        double totaleforcheck = 0; //totale precalcolato da richiedere ( comprende tutti i costo : articoli, spezione etc... 
+        double totalamount = 0;  //totale calcolato per la richiesta ( comprende gli articoli ed anche gli atri costi aggiuntivi
+                                 //che sono preparati nella memorizzazione paypaldatas prima della chiamata al pagamento)
         int i = 0;
-        foreach (string item in paypaldatas.Keys)//scorro gli elementi a carrello
+        foreach (string item in paypaldatas.Keys)//scorro gli elementi a carrello e i costi  aggiuntivi ( preparati in precedenza ) per costruire la richiesta
         {
             //paypaldatas contiene indicizzato per ogni id i seguenti in sequenza
             List<string> dettaglio = paypaldatas[item];
             //testo1
-            string testo1 = dettaglio[0]; //id prodotto o vuoto
+            string testo1 = dettaglio[0]; //id prodotto o vuoto nel caso dei costi aggiuntivi (es. spedizione,assicu, sconto etc..)
             //testo2
             string testo2 = dettaglio[1]; //titolo rigo
             //testo3

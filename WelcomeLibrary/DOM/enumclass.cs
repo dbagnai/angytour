@@ -30,7 +30,8 @@ namespace WelcomeLibrary.DOM
         {
             invioemail = 0,
             visitaurl = 1,
-            visitapagina = 2
+            visitapagina = 2,
+            cookieprefs = 3
         }
 
     }
