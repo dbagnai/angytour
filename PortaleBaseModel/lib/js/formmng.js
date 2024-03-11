@@ -39,7 +39,7 @@ function ConfirmValidationFormGeneral(btnid, serveroperation) {
     ////////////////////////////////////////////////////////////////
     /////ABILITARE PER CONTROLLO CAPTCHA
     ////////////////////////////////////////////////////////////////
-    if (grecaptcha != null && grecaptcha != undefined) {
+    if (typeof (grecaptcha) != 'undefined') {
         var response = grecaptcha.getResponse();
         if (response.length == 0)  //reCaptcha not verified
         {
