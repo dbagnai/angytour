@@ -160,7 +160,7 @@ public partial class AspNetPages_Orderpage : CommonPage
 
 
     /// <summary>
-    /// Invia la mail d'ordine finale
+    /// Invia la mail d'ordine finale ( usato solo per pagamento con bonifico, contanti o richiesta preventivo ) 
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -189,12 +189,17 @@ public partial class AspNetPages_Orderpage : CommonPage
                 modalita = inpBonifico.Value;
                 //  descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
             }
-            if (inpPaypal.Checked)
+            //if (inpPaypal.Checked)
+            //{
+            //    modalita = inpPaypal.Value;
+            //    // descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
+            //}
+            if (inpPaypalnew.Checked) //nuovo sistema paypal con chiamata diretta ma passa tramite l'handler non da qui
             {
-                modalita = inpPaypal.Value;
+                modalita = inpPaypalnew.Value;
                 // descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
             }
-            if (inpstripe.Checked)
+            if (inpstripe.Checked)  //nuovo sistema stripe con chiamata diretta ma passa tramite l'handler non da qui
             {
                 modalita = inpstripe.Value;
                 //  descrizionepagamento = references.ResMan("Common", Lingua, "chk" + modalita).ToString();  //_> da inserie la descrizione della forma di pagamento
@@ -284,7 +289,7 @@ public partial class AspNetPages_Orderpage : CommonPage
                     ////////////////////////////////////////////////////////////////////////////////////////////////////
                 }
 
-                if (modalita == "paypal") //PAGAMENTO CON CARTA DI CREDITO  
+                if (modalita == "paypal") //PAGAMENTO CON CARTA DI CREDITO   (SOAP VECCHIO!!)
                 {
                     //Procediamo con l'odine su paypal
                     //Valori impostazione paypal
@@ -303,12 +308,12 @@ public partial class AspNetPages_Orderpage : CommonPage
                     bool authandcapturemode = Convert.ToBoolean(ConfigManagement.ReadKey("authandcapturePaypal"));
                     EseguiCheckOutPaypal(returl, cancelurl, paypaldatas, authandcapturemode); // da traspormare in auth and capture true succesivamente
                 }
-                if (modalita == "stripe")
+                if (modalita == "stripe") //NON USATO ( SI PASSA DALLA CHIAMATA ASINCRONA ALL'HANDLER)
                 {
                     //qui potrei aggiornare i dati per la chiamata al paymentint .... 
-                    // da capire se serve qui ( ho trasferito le funzioni nell'handler dei pagamenti
+                    //  ( ho trasferito le funzioni nell'handler dei pagamenti
                     // Non viene fatto il postback per il pagamento stripe
-                    //....
+                    // QUINDI NON VIENE ESEGUITO NULLA QUI
                 }
                 if (modalita == "bacs" || modalita == "contanti") //PAGAMENTO CON BONIFICO
                 {
@@ -816,7 +821,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             totali.Indirizzofatturazione += "Nazione: " + cliente.CodiceNAZIONE + "<br/>";
             totali.Indirizzofatturazione += "Telefono: " + cliente.Telefono + "<br/>";
             if (!string.IsNullOrEmpty(cliente.Ragsoc))
-                totali.Denominazionecliente += cliente.Ragsoc + "<br/>";
+                totali.Denominazionecliente += " " + cliente.Ragsoc + "<br/>";
             totali.Indirizzofatturazione += "P.Iva: " + cliente.Pivacf + "<br/>";
             totali.Indirizzofatturazione += "CodiceDestinatario/Pec: " + cliente.Emailpec + "<br/>";
 
@@ -889,7 +894,7 @@ public partial class AspNetPages_Orderpage : CommonPage
             { totali.Pagato = false; totali.Pagatoacconto = false; }
             totali.Urlpagamento = "";
 
-            //Prepariamo i valori per la chiamata a Paypal
+            //Prepariamo i valori per la chiamata a sistema pagamento
             Session.Add("tmpCodiceOrdine", CodiceOrdine); //appoggio il codiceordine generato in sessione
             Session.Add("cliente_" + CodiceOrdine, cliente); //Mettiamo tutto in sessione per riaverlo alla conferma dell'esito positivo della transazione
             Session.Add("totali_" + CodiceOrdine, totali); //Mettiamo tutto in sessione per riaverlo alla conferma dell'esito positivo della transazione
@@ -1221,9 +1226,16 @@ public partial class AspNetPages_Orderpage : CommonPage
 
         //Dal calcolo dei totali e delle spedizioni viene indicato di bloccare l'acquisto diretto
         if (totali.Bloccaacquisto)
-            liPaypal.Visible = false;
+        {
+            // liPaypal.Visible = false;
+            lipaypalnew.Visible = false;
+        }
         else
-            liPaypal.Visible = true;
+        {
+            //  liPaypal.Visible = true;
+            lipaypalnew.Visible = false;
+        }
+
 #if true //metodo alternativo di blocco pagamento e invio solo ordine
 
         if (totali.Bloccaacquisto)
@@ -1231,7 +1243,8 @@ public partial class AspNetPages_Orderpage : CommonPage
             litMessage.Text = references.ResMan("Common", Lingua, "testoBloccoacquisto");
             //liPaypal.Visible = false;
             divPayment.Visible = false;
-            inpPaypal.Checked = false;
+            // inpPaypal.Checked = false;
+            inpPaypalnew.Checked = false;
             inpstripe.Checked = false;
             inpRichiesta.Checked = true;
             divOrderrequest.Visible = true;
@@ -1239,7 +1252,8 @@ public partial class AspNetPages_Orderpage : CommonPage
         else
         {
             litMessage.Text = "";
-            liPaypal.Visible = true;
+            // liPaypal.Visible = true;
+            lipaypalnew.Visible = true;
             divPayment.Visible = true;
             // inpPaypal.Checked = true;
             inpRichiesta.Checked = false;

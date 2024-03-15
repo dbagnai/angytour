@@ -94,6 +94,32 @@ public partial class AspNetPages_OrdineOk : CommonPage
             }
             /////////////////////////////////////////////////////////////////
 
+
+            /////////////////////////////////////////////////////////////////
+            //CODICI PER TRANSAZIONE PAYPAL REST!!!
+            /////////////////////////////////////////////////////////////////
+            string idordine_PP = CaricaValoreMaster(Request, Session, "tranrestpp");
+            string Encodedidordine_PP = idordine_PP;
+            error = string.Empty;
+            idordine_PP = dataManagement.DecodeFromBase64(idordine_PP);
+            //Fare chiamata per stripe per visualizzare l'accaduto stripe
+            if (!string.IsNullOrEmpty(idordine_PP)) //PAGAMENTO stripe
+            {
+                error = CaricaValoreMaster(Request, Session, "error");
+                if (error == "true")
+                {
+                    //errore stripe operazione...da visualizzare
+                    VisualizzaErrorpaypalrest(idordine_PP, Encodedidordine_PP); //da completare
+                    return;
+                }
+                else
+                {
+                    /// successo operazione stripe .. da visualizzare
+                    Visualizzasuccepaypalrest(idordine_PP, Encodedidordine_PP); //da completare
+                    return;
+                }
+            }
+
             /////////////////////////////////////////////////////////////////
             //CODICI PER TRANSAZIONE STRIPE!!!
             /////////////////////////////////////////////////////////////////
@@ -121,6 +147,25 @@ public partial class AspNetPages_OrdineOk : CommonPage
             DataBind();
 
         }
+    }
+
+    private void Visualizzasuccepaypalrest(string idordine, string encodedidordine)
+    {
+        string CodiceOrdine = idordine;
+        //output.Text += references.ResMan("Common", Lingua, "risposta_5");
+        if (Session["thankyoumessages"] != null)
+            output.Text += Session["thankyoumessages"].ToString();// references.ResMan("Common", Lingua, "thankyoumessages");
+        Session.Remove("thankyoumessages");
+    }
+    private void VisualizzaErrorpaypalrest(string idordine, string encodedidordine)
+    {
+        // throw new NotImplementedException();
+        output.Text = references.ResMan("Common", Lingua, "risposta_4").ToString() + " Order: " + idordine + "<br/>";
+
+        if (Session["thankyoumessages"] != null)
+            output.Text += Session["thankyoumessages"].ToString();// references.ResMan("Common", Lingua, "thankyoumessages");
+        Session.Remove("thankyoumessages");
+        pnlbtnretry.Visible = true;
     }
 
     private void Visualizzasuccestripe(string idordine_stripe, string encodedidordine_stripe)

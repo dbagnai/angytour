@@ -489,6 +489,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                     clispediz.CodiceREGIONE = (data.GetValueOrDefault("regiones") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
                     clispediz.CodicePROVINCIA = (data.GetValueOrDefault("provincias") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
                     clispediz.CodiceCOMUNE = (data.GetValueOrDefault("comunes") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+                    references.SearchGeoCodesByText(clispediz, lingua);
                     string cliserialized = Newtonsoft.Json.JsonConvert.SerializeObject(clispediz);
                     cliente.Serialized = cliserialized; //Appoggio i dati di spedizione in Serialized del cliente !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

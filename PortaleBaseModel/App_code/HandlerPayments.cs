@@ -9,6 +9,9 @@ using System.Linq;
 using Newtonsoft.Json;
 using Stripe;
 using Stripe.Checkout;
+using WelcomeLibrary.UF.PaypalRestApi;
+using System.Net.Http;
+using System.Net;
 
 //https://github.com/stripe/stripe-dotnet
 //https://stripe.com/docs/development/quickstart
@@ -66,7 +69,100 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
 
             switch (q)
             {
-                case "register-complete-order": //chiamata dopo il completamento ordine per aggiornare il database ecommerce e finalizzare i dati transazione nel carrello ( usato )
+                //creazione ordine paypal rest api v2 da approvare successivamente con il pagamento
+                case "paypal-create-order":
+                    //valori in input ( che vengono dal form di pagamento ) RIEMPITI NELLA CHIMATA AL METODO DAL CLIENT!!!
+                    string spaypalcollecteddatas = pars.ContainsKey("contactdatas") ? pars["contactdatas"] : "";
+                    //e tornare i valori di ritorno per il completamento dell'ordine ( in particolare codiceordine e orderid di paypal)
+                    Dictionary<string, string> retdictpp = new Dictionary<string, string>(); //parametri di ritorno per utilizzo del javascript chiamante
+                    UpdateDataForOrder(pars, retdictpp, lingua, context); //prepariamo tutto per fare il pagamento
+
+                    //valori tornati dalla procedura updateorder ( VENGONO inseriti in retdictpp e serializzati per il client )
+                    //string nomeutentePP = "";
+                    //string codiceordinePP = "";
+                    //if (retdictpp.ContainsKey("nome"))
+                    //    nomeutentePP = retdictpp["nome"];
+                    //if (retdictpp.ContainsKey("codiceordine"))
+                    //{
+                    //    codiceordinePP = retdictpp["codiceordine"];
+                    //}
+                    //retdictpp["amount"]
+                    //retdictpp["stoperror"]
+                    //retdictpp["messages"]
+
+                    retdictpp.Add("paypal_response", "{}");
+                    if (!(retdictpp.ContainsKey("stoperror") && retdictpp["stoperror"] == "true")) //se la procedura UpdateDataForOrder non torna errori procedo con la creazione dell'ordine paypal
+                        //////////////////////////////////////////////////////////////
+                        //////////CREAZIONE ORDINE PAYPAL ////////////////////////////
+                        //////////////////////////////////////////////////////////////
+                        //creo l'ordine su paypal rest api con i dati raccolti
+                        PaypalMangement.CreateOrder(retdictpp, context);
+
+                    //VALORI DI CONFIG PER PAYPAL REST API PRELEVATI DA TABELLA DI CONFIGURAZIONE
+                    //string accessToken = PaypalMangement.GetPaypalAccessToken();
+                    //var config = ConfigManager.Instance.GetProperties();
+                    //ConfigManagement.ReadKey("paypal_sandbox_addr")
+                    //ConfigManagement.ReadKey("paypal_live_addr")
+                    //if (config.ContainsKey("mode")) config["mode"] = mode; else config.Add("mode", mode);
+                    //string mode = ConfigManagement.ReadKey("sandboxPaypal") == "true" ? "sandbox" : "live";
+                    //if (config.ContainsKey("mode")) config["mode"] = mode; else config.Add("mode", mode);
+                    //if (config.ContainsKey("clientId")) config["clientId"] = ConfigManagement.ReadKey("paypal_clientid"); else config.Add("clientId", ConfigManagement.ReadKey("paypal_clientid"));
+                    //if (config.ContainsKey("clientSecret")) config["clientSecret"] = ConfigManagement.ReadKey("paypal_secretkey1"); else config.Add("clientSecret", ConfigManagement.ReadKey("paypal_secretkey1"));
+
+
+                    // oggetto di ritorno per la chimata Javascript del client, dictionary che contiene la risposta paypal nella chiave paypal_response
+                    // //se tutto a buon fine, inoltre abbiamo chiavi aggiuntive : nome, codiceordine, stoperror, messages dalla procedura di preparazione!!!
+                    result = Newtonsoft.Json.JsonConvert.SerializeObject(retdictpp, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None,
+                    });
+                    // da integrare il valore di retdictpp alla response di paypal  
+
+                    break;
+                case "paypal-register-complete-order": //registrazione ordine avvenuto per paypal
+                    string spaypalfinalizedatas = pars.ContainsKey("paypalfinalizedatas") ? pars["paypalfinalizedatas"] : "";
+                    Dictionary<string, string> datapf = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(spaypalfinalizedatas);
+                    Dictionary<string, string> retdictcompletepp = new Dictionary<string, string>();
+                    string encodedidordinepp = dataManagement.EncodeToBase64(datapf["codiceordine"]);
+                    string SuccessUrlPP = (ConfigManagement.ReadKey("SuccessUrl_restpp")) + encodedidordinepp + "&Lingua=" + lingua;
+                    string ErrorUrlPP = (ConfigManagement.ReadKey("CancelUrl_restpp")) + encodedidordinepp + "&error=true" + "&Lingua=" + lingua;
+                    //-- > a seguire chiamo la pagine di thankyou con codice pagamento paymentIntentId e codice ordine  (ordineok.aspx, serve per fare solo redirect  per monitoraggio conversioni, testare e controllare i messaggi)
+                    retdictcompletepp.Add("SuccessUrl", SuccessUrlPP);
+                    retdictcompletepp.Add("ErrorUrl", ErrorUrlPP);
+                    context.Session.Remove("thankyoumessages");
+
+                    //CHIAMIAMO LA FUNZIONE DI COMPLETAMENTO ORDINE PAYPAL
+                    // da verificare e completare ....
+                    retdictcompletepp.Add("paypal_response", "{}");
+                    if (PaypalMangement.CompleteOrder(datapf["orderID"], retdictcompletepp) == "OK")
+                    {
+                        //se la procedura paypal va a buon fine -->
+                        //fare le operazioni di registrazione ordine e invio email
+                        //( replica quanto fatto nella caso register-complete-order)
+                        RegistraCompleteOrder(datapf["codiceordine"], encodedidordinepp, retdictcompletepp, context, lingua); // da valorizzare retdictcomplete error NELLA FUNZIONE in caso di errore ....
+                        context.Session.Add("thankyoumessages", retdictcompletepp["messages"]); //metto i valori di ritorno in sessione per la thankyoupage CON REDIRECT FINALE
+                    }
+                    else
+                    {
+                        //messaggi di ritorno di errore da passare .... al chiamante
+                        retdictcompletepp.Add("messages", "Paypal, errore completamento ordine");
+                        retdictcompletepp.Add("stoperror", "true"); // se errore setto a true
+                    }
+
+                    result = Newtonsoft.Json.JsonConvert.SerializeObject(retdictcompletepp, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None,
+                    });
+
+                    break;
+                case "register-complete-order": //procedura stripe
+                    //chiamata dopo il completamento ordine per aggiornare il database ecommerce e finalizzare i dati transazione nel carrello ( usato )
                     //funzione nell'handler alla chiusura dell'ordine se pagamento ok viene chiamata per registrare l'ordine nel database facendo le attivita collegate
                     //(da replicare quanto fatto nella funzione  RegistrazioneOrdinePaypal di ordineok)
                     string sconfirmpaymentdata = pars.ContainsKey("confirmpaymentdata") ? pars["confirmpaymentdata"] : "";
@@ -94,7 +190,8 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
                     });
 
                     break;
-                case "create-and-update-payment-intent": //Funzione primaria di creazione e aggiornamento intento di pagamento ( usato )
+                case "create-and-update-payment-intent": //procedure stripe
+                    //Funzione primaria di creazione e aggiornamento intento di pagamento ( usato )
                     Dictionary<string, string> retdictcu = new Dictionary<string, string>(); //parametri di ritorno per utilizzo del javascript chiamante
                     UpdateDataForOrder(pars, retdictcu, lingua, context); //prepariamo tutto per fare il pagamento
                     string nomeutente = "";
@@ -218,7 +315,7 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
                     });
 
                     break;
-                case "webhook":
+                case "webhook":  //stripe non usato webhook
                     var stripeEvent = EventUtility.ParseEvent(body, false); //throwOnApiVersionMismatch: false
                     // Handle the event
                     if (stripeEvent.Type == Events.PaymentIntentSucceeded)
@@ -228,7 +325,7 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
                     }
                     else if (stripeEvent.Type == Events.PaymentMethodAttached)
                     {
-                        var paymentMethod = stripeEvent.Data.Object as PaymentMethod;
+                        var paymentMethod = stripeEvent.Data.Object as Stripe.PaymentMethod;
                         Console.WriteLine("PaymentMethod was attached to a Customer!");
                     }
                     // ... handle other event types
@@ -245,6 +342,7 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
         catch (Exception ex)
         {
             string er = ex.Message;
+            Dictionary<string, string> errdict = new Dictionary<string, string>();
             result = Newtonsoft.Json.JsonConvert.SerializeObject((new { messages = er }), Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
             {
                 NullValueHandling = NullValueHandling.Ignore,
@@ -265,12 +363,127 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
         ///////////////////////////////////////////////
     }
 
+
+#if false
+
+
+    // Define the method to execute a PayPal payment for the order
+    public Payment ExecutePayPalPayment(string payerId, PaypalOrder order, APIContext apiContext)
+    {
+        // Get the API context using the client ID and secret ID from the PayPal app
+        //var config = ConfigManager.Instance.GetProperties();
+        //var accessToken = new OAuthTokenCredential(config).GetAccessToken();
+        //var apiContext = new APIContext(accessToken);
+
+        // Create the payment execution object with the payer ID
+        var paymentExecution = new PaymentExecution() { payer_id = payerId };
+
+        // Get the payment object by its ID
+        var payment = new Payment() { id = order.Id };
+
+        // Execute the payment using the API context and the payment execution object
+        var executedPayment = payment.Execute(apiContext, paymentExecution);
+
+        // Return the executed payment
+        return executedPayment;
+    }
+
+    // Define the method to create a PayPal payment for the order
+    public Payment CreatePayPalPayment(PaypalOrder order, string baseUrl, string intent)
+    {
+        // Get the API context using the client ID and secret ID from the PayPal app
+        var config = ConfigManager.Instance.GetProperties();
+        var accessToken = new OAuthTokenCredential(config).GetAccessToken();
+        var apiContext = new APIContext(accessToken);
+
+        // Create a list of items for the order
+        var itemList = new ItemList()
+        {
+            items = new List<Item>()
+                {
+                    new Item()
+                    {
+                        name = order.ProductName,
+                        currency = "EUR",
+                        price = order.ProductPrice.ToString(),
+                        quantity = order.ProductQuantity.ToString(),
+                        sku = "sku"
+                    }
+                }
+        };
+
+        // Create the payer object with the customer email
+        var payer = new Payer() { payment_method = "paypal", payer_info = new PayerInfo() { email = order.CustomerEmail } };
+
+        // Create the redirect URLs object with the return and cancel URLs
+        var redirUrls = new RedirectUrls()
+        {
+            cancel_url = baseUrl + "/Cancel",
+            return_url = baseUrl + "/Return"
+        };
+
+        // Create the details object with the subtotal and total amount
+        var details = new Details()
+        {
+            subtotal = order.TotalAmount.ToString(),
+            tax = "0",
+            shipping = "0"
+        };
+
+        // Create the amount object with the currency and the details
+        var amount = new Amount()
+        {
+            currency = "EUR",
+            total = order.TotalAmount.ToString(),
+            details = details
+        };
+
+        // Create the transaction object with the amount, the item list and a description
+        var transactionList = new List<Transaction>();
+        transactionList.Add(new Transaction()
+        {
+            description = "Order from " + order.CustomerName,
+            invoice_number = new Random().Next(100000).ToString(),
+            amount = amount,
+            item_list = itemList
+        });
+
+        // Create the payment object with the intent, the payer, the redirect URLs and the transaction list
+        var payment = new Payment()
+        {
+            intent = intent,
+            payer = payer,
+            transactions = transactionList,
+            redirect_urls = redirUrls
+        };
+
+        // Create the payment using the API context
+        var createdPayment = payment.Create(apiContext);
+
+        // Save the payment ID for later use
+        order.Id = createdPayment.id;
+
+        // Return the created payment
+        return createdPayment;
+    }
+
+#endif
+
+    /// <summary>
+    /// Se tutto ok, memorizza nel db i dati dell'ordine, invia le mail e svuota il carrello
+    /// </summary>
+    /// <param name="CodiceOrdine"></param>
+    /// <param name="Encodedidordine"></param>
+    /// <param name="valuefororder"></param>
+    /// <param name="context"></param>
+    /// <param name="Lingua"></param>
     private void RegistraCompleteOrder(string CodiceOrdine, string Encodedidordine, Dictionary<string, string> valuefororder, HttpContext context, string Lingua)
     {
         //Creo una variabile per la scrittura dei messaggi nel file di log (logging order )
         System.Collections.Generic.Dictionary<string, string> Messaggi = new System.Collections.Generic.Dictionary<string, string>();
         Messaggi.Add("Messaggio", "");
-        Messaggi["Messaggio"] += "RegistrazioneOrdine Stripe ok, da registrare ordine : " + CodiceOrdine + " " + System.DateTime.Now.ToString() + "\r\n";
+        Messaggi["Messaggio"] += "RegistraCompleteOrder(): registrazione ordine " + CodiceOrdine + " " + System.DateTime.Now.ToString() + "\r\n";
+
 
         //variabili di messaggisitica di ritorno
         valuefororder.Add("messages", "");
@@ -298,7 +511,7 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
             context.Session.Remove("prodotti_" + CodiceOrdine);
 
             /////////////////////////////////////////////////////////////////////////////////
-            /////QUESTI MESSAGGI PUO VISUALIZZARLI ANCHE LA THANKYOU PAGE VOLENDO!
+            /////QUESTI MESSAGGI POTREI PASSARSLI ACNHE ALLA THANKYOU PAGE PER VISUALIZZARLI!
             /////////////////////////////////////////////////////////////////////////////////
             string jscodetoinject = CommonPage.Creaeventopurchaseagooglegtag(totali, prodotti);
             //valutare se mettere tutto in messages
@@ -306,6 +519,7 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
             valuefororder["messages"] += references.ResMan("Common", Lingua, "GoogleConversione");
             valuefororder["messages"] += references.ResMan("Common", Lingua, "risposta_5");
             valuefororder["messages"] += " Order: " + CodiceOrdine;
+            Messaggi["Messaggio"] += " Order: " + CodiceOrdine + " Metodo: " + totali.Modalitapagamento + "\r\n";
         }
         else
         {
@@ -613,7 +827,7 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
         /////////////////////////////////////////////////////////////////////////////
 
 
-        Messaggi["Messaggio"] += "RegistrazioneOrdine Stripe ok, registrato ordine : " + CodiceOrdine + " " + System.DateTime.Now.ToString() + "\r\n";
+        Messaggi["Messaggio"] += "RegistraCompleteOrder(): registrato ordine " + CodiceOrdine + " " + System.DateTime.Now.ToString() + "\r\n";
         InsertEventoBooking(prodotti, totali, "rif000001");
         //Creiamo il file per export degli ordini...
         //try
@@ -917,7 +1131,7 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
         else
             amount = (long)((totali.TotaleAcconto + totali.TotaleSaldo) * 100);
 
-        valuefororder["amount"] = amount.ToString();
+        valuefororder["amount"] = amount.ToString(); //questo totale ordine comprende tutto ( spedizione, contrassegno, sconti, ecc..)
         valuefororder["codiceordine"] = CodiceOrdine;
         valuefororder["nome"] = cliente.Cognome + " " + cliente.Nome;
         if (!string.IsNullOrEmpty(reterr))  //se errore preparazione dati non procedo
@@ -1004,7 +1218,7 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
             //PRENDIAMO I DATI DAL FORM PER LA PREPARAZIONE ORDINE //////////////////////////////////////////////////////////////////
             totali.Denominazionecliente = " " + cliente.Cognome + " " + cliente.Nome;
             if (!string.IsNullOrEmpty(cliente.Ragsoc))
-                totali.Denominazionecliente += cliente.Ragsoc + "<br/>";
+                totali.Denominazionecliente += " " + cliente.Ragsoc + "<br/>";
             totali.Mailcliente = cliente.Email;
             totali.Dataordine = System.DateTime.Now;
             totali.CodiceOrdine = CodiceOrdine;
@@ -1542,4 +1756,256 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
     }
 
 }
+
+
+public class PaypalMangement
+{
+    /// <summary>
+    /// Crea l'ordine su Paypal con le api rest e torna l'id generato
+    /// </summary>
+    /// <param name="valuesfororder"></param>
+    /// <param name="context"></param>
+    /// <returns></returns>
+    public static string CreateOrder(Dictionary<string, string> valuesfororder, HttpContext context)
+    {
+        //https://developer.paypal.com/docs/api/orders/v2/#orders_create
+        //https://developer.paypal.com/docs/api/orders/v2/
+        string CodiceOrdine = "";
+        if (valuesfororder.ContainsKey("codiceordine"))
+            CodiceOrdine = valuesfororder["codiceordine"];
+        if (string.IsNullOrEmpty(CodiceOrdine)) return "";
+
+        string orderid = "";
+        string endpoint = ConfigManagement.ReadKey("paypal_sandbox_addr");
+        if (ConfigManagement.ReadKey("sandboxPaypal") != "true") endpoint = ConfigManagement.ReadKey("paypal_live_addr");
+        string url = endpoint + "/v2/checkout/orders";
+        string accessToken = GetPaypalAccessToken();
+        string paypal_intent = (ConfigManagement.ReadKey("authandcapturepaypal") == "true") ? "AUTHORIZE" : "CAPTURE";
+        string currenycode = "EUR"; ;
+
+        ///////////////////////////////////////////////////////
+        //RIEMPIANO I DATI DI ORDINE CREANDO LA RICHIESTADI ORDINE PER PAYPAL
+        ///////////////////////////////////////////////////////
+
+        json_paypalorder jsonorderRequest = new json_paypalorder();
+        jsonorderRequest.intent = paypal_intent;
+        jsonorderRequest.purchase_units = new List<json_paypalpurchaseunits>();
+        jsonorderRequest.purchase_units.Add(new json_paypalpurchaseunits()); //inserisco un solo purchase_units !
+        jsonorderRequest.purchase_units[0].invoice_id = CodiceOrdine;
+        jsonorderRequest.purchase_units[0].amount = new json_paypalamount();
+        jsonorderRequest.purchase_units[0].amount.currency_code = currenycode;
+        double amount = 0;
+        if (valuesfororder.ContainsKey("amount")) { double.TryParse(valuesfororder["amount"], out amount); }  //questo totale ordine comprende tutto ( spedizione, contrassegno, sconti, ecc..)
+        amount = amount / 100; //nella funzione stripe era tutto moltiplicato per 100 ... quindi riporto a normale per pagamento paypal
+        jsonorderRequest.purchase_units[0].amount.value = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] { amount });
+        //jsonorderRequest.purchase_units[0].reference_id = ""; //OBBLIGATORIO SOLO NEL CASO DI PIU ORDINI NELLO STESSO PAGAMENTO
+        jsonorderRequest.purchase_units[0].description = "Ordine " + CodiceOrdine;
+
+#if true
+        ///////////////////////////////////////////////////////////
+        //OPZIONALE specificare gli items che compongono l'ordine
+        ///////////////////////////////////////////////////////////
+        ///  //Cliente cliente = (Cliente)context.Session["cliente_" + CodiceOrdine];
+        TotaliCarrello totali = (TotaliCarrello)context.Session["totali_" + CodiceOrdine];
+        CarrelloCollection prodotti = (CarrelloCollection)context.Session["prodotti_" + CodiceOrdine];
+
+        jsonorderRequest.purchase_units[0].amount.breakdown = new json_paypalbreakdown();//necessario se specifichiamo gli item ( cumula le spese accessorie)
+        jsonorderRequest.purchase_units[0].items = new List<json_paypalorderitem>();
+        json_paypalorderitem itemcarrello = new json_paypalorderitem();//aggiungerne uno per ogni articolo a carrello
+        double totalamount = 0; //solo per check!!
+        foreach (Carrello p in prodotti) // per ogni prodotto va impostao quello che si fa in  ShortcutExpressCheckout ( vecchia procedura )
+        {
+            if (p.Prezzo == 0) continue;//non iserisco articoli a prezzo 0
+            itemcarrello = new json_paypalorderitem();
+            string titoloarticolo = "";
+            if (totali.Percacconto != 100) titoloarticolo += "Acconto " + totali.Percacconto + "% ";
+            if (p.Offerta != null)
+            {
+                titoloarticolo += p.Offerta.DenominazioneI;
+            }
+            else titoloarticolo = ("no title");
+            if (p.Dataend != null && p.Datastart != null)
+            {
+                titoloarticolo += p.Datastart != null ? string.Format("{0:dd/MM/yyyy}", p.Datastart.Value) : "";
+                titoloarticolo += p.Dataend != null ? "-" + string.Format("{0:dd/MM/yyyy}", p.Dataend.Value) : "";
+            }
+            itemcarrello.name = titoloarticolo;
+            itemcarrello.name.Substring(0, (itemcarrello.name.Length <= 126) ? itemcarrello.name.Length : 126);
+            //itemcarrello.description = "";//dettaglio opzionale dell'articolo
+            //itemcarrello.category = "DIGITAL_GOODS";
+            //itemcarrello.category = "PHYSICAL_GOODS";
+            itemcarrello.quantity = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N0}", new object[] { p.Numero });
+            itemcarrello.unit_amount = new json_paypalunit_amout();
+            itemcarrello.unit_amount.currency_code = currenycode;
+            //metto il prezzo articolo ( o eventualmente l'acconto sul prezzo articolo pagato se presente acconto )
+            itemcarrello.unit_amount.value = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] { p.Prezzo * totali.Percacconto / 100 });
+
+            jsonorderRequest.purchase_units[0].items.Add(itemcarrello);
+            totalamount += p.Prezzo * p.Numero * totali.Percacconto / 100; //totale degli articoli a carrello ( ci vanno sommate le spedizio e atro non compreso ) per avere l'amount totale dell'ordine
+        }
+        //TOTALE ARICOLI A CARRELLO ( EVENTUALMENTE RIDOTTI DLLA PERCENTUALE DI ANTICIPO )
+        jsonorderRequest.purchase_units[0].amount.breakdown.item_total = new json_paypalitem_total();
+        jsonorderRequest.purchase_units[0].amount.breakdown.item_total.currency_code = currenycode;
+        jsonorderRequest.purchase_units[0].amount.breakdown.item_total.value = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] { totalamount });
+        //SPESE DI SPEDIZIONE ( la qota in base all'acconto )
+        jsonorderRequest.purchase_units[0].amount.breakdown.shipping = new json_paypalshippingb();
+        jsonorderRequest.purchase_units[0].amount.breakdown.shipping.value = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] { totali.TotaleSpedizione * totali.Percacconto / 100 });
+        jsonorderRequest.purchase_units[0].amount.breakdown.shipping.currency_code = currenycode;
+        //TOLGO EVENTUALE SCONTO SU CARRELLO
+        jsonorderRequest.purchase_units[0].amount.breakdown.discount = new json_paypaldiscount();
+        jsonorderRequest.purchase_units[0].amount.breakdown.discount.value = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"), "{0:N2}", new object[] { totali.TotaleSconto * totali.Percacconto / 100 });
+        jsonorderRequest.purchase_units[0].amount.breakdown.discount.currency_code = currenycode;
+        ///////////////////////////////////////////////////////////
+        double testamount = totalamount + totali.TotaleSpedizione * totali.Percacconto / 100 - totali.TotaleSconto * totali.Percacconto / 100;
+#endif
+
+        //Opzionale parametri per la sorgente di pagamento
+        jsonorderRequest.payment_source = new json_paypalpayment_source();
+        jsonorderRequest.payment_source.paypal = new json_paypal();
+        jsonorderRequest.payment_source.paypal.experience_context = new json_experience_context();
+        jsonorderRequest.payment_source.paypal.experience_context.locale = "it-IT";
+        //jsonorderRequest.payment_source.paypal.experience_context.landing_page = "GUEST_CHECKOUT";//per inserimento solo carta senza login
+        jsonorderRequest.payment_source.paypal.experience_context.return_url = ConfigManagement.ReadKey("SuccessUrl_restpp");
+        jsonorderRequest.payment_source.paypal.experience_context.cancel_url = ConfigManagement.ReadKey("CancelUrl_restpp");
+        ////////////
+
+        string data = Newtonsoft.Json.JsonConvert.SerializeObject(jsonorderRequest, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings()
+        {
+            NullValueHandling = NullValueHandling.Ignore,
+            MissingMemberHandling = MissingMemberHandling.Ignore,
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            PreserveReferencesHandling = PreserveReferencesHandling.None,
+        });
+        if (!valuesfororder.ContainsKey("paypal_response"))
+            valuesfororder.Add("paypal_response", "{}"); //Memoria della risposta da paypal
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        using (var client = new System.Net.Http.HttpClient())
+        {
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
+            var requestMessage = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Post, url);
+            requestMessage.Content = new StringContent(data, null, "application/json");
+            var responseTask = client.SendAsync(requestMessage);
+            responseTask.Wait();
+            var result = responseTask.Result;
+            if (result != null)
+            {
+                var readTask = result.Content.ReadAsStringAsync();
+                readTask.Wait();
+                string strResponse = readTask.Result;
+                valuesfororder["paypal_response"] = strResponse;
+                if (result.IsSuccessStatusCode)
+                {
+                    dynamic jsonResponse = Newtonsoft.Json.JsonConvert.DeserializeObject(strResponse);
+                    if (jsonResponse != null && jsonResponse.ContainsKey("id"))
+                    {
+                        orderid = jsonResponse["id"].ToString();
+                    }
+                }
+            }
+
+
+        }
+        return orderid;
+    }
+    public static string CompleteOrder(string orderid, Dictionary<string, string> valuesfororder) //darivedere
+    {
+        //https://developer.paypal.com/docs/api/orders/v2/#orders_capture
+        //https://developer.paypal.com/docs/api/orders/v2/#orders_authorize
+        string endpoint = ConfigManagement.ReadKey("paypal_sandbox_addr");
+        if (ConfigManagement.ReadKey("sandboxPaypal") != "true") endpoint = ConfigManagement.ReadKey("paypal_live_addr");
+        string paypal_intent = (ConfigManagement.ReadKey("authandcapturepaypal") == "true") ? "AUTHORIZE" : "CAPTURE";
+        string url = endpoint + "/v2/checkout/orders/" + orderid + "/" + paypal_intent.ToLower();
+        string accessToken = GetPaypalAccessToken();
+
+        string data = "{}";
+        if (!valuesfororder.ContainsKey("paypal_response"))
+            valuesfororder.Add("paypal_response", "{}"); //Memoria della risposta da paypal
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        using (var client = new System.Net.Http.HttpClient())
+        {
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
+            var requestMessage = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Post, url);
+            requestMessage.Content = new StringContent(data, null, "application/json");
+            var responseTask = client.SendAsync(requestMessage);
+            responseTask.Wait();
+            var result = responseTask.Result;
+            if (result != null)
+            {
+                var readTask = result.Content.ReadAsStringAsync();
+                readTask.Wait();
+                string strResponse = readTask.Result;
+                valuesfororder["paypal_response"] = strResponse;
+                if (result.IsSuccessStatusCode)
+                {
+                    dynamic jsonResponse = Newtonsoft.Json.JsonConvert.DeserializeObject(strResponse);
+                    if (jsonResponse != null && jsonResponse.ContainsKey("status"))
+                    {
+                        string status = jsonResponse["status"].ToString();
+                        if (status == "COMPLETED")
+                        {
+                            return "OK";
+                        }
+                    }
+                }
+            }
+        }
+        return "KO";
+    }
+
+
+    public static string GetPaypalAccessToken()
+    {
+        string accessToken = "";
+        string endpoint = ConfigManagement.ReadKey("paypal_sandbox_addr");
+        if (ConfigManagement.ReadKey("sandboxPaypal") != "true") endpoint = ConfigManagement.ReadKey("paypal_live_addr");
+
+        string url = endpoint + "/v1/oauth2/token";
+        string clientid = ConfigManagement.ReadKey("paypal_clientid");
+        string secret = ConfigManagement.ReadKey("paypal_secretkey1");
+        string auth = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(clientid + ":" + secret));
+        string data = "grant_type=client_credentials";
+#if false
+        System.Net.HttpWebRequest request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(url);
+        request.Method = "POST";
+        request.ContentType = "application/x-www-form-urlencoded";
+        request.Headers.Add("Authorization", "Basic " + auth);
+        request.ContentLength = data.Length;
+        using (System.IO.Stream stream = request.GetRequestStream())
+        {
+            stream.Write(System.Text.Encoding.ASCII.GetBytes(data), 0, data.Length);
+        }
+        System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)request.GetResponse();
+        string responseString = new System.IO.StreamReader(response.GetResponseStream()).ReadToEnd();
+        dynamic json = Newtonsoft.Json.JsonConvert.DeserializeObject(responseString);
+        accessToken = json.access_token;
+
+#endif
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        using (var client = new System.Net.Http.HttpClient())
+        {
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", auth);
+            client.DefaultRequestHeaders.Add("Authorization", "Basic " + auth);
+            var requestMessage = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Post, url);
+            requestMessage.Content = new StringContent(data, null, "application/x-www-form-urlencoded");
+            var responseTask = client.SendAsync(requestMessage);
+            responseTask.Wait();
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsStringAsync();
+                readTask.Wait();
+                string strResponse = readTask.Result;
+                dynamic jsonResponse = Newtonsoft.Json.JsonConvert.DeserializeObject(strResponse);
+                if (jsonResponse != null && jsonResponse.ContainsKey("access_token"))
+                {
+                    accessToken = jsonResponse["access_token"].ToString();
+                }
+            }
+        }
+        return accessToken;
+    }
+
+}
+
+
 

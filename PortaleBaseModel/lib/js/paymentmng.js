@@ -1,5 +1,6 @@
 ﻿"use strict";
 
+////////////////////// START STRIPE PAYMENT /////////////////////////////
 var tmppaymentIntentId = "";
 var confirmpaymentdata = {};
 var registerdict = {
@@ -435,6 +436,335 @@ var showError = function (errorMsgText) {
         errorMsgpre.innerHTML = "";
     }, 10000);
 };
+
+///////////////////////END STRIPE PAYMENT /////////////////////////////
+
+///////////////////////START paypal payment /////////////////////////////
+
+//Opzione 1 inserimento sdk paypal con chiamata script diretta sincrone
+function loadScriptPaypal() {
+    //https://developer.paypal.com/sdk/js/configuration/
+    //Le Varibili sotto sono iniettate in pagina da masterpage codebehind
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://www.paypal.com/sdk/js?client-id=' + paypal_clientid +
+        '&components=' + paypal_components +
+        '&enable-funding=' + paypal_enablefunding +
+        '&disable-funding=' + paypal_disablefunding +
+        '&intent=' + paypal_intent +
+        '&currency=EUR';
+    document.body.appendChild(script);
+}
+//Carico script di paypal con chiamata sincrona diretta ( verificando la presenza del contenitore )
+if (document.getElementById("paypal-button-container") != null)
+    loadScriptPaypal();
+
+//in alternativa da vedere chiamata asincrona ...   https://www.npmjs.com/package/@paypal/paypal-js
+//... da vedere evempio se serve
+//carico script paypa con chiamata asincrona ( ma  devi installare il pacchetto npm install @paypal/paypal-js ))
+//  if (typeof loadScript === "function") {
+//}
+
+let cardField = null;
+let paypal_buttons = null;
+var paypalfinalizedatas = {};
+var paypalregisterorder = {
+    q: 'paypal-register-complete-order', 'lng': lng, paypalfinalizedatas: ''
+};
+var paypalcollecteddatas = {};
+var paypalcreateorder = {
+    q: 'paypal-create-order', 'lng': lng, contactdatas: ''
+};
+var paypalcancelorder = {
+    q: 'paypal-cancel-order', 'lng': lng, contactdatas: ''
+};
+(function wait() {
+    if (typeof window.paypal === "object") {
+        initpaypalelements();
+    } else {
+        setTimeout(wait, 50);
+    }
+})();
+
+
+function initpaypalelements() {
+
+    paypal_buttons = window.paypal
+        .Buttons({
+            style: {
+                layout: 'vertical',
+                color: 'black',
+                shape: 'rect',
+                label: 'paypal',
+                tagline: false
+            },
+            createOrder: createOrderCallback,
+            onApprove: onApproveCallback,
+            onCancel: onCancelCallback,
+            //onError: onErrorCallback
+        });
+    paypal_buttons.render("#paypal-button-container");
+
+
+    cardField = window.paypal.CardFields({
+        createOrder: createOrderCallback,
+        onApprove: onApproveCallback,
+        onCancel: onCancelCallback,
+        //onError: onErrorCallback
+    });
+    // Render each field after checking for eligibility
+    if (cardField.isEligible()) {
+        const nameField = cardField.NameField();
+        nameField.render("#card-name-field-container");
+
+        const numberField = cardField.NumberField();
+        numberField.render("#card-number-field-container");
+
+        const cvvField = cardField.CVVField();
+        cvvField.render("#card-cvv-field-container");
+
+        const expiryField = cardField.ExpiryField();
+        expiryField.render("#card-expiry-field-container");
+
+        // Add click listener to submit button and call the submit function on the CardField component
+        document
+            .getElementById("multi-card-field-button")
+            .addEventListener("click", () => {
+                cardField.submit().catch((error) => {
+                    resultMessage(
+                        `Sorry, your transaction could not be processed...<br><br>${error}`,
+                    );
+                });
+            });
+    } else {
+        // Hides card fields if the merchant isn't eligible
+        document.querySelector("#card-form").style = "display: none";
+    }
+
+
+}
+
+//Procedura (NON USATA) da completare  !!!
+//nel caso di acquisto con campi card custom per paypal
+function executeorderpaypal(btnorder) {
+
+    $(btnorder).attr("disabled", "")
+    var tastotxt = $(btnorder).html();
+    $(btnorder).html("Wait ..");
+    paypalcollecteddatas = {};
+    getcontactdataformorder(paypalcollecteddatas, function (paypalcollecteddatas) {
+
+        if (paypalcollecteddatas.validated == true) { //prima controllo la validazione dei dati ...
+            paypalcreateorder.contactdatas = JSON.stringify(paypalcollecteddatas); //per create and update
+
+            showModalPaypal(); //MODAL CON I CAMPI CARTA PER PAYPAL
+
+            $(btnorder).removeAttr("disabled")
+            $(btnorder).html(tastotxt);
+        }
+        else {
+            $(btnorder).removeAttr("disabled")
+            $(btnorder).html(tastotxt);
+            console.log('not  validated');
+            var messaggioerrore = paypalcollecteddatas.messages + ' ';
+            resultMessage(messaggioerrore);
+            setTimeout(function () {
+                resultMessage("");
+            }, 10000);
+        }
+
+    });
+
+}
+
+async function raccoltaDatiFormAsync() {
+    paypalcollecteddatas = {};
+    getcontactdataformorder(paypalcollecteddatas, function (paypalcollecteddatas) {
+        paypalcreateorder.contactdatas = JSON.stringify(paypalcollecteddatas);
+    });
+}
+
+async function createOrderCallback() {
+    let errorStringCompleteCreate = "";
+    try {
+
+        //////////////TEST CON CHIAMAAT WEBAPI ( da completare, problemi nel routing )////////////////////)
+        //var ser = $('#aspnetForm').serialize();
+        //const response = await $.post('/api/Webapi/CreateOrderAsync', JSON.stringify(ser));
+        //const response = await $.post('/api/Webapi/CreateOrderAsync', JSON.stringify(paypalcreateorder));
+        //.success(function (data) {
+        //    // Do something to tell the user that all went well.
+        //    //console.log(data);
+        //    //var sv = Object.prototype.toString.call(data);
+        //    //console.trace(sv);
+        //})
+        //.error(function (data, msg, detail) {
+        //    alert(data + '\n' + msg + '\n' + detail)
+        //});
+        ////////////////////////////////////////////////////////////////////////////
+
+        await raccoltaDatiFormAsync(); //raccolgo i dati del form e li metto in paypalcreateorder.contactdatas ( con await aspetto che la procedura sia completata)
+        if (paypalcreateorder.contactdatas == undefined || JSON.parse(paypalcreateorder.contactdatas).validated != true) { //prima controllo la validazione dei dati ...
+            //stop e mado errore
+            console.log('not  validated');
+            var messaggioerrore = JSON.parse(paypalcreateorder.contactdatas).messages + ' ';
+            resultMessage(messaggioerrore);
+            throw new Error(messaggioerrore);
+        }
+
+        /////////////////////////
+        //chiamata server con handler
+        /////////////////////////
+        const response = await fetch("/lib/hnd/HandlerPayments.ashx", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            // use the "body" param to optionally pass additional order information
+            // like product ids and quantities
+            body: JSON.stringify(paypalcreateorder)
+        });
+
+        let responsefromserver = await response.json();
+        let orderData = "{}";
+        if (testJSON(responsefromserver.paypal_response))
+            orderData = JSON.parse(responsefromserver.paypal_response);
+
+        //imposto i valori provenienti dalla createorder sul server nella variabile che sono usati nella procedura di approvazione del pagamento
+        paypalfinalizedatas["codiceordine"] = responsefromserver.codiceordine;
+        paypalfinalizedatas["nome"] = responsefromserver.nome;
+        if (responsefromserver.stoperror == "true") { errorStringCompleteCreate = 'Errore creazione ordine. ' + responsefromserver.messages; resultMessage(errorStringCompleteCreate); }
+
+        //Controllo i dati da paypal e verifico se ci sono errori
+        if (orderData.id) {
+            //console.log('id paypal da procedura create:' + orderData.id);
+            return orderData.id;
+        } else {
+            const errorDetail = orderData?.details?.[0];
+            const errorMessage = errorDetail
+                ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
+                : JSON.stringify(orderData);
+
+            throw new Error(errorMessage);
+        }
+        /////////////////////////
+
+
+    } catch (error) {
+        console.error(error);
+        resultMessage(`Errore procedura pagamento <br/>` + errorStringCompleteCreate + ` <br/>${error}`);
+    }
+}
+
+async function onApproveCallback(data, actions) {
+    //${data.orderID}
+    let errorStringCompleteApprove = "";
+    try {
+        //   console.log('orderID inviato da paypal, inizio procedura approve:' + data.orderID);
+
+        paypalfinalizedatas["orderID"] = data.orderID; //id ordine passato da paypal relativo allordine approvato
+        paypalregisterorder.paypalfinalizedatas = JSON.stringify(paypalfinalizedatas);
+        const response = await fetch((pathAbs + "/lib/hnd/HandlerPayments.ashx"), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(paypalregisterorder)
+        });
+
+        let responsefromserver = await response.json();
+        let orderData = "{}";
+        if (testJSON(responsefromserver.paypal_response))
+            orderData = JSON.parse(responsefromserver.paypal_response);
+        //verifica finale per paga successo ordine!!!
+        if (responsefromserver.stoperror == "true") { errorStringCompleteApprove = 'Errore completamento ordine. ' + responsefromserver.messages; resultMessage(errorStringCompleteApprove); }
+
+
+        // Three cases to handle ( returning from approve on server ):
+        //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+        //   (2) Other non-recoverable errors -> Show a failure message
+        //   (3) Successful transaction -> Show confirmation or thank you message
+        const transaction =
+            orderData?.purchase_units?.[0]?.payments?.captures?.[0] ||
+            orderData?.purchase_units?.[0]?.payments?.authorizations?.[0];
+        const errorDetail = orderData?.details?.[0];
+
+        // this actions.restart() behavior only applies to the Buttons component
+        if (errorDetail?.issue === "INSTRUMENT_DECLINED" && !data.card && actions) {
+            // (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+            // recoverable state, per https://developer.paypal.com/docs/checkout/standard/customize/handle-funding-failures/
+            return actions.restart();
+        } else if (
+            errorDetail ||
+            !transaction ||
+            transaction.status === "DECLINED"
+        ) {
+            // (2) Other non-recoverable errors -> Show a failure message
+            let errorMessage;
+            if (transaction) {
+                errorMessage = `Transaction ${transaction.status}: ${transaction.id}`;
+            } else if (errorDetail) {
+                errorMessage = `${errorDetail.description} (${orderData.debug_id})`;
+            } else {
+                errorMessage = JSON.stringify(orderData);
+            }
+
+            throw new Error(errorMessage);
+        } else {
+            // (3) Successful transaction -> Show confirmation or thank you message
+            // Or go to another URL:  actions.redirect('thank_you.html');
+
+            //1. VERSIONE con messaggio in pagina
+            resultMessage(
+                `Transaction ${transaction.status}: ${transaction.id}<br><br>Vedi in console log per i dettagli!`,
+            );
+            console.log(
+                "Capture result",
+                orderData,
+                JSON.stringify(orderData, null, 2),
+            );
+            paypal_buttons.close();//nasconde i bottoni di pagamento
+
+            //2. (VERSIONE ALTERNATIVA)  redirect finale alla pagina THANKYOU!!!
+            if (responsefromserver.stoperror != "true")
+                location.assign(responsefromserver["SuccessUrl"]);
+
+        }
+    } catch (error) {
+        console.error(error);
+        resultMessage(
+            `Impossibile completare la transazione ...<br>` + errorStringCompleteApprove + ` <br>${error}`,
+        );
+    }
+}
+
+async function onCancelCallback(data) {
+    resultMessage("Pagamento annullato dall'utente!");
+
+    //paypalfinalizedatas["orderID"] = data.orderID; //id ordine passato da paypal relativo allordine approvato
+    //paypalcancelorder.paypalfinalizedatas = JSON.stringify(paypalfinalizedatas);
+    //const response = await fetch((pathAbs + "/lib/hnd/HandlerPayments.ashx"), {
+    //    method: "POST",
+    //    headers: {
+    //        "Content-Type": "application/json",
+    //    },
+    //    body: JSON.stringify(paypalcancelorder)
+    //});
+
+    //const orderData = await response.json();
+    // da ultimare  ....
+    // le attivita in caoso di cancellazione...
+}
+//async function onErrorCallback(data) {
+//    resultMessage("The transaction returned error!");
+//}
+
+// Example function to show a result to the user. Your site's UI library can be used instead.
+function resultMessage(message) {
+    const container = document.querySelector("#result-message");
+    container.innerHTML = message;
+}
+///////////////////////END paypal payment /////////////////////////////
 
 
 

@@ -233,6 +233,17 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         scriptRegVariables += ";\r\n" + string.Format("var categoria2liv = '" + Categoria2liv + "'");
         scriptRegVariables += ";\r\n" + string.Format("var GoogleMapsKey = '" + WelcomeLibrary.UF.ConfigManagement.ReadKey("GoogleMapsKey") + "'");
         scriptRegVariables += ";\r\n" + string.Format("var stripe_publishableKey = '{0}'", ConfigManagement.ReadKey("stripe_publishableKey"));
+        //valori per gestione pagamenti paypal rest //////
+        scriptRegVariables += ";\r\n" + string.Format("var paypal_clientid = '{0}'", ConfigManagement.ReadKey("paypal_clientid"));
+        string paypal_intent = (ConfigManagement.ReadKey("authandcapturepaypal") == "true") ? "authorize" : "capture";
+        scriptRegVariables += ";\r\n" + string.Format("var paypal_intent = '{0}'", paypal_intent);
+        scriptRegVariables += ";\r\n" + string.Format("var paypal_components = '{0}'", ConfigManagement.ReadKey("paypal_components"));
+        scriptRegVariables += ";\r\n" + string.Format("var paypal_disablefunding = '{0}'", ConfigManagement.ReadKey("paypal_disablefunding"));
+        scriptRegVariables += ";\r\n" + string.Format("var paypal_enablefunding = '{0}'", ConfigManagement.ReadKey("paypal_enablefunding"));
+        //scriptRegVariables += ";\r\n" + string.Format("var paypal_sandbox_addr = '{0}'", ConfigManagement.ReadKey("paypal_sandbox_addr"));
+        //scriptRegVariables += ";\r\n" + string.Format("var paypal_live_addr = '{0}'", ConfigManagement.ReadKey("paypal_live_addr"));
+        /////////////////////////////////////
+        ///
 
         scriptRegVariables += ";\r\n";
 

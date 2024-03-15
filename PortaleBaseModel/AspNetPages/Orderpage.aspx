@@ -8,23 +8,23 @@
     <%--<script src="https://js.stripe.com/v3/"></script>--%>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-     <script>
-         //////////////////////////////////////////////////////////////////////////////////////
-         //Rileva la navigazione con cronologia se effettuata ricarica la pagina completamente
-         //per evitare errori dovuti a valori dei campi in cache che non impostano la visualizzazione corretta
-         //////////////////////////////////////////////////////////////////////////////////////
-         window.addEventListener("pageshow", function (event) {
-             const entries = window.performance.getEntriesByType("navigation");
-             var historyTraversal = event.persisted
-                 //  ||  (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
-                 || (entries[0].type === "back_forward");
-             if (historyTraversal) {
-                 // Handle page restore.
-                 window.location.reload();
-                 console.log('page reload by hystory nav');
-             }
-         });
-     </script>
+    <script>
+        //////////////////////////////////////////////////////////////////////////////////////
+        //Rileva la navigazione con cronologia se effettuata ricarica la pagina completamente
+        //per evitare errori dovuti a valori dei campi in cache che non impostano la visualizzazione corretta
+        //////////////////////////////////////////////////////////////////////////////////////
+        window.addEventListener("pageshow", function (event) {
+            const entries = window.performance.getEntriesByType("navigation");
+            var historyTraversal = event.persisted
+                //  ||  (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
+                || (entries[0].type === "back_forward");
+            if (historyTraversal) {
+                // Handle page restore.
+                window.location.reload();
+                console.log('page reload by hystory nav');
+            }
+        });
+    </script>
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -632,7 +632,8 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li style="display: block" id="liPaypal" runat="server">
+                                            <%-- VECCHIA VERSIONE CON PAYPAL CLASS API SOAP (per riusare ricordarisi di scommentare in .cs liPaypal.visi...  --%>
+                                            <%-- <li style="display: block" id="liPaypal" runat="server">
                                                 <div class="clearfix" style="margin-bottom: 25px">
                                                     <div class="float-left mt-0 mr-2" style="width: 25px;">
                                                         <input type="radio" class="form-control" style="background-color: transparent" disabled="false" checked="false" name="payment_method" value="paypal" runat="server" validationgroup="none" autopostback="true" id="inpPaypal" onclick="refreshcarrello(this, 'inpPaypal')" />
@@ -640,18 +641,18 @@
 
                                                     <div class="float-left" style="width: calc(100% - 30px - .5rem); margin-top: 6px;">
                                                         <b><%= references.ResMan("Common", Lingua,"txtpaypal") %></b>
-                                                        <%--icone-carte di credito--%>
-                                                        <div class="container" style="">
-                                                            <div class="row justify-content-between d-flex justify-content-center my-2" style="height: 40px;">
-                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
-                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
-                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
-                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
-                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
-                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
-                                                                <div class="logo-payment" style="width: 12.5%; background-size: 100% !important;"></div>
-                                                            </div>
-                                                        </div>
+                                                    
+                                                        <%= references.ResMan("Common", Lingua,"chkpaypal") %>
+                                                    </div>
+                                                </div>
+                                            </li>--%>
+                                            <li style="display: block" id="lipaypalnew" runat="server">
+                                                <div class="clearfix" style="margin-bottom: 25px">
+                                                    <div class="float-left mt-0 mr-2" style="width: 25px;">
+                                                        <input type="radio" class="form-control" style="background-color: transparent" disabled="false" checked="false" name="payment_method" value="paypal" runat="server" validationgroup="none" autopostback="true" id="inpPaypalnew" onclick="refreshcarrello(this, 'inpPaypal')" />
+                                                    </div>
+                                                    <div class="float-left" style="width: calc(100% - 30px - .5rem); margin-top: 6px;">
+                                                        <b><%= references.ResMan("Common", Lingua,"txtpaypal") %> (new)</b>
                                                         <%= references.ResMan("Common", Lingua,"chkpaypal") %>
                                                     </div>
                                                 </div>
@@ -712,25 +713,44 @@
                                         </li>
                                     </ul>
                                 </div>
+                                <div class="col-12 col-sm-8 mx-auto px-0 py-1" id="paypalnewbutton">
+                                    <!-- Paypal buttons container -->
+                                    <div id="paypal-button-container" class="paypal-button-container"></div>
+                                    <%--
+                                       <button type="button" class="btn w-100" id="paypalproceedbtn" onclick="javascript:executeorderpaypal(this)">
+                                       <%= references.ResMan("Common", Lingua,"OrdineEsegui") + "PP" %>
+                                   </button>
+                                    --%>
+                                    <p id="result-message"></p>
+                                </div>
+
                                 <div class="col-12 col-sm-8 mx-auto px-0 py-1" id="stdbutton">
-                                    <!- Normal button -->
-                                        <button id="btnConvalida" type="button" class="btn w-100" runat="server" onclick="ConfirmValidationOrder(this);"><%= references.ResMan("Common", Lingua,"OrdineEsegui") %> </button>
+                                    <!-- Normal button -->
+                                    <button id="btnConvalida" type="button" class="btn w-100" runat="server" onclick="ConfirmValidationOrder(this);"><%= references.ResMan("Common", Lingua,"OrdineEsegui") %> </button>
                                     <asp:Button ID="btnConvalidaSrv" ClientIDMode="Static" Style="display: none" runat="server" OnClick="btnConvalidaOrdine" />
                                 </div>
 
                                 <div class="col-12 col-sm-8 mx-auto px-0 py-1" id="stripebutton">
-                                    <!- Stripe button -->
-                                        <button type="button" class="btn w-100" id="stripeproceedbtn" onclick="javascript:executeorder(this)">
-                                            <%= references.ResMan("Common", Lingua,"OrdineEsegui") %> Stripe
-                                        </button>
+                                    <!-- Stripe button -->
+                                    <button type="button" class="btn w-100" id="stripeproceedbtn" onclick="javascript:executeorder(this)">
+                                        <%= references.ResMan("Common", Lingua,"OrdineEsegui") %> Stripe
+                                    </button>
                                     <p id="card-error-pre" class="py-1" role="alert" style="color: red"></p>
                                 </div>
                                 <script>
                                     var stripechk = false;
                                     if ($("[id$='inpstripe']").length != 0)
                                         stripechk = $("[id$='inpstripe']")[0].checked;
-                                    if (stripechk == true) { $("[id$='stripebutton']").show(); $("[id$='stdbutton']").hide(); }
-                                    else { $("[id$='stripebutton']").hide(); $("[id$='stdbutton']").show(); }
+                                    var paypalchk = false;
+                                    if ($("[id$='inpPaypal']").length != 0)
+                                        paypalchk = $("[id$='inpPaypal']")[0].checked;
+                                    var paypalnewchk = false;
+                                    if ($("[id$='inpPaypalnew']").length != 0)
+                                        paypalnewchk = $("[id$='inpPaypalnew']")[0].checked;
+
+                                    if (stripechk == true) { $("[id$='stripebutton']").show(); $("[id$='stdbutton']").hide(); $("[id$='paypalnewbutton']").hide(); }
+                                    if (paypalnewchk == true) { $("[id$='stripebutton']").hide(); $("[id$='stdbutton']").hide(); $("[id$='paypalnewbutton']").show(); }
+                                    else if (stripechk == false && paypalnewchk == false) { $("[id$='stripebutton']").hide(); $("[id$='paypalnewbutton']").hide(); $("[id$='stdbutton']").show(); }
                                 </script>
                                 <script>
                                     function ConfirmValidationOrder(elembtn) {
@@ -758,7 +778,7 @@
                                             //$(elembtn).html("Wait ..");
                                             document.getElementById("<%= btnConvalidaSrv.ClientID  %>").click();
                                             ////////////////////////////////////////////////////////////////////////
-                                              //$(elembtn).removeAttr("disabled")
+                                            //$(elembtn).removeAttr("disabled")
                                             //$(elembtn).html(tastotxt);
                                         } else {
                                             $('html,body').animate({
@@ -850,4 +870,44 @@
         }
     </script>
     <%-- FINE SEZIONE CONTROLLO STRIPE MODAL--%>
+
+
+    <%--SEZIONE PAYPAL MODAL (con card diretta da ultimare!)--%>
+    <script>
+        function showModalPaypal() {
+            $('#paypalModal').modal().show();  //modal per il pagamento stripe
+        }
+    </script>
+    <div class="modal fade bd-example-modal-lg" id="paypalModal" tabindex="-1" role="dialog" aria-labelledby="paypalModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg  " role="document">
+            <div class="modal-content position-relative">
+                <div class="modal-header" style="background-color: #ccc">
+                    <%--     <div class="float:left" style="background: url('/images/logo-dark.png') center bottom no-repeat !important; height: 50px; width: 50px; background-size: 110px !important;"></div>--%>
+                    <h3 class="mbr-section-subtitle modal-title" id="paypalModalLabel">Procedi al Pagamento dell'ordine</h3>
+                    <br />
+                    <button class="close" type="button" data-dismiss="modal"><span aria-hidden="true">&times;</span> </button>
+                </div>
+                <div class="modal-body " style="background-color: #ddd; min-height: 220px; text-align: center">
+                    <!-- Modal   card and buttot for payment -->
+                    <p class="lead d-block">Inserisci i dati della carta per procedere al pagamento</p>
+                    <div id="card-form" class="card_container">
+                        <div id="card-name-field-container"></div>
+                        <div id="card-number-field-container"></div>
+                        <div id="card-expiry-field-container"></div>
+                        <div id="card-cvv-field-container"></div>
+                        <button id="multi-card-field-button" class="btn w-100" type="button">Pay now with Card</button>
+                    </div>
+                </div>
+                <div class="modal-footer position-relative" style="background-color: #ddd">
+                    <!--<div class="w-100">
+                 <div class="row justify-content-center">
+                     <div class="col-auto py-1">
+                     </div>
+                 </div>
+             </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
 </asp:Content>
