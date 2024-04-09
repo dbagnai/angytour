@@ -135,6 +135,19 @@
                                                             out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
                                                             return false;
                                                         } else { out1.innerHTML = ''; }
+
+                                                        /*ABILITARE PER CONTROLLO CAPTCHA*/
+                                                        if (typeof (grecaptcha) != 'undefined') {
+                                                            var response = grecaptcha.getResponse();
+                                                            if (response.length == 0)  //reCaptcha not verified
+                                                            {
+                                                                out1.innerHTML = ('<%= references.ResMan("Common", Lingua,"testoCaptcha").Replace("'","`") %>');
+                                                                /*        $('#recaptcharesponse').css({ 'display': 'block' });*/
+                                                                return false;
+                                                            }
+                                                        }
+
+
                                                         if (Page_ClientValidate("contattilateral")) {
                                                             /*do work and go for postback*/
                                                             console.log('ok validated');
@@ -159,7 +172,7 @@
                                                             }, $(elembtn));
                                                             ///////////////////////////////////////////////////////////////////////
 
-                                                                            ////////////////////////////////////////////////////////////////////////
+                                                            ////////////////////////////////////////////////////////////////////////
                                                             //Invio con postback
                                                             <%--  var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
                                                             $(elembtn).html("Wait ..");
@@ -183,6 +196,9 @@
                                                     }
 
                                                 </script>
+                                                <%= references.ResMan("common", Lingua,"recaptchask") %> 
+                                                <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
+
                                                 <button id="btnFormContatto" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm1(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
                                                 <%-- <asp:Button ID="btnFormContattoSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />--%>
 
@@ -231,15 +247,15 @@
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderIndextext" runat="Server">
-   
-        <%--RECENSIONI CLIENTI--%>
+
+    <%--RECENSIONI CLIENTI--%>
     <div runat="server" visible="true">
         <asp:Panel ID="pnlCommenti" runat="server" Visible="false">
             <div id="divCommenti" class="inject py-5 commenti-details-page bg-white" params="commenttool.rendercommentsloadref,'<%= idOfferta %>','divCommenti','feedbacklist2.html','true','1','35','',false,'',false,false"></div>
         </asp:Panel>
     </div>
 
-     <%--ALTRI ARTICOLI--%>
+    <%--ALTRI ARTICOLI--%>
     <%--<div class="bd-light-color" style="position: relative; border-top: 10px dotted; background-color:#fff;" id="divSuggeritiContainer">--%>
     <div class="bg-light-color" id="divSuggeritiContainer">
         <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 30px 25px;">
@@ -345,6 +361,18 @@
                                     out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
                                     return false;
                                 } else { out1.innerHTML = ''; }
+
+                                /*ABILITARE PER CONTROLLO CAPTCHA*/
+                                if (typeof (grecaptcha) != 'undefined') {
+                                    var response = grecaptcha.getResponse();
+                                    if (response.length == 0)  //reCaptcha not verified
+                                    {
+                                        out1.innerHTML = ('<%= references.ResMan("Common", Lingua,"testoCaptcha").Replace("'","`") %>');
+                                        /*        $('#recaptcharesponse').css({ 'display': 'block' });*/
+                                        return false;
+                                    }
+                                }
+
                                 if (Page_ClientValidate("contattilateral")) {
                                     /*do work and go for postback*/
                                     console.log('ok validated');
@@ -396,6 +424,10 @@
                             }
 
                         </script>
+                        <%=  WelcomeLibrary.UF.ConfigManagement.ReadKey("recaptchask") %>
+
+                        <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
+
                         <button id="Button1" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
                         <%-- <asp:Button ID="Button1srv" Style="display: none" runat="server" OnClick="btnContatti_Click" />--%>
 

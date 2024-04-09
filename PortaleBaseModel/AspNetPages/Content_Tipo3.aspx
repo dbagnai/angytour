@@ -337,7 +337,6 @@
 
 
                                                                 <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnInvia_Click" />
-                                                                <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
                                                                 <style>
                                                                     .g-recaptcha {
                                                                         margin: 15px auto !important;
@@ -365,13 +364,18 @@
                                                                             $("#recaptcharesponse").html('');
                                                                             $('#recaptcharesponse').css({ 'display': 'none' });
                                                                         }
-                                                            <%--  var response = grecaptcha.getResponse();
-                                                            if (response.length == 0)  //reCaptcha not verified
-                                                            {
-                                                                $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"testoCaptcha") %>');
-                                                                return false;
-                                                            }
-                                                            else {--%>
+
+                                                                        /*ABILITARE PER CONTROLLO CAPTCHA*/
+                                                                        if (typeof (grecaptcha) != 'undefined') {
+                                                                            var response = grecaptcha.getResponse();
+                                                                            if (response.length == 0)  //reCaptcha not verified
+                                                                            {
+                                                                                $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"testoCaptcha").Replace("'","`") %>');
+                                                                                $('#recaptcharesponse').css({ 'display': 'block' });
+                                                                                return false;
+                                                                            }
+                                                                        }
+
                                                                         if (Page_ClientValidate("MailInfo")) {
                                                                             /*do work and go for postback*/
                                                                             $(elembtn).attr("disabled", "")
@@ -457,6 +461,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 p-0 pr-5 text-center">
+                                                                <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
+                                                                    <%=  WelcomeLibrary.UF.ConfigManagement.ReadKey("recaptchask") %>
                                                                     <button id="btnInvia" type="button" class="btn btn-lg btn-block text-white" style="width: 200px" runat="server" validationgroup="MailInfo" onclick="ConfirmContactValue(this);"><%=  references.ResMan("Common", Lingua,"TestoInvio")  %> </button>
 
                                                                     <%--AVVISO ERRORE DATI NON INSERITI--%>

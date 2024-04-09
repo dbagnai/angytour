@@ -784,6 +784,19 @@
                                                                 out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
                                                                 return false;
                                                             } else { out1.innerHTML = ''; }
+
+
+                                                            /*ABILITARE PER CONTROLLO CAPTCHA*/
+                                                            if (typeof (grecaptcha) != 'undefined') {
+                                                                var response = grecaptcha.getResponse();
+                                                                if (response.length == 0)  //reCaptcha not verified
+                                                                {
+                                                                    out1.innerHTML = ('<%= references.ResMan("Common", Lingua,"testoCaptcha").Replace("'","`") %>');
+                                                                    /*        $('#recaptcharesponse').css({ 'display': 'block' });*/
+                                                                    return false;
+                                                                }
+                                                            }
+
                                                             if (Page_ClientValidate("contattifooter")) {
                                                                 /*do work and go for postback*/
                                                                 console.log('ok validated');
@@ -806,9 +819,9 @@
                                                                         }
                                                                     }, tastotxt);
                                                                 }, $(elembtn));
-                                                    ///////////////////////////////////////////////////////////////////////
-                                                    ///////////////////////////////////////////////////////////////////////
-                                                    //Invio con post back (metodo originale)
+                                                                ///////////////////////////////////////////////////////////////////////
+                                                                ///////////////////////////////////////////////////////////////////////
+                                                                //Invio con post back (metodo originale)
                                                     //var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
                                                                 // $(elembtn).html("Wait ..");
                                                                 // buttpost.click();
@@ -833,6 +846,8 @@
                                                             callback(contactdatas);
                                                         }
                                                     </script>
+                                                    <%=  WelcomeLibrary.UF.ConfigManagement.ReadKey("recaptchask") %>
+                                                    <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
                                                     <br />
                                                     <button id="btnInvia" type="button" class="divbuttonstyle" style="width: 200px" runat="server" validationgroup="contattifooter" onclick="ConfirmValidationFormMaster(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
                                                     <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />
@@ -1073,7 +1088,7 @@
 
     <%--SERVICE WORKER--%>
     <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>  --%>
-    <%--   <script src='https://www.google.com/recaptcha/api.js'></script>--%>
+<%--     <script src='https://www.google.com/recaptcha/api.js'></script> --%>
     <%--    <%= InjectDirectrenderinPage() %>--%>
 </body>
 </html>
