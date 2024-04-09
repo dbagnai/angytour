@@ -363,6 +363,13 @@
                             </div>
                         </div>
                         <div class="row" style="padding-bottom: 10px">
+                             <div class="col-sm-3 item-text  text-left">
+                                   <strong>Data Inserimento</strong><br /> 
+                                   <input type="text" class="form-control"
+                                     v-bind:value="vm.itemselected.DataInserimento | formatshortDate"
+                                     v-on:blur="vm.itemselected.DataInserimento = formatDateforvue($event.target.value)"
+                                     />
+                             </div>
                             <div class="col-sm-3 item-text  text-left">
                                  <strong>Codici Sconto</strong><br />
                                 <input class="form-control" type="text" v-model="vm.itemselected.Codicisconto"    />

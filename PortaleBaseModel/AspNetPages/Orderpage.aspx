@@ -90,6 +90,20 @@
                                 <input type="text" class="form-control" placeholder="Username" style="display: inline-block; width: 180px; background-color: #fff" runat="server" id="inputName" value="" />
                                 <input type="password" class="form-control" placeholder="Password" style="display: inline-block; width: 180px; background-color: #fff" runat="server" id="inputPassword" value="" />
                                 <input type="button" id="btnlogin" class="btn btn-small" onclick="verificalogin(this)" value="<%= references.ResMan("Common",Lingua,"testoLoginAccedi") %>" />
+                                 <script>
+                                     $("#inputPassword").on('keypress', function () {
+                                         if (event.keyCode == 13) {
+                                             event.preventDefault();
+                                             document.getElementById('btnlogin').click(); //per eseguire login
+                                         }
+                                     });
+                                     $("#inputName").on('keypress', function () {
+                                         if (event.keyCode == 13) {
+                                             event.preventDefault();
+                                             document.getElementById('btnlogin').click(); //per eseguire login
+                                         }
+                                     });
+                                 </script>
                                 <br />
                                 <a id="linkpassrecover" href="javascript:void(0)" onclick="recuperapass(this)" class="secondary-color pt-2" style="display: block"><%= references.ResMan("Common",Lingua,"forgetrequest0") %> </a>
                             </div>

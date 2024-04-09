@@ -878,20 +878,34 @@ namespace WelcomeLibrary.DAL
         /// <param name="connection"></param>
         /// <param name="mindate"></param>
         /// <returns></returns>
-        public MailCollection CaricaListaNewsletter(string connection, DateTime? mindate = null)
+        public MailCollection CaricaListaNewsletter(string connection, DateTime? mindate = null, long page = 1, long pagesize = 0)
         {
             MailCollection list = new MailCollection();
             if (connection == null || connection == "") return null;
 
             Mail item = new Mail();
-            string query = "SELECT  * FROM TBL_MAILING_STRUTTURA order by Id";
+            string query = "SELECT  * FROM TBL_MAILING_STRUTTURA ";
+
+            string queryfilter = "";
             List<SQLiteParameter> parColl = new List<SQLiteParameter>();
             if (mindate != null)
             {
                 SQLiteParameter p1 = new SQLiteParameter("@DataInserimento", mindate.Value.ToShortDateString()); //OleDbType.VarChar
                 parColl.Add(p1);
-                query += " WHERE DataInserimento > @DataInserimento ";
+                queryfilter += " WHERE DataInserimento > @DataInserimento ";
             }
+            query += queryfilter;
+
+            query += "order by Id";
+            if (pagesize != 0)
+            {
+                query += " limit " + (page - 1) * pagesize + "," + pagesize;
+            }
+
+            /*CALCOLO IL NUMERO DI RIGHE FILTRATE TOTALI*/
+            long totalrecords = dbDataAccess.ExecuteScalar<long>("SELECT count(*) FROM TBL_MAILING_STRUTTURA " + queryfilter, parColl, connection);
+            list.Totrecs = totalrecords;
+
 
             try
             {
@@ -914,8 +928,6 @@ namespace WelcomeLibrary.DAL
                             //    txtfromdb = Utility.DecompressString(txtfromdb);
                             item.TestoMail = txtfromdb;
                         }
-
-
 
                         if (!reader["SoggettoMail"].Equals(DBNull.Value))
                             item.SoggettoMail = reader.GetString(reader.GetOrdinal("SoggettoMail"));

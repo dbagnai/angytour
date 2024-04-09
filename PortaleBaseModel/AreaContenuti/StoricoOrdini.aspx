@@ -537,19 +537,15 @@
                                 </tr>
                             </ItemTemplate>
                         </asp:Repeater>
-                        <tr>
-                            <td>
-                                <div class="pull-right">
+                                </tbody>
+                         </table>
+                         <div class="pull-right" style="width:100%;position:relative">
                                     <UC:PagerEx ID="PagerRisultati" runat="server" NavigateUrl="" PageSize="30" CurrentPage="1"
                                         TotalRecords="0" dimensioneGruppo="20" nGruppoPagine="1" OnPageCommand="PagerRisultati_PageCommand"
                                         OnPageGroupClickNext="PagerRisultati_PageGroupClickNext" OnPageGroupClickPrev="PagerRisultati_PageGroupClickPrev" />
-                                </div>
-                                <div class="clearfix">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                          </div>
+                          <div class="clearfix"> </div>
+            
             </div>
         </div>
     </div>

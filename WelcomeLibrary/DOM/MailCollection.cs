@@ -12,8 +12,10 @@ namespace WelcomeLibrary.DOM
         {
             _MailCollection = new List<Mail>();
         }
+        private long _totrecs = 0;
+        public long Totrecs { get => _totrecs; set => _totrecs = value; }
 
-          /// <summary>
+        /// <summary>
         /// Costruttore dell'oggetto a partire da un oggetto MailCollection
         /// </summary>
         /// <param name="list"></param>

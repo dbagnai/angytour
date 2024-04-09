@@ -69,7 +69,13 @@ function ConfirmValidationFormGeneral(btnid, serveroperation) {
                             out1.innerHTML = (localmessagegeneral.successmsg);
                             $("#form" + btnid.id).hide();
                         }
-                        else { out1.innerHTML = (result); location.replace(result); }
+                        else {
+                            out1.innerHTML = (result);
+                            location.replace(result);
+                            //$('html,body').animate({
+                            //    scrollTop: $("#" + "divoutput" + btnid.id).offset().top - 190
+                            //}, 'fast');
+                        }
                         $(btnid).removeAttr("disabled");
                         $(btnid).html(tastotxt);
                     }, tastotxt);

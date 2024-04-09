@@ -841,6 +841,7 @@ METODO PER POSTARE DA CODICE I DATI IN JSON (esempio )
                 filePath = HttpContext.Current.Server.MapPath(url);
                 fileName = System.IO.Path.GetFileName(filePath);
                 FileInfo finfo = new FileInfo(filePath);
+                if (finfo == null) return;
 
                 HttpContext.Current.Response.ClearContent();
                 HttpContext.Current.Response.ClearHeaders();
@@ -872,6 +873,7 @@ METODO PER POSTARE DA CODICE I DATI IN JSON (esempio )
                 filePath = HttpContext.Current.Server.MapPath(url);
                 fileName = System.IO.Path.GetFileName(filePath);
                 FileInfo finfo = new FileInfo(filePath);
+                if (finfo == null) return;
 
                 HttpContext.Current.Response.ClearContent();
                 HttpContext.Current.Response.ClearHeaders();

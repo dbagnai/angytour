@@ -144,6 +144,13 @@ namespace WelcomeLibrary.DOM
             get { return _DataRicezioneValidazione; }
             set { _DataRicezioneValidazione = value; }
         }
+        private DateTime? _DataInserimento;
+        public DateTime? DataInserimento
+        {
+            get { return _DataInserimento; }
+            set { _DataInserimento = value; }
+        }
+
         private bool _Validato;
         public bool Validato
         {
@@ -269,6 +276,7 @@ namespace WelcomeLibrary.DOM
             this.DataInvioValidazione = null;
             this.DataNascita = DateTime.MinValue;
             this.DataRicezioneValidazione = null;
+            this.DataInserimento = null;
             this.Id_card = 0;
             this.Id_cliente = 0;
             this.Indirizzo = string.Empty;
@@ -312,6 +320,7 @@ namespace WelcomeLibrary.DOM
             this.DataInvioValidazione = tmp.DataInvioValidazione;
             this.DataNascita = tmp.DataNascita;
             this.DataRicezioneValidazione = tmp.DataRicezioneValidazione;
+            this.DataInserimento = tmp.DataInserimento;
             this.Id_card = tmp.Id_card;
             this.Id_cliente = tmp.Id_cliente;
             this.Indirizzo = tmp.Indirizzo;
