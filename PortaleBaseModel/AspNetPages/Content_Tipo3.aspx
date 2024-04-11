@@ -365,6 +365,7 @@
                                                                             $('#recaptcharesponse').css({ 'display': 'none' });
                                                                         }
 
+                                                                        var contactdatas = {};
                                                                         /*ABILITARE PER CONTROLLO CAPTCHA*/
                                                                         if (typeof (grecaptcha) != 'undefined') {
                                                                             var response = grecaptcha.getResponse();
@@ -373,7 +374,7 @@
                                                                                 $("#recaptcharesponse").html('<%= references.ResMan("Common", Lingua,"testoCaptcha").Replace("'","`") %>');
                                                                                 $('#recaptcharesponse').css({ 'display': 'block' });
                                                                                 return false;
-                                                                            }
+                                                                            } else contactdatas.recaptcharesponse = response;
                                                                         }
 
                                                                         if (Page_ClientValidate("MailInfo")) {
@@ -381,7 +382,6 @@
                                                                             $(elembtn).attr("disabled", "")
 
                                                                             //invio nopostback con handler////////////////////////////////////////////////////
-                                                                            var contactdatas = {};
                                                                             contactdatas.chkprivacy = $('<%= "#" + chkPrivacy.ClientID %>')[0].checked;
                                                                             contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
                                                                             getcontactdata1(contactdatas, function (contactdatas) {
@@ -461,7 +461,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 p-0 pr-5 text-center">
-                                                                <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
+                                                                    <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
                                                                     <%=  WelcomeLibrary.UF.ConfigManagement.ReadKey("recaptchask") %>
                                                                     <button id="btnInvia" type="button" class="btn btn-lg btn-block text-white" style="width: 200px" runat="server" validationgroup="MailInfo" onclick="ConfirmContactValue(this);"><%=  references.ResMan("Common", Lingua,"TestoInvio")  %> </button>
 

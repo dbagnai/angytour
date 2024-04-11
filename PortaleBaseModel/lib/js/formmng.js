@@ -36,6 +36,8 @@ function ConfirmValidationFormGeneral(btnid, serveroperation) {
         out1.innerHTML = '';
     }
 
+
+    var contactdatas = {};
     ////////////////////////////////////////////////////////////////
     /////ABILITARE PER CONTROLLO CAPTCHA
     ////////////////////////////////////////////////////////////////
@@ -45,14 +47,13 @@ function ConfirmValidationFormGeneral(btnid, serveroperation) {
         {
             out1.innerHTML = localmessagegeneral.captcha;
             return false;
-        }
+        } else contactdatas.recaptcharesponse = response;
     }
     //else {
     if (true) { //fare controllo di validazione ...
         /*do work and go for postback*/
         $(btnid).attr("disabled", "");
         //invio nopostback con handler////////////////////////////////////////////////////
-        var contactdatas = {};
         contactdatas.chkprivacy = chk1.checked;
         contactdatas.lingua = lng;
         var tastotxt = $(btnid).html();
@@ -406,39 +407,39 @@ function imgdeletegeneral(file, out1) {
         });
 };
 
-    //$(document).ready(function () {
-    //    validateinitgeneral();
-    //});
-    //function validateinitgeneral() {
-    //    $("#aspnetForm").validate({
-    //        ignore: [], //Abilita il controllo dei campi Hidden!
-    //        rules: {
-    //            descrizionebtniscrivi: {
-    //                required: true,
-    //                minlength: 250,
-    //                noSpacesonlytext: true
-    //            }
-    //        },
-    //        messages: {
-    //            descrizionebtniscrivi: {
-    //                required: "Inserisci la descrizione del ristorante",
-    //                minlength: "Nome almeno 250 caratteri"
-    //            }
-    //        }, showErrors: function (errorMap, errorList) {
-    //            if (this.numberOfInvalids() == 0) {
-    //                localmessagegeneral.inputisvalid = true;
-    //                localmessagegeneral.validatemsg = "";
-    //            }
-    //            else {
-    //                localmessagegeneral.inputisvalid = false;
-    //                localmessagegeneral.validatemsg = "Impossibile inviare. Numero di errori relevati: " + this.numberOfInvalids();
-    //                if (errorList.length > 0) {
-    //                    for (var x = 0; x < errorList.length; x++) {
-    //                        localmessagegeneral.validatemsg += "<br/>\n\u25CF " + errorList[x].message;
-    //                    }
-    //                }
-    //            }
-    //            this.defaultShowErrors();
-    //        }
-    //    });
-    //}
+//$(document).ready(function () {
+//    validateinitgeneral();
+//});
+//function validateinitgeneral() {
+//    $("#aspnetForm").validate({
+//        ignore: [], //Abilita il controllo dei campi Hidden!
+//        rules: {
+//            descrizionebtniscrivi: {
+//                required: true,
+//                minlength: 250,
+//                noSpacesonlytext: true
+//            }
+//        },
+//        messages: {
+//            descrizionebtniscrivi: {
+//                required: "Inserisci la descrizione del ristorante",
+//                minlength: "Nome almeno 250 caratteri"
+//            }
+//        }, showErrors: function (errorMap, errorList) {
+//            if (this.numberOfInvalids() == 0) {
+//                localmessagegeneral.inputisvalid = true;
+//                localmessagegeneral.validatemsg = "";
+//            }
+//            else {
+//                localmessagegeneral.inputisvalid = false;
+//                localmessagegeneral.validatemsg = "Impossibile inviare. Numero di errori relevati: " + this.numberOfInvalids();
+//                if (errorList.length > 0) {
+//                    for (var x = 0; x < errorList.length; x++) {
+//                        localmessagegeneral.validatemsg += "<br/>\n\u25CF " + errorList[x].message;
+//                    }
+//                }
+//            }
+//            this.defaultShowErrors();
+//        }
+//    });
+//}

@@ -136,6 +136,7 @@
                                                             return false;
                                                         } else { out1.innerHTML = ''; }
 
+                                                        var contactdatas = {};
                                                         /*ABILITARE PER CONTROLLO CAPTCHA*/
                                                         if (typeof (grecaptcha) != 'undefined') {
                                                             var response = grecaptcha.getResponse();
@@ -144,7 +145,7 @@
                                                                 out1.innerHTML = ('<%= references.ResMan("Common", Lingua,"testoCaptcha").Replace("'","`") %>');
                                                                 /*        $('#recaptcharesponse').css({ 'display': 'block' });*/
                                                                 return false;
-                                                            }
+                                                            } else contactdatas.recaptcharesponse = response;
                                                         }
 
 
@@ -155,7 +156,6 @@
                                                             $(elembtn).attr("disabled", "");
 
                                                             //invio nopostback con handler////////////////////////////////////////////////////
-                                                            var contactdatas = {};
                                                             contactdatas.chkprivacy = $('<%= "#" + chkContactPrivacy1.ClientID %>')[0].checked;
                                                             contactdatas.chknewsletter = $('<%= "#" + chkNewsletter1.ClientID %>')[0].checked;
                                                             getcontactdata1(contactdatas, function (contactdatas) {
@@ -196,7 +196,7 @@
                                                     }
 
                                                 </script>
-                                                <%= references.ResMan("common", Lingua,"recaptchask") %> 
+                                                <%= references.ResMan("common", Lingua,"recaptchask") %>
                                                 <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
 
                                                 <button id="btnFormContatto" type="button" class="btn btn-lg btn-block" style="width: 200px" runat="server" validationgroup="contattilateral" onclick="ConfirmValidationForm1(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
@@ -362,6 +362,7 @@
                                     return false;
                                 } else { out1.innerHTML = ''; }
 
+                                var contactdatas = {};
                                 /*ABILITARE PER CONTROLLO CAPTCHA*/
                                 if (typeof (grecaptcha) != 'undefined') {
                                     var response = grecaptcha.getResponse();
@@ -370,7 +371,7 @@
                                         out1.innerHTML = ('<%= references.ResMan("Common", Lingua,"testoCaptcha").Replace("'","`") %>');
                                         /*        $('#recaptcharesponse').css({ 'display': 'block' });*/
                                         return false;
-                                    }
+                                    } else contactdatas.recaptcharesponse = response;
                                 }
 
                                 if (Page_ClientValidate("contattilateral")) {
@@ -380,7 +381,6 @@
                                     $(elembtn).attr("disabled", "")
 
                                     //invio nopostback con handler////////////////////////////////////////////////////
-                                    var contactdatas = {};
                                     contactdatas.chkprivacy = $('<%= "#" + chkContactPrivacy.ClientID %>')[0].checked;
                                     contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
                                     getcontactdata2(contactdatas, function (contactdatas) {

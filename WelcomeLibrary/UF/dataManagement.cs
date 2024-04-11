@@ -713,7 +713,8 @@ METODO PER POSTARE DA CODICE I DATI IN JSON (esempio )
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
                 request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
                 request.ContentLength = dataBytes.Length;
-                request.ContentType = contentType;
+                if (!string.IsNullOrEmpty(contentType))
+                    request.ContentType = contentType;
                 request.Method = method;
 
                 using (Stream requestBody = request.GetRequestStream())
