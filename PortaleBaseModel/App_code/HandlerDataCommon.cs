@@ -308,7 +308,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                      */
                     string recaptcharesponse = (maildata.GetValueOrDefault("recaptcharesponse") ?? "");
                     bool errorerecaptcha = false;
-                    if (!string.IsNullOrEmpty(recaptcharesponse))
+                    if (!string.IsNullOrEmpty(recaptcharesponse) || WelcomeLibrary.UF.ConfigManagement.ReadKey("recaptchaforced") == "true") //se forzo il recaptcha il test deve essere fatto anche con response vuota
                     {
                         string recaptchasecret = WelcomeLibrary.UF.ConfigManagement.ReadKey("recaptchasecretkey");
                         string urlgoogleverify = "https://www.google.com/recaptcha/api/siteverify?secret=" + recaptchasecret
@@ -543,7 +543,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                      */
                     string recaptcharesponse1 = (data.GetValueOrDefault("recaptcharesponse") ?? "");
                     bool errorerecaptcha1 = false;
-                    if (!string.IsNullOrEmpty(recaptcharesponse1))
+                    if (!string.IsNullOrEmpty(recaptcharesponse1) || WelcomeLibrary.UF.ConfigManagement.ReadKey("recaptchaforced") == "true") //se forzo il recaptcha il test deve essere fatto anche con response vuota
                     {
                         string recaptchasecret = WelcomeLibrary.UF.ConfigManagement.ReadKey("recaptchasecretkey");
                         string urlgoogleverify = "https://www.google.com/recaptcha/api/siteverify?secret=" + recaptchasecret

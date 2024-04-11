@@ -777,6 +777,21 @@
                                                 </div>
                                                 <div class="col-sm-12 pr-xl-2">
                                                     <script>
+
+
+                                                        function getcontactdata(contactdatas, callback) {
+                                                            var contactdatas = contactdatas || {};
+                                                            contactdatas.idofferta = '<%= idOfferta %>';
+                                                            contactdatas.name = $("[id$='txtContactName']").val();
+                                                            contactdatas.cognome = $("[id$='txtContactCognome']").val();
+                                                            contactdatas.email = $("[id$='txtContactEmail']").val();
+                                                            contactdatas.telefono = $("[id$='txtContactTelefono']").val();
+                                                            contactdatas.message = $("[id$='txtContactMessage']").val();
+                                                            contactdatas.tipo = "informazioni";
+                                                            callback(contactdatas);
+                                                        }
+
+                                                        //Funzione con validazione captcha v2
                                                         function ConfirmValidationFormMaster(elembtn) {
                                                             var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
                                                             var out1 = document.getElementById("outputContactMasterDiv");
@@ -787,7 +802,7 @@
 
                                                             var contactdatas = {};
 
-                                                            /*ABILITARE PER CONTROLLO CAPTCHA*/
+                                                            /*ABILITARE PER CONTROLLO CAPTCHA v2*/
                                                             if (typeof (grecaptcha) != 'undefined') {
                                                                 var response = grecaptcha.getResponse();
                                                                 if (response.length == 0)  //reCaptcha not verified
@@ -834,20 +849,69 @@
                                                                 return false;
                                                             }
                                                         }
-                                                        function getcontactdata(contactdatas, callback) {
-                                                            var contactdatas = contactdatas || {};
-                                                            contactdatas.idofferta = '<%= idOfferta %>';
-                                                            contactdatas.name = $("[id$='txtContactName']").val();
-                                                            contactdatas.cognome = $("[id$='txtContactCognome']").val();
-                                                            contactdatas.email = $("[id$='txtContactEmail']").val();
-                                                            contactdatas.telefono = $("[id$='txtContactTelefono']").val();
-                                                            contactdatas.message = $("[id$='txtContactMessage']").val();
-                                                            contactdatas.tipo = "informazioni";
-                                                            callback(contactdatas);
+
+                                                        ////////////////////////////////////////////
+                                                        // funzioni per validazione captcha v3 ( da ultimare lato server con il check del punteggio risultante !!!!)
+                                                        ////////////////////////////////////////////
+
+                                                        //Funzione da chiamre sull'invio del modulo per la validazione v3 - devi aggiunere il token di google all caricamento api.js in master
+                                                        //https://www.google.com/recaptcha/api.js?render=reCAPTCHA_site_key 
+                                                      <%--  function googlevalidationv3(elembtn) {
+                                                            // TEST google captcha v3 
+                                                            if (typeof (grecaptcha) != 'undefined') {
+                                                              //  grecaptcha.ready(function () {
+                                                                grecaptcha.execute('reCAPTCHA_site_key', { action: '' }).then(function (token) {
+
+                                                                        // Add your logic to submit to your backend server here.
+                                                                        console.log(token);
+                                                                        ConfirmValidationFormMasterv3(elembtn, token)
+
+                                                                    });
+                                                                //});
+                                                            } else { console.log('captcha not present'); ConfirmValidationFormMasterv3(elembtn, ''); }
                                                         }
+                                                        function ConfirmValidationFormMasterv3(elembtn, tokengv3) {
+                                                            var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
+                                                            var out1 = document.getElementById("outputContactMasterDiv");
+                                                            if (!chk1.checked) {
+                                                                out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
+                                                                return false;
+                                                            } else { out1.innerHTML = ''; }
+                                                            var contactdatas = {};
+                                                            contactdatas.recaptcharesponse = tokengv3;
+                                                            if (Page_ClientValidate("contattifooter")) {
+                                                                console.log('ok validated');
+                                                                $(elembtn).attr("disabled", "")
+                                                                //invio nopostback con handler////////////////////////////////////////////////////
+                                                                contactdatas.chkprivacy = chk1.checked;
+                                                                contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
+
+                                                                getcontactdata(contactdatas, function (contactdatas) {
+                                                                    var tastotxt = $(elembtn).html();
+                                                                    $(elembtn).html("Wait ..");
+                                                                    inviamessaggiomail(lng, contactdatas, function (result) {
+                                                                        if (result) {
+                                                                            //in caso di errore visualizzo
+                                                                            out1.innerHTML = result;
+                                                                            $(elembtn).removeAttr("disabled")
+                                                                            $(elembtn).html(tastotxt);
+                                                                        }
+                                                                    }, tastotxt);
+                                                                }, $(elembtn));
+                                                                ///////////////////////////////////////////////////////////////////////
+                                                            } else {
+                                                                $('html,body').animate({
+                                                                    scrollTop: $("#ctl00_divContattiMaster").offset().top - 20
+                                                                }, 'fast');
+                                                                console.log('not  validated');
+                                                                return false;
+                                                            }
+                                                        }--%>
+
+
                                                     </script>
-                                                    <%=  WelcomeLibrary.UF.ConfigManagement.ReadKey("recaptchask") %>
-                                                    <%--    <div class="g-recaptcha" id="rcaptcha" data-sitekey="6LccbRMUAAAAAAN14HC8RFxwNMaqdGvJFPQEVinq"></div>--%>
+
+                                                      <%=  WelcomeLibrary.UF.ConfigManagement.ReadKey("recaptchask") %>
                                                     <br />
                                                     <button id="btnInvia" type="button" class="divbuttonstyle" style="width: 200px" runat="server" validationgroup="contattifooter" onclick="ConfirmValidationFormMaster(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
                                                     <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />
@@ -1091,6 +1155,6 @@
     <%--    <%= InjectDirectrenderinPage() %>--%>
 
     <%--ABILITARE LA SEGUENTE E INSERIRE LE CHIAVI CAPRCHA NEL DB CONFIG PER ATTIVARE GOOGLE CAPTCHA SERVER/CLIENT VALIDATION--%>
-    <%--  <script src='https://www.google.com/recaptcha/api.js'></script>--%>
+   <%-- <script src='https://www.google.com/recaptcha/api.js'></script>--%>
 </body>
 </html>
