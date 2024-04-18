@@ -571,7 +571,7 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                          */
                     }
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    if (!string.IsNullOrEmpty(recaptcharesponse1))
+                    if (!errorerecaptcha1)
                     {
 
                         //string actlingua = (data.GetValueOrDefault("lingua") ?? ""); //viene gia passata
