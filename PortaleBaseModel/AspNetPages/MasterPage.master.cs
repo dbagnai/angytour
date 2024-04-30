@@ -1714,6 +1714,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         }
     }
 
+#if false
 
     protected void btnContatti1_Click(object sender, EventArgs e)
     {
@@ -1783,6 +1784,7 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         }
     }
 
+#endif
     protected void InserisciNewsletter(string email)
     {
         string pattern = "^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$";

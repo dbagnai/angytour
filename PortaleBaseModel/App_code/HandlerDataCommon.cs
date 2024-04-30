@@ -347,6 +347,12 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         string ragsoc = (maildata.GetValueOrDefault("ragsoc") ?? "");
                         string mittenteMail = (maildata.GetValueOrDefault("email") ?? "");
                         string mittenteTelefono = (maildata.GetValueOrDefault("telefono") ?? "");
+#if true
+                        bool resultchktelefono = Utility.ContainsOnlyAllowedChars(mittenteTelefono, "-+0123456789 ");
+                        if (!resultchktelefono) throw new ApplicationException("Error validazione numero telefonico");
+
+#endif
+
                         string message = (maildata.GetValueOrDefault("message") ?? "");
                         string location = (maildata.GetValueOrDefault("location") ?? "");
                         string regione = (maildata.GetValueOrDefault("regione") ?? "");
@@ -593,6 +599,14 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         cliente.Ragsoc = (data.GetValueOrDefault("ragsoc") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
                         cliente.Email = (data.GetValueOrDefault("email") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
                         cliente.Telefono = (data.GetValueOrDefault("telefono") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
+
+#if true
+                        bool resultchktelefono1 = Utility.ContainsOnlyAllowedChars(cliente.Telefono, "-+0123456789 ");
+                        if (!resultchktelefono1) throw new ApplicationException("Error validazione numero telefonico");
+
+#endif
+
+
                         cliente.Pivacf = (data.GetValueOrDefault("piva") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
                         cliente.Emailpec = (data.GetValueOrDefault("sdi") ?? "").Trim().Trim('\t').Trim('\\').Trim('\r').Trim('\n');
 

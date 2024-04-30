@@ -17,6 +17,7 @@ using System.Collections.Specialized;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
+using System.Linq;
 
 namespace WelcomeLibrary.UF
 {
@@ -341,6 +342,12 @@ namespace WelcomeLibrary.UF
 
     public static class Utility
     {
+
+        public static bool ContainsOnlyAllowedChars(string input, string allowedChars)
+        {
+            return input.All(c => allowedChars.Contains(c));
+        }
+
         public static string reformatdatetimestring(string inputdatetext, string inputformat = "yyyy-MM-dd HH:mm:ss", string outformat = "{0:dd/MM/yyyy}")
         {
             string ret = "";

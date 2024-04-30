@@ -835,12 +835,7 @@
                                                                     }, tastotxt);
                                                                 }, $(elembtn));
                                                                 ///////////////////////////////////////////////////////////////////////
-                                                                ///////////////////////////////////////////////////////////////////////
-                                                                //Invio con post back (metodo originale)
-                                                    //var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
-                                                                // $(elembtn).html("Wait ..");
-                                                                // buttpost.click();
-                                                                ////////////////////////////////////////////////////////////////////////
+                                                              
                                                             } else {
                                                                 $('html,body').animate({
                                                                     scrollTop: $("#ctl00_divContattiMaster").offset().top - 20
@@ -914,7 +909,7 @@
                                                       <%=  WelcomeLibrary.UF.ConfigManagement.ReadKey("recaptchask") %>
                                                     <br />
                                                     <button id="btnInvia" type="button" class="divbuttonstyle" style="width: 200px" runat="server" validationgroup="contattifooter" onclick="ConfirmValidationFormMaster(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
-                                                    <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnContatti1_Click" />
+                                                  
                                                 </div>
                                             </div>
                                         </div>
