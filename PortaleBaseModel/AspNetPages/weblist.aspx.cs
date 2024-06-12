@@ -99,7 +99,11 @@ public partial class AspNetPages_weblist : CommonPage
         get { return ViewState["Giornofiltro"] != null ? (string)(ViewState["Giornofiltro"]) : ""; }
         set { ViewState["Giornofiltro"] = value; }
     }
-
+    public string orderby
+    {
+        get { return ViewState["orderby"] != null ? (string)(ViewState["orderby"]) : ""; }
+        set { ViewState["orderby"] = value; }
+    }
     public string Comune
     {
         get { return ViewState["Comune"] != null ? (string)(ViewState["Comune"]) : ""; }
@@ -274,6 +278,7 @@ public partial class AspNetPages_weblist : CommonPage
                 Vetrina = tmpbool;
                 Promozioni = CaricaValoreMaster(Request, Session, "promozioni");
 
+                orderby = CaricaValoreMaster(Request, Session, "orderby");
 
                 Categoria = CaricaValoreMaster(Request, Session, "Categoria", true);
                 Categoria2liv = CaricaValoreMaster(Request, Session, "Categoria2liv", true);
@@ -362,10 +367,14 @@ public partial class AspNetPages_weblist : CommonPage
                 column3.Visible = false;
                 divSearch.Visible = false;
 
+
                 if (!string.IsNullOrEmpty(Categoria2liv) || (string.IsNullOrEmpty(Categoria2liv) && !string.IsNullOrEmpty(Categoria)) || (!string.IsNullOrEmpty(testoricerca))
-                    || (!string.IsNullOrEmpty(Caratteristica1))
+                                || (!string.IsNullOrEmpty(Caratteristica1))
                     || (!string.IsNullOrEmpty(Caratteristica2))
                     || (!string.IsNullOrEmpty(Caratteristica3))
+                    || (!string.IsNullOrEmpty(Caratteristica4))
+                    || (!string.IsNullOrEmpty(Caratteristica5))
+                    || (!string.IsNullOrEmpty(Promozioni))
                     || (!string.IsNullOrEmpty(Nazione))
                     || (!string.IsNullOrEmpty(Regione))
                     || (!string.IsNullOrEmpty(prezzofilter))
@@ -955,7 +964,10 @@ public partial class AspNetPages_weblist : CommonPage
         //        objvalue["ddlAtcgmp3"] = Caratteristica3.Substring(0, 4);
         //}
 
-
+        if (orderby != "")
+        {
+            objvalue["orderby"] = orderby;
+        }
         if (datapartenzafilter != "")
         {
             objvalue["datapartenzafilter"] = datapartenzafilter;
@@ -1714,6 +1726,9 @@ public partial class AspNetPages_weblist : CommonPage
         Tabrif link2 = null;
         Tabrif link3 = null;
         string linkurl = "";
+        bool usacaratteristiche = false; //per creare i breadcumb con le caratteristiche secondarie
+
+
         Dictionary<string, string> addpars = new Dictionary<string, string>();
         if (!string.IsNullOrEmpty(Caratteristica1) && Caratteristica1 != "0") addpars.Add("Caratteristica1", Caratteristica1);
         if (!string.IsNullOrEmpty(Caratteristica2) && Caratteristica2 != "0") addpars.Add("Caratteristica2", Caratteristica2);

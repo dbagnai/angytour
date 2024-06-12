@@ -1071,6 +1071,7 @@ namespace WelcomeLibrary.UF
             if (addparms != null)
                 foreach (KeyValuePair<string, string> kv in addparms)
                 {
+                    if (kv.Key.ToLower() == "filtrodisponibili") continue; //non creo una customizzazione del link per i disponibili in qunato è implicito in tutti i filtri!!!!
                     string tmptxt = modificatestourlbyparameter(kv, Lingua);
                     testomodificatore1 += (!string.IsNullOrEmpty(tmptxt)) ? tmptxt + "-" : ""; //estendo l'url col testo in base al filtro dei parametri aggiuntivi passati
                     if (kv.Value != "0") //per valore chiave a zero non faccio il replace senno la chiave 0 la annullo!!!

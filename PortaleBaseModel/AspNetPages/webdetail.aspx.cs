@@ -1141,12 +1141,18 @@ public partial class _webdetail : CommonPage
         Tabrif link2 = null;
         Tabrif link3 = null;
         string linkurl = "";
+        bool usacaratteristiche = false; //per creare i breadcumb con le caratteristiche secondarie
 
         Dictionary<string, string> addpars = new Dictionary<string, string>();
-        if (!string.IsNullOrEmpty(Caratteristica1) && Caratteristica1 != "0") addpars.Add("Caratteristica1", Caratteristica1);
-        if (!string.IsNullOrEmpty(Caratteristica2) && Caratteristica2 != "0") addpars.Add("Caratteristica2", Caratteristica2);
-        if (!string.IsNullOrEmpty(Caratteristica3) && Caratteristica3 != "0") addpars.Add("Caratteristica3", Caratteristica3);
+#if true
 
+        if (usacaratteristiche)
+        {
+            if (!string.IsNullOrEmpty(Caratteristica1) && Caratteristica1 != "0") addpars.Add("Caratteristica1", Caratteristica1);
+            if (!string.IsNullOrEmpty(Caratteristica2) && Caratteristica2 != "0") addpars.Add("Caratteristica2", Caratteristica2);
+            if (!string.IsNullOrEmpty(Caratteristica3) && Caratteristica3 != "0") addpars.Add("Caratteristica3", Caratteristica3);
+        }
+#endif
 
         link = new Tabrif();
         link.Campo1 = ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome"));
@@ -1157,12 +1163,17 @@ public partial class _webdetail : CommonPage
         {
             //1 livello tipologia
             string testosezione = item.Descrizione;
-            if (!string.IsNullOrEmpty(Caratteristica1))
-                testosezione += " " + references.TestoCaratteristica(0, Caratteristica1, "I");
-            if (!string.IsNullOrEmpty(Caratteristica2))
-                testosezione += " " + references.TestoCaratteristica(1, Caratteristica2, "I");
-            if (!string.IsNullOrEmpty(Caratteristica3))
-                testosezione += " " + references.TestoCaratteristica(2, Caratteristica3, "I");
+#if true
+            if (usacaratteristiche)
+            {
+                if (!string.IsNullOrEmpty(Caratteristica1))
+                    testosezione += " " + references.TestoCaratteristica(0, Caratteristica1, "I");
+                if (!string.IsNullOrEmpty(Caratteristica2))
+                    testosezione += " " + references.TestoCaratteristica(1, Caratteristica2, "I");
+                if (!string.IsNullOrEmpty(Caratteristica3))
+                    testosezione += " " + references.TestoCaratteristica(2, Caratteristica3, "I");
+            }
+#endif
 
             linkurl = CreaLinkRoutes(null, false, Lingua, CleanUrl(testosezione), "", CodiceTipologia, "", "");
             linkurl = WelcomeLibrary.UF.SitemapManager.CreaLinkRoutes(Lingua, CleanUrl(item.Descrizione), "", CodiceTipologia, "", "", "", "", "", true, WelcomeLibrary.STATIC.Global.UpdateUrl, addpars);
