@@ -4773,6 +4773,12 @@ namespace WelcomeLibrary.UF
                                 if (nodetobind.Attributes.Contains("myvalue4"))
                                     prop.Add(nodetobind.Attributes["myvalue4"].Value);
                                 else prop.Add("");
+                                if (nodetobind.Attributes.Contains("myvalue5"))
+                                    prop.Add(nodetobind.Attributes["myvalue5"].Value);
+                                else prop.Add("");
+                                if (nodetobind.Attributes.Contains("myvalue6"))
+                                    prop.Add(nodetobind.Attributes["myvalue6"].Value);
+                                else prop.Add("");
 
                                 ret = CallMappedFunction(functiontocall, valore, prop, nodetobind, itemdic, linkloaded, resultinfo);
                                 //if (ret != null && Array.isArray(ret) && ret.length > 0)
@@ -4825,7 +4831,12 @@ namespace WelcomeLibrary.UF
                                 if (nodetobind.Attributes.Contains("myvalue4"))
                                     prop.Add(nodetobind.Attributes["myvalue4"].Value);
                                 else prop.Add("");
-
+                                if (nodetobind.Attributes.Contains("myvalue5"))
+                                    prop.Add(nodetobind.Attributes["myvalue5"].Value);
+                                else prop.Add("");
+                                if (nodetobind.Attributes.Contains("myvalue6"))
+                                    prop.Add(nodetobind.Attributes["myvalue6"].Value);
+                                else prop.Add("");
                                 ret = CallMappedFunction(functiontocall, valore, prop, nodetobind, itemdic, linkloaded, resultinfo);
                                 //if (ret != null && Array.isArray(ret) && ret.length > 0)
                                 //    valore = ret[0];
@@ -4877,7 +4888,12 @@ namespace WelcomeLibrary.UF
                                 if (nodetobind.Attributes.Contains("myvalue4"))
                                     prop.Add(nodetobind.Attributes["myvalue4"].Value);
                                 else prop.Add("");
-
+                                if (nodetobind.Attributes.Contains("myvalue5"))
+                                    prop.Add(nodetobind.Attributes["myvalue5"].Value);
+                                else prop.Add("");
+                                if (nodetobind.Attributes.Contains("myvalue6"))
+                                    prop.Add(nodetobind.Attributes["myvalue6"].Value);
+                                else prop.Add("");
                                 ret = CallMappedFunction(functiontocall, valore, prop, nodetobind, itemdic, linkloaded, resultinfo);
                                 // da finire ....
                                 //if (ret != null && Array.isArray(ret) && ret.length > 0)
@@ -5295,6 +5311,44 @@ namespace WelcomeLibrary.UF
                             ret = itemdic[prop[0]];
                         }
                     break;
+                case "formatvisibilitybyjsonvalue":
+                    try
+                    {
+                        ret = "false";
+                        string checkvalue = "";
+                        string valorecontenuto = "";
+                        List<Tabrif> extradata1 = new List<Tabrif>();
+
+                        if (prop.Count > 0 && prop[0] != "")
+                            if (itemdic.ContainsKey(prop[0]))
+                            {
+                                valorecontenuto = itemdic[prop[0]];
+                                if (!string.IsNullOrEmpty(valorecontenuto))
+                                {
+                                    extradata1 = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Tabrif>>(valorecontenuto);
+                                    if (extradata1 != null)
+                                        if (prop.Count > 1 && prop[1] != "")
+                                        {
+                                            Tabrif elem = extradata1.Find(e => e.Campo2 == prop[1]);
+                                            if (elem != null)
+                                            {
+                                                if (!string.IsNullOrEmpty(elem.Campo1))
+                                                    checkvalue += elem.Campo1;
+                                                else if (elem.Double1 != 0)
+                                                    checkvalue += elem.Double1;
+                                            }
+                                        }
+                                }
+                            }
+                        if (string.IsNullOrEmpty(checkvalue))
+                        {
+                            ret = "true";
+                        }
+                        else
+                            ret = "false";
+                    }
+                    catch { }
+                    break;
                 case "formatjsontext":
                     List<Tabrif> extradata = new List<Tabrif>();
                     if (prop.Count > 0 && prop[0] != "")
@@ -5338,6 +5392,63 @@ namespace WelcomeLibrary.UF
                                         }
                                     }
 
+                                if (!string.IsNullOrEmpty(ret))
+                                {
+
+                                    string splitvalues = ret;
+                                    //funzione per il bind del template per la customizzazione html link a schede
+                                    if (prop.Count > 6 && prop[6] != "")
+                                    {
+                                        if (prop[6] == "crealinkfromid")
+                                        {
+                                            //creare dalla lista id i link alle scehde collegate con la funzione crealinkfromid da rivedere
+                                            offerteDM offDM = new offerteDM();
+                                            string sessionid = "";
+                                            if (Session != null && !string.IsNullOrEmpty(Session.SessionID))
+                                                sessionid = Session.SessionID;
+                                            Dictionary<string, string> linkedschede = offerteDM.getlinklist(Lingua, splitvalues, sessionid);//tiro su le sched collegate
+                                            //splitta splitvalues in una lista di id separati da ,
+                                            string[] ids = splitvalues.Split(',');
+                                            string htmltoinsert = "<select class=\"form-control\" onChange=\"window.location.href=this.value\">";
+                                            string optionelem = " <option value=\"\">" + WelcomeLibrary.UF.ResourceManagement.ReadKey("common", Lingua, "linkedidsselectiontext").Valore + "</option>"; ;
+                                            htmltoinsert += optionelem;
+                                            foreach (string id in ids)
+                                            {
+                                                if (linkedschede.ContainsKey(id))
+                                                {
+                                                    string link = linkedschede[id];
+                                                    string linktext = linkedschede[id + "name"];
+                                                    //string linkurlidhtml = "<a class=\"btn btn-lg btn-black btn-black-outline\" target=\"_self\" href =\"" + link + "\" >" + linktext + "</a>";
+                                                    optionelem = " <option value=\"link\">text</option>";
+                                                    optionelem = optionelem.Replace("link", link);
+                                                    optionelem = optionelem.Replace("text", linktext);
+                                                    htmltoinsert += optionelem;
+                                                    //ret += linkurlidhtml;
+                                                }
+                                            }
+                                            htmltoinsert += "</select>";
+                                            ret = htmltoinsert;
+                                        }
+
+                                    }
+
+
+                                    if (prop.Count > 2 && prop[2] != "")
+                                        if (prop.Count > 3 && prop[3] != "")
+                                        {
+                                            string testodarisorsa = WelcomeLibrary.UF.ResourceManagement.ReadKey(prop[2], Lingua, prop[3]).Valore;
+                                            ret = testodarisorsa + " " + ret;
+                                        }
+                                    if (prop.Count > 4 && prop[4] != "")
+                                        if (prop.Count > 5 && prop[5] != "")
+                                        {
+                                            string testodarisorsa = WelcomeLibrary.UF.ResourceManagement.ReadKey(prop[4], Lingua, prop[5]).Valore;
+                                            ret = ret + " " + testodarisorsa;
+                                        }
+
+                                }
+                                else
+                                { }
                             }
                         }
                     break;

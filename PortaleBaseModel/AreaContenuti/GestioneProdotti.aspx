@@ -1034,7 +1034,15 @@
                             FilterMode="ValidChars" ValidChars="0123456789," />
                     </div>
                 </div>
-
+               <div class="row" style="display: block">
+                  <div class="col-sm-2 item-text">
+                      <strong>
+                          <asp:Label Width="30%" ID="Label84" runat="server" Text="Schede Collegate" /></strong>
+                  </div>
+                  <div class="col-sm-10">
+                      <asp:TextBox CssClass="mceNoEditor" Width="60%" ID="txtlinkedids" runat="server"></asp:TextBox>
+                  </div>
+              </div>
                 <div class="row" style="display: block">
                     <div class="col-sm-2 item-text">
                         <strong>

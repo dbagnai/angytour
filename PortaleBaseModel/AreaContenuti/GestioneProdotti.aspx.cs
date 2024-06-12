@@ -377,6 +377,20 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         Offerte Details = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, OffertaIDSelected);
         if (Details != null)
         {
+
+            ////////////EXTRADATA INTABELLA COLLEGATA /
+            List<Tabrif> extradata = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Tabrif>>(Details.Textfield1_dts);
+            if (extradata != null)
+            {
+                Tabrif elem = elem = extradata.Find(e => e.Campo2 == "linkedids");
+                if (elem != null)
+                {
+                    txtlinkedids.Text = elem.Campo1;
+                }
+
+            }
+            //////////////////////////////
+          
             txtCampo1I.Text = Details.Campo1I;
             txtCampo2I.Text = Details.Campo2I;
             txtCampo1GB.Text = Details.Campo1GB;
@@ -937,6 +951,24 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     updrecord.Id = tmp;
                     updrecord = offDM.CaricaOffertaPerId(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, OffertaIDSelected);
 
+#if true
+
+
+                    ///aggiornamento extraprops intablela collegata /////
+                    List<Tabrif> extraprops = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Tabrif>>(updrecord.Textfield1_dts);
+                    if (extraprops == null) extraprops = new List<Tabrif>();
+                    Tabrif elem = new Tabrif();
+                    //    schede collegate
+                    elem = new Tabrif();
+                    elem.Campo2 = "linkedids"; elem.Campo1 = txtlinkedids.Text; elem.Lingua = "I";
+                    extraprops.RemoveAll(etmp => etmp.Campo2 == elem.Campo2);
+                    extraprops.Add(elem);
+
+                    string serializedextraprops = Newtonsoft.Json.JsonConvert.SerializeObject(extraprops);
+                    updrecord.Textfield1_dts = serializedextraprops; //metto le extraprops nella tabella collegata!!!
+                                                                     ///////////////////////////////////////////////////  
+#endif
+
 
                     long tmpcoll = 0;
                     if (long.TryParse(txtIdcollegato.Text, out tmpcoll))
@@ -1246,7 +1278,24 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 double.TryParse(txtLongitudine1_dts.Text, out _tmpdbl);//Mettere textbox per prezzo
                 updrecord.Longitudine1_dts = _tmpdbl;
 
+#if true
 
+                /////////////////////////////////////////////////////
+                ///aggiornamento extraprops intablela collegata /////
+                List<Tabrif> extraprops = new List<Tabrif>();
+                Tabrif elem = new Tabrif();
+                elem = new Tabrif();
+                //    txtlinkedids
+                elem = new Tabrif();
+                elem.Campo2 = "linkedids"; elem.Campo1 = txtlinkedids.Text; elem.Lingua = "I";
+                extraprops.RemoveAll(etmp => etmp.Campo2 == elem.Campo2);
+                extraprops.Add(elem);
+
+                string serializedextraprops = Newtonsoft.Json.JsonConvert.SerializeObject(extraprops);
+                updrecord.Textfield1_dts = serializedextraprops; //metto le extraprops nella tabella collegata!!!
+                                                                 /////////////////////////////////////////////////////
+                ///  
+#endif
                 //Questi li devi riempire con la lista delle foto
                 //updrecord.FotoCollection_M.Schema = txtFotoSchema.Value;
                 //updrecord.FotoCollection_M.Valori = txtFotoValori.Value;
