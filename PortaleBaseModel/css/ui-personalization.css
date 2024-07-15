@@ -1053,6 +1053,21 @@ Social icons
         border: 1px solid #00799e;
     }
 
+
+
+.social-icons .x-icon {
+    background-image: url("../images/social-media/social-media-x.png");
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #e8e8e8;
+}
+
+    .social-icons .x-icon:hover {
+        background-color: #000;
+        border: 1px solid #00799e;
+    }
+
 .social-icons .facebook-icon {
     background-image: url("../images/social-media/social-media-facebook.png");
     -webkit-box-sizing: border-box;
@@ -1337,6 +1352,23 @@ Social icons
         background-color: #00a0d1;
         border: 1px solid #00799e;
     }
+
+
+
+
+.social-icons-small .x-icon-small {
+    background-image: url("../images/social-media/social-media-x-small-white.png");
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: none;
+}
+
+    .social-icons-small .x-icon-small:hover {
+        background-color: #000;
+        border: 1px solid #00799e;
+    }
+
 
 .social-icons-small .facebook-icon-small {
     background-image: url("../images/social-media/social-media-facebook-small-white.png");
