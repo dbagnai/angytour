@@ -419,6 +419,7 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
         catch { valore = ""; ddlregione.SelectedValue = valore; }
 
     }
+#if false
 
     /// <summary>
     /// Invia al destinatario la rochiesta di interessamento
@@ -578,6 +579,8 @@ public partial class AspNetPages_Content_Tipo3 : CommonPage
             lblRisposta.Text = references.ResMan("Common", Lingua, "txtMailError");
         }
     }
+
+#endif
     //private void CaricaDdlservizi(string value = "")
     //{
 

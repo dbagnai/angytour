@@ -336,7 +336,7 @@
                                                                 <%--<div id="recaptcharesponse"></div>--%>
 
 
-                                                                <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnInvia_Click" />
+                                                               <%-- <asp:Button ID="btnInviaSrv" Style="display: none" runat="server" OnClick="btnInvia_Click" />--%>
                                                                 <style>
                                                                     .g-recaptcha {
                                                                         margin: 15px auto !important;
@@ -400,10 +400,6 @@
                                                                             ///////////////////////////////////////////////////////////////////////
 
                                                                             ////////////////////////////////////////////////////////////////////////
-                                                                            //Invio con postback
-                                                                          <%--  var buttpost = document.getElementById("<%= btnInviaSrv.ClientID  %>");
-                                                                            $(elembtn).html("Wait ..");
-                                                                            buttpost.click();--%>
                                                                             ////////////////////////////////////////////////////////////////////////
 
                                                                         }
