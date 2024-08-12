@@ -906,14 +906,19 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
 
 .border-tipo1 {
     border-color: #ccc !important;
-    /*background-color: rgba(200,200,200,0.05);*/
-    -webkit-box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.3);
-    -moz-box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.3);
-    box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.3);
+    /* background-color: rgba(200, 200, 200, 0.05); */
+    -webkit-box-shadow: 0px 1px 18px 1px rgba(135, 135, 135, 0.3);
+    -moz-box-shadow: 0px 1px 18px 1px rgba(135, 135, 135, 0.3);
+    box-shadow: 0px 1px 18px 1px rgba(135, 135, 135, 0.3);
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
-    border-radius: 0px;
-    -webkit-transition: box-shadow .3s;
+    border-radius: 30px !important;
+    -webkit-transition: box-shadow 0.3s;
+    border-color: #3c3c3b;
+    border: none !important;
+    border-radius: 0;
+    overflow: hidden;
+    /* overflow:hidden;*/
 }
 
 .border-tipo1:hover {
@@ -1955,15 +1960,14 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
     -o-transform: rotate(-40deg);
 }*/
 
-.prod_discount {
+.prod_discount { 
     position: absolute;
     padding: 1px 7px;
-    border-radius: 1px;
-    left: 5px;
-    top: 10px;
-    z-index: 5;
-    /* background: url(../images/sitespecific/bollino-1.png) no-repeat center center;*/
-    border: 1px solid;
+    left: 15px;
+    top: 15px;
+    z-index: 2;
+    /* background: url(../images/sitespecific/bollino-1.png) no-repeat center center; */
+    border: 1px solid transparent;
     background-color: #fff;
     text-align: left;
     color: black;
@@ -1971,6 +1975,7 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
     font-weight: 800;
     font-size: 0.8rem;
     word-wrap: normal;
+    border-radius:5px;
 }
 
 .prod_discount > span {
@@ -1986,18 +1991,19 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
     position: absolute;
     padding: 1px 7px;
     border-radius: 1px;
-    right: 25px;
-    top: 10px;
-    z-index: 5;
-    /* background: url(../images/sitespecific/bollino-1.png) no-repeat center center;*/
-    border: 1px solid;
+    left: 15px;
+    top: 15px;
+    z-index: 2;
+    /* background: url(../images/sitespecific/bollino-1.png) no-repeat center center; */
+    border: 1px solid transparent;
     background-color: #fff;
     text-align: left;
-    color: blue;
+    color: black;
     font-family: @primary-font;
     font-weight: 800;
     font-size: 0.8rem;
     word-wrap: normal;
+    border-radius: 5px;
 }
 
 .prod_promo > span {
@@ -4355,4 +4361,172 @@ svg path {
     /*top: 50%;*/
     transform: translateY(-50%);
     margin-left: -25% !important;
+}
+
+.custom-list-item {
+    list-style: none;
+    margin: auto auto auto 20px;
+    border-left: 6px dotted #00ccbd;
+    padding: 0 0 30px 20px;
+    position: relative;
+}
+
+.custom-list-item::before {
+    position: absolute;
+    left: -14px;
+    content: ""; 
+    border: 8px solid hsla(0, 0%, 100%, .74);
+    border-radius: 100%;
+    background: #00ccbd;
+    height: 20px;
+    width: 20px;
+}
+
+.custom-list-item:last-child {
+    border-left: none;
+    left: 7px;
+    padding-bottom: 0;
+}
+
+.accordion {
+    border-radius: 15px;
+    overflow: hidden
+}
+
+.accordion button:after {
+    content: "";
+    font-family: 'Font Awesome 5 Free';
+    float: right;
+    font-style: normal;
+    font-weight: 900;
+    text-decoration: inherit;
+    margin-left: -5px;
+    line-height: 42px
+}
+
+.accordion button.collapsed:after {
+    content: "";
+    font-family: 'Font Awesome 5 Free';
+    float: right;
+    font-style: normal;
+    font-weight: 900;
+    text-decoration: inherit;
+    margin-left: -5px;
+    line-height: 42px
+}
+
+.btn-accordion, .btn-accordion:hover, .btn-accordion:active, .btn-accordion:focus {
+    background-color: @bg-custom-color1;
+    border: none;
+    font-size: 19px;
+    color: #481728 !important;
+    padding: 15px 20px;
+    border-radius: 0;
+    line-height: 2em;
+    box-shadow: none;
+    text-decoration: none
+}
+
+.custom-list {
+    list-style-type: none;
+    counter-reset: custom-counter;
+    font-size: 1.2rem
+}
+
+.custom-list-item {
+    list-style: none;
+    margin: auto auto auto 20px;
+    border-left: 6px dotted #00ccbd;
+    padding: 0 0 30px 20px;
+    position: relative
+}
+
+.custom-list-item:last-child {
+    border-left: none;
+    left: 7px;
+    padding-bottom: 0
+}
+
+.custom-list-item::before {
+    position: absolute;
+    left: -14px;
+    content: " ";
+    border: 8px solid hsla(0,0%,100%,.74);
+    border-radius: 100%;
+    background: #00ccbd;
+    height: 20px;
+    width: 20px
+}
+
+.custom-list-item h3 {
+    margin: 0;
+    display: inline
+}
+
+/* SCHEDA DETAILS CATALOGO schedadetails-fullimage-ctafixed */
+
+.detail-cta-fixed {
+    .title-post {
+        top: 140px;
+        backdrop-filter: saturate(180%) blur(20px) !important;
+        background-color: #ffffff9c;
+        z-index: 80;
+        padding: 0 0;
+    }
+
+    .headerspacer {
+        padding-top: calc(220px);
+    }
+
+    @media (max-width: 1179px) {
+        .headerspacer, .headerspacer-home {
+            padding-top: 70px !important;
+        }
+    }
+}
+/* Banner sliderBanner-textcenter-button */
+.txt-slider {
+    .testoTxtCenter {
+        font-size: 1em;
+        text-shadow: 0 0 6px #000000;
+        color: #fff;
+        font-style: italic;
+    }
+
+    .enfword {
+        font-size: 2em !important;
+        text-shadow: 0 0 20px #00000091;
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .btn-testata, .btn-testata:hover, .btn-testata:active {
+        text-transform: uppercase;
+        background-color: transparent;
+        border: 1px solid #fff !important;
+        box-shadow: none !important;
+        font-size: .5em;
+        font-weight: 300;
+        color: #fff !important;
+        padding: 10px;
+        border-radius: 5px
+    }
+
+    @media screen and (max-width: 920px) {
+        .testoTxtCenter {
+            font-size: 3em;
+            margin: 15px !important;
+        }
+
+        .enfword {
+            margin: 0px;
+            font-size: 5em;
+            line-height: 0.9em !important;
+            font-weight: 100;
+        }
+
+        .btn-testata, .btn-testata:hover, .btn-testata:active {
+            font-size: 2em;
+        }
+    }
 }

@@ -423,3 +423,35 @@
 <Messaggio> Application start : 27/05/2024 09:29:47</Messaggio>
  <Data>27/05/2024 09:29:52</Data>
 <Messaggio> Global init original path: http://localhost:62000/index.aspx Global init AbsolutePath : /index.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>07/08/2024 12:53:45</Data>
+<Messaggio> Application start : 07/08/2024 12:53:42</Messaggio>
+ <Data>07/08/2024 12:53:45</Data>
+<Messaggio> Global init original path: http://localhost:62000/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>07/08/2024 12:56:45</Data>
+<Messaggio>httplocalhost62000Generato sitemap  07/08/2024 12:56:45</Messaggio>
+ <Data>07/08/2024 12:56:45</Data>
+<Messaggio>httplocalhost62000Generato sitemap  07/08/2024 12:56:45Terminato Aggiornamento  07/08/2024 12:56:45</Messaggio>
+ <Data>07/08/2024 16:56:46</Data>
+<Messaggio>httplocalhost62000Generato sitemap  07/08/2024 16:56:46</Messaggio>
+ <Data>07/08/2024 16:56:46</Data>
+<Messaggio>httplocalhost62000Generato sitemap  07/08/2024 16:56:46Terminato Aggiornamento  07/08/2024 16:56:46</Messaggio>
+ <Data>07/08/2024 17:07:14</Data>
+<Messaggio> Application start : 07/08/2024 17:07:13</Messaggio>
+ <Data>07/08/2024 17:07:14</Data>
+<Messaggio> Global init original path: http://localhost:62000/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>07/08/2024 17:10:15</Data>
+<Messaggio>httplocalhost62000Generato sitemap  07/08/2024 17:10:15</Messaggio>
+ <Data>07/08/2024 17:10:15</Data>
+<Messaggio>httplocalhost62000Generato sitemap  07/08/2024 17:10:15Terminato Aggiornamento  07/08/2024 17:10:15</Messaggio>
+ <Data>09/08/2024 12:09:43</Data>
+<Messaggio> Application start : 09/08/2024 12:09:39</Messaggio>
+ <Data>09/08/2024 12:13:17</Data>
+<Messaggio> Global init original path: http://localhost:62000/l Global init AbsolutePath : /l Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http:/</Messaggio>
+ <Data>12/08/2024 11:30:59</Data>
+<Messaggio> Application start : 12/08/2024 11:30:55</Messaggio>
+ <Data>12/08/2024 11:30:59</Data>
+<Messaggio> Global init original path: http://localhost:62000/it/test-new-banner-64 Global init AbsolutePath : /it/test-new-banner-64 Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>12/08/2024 11:33:59</Data>
+<Messaggio>httplocalhost62000Generato sitemap  12/08/2024 11:33:59</Messaggio>
+ <Data>12/08/2024 11:33:59</Data>
+<Messaggio>httplocalhost62000Generato sitemap  12/08/2024 11:33:59Terminato Aggiornamento  12/08/2024 11:33:59</Messaggio>

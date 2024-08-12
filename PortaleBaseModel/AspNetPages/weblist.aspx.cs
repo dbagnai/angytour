@@ -394,7 +394,7 @@ public partial class AspNetPages_weblist : CommonPage
                     //NUOVO METODO CON INIZIALZIZATORE NEL FILE COMMON
                     string svetrina = "";
                     sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
-                    sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioProdotti4Card-a.html,divPortfolioList,portlist1, 1, 55,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',false,true,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'" + Categoria2liv + "\',\'\'");
+                    sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioProdotti4Card-cd.html,divPortfolioList,portlist1, 1, 55,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',false,true,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'" + Categoria2liv + "\',\'\'");
                     sb.Append("\"></div>");
                     sb.Append("<div id=\"divPortfolioListPager\"></div>");
 

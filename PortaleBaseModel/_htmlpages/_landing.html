@@ -1,0 +1,381 @@
+﻿<script>
+    // <![CDATA[
+    $('#ctl00_divContattiMaster').html('');
+    //$('#divTitleContainer').html('');
+    jQuery(document).ready(function () {
+        $('#ctl00_divContattiMaster').html('');
+        $(".fixedtop").hide();
+
+        // $('#divTitleContainer').html('');
+    });
+    //Muoviamo i breadcrum spostandoli sotto il banner
+    jQuery(document).ready(function ($) {
+        //  $("#breadcrumbmove").html($("#breadcrumbContainer").html());
+        $("#breadcrumbContainer").html('');
+        $(".searchbar-container").html('');
+        //$(".fixedtop").hide();
+        //$(".fixednav").hide();
+        //$(".lead-action-link").attr("href", "#richiedilinkpoint");
+        $(".lead-action-link").hide();
+    });
+    // ]]></script>
+<style>
+    .headerspacer, .headerspacer-home {
+        padding-top: 0px;
+    }
+
+    .fixednav {
+        top: 0px !important;
+    }
+    
+    .prime-review {
+        margin-top: -241px;
+        z-index: 95;
+    }
+    @media screen and (max-width: 920px) {
+        .prime-review {
+            margin-top: 0px;
+            z-index: 95;
+        }
+    }
+    .video-container {
+        position: relative;
+        width: 100vw;
+        height: 110vh;
+        z-index: 89;
+    }
+
+    .video-container video {
+        width: 100vw;
+        height: 110vh;
+        object-fit: cover;
+        position: relative;
+        top: 0;
+        left: 0;
+        z-index: 90;
+    }
+
+    @media screen and (max-width: 400px) {
+        .video-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            top: 0vh;
+            z-index: 89;
+        }
+        .video-container video {
+            width: 100vw;
+            height: 85vh;
+            object-fit: cover;
+            position: relative;
+            top: 0vh;
+            left: 0;
+            z-index: 90;
+        }
+    }
+
+    .overlayvideotext {
+        position: absolute;
+        text-align: center;
+        justify-content: center;
+        vertical-align: center;
+        top: 40%;
+        width: 100%;
+        height: 30%;
+        z-index: 95;
+        padding: 10px 30px 10px 30px;
+    }
+    .light-background{
+        background-color:#fff;
+        border-radius:20px;
+    }
+
+</style>
+<!--<div class="video-container setfullscreenheader ">
+    <video width="300" height="150" id="head-video" playsinline="" autoplay="autoplay" muted="" loop="loop" poster="https://romagnarelax.it/public/Files/con001000/1/romagna-foto-1.jpg">
+        <source src="https://romagnarelax.it/public/Files/con001000/1/io.mp4" type="video/mp4">
+    </video>
+</div>-->
+<div id="divContainerb1" class="inject my-0 mx-auto position-relative" params="injectSliderAndLoadBanner,sliderBanner-textcenter-button.html, divContainerb1, bannersliderb1, 1, 2, false, '', '', '', TBL_BANNERS_GENERALE, header-1, false, 1600, 530"></div>
+<div id="breadcrumbmove"></div>
+<div id="nav-home-top" style="padding-top: 100.2px; margin-top: -100.2px;"></div>
+<section class="prime-review">
+    <div style="background: linear-gradient(0deg,#245849,hsl(0deg 0% 4% / 0%));">
+        <div class="container">
+            <div class="row  text-center" style="padding: 50px 20px 0px 20px;">
+                <h1 class="col-12 mbr-section-title mt-5 text-center pt-3 mb-1 font-weight-strong white-color">Prima la provi e poi se ti piace la paghi</h1>
+                <span class="col-12 mbr-section-subtitle mb-0 mt-1 text-center white-color">Romagna Relax mantiene le sue promesse, provala senza impegno e scopri la qualit&agrave; della nostra poltrona. Puoi pagarla ancora meno con le detrazioni fiscali del 19%, Contattaci adesso</span>
+                <h2 class="col-12 mbr-section-title mt-0 text-center pt-5 mb-1 font-weight-strong white-color">Guarda il nostro Video e scopri le nostre poltrone</h2>
+            </div>
+        </div>
+    </div>
+    <div style="background-color: #245849;">
+        <div class="container text-center p-0">
+            <div class="col-12 py-3 px-1" style="align-self: center;">
+                <div class="responsive-video" style="display: block;">
+                    <div class="fluid-width-video-wrapper" style="padding-top: 55.9998%;"><iframe width="80%" height="150" frameborder="0" allowfullscreen="allowfullscreen" class="lazy" src="https://www.youtube.com/embed/H3A226CrzDk?rel=0&amp;playlist=H3A226CrzDk"></iframe></div>
+                </div>
+                <a class="btn btn-lg btn-primary-2 mt-5 scalablefont-smallest" href="#richiedilinkpoint">Contattaci ora</a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container-fluid" style="padding-bottom: 90px; padding-top: 10px;">
+    <div class="container p-0">
+        <div class="row">
+            <section class="pt-0 pb-2 mb-2 mt-5 px-3">
+                <div class="row">
+                    <h3 class="col-12 mbr-section-title text-center pt-3 mt-3 font-weight-strong ">Perch&egrave; scegliere le poltrone Romagna relax</h3>
+                    <span class="col-12 mbr-section-subtitle mb-0 mt-1 text-center"> Manteniamo sempre quello che promettiamo, usiamo solo <b>materiali di qualit&agrave; e durevoli</b>, troverai <b>comfort e design ad un prezzo conveniente e senza sorprese</b> </span>
+                </div>
+            </section>
+            <div class="mx-auto pb-3" style="padding-right: 15px; padding-left: 15px;">
+                <div class="inject" id="divContainer-bply2" params="injectbootstrapportfolioandloadbanner,'bootstrapVPolygonBanner3-noButton.html', 'divContainerBanner-bply2', 'idbply2', 1, 1, false, '', '9', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-sezioni', false"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container pb-2 pb-md-2 text-center">
+        <div class="row">
+            <div class="col-12 mx-auto text-center mb-0 mb-md-0">
+                <h3 class="col-12 mbr-section-title  text-center pt-3 mb-1 font-weight-strong ">Le nostre POLTRONE e le vostre ESPERIENZE</h3>
+                <span class="col-12 mbr-section-subtitle mb-0 mt-1 text-center"> Poltrone, reti e materassi. <b>La forza del prezzo e l'essenza della qualit&agrave;!</b> </span>
+            </div>
+        </div>
+        <div class="inject mt-0 mt-xl-4" id="divContainerscb8" params="injectScrollerAndLoadBanner,'owlscrollerBanner5-textoverlay.html', 'divContainerscb8', 'idscb8', null, 20, 1, 'TBL_BANNERS_GENERALE', 'banner-portfolio-sezioni', false"></div>
+        <a class="btn btn-lg btn-primary-2 mt-5 scalablefont-smallest" href="#richiedilinkpoint">Contattaci ora</a>
+    </div>
+</section>
+<section style="background-color: #245849; padding-top: 40px; padding-bottom: 40px;">
+    <div class="container">
+        <p class="mbr-section-title  text-center white-color mb-1 mt-3">Una poltrona unica, realizzata da <span style="color: #da3832;">veri artigiani italiani</span></p>
+        <p class="mbr-section-subtitle white-color text-center mt-0 mb-3 py-0 py-md-2 mb-5">qualit&agrave;, design e prestazioni senza rivali. Scopri tutte le possibilit&agrave; di utilizzo e la sua flessibilit&agrave; unica.</p>
+        <div class="container inject mt-5 mx-auto p-0 position-relative light-background" id="divContainer-bfd2" params="injectbootstrapportfolioandloadbanner,'bootstrapBannerSinglerow-alternato-nobutton.html', 'divContainer-bfd2', 'idbfd2', 1, 2, false, '', '6', '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-sezioni', false" style="overflow: hidden; border-radius: 20px;"></div>
+    </div>
+</section>
+<section class="d-block" style="background-color: #245849; padding-top: 40px; padding-bottom: 40px;">
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-12 mb-2  text-center">
+                <span class="mbr-section-title font-weight-strong  mb-0 pt-0 text-white text-center">Leggi i pareri di chi l'ha gi&agrave; provata</span> <br />
+                <div class="mbr-section-subtitle mb-0 mt-1 text-white text-center ">Scopri come le caratteristiche della poltrona Romagna sono state apprezzate dei nostri clienti</div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-12 text-center">
+                <div class="inject mt-0 mt-xl-4" id="divContainerscb7" params="injectScrollerAndLoadBanner,'owlscrollerBanner5-textoverlay.html', 'divContainerscb7', 'idscb7', null, 20, '2', 'TBL_BANNERS_GENERALE', 'banner-portfolio-sezioni', false"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" style="padding-left: 15px; padding-right: 15px;">
+            <h3 class="col-12 mbr-section-title mt-5 text-center pt-3 mb-1 font-weight-strong text-white">Contattaci con fiducia senza timore!</h3>
+            <span class="col-12 mbr-section-subtitle mb-0 mt-1 text-center  text-white">Ti promettiamo il massimo rispetto per i tuoi dati e di <b>non infastidirti</b> se non vorrai procedere con la prova o l'acquisto</span>
+        </div>
+        <div class="row mb-5">
+            <div class="col-12 col-md-6 p-0" style="align-self: center;"><img src="https://romagnarelax.it/public/Banners/poltronescontornate1.jpg" alt="" class=" imgBanner w-100" style="border-radius: 15px; box-shadow: 3px -1px 20px 0px #000000b3;" /></div>
+            <div class="col-12 col-md-6 text-center py-5 px-0">
+                <ul class="custom-list text-left" style="padding-inline-start: 20px; padding-right: 25px;">
+                    <li class="custom-list-item">
+                        <h3 class="white-color">Contattaci col metodo che preferisci</h3>
+                        <p class="white-color">Invia la tua richiesta via telefono, WhatsApp o e-mail direttamente da questa pagina.</p>
+                    </li>
+                    <li class="custom-list-item">
+                        <h3 class="white-color">Gestione del contatto da persone qualificate</h3>
+                        <p class="white-color">Sarari contattato direttamente da un membro del nostro team Romagna Relax che risponder&agrave; ad ogni tuo quesito.</p>
+                    </li>
+                    <li class="custom-list-item">
+                        <h3 class="white-color">Massima riservatezza e rispetto della tua privacy e dei tuoi dati</h3>
+                        <p class="white-color">Ci teniamo alla tua privacy e potrai liberamente scegliere se iniziare la tua prova gratuita in caso negativo non verrai pi&ugrave; disturbato.</p>
+                    </li>
+                </ul>
+                <a class="btn btn-lg btn-primary-2 mt-3 scalablefont-smallest" href="#richiedilinkpoint">Contattaci ora</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!--<section class="container">
+    <div class="col-12 inject m-auto position-relative" id="divContainer-bfd2" params="injectbootstrapportfolioandloadbanner,'bootstrapBannerfascia2.html', 'divContainer-bfd2', 'idbfd2', 1, 2, false, '', '2', '', 'TBL_BANNERS_GENERALE', 'banners-dettagli-land1', false" style="max-width: 1600px;"></div>
+</section>-->
+<!--<section class="container-fluid">
+    <div style="position: relative; margin: 0px auto; display: none;">
+        <div class="inject" id="divBannerimgback2" params="injectbootstrapportfolioandloadbanner,'bootstrapBannerSinglerowImgback-alternato.html', 'divBannerimgback2', 'imgbck2', 1, 1, false, '', '10', '', 'TBL_BANNERS_GENERALE', 'banner-bg-land1', false" style="background-color: transparent;"></div>
+    </div>
+</section>-->
+<!-- FORM RICHIESTA IN PAGINA -->
+<!--<div id="richiedilinkpoint" style="padding-top: 176px; margin-top: -176px;"></div>
+<section class="mbr-section  p-0" style="background-image: url('/public/Files/con001000/7/contact-back6.jpg');">
+    <div class="m-auto py-4 px-4" style="max-width: 1400px;">
+        <div class="row align-items-center py-0 pt-4 py-sm-5">
+            <div class="col-12 col-sm-7">
+                <div class="text-center text-md-left">
+                    <p class="scalablefont-big title-weight-1 primary-font font-italic  mt-1 text-shadow mb-4 white-color">Vuoi un preventivo o informazioni ?</p>
+                    <p class="scalablefont-medium subtitle-weight  text-shadow pb-2 white-color">Siamo a tua disposizione per ogni chiarimento o supporto, puoi chiamarci telefonicamente o contattarci tramite whatsapp cliccando i bottoni</p>
+                    <a href="tel:+390721829867" target="_self" title="" class="btn btn-small m-1 " style="width: 200px;"> <i class="fa fa-phone" aria-hidden="true"></i>+390721829867</a> <a target="_blank" href="https://wa.me/393385608668" class="btn btn-small m-1" style="background-color: #21722c; width: 200px;"><i class="fa fa-whatsapp" style="color: #fff;"></i> WhatsApp</a> <br />
+                    <p class="scalablefont-medium  subtitle-weight text-shadow py-2 white-color">oppure inviarci la tua richiesta compilando il modulo con i tuoi dati</p>
+                    <img src="/images/main_logo_d_b.png" class="img-responsive margin-auto" style="max-width: 400px; width: 100%;" />
+                </div>
+            </div>
+            <div class="col-12 col-sm-5">
+                <div class="ui-15 my-2" id="divContactForm">-->
+<section class=" bg-white" data-animtype="bounceInRight" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s" style="animation-delay: 0.5s; animation-duration: 0.5s; background-color: #e3ded2; padding: 5%; margin: 40px auto -40px;">
+    <div class="container">
+        <p class="title-isotope text-center mb-1">Le risposte alle domande pi&ugrave; frequenti</p>
+        <p class="mbr-section-subtitle text-center mt-0 mb-3 py-0 py-md-2">Se <b>ancora hai dei dubbi</b> qui pi&ugrave; trovare le <b>risposte che cerchi</b>, altrimenti contattaci con fiducia</p>
+        <div class="accordion" id="accordionExample1">
+            <!-- Domanda  -->
+            <div id="headingHeight1">
+                <p class="mb-0"><button class="btn-accordion btn-block text-center collapsed" style="border: none; border-bottom: 1px solid #fff; font-weight: 400;" type="button" data-toggle="collapse" data-target="#collapseHeight1">Ci sono agevolazioni fiscali per l'acquisto ? </button></p>
+            </div>
+            <div id="collapseHeight1" class="lead p-3 collapse" style="line-height: 1.4;" aria-labelledby="headingHeight1" data-parent="">Poltrona Romagna &egrave; certificata dispositivo medico in Classe 1 e potrai quindi usufruire della detrazione fiscale al 19% ed iva al 4% per gli aventi diritto Legge 104, contattaci per sapere se si applica nel tuo caso, potrai pagare la poltrona ancora meno!</div>
+            <!-- Domanda 1 -->
+            <div id="headingOne1">
+                <p class="mb-0"><button class="btn-accordion btn-block text-center collapsed" style="border: none; border-bottom: 1px solid #fff; font-weight: 400;" type="button" data-toggle="collapse" data-target="#collapseOne1"> Come faccio a fare la prova della Poltrona Romagna prima di acquistarla? </button></p>
+            </div>
+            <div id="collapseOne1" class="lead p-3 collapse" aria-labelledby="headingOne1" data-parent="">S&igrave;, offriamo la possibilit&agrave; di provare la Poltrona Romagna prima dell'acquisto grazie alla nostra politica "Prima la provi e poi la paghi". Contattateci per organizzare una prova presso il nostro showroom o a casa tua e per ricevere ulteriori dettagli.</div>
+            <!-- Domanda 2 -->
+            <div id="headingTwo1">
+                <p class="mb-0"><button class="btn-accordion btn-block text-center collapsed" style="border: none; border-bottom: 1px solid #fff; font-weight: 400;" type="button" data-toggle="collapse" data-target="#collapseTwo1"> Quali sono le opzioni di pagamento per la Poltrona Romagna, ci sono agevolazioni? </button></p>
+            </div>
+            <div id="collapseTwo1" class="lead p-3 collapse" style="line-height: 1.4;" aria-labelledby="headingTwo1" data-parent="">Offriamo diverse opzioni di pagamento, incluso il pagamento a rate da 21,00&euro;/mese. Contattateci per discutere le opzioni di finanziamento che meglio si adattano alle vostre esigenze.</div>
+            <!-- Domanda 3 -->
+            <div id="headingThree1">
+                <p class="mb-0"><button class="btn-accordion btn-block text-center collapsed" style="border: none; border-bottom: 1px solid #fff; font-weight: 400;" type="button" data-toggle="collapse" data-target="#collapseThree1"> Quali colorazioni sono disponibili per la Poltrona Romagna? </button></p>
+            </div>
+            <div id="collapseThree1" class="lead p-3 collapse" style="line-height: 1.4;" aria-labelledby="headingThree1" data-parent="">La Poltrona Romagna &egrave; disponibile in 4 fantastiche colorazioni. Potete visualizzare tutte le opzioni sul nostro sito web o contattarci per ricevere campioni di tessuto per una scelta pi&ugrave; accurata.</div>
+            <!-- Domanda 4 -->
+            <div id="headingFour1">
+                <p class="mb-0"><button class="btn-accordion btn-block text-center collapsed" style="border: none; border-bottom: 1px solid #fff; font-weight: 400;" type="button" data-toggle="collapse" data-target="#collapseFour1"> Cosa copre la garanzia della Poltrona Romagna? </button></p>
+            </div>
+            <div id="collapseFour1" class="lead p-3 collapse" style="line-height: 1.4;" aria-labelledby="headingFour1" data-parent="">S&igrave;, offriamo una garanzia di 2 anni sulla Poltrona Romagna. Ci impegniamo a fornire assistenza e supporto durante questo periodo per garantire la vostra soddisfazione.</div>
+            <!-- Domanda 5 -->
+            <div id="headingFive1">
+                <p class="mb-0"><button class="btn-accordion btn-block text-center collapsed" style="border: none; border-bottom: 1px solid #fff; font-weight: 400;" type="button" data-toggle="collapse" data-target="#collapseFive1"> Come funziona il servizio di consegna e ritiro del vecchio? </button></p>
+            </div>
+            <div id="collapseFive1" class="lead p-3 collapse" style="line-height: 1.4;" aria-labelledby="headingFive1" data-parent="">La consegna della Poltrona Romagna &egrave; gratuita, e offriamo anche il servizio di ritiro del vecchio. Per ulteriori dettagli sulle modalit&agrave; di consegna e ritiro, contattateci e saremo lieti di assistervi.</div>
+            <!-- Domanda 6 -->
+            <div id="headingSix1">
+                <p class="mb-0"><button class="btn-accordion btn-block text-center collapsed" style="border: none; border-bottom: 1px solid #fff; font-weight: 400;" type="button" data-toggle="collapse" data-target="#collapseSix1"> La Poltrona Romagna &egrave; adatta a chi pesa oltre 130 kg? </button></p>
+            </div>
+            <div id="collapseSix1" class="lead p-3 collapse" style="line-height: 1.4;" aria-labelledby="headingSix1" data-parent="">S&igrave;, la Poltrona Romagna ha una portata massima di 130 kg. La sua struttura robusta e le caratteristiche di design garantiscono comfort e sicurezza per una vasta gamma di utenti.</div>
+            <!-- Domanda 7 -->
+            <div id="headingSeven1">
+                <p class="mb-0"><button class="btn-accordion btn-block text-center collapsed" style="border: none; border-bottom: 1px solid #fff; font-weight: 400;" type="button" data-toggle="collapse" data-target="#collapseSeven1"> Come funziona il meccanismo Lift/Relax e il Roller Gold? </button></p>
+            </div>
+            <div id="collapseSeven1" class="lead p-3 collapse" style="line-height: 1.4;" aria-labelledby="headingSeven1" data-parent="">Il meccanismo Lift/Relax consente di regolare l'altezza della seduta in modo personalizzato mentre il Roller Gold semplifica l'attivazione e lo sblocco semplice del meccanismo di movimento su 4 ruote. Il sistema lift permette di alzarsi facilmente oppure rogolare l'altezza della poltrona per l'utilizzo ottimale a tavola. Per una dimostrazione pratica, non esitate a contattarci.</div>
+        </div>
+        <!--<p class="text-center my-0 my-md-3">
+                                                                                <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                                                                            </p>-->
+        <div class="row" style="margin-top: 60px;">
+            <div class="col-12 text-center">
+                <div class="mbr-section-title font-weight-strong  mb-0 pt-0   text-center">Opinioni dai social e dal web sulla Poltrona Romagna</div>
+                <div class="mbr-section-subtitle mb-0 mt-1   text-center ">Scopri i pareri e le esperienze dei <b>clienti Romagna Relax</b></div>
+            </div>
+            <div class="col-12 text-center">
+                <div id="divCommentiscroll" class="inject d-sm-block " style="padding-top: 10px;" params="commenttool.rendercommentsloadref,'all','divCommentiscroll','feedbackscrollersimple.html','false','','',12,false,1"></div>
+                <!--<div class="inject mt-0 mt-xl-4" id="divContainer-szcb2" params="injectScrollerAndLoadBanner,'owlscrollerBanner5.html', 'divContainer-scb2', 'id-scb2', null, 12, '', 'TBL_BANNERS_GENERALE', 'banner-portfolio-feeds', false"></div>-->
+            </div>
+            <h3 class="card-title title-isotope display-3 text-center mb- p-4" style="background-color: #bcb093;"><span> <span class="mb-3"> <br />Ricordati! Prima la provi poi la paghi. Direttamente a casa tua</span> <br /> <br /> <a class="btn btn-lg btn-primary-2 scalablefont-smallest" href="#richiedilinkpoint"> Contattaci ora<br /> </a> </span></h3>
+        </div>
+    </div>
+</section>
+<!-- Ui Form -->
+<div id="richiedilinkpoint" class=" bg-light-color py-4 border-tipo2 rounded  mt-5" style="overflow: hidden; background-color: #fff !important; background-repeat: no-repeat; background-size: cover;">
+    <div class="m-auto round-container imgbackstyle py-md-4 p-0 px-md-5" style="max-width: 1400px; margin: 2em auto!important; background-position: center; background-image: url('/public/Files/con001000/1/contact-back.jpg'); position: relative;">
+        <div class="row align-items-center py-0 pt-0 pt-sm-4 py-sm-5">
+            <div class="col-12 col-sm-7">
+                <div class=" light-background formbackground p-4 border-tipo2 rounded" style="overflow: hidden;">
+                    <div class="row justify-content-center">
+                        <div class="col-12" id="formbtniscrivi">
+                            <div class="row text-center pb-5">
+                                <div class="col-12 px-5">
+                                    <div class="scalablefont-medium   bounceInTop text-center pl-1 black-color" data-animtype="bounceInRight" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s" style="letter-spacing: 2px; font-weight: 500 !important;">Compila il modulo</div>
+                                    <div class="scalablefont-big   bounceInTop text-center pl-1  black-color" data-animtype="bounceInRight" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s" style="letter-spacing: 2px; font-weight: 800 !important;">
+                                        <span>Invia la tua richiesta</span>
+                                        <p class="mb-0 font-medium-bold">Se hai bisogno di informazioni contattaci o inviaci una richiesta e assicurati adesso una poltrona 100% Made in Italy ad un prezzo super vantaggioso.</p>
+                                        <p class="mb-0">puoi chiamarci telefonicamente o contattarci tramite whatsapp cliccando i bottoni</p>
+                                        <a href="tel:+390541694339" target="_self" title="" class="btn btn-small m-1 " style="width: 200px;"> <i class="fa fa-phone" aria-hidden="true"></i>+390541694339 </a> <a target="_blank" href="https://wa.me/393385608668" class="btn btn-small m-1" style="background-color: #21722c; width: 200px;"> <i class="fa fa-whatsapp" style="color: #fff;"></i> WhatsApp </a> <br />
+                                        <p>oppure inviarci la tua richiesta compilando il modulo con i tuoi dati</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="col-12">
+                                    <div class="ui-15 my-2" id="divContactForm">
+                                        <!-- Ui Form -->
+                                        <div class="ui-form formbackground bg-light-color p-4 border-tipo2 rounded" style="overflow: hidden;">
+                                            <div class="row justify-content-center">
+                                                <div class="col-12">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 pr-xl-2">
+                                                            <div class="ui-input"><input class="form-control" type="text" id="nomebtniscrivi" name="uname" placeholder="Nome" /> <label class="ui-icon"> <i class="fa fa-user"></i> </label></div>
+                                                        </div>
+                                                        <div class="col-sm-6 pr-xl-2">
+                                                            <div class="ui-input"><input class="form-control" type="text" id="cognomebtniscrivi" name="uname" placeholder="Cognome" /> <label class="ui-icon"> <i class="fa fa-user"></i> </label></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6 pr-xl-2">
+                                                            <div class="ui-input"><input class="form-control" type="text" id="telefonobtniscrivi" name="unname" placeholder="Telefono" /> <label class="ui-icon"> <i class="fa fa-phone"></i> </label></div>
+                                                        </div>
+                                                        <div class="col-sm-6 pr-xl-2">
+                                                            <div class="ui-input"><input class="form-control" type="text" id="emailbtniscrivi" name="unname" placeholder="Email" /> <label class="ui-icon"> <i class="fa fa-envelope-o"></i> </label></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="ui-input"><input class="form-control" type="text" value="infopoltrone" id="codicescontobtniscrivi" name="unname" placeholder="Codice sconto" /> <label class="ui-icon"> <i class="fa fa-bookmark"></i> </label></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12 col-sm-12">
+                                                            <p class="mb-0 font-medium-bold">Informazioni aggiuntive</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ui-input"><textarea class="form-control" rows="4" cols="5" name="q" placeholder="Note .." id="descrizionebtniscrivi"></textarea> <label class="ui-icon"> <i class="fa fa-comments"></i> </label></div>
+                                                    <div class="row" style="text-align: left;">
+                                                        <div class="col-sm-12">
+                                                            <div class="ui-input"><b>Formula di acquisizione del consenso dell'interessato</b> <br /> <a target="_blank" style="color: #c0c0c0;" href="/it/privacy-policy-6">Informativa Privacy ex art. 13 Reg. (UE) 2016/679</a> <a> <br /> L'interessato acquisite le informazioni dal Titolare, presta il consenso per le finalit&agrave; sotto riportate.<br /> <b>I campi contrassegnati con l'asterisco sono obbligatori.</b> <br /> </a></div>
+                                                            <div class="checkbox" style="margin-bottom: 20px;"><label> <input type="checkbox" id="chkprivacybtniscrivi" /> <span class="cr"> <i class="cr-icon fa fa-check"></i> </span> Per accedere al servizio richiesto * </label></div>
+                                                            <div class="checkbox" style="margin-bottom: 20px;"><label> <input type="checkbox" id="chkprivacy1btniscrivi" /> <span class="cr"> <i class="cr-icon fa fa-check"></i> </span> Per invio promozioni e informative via mail. </label></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ui-input text-center">
+                                                        <div class="ui-input text-center"><!--<div class="g-recaptcha" id="rcaptcha" data-sitekey="6LduFJUpAAAAAMNTYF7ENSIb6iMAIDJB4Jrih6Rf"></div>--></div>
+                                                        <div style="font-weight: 300; font-size: 1.4rem; color: red;" class="w-100" id="outputbtnuploaddocbtniscrivi"></div>
+                                                        <div class="ui-input text-center"><a class="btn btn-lg  scalablefont-smallest animated pulse  mt-4" data-animtype="pulse" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="1.5s" onclick="ConfirmValidationFormGeneral(this,'inseriscianagraficaenotifica','');" type="button" id="btniscrivi">Invia la richiesta</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-12">
+                                                    <div style="font-weight: 300; font-size: 1.6rem; color: red;" id="divoutputbtniscrivi"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            // <![CDATA[
+                            var localmessage = {};
+                            localmessage.privacy = 'Spuntare la casella di autorizzazione trattamento dati personali per procedere.';
+                            localmessage.captcha = "Selezionare la casella 'Non sono un Robot' per procedere con l'inserimento.";
+                            localmessage.validation = "Riempire tutti i campi per procedere !";
+                            localmessage.successmsg = "Richiesta correttamente inviata.";
+                            localmessage.errormsg = "Errore nell'inserimento della richiesta. Contattate il supporto per procedere.";
+                            localmessage.tipologia = "0"; //uso il campo per settare la tipologia del cliente da inserire!!! ( 0 - Iscritto Web )
+                            localmessage.generautente = "0";
+                            localmessage.inputisvalid = false;
+                            localmessage.validatemsg = "";
+                            localmessage.tipocontenuto = "infopoltrone";
+                            localmessagegeneral = localmessage;
+                            // ]]></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- </div> -->
+</div>

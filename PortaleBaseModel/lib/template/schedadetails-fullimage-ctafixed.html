@@ -1,0 +1,220 @@
+﻿
+<div id="replaceid" class="mt-4 p-0 text-left detail-cta-fixed bg-light-color" itemscope="" itemtype="http://schema.org/Article">
+
+    <div class="container position-sticky d-none d-md-block bg-light-color  mx-0 mx-sm-0" style="z-index:96">
+        <div class="col-10 m-auto row title-post fixed-top">
+            <div class="w-100 col-12 col-md-10 p-0 p-md-3 pt-md-4 pl-md-5 text-center text-md-left  ">
+                <span itemprop="name" class="card-title title-isotope display-3 text-left mb-1">
+                    <span class="bind  " mybind="Id" myvalue="titolo" format="formattitle"> </span> <br />
+                    <span class="bind tx-sottomenu-color" style="font-size: 70%" mybind="Id" myvalue="titolo" format="formatsubtitle">
+                    </span>
+                </span>
+            </div>
+            <div class="w-100 col-12 col-md-2 p-0 p-md-3 pt-md-4 pr-md-5 text-center text-md-right">
+                <span itemprop="name" class="text-md-left col-12 col-md-6 text-right">
+                    <a class=" divbuttonstyle mt-0 mt-md-1" target="_self" href="#ctl00_divContattiMaster" title="Contattaci
+    " style="display:inline-block"><span class="">Contattaci</span></a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container blog-post  ">
+        <!-- ----- COLONNA 1 IMMAGINE ------
+        ----------------------------- -->
+        <!-- Placeholder per la owl gallery -->
+        <div class="col-12 col-md-12 p-0" style="max-height: 75vh; overflow: hidden;">
+            <div id="plhGallery" class="bind" mybind="Id" myvalue="video" format="frmvisibility"> </div>
+            <div class="responsive-video" style="display: none">
+                <iframe frameborder="0" allowfullscreen class="bind" mybind="Id" myvalue="video" src=""> </iframe>
+            </div>
+
+
+
+
+        </div>
+        <!-- --------------------------
+        ------ COLONNA 2 TITOLO ------
+        --------------------------- -->
+        <div class="col-12 col-md-12 px-md-3 position-sticky bg-light-color" style="
+    z-index: 0;
+    ">
+            <div class="w-100 px-3 py-4">
+                <div id="breadcrumbmove" class=""> </div>
+                <div class="text-center text-md-right position-relative float-none float-md-right mr-0 mr-md-4">
+                    <!-- <a rel="nofollow, noindex" class="btn-black-outline bind w-100" target="_blank" href="printlink" title="" mybind="Id" > <span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource" > </span > </a >-->
+                    <p>
+                        <div class="bind" mybind="Id" myvalue="common" myvalue1="social_condividi" format="formatstringfromresource"> </div><br />
+                        <div class="share42init" data-path="/js/share42/"> </div>
+                    </p>
+                </div>
+                <div class="blog-post-body text-center text-md-left py-1 border-top border-bottom-0  bd-light-color" style="line-height: 1.6rem;" itemprop="description">
+                    <h1 class="bind mbr-section-title text-center  text-md-left" mybind="Id" myvalue="titolo" format="formattitle"> </h1>
+                    <h2 class="mbr-section-subtitle text-center  text-md-left bind" mybind="Id" myvalue="titolo" format="formatsubtitle"> </h2>
+                    <div mybind="Id" class="bind files-list mt-3" style="display:none"> </div>
+                </div>
+            </div>
+            <!-- --------------------------------------------
+            ------ COLONNA 2 PREZZO E DATI AGGIUNTIVI ------
+            --------------------------------------------- -->
+            <div class="blog-post-details d-none m-3" runat="server" id="divPostDetails">
+
+                <div class="blog-post-details-item blog-post-details-item-right pl-0 pb-2">
+                    <div class="text-center text-sm-left tx-primary-color mb-2" style="font-weight: 800; font-size: 1.9em; line-height: normal">
+                        <span class="bind" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"> </span>
+                        <span style="text-decoration: line-through;font-weight: 200;" class="pl-3 bind tx-secondary-color" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta"> </span>
+                    </div>
+                    <!-- <div class="float-left px-2 tx-secondary-color mb-2" style="font-weight: 200; font-size: 1.4em; line-height: normal; text-decoration: line-through;" >
+                    <span style="font-size: 1.4em;" class="bind" mybind="PrezzoListino" myvalue="visualPrezzo" format="formatprezzoofferta" > </span >
+                    </div >-->
+                </div>
+                <!-- <div class="clearfix" > </div >
+                <div class="blog-post-details-item blog-post-details-item-left" style="display:none;" >
+                <span class="bind" mybind="CodiceTipologia" format="frmtipologia" > </span >
+                <meta itemprop="datePublished" class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata" / >
+                <span class="bind" mybind="DataInserimento" myvalue="TestoPubblicatodata" myvalue1="visualData" format="formatlabelresource" > </span >
+                <span class="bind" mybind="DataInserimento" myvalue="visualData" format="formatdata" > </span >
+                <span class="bind" mybind="CodiceCategoria" format="frmcategoria" > </span >
+                </div >
+
+                <div class="blog-post-details-item blog-post-details-item-left" >
+                <span class="bind" mybind="CodiceRegione" format="frmregione" > </span >
+                <span class="bind" mybind="CodiceProvincia" format="frmprovincia" > </span >
+                <span class="bind" mybind="CodiceComune" format="formatvalue" > </span >
+                </div >-->
+            </div>
+            <!-- -------------------------------
+            ------ COLONNA 2 DESCRIZIONE ------
+            -------------------------------- -->
+
+            <div class="blog-post-body text-center text-md-left py-1 border-top border-bottom-0 m-3 bd-secondary-color" style="line-height: 1.6rem;" itemprop="description">
+                <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="600" format="formatdescrizione"> </span>
+            </div>
+            <div class="blog-post-body text-center text-md-left m-3 p-0 border-0 d-none d-md-block" style="line-height: 1.6rem;" itemprop="description">
+                <!--
+                <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" >
+                <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione" > </span >
+                </div >-->
+                <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="80000" format="formatdescrizione"> </span>
+            </div>
+
+            <div>
+
+                <div class="col-sm-12 col-xs-12 my-2 mx0">
+                    <a rel="nofollow, noindex" class="bind btn w-100" target="_self" href="contactlink" title="" mybind="Id"> <span class="bind" mybind="Id" myvalue="testorichiedi1" format="formatlabelresource"> </span> </a>
+                </div>
+                <!-- <div class="col-12" style="margin: 5px 0;" >
+                <a rel="nofollow, noindex" class="bind btn w-100" target="_blank" href="prenotalink" title="" mybind="Id" > <span class="bind" mybind="Id" myvalue="testoprenota" format="formatlabelresource" > </span > </a >
+                </div >-->
+                <!-- <div class="col-sm-6" >
+                <a rel="nofollow, noindex" class="btn" style="width: 100%;" target="_blank" href="printlink" title="" mybind="Id" > <span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource" > </span > </a >
+                </div >-->
+                <!-- <div class="col-sm-4" >
+                <a class="btn" style="width: 100%;" target="_self" href="bcklink" title="" mybind="Id" > <span class="bind" mybind="Id" myvalue="testoindietro" format="formatlabelresource" > </span > </a >
+                </div >-->
+            </div>
+            <!-- -------------------------------
+            ------ COLONNA 2 CALL TO ACTION ------
+            -------------------------------- -->
+            <!-- --------------------------
+            ------ COLONNA 2 SOCIAL ------
+            --------------------------- -->
+            <!-- <p >
+            <div class="bind" mybind="Id" myvalue="common" myvalue1="social_condividi" format="formatstringfromresource" > </div >
+
+            <div class="share42init" data-path="/js/share42/" > </div >
+
+            </p >-->
+            <!-- ----------------------------
+            ------ COLONNA 2 PULSANTI ------
+            ----------------------------- -->
+            <div class="clearfix"> </div>
+
+        </div>
+    </div>
+    <!-- ----------------------------
+    <!-- --------------------------------
+    ------ COLONNA 1 DATI TECNICI ------
+    --------------------------------- -->
+    <div class="col-12 col-md-12 d-block d-md-none">
+        <div class="blog-post-body text-center text-md-left m-0 pb-0 border-0" style="line-height: 1.6rem;" itemprop="description">
+            <!-- <nav id="navbar-example2" class="navbar navbar-light bg-light" >
+            <a class="navbar-brand" href="#" > Navbar</a >
+            <ul class="nav nav-pills" >
+            <li class="nav-item" >
+            <a class="nav-link" href="#fat" > @fat</a >
+            </li >
+            <li class="nav-item" >
+            <a class="nav-link" href="#mdo" > @mdo</a >
+            </li >
+            <li class="nav-item dropdown" >
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" > Dropdown</a >
+            <div class="dropdown-menu" >
+            <a class="dropdown-item" href="#one" > one</a >
+            <a class="dropdown-item" href="#two" > two</a >
+            <div role="separator" class="dropdown-divider" > </div >
+            <a class="dropdown-item" href="#three" > three</a >
+            </div >
+            </li >
+            </ul >
+            </nav >
+
+            <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" >
+            <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="6000" format="formatdescrizione" > </span >
+            </div >-->
+            <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="80000" format="formatdescrizione"> </span>
+        </div>
+    </div>
+    <!-- <div class="bind mb-3 text-center" mybind="Id" myvalue="infoutili" format="formatlabelresource" > </div >-->
+    <!-- <div class="col-12" style="margin: 5px 0;" >
+    <a rel="nofollow, noindex" class="bind btn w-100" target="_blank" href="prenotalink" title="" mybind="Id" > <span class="bind" mybind="Id" myvalue="testoprenota" format="formatlabelresource" > </span > </a >
+    </div >-->
+    <!-- <div class="col-sm-6" >
+    <a rel="nofollow, noindex" class="btn" style="width: 100%;" target="_blank" href="printlink" title="" mybind="Id" > <span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource" > </span > </a >
+    </div >-->
+    <!-- <div class="col-sm-4" >
+    <a class="btn" style="width: 100%;" target="_self" href="bcklink" title="" mybind="Id" > <span class="bind" mybind="Id" myvalue="testoindietro" format="formatlabelresource" > </span > </a >
+    </div >-->
+    <!-- -------------------------------------------------
+    ------ COLONNA 1 SERVIZI (DOTAZIONI IN CAMERA) ------
+    <!-- -------------------------------------------------
+    ------ COMANDI NAVIGAZIONE ------
+    -------------------------------------------------- -->
+    <section class="py-0  mt-5 fascia-scura ">
+        <div class=" bg">
+            <div class="container">
+                <div class="row justify-content-center mx-0 py-5 card_form">
+
+                    <div class="col-12 text-right text-md-left btn-center p-0 pr-3">
+                        <span class="bind" mybind="Id" myvalue="testocall" format="formatlabelresource"> </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="m-3">
+    <div class="float-sm-left">
+        <a rel="nofollow" class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
+            <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource" style="min-width: calc(176px - 0.6rem);"> </span>
+            <div class="d-inline-block">
+            </div>
+        </a>
+    </div>
+    <div class="float-sm-right">
+        <a rel="nofollow" class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
+            <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource" style="min-width: calc(176px - 0.6rem);"> </span>
+            <div class="d-inline-block align-top">
+            </div>
+        </a>
+    </div>
+</div>
+    </div >
+<div class="col-12 mt-3 mt-md-4">
+    <span class="bind" mybind="Id" myvalue="bannerevidenza" format="formatlabelresource"> </span>
+</div>
+
+
+
+<!-- <hr / >-->

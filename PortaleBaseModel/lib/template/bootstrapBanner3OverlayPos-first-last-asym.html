@@ -1,0 +1,28 @@
+﻿<script>
+// <![CDATA[
+$(function () {
+    $(".asym-banner").children().first().removeClass();
+    $(".asym-banner").children().first().addClass("col-12 col-lg-8"); //Modifico la classe del primo elemento del portfolio
+    $(".asym-banner").children().last().removeClass();
+    $(".asym-banner").children().last().addClass("col-12 col-lg"); //Modifico la classe dell'ultimos elemento del portfolio
+    });
+// ]]></script>
+<div class="row no-gutters asym-banner" id="replaceid">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+        <div class="card m-2 " style="overflow:hidden">
+            <div class="position-relative imgovercontainer imgbackstyle imgback bind" mybind="Id">
+                <div class="card-img-overlay">
+                    <div style="position:absolute;display:block;z-index:96;bottom:0px;width:90%;text-align:center">
+                        <h3 class="card-title titolo-offerta mb-2 white-color">
+                            <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                        </h3>
+                        <h4 class="card-subtitle sottotitolo-offerta mt-0 mb-3 white-color">
+                            <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle" style=""></span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,258 @@
+﻿<div id="replaceid" class="scheda-bottiglie" style="text-align: left" itemscope="" itemtype="http://schema.org/Product">
+    <div class="container-fluid ">
+        <div class="row">
+            <!---------------------------------------------
+            ------ COLONNA 1 IMMAGINE ------
+            ---------------------------------------------->
+            <div class="col-12 col-md-12 p-0">
+                <div class="position-relative mt-0 py-2 mx-auto" style="max-width: 1000px; padding-left: 15px; padding-right: 15px;">
+                    <div itemprop="name" class=" mx-0  text-left">
+                        <h1 itemprop="name" class="bind mb-2 tx-primary-color   mt-0" style="line-height: 1.2;" mybind="Id" myvalue="titolo" format="formattitle"></h1>
+                        <h2 class="bind tx-sottomenu-color mbr-section-subtitle text-left  " mybind="Id" myvalue="titolo" format="formatsubtitle"></h2>
+                        <span class="bind " mybind="CodiceRegione" format="frmregione"></span> -
+                        <span class="bind " mybind="CodiceProvincia" format="frmprovincia"></span> -
+                        <span class="bind   " mybind="CodiceComune"></span><br />
+                        <a class="  " data-toggle="modal" data-target="#exampleModalCenter"> Condividi <i class="fas fa-share-alt"></i></a>
+                        <!--<span class="bind mbr-section-subtitle" mybind="Id" myvalue="basetext" myvalue1="prezzo" format="formatstringfromresource"></span>-->
+                    </div>
+
+                    <div class=" text-right"> <span class="bind mbr-section-subtitle font-weight-bold text-right" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span></div>
+
+                    <div id="plhGallery" class="bind" mybind="Id" myvalue="video" myvalue2="60vh" format="frmvisibility"></div>
+                    <div class="responsive-video" style="display: none">
+                        <iframe frameborder="0" allowfullscreen class="bind" mybind="Id" myvalue="video" src=""></iframe>
+                    </div>
+                </div>
+
+                <!--<div class="position-relative d-none d-md-block col-12 col-md-6 align-self-end bg-blur p-3" style=" z-index: 94; top: 50%; left: 12%; position: absolute !important;">
+                <div itemprop="name" class="w-100 text-left mb-4 mx-0 mx-sm-3">
+                    <div itemprop="name" class="bind mb-0 tx-primary-color mbr-section-title  mt-0 text-left" style="line-height: 1.2;" mybind="Id" myvalue="titolo" format="formattitle"></div>
+                    <div class="bind tx-sottomenu-color mbr-section-subtitle text-left" mybind="Id" myvalue="titolo" format="formatsubtitle"></div>-->
+                <!-- Button trigger modal -->
+                <!--<a data-toggle="modal" data-target="#exampleModalCenter" style=" position: relative; float: right; top: -25px; cursor: pointer; "> Condividi <i class="fas fa-share-alt"></i></a>
+                        <p>
+                            <span class="bind" mybind="CodiceRegione" format="frmregione"></span> -
+                            <span class="bind" mybind="CodiceProvincia" format="frmprovincia"></span> -
+                            <span class="bind" mybind="CodiceComune"></span>
+                        </p>
+                        <p class="m-0 text-left">
+                            <div class="bind scalablefont-small font-medium" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></div>
+                            <span class="bind" mybind="Id" myvalue="Textfield1_dts" myvalue1="metratura" myvalue2="" myvalue3="" myvalue4="common" myvalue5="metraturaunit" format="formatjsontext"></span>
+                            <span class="bind" mybind="Id" myvalue="Textfield1_dts" myvalue1="camere" myvalue2="common" myvalue3="camere" myvalue4="" myvalue5="" format="formatjsontext"></span>
+                            <span class="bind" mybind="Id" myvalue="Textfield1_dts" myvalue1="bagni" myvalue2="common" myvalue3="bagni" myvalue4="" myvalue5="" format="formatjsontext"></span>
+                        </p>
+                    </div>
+                </div>-->
+                <!-- pulsanti social -->
+                <!--<div class="share42init" data-path="/js/share42/"></div>-->
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h5 class="modal-title" id="exampleModalLongTitle">   <span class="bind" mybind="Id" myvalue="common" myvalue1="social_condividi_title" format="formatstringfromresource"></span>   </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="clearfix"></div>
+
+                        <div class="mr-sm-3 text-left mb-5">
+                            <!--<a rel="nofollow, noindex" class="btn-black-outline bind w-100" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>-->
+                            <p>
+                                <div class="bind" mybind="Id" myvalue="common" myvalue1="social_condividi" format="formatstringfromresource"></div>
+                                <div class="share42init" data-path="/js/share42/"></div>
+                            </p>
+                        </div>
+                        <!--<div class="clearfix" style="margin:40px"></div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-100 py-3 px-0 my-0 mx-0 mx-md-3">
+            <div class="container pt-0 pt-sm-4">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+
+                        <div class="row">
+                            <div class="col-12 col-lg-12 my-2 text-center">
+                                <div class="col-12 px-3 py-1 bg-light-color border-tipo2">
+                                    <i class="fas fa-home"></i>
+                                    <p class="m-0"> <span class="bind" mybind="Id" myvalue="basetext" myvalue1="tipologia" format="formatstringfromresource"></span></p>
+                                    <span class="bind font-weight-medium" mybind="CodiceCategoria" format="frmcategoria"></span>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-4 my-2  text-center">
+                                <div class="col-12 px-3 py-1 bg-light-color border-tipo2">
+                                    <i class="fas fa-home"></i>
+                                    <p class="m-0"> <span class="bind" mybind="Id" myvalue="basetext" myvalue1="prezzo" format="formatstringfromresource"></span></p>
+                                    <span class="bind font-weight-medium" mybind="Prezzo" myvalue="visualPrezzo" format="formatprezzoofferta"></span>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-4 my-2 text-center">
+                                <div class="col-12 px-3 py-1  bg-light-color border-tipo2">
+                                    <i class="fas fa-home"></i>
+                                    <p class="m-0"> <span class="bind" mybind="Id" myvalue="common" myvalue1="metratura" format="formatstringfromresource"></span></p>
+                                    <span class="bind  font-weight-medium" mybind="Id" myvalue="Textfield1_dts" myvalue1="metratura" myvalue2="" myvalue3="" myvalue4="common" myvalue5="metraturaunit" format="formatjsontext"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-lg-4 my-2 text-center">
+                                <div class="col-12 px-3 py-1 bg-light-color border-tipo2">
+                                    <i class="fas fa-home"></i>
+                                    <p class="m-0"> <span class="bind" mybind="Id" myvalue="basetext" myvalue1="codice" format="formatstringfromresource"></span></p>
+                                    <span class="bind  font-weight-medium" mybind="CodiceProdotto"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-4 bind " mybind="Id" myvalue="Textfield1_dts" myvalue1="camere" format="formatvisibilitybyjsonvalue">
+                                <div class="bind font-bold bg-light-color border-tipo2 p-2 text-center my-2 col-12" mybind="Id" myvalue="Textfield1_dts" myvalue1="camere" myvalue2="common" myvalue3="camere" myvalue4="" myvalue5="" format="formatjsontext"></div>
+                            </div>
+                            <div class=" col-12 col-md-4 bind " mybind="Id" myvalue="Textfield1_dts" myvalue1="bagni" format="formatvisibilitybyjsonvalue">
+                                <div class="bind font-bold bg-light-color border-tipo2 p-2 text-center my-2 col-12" mybind="Id" myvalue="Textfield1_dts" myvalue1="bagni" myvalue2="common" myvalue3="bagni" myvalue4="" myvalue5="" format="formatjsontext"></div>
+                            </div>
+                            <div class="col-12 col-md-4 bind " mybind="Id" myvalue="Textfield1_dts" myvalue1="terreno" format="formatvisibilitybyjsonvalue">
+                                <div class="bind font-bold bg-light-color border-tipo2 p-2 text-center my-2 col-12" mybind="Id" myvalue="Textfield1_dts" myvalue1="terreno" myvalue2="common" myvalue3="terreno" myvalue4="common" myvalue5="terrenounit" format="formatjsontext"></div>
+                            </div>
+                            <div class="col-12 col-md-4 bind " mybind="Id" myvalue="Textfield1_dts" myvalue1="terreno1" format="formatvisibilitybyjsonvalue">
+                                <div class="bind font-bold bg-light-color border-tipo2 p-2 text-center my-2 col-12" mybind="Id" myvalue="Textfield1_dts" myvalue1="terreno1" myvalue2="common" myvalue3="terreno" myvalue4="common" myvalue5="terrenounit1" format="formatjsontext"></div>
+                            </div>
+                            <div class="col-12 col-md-4 bind " mybind="Id" myvalue="Textfield1_dts" myvalue1="cle" format="formatvisibilitybyjsonvalue">
+                                <div class="bind font-bold bg-light-color border-tipo2 p-2 text-center my-2 col-12" mybind="Id" myvalue="Textfield1_dts" myvalue1="cle" myvalue2="common" myvalue3="cle" myvalue4="" myvalue5="" format="formatjsontext"></div>
+                            </div>
+                            <div class="d-block mx-0 mt-1 text-left" style="line-height: 1.6rem; flex: 0 0 100%;">
+                                <!--<div mybind="Id" class="bind files-list" style="display:none"></div>-->
+
+                                <div id="accordion" class="mb-0 mb-lg-4 w-100 faq-section">
+                                    <div class="card" style="border:none;">
+                                        <div class="card-header bg-light-color" id="headingOne">
+                                            <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                <h4 class="mb-0 tx-sottomenu-color" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                                    <i class="fa fa-chevron-up pr-2" aria-hidden="true"></i>  <span class="bind" mybind="Id" myvalue="descrizionedelprodotto" format="formatlabelresource"></span>
+                                                </h4>
+                                            </a>
+                                        </div>
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
+                                            <div class="card-body px-3 pb-3 pt-2" itemprop="description">
+                                                <span class="bind" mybind="Id" myvalue="descrizione" myvalue1="60000" format="formatdescrizione"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="border:none;">
+                                        <div class="card-header" id="headingTwo">
+                                            <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                <h4 class="mb-0 tx-sottomenu-color" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                                    <i class="fa fa-chevron-down pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="ulterioriinformazioni" format="formatlabelresource"></span>
+                                                </h4>
+                                            </a>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
+                                            <div class="card-body px-3 pb-3 pt-2">
+                                                <span class="bind" mybind="Id" myvalue="datitecnici" myvalue1="60000" format="formatdescrizione"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<div class="card" style="border:none;">
+                                        <div class="card-header" id="headingThree">
+                                            <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                <h4 class="mb-0 tx-sottomenu-color" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                                    <i class="fa fa-chevron-up pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="schedatecnica" format="formatlabelresource"></span>
+                                                </h4>
+                                            </a>
+                                        </div>
+                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree">
+                                            <div class="card-body px-3 pb-3 pt-2">
+                                                <span class="bind" mybind="Indirizzo" myvalue="testoordine2" myvalue1="6000" format="formatstringvalue"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingFour">
+                                            <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                <h4 class="mb-0 tx-sottomenu-color" style="text-transform:uppercase; letter-spacing: 1px; cursor:pointer">
+                                                    <i class="fa fa-chevron-up pr-2" aria-hidden="true"></i> <span class="bind" mybind="Id" myvalue="informazioniperacquisto" format="formatlabelresource"></span>
+                                                </h4>
+                                            </a>
+                                        </div>
+                                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour">
+                                            <div class="card-body px-3 pt-3 pb-0 text-left">
+                                                <span class="bind" mybind="Id" myvalue="testoordine3" format="formatlabelresource"></span>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <!---------------------------------------------
+                    ------ COLONNA 3 CALL TO ACTION ------
+                    ---------------------------------------------->
+                    <div class="col-12 col-lg-4 mt-3  mt-lg-0 mb-2 mb-lg-5 pb-1 pb-lg-2 card-info" style="">
+                        <div class="position-sticky" style="top:120px">
+                            <!--riquadro hai bisogno di aiuto-->
+                            <div class="w-100 mb-1 px-2 py-3 text-center card card-header bg-blur">
+                                <div class="bind" mybind="Id" myvalue="testocall1" format="formatlabelresource"></div>
+                            </div>
+                            <!-- pulsanti info utili 1 -->
+                            <div class="bind w-100 mx-3 mx-md-0 mb-3 text-center d-none" mybind="Id" myvalue="infoutili" format="formatlabelresource"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!---------------------------------------------------
+            ------ LONNA 4 LEFT - COMANDI NAVIGAZIONE ------
+            ---------------------------------------------------->
+            <div class="w-100">
+                <div class="row justify-content-between mx-0 pt-3 pt-lg-4 pb-3 pb-lg-5 border-top bd-primary-color">
+
+                    <div class="col-12 col-lg-auto mr-0 mb-3 mb-lg-0">
+                        <div class="row">
+                            <a rel="nofollow, noindex" class="btn-black-outline w-100 bind" target="_blank" href="printlink" title="" mybind="Id"><span class="bind" mybind="Id" myvalue="stampa" format="formatlabelresource"></span></a>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-auto mb-3 my-lg-0">
+                        <div class="row justify-content-between">
+                            <div class="row">
+                                <div class="col mr-3">
+                                    <a rel="nofollow" class="bind" style="display:none;" target="_self" href="prevlink" title="prevlinktext" mybind="Id">
+                                        <span class="btn bind" mybind="Id" myvalue="schedaindietro" format="formatlabelresource"></span><div style="display:inline-block;">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <a rel="nofollow" class="bind" style="display:none;" target="_self" href="nextlink" title="nextlinktext" mybind="Id">
+                                        <span class="btn bind" mybind="Id" myvalue="schedaavanti" format="formatlabelresource"></span><div style="display:inline-block;vertical-align:top">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    $("#headingOne a[role=button]").click(function () {
+        $('#headingOne').find('i').toggleClass('fa-chevron-down fa-chevron-up')
+    });
+    $("#headingTwo a[role=button]").click(function () {
+        $('#headingTwo').find('i').toggleClass('fa-chevron-down fa-chevron-up')
+    });
+</script>

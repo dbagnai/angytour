@@ -2,9 +2,9 @@
 <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
   <channel>
     <title>Nome Sito Rassegna Stampa</title>
-    <link>http://localhost:60100</link>
+    <link>http://localhost:62000</link>
     <description>Nome Sito</description>
-    <lastBuildDate>Thu, 22 Jun 2023 15:02:24 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 12 Aug 2024 11:34:11 GMT</lastBuildDate>
     <language>it-IT</language>
   </channel>
 </rss>

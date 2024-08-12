@@ -2,83 +2,77 @@
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
     <title>Nome Sito Ceramiche catalogo</title>
-    <link>http://localhost:60100</link>
+    <link>http://localhost:62000</link>
     <description>Nome Sito</description>
-    <lastBuildDate>Thu, 22 Jun 2023 15:02:24 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 12 Aug 2024 11:34:10 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2023-06-22T15:02+02:00</sy:updateBase>
+    <sy:updateBase>2024-08-12T11:34+02:00</sy:updateBase>
     <language>it-IT</language>
     <item>
       <title><![CDATA[titolo sottotitolo
 ]]></title>
-      <link><![CDATA[http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-62]]></link>
-      <guid isPermaLink="true">http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-62</guid>
+      <link><![CDATA[http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-62]]></link>
+      <guid isPermaLink="true">http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-62</guid>
       <pubDate>Thu, 12 Jul 2018 12:20:42 +02:00</pubDate>
       <category>Ceramiche catalogo</category>
       <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="titolo
-sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.
-<p>Continua a leggere / Read More <a href="http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-62"><em>titolo
+sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.<p>Continua a leggere / Read More <a href="http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-62"><em>titolo
 sottotitolo</em></a>.</p>]]></description>
     </item>
     <item>
       <title><![CDATA[titolo sottotitolo
 ]]></title>
-      <link><![CDATA[http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-48]]></link>
-      <guid isPermaLink="true">http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-48</guid>
+      <link><![CDATA[http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-48]]></link>
+      <guid isPermaLink="true">http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-48</guid>
       <pubDate>Mon, 11 Jun 2018 12:48:11 +02:00</pubDate>
       <category>Ceramiche catalogo</category>
       <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="titolo
-sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.
-<p>Continua a leggere / Read More <a href="http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-48"><em>titolo
+sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.<p>Continua a leggere / Read More <a href="http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-48"><em>titolo
 sottotitolo</em></a>.</p>]]></description>
     </item>
     <item>
       <title><![CDATA[titolo sottotitolo
 ]]></title>
-      <link><![CDATA[http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-47]]></link>
-      <guid isPermaLink="true">http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-47</guid>
+      <link><![CDATA[http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-47]]></link>
+      <guid isPermaLink="true">http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-47</guid>
       <pubDate>Mon, 11 Jun 2018 12:48:00 +02:00</pubDate>
       <category>Ceramiche catalogo</category>
       <description><![CDATA[<img style="margin-right: 10px; float: left" src="" alt="titolo
-sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.
-<p>Continua a leggere / Read More <a href="http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-47"><em>titolo
+sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.<p>Continua a leggere / Read More <a href="http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-47"><em>titolo
 sottotitolo</em></a>.</p>]]></description>
     </item>
     <item>
       <title><![CDATA[titolo sottotitolo
 ]]></title>
-      <link><![CDATA[http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-31]]></link>
-      <guid isPermaLink="true">http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-31</guid>
+      <link><![CDATA[http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-31]]></link>
+      <guid isPermaLink="true">http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-31</guid>
       <pubDate>Wed, 30 May 2018 10:47:28 +02:00</pubDate>
       <category>Ceramiche catalogo</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:60100/public/Files/rif000004/31/antsample-banner.jpg" alt="titolo
-sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.
-<p>Continua a leggere / Read More <a href="http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-31"><em>titolo
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:62000/public/Files/rif000004/31/antsample-banner.jpg" alt="titolo
+sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.<p>Continua a leggere / Read More <a href="http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-31"><em>titolo
 sottotitolo</em></a>.</p>]]></description>
     </item>
     <item>
       <title><![CDATA[titolo sottotitolo
 ]]></title>
-      <link><![CDATA[http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-25]]></link>
-      <guid isPermaLink="true">http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-25</guid>
+      <link><![CDATA[http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-25]]></link>
+      <guid isPermaLink="true">http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-25</guid>
       <pubDate>Thu, 03 May 2018 11:58:02 +02:00</pubDate>
       <category>Ceramiche catalogo</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:60100/public/Files/rif000004/25/antsample-banner.jpg" alt="titolo
-sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.
-<p>Continua a leggere / Read More <a href="http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-25"><em>titolo
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:62000/public/Files/rif000004/25/antsample-banner.jpg" alt="titolo
+sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.<p>Continua a leggere / Read More <a href="http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-25"><em>titolo
 sottotitolo</em></a>.</p>]]></description>
     </item>
     <item>
       <title><![CDATA[titolo sottotitolo
 ]]></title>
-      <link><![CDATA[http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-24]]></link>
-      <guid isPermaLink="true">http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-24</guid>
+      <link><![CDATA[http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-24]]></link>
+      <guid isPermaLink="true">http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-24</guid>
       <pubDate>Thu, 03 May 2018 11:56:07 +02:00</pubDate>
       <category>Ceramiche catalogo</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:60100/public/Files/rif000004/24/antsample-banner.jpg" alt="titolo
-sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.
-<p>Continua a leggere / Read More <a href="http://localhost:60100/it/ceramiche-catalogo/titolo-sottotitolo-24"><em>titolo
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:62000/public/Files/rif000004/24/antsample-banner.jpg" alt="titolo
+sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet. Aenean pellentesque felis augue, ut dictum dolor ullamcorper in. Proin id pellentesque orci, ut mattis dui. Integer rutrum enim leo, ut accumsan.<p>Continua a leggere / Read More <a href="http://localhost:62000/it/ceramiche-catalogo/titolo-sottotitolo-24"><em>titolo
 sottotitolo</em></a>.</p>]]></description>
     </item>
   </channel>
