@@ -854,6 +854,16 @@ namespace WelcomeLibrary.DAL
                     //	queryfilter += " AND  Promozione = " + ((bool)promozione.Value ? "1" : "0") + "   ";
 
                 }
+                if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@percentualesconto"; }))
+                {
+                    SQLiteParameter psconto = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@percentualesconto"; });
+                    _parUsed.Add(psconto);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE   Prezzo is not null and PrezzoListino is not null  and PrezzoListino != 0 and (100-Prezzo/PrezzoListino*100) <= @percentualesconto  ";
+                    else
+                        queryfilter += " AND   Prezzo is not null and PrezzoListino is not null  and PrezzoListino != 0 and (100-Prezzo/PrezzoListino*100) <= @percentualesconto   ";
+                }
+
 
 
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Autore"; }))
