@@ -773,7 +773,7 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p1);
             try
             {
-                string query = "SELECT  G.GruppoMailing as G_GruppoMailing,G.ID_CLIENTE as G_ID_CLIENTE,G.DescrizioneGruppoMailing,G.DataInserimento,G.Attivo,C.ID_CLIENTE as C_ID_CLIENTE,C.ID_CARD,C.Cap,C.Cellulare,C.CodiceCOMUNE,C.CodiceNAZIONE,C.CodicePROVINCIA,C.CodiceREGIONE,C.Cognome,C.Consenso1,C.Consenso2,C.Consenso3,C.Consenso4,C.ConsensoPrivacy,C.DataInvioValidazione,C.DataInserimento,C.Sesso,C.DataNascita,C.DataRicezioneValidazione,C.Email,C.Emailpec,C.Indirizzo,C.IPclient,C.Lingua,C.Nome,C.Professione,C.Spare1,C.Spare2,C.Telefono,C.TestoFormConsensi,C.Validato,C.Pivacf,C.Codicisconto,C.id_tipi_clienti,C.Serialized,C.Ragsoc FROM TBL_MAILING_GRUPPI_CLIENTI G LEFT JOIN TBL_CLIENTI C ON G.ID_CLIENTE = c.ID_CLIENTE  WHERE GruppoMailing=@GruppoMailing AND  G.ID_CLIENTE <> 0 ";
+                string query = "SELECT  G.GruppoMailing as G_GruppoMailing,G.ID_CLIENTE as G_ID_CLIENTE,G.DescrizioneGruppoMailing,G.DataInserimentoas as G_Datainserimento,G.Attivo,C.ID_CLIENTE as C_ID_CLIENTE,C.ID_CARD,C.Cap,C.Cellulare,C.CodiceCOMUNE,C.CodiceNAZIONE,C.CodicePROVINCIA,C.CodiceREGIONE,C.Cognome,C.Consenso1,C.Consenso2,C.Consenso3,C.Consenso4,C.ConsensoPrivacy,C.DataInvioValidazione as C_Datainserimento,C.DataInserimento,C.Sesso,C.DataNascita,C.DataRicezioneValidazione,C.Email,C.Emailpec,C.Indirizzo,C.IPclient,C.Lingua,C.Nome,C.Professione,C.Spare1,C.Spare2,C.Telefono,C.TestoFormConsensi,C.Validato,C.Pivacf,C.Codicisconto,C.id_tipi_clienti,C.Serialized,C.Ragsoc FROM TBL_MAILING_GRUPPI_CLIENTI G LEFT JOIN TBL_CLIENTI C ON G.ID_CLIENTE = c.ID_CLIENTE  WHERE GruppoMailing=@GruppoMailing AND  G.ID_CLIENTE <> 0 ";
 
                 SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
                 using (reader)
@@ -821,8 +821,8 @@ namespace WelcomeLibrary.DAL
                             item.DataNascita = reader.GetDateTime(reader.GetOrdinal("DataNascita"));
                         if (!reader["DataRicezioneValidazione"].Equals(DBNull.Value))
                             item.DataRicezioneValidazione = reader.GetDateTime(reader.GetOrdinal("DataRicezioneValidazione"));
-                        if (!reader["DataInserimento"].Equals(DBNull.Value))
-                            item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
+                        if (!reader["C_Datainserimento"].Equals(DBNull.Value))
+                            item.DataInserimento = reader.GetDateTime(reader.GetOrdinal("C_Datainserimento"));
 
                         if (!reader["Email"].Equals(DBNull.Value))
                             item.Email = reader.GetString(reader.GetOrdinal("Email"));
