@@ -415,8 +415,12 @@
                         </asp:DropDownList>
                         <asp:TextBox runat="server" ID="txtTipoClienteUpdate" Text="" Width="200" placeholter="inserire nuovo tipo cliente" />
            
-                        <asp:Button Text="Aggiorna" ID="btnTipiClienti" runat="server" OnClick="btnTipiClienti_Click" />
+                        <asp:Button Text="Aggiorna/Inserisci" ID="Button2" runat="server" OnClick="btnTipiClienti_Click" />
+                        <asp:Button Text="Elimina" ID="btnTipiClientiDelete" runat="server" OnClick="btnTipiClientiDelete_Click" />
                         <br />
+                            <span style="font-size:1.6rem;color:red">
+                              <asp:Literal Text="" runat="server" ID="outtipo" />
+                            </span>
                         <br />
                         </div>
                 </div>

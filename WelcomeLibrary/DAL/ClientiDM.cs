@@ -6,6 +6,7 @@ using WelcomeLibrary.UF;
 using WelcomeLibrary.DOM;
 using System.Data.SQLite;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace WelcomeLibrary.DAL
 {
@@ -1443,6 +1444,40 @@ namespace WelcomeLibrary.DAL
         }
 
 
+        public void CancellaTipoCliente(string nomeConnessioneDb, Tabrif item)
+        {
+            // throw new NotImplementedException();
+            //cancello la tipologia del cliente in base a item.Codice controllando se ci sono clienti con quella tipologia nella TBL_CLienti
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            if (nomeConnessioneDb == null || nomeConnessioneDb == "") return;
+
+            //controlliamo se ci sono clienti con quella tipologia in tbl_clienti
+            Cliente clifilter = new Cliente();
+            clifilter.id_tipi_clienti = item.Codice;
+            ClienteCollection list = this.CaricaClientiFiltrati(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, clifilter, true);//Passando null -> prende tutti i clienti, inoltre baypasso il filtro 
+            if (list != null && list.Count > 0)
+            {
+                throw new ApplicationException("Errore, cancellazione Tipo Cliente : Ci sono clienti con quella tipologia, spostare/eliminare prima i clienti");
+
+            }
+
+
+            SQLiteParameter p1 = new SQLiteParameter("@CodiceTipo", item.Codice);
+            parColl.Add(p1);
+            string query = "DELETE FROM dbo_TBLRIF_TIPI_CLIENTI WHERE CodiceTipo=@CodiceTipo";
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, nomeConnessioneDb);
+
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, cancellazione Tipo Cliente :" + error.Message, error);
+            }
+            return;
+        }
+
         /// <summary>
         /// Inserisce o aggiorna i dati di un cliente nel db.
         /// Aggiorna se passato id diverso da zero altrimenti inserisce
@@ -1559,7 +1594,7 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pcsco = new SQLiteParameter("@Codicisconto", item.Codicisconto);
             parColl.Add(pcsco);
 
-         
+
             SQLiteParameter pserial = new SQLiteParameter("@Serialized", item.Serialized);
             parColl.Add(pserial);
 
@@ -1633,7 +1668,6 @@ namespace WelcomeLibrary.DAL
             }
             return;
         }
-
 
 
     }

@@ -188,6 +188,41 @@ public partial class AreaContenuti_GestioneClienti : CommonPage
         Utility.CaricaListaStaticaTipiClienti(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
         PopolaTipiClienti();
     }
+
+    protected void btnTipiClientiDelete_Click(object sender, EventArgs e)
+    {
+        ClientiDM cDM = new ClientiDM();
+    
+        try
+        {
+        Tabrif item = new Tabrif();
+            item = Utility.TipiClienti.Find(c => c.Codice == ddlTipiClientiUpdate.SelectedValue);
+            if (item == null)
+            {
+                outtipo.Text = "Errore selezione cancellazione tipo cliente";
+                return;
+            }
+            cDM.CancellaTipoCliente(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, item);
+                outtipo.Text = "Tipo cliente cancellato";
+            //Aggiorno la visualizzazione
+            Utility.CaricaListaStaticaTipiClienti(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
+            PopolaTipiClienti();
+        }
+        catch (Exception error)
+        {
+            outtipo.Text = error.Message;
+        }
+
+         
+        txtTipoClienteUpdate.Text = "";
+        //Aggiorno la visualizzazione
+        Utility.CaricaListaStaticaTipiClienti(WelcomeLibrary.STATIC.Global.NomeConnessioneDb);
+        PopolaTipiClienti();
+    }
+
+    
+
+
     private void RiempiDdlTipiClienti(string Tipologia, DropDownList ddlTipiClienti)
     {
         //Riempio la ddl tipi clienti
