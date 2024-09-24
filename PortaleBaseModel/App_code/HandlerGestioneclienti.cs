@@ -470,7 +470,7 @@ public class clientivuemodel
 
     public string message = "";
     public string messageResp = "";
-    public PagerModel Pager = new PagerModel(1, 20, 0);
+    public PagerModel Pager = new PagerModel(1, 40, 0);
     public OrderedDictionary coordinatoriinlist = new OrderedDictionary();
     public clientivuemodel()
     {

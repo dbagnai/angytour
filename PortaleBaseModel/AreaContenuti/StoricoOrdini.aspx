@@ -248,7 +248,10 @@
                             <input type="text" id="txtidscaglione" style="width: 100%" clientidmode="Static" runat="server" /><br />
                         </div>
                     </li>
-                    
+                     <li runat="server" id="li1"><b>Codice Categoria Prodotto:</b><br />
+                         <asp:TextBox ID="txtcodicecategoria" Width="100%" runat="server" /><br />
+                     </li>
+
 
                     <li runat="server" id="liFiltroordini"><b>Codice Ordine:</b><br />
                         <asp:TextBox ID="txtCodiceordine" Width="100%" runat="server" /><br />

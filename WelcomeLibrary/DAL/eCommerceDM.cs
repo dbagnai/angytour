@@ -440,6 +440,233 @@ namespace WelcomeLibrary.DAL
 
             return list;
         }
+        /// <summary>
+        /// Carica la lista degli elementi del carrello in base ai parametri dei prodotti indicati 
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="Codiceordine"></param>
+        /// <returns></returns>
+        public CarrelloCollection CaricaCarrelloFiltroprodotti(string connection, List<SQLiteParameter> parPassed)
+        {
+            if (connection == null || connection == "") return null;
+            if (parPassed == null) return null;
+
+            CarrelloCollection list = null;
+            Carrello item;
+            try
+            {
+                bool activatefiltering = false;
+                List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+                string query = "";
+                string queryfilter = "";
+                query = "SELECT A.ID,A.SessionId,A.Data,A.Prezzo,A.Iva,A.Numero,A.CodiceProdotto,A.jsonfield1,A.IpClient,A.Validita,A.Campo1,A.Campo2,A.Campo3,A.Campo4,A.Campo5,A.CodiceOrdine,A.ID_cliente,A.ID_prodotto,A.Codicenazione,A.Codiceprovincia,A.Codicesconto,A.Datastart,A.Dataend, B.ID as B_ID,B.CodiceTIPOLOGIA,B.DataInserimento,B.DescrizioneGB,B.DescrizioneRU,B.DescrizioneFR,B.DescrizioneDE,B.DescrizioneES,B.DescrizioneI,B.DENOMINAZIONEGB,B.DENOMINAZIONERU,B.DENOMINAZIONEFR,B.DENOMINAZIONEDE,B.DENOMINAZIONEES,B.DENOMINAZIONEI,B.linkVideo,B.CodiceCOMUNE,B.CodicePROVINCIA as B_CodicePROVINCIA,B.CodiceREGIONE,B.CodiceProdotto as B_CodiceProdotto,B.CodiceCategoria,B.CodiceCategoria2Liv,B.Caratteristica1,B.Caratteristica2,B.Caratteristica3,B.Caratteristica4,B.Caratteristica5,B.Caratteristica6,B.Xmlvalue,B.DATITECNICII,B.DATITECNICIGB,B.DATITECNICIRU,B.DATITECNICIFR,B.DATITECNICIDE,B.DATITECNICIES,B.EMAIL,B.FAX,B.INDIRIZZO,B.TELEFONO,B.WEBSITE,B.Prezzo as B_Prezzo,B.PrezzoListino,B.Peso,B.Vetrina,B.FotoSchema,B.FotoValori,B.urlcustomI,B.urlcustomGB,B.urlcustomRU,B.urlcustomFR,B.urlcustomDE,B.urlcustomES FROM TBL_CARRELLO A left outer join TBL_ATTIVITA B on A.id_prodotto=B.Id ";
+                queryfilter = " where CodiceOrdine != '' ";
+
+                //Filtro su categoria del prodotto
+                if (parPassed.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCategoria"; }))
+                {
+                    activatefiltering = true;
+                    SQLiteParameter pcat = parPassed.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@CodiceCategoria"; });
+                    parColl.Add(pcat);
+                    if (!queryfilter.ToLower().Contains("where"))
+                        queryfilter += " WHERE CodiceCategoria like @CodiceCategoria ";
+                    else
+                        queryfilter += " AND CodiceCategoria like @CodiceCategoria  ";
+                }
+
+                //SQLiteParameter p1 = new SQLiteParameter("@Codiceordine", Codiceordine);//OleDbType.VarChar
+                //parColl.Add(p1);
+                //query += " order by A.id desc ";
+
+                query += queryfilter;
+                if (activatefiltering)
+                {
+                    list = new CarrelloCollection();
+                    SQLiteDataReader reader = dbDataAccess.GetReaderListOle(query, parColl, connection);
+                    using (reader)
+                    {
+                        if (reader == null) { return list; };
+                        if (reader.HasRows == false)
+                            return list;
+                        while (reader.Read())
+                        {
+                            item = new Carrello();
+                            item.ID = reader.GetInt64(reader.GetOrdinal("ID"));
+                            item.IpClient = reader.GetString(reader.GetOrdinal("IpClient"));
+                            item.SessionId = reader.GetString(reader.GetOrdinal("SessionId"));
+
+                            if (!reader["Id_cliente"].Equals(DBNull.Value))
+                                item.ID_cliente = reader.GetInt64(reader.GetOrdinal("Id_cliente"));
+                            if (!reader["Codicenazione"].Equals(DBNull.Value))
+                                item.Codicenazione = reader.GetString(reader.GetOrdinal("Codicenazione"));
+                            if (!reader["Codiceprovincia"].Equals(DBNull.Value))
+                                item.Codiceprovincia = reader.GetString(reader.GetOrdinal("Codiceprovincia"));
+                            if (!reader["Codicesconto"].Equals(DBNull.Value))
+                                item.Codicesconto = reader.GetString(reader.GetOrdinal("Codicesconto"));
+                            item.id_prodotto = reader.GetInt64(reader.GetOrdinal("id_prodotto"));
+                            if (!reader["CodiceProdotto"].Equals(DBNull.Value))
+                                item.CodiceProdotto = reader.GetString(reader.GetOrdinal("CodiceProdotto"));
+                            if (!reader["jsonfield1"].Equals(DBNull.Value))
+                                item.jsonfield1 = reader.GetString(reader.GetOrdinal("jsonfield1"));
+                            item.Data = reader.GetDateTime(reader.GetOrdinal("Data"));
+
+
+                            if (!reader["Datastart"].Equals(DBNull.Value))
+                                item.Datastart = reader.GetDateTime(reader.GetOrdinal("Datastart"));
+                            if (!reader["Dataend"].Equals(DBNull.Value))
+                                item.Dataend = reader.GetDateTime(reader.GetOrdinal("Dataend"));
+
+
+                            //if (!reader["B.Prezzo"].Equals(DBNull.Value))
+                            //    item.Prezzo = reader.GetDouble(reader.GetOrdinal("B.Prezzo"));
+                            item.Prezzo = reader.GetDouble(reader.GetOrdinal("Prezzo"));
+
+                            item.Iva = reader.GetInt64(reader.GetOrdinal("Iva"));
+                            item.Numero = reader.GetInt64(reader.GetOrdinal("Numero"));
+                            item.Validita = reader.GetInt64(reader.GetOrdinal("Validita"));
+
+                            if (!reader["Campo1"].Equals(DBNull.Value))
+                                item.Campo1 = reader.GetString(reader.GetOrdinal("Campo1"));
+                            if (!reader["Campo2"].Equals(DBNull.Value))
+                                item.Campo2 = reader.GetString(reader.GetOrdinal("Campo2"));
+                            if (!reader["Campo3"].Equals(DBNull.Value))
+                                item.Campo3 = reader.GetString(reader.GetOrdinal("Campo3"));
+
+                            if (!reader["CodiceOrdine"].Equals(DBNull.Value))
+                                item.CodiceOrdine = reader.GetString(reader.GetOrdinal("CodiceOrdine"));
+
+
+                            //carichiamo i dati relativi all'offerta scelta
+                            //item.Offerta = CaricaDatiOffertaRelativa(connection, item.CodiceProdotto);
+                            Offerte offerta = new Offerte();
+                            if (!reader["B_ID"].Equals(DBNull.Value))
+                            {
+                                offerta.Id = reader.GetInt64(reader.GetOrdinal("B_ID"));
+                                offerta.CodiceTipologia = reader.GetString(reader.GetOrdinal("CodiceTIPOLOGIA"));
+                                offerta.DataInserimento = reader.GetDateTime(reader.GetOrdinal("DataInserimento"));
+                                offerta.DescrizioneGB = reader.GetString(reader.GetOrdinal("DescrizioneGB"));
+                                offerta.DenominazioneGB = reader.GetString(reader.GetOrdinal("DENOMINAZIONEGB"));
+                                if (!(reader["DescrizioneFR"]).Equals(DBNull.Value)) offerta.DescrizioneFR = reader.GetString(reader.GetOrdinal("DescrizioneFR"));
+                                if (!(reader["DenominazioneFR"]).Equals(DBNull.Value)) offerta.DenominazioneFR = reader.GetString(reader.GetOrdinal("DENOMINAZIONEFR"));
+                                if (!(reader["DescrizioneES"]).Equals(DBNull.Value)) offerta.DescrizioneES = reader.GetString(reader.GetOrdinal("DescrizioneES"));
+                                if (!(reader["DenominazioneES"]).Equals(DBNull.Value)) offerta.DenominazioneES = reader.GetString(reader.GetOrdinal("DENOMINAZIONEES"));
+
+                                if (!(reader["DescrizioneDE"]).Equals(DBNull.Value)) offerta.DescrizioneDE = reader.GetString(reader.GetOrdinal("DescrizioneDE"));
+                                if (!(reader["DenominazioneDE"]).Equals(DBNull.Value)) offerta.DenominazioneDE = reader.GetString(reader.GetOrdinal("DENOMINAZIONEDE"));
+
+                                if (!(reader["DescrizioneRU"]).Equals(DBNull.Value)) offerta.DescrizioneRU = reader.GetString(reader.GetOrdinal("DescrizioneRU"));
+                                if (!(reader["DenominazioneRU"]).Equals(DBNull.Value)) offerta.DenominazioneRU = reader.GetString(reader.GetOrdinal("DENOMINAZIONERU"));
+
+
+                                offerta.DescrizioneI = reader.GetString(reader.GetOrdinal("DescrizioneI"));
+                                offerta.DenominazioneI = reader.GetString(reader.GetOrdinal("DENOMINAZIONEI"));
+                                if (!reader["linkVideo"].Equals(DBNull.Value))
+                                    offerta.linkVideo = reader.GetString(reader.GetOrdinal("linkVideo"));
+
+                                if (!reader["CodiceCOMUNE"].Equals(DBNull.Value))
+                                    offerta.CodiceComune = reader.GetString(reader.GetOrdinal("CodiceCOMUNE"));
+                                if (!reader["B_CodicePROVINCIA"].Equals(DBNull.Value))
+                                    offerta.CodiceProvincia = reader.GetString(reader.GetOrdinal("B_CodicePROVINCIA"));
+                                if (!reader["CodiceREGIONE"].Equals(DBNull.Value))
+                                    offerta.CodiceRegione = reader.GetString(reader.GetOrdinal("CodiceREGIONE"));
+                                if (!reader["B_CodiceProdotto"].Equals(DBNull.Value))
+                                    offerta.CodiceProdotto = reader.GetString(reader.GetOrdinal("B_CodiceProdotto"));
+                                if (!reader["CodiceCategoria"].Equals(DBNull.Value))
+                                    offerta.CodiceCategoria = reader.GetString(reader.GetOrdinal("CodiceCategoria"));
+                                if (!reader["CodiceCategoria2Liv"].Equals(DBNull.Value))
+                                    offerta.CodiceCategoria2Liv = reader.GetString(reader.GetOrdinal("CodiceCategoria2Liv"));
+                                if (!reader["Caratteristica1"].Equals(DBNull.Value))
+                                    offerta.Caratteristica1 = reader.GetInt64(reader.GetOrdinal("Caratteristica1"));
+                                if (!reader["Caratteristica2"].Equals(DBNull.Value))
+                                    offerta.Caratteristica2 = reader.GetInt64(reader.GetOrdinal("Caratteristica2"));
+                                if (!reader["Caratteristica3"].Equals(DBNull.Value))
+                                    offerta.Caratteristica3 = reader.GetInt64(reader.GetOrdinal("Caratteristica3"));
+                                if (!reader["Caratteristica4"].Equals(DBNull.Value))
+                                    offerta.Caratteristica4 = reader.GetInt64(reader.GetOrdinal("Caratteristica4"));
+                                if (!reader["Caratteristica5"].Equals(DBNull.Value))
+                                    offerta.Caratteristica5 = reader.GetInt64(reader.GetOrdinal("Caratteristica5"));
+                                if (!reader["Caratteristica6"].Equals(DBNull.Value))
+                                    offerta.Caratteristica6 = reader.GetInt64(reader.GetOrdinal("Caratteristica6"));
+
+                                if (!(reader["urlcustomGB"]).Equals(DBNull.Value))
+                                    offerta.UrlcustomGB = reader.GetString(reader.GetOrdinal("urlcustomGB"));
+                                if (!(reader["urlcustomI"]).Equals(DBNull.Value))
+                                    offerta.UrlcustomI = reader.GetString(reader.GetOrdinal("urlcustomI"));
+                                if (!(reader["urlcustomRU"]).Equals(DBNull.Value))
+                                    offerta.UrlcustomRU = reader.GetString(reader.GetOrdinal("urlcustomRU"));
+                                if (!(reader["urlcustomFR"]).Equals(DBNull.Value))
+                                    offerta.UrlcustomFR = reader.GetString(reader.GetOrdinal("urlcustomFR"));
+                                if (!(reader["urlcustomDE"]).Equals(DBNull.Value))
+                                    offerta.UrlcustomDE = reader.GetString(reader.GetOrdinal("urlcustomDE"));
+                                if (!(reader["urlcustomES"]).Equals(DBNull.Value))
+                                    offerta.UrlcustomES = reader.GetString(reader.GetOrdinal("urlcustomES"));
+
+                                if (!reader["Xmlvalue"].Equals(DBNull.Value))
+                                    offerta.Xmlvalue = reader.GetString(reader.GetOrdinal("Xmlvalue"));
+
+                                if (!reader["DATITECNICII"].Equals(DBNull.Value))
+                                    offerta.DatitecniciI = reader.GetString(reader.GetOrdinal("DATITECNICII"));
+                                if (!reader["DATITECNICIGB"].Equals(DBNull.Value))
+                                    offerta.DatitecniciGB = reader.GetString(reader.GetOrdinal("DATITECNICIGB"));
+                                if (!reader["DATITECNICIRU"].Equals(DBNull.Value))
+                                    offerta.DatitecniciRU = reader.GetString(reader.GetOrdinal("DATITECNICIRU"));
+                                if (!reader["DATITECNICIFR"].Equals(DBNull.Value))
+                                    offerta.DatitecniciFR = reader.GetString(reader.GetOrdinal("DATITECNICIFR"));
+                                if (!reader["DATITECNICIES"].Equals(DBNull.Value))
+                                    offerta.DatitecniciES = reader.GetString(reader.GetOrdinal("DATITECNICIES"));
+                                if (!reader["DATITECNICIDE"].Equals(DBNull.Value))
+                                    offerta.DatitecniciDE = reader.GetString(reader.GetOrdinal("DATITECNICIDE"));
+
+                                if (!reader["EMAIL"].Equals(DBNull.Value))
+                                    offerta.Email = reader.GetString(reader.GetOrdinal("EMAIL"));
+                                if (!reader["FAX"].Equals(DBNull.Value))
+                                    offerta.Fax = reader.GetString(reader.GetOrdinal("FAX"));
+                                if (!reader["INDIRIZZO"].Equals(DBNull.Value))
+                                    offerta.Indirizzo = reader.GetString(reader.GetOrdinal("INDIRIZZO"));
+                                if (!reader["TELEFONO"].Equals(DBNull.Value))
+                                    offerta.Telefono = reader.GetString(reader.GetOrdinal("TELEFONO"));
+                                if (!reader["WEBSITE"].Equals(DBNull.Value))
+                                    offerta.Website = reader.GetString(reader.GetOrdinal("WEBSITE"));
+                                if (!reader["B_Prezzo"].Equals(DBNull.Value))
+                                    offerta.Prezzo = reader.GetDouble(reader.GetOrdinal("B_Prezzo"));
+
+                                if (!reader["PrezzoListino"].Equals(DBNull.Value))
+                                    offerta.PrezzoListino = reader.GetDouble(reader.GetOrdinal("PrezzoListino"));
+                                if (!reader["Vetrina"].Equals(DBNull.Value))
+                                    offerta.Vetrina = reader.GetBoolean(reader.GetOrdinal("Vetrina"));
+                                if (!reader["Peso"].Equals(DBNull.Value))
+                                    offerta.Peso = reader.GetDouble(reader.GetOrdinal("Peso"));
+
+                                if (!(reader["FotoSchema"]).Equals(DBNull.Value))
+                                    offerta.FotoCollection_M.Schema = reader.GetString(reader.GetOrdinal("FotoSchema"));
+                                else
+                                    offerta.FotoCollection_M.Schema = "";
+                                if (!(reader["FotoValori"]).Equals(DBNull.Value))
+                                    offerta.FotoCollection_M.Valori = reader.GetString(reader.GetOrdinal("FotoValori"));
+                                else
+                                    offerta.FotoCollection_M.Valori = "";
+                                //Creo la lista delle foto
+                                offerteDM offDm = new offerteDM();
+                                offerta.FotoCollection_M = offDm.CaricaAllegatiFoto(offerta.FotoCollection_M);
+                            }
+                            //quindi affidiamo l'offerta al prodotto
+                            item.Offerta = offerta;
+
+                            list.Add(item);
+                        }
+                    }
+                }
+
+
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore Caricamento Contenuti Carrello per Codice Ordine :" + error.Message, error);
+            }
+
+            return list;
+        }
+
 
 
         /// <summary>
@@ -1325,8 +1552,50 @@ namespace WelcomeLibrary.DAL
                         }
                     }
                     else return list; //se il filtro ordini si è attivato per presenza dei parametri dedicati e non ci sono risultati devo tornare lista vuota
-                ////////////////////////////////////////////////////////////////
+                                      ////////////////////////////////////////////////////////////////
                 ///
+
+
+                /////////////////////////////////////////////
+                ///SE Passato il codice categoria prodotto a catalogo cerco gli ordini che nelle righe di ordine hanno quel (CodiceCategoria) nei prodotti collegati in tbl_attivita
+                ///// da fare funzoine che torna la lista dei codiciordine corrispontenti e la aggiunge al filtro
+                CarrelloCollection righecarrellofiltro = CaricaCarrelloFiltroprodotti(connection, parColl);
+                if (righecarrellofiltro != null)
+                {
+                    if (righecarrellofiltro.Count > 0)
+                    {
+                        string listcod = "";
+                        righecarrellofiltro.ForEach(c => listcod += "," + c.CodiceOrdine);
+                        if (!parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Codiceordine"; }))
+                        {
+                            SQLiteParameter parcod = new SQLiteParameter("@Codiceordine", listcod);
+                            parColl.Add(parcod);
+                        }
+                        else // facciamo un operatore and delle due liste passata e filtrata dal carrello
+                        {
+                            SQLiteParameter pcodlist = parColl.Find(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Codiceordine"; });
+                            string parameterscodici = pcodlist.Value.ToString();
+                            parameterscodici = parameterscodici.Trim().ToString().Replace("|", ",");
+                            //FACCIAMO UN'OPERAZIONE AND DELLE DUE LISTE CODICI
+                            List<string> passedlist = parameterscodici.Trim().Split(',').ToList();
+                            List<string> filteredlist = listcod.Trim().Split(',').ToList();
+                            string joinedandlist = string.Empty;
+                            foreach (string el in filteredlist)
+                            {
+                                if (!string.IsNullOrEmpty(el.Trim()))
+                                    if (passedlist.Exists(el1 => el1 == el))
+                                        joinedandlist += "," + el.Trim();
+                            }
+                            if (!string.IsNullOrEmpty(joinedandlist))
+                                pcodlist.Value = joinedandlist; //sovrascrivo lo lista codiciordini passata con quella filtrata dando la priprita a questa
+                            else return list; //parColl.Remove(pcodlist); NON CI SONO CODICI COMUNI NELLE LISTE.. DEVO TORNARE LISTA VUOTA
+                        }
+                    }
+                    else return list; //se il filtro sul carrello si è attivato per presenza dei parametri sui prodotti e non ci sono risultati devo tornare lista vuota
+                                      //
+                }
+                /////////////////////////////////////////////
+
 
                 if (parColl.Exists(delegate (SQLiteParameter tmp) { return tmp.ParameterName == "@Codiceordine"; }))
                 {

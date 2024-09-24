@@ -2815,6 +2815,12 @@ public class CommonPage : Page
             parcoll.Add(parcod);
         }
 
+        if (parametri.ContainsKey("codicecategoria") && !string.IsNullOrWhiteSpace(parametri["codicecategoria"]))
+        {
+            SQLiteParameter parcate = new SQLiteParameter("@CodiceCategoria", parametri["codicecategoria"]);
+            parcoll.Add(parcate);
+        }
+
         if (parametri.ContainsKey("datamin") && !string.IsNullOrWhiteSpace(parametri["datamin"]))
         {
             DateTime _dt;

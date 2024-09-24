@@ -397,6 +397,9 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         parametri.Add("statoacconto", statoacconto);
         parametri.Add("statosaldo", statosaldo);
 
+        if (!string.IsNullOrEmpty(txtcodicecategoria.Text))
+            parametri.Add("codicecategoria", txtcodicecategoria.Text);
+
         TotaliCarrelloCollection ordini = CaricaDatiOrdini(parametri, PagerRisultati.CurrentPage, PagerRisultati.PageSize);
 
         long nrecordfiltrati = ordini.Totrecs;
@@ -523,6 +526,9 @@ public partial class AreaContenuti_StoricoOrdini_New : CommonPage
         parametri.Add("idscaglione", idscaglione);
         parametri.Add("statoacconto", statoacconto);
         parametri.Add("statosaldo", statosaldo);
+
+        if (!string.IsNullOrEmpty(txtcodicecategoria.Text))
+            parametri.Add("codicecategoria", txtcodicecategoria.Text);
 
         TotaliCarrelloCollection listaordini = CaricaDatiOrdini(parametri);
         string csvName = "export-ordini-" + string.Format("{0:dd-MM-yyyy}", System.DateTime.Now) + ".xlsx";

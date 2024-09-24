@@ -372,6 +372,23 @@ public partial class AreaContenuti_GestioneNewsletter : CommonPage
             PopolaGruppiMailing(id);
         }
     }
+    protected void CancellaGruppo(object sender, EventArgs e)
+    {
+        mailingDM mDM = new mailingDM();
+
+        Tabrif grupposelezionato = new Tabrif();
+        if (listGruppi.SelectedItem != null)
+        {
+            string selvalue = listGruppi.SelectedItem.Value;
+            long id = 0;
+            long.TryParse(selvalue, out id);
+
+            //cancellazione il   gruppo clienti
+            if (id != 0)
+                mDM.CancellaGruppomailing(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, id);
+            PopolaGruppiMailing(id);
+        }
+    }
 
     /// <summary>
     /// Selezione in listbox clienti nel gruppo

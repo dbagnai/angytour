@@ -271,6 +271,9 @@
                 <asp:Button ID="btnModificaGruppo" Width="300" runat="server" Text="Modifica descrizione gruppo mailing"
                     OnClick="ModificaGruppo" />
                 <br />
+                <asp:Button ID="Button1" Width="300" runat="server" Text="Cancella  gruppo mailing"
+                    OnClick="CancellaGruppo" />
+                <br />
             </div>
             <div style="clear: both">
             </div>

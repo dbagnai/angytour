@@ -1316,6 +1316,35 @@ namespace WelcomeLibrary.DAL
 
         }
 
+        /// <summary>
+        /// Elimino dal gruppo mailing selezionato tutti i clienti pressenti
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="idGruppo"></param>
+        public void CancellaGruppomailing(string connection, long idGruppo)
+        {
+            List<SQLiteParameter> parColl = new List<SQLiteParameter>();
+            if (connection == null || connection == "") return;
+
+            //string query = "DELETE FROM TBL_MAILING_GRUPPI_CLIENTI WHERE ( GruppoMailing = @GruppoMailing AND ID_CLIENTE = @ID_CLIENTE  ) ";
+            string query = "DELETE FROM TBL_MAILING_GRUPPI_CLIENTI WHERE ( GruppoMailing = @GruppoMailing  ) ";
+
+            SQLiteParameter pgruppomailing;
+            pgruppomailing = new SQLiteParameter("@GruppoMailing", idGruppo);
+            parColl.Add(pgruppomailing);
+
+            try
+            {
+                dbDataAccess.ExecuteStoredProcListOle(query, parColl, connection);
+            }
+            catch (Exception error)
+            {
+                throw new ApplicationException("Errore, eliminazione  gruppo mailing :" + error.Message, error);
+            }
+            return;
+
+        }
+
 
     }
 }
