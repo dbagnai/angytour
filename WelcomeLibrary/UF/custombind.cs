@@ -2886,6 +2886,25 @@ namespace WelcomeLibrary.UF
                         if (nodetobind.Attributes.Contains("idbind"))
                             nodetobind.Attributes["idbind"].Value = itemdic[nodetobind.Attributes["idbind"].Value];
                     }
+                    else if ((nodetobind.Name == "div") && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("modal")) //bootstrap modal
+                    {
+                        if (itemdic.ContainsKey(property))
+                        {
+                            string itemid = itemdic[property];
+                            //         modal.id = uniqueModalId;
+                            if (nodetobind.Attributes.Contains("id"))
+                                nodetobind.Attributes["id"].Value = nodetobind.Attributes["id"].Value.Replace("itemid", itemid); 
+                        }
+                    }
+                    else if ((nodetobind.Name == "a") && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("modal-trigger"))  //bootstrap modal
+                    {
+                        if (itemdic.ContainsKey(property))
+                        {
+                            string itemid = itemdic[property];
+                            //  trigger.setAttribute("data-target", `#${uniqueModalId}`);
+                            nodetobind.Attributes["data-target"].Value =  nodetobind.Attributes["data-target"].Value.Replace("itemid", itemid);
+                        }
+                    }
                     else if ((nodetobind.Name == "span" || nodetobind.Name == "div") && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("ratinginfo"))
                     {
                         if (nodetobind.Attributes.Contains("idbind"))
@@ -3165,7 +3184,7 @@ namespace WelcomeLibrary.UF
                                     sb.Append("<a href=\"" + imgslist[j] + "\" >");
 
                                     //string imgstyle = "max-width:100%;height:auto;";
-                                    
+
                                     //////////////////////////////////////////////////////////
                                     ////Eventuale impostazione max height elementi
                                     //if (nodetobind.Attributes.Contains("style") && nodetobind.Attributes["style"].Value.Contains("max-height"))
@@ -3211,8 +3230,8 @@ namespace WelcomeLibrary.UF
                                     //}
                                     ////////////////////////////////////////////////////////
 
-                                  
-                                     
+
+
                                     sb.Append("<img class=\"d-none\"   src=\"");
                                     sb.Append(imgslist[j]);
                                     sb.Append("\" ");
@@ -4007,7 +4026,8 @@ namespace WelcomeLibrary.UF
                             if (valore != null && valore != "")
                             {
                                 if (nodetobind.Attributes.Contains("src"))
-                                    nodetobind.Attributes["src"].Value += valore + "?rel=0";//&autoplay=1
+                                    nodetobind.Attributes["src"].Value += valore + "";//&autoplay=1
+                                                                                      //nodetobind.Attributes["src"].Value += valore + "?rel=0";//&autoplay=1
 
                                 if (nodetobind != null && nodetobind.ParentNode != null)
                                     if (nodetobind.ParentNode.Attributes.Contains("style"))
@@ -4970,7 +4990,8 @@ namespace WelcomeLibrary.UF
                                 if (valore != null && valore != "")
                                 {
                                     if (nodetobind.Attributes.Contains("src"))
-                                        nodetobind.Attributes["src"].Value += valore + "?rel=0";//&autoplay=1
+                                        nodetobind.Attributes["src"].Value += valore + "";//&autoplay=1
+                                                                                          //nodetobind.Attributes["src"].Value += valore + "?rel=0";//&autoplay=1
 
                                     if (nodetobind != null && nodetobind.ParentNode != null)
                                         if (nodetobind.ParentNode.Attributes.Contains("style"))
@@ -5148,6 +5169,31 @@ namespace WelcomeLibrary.UF
                         if (linkloaded.ContainsKey(valore[0]) && linkloaded[valore[0]].ContainsKey(prop[0]))
                         {
                             ret = linkloaded[valore[0]][prop[0]];
+                        }
+                    }
+                    catch { }
+                    break;
+                case "formatcarrelloavailable":
+                    try
+                    {
+
+                        string id = valore[0];
+                        string qtavendita = valore[1];
+                        string xmlvalue = valore[2];
+                        string prezzo = valore[3];
+                        double p = 0;
+                        double.TryParse(prezzo, out p);
+                        double q = 0;
+                        double.TryParse(qtavendita, out q);
+                        if (q == 0 && qtavendita != "")
+                            ret = "true";
+                        else
+                        {
+                            ret = "false"; //disponibile
+                            if ((xmlvalue != null && xmlvalue != "") || (prezzo == null || prezzo == "" || p == 0))
+                            {
+                                ret = "true";
+                            }
                         }
                     }
                     catch { }

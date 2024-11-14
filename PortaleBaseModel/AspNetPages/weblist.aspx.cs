@@ -433,6 +433,7 @@ public partial class AspNetPages_weblist : CommonPage
                         sb.Append("<div id=\"divPortfolioList\" class=\"inject\" params=\"");
                         //sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioBlog3Card.html,divPortfolioList,portlist1, 1, 44,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',true,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
                         sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioBlog3Card-masonry.html,divPortfolioList,portlist1, 1, 44,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',false,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
+                      //  sb.Append("injectbootstrapportfolioandload,bootstrapPortfolioBlog3Card-vid1.html,divPortfolioList,portlist1, 1, 44,true,\'\',\'" + cattipo + "\',\'" + Categoria + "\',false,false,\'\',\'" + testoricerca + "\',\'\',\'\',\'\',\'\'");
                         sb.Append("\"></div>");
                         sb.Append("<div id=\"divPortfolioListPager\"></div>");
 
