@@ -72,23 +72,7 @@
     </div>
 </div>
 
-
-<script>
-    <!-- function generateRandomId(prefix = "modal") { -->
-        <!-- return prefix + "_" + Math.random().toString(36).substr(2, 9); -->
-    <!-- } -->
-
-    <!-- document.addEventListener("DOMContentLoaded", function () { -->
-        <!-- document.querySelectorAll('.modal-container').forEach((container, index) => { -->
-            <!-- const uniqueModalId = generateRandomId("videoModal"); -->
-            <!-- const uniqueLabelId = generateRandomId("videoModalLabel"); -->
-            <!-- const modal = container.querySelector('.modal'); -->
-            <!-- modal.id = uniqueModalId; -->
-            <!-- modal.setAttribute("aria-labelledby", uniqueLabelId); -->
-            <!-- const trigger = container.querySelector('.modal-trigger'); -->
-            <!-- trigger.setAttribute("data-target", `#${uniqueModalId}`); -->
-        <!-- }); -->
-    <!-- }); -->
+<script> 
     // Interrompe il video quando la modale viene chiusa
     $('.modal').on('hidden.bs.modal', function () {
         const iframe = $(this).find('iframe'); // Trova l'iframe all'interno della modale chiusa
