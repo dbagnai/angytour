@@ -318,12 +318,15 @@ public class HandlerPayments : IHttpHandler, IRequiresSessionState
                 case "webhook":  //stripe non usato webhook
                     var stripeEvent = EventUtility.ParseEvent(body, false); //throwOnApiVersionMismatch: false
                     // Handle the event
-                    if (stripeEvent.Type == Events.PaymentIntentSucceeded)
+
+                    //if (stripeEvent.Type == Events.PaymentIntentSucceeded)  
+                    if (stripeEvent.Type == "payment_intent.succeeded")  
                     {
                         var paymentIntentwh = stripeEvent.Data.Object as PaymentIntent;
                         Console.WriteLine("PaymentIntent was successful!");
                     }
-                    else if (stripeEvent.Type == Events.PaymentMethodAttached)
+                    //else if (stripeEvent.Type == Events.PaymentMethodAttached)
+                    if (stripeEvent.Type == "payment_method.attached")
                     {
                         var paymentMethod = stripeEvent.Data.Object as Stripe.PaymentMethod;
                         Console.WriteLine("PaymentMethod was attached to a Customer!");

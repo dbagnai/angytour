@@ -1158,8 +1158,41 @@ function FillBindControls(jquery_obj, dataitem, localObjects, classselector, cal
                             $(this).attr("idbind", dataitem[$(this).attr("idbind")]);
                     }
                     else if ($(this).is("input") && ($(this).attr('type') == 'text' || $(this).attr('type') == 'email' || $(this).attr('type') == null)) {
-                        if (dataitem.hasOwnProperty(proprarr[0]))
-                            $(this).attr("value", dataitem[proprarr[0]]);
+                        if (dataitem.hasOwnProperty(proprarr[0])) {
+
+                            ////////////////////////////////////////////////////
+                            //AGGIUNTO PER EFFETTAURE FORMAT SUI CAMPI INPUT
+                            var valore = [];
+                            valore[0] = dataitem[proprarr[0]]; //campo da valutare
+                            var prop = [];
+                            var formatfunc = "";
+                            if ($(this).attr("format") != null) {
+                                formatfunc = $(this).attr("format");
+                                if ($(this).attr("mybind1") != null)
+                                    valore[1] = dataitem[$(this).attr("mybind1")];
+                                if ($(this).attr("mybind2") != null)
+                                    valore[2] = dataitem[$(this).attr("mybind2")];
+                                if ($(this).attr("myvalue") != null)
+                                    prop[0] = $(this).attr("myvalue");
+                                if ($(this).attr("myvalue1") != null)
+                                    prop[1] = $(this).attr("myvalue1");
+                                if ($(this).attr("myvalue2") != null)
+                                    prop[2] = $(this).attr("myvalue2");
+                                window[formatfunc](localObjects, valore, prop, function (ret) {
+                                    // valore = ret;
+                                    if (ret != null && Array.isArray(ret) && ret.length > 0)
+                                        valore = ret[0];
+                                    else
+                                        valore = ret;
+                                });
+                            }
+                            ///////////////////////////////////
+
+                            $(this).attr("value", valore);
+                            //$(this).attr("value", dataitem[proprarr[0]]);
+
+
+                        }
                         else
                             $(this).attr("value", '');
 

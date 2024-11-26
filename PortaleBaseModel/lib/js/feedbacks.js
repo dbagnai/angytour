@@ -503,7 +503,6 @@ function commentclosure(varname) {
                     if (mainscope.mailadvice) {
                         mainscope.localcontainer.mail.Emailaddress.defaultsenderemail = mainscope.localcontainer.item['Email'];
                         mainscope.localcontainer.mail.Emailaddress.defaultsendername = mainscope.localcontainer.item['Nome'];
-                        //Inserire i dati necessari per l'invio nella mail 
                         mainscope.localcontainer.mail.Sparedict["Idpost"] = mainscope.localcontainer.item['Idpost']; //Id prodotto se presente
                         mainscope.localcontainer.mail.Sparedict["Id"] = mainscope.localcontainer.item["Id"]; //id recensione inserita
 
@@ -532,6 +531,19 @@ function commentclosure(varname) {
                     found = true;
                     console.log('update');
                     console.log(mainscope.localcontainer.list[j]);
+
+                    //converto a data controllanto il formato DD-MM-YYYY o YYYY-MM-DDTHH:mm:ss
+                    console.log(mainscope.localcontainer.list[j]["Data"]);
+                    var datetmp = moment(mainscope.localcontainer.list[j]["Data"], 'YYYY-MM-DDTHH:mm:ss', true);
+                    if (datetmp.format("YYYY-MM-DDTHH:mm:ss") != 'Invalid date') mainscope.localcontainer.list[j]["Data"] = datetmp.format("YYYY-MM-DDTHH:mm:ss");
+                    else
+                    {
+                        datetmp = moment(mainscope.localcontainer.list[j]["Data"], 'DD-MM-YYYY', true);
+                        if (datetmp.format("YYYY-MM-DDTHH:mm:ss") != 'Invalid date') mainscope.localcontainer.list[j]["Data"] = datetmp.format("YYYY-MM-DDTHH:mm:ss");
+                    } 
+                    console.log('data moment:' + datetmp.format("YYYY-MM-DDTHH:mm:ss"));
+                    //////////
+
                     updatecomments(lng, mainscope.localcontainer.list[j], function (ret) {
                         console.log(ret);
                         if (ret == '' || ret == null)

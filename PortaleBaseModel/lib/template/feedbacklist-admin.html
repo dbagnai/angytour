@@ -8,10 +8,14 @@
                 <span class="rating bind" mybind="stelle" idbind="Id" data-default-rating="2.5"></span>
             </div>
             <div class="col-12 text-left"><div style="font-size:0.9rem;margin-bottom:3px" class="bind" mybind="Data" myvalue="" format="formatdata" /></div>
+
+
             <div class="col-12 text-left">
                 <input type="checkbox" style="width:50px !important; height:35px;align-items:flex-start;display:inline-block" class="form-control bind" mybind="Approvato" idbind="Id" onchange="commenttool.onchangeValue(this)" onkeyup="commenttool.onchangeValue(this)" />
                 <i class="fa fa-2x fa-comments-o"></i><input type="text" class="form-control bind" mybind="Nome" idbind="Id" onchange="commenttool.onchangeValue(this)" onkeyup="commenttool.onchangeValue(this)" />
             </div>
+            <div class="col-12" style="text-align:left"><input type="text" class="form-control bind" mybind="Data" myvalue="" format="formatdata1" idbind="Id" onchange="commenttool.onchangeValue(this)" onkeyup="commenttool.onchangeValue(this)" /></div>
+
             <div class="col-12" style="text-align:left"><input type="email" class="form-control bind" mybind="Email" idbind="Id" onchange="commenttool.onchangeValue(this)" onkeyup="commenttool.onchangeValue(this)" /></div>
             <div class="col-12" style="text-align:left"><input type="text" class="form-control bind" mybind="Titolo" idbind="Id" onchange="commenttool.onchangeValue(this)" onkeyup="commenttool.onchangeValue(this)" /></div>
             <div class="col-12" style="text-align:left"><textarea rows="3" type="text" class="form-control bind" mybind="Testo" idbind="Id" onchange="commenttool.onchangeValue(this)" onkeyup="commenttool.onchangeValue(this)" /></div>
