@@ -387,10 +387,15 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 {
                     txtlinkedids.Text = elem.Campo1;
                 }
+                elem = elem = extradata.Find(e => e.Campo2 == "cbd");
+                if (elem != null)
+                {
+                    txtcbd.Text = elem.Campo1;
+                }
 
             }
             //////////////////////////////
-          
+
             txtCampo1I.Text = Details.Campo1I;
             txtCampo2I.Text = Details.Campo2I;
             txtCampo1GB.Text = Details.Campo1GB;
@@ -964,6 +969,12 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                     extraprops.RemoveAll(etmp => etmp.Campo2 == elem.Campo2);
                     extraprops.Add(elem);
 
+                    elem = new Tabrif();
+                    elem.Campo2 = "cbd"; elem.Campo1 = txtcbd.Text; elem.Lingua = "I";
+                    extraprops.RemoveAll(etmp => etmp.Campo2 == elem.Campo2);
+                    extraprops.Add(elem);
+
+
                     string serializedextraprops = Newtonsoft.Json.JsonConvert.SerializeObject(extraprops);
                     updrecord.Textfield1_dts = serializedextraprops; //metto le extraprops nella tabella collegata!!!
                                                                      ///////////////////////////////////////////////////  
@@ -1291,6 +1302,11 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
                 extraprops.RemoveAll(etmp => etmp.Campo2 == elem.Campo2);
                 extraprops.Add(elem);
 
+                elem = new Tabrif();
+                elem.Campo2 = "cbd"; elem.Campo1 = txtcbd.Text; elem.Lingua = "I";
+                extraprops.RemoveAll(etmp => etmp.Campo2 == elem.Campo2);
+                extraprops.Add(elem);
+
                 string serializedextraprops = Newtonsoft.Json.JsonConvert.SerializeObject(extraprops);
                 updrecord.Textfield1_dts = serializedextraprops; //metto le extraprops nella tabella collegata!!!
                                                                  /////////////////////////////////////////////////////
@@ -1568,6 +1584,9 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         txtData.Text = "";
         txtAutore.Text = "";
 
+        txtlinkedids.Text = "";
+        txtcbd.Text = "";
+
         txtLatitudine1_dts.Text = string.Empty;
         txtLongitudine1_dts.Text = string.Empty;
 
@@ -1654,6 +1673,8 @@ public partial class AreaContenuti_Gestioneprodotti : CommonPage
         ddlNazione.Enabled = !valore;
         ddlProvincia.Enabled = !valore;
         ddlComune.Enabled = !valore;
+        txtlinkedids.ReadOnly = valore;
+        txtcbd.ReadOnly = valore;
 
         txtLatitudine1_dts.ReadOnly = valore;
         txtLongitudine1_dts.ReadOnly = valore;

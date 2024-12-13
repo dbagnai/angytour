@@ -1043,6 +1043,20 @@
                       <asp:TextBox CssClass="mceNoEditor" Width="60%" ID="txtlinkedids" runat="server"></asp:TextBox>
                   </div>
               </div>
+                  <div class="row" style="display: block">
+                     <div class="col-sm-2 item-text">
+                         <strong>
+                             <asp:Label Width="30%" ID="Label80" runat="server" Text="Valore Cbd" /></strong>
+                     </div>
+                     <div class="col-sm-10">
+                         <asp:TextBox CssClass="mceNoEditor" Width="60%" ID="txtcbd" runat="server"></asp:TextBox>
+                     </div>
+                 </div>
+
+
+
+
+
                 <div class="row" style="display: block">
                     <div class="col-sm-2 item-text">
                         <strong>

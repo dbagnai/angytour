@@ -5212,6 +5212,30 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
     -moz-transform: rotate(-40deg);
     -o-transform: rotate(-40deg);
 }*/
+.prod_labelright {
+  position: absolute;
+  padding: 1px 7px;
+  right: 15px;
+  top: 15px;
+  z-index: 2;
+  /* background: url(../images/sitespecific/bollino-1.png) no-repeat center center; */
+  border: 1px solid transparent;
+  background-color: #fff;
+  text-align: left;
+  color: black;
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 800;
+  font-size: 0.8rem;
+  word-wrap: normal;
+  border-radius: 5px;
+}
+.prod_labelright > span {
+  display: block;
+  transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+}
 .prod_discount {
   position: absolute;
   padding: 1px 7px;

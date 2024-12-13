@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
   <channel>
-    <title>Nome Sito Blog</title>
+    <title>Perizie Inail Tavanti Blog</title>
     <link>http://localhost:62000</link>
-    <description>Nome Sito</description>
-    <lastBuildDate>Mon, 12 Aug 2024 11:34:10 GMT</lastBuildDate>
+    <description>Perizie Inail Tavanti</description>
+    <lastBuildDate>Fri, 13 Dec 2024 16:48:50 GMT</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2024-08-12T11:34+02:00</sy:updateBase>
+    <sy:updateBase>2024-12-13T16:48+01:00</sy:updateBase>
     <language>it-IT</language>
     <item>
       <title><![CDATA[titolo sottotitolo
@@ -16,7 +16,7 @@
       <guid isPermaLink="true">http://localhost:62000/it/blog/titolo-sottotitolo-30</guid>
       <pubDate>Tue, 29 May 2018 11:18:41 +02:00</pubDate>
       <category>Blog</category>
-      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:62000/public/Files/rif000002/30/sample.jpg" alt="titolo
+      <description><![CDATA[<img style="margin-right: 10px; float: left" src="http://localhost:62000/public/Files/rif000002/30/4.jpg" alt="titolo
 sottotitolo" width="350" />Ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat vulputate erat vel pharetra. Curabitur eu ligula dictum, porttitor enim eget, luctus velit. Donec fermentum, purus ut aliquam luctus, elit diam scelerisque sem, sit amet elementum nibh nisi vitae sem. Aenean tempor libero varius finibus imperdiet.<p>Continua a leggere / Read More <a href="http://localhost:62000/it/blog/titolo-sottotitolo-30"><em>titolo
 sottotitolo</em></a>.</p>]]></description>
     </item>

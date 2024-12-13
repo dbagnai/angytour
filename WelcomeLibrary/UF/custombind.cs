@@ -2893,7 +2893,7 @@ namespace WelcomeLibrary.UF
                             string itemid = itemdic[property];
                             //         modal.id = uniqueModalId;
                             if (nodetobind.Attributes.Contains("id"))
-                                nodetobind.Attributes["id"].Value = nodetobind.Attributes["id"].Value.Replace("itemid", itemid); 
+                                nodetobind.Attributes["id"].Value = nodetobind.Attributes["id"].Value.Replace("itemid", itemid);
                         }
                     }
                     else if ((nodetobind.Name == "a") && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("modal-trigger"))  //bootstrap modal
@@ -2902,7 +2902,7 @@ namespace WelcomeLibrary.UF
                         {
                             string itemid = itemdic[property];
                             //  trigger.setAttribute("data-target", `#${uniqueModalId}`);
-                            nodetobind.Attributes["data-target"].Value =  nodetobind.Attributes["data-target"].Value.Replace("itemid", itemid);
+                            nodetobind.Attributes["data-target"].Value = nodetobind.Attributes["data-target"].Value.Replace("itemid", itemid);
                         }
                     }
                     else if ((nodetobind.Name == "span" || nodetobind.Name == "div") && nodetobind.Attributes.Contains("class") && nodetobind.Attributes["class"].Value.Contains("ratinginfo"))
@@ -5476,6 +5476,12 @@ namespace WelcomeLibrary.UF
                                             ret = htmltoinsert;
                                         }
 
+                                    }
+
+                                    //altre proprieta da visualizare
+                                    if (prop[6] == "creaetichetta")
+                                    {
+                                        string htmltoinsert = ret;
                                     }
 
 

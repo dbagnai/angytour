@@ -5,7 +5,11 @@
             <div class="item box position-relative  p-0 mb-4 card border border-tipo1 rounded" style="overflow:hidden;">
                 <!--RIBBON-->
                 <div class="bind" mybind="Prezzo" mybind1="PrezzoListino" format="formatlabelsconto"></div>
-                <div class="bind" mybind="Promozione" format="formatlabelpromo"></div>
+                <div class="bind" mybind="Promozione" format="formatlabelpromo"></div>  
+                <!--DA TESTARE PER CBD-->
+                <div class="bind" mybind="Id" myvalue="Textfield1_dts" myvalue1="cbd" format="formatvisibilitybyjsonvalue">
+                    <div class="bind prod_labelright font-bold text-left my-2 " mybind="Id" myvalue="Textfield1_dts" myvalue1="cbd" myvalue2="common" myvalue3="cbdintrotext" myvalue4="common" myvalue5="cbdendtext" myvalue6="creaetichetta" format="formatjsontext"></div>
+                </div>
                 <!--<a target="_self" href="link" class="bind mb-3" title="titolo" mybind="Id" style="overflow:hidden">
                     <div class="work-image imgovercontainer d-flex align-items-center catalogo_img_shadow" style="height:260px;overflow:hidden">
                         <img src="/images/dummylogo.png" alt="" class="bind lazyOwl" mybind="Id" />
@@ -22,6 +26,7 @@
                 </a>
 
                 <div class="card-body position-relative pt-0 pb-0 px-0" style="overflow:hidden">
+
 
                     <div class=" px-3 py-2 bg-primary-color" style="">
                         <span class="bind scalablefont-smallest primary-font font-weight-medium" mybind="CodiceCategoria" format="frmcategoria"></span>
