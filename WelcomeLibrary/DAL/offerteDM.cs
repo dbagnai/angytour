@@ -7831,7 +7831,7 @@ namespace WelcomeLibrary.DAL
                 parColl.Add(p4);
 
 
-                string query = "UPDATE dbo_TBLRIF_PRODOTTO SET [CodiceTipologia]=@CodiceTipologia , [Descrizione]=@Descrizione WHERE CodiceProdotto=@CodiceProdotto AND Lingua= @Lingua ";
+                string query = "UPDATE dbo_TBLRIF_PRODOTTO SET [CodiceTipologia]=@CodiceTIPOLOGIA , [Descrizione]=@Descrizione WHERE CodiceProdotto=@CodiceProdotto AND Lingua= @Lingua ";
 
 
                 try
@@ -7855,7 +7855,7 @@ namespace WelcomeLibrary.DAL
                 parColl.Add(p4);
 
 
-                string query = "UPDATE dbo_TBLRIF_PRODOTTO SET [CodiceTipologia]=@CodiceTipologia , [Descrizione]=@Descrizione WHERE CodiceProdotto=@CodiceProdotto AND Lingua= @Lingua";
+                string query = "UPDATE dbo_TBLRIF_PRODOTTO SET [CodiceTipologia]=@CodiceTIPOLOGIA , [Descrizione]=@Descrizione WHERE CodiceProdotto=@CodiceProdotto AND Lingua= @Lingua";
 
 
                 try
@@ -7964,7 +7964,7 @@ namespace WelcomeLibrary.DAL
             parColl = new List<SQLiteParameter>();
             SQLiteParameter p1prod = new SQLiteParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
             parColl.Add(p1prod);
-            string query = "DELETE FROM dbo_TBLRIF_PRODOTTO WHERE Codiceprodotto=@Codiceprodotto";
+            string query = "DELETE FROM dbo_TBLRIF_PRODOTTO WHERE CodiceProdotto=@CodiceProdotto";
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -7977,7 +7977,7 @@ namespace WelcomeLibrary.DAL
             parColl = new List<SQLiteParameter>();
             SQLiteParameter p1 = new SQLiteParameter("@CodiceProdotto", item.CodiceProdotto);//OleDbType.VarChar
             parColl.Add(p1);
-            query = "DELETE FROM dbo_TBLRIF_SOTTOPRODOTTO WHERE Codiceprodotto=@Codiceprodotto";
+            query = "DELETE FROM dbo_TBLRIF_SOTTOPRODOTTO WHERE CodiceProdotto=@CodiceProdotto";
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
@@ -8088,7 +8088,7 @@ namespace WelcomeLibrary.DAL
             parColl.Add(p1);
             SQLiteParameter p3 = new SQLiteParameter("@CodiceSottoprodotto", item.CodiceSProdotto);
             parColl.Add(p3);
-            string query = "DELETE FROM dbo_TBLRIF_SOTTOPRODOTTO WHERE Codiceprodotto=@Codiceprodotto AND CodiceSottoprodotto=@CodiceSottoprodotto  ";
+            string query = "DELETE FROM dbo_TBLRIF_SOTTOPRODOTTO WHERE CodiceProdotto=@CodiceProdotto AND CodiceSottoprodotto=@CodiceSottoprodotto  ";
             try
             {
                 dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
