@@ -988,7 +988,7 @@ namespace WelcomeLibrary.DAL
             //p8.OleDbType = OleDbType.Date;
             parColl.Add(p8);
 
-            SQLiteParameter p9 = new SQLiteParameter("@id_attivita", item.Id_attivita);
+            SQLiteParameter p9 = new SQLiteParameter("@Id_attivita", item.Id_attivita);
             parColl.Add(p9);
 
             SQLiteParameter pct1 = new SQLiteParameter("@customtitleI", item.CustomtitleI);
@@ -1033,7 +1033,7 @@ namespace WelcomeLibrary.DAL
             SQLiteParameter pr1 = new SQLiteParameter("@robots", item.Robots);
             parColl.Add(pr1);
 
-            string query = "INSERT INTO TBL_CONTENUTI([CodiceContenuto],[TitoloI],[TitoloGB],[TitoloRU],[TitoloFR],[TitoloDE],[TitoloES],[DescrizioneI],[DescrizioneGB],[DescrizioneRU],[DescrizioneFR],[DescrizioneDE],[DescrizioneES],[FotoSchema],[FotoValori],[DataInserimento],[Id_attivita],customtitleI,customtitleGB,customtitleRU,customtitleFR,customtitleDE,customtitleES,customdescI,customdescGB,customdescRU,customdescFR,customdescDE,customdescES,canonicalI,canonicalGB,canonicalRU,canonicalFR,canonicalDE,canonicalES,robots) VALUES (@codicecontenuto,@titoloi,@titologb,@titoloru,@titoloFR,@titoloDE,@titoloES,@descrizionei,@descrizionegb,@descrizioneru,@descrizioneFR,@descrizioneDE,@descrizioneES,@fotoschema,@fotovalori,@data,@id_attivita,@customtitleI,@customtitleGB,@customtitleRU,@customtitleFR,@customtitleDE,@customtitleES,@customdescI,@customdescGB,@customdescRU,@customdescFR,@customdescDE,@customdescES,@canonicalI,@canonicalGB,@canonicalRU,@canonicalFR,@canonicalDE,@canonicalES,@robots)";
+            string query = "INSERT INTO TBL_CONTENUTI([CodiceContenuto],[TitoloI],[TitoloGB],[TitoloRU],[TitoloFR],[TitoloDE],[TitoloES],[DescrizioneI],[DescrizioneGB],[DescrizioneRU],[DescrizioneFR],[DescrizioneDE],[DescrizioneES],[FotoSchema],[FotoValori],[DataInserimento],[Id_attivita],customtitleI,customtitleGB,customtitleRU,customtitleFR,customtitleDE,customtitleES,customdescI,customdescGB,customdescRU,customdescFR,customdescDE,customdescES,canonicalI,canonicalGB,canonicalRU,canonicalFR,canonicalDE,canonicalES,robots) VALUES (@codicecontenuto,@titoloi,@titologb,@titoloru,@titoloFR,@titoloDE,@titoloES,@descrizionei,@descrizionegb,@descrizioneru,@descrizioneFR,@descrizioneDE,@descrizioneES,@fotoschema,@fotovalori,@data,@Id_attivita,@customtitleI,@customtitleGB,@customtitleRU,@customtitleFR,@customtitleDE,@customtitleES,@customdescI,@customdescGB,@customdescRU,@customdescFR,@customdescDE,@customdescES,@canonicalI,@canonicalGB,@canonicalRU,@canonicalFR,@canonicalDE,@canonicalES,@robots)";
             try
             {
                 long lastidentity = dbDataAccess.ExecuteStoredProcListOle(query, parColl, connessione);
