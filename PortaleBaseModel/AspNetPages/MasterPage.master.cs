@@ -269,13 +269,6 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
         scriptRegVariables += ";\r\n" + string.Format("var idmapcontainer1 = 'map1'");
         scriptRegVariables += ";\r\n" + string.Format("var idmapcontainerlocal = 'maplocal'");
         scriptRegVariables += ";\r\n" + string.Format("var iddirectionpanelcontainer = 'directionpanel'");
-        //Passo codificate base64 con encoding utf-8 le risorse necessarie al javascript della pagina iniettandole in pagina (   questo evita di attendere la promise per inizializzare le variabili javascript !!! )
-        //scriptRegVariables += ";\r\n" + string.Format("loadvariables(utf8ArrayToStr(urlB64ToUint8Array('{0}')))", dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name)));
-        scriptRegVariables += ";\r\n" + WelcomeLibrary.UF.Utility.waitwrappercall("loadvariables", string.Format("loadvariables(b64ToUtf8('{0}'))", dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name))));
-        scriptRegVariables += ";\r\n" + WelcomeLibrary.UF.Utility.waitwrappercall("moment", string.Format("moment.locale('{0}') ", "it"));
-        //scriptRegVariables += ";\r\n " + string.Format("moment.locale('{0}') ", "it");
-        scriptRegVariables += ";\r\n";
-
         // LEGGE SE PRSENTE CODICE DA ESEGUIRE IN PAGINA DALLA SESSIONE PER LE CONVErSIONI "jscodeconversion"
         //( SOLO SULLA PAGINA DI CONVERSIONE THANKYOU! )
         if (Request != null && Request.QueryString["conversione"] != null && Request.QueryString["conversione"].ToString() == "true")
@@ -285,6 +278,15 @@ public partial class AspNetPages_MasterPage : System.Web.UI.MasterPage
             Session.Remove("jscodeconversion");
         }
         ////////////////////////////////////
+        ///
+        //Passo codificate base64 con encoding utf-8 le risorse necessarie al javascript della pagina iniettandole in pagina (   questo evita di attendere la promise per inizializzare le variabili javascript !!! )
+        //scriptRegVariables += ";\r\n" + string.Format("loadvariables(utf8ArrayToStr(urlB64ToUint8Array('{0}')))", dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name)));
+        scriptRegVariables += ";\r\n" + WelcomeLibrary.UF.Utility.waitwrappercall("loadvariables", string.Format("loadvariables(b64ToUtf8('{0}'))", dataManagement.EncodeUtfToBase64(references.initreferencesdataserialized(Lingua, Page.User.Identity.Name))));
+        scriptRegVariables += ";\r\n" + WelcomeLibrary.UF.Utility.waitwrappercall("moment", string.Format("moment.locale('{0}') ", "it"));
+        //scriptRegVariables += ";\r\n " + string.Format("moment.locale('{0}') ", "it");
+        scriptRegVariables += ";\r\n";
+
+     
         
         if (addelements == null) addelements = new Dictionary<string, string>();
         addelements.Add("jsvarfrommasterend", scriptRegVariables);

@@ -39,6 +39,62 @@ namespace WelcomeLibrary.DOM
     //  });
     //</script>
 
+    public class jsongtaguserdata
+    {
+        public string email { set; get; }
+
+        private string _phone_number = "";
+        public string phone_number { get => _phone_number; set => _phone_number = value; }
+
+
+        public jsontagaddress address { set; get; }
+
+        //     Numero di telefono dell'utente. Deve essere nel formato E.164, ovvero essere composto da 11 a 15 cifre, inclusi il segno più (+) e il codice paese, senza trattini, parentesi o spazi.
+
+        //         Esempio: '+11231234567'
+        //Nome address.first_name
+
+        //         Cognome address.last_name
+        //         // Implement
+        //         <script>
+        //         gtag('set', 'user_data', {
+        //         "email": yourEmailVariable,  
+        //	"phone_number": yourPhoneVariable,
+        //	"address": {
+        //             "first_name": yourFirstNameVariable,
+        //	"last_name": yourLastNameVariable,
+        //	"street": yourStreetAddressVariable,
+        //	"city":yourCityVariable,
+        //	"region": yourRegionVariable,
+        //	"postal_code": yourPostalCodeVariable,
+        //	"country": yourCountryVariable
+
+        //             }
+        //     });
+        //</script>	
+
+    }
+    public class jsontagaddress
+    {
+
+        private string _first_name = "";
+        public string first_name { get => _first_name; set => _first_name = value; }
+        private string _last_name = "";
+        public string last_name { get => _last_name; set => _last_name = value; }
+        private string _street = "";
+        public string street { get => _street; set => _street = value; }
+        private string _city = "";
+        public string city { get => _city; set => _city = value; }
+        private string _region = "";
+        public string region { get => _region; set => _region = value; }
+        private string _postal_code = "";
+        public string postal_code { get => _postal_code; set => _postal_code = value; }
+        private string _country = "";
+        public string country { get => _country; set => _country = value; }
+
+    }
+
+
     public class jsongtagpurchase
     {
         public string transaction_id { set; get; }

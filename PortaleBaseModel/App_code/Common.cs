@@ -2418,7 +2418,7 @@ public class CommonPage : Page
                 jtagpurchaseevent.items.Add(purchaseitem);
             }
             jsoncarrelloordine = Newtonsoft.Json.JsonConvert.SerializeObject(jtagpurchaseevent);
-            scriptRegVariables += ";\r\n " + string.Format("gtag('event', 'purchase', {0});console.log('gtag called;');", jsoncarrelloordine);
+            scriptRegVariables += ";\r\n " + string.Format("gtag('event', 'purchase', {0});console.log('gtag called purchase;');", jsoncarrelloordine);
 
             //EVENTO CONVERSIONE GOOGLE ADS
             if (!string.IsNullOrEmpty(ConfigManagement.ReadKey("send_to"))) // invio dati verso google ads!!!
@@ -2431,9 +2431,11 @@ public class CommonPage : Page
                 jtaggoogleadseevent.currency = "EUR";
                 jtaggoogleadseevent.send_to = ConfigManagement.ReadKey("send_to");// "AW-306245660/POpGCNukq4IDEJzgg5IB"; // va passata da fuori tramite config 
                 string jsongoogleadsconversione = Newtonsoft.Json.JsonConvert.SerializeObject(jtaggoogleadseevent);
-                scriptRegVariables += ";\r\n " + string.Format("gtag('event', 'conversion', {0});console.log('gtag called;');", jsongoogleadsconversione);
+                scriptRegVariables += ";\r\n " + string.Format("gtag('event', 'conversion', {0});console.log('gtag called send_to;');", jsongoogleadsconversione);
             }
-            scriptRegVariables = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariables, "300", waitforconsent); //wrapper fo waiting
+
+            scriptRegVariables = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariables, "300", false); //wrapper fo waiting ignoro il consenso per invio della conversione acquisto
+            //scriptRegVariables = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariables, "300", waitforconsent); //wrapper fo waiting
             /////////////////////////////////////////////////////
 
             /////////////////////////////////////////////////////
@@ -2455,7 +2457,8 @@ public class CommonPage : Page
             }
             string fbpeventpurchase = Newtonsoft.Json.JsonConvert.SerializeObject(jtagpurchafbq);
             string scriptRegVariablesfbq = ";\r\n " + string.Format("fbq('track', 'Purchase', {0});console.log('fbq track purchase called;');", fbpeventpurchase);
-            scriptRegVariablesfbq = WelcomeLibrary.UF.Utility.waitwrappercall("fbq", scriptRegVariablesfbq, "300", waitforconsent); //wrapper fo waiting
+            scriptRegVariablesfbq = WelcomeLibrary.UF.Utility.waitwrappercall("fbq", scriptRegVariablesfbq, "300", false); //wrapper fo waiting
+            //scriptRegVariablesfbq = WelcomeLibrary.UF.Utility.waitwrappercall("fbq", scriptRegVariablesfbq, "300", waitforconsent); //wrapper fo waiting
             /////////////////////////////////////////////////////
 
             string scriptvariablesfinal = "";
@@ -2510,8 +2513,9 @@ public class CommonPage : Page
         //torniamo il codice da inisettare
         string serializedstringgoogle = Newtonsoft.Json.JsonConvert.SerializeObject(cartcontainer);
         string scriptRegVariablesgoogle = ";\r\n " + string.Format("gtag('event', 'add_to_cart', {0});console.log('google track adttocart called;');", serializedstringgoogle);
-        scriptRegVariablesgoogle = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariablesgoogle, "300", waitforconsent); //wrapper fo waiting
-                                                                                                                //google add tocart
+        scriptRegVariablesgoogle = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariablesgoogle, "300", false); //wrapper fo waiting ignoro il consenso per l'invio della conversione
+        //scriptRegVariablesgoogle = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariablesgoogle, "300", waitforconsent); //wrapper fo waiting
+
 
         ////facebook ///////////////////
         jsoncartdetailsfbq itemfbq = new jsoncartdetailsfbq();
@@ -2529,7 +2533,7 @@ public class CommonPage : Page
         string serializedstringfbq = Newtonsoft.Json.JsonConvert.SerializeObject(itemfbq);
         string scriptRegVariablesfbq = ";\r\n " + string.Format("fbq('track', 'AddToCart', {0});console.log('fbq track adttocart called;');", serializedstringfbq);
         scriptRegVariablesfbq = WelcomeLibrary.UF.Utility.waitwrappercall("fbq", scriptRegVariablesfbq, "300", waitforconsent); //wrapper fo waiting
-                                                                                                         ////fbq ///////////////////////
+                                                                                                                                ////fbq ///////////////////////
         string scriptvariablesfinal = "";
         scriptvariablesfinal += scriptRegVariablesgoogle;
         scriptvariablesfinal += scriptRegVariablesfbq;
@@ -2546,15 +2550,54 @@ public class CommonPage : Page
         //item.offerte contiene i dettagli dell'oggetto aggiunto a carrello
         bool waitforconsent = false;
         bool.TryParse(ConfigManagement.ReadKey("waitforconsent"), out waitforconsent);
+        string scriptRegVariablesgoogle = "";
 
+        ///////////////////////////////////////////
+        //Versione 1 (gtag)
+        ///////////////////////////////////////////
+#if true
+        jsongtaguserdata userdata = new jsongtaguserdata();
+        jsontagaddress addressdata = new jsontagaddress();
+        userdata.address = addressdata;
+        userdata.email = item.EmailMittente;
+
+        //additional data for conversion ( from the form )
+        //userdata.phone_number = (item.AdditionalFields.GetValueOrDefault("phone_number") ?? "");
+        //userdata.phone_number = userdata.phone_number.StartsWith("+") ? userdata.phone_number : "+" + "39" + userdata.phone_number;  //must be in international format  '+11231234567' ( default italy)
+        //userdata.phone_number = userdata.phone_number.Replace(" ", "").Replace("-", "").Replace(".", "");
+        //string first_name = (item.AdditionalFields.GetValueOrDefault("first_name") ?? "");
+        //string last_name = (item.AdditionalFields.GetValueOrDefault("last_name") ?? "");
+        //if (!string.IsNullOrEmpty(first_name)) scriptRegVariablesgoogle += ";\r\n " + string.Format("dataLayer.push({{'first_name': '{0}'}});", first_name);
+        //if (!string.IsNullOrEmpty(last_name)) scriptRegVariablesgoogle += ";\r\n " + string.Format("dataLayer.push({{'last_name': '{0}'}});", last_name);
+        //if (!string.IsNullOrEmpty(phone_number)) scriptRegVariablesgoogle += ";\r\n " + string.Format("dataLayer.push({{'phone_number': '{0}'}});", phone_number);
+
+        //string serializedstringgoogle = Newtonsoft.Json.JsonConvert.SerializeObject(userdata);
+        //scriptRegVariablesgoogle = ";\r\n " + string.Format("gtag('set', 'user_data', {0});console.log('google gtag user_data conversion;');", serializedstringgoogle);
+        //scriptRegVariablesgoogle = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariablesgoogle, "300", waitforconsent); //wrapper fo waiting
+        string serializedstringgoogle = Newtonsoft.Json.JsonConvert.SerializeObject(userdata);
+        scriptRegVariablesgoogle = ";\r\n " + string.Format("gtag('event', 'sendconversiondata', {0});console.log('google gtag event sendconversiondata conversion;');", serializedstringgoogle);
+       
+        scriptRegVariablesgoogle = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariablesgoogle, "300", false); //wrapper fo waiting ignoro il consenso per l'invio della conversione
+        //scriptRegVariablesgoogle = WelcomeLibrary.UF.Utility.waitwrappercall("gtag", scriptRegVariablesgoogle, "300", waitforconsent); //wrapper fo waiting
+#endif
+        ///////////////////////////////////////////
+
+
+        ///////////////////////////////////////////
+        //Versione 2 (dataLayer.push) PURTROPPO QUESTA VARIABILE VIENE INIETTATA TROPPO TARDI IN PAGINA RISPETTO ALL'EVENTI D APERTURA DELLA PAGINA PER TAG MANAGER
+        ///////////////////////////////////////////
+#if false
         // da testare per conversion advanced
         //da creare la chiamata .. da iniettare in sessione
         //     <script>
         //dataLayer.push({ 'customerEmail': ’sostituire con comando dinamico’});
         //</script>
 
-        string scriptRegVariablesgoogle = ";\r\n " + string.Format("dataLayer.push({{'customerEmail': '{0}'}});console.log('google datalayer push conversion;');", item.EmailMittente);
-        scriptRegVariablesgoogle = WelcomeLibrary.UF.Utility.waitwrappercall("dataLayer.push", scriptRegVariablesgoogle, "300", waitforconsent);
+          scriptRegVariablesgoogle = ";\r\n " + string.Format("dataLayer.push({{'customerEmail': '{0}'}});console.log('google datalayer push conversion;');", item.EmailMittente);
+       // scriptRegVariablesgoogle = WelcomeLibrary.UF.Utility.waitwrappercall("dataLayer.push", scriptRegVariablesgoogle, "300", waitforconsent);
+        scriptRegVariablesgoogle = WelcomeLibrary.UF.Utility.waitwrappercall("dataLayer.push", scriptRegVariablesgoogle, "300", false); ignoro il consenso per l'invio della conversione
+#endif
+
         ret = scriptRegVariablesgoogle;
         return ret;
     }

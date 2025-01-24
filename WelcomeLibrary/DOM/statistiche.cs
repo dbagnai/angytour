@@ -57,6 +57,12 @@ namespace WelcomeLibrary.DOM
             get { return _data; }
             set { _data = value; }
         }
+        private Dictionary<string, string> additionalFields;
+        public Dictionary<string, string> AdditionalFields
+        {
+            get { return additionalFields; }
+            set { additionalFields = value; }
+        }
         public Statistiche()
         {
             this.Id = 0;
@@ -67,6 +73,7 @@ namespace WelcomeLibrary.DOM
             this.EmailDestinatario = "";
             this.Testomail = "";
             this.Data = DateTime.MinValue;
+            this.additionalFields = new Dictionary<string, string>();
 
         }
         public Statistiche(Statistiche tmp)
@@ -79,6 +86,8 @@ namespace WelcomeLibrary.DOM
             this.EmailDestinatario = tmp.EmailDestinatario;
             this.Testomail = tmp.Testomail;
             this.Data = tmp.Data;
+            this.additionalFields = new Dictionary<string, string>(tmp.AdditionalFields);
+
         }
     }
 

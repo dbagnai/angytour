@@ -473,6 +473,11 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                             stat.Testomail = ragsoc + " " + nomemittente + "<br/>" + SoggettoMail + "<br/>" + Descrizione;
                             stat.TipoContatto = enumclass.TipoContatto.invioemail.ToString();
                             stat.Url = "";
+                            //aditionalfileds non vengono salvati ne db statistiche
+                            stat.AdditionalFields.Add("first_name", nomemittente);
+                            stat.AdditionalFields.Add("last_name", cognomemittente);
+                            stat.AdditionalFields.Add("phone_number", mittenteTelefono);
+
                             statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat);
                             result = CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", lingua, "LinkContatti"));
                             if (idofferta != "") result += "&idOfferta=" + idofferta.ToString();
@@ -784,6 +789,12 @@ public class HandlerDataCommon : IHttpHandler, IRequiresSessionState
                         stat1.Testomail = SoggettoMail1 + " <br/>- " + Descrizione1;
                         stat1.TipoContatto = enumclass.TipoContatto.invioemail.ToString();
                         stat1.Url = "";
+                        //aditionalfileds non vengono salvati ne db statistiche
+                        stat1.AdditionalFields.Add("first_name", cliente.Nome);
+                        stat1.AdditionalFields.Add("last_name", cliente.Cognome);
+                        stat1.AdditionalFields.Add("phone_number", cliente.Telefono);
+
+
                         statisticheDM.InserisciAggiorna(WelcomeLibrary.STATIC.Global.NomeConnessioneDb, stat1);
                         if (string.IsNullOrEmpty(result))
                         {
