@@ -768,6 +768,7 @@
                                                                 <span class="menu-text">Banner Navigazione Blog</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
+                                                          <%= references.ResMan("Common", Lingua,"customnavigazionemenu1") %>
                                                         <%--<li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog0">
                                                     <i class="menu-icon fa fa-caret-right"></i>
@@ -825,6 +826,7 @@
                                                                 <span class="menu-text">Banner generico (test parallax)</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
+                                                          <%= references.ResMan("Common", Lingua,"customnavigazionemenu2") %>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -906,6 +908,8 @@
                                                                 <span class="menu-text">Testata Bottom pages</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
+                                                          <%= references.ResMan("Common", Lingua,"customnavigazionemenu3") %>
+
                                                     </ul>
                                                 </div>
                                             </div>
@@ -942,12 +946,14 @@
                                                                 <span class="menu-text">Testate Pagina 1</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
+                                                          <%= references.ResMan("Common", Lingua,"customtestatemenu1") %>
+
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div style="display: block">
+                                        <div style="display: none">
                                             <hr style="margin: 2px 0" />
                                             <ul class="submenu display-active">
                                                 <li id="toggle" class="newLi hover" role="tab">
@@ -1057,11 +1063,12 @@
                                                                 <span class="menu-text">Land Fascia 5</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
+                                                           <%= references.ResMan("Common", Lingua,"customlandingmenu1") %>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div style="display: block">
+                                        <div style="display: none">
                                             <hr style="margin: 2px 0" />
                                             <ul class="submenu display-active">
                                                 <li id="toggle_funnel" class="newLi hover" role="tab">
@@ -1096,7 +1103,7 @@
                                             </div>
                                         </div>
 
-                                        <div style="display: block">
+                                        <div style="display: none">
                                             <hr style="margin: 2px 0" />
                                             <ul class="submenu display-active">
                                                 <li id="toggle_pwa" class="newLi hover" role="tab">
