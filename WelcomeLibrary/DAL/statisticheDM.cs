@@ -391,7 +391,7 @@ namespace WelcomeLibrary.DAL
                 query += ",Data,Testomail )";
                 query += " values ( ";
                 query += "@Idattivita,@EmailDestinatario,@EmailMittente,@TipoContatto,@Url";
-                query += ",@Data,@TestoMail )";
+                query += ",@Data,@Testomail )";
             }
 
             try

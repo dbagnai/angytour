@@ -1620,7 +1620,7 @@ namespace WelcomeLibrary.DAL
                 query += ",ConsensoPrivacy,Consenso1,Consenso2,Consenso3,Consenso4,Lingua,Spare1,Spare2,Pivacf,Sesso,id_tipi_clienti,Codicisconto,Serialized,Ragsoc)";
                 query += " values ( ";
                 query += "@Id_card,@Nome,@Cognome,@CodiceNAZIONE,@CodiceREGIONE,@CodicePROVINCIA,@CodiceCOMUNE";
-                query += ",@Cap,@Indirizzo,@Email,@Emailpec,@Telefono,@Cellulare,@Professione, @IPClient, @Validato,@TestoFormConsensi,@DataNascita,@DataInvioValidazione,@DataRicezioneValidazione,@DataInserimento";
+                query += ",@Cap,@Indirizzo,@Email,@Emailpec,@Telefono,@Cellulare,@Professione, @IPclient, @Validato,@TestoFormConsensi,@DataNascita,@DataInvioValidazione,@DataRicezioneValidazione,@DataInserimento";
                 query += ",@ConsensoPrivacy,@Consenso1,@Consenso2,@Consenso3,@Consenso4,@Lingua,@Spare1,@Spare2,@Pivacf,@Sesso,@id_tipi_clienti,@Codicisconto,@Serialized,@Ragsoc )";
             }
 
