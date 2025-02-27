@@ -5111,6 +5111,20 @@ namespace WelcomeLibrary.UF
                     }
                     catch { }
                     break;
+                case "formatvisibilitybystringinverted":
+                    try
+                    {
+                        ret = "false";
+                        var valorestringa = valore[1];
+                        if (string.IsNullOrEmpty(valorestringa))
+                        {
+                            ret = "false";
+                        }
+                        else
+                            ret = "true";
+                    }
+                    catch { }
+                    break;
                 case "formatprezzoofferta":
                     try
                     {

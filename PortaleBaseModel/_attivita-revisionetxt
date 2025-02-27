@@ -1,0 +1,4 @@
+. verificare corrispondenze maiuscole/minuscole @parameetr tra query e sqlparameter nelle funzioni della base  ( importante specie ecommerce e pagamenti! ) 
+  
+    . modificare nella base il tool al piede delle newsltter
+
