@@ -149,10 +149,10 @@ function commentclosure(varname) {
                                     jQuery(document).ready(function () {
                                         var owl = jQuery("#" + mainscope.idcontainer + '-ctrl');
                                         owl.owlCarousel({
-                                            items: [1],
+                                            items: [3],
                                             autoPlay: 5000,
-                                            itemsDesktop: [1199, 1], // i/tems between 1000px and 601px
-                                            itemsTablet: [979, 1], // items between 600 and 0;
+                                            itemsDesktop: [1199, 3], // i/tems between 1000px and 601px
+                                            itemsTablet: [979, 2], // items between 600 and 0;
                                             itemsMobile: [479, 1], // itemsMobile disabled - inherit from itemsTablet option
                                             slideSpeed: 1000,
                                             afterInit: lazyLoad,

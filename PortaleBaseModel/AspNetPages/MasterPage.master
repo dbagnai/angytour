@@ -36,7 +36,7 @@
             }); var f = d.getElementsByTagName(s)[0],
                 j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-xxxxxxxxxx');
+        })(window, document, 'script', 'dataLayer', 'GTM-523DP4TT');
     </script>
 
 
@@ -52,7 +52,7 @@
 
 
     <link rel="preload" as="font">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300..900&display=swap" rel="stylesheet">
 
     <title runat="server" id="metaTitle"></title>
     <meta id="metaDesc" runat="server" name="Description" content="" />
@@ -86,7 +86,7 @@
     <%--META FOR PWA--%>
     <link rel="icon" href="/images/icons/icon-144x144.png">
     <!-- theme-color defines the top bar color (blue in my case)-->
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#008aff" />
     <!-- Add to home screen for Safari on iOS-->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -175,7 +175,7 @@
 
     <!-- Google Tag Manager (noscript) -->
     <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-xxxxxxxxxx"
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-523DP4TT"
             height="0" width="0" style="display: none; visibility: hidden"></iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
@@ -200,40 +200,10 @@
 
         <!-- MENU -->
         <div class="fixedtop" id="divTop" runat="server" visible="true">
-            <div class="row d-flex justify-content-between " style="padding: 5px 0px; margin: 0px;">
-                <div class="col-auto  d-flex justify-content-start">
+            <div class="row d-flex justify-content-end " style="padding: 0px 100px; margin: 0px;">
+                <div class="col-auto  d-flex justify-content-end">
                     <%-- SOCIAL --%>
-                    <div class="social-icons-small  d-block px-2 px-lg-4 border-right bd-secondary-color" runat="server" visible="true">
-                        <ul>
-                            <li style="float: right">
-                                <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon-small facebook-icon-small" data-original-title="facebook"></a>
-                            </li>
-
-                            <li style="float: right">
-                                <a href='<%= references.ResMan("Common", Lingua,"_linkx") %>' target="_blank" class="social-media-icon-small x-icon-small" data-original-title="x">x</a>
-                            </li>
-
-                            <%--      <li style="float: right">
-                                <a href='<%= references.ResMan("Common", Lingua,"_linkInstagram") %>' target="_blank" class="social-media-icon-small instagram-icon-small" data-original-title="instagram"></a>
-                            </li>
-                            <li style="float: right">
-                                <a href='<%= references.ResMan("Common", Lingua,"_linkYoutube") %>' target="_blank" class="social-media-icon-small youtube-icon-small" data-original-title="youtube"></a>
-                            </li>--%>
-                            <%--  <li style="float: right">
-                                <a href='<%= references.ResMan("Common", Lingua,"_linktwitter") %>' target="_blank" class="social-media-icon-small twitter-icon-small" data-original-title="twitter">twitter</a>
-                            </li>--%>
-                            <%-- <li style="float: right"><a class="social-media-icon-small googleplus-icon-small" href='<%= references.ResMan("Common", Lingua,"_linkGoogle") %>' target="_blank" data-original-title="googleplus">googleplus</a></li>--%>
-                        </ul>
-                        <%--    <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>"  target="_blank" style="color: #fff;">
-                            <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgFacebook") %>" />
-                        </a>--%>
-                        <%--<a href='<%= references.ResMan("Common", Lingua,"_linkTwitter") %>"  target="_blank" style="color: #fff;">
-                                <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgTwitter") %>" />
-                            </a>
-                            <a href='<%= references.ResMan("Common", Lingua,"_linkLinkedin") %>" target="_blank" style="color: #fff;">
-                                <img style="max-width: 30px"  src='<%= references.ResMan("Common", Lingua,"imgLinkedin") %>" />
-                            </a>--%>
-                    </div>
+                
                     <%-- MENU TOP LEFT (after social) --%>
                     <div class="simplemenu">
                         <ul>
@@ -243,10 +213,20 @@
                                 <i class="fa fa-map-marker mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"testoid5") %></span>
                             </a>
                         </li>--%>
+                            <li runat="server" class="dropdown px-2 px-lg-4 d-none d-sm-block">
+                           
+                                <a id="linkPlaces" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
+                                    <i class="fa fa-2x fa-envelope-o mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"TestoContatti") %></span>
+                                </a>  </li>
                             <%-- BLOG --%>
                             <li runat="server" class="dropdown px-2 px-lg-4 d-none d-sm-block">
+
+                                <a id="linkBlog" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkBlog")) %>'>
+                                    <i class="fa fa-2x fa-comments mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"TestoBlog") %></span>
+                                </a></li>
+                           <%-- <li runat="server" class="dropdown px-2 px-lg-4 d-none d-sm-block">
                                 <a data-target="#" data-toggle="dropdown" class="dropdown-toggle" style="cursor: pointer; color: #fff">
-                                    <i class="fa fa-comments-o mr-2" style="color: #fff;"></i><%= references.ResMan("Common", Lingua,"testomenu2") %><b class="caret"></b></a>
+                                    <i class="fa fa-2x  fa-comments-o mr-2" style="color: #fff;"></i><%= references.ResMan("Common", Lingua,"testomenu2") %><b class="caret"></b></a>
                                 <ul class="dropdown-menu dropdown-menu-right px-3">
                                     <%= CreaLinkTipologie(2,2) %>
                                     <li>
@@ -254,13 +234,14 @@
                                     </li>
                                     <%= CreaLinkCategorie("rif000002") %>
                                 </ul>
-                            </li>
+                            </li>--%>
+                         
                             <!-- CONTATTI -->
-                            <li runat="server" class="px-2 px-lg-4 d-none d-sm-block">
+                       <%--     <li runat="server" class="px-2 px-lg-4 d-none d-sm-block">
                                 <a id="linkContattiHigh" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
-                                    <i class="fa fa-envelope-o mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"TestoContatti") %></span>
+                                    <i class="fa fa-2x  fa-envelope-o mr-2" style="color: #fff;"></i><span><%= references.ResMan("Common", Lingua,"TestoContatti") %></span>
                                 </a>
-                            </li>
+                            </li>--%>
                             <!-- TELEFONO -->
                             <%--   <li runat="server" class="px-2 px-lg-4 d-none d-sm-block">
                                 <a href="<%= "tel:" + references.ResMan("Common", Lingua,"testoTelfisso") %>">
@@ -270,6 +251,35 @@
                         </ul>
                     </div>
                 </div>
+                <div class="social-icons-small  d-block px-2 px-lg-0 border-right bd-secondary-color" runat="server" visible="true">
+                    <ul>
+                        <li style="float: right">
+                            <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon-small facebook-icon-small" data-original-title="facebook"></a>
+                        </li>
+                        <li style="float: right">
+                            <a href='<%= references.ResMan("Common", Lingua,"_linkInstagram") %>' target="_blank" class="social-media-icon-small instagram-icon-small" data-original-title="instagram">
+                                <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgInstagram") %>"' /></a>
+                        </li>
+                        <%--    <li style="float: right">
+               <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>"  target="_blank" >
+            <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgFacebook") %>" />
+        </a>
+            </li>--%>
+                        <%--  <li style="float: right">
+                <a href='<%= references.ResMan("Common", Lingua,"_linktwitter") %>' target="_blank" class="social-media-icon-small twitter-icon-small" data-original-title="twitter">twitter</a>
+            </li>--%>
+                        <%-- <li style="float: right"><a class="social-media-icon-small googleplus-icon-small" href='<%= references.ResMan("Common", Lingua,"_linkGoogle") %>' target="_blank" data-original-title="googleplus">googleplus</a></li>--%>
+                    </ul>
+                    <%--    <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>"  target="_blank" style="color: #fff;">
+            <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgFacebook") %>" />
+        </a>--%>
+                    <%--<a href='<%= references.ResMan("Common", Lingua,"_linkTwitter") %>"  target="_blank" style="color: #fff;">
+                <img style="max-width: 30px" src='<%= references.ResMan("Common", Lingua,"imgTwitter") %>" />
+            </a>
+            <a href='<%= references.ResMan("Common", Lingua,"_linkLinkedin") %>" target="_blank" style="color: #fff;">
+                <img style="max-width: 30px"  src='<%= references.ResMan("Common", Lingua,"imgLinkedin") %>" />
+            </a>--%>
+                </div>
                 <%--      <div class="col-4 justify-content-center">
                      <a href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common",Lingua,"LinkHome")) %>'>
                             <img style="height: 60px" src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo.png")%>' class="img-responsive" alt="<%= WelcomeLibrary.UF.ConfigManagement.ReadKey("Nome")%>" />
@@ -278,7 +288,7 @@
                         <div class="divlogoBrand fulllogobckdark"></div>
                     </a>
                 </div>--%>
-                <div class="col-auto d-flex justify-content-end">
+                <div class="col-auto d-none">
                     <div class="position-relative">
                         <div class="input-group flex-nowrap px-2 px-lg-4 bd-secondary-color" style="width: 100%; padding-top: 3px; padding-bottom: 3px; border-left: 1px solid">
                             <%-- <input enableviewstate="true" type="text" id="txtSearchTop" class="form-control" style="height: 24px; font-family: 'Fira Sans', sans-serif; font-size: 0.8rem;" runat="server" placeholder="Cerca ...." />
@@ -300,7 +310,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="position-relative d-none d-sm-block" runat="server" visible="true" style="min-width: 60px">
+                    <div class="position-relative  d-none d-sm-block" runat="server" visible="true" style="min-width: 60px">
                         <%--CARRELLO--%>
                         <asp:PlaceHolder runat="server" Visible="true">
                             <div class="carrellomaincontainer d-block position-relative pt-0 px-1 pr-lg-4 pl-lg-3 py-0 d-xl-none">
@@ -386,13 +396,13 @@
                 </div>
             </div>
         </div>
-        <div class="fixednav bckColor2" id="mainnav" style="padding-left: 0px; padding-right: 0px">
+        <div class="fixednav bckColor2" id="mainnav">
 
             <!-- ICONA CALL RESPONSIVE -->
-            <div class="d-block d-sm-none" style="position: absolute; top: 15px; right: 5px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 99">
+            <%--  <div class="d-block d-sm-none" style="position: absolute; top: 0; right: 5px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 99">
                 <a style="padding-top: 0px;" class="float-right" href='<%=  references.ResMan("Common", Lingua,"iconcelltext") %>'>
                     <i class="fas fas-2x fa-phone" style="font-size: 24px; margin-top: 5px;"></i></a>
-            </div>
+            </div>--%>
             <div class="d-none" style="position: absolute; top: 10px; right: 45px; margin-right: 15px; margin-left: 5px; margin-top: 0px; padding: 0px; font-size: 0.9rem; background-color: transparent; border-radius: 3px; z-index: 99">
                 <a style="padding-top: 0px;" class="float-right" href='<%=  references.ResMan("Common", Lingua,"iconwhatsapp") %>'>
                     <i class="fa fa-2x fa-whatsapp" style="color: #2f7b40; font-size: 30px; font-weight: 900; margin-top: 5px;"></i></a>
@@ -413,7 +423,7 @@
                     </a>
                 </div>
                 <ul class="menuzord-menu menuzord-indented scrollable menuzord-right outofsight">
-                    <%= CreaLinkPaginastatica(3) %>
+
 
                     <%--                     <li runat="server">
                         <%= CreaLinkTipologie(1,1,"a-dropdown tx-sottomenu-color",true) %>
@@ -425,16 +435,7 @@
                             </div>
                         </div>
                     </li>--%>
-                    <li runat="server">
-                        <%= CreaLinkTipologie(1,1,"a-dropdown tx-sottomenu-color buttonmenu",true) %>
-                        <ul class="dropdown" style="max-height: 500px; overflow: auto">
-                            <%= CreaLinkTipologie(1,1) %>
-                            <li>
-                                <hr style="margin: 0 !important;" />
-                            </li>
-                            <%= CreaLinkCategorie("rif000001","","") %>
-                        </ul>
-                    </li>
+
 
                     <%--MEGAMENU DANY--%>
                     <%--     <li runat="server">
@@ -556,19 +557,28 @@
                             <%= CreaLinkCategorieNested("rif000001","",true) %>
                         </ul>
                     </li>--%>
-                    <%= CreaLinkTipologie(5,5) %>
-                    <%= CreaLinkTipologie(8,8) %>
-                    <%= CreaLinkPaginastatica(4) %>
-                    <%= CreaLinkTipologie(9,9) %>
-                    <%= CreaLinkPaginastatica(3) %>
+                    <%= CreaLinkTipologie(10,10) %>
+                    <%= CreaLinkTipologie(11,11) %>
+                    <%= CreaLinkTipologie(12,12) %>
+                    <%= CreaLinkPaginastatica(10,false,"buttonmenu") %>
+                    <li runat="server" class="d-block d-sm-none">
+                        <%= CreaLinkTipologie(2,2,"a-dropdown ",true) %>
+                        <ul class="dropdown" style="max-height: 500px; overflow: none; border: none; border-radius: 15px;">
+                            <%= CreaLinkTipologie(2,2) %>
+                            <li>
+                                <hr style="margin: 0 !important;" />
+                            </li>
+                            <%= CreaLinkCategorie("rif000002","","") %>
+                        </ul>
+                    </li>
                     <%--PRENOTA--%>
-                    <li runat="server">
+                    <%-- <li runat="server">
                         <a id="linkPrenota2High" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkPrenota")) %>' class="buttonmenu">
                             <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoPrenota") %>   </span>
                         </a>
-                    </li>
+                    </li>--%>
                     <%--CARRELLO--%>
-                    <li runat="server" visible="true">
+                    <li runat="server" visible="false">
                         <asp:PlaceHolder runat="server" Visible="true">
                             <div class="carrellomaincontainer float-right d-none d-xl-block" style="padding-left: 5px; max-width: 270px; position: relative; display: block">
                                 <%--<a class="float-right" style="color: #666 !important; border: none"
@@ -603,6 +613,25 @@
                         </asp:PlaceHolder>
 
 
+                    </li>
+                    <%-- <li runat="server">
+                        <%= CreaLinkTipologie(2,2,"a-dropdown ",true) %>
+                        <ul class="dropdown" style="max-height: 500px; overflow: none;
+    border: none;
+    border-radius: 15px;">
+                            <%= CreaLinkTipologie(2,2) %>
+                            <li>
+                                <hr style="margin: 0 !important;" />
+                            </li>
+                            <%= CreaLinkCategorie("rif000002","","") %>
+                        </ul>
+                    </li>
+                    --%>
+                    <!-- CONTATTI -->
+                    <li runat="server" class="d-block d-sm-none ">
+                        <a id="" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
+                            <span><%= references.ResMan("Common", Lingua,"TestoContatti") %></span>
+                        </a>
                     </li>
                     <%--CARRELLO END--%>
 
@@ -658,32 +687,6 @@
                             <%= CreaLinkCategorie("rif000004") %>
                         </ul>
                     </li> --%>
-
-                    <%-- Blog --%>
-                    <li runat="server" class="d-block d-md-none">
-                        <a class="a-dropdown" runat="server" href="javascript:void(0)" style="cursor: pointer;">
-                            <%= references.ResMan("Common", Lingua,"testomenu2") %></a>
-                        <ul class="dropdown">
-                            <%= CreaLinkCategorie("rif000002") %>
-                        </ul>
-                    </li>
-
-                    <%-- Contatti --%>
-                    <li runat="server" class="d-block d-md-none">
-                        <a id="linkContatti1High" href='<%= CommonPage.ReplaceAbsoluteLinks( references.ResMan("Common", Lingua,"linkContatti")) %>'>
-                            <span class="label-nav"><%= references.ResMan("Common", Lingua,"TestoContatti") %>   </span>
-                        </a>
-                    </li>
-                    <li class="search" style="float: right;" runat="server" visible="false" id="lisearch">
-                        <div style="padding-top: 5px; padding-left: 10px">
-                            <%--<input enableviewstate="true" class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" runat="server" id="searchboxinputtext" type="text" placeholder='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' />
-                            <asp:Button OnClick="btnsearch_Click" ID="Button2" class="btn btn-default btn-brown float-left" Text='<%# references.ResMan("Common", Lingua,"TestoCerca") %>' runat="server" ClientIDMode="Static" />--%>
-
-                            <input name="txtSearchTop" id="searchboxinputtext" type="text" placeholder='<%= references.ResMan("Common", Lingua,"TestoCerca") %>' class="float-left" style="width: auto; padding: 8px; margin-top: -5px;" onkeydown="if (event.keyCode == 13)  document.getElementById('btncercamater1').click()" />
-                            <button type="button" onclick="cerca('searchboxinputtext','rif000001',true)" id="btncercamater1" class="btn btn-default btn-brown float-left"><%= references.ResMan("Common", Lingua,"TestoCerca") %>></button>
-                        </div>
-                    </li>
-                    <li style="height: 1px" class="scrollable-fix"></li>
                 </ul>
             </div>
         </div>
@@ -692,12 +695,7 @@
         <section class="body-wrapper">
             <div id="VerticalSpacer" clientidmode="static" class="headerspacer" runat="server"></div>
             <div id="VerticalSpacer1" style="height: 0px; background-color: transparent"></div>
-            <div style="max-width: 1400px; margin: 0 auto; padding-left: 15px; padding-right: 15px; position: relative" id="breadcrumbContainer">
-                <div class="breadcrumbs clearfix">
-                    <ul class="float-right breadcrumb" runat="server" id="ulBreadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-                    </ul>
-                </div>
-            </div>
+            
             <asp:ContentPlaceHolder ID="ContentPlaceHolderSubsSlider" runat="server">
             </asp:ContentPlaceHolder>
             <div runat="server" id="divRicerca" visible="false">
@@ -707,7 +705,13 @@
             </asp:ContentPlaceHolder>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-            <div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px">
+            <div style="max-width: 1400px; margin: 0px auto; padding-left: 0px; padding-right: 0px" class="container-master">
+                <div class="container" id="breadcrumbContainer">
+                    <div class="breadcrumbs clearfix mt-3">
+                        <ul class="breadcrumb" runat="server" id="ulBreadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                        </ul>
+                    </div>
+                </div>
                 <div>
                     <asp:ContentPlaceHolder ID="ContentPlaceHoldermasternorow" runat="server">
                     </asp:ContentPlaceHolder>
@@ -728,31 +732,35 @@
             <div id="masterlow"></div>
             <div id="contactmasterlinkpoint" style="padding-top: 80px; margin-top: -80px;"></div>
             <%--START BANNER E_COMMERCE_ VENDITA IN BASSO--%>
-            <div id="masterlow1" runat="server" clientid="static"></div>
+            <div id="masterlow1" runat="server" clientid="static" class="container-fluid"></div>
             <div id="masterlow3" runat="server" clientid="static"></div>
 
             <%--END BANNER E_COMMERCE_ VENDITA IN BASSO--%>
-            <div id="divContattiMaster" runat="server" visible="true">
-                <section class="mbr-section  p-0" style="background-image: url('/public/Files/con001000/1/contact-back.jpg');">
-                    <div class="mbr-overlay mbr-overlay-black"></div>
-                    <div class="m-auto py-4 px-4" style="max-width: 1400px;">
-                        <div class="row align-items-center py-0 pt-4 py-sm-5">
-                            <div class="col-12 col-sm-7">
+            <div id="divContattiMaster" runat="server" visible="true"  >
+                <!--banner form contatti solo per mobile -->
+
+                <section class="mbr-section px-0 px-md-5 pb-5 pt-0" style="">
+                    <%-- <div class="mbr-overlay mbr-overlay-black"></div>--%>
+                    <div class="m-auto round-container imgbackstyle py-md-4 p-0 px-md-5" style="max-width: 1400px; margin: 2em auto!important; background-image: url('/public/Files/con001000/1/contact-back.jpg'); position: relative; background-size: cover; right: 0; background-position: 65%; border-radius: 30px;">
+                        <div class="row d-flex justify-content-start py-0 pt-0 pt-sm-4 py-sm-5">
+                            <%-- <div class="col-12 col-sm-7">
                                 <%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
-                            </div>
-                            <div class="col-12 col-sm-5">
-                                <div class=" formbackground bg-light-color p-4 border-tipo2 rounded" style="overflow: hidden;">
+                            </div>--%>
+
+                            <div class="col-12 col-sm-6" style=" border-radius: 15px;">
+
+                                <div class=" formbackground p-4" style="overflow: hidden; background-color: #000000b3;">
+
 
                                     <div class="row justify-content-center">
                                         <div class="col-12" id="formbtniscrivi">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <%= references.ResMan("Common", Lingua,"TestoContattaciFooter1") %>
+                                            <div class="row text-center">
+                                                <div class="col-12 px-0 px-md-5">
+                                                    <%= references.ResMan("Common", Lingua,"TestoContattaciFooter") %>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-sm-12 pr-xl-2">
-
+                                                <div class="row px-2 px-md-5 pb-3">
                                                     <asp:RequiredFieldValidator CssClass="errorvalidateclass" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactName" runat="server" />
                                                     <input style="background-color: rgba(255, 255, 255, 0.80);" type="text" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.5s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto2") %>' runat="server" id="txtContactName" />
                                                     <asp:RequiredFieldValidator CssClass="errorvalidateclass" ErrorMessage='<%# references.ResMan("Common", Lingua,"formtesto3Err") %>' ValidationGroup="contattifooter" ControlToValidate="txtContactCognome" runat="server" />
@@ -765,7 +773,7 @@
                                                     <textarea style="background-color: rgba(255, 255, 255, 0.80);" rows="4" cols="5" class="subscribe-input text-input form-control animated" data-animtype="fadeIn" data-animrepeat="1" data-animspeed="1s" data-animdelay="0.8s" validationgroup="contattifooter" placeholder='<%# references.ResMan("Common", Lingua,"FormTesto17") %>' runat="server" id="txtContactMessage" />
                                                     <br />
                                                 </div>
-                                                <div class="col-sm-12 pr-xl-2">
+                                                <div class="col-sm-12 px-5 white-color">
                                                     <%= references.ResMan("basetext", Lingua,"privacytext") %>
                                                     <div class="checkbox mt-3 mb-2">
                                                         <label>
@@ -780,10 +788,47 @@
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-12 pr-xl-2">
+                                                <div class="col-sm-12 text-center pr-xl-2">
                                                     <script>
+                                                        function ConfirmValidationFormMaster(elembtn) {
+                                                            var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
+                                                            var out1 = document.getElementById("outputContactMasterDiv");
+                                                            if (!chk1.checked) {
+                                                                out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
+                                                                return false;
+                                                            } else { out1.innerHTML = ''; }
+                                                            if (Page_ClientValidate("contattifooter")) {
+                                                                /*do work and go for postback*/
+                                                                console.log('ok validated');
+                                                                $(elembtn).attr("disabled", "")
 
+                                                                //invio nopostback con handler////////////////////////////////////////////////////
+                                                                var contactdatas = {};
+                                                                contactdatas.chkprivacy = chk1.checked;
+                                                                contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
 
+                                                                getcontactdata(contactdatas, function (contactdatas) {
+                                                                    var tastotxt = $(elembtn).html();
+                                                                    $(elembtn).html("Wait ..");
+                                                                    inviamessaggiomail(lng, contactdatas, function (result) {
+                                                                        if (result) {
+                                                                            //in caso di errore visualizzo
+                                                                            out1.innerHTML = result;
+                                                                            $(elembtn).removeAttr("disabled")
+                                                                            $(elembtn).html(tastotxt);
+                                                                        }
+                                                                    }, tastotxt);
+                                                                }, $(elembtn));
+                                                                ///////////////////////////////////////////////////////////////////////
+
+                                                            } else {
+                                                                $('html,body').animate({
+                                                                    scrollTop: $("#ctl00_divContattiMaster").offset().top - 20
+                                                                }, 'fast');
+                                                                console.log('not  validated');
+                                                                return false;
+                                                            }
+                                                        }
                                                         function getcontactdata(contactdatas, callback) {
                                                             var contactdatas = contactdatas || {};
                                                             contactdatas.idofferta = '<%= idOfferta %>';
@@ -795,130 +840,13 @@
                                                             contactdatas.tipo = "informazioni";
                                                             callback(contactdatas);
                                                         }
-
-                                                        //Funzione con validazione captcha v2
-                                                        function ConfirmValidationFormMaster(elembtn) {
-                                                            var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
-                                                            var out1 = document.getElementById("outputContactMasterDiv");
-                                                            if (!chk1.checked) {
-                                                                out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
-                                                                return false;
-                                                            } else { out1.innerHTML = ''; }
-
-                                                            var contactdatas = {};
-
-                                                            /*ABILITARE PER CONTROLLO CAPTCHA v2*/
-                                                            if (typeof (grecaptcha) != 'undefined') {
-                                                                var response = grecaptcha.getResponse();
-                                                                if (response.length == 0)  //reCaptcha not verified
-                                                                {
-                                                                    out1.innerHTML = ('<%= references.ResMan("Common", Lingua,"testoCaptcha").Replace("'","`") %>');
-                                                                    /*        $('#recaptcharesponse').css({ 'display': 'block' });*/
-                                                                    return false;
-                                                                } else contactdatas.recaptcharesponse = response;
-                                                            }
-
-                                                            if (Page_ClientValidate("contattifooter")) {
-                                                                /*do work and go for postback*/
-                                                                console.log('ok validated');
-                                                                $(elembtn).attr("disabled", "")
-
-                                                                //invio nopostback con handler////////////////////////////////////////////////////
-                                                                contactdatas.chkprivacy = chk1.checked;
-                                                                contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
-
-                                                                getcontactdata(contactdatas, function (contactdatas) {
-                                                                    var tastotxt = $(elembtn).html();
-                                                                    $(elembtn).html("Wait ..");
-                                                                    inviamessaggiomail(lng, contactdatas, function (result) {
-                                                                        if (result) {
-                                                                            //in caso di errore visualizzo
-                                                                            out1.innerHTML = result;
-                                                                            $(elembtn).removeAttr("disabled")
-                                                                            $(elembtn).html(tastotxt);
-                                                                        }
-                                                                    }, tastotxt);
-                                                                }, $(elembtn));
-                                                                ///////////////////////////////////////////////////////////////////////
-
-                                                            } else {
-                                                                $('html,body').animate({
-                                                                    scrollTop: $("#ctl00_divContattiMaster").offset().top - 20
-                                                                }, 'fast');
-                                                                console.log('not  validated');
-                                                                return false;
-                                                            }
-                                                        }
-
-                                                        ////////////////////////////////////////////
-                                                        // funzioni per validazione captcha v3 ( da ultimare lato server con il check del punteggio risultante !!!!)
-                                                        ////////////////////////////////////////////
-
-                                                        //Funzione da chiamre sull'invio del modulo per la validazione v3 - devi aggiunere il token di google all caricamento api.js in master
-                                                        //https://www.google.com/recaptcha/api.js?render=reCAPTCHA_site_key 
-                                                      <%--  function googlevalidationv3(elembtn) {
-                                                            // TEST google captcha v3 
-                                                            if (typeof (grecaptcha) != 'undefined') {
-                                                              //  grecaptcha.ready(function () {
-                                                                grecaptcha.execute('reCAPTCHA_site_key', { action: '' }).then(function (token) {
-
-                                                                        // Add your logic to submit to your backend server here.
-                                                                        console.log(token);
-                                                                        ConfirmValidationFormMasterv3(elembtn, token)
-
-                                                                    });
-                                                                //});
-                                                            } else { console.log('captcha not present'); ConfirmValidationFormMasterv3(elembtn, ''); }
-                                                        }
-                                                        function ConfirmValidationFormMasterv3(elembtn, tokengv3) {
-                                                            var chk1 = document.getElementById("<%= chkContactPrivacy.ClientID  %>");
-                                                            var out1 = document.getElementById("outputContactMasterDiv");
-                                                            if (!chk1.checked) {
-                                                                out1.innerHTML = '<%= references.ResMan("Common", Lingua,"txtprivacyerror")%>';
-                                                                return false;
-                                                            } else { out1.innerHTML = ''; }
-                                                            var contactdatas = {};
-                                                            contactdatas.recaptcharesponse = tokengv3;
-                                                            if (Page_ClientValidate("contattifooter")) {
-                                                                console.log('ok validated');
-                                                                $(elembtn).attr("disabled", "")
-                                                                //invio nopostback con handler////////////////////////////////////////////////////
-                                                                contactdatas.chkprivacy = chk1.checked;
-                                                                contactdatas.chknewsletter = $('<%= "#" + chkNewsletter.ClientID %>')[0].checked;
-
-                                                                getcontactdata(contactdatas, function (contactdatas) {
-                                                                    var tastotxt = $(elembtn).html();
-                                                                    $(elembtn).html("Wait ..");
-                                                                    inviamessaggiomail(lng, contactdatas, function (result) {
-                                                                        if (result) {
-                                                                            //in caso di errore visualizzo
-                                                                            out1.innerHTML = result;
-                                                                            $(elembtn).removeAttr("disabled")
-                                                                            $(elembtn).html(tastotxt);
-                                                                        }
-                                                                    }, tastotxt);
-                                                                }, $(elembtn));
-                                                                ///////////////////////////////////////////////////////////////////////
-                                                            } else {
-                                                                $('html,body').animate({
-                                                                    scrollTop: $("#ctl00_divContattiMaster").offset().top - 20
-                                                                }, 'fast');
-                                                                console.log('not  validated');
-                                                                return false;
-                                                            }
-                                                        }--%>
-
-
                                                     </script>
-
-                                                    <%=  WelcomeLibrary.UF.ConfigManagement.ReadKey("recaptchask") %>
                                                     <br />
                                                     <button id="btnInvia" type="button" class="divbuttonstyle" style="width: 200px" runat="server" validationgroup="contattifooter" onclick="ConfirmValidationFormMaster(this);"><%= references.ResMan("Common", Lingua,"TestoInvio") %> </button>
-
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-sm-12" style="height: 120px;">
+                                        <div class="col-12 col-sm-12">
                                             <div style="font-weight: 300; color: #d2ac67" id="outputContactMasterDiv">
                                                 <asp:Literal Text="" ID="outputContact" runat="server" />
                                             </div>
@@ -932,6 +860,7 @@
                     </div>
                 </section>
             </div>
+
 
             <asp:PlaceHolder ID="plhMapMaster" runat="server" Visible="false">
                 <div style="height: 100%; width: 100%; position: relative">
@@ -949,7 +878,7 @@
                         <div class="row justify-content-md-center">
                             <div class="col-sm-6 align-self-center py-3 text-center text-md-left">
                                 <a href='<%= CommonPage.ReplaceAbsoluteLinks(references.ResMan("Common", Lingua, "LinkHome")) %>' title='<%= references.ResMan("Common", Lingua,"testoHomeIndex") %>'>
-                                    <img src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png" )%>' class="my-0 mx-auto  " style="height: 45px" alt="" />
+                                    <img src='<%= CommonPage.ReplaceAbsoluteLinks("~/images/main_logo_footer.png" )%>' class="my-0 mx-auto  " style="height: 80px" alt="" />
                                 </a>
                             </div>
 
@@ -957,16 +886,13 @@
                             <div class="col-sm-6 align-self-center">
                                 <div class="d-table mx-auto d-sm-block col-sm-mx-right d-block social-icons animated" data-animtype="bounceInRight" data-animrepeat="1" data-animspeed="0.5s" data-animdelay="0.5s">
                                     <ul>
-                                        <li style="float: right">
+                                        <%--       <li style="float: right">
                                             <a href='<%= references.ResMan("Common", Lingua,"_linkFacebook") %>' target="_blank" class="social-media-icon facebook-icon" data-original-title="facebook"></a>
                                         </li>
                                         <li style="float: right">
                                             <a href='<%= references.ResMan("Common", Lingua,"_linkInstagram") %>' target="_blank" class="social-media-icon instagram-icon" data-original-title="instagram"></a>
                                         </li>
-                                        <li style="float: right">
-                                            <a href='<%= references.ResMan("Common", Lingua,"_linkX") %>' target="_blank" class="social-media-icon x-icon" data-original-title="x"></a>
-                                        </li>
-                                        <li style="float: right"><a class="social-media-icon youtube-icon" href='<%= references.ResMan("Common", Lingua,"_linkYoutube") %>' data-original-title="yuotube" target="_blank"></a></li>
+                                        <li style="float: right"><a class="social-media-icon youtube-icon" href='<%= references.ResMan("Common", Lingua,"_linkYoutube") %>' data-original-title="yuotube" target="_blank"></a></li>--%>
                                         <%--
                                             <li style="float: right">
                                                 <a href='<%# references.ResMan("Common", Lingua,"_linkyoutube") %>" runat="server" target="_blank" class="social-media-icon youtube-icon" data-original-title="youtube">youtube</a>
@@ -977,13 +903,12 @@
                                             <li>
                                                 <a href='<%# references.ResMan("Common", Lingua,"_linkpinterest") %>" runat="server" target="_blank" class="social-media-icon pininterest-icon" data-original-title="pininterest">pininterest</a>
                                             </li>--%>
-                                        <li style="float: right">
+                                        <%--           <li style="float: right">
                                             <a href='<%# references.ResMan("Common", Lingua,"_linktripadvisor") %>' target="_blank" class="social-media-icon tripadvisor-icon" data-original-title="tripadvisor">tripadvisor</a>
                                         </li>
                                         <li style="float: right">
                                             <a href='<%# references.ResMan("Common", Lingua,"_linkskype") %>' class="social-media-icon skype-icon" data-original-title="Skype">Skype</a>
-                                        </li>
-
+                                        </li>--%>
                                     </ul>
                                 </div>
                             </div>
@@ -995,12 +920,12 @@
                 <div class="footer-wrapper py-5">
                     <div class="container">
                         <div class="row justify-content-center">
-
-                            <div class="col col-sm-4 col-md-3 footer-col">
+                           
+                            <div class="col-12 col-sm-4 col-md-4 text-center footer-col">
                                 <%-- LINKS --%>
-                                <div class="footer-title">
-                                    <%= references.ResMan("Common",Lingua,"testofooter1") %>
-                                </div>
+                                                           <div class="footer-title col-12 text-center">
+    <%= references.ResMan("Common",Lingua,"testofooter1") %>
+</div>
                                 <div class="footer-content">
                                     <ul class="footer-category-list">
                                         <%-- Home --%>
@@ -1011,21 +936,8 @@
                                                 </span>
                                             </a>
                                         </li>
-
-                                        <%= CreaLinkPaginastatica(8) %>
                                         <%= CreaLinkTipologie(3,3) %>
-                                        <%= CreaLinkPaginastatica(4) %>
-                                        <%= CreaLinkTipologie(8,8) %>
-                                        <%= CreaLinkTipologie(9,9) %>
-
-                                        <%= CreaLinkPaginastatica(9) %>
-                                        <%= CreaLinkPaginastatica(12) %>
-                                        <%= CreaLinkPaginastatica(17) %>
-                                        <%= CreaLinkPaginastatica(18) %>
-                                        <%= CreaLinkPaginastatica(19) %>
-                                        <%= CreaLinkPaginastatica(20) %>
-
-
+                                        <%= CreaLinkPaginastatica(8) %>
 
 
                                         <%-- Contatti --%>
@@ -1036,49 +948,46 @@
                                                 </span>
                                             </a>
                                         </li>
-                                        <%--<%= CreaLinkSottoCategorie("rif000002","prod000018") %>--%>
-                                        <%= CreaLinkPaginastatica(100) %>
 
                                         <%--       <li> <button type="button" data-cc="c-settings" >Modifica preferenze cookie</button></li>--%>
                                         <li><a href="#" data-cc="c-settings">Modifica preferenze cookie</a></li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col col-sm-4 col-md-3 footer-col">
-                                <%-- SERVIZI --%>
-                                <%--<div class="footer-title">
-                                <%= references.ResMan("Common",Lingua,"testofooter4") %>
-                            </div>
-                            <div class="footer-content">
-                                <ul class="footer-category-list">
-                                    <%= CaricaLinksPerTipologia("rif000003","","10") %>
-                                </ul>
-                            </div>--%>
-                                <%--SHOP--%>
+                            <div class="col-12 col-sm-4 col-md-4 text-center footer-col pt-3 pt-sm-0">
                                 <div class="footer-title">
-                                    <%= references.ResMan("Common",Lingua,"testoid4") %>
+                                                           <%= references.ResMan("Common",Lingua,"testofooter2") %>
+<%--                                    <%= CreaLinkTipologie(3,3,"",true) %>--%>
                                 </div>
                                 <div class="footer-content">
-                                    <ul class="footer-category-list catalogo-footer">
-                                        <%= CreaLinkCategorie("rif000001") %>
+                                    <ul class="footer-category-list">
+
+                                        <%= CreaLinkTipologie(10,10) %>
+                                        <%= CreaLinkTipologie(11,11) %>
+                                        <%= CreaLinkTipologie(12,12) %>
+                                        
+                                        <%= CreaLinkPaginastatica(10) %>
                                     </ul>
                                 </div>
                             </div>
                             <%--BLOG--%>
-                            <div class="col col-sm-4 col-md-3 footer-col pt-3 pt-sm-0">
+                            <div class="col-12 col-sm-4 col-md-4 text-center footer-col pt-3 pt-sm-0">
                                 <div class="footer-title">
-                                    <%--                       <%= references.ResMan("Common",Lingua,"testofooter2") %>--%>
-                                    <%= CreaLinkTipologie(2,2,"",true) %>
+                                                           <%= references.ResMan("Common",Lingua,"testofooter3") %>
                                 </div>
                                 <div class="footer-content">
                                     <ul class="footer-category-list">
-                                        <%= CreaLinkCategorie("rif000002") %>
+                                       
+                                        <%= CreaLinkPaginastatica(9) %>
+                                                                                <%= CreaLinkPaginastatica(12) %>
+
+                                        <%= CreaLinkTipologie(2,2) %>
                                     </ul>
                                 </div>
                             </div>
 
                             <%--NEWS-LETTER--%>
-                            <div class="col-12 col-md-3 footer-col pt-3 pt-sm-3 pt-md-0">
+                            <div class="col-12 col-md-3 footer-col pt-3 pt-sm-3 pt-md-0 d-none">
                                 <div class="footer-title">
                                     <%= references.ResMan("Common", Lingua,"titoloNewsletter") %>
                                 </div>
@@ -1090,7 +999,7 @@
                                         <br />
                                         <br />
                                     --%>
-                                    <input type="text" style="width: 80%; height: 36px; border-radius: 5px 0 0 5px;" name="q" class="subscribe-input text-input form-control float-left bg-white border-0 pl-2" validationgroup="newsletter1" placeholder="Email .." runat="server" id="txtEmail" />
+                                    <input type="text" style="margin: 0; width: 80%; height: 42px; border-radius: 5px 0 0 5px;" name="q" class="subscribe-input text-input form-control float-left bg-white border-0 pl-2" validationgroup="newsletter1" placeholder="Email .." runat="server" id="txtEmail" />
                                     <button class="divbuttonstyle px-2 border-0" style="width: 20%; height: 36px; border-radius: 0px 5px 5px 0; cursor: pointer;" runat="server" validationgroup="newsletter1" onserverclick="btnNewsletter1_Click"><%= references.ResMan("Common", Lingua,"TestoBtnNewsletter") %></button>
                                     <asp:RequiredFieldValidator ID="req1" ErrorMessage='<%# references.ResMan("Common", Lingua,"FormTesto2Err") %>' ValidationGroup="newsletter1" ControlToValidate="txtEmail" runat="server" />
                                 </asp:Panel>
@@ -1155,9 +1064,7 @@
 
     <%--SERVICE WORKER--%>
     <%--   <%= WelcomeLibrary.UF.BundleEngine.RenderJS("bundlejssw") %>  --%>
+    <%--   <script src='https://www.google.com/recaptcha/api.js'></script>--%>
     <%--    <%= InjectDirectrenderinPage() %>--%>
-
-    <%--ABILITARE LA SEGUENTE E INSERIRE LE CHIAVI CAPRCHA NEL DB CONFIG PER ATTIVARE GOOGLE CAPTCHA SERVER/CLIENT VALIDATION--%>
-    <%-- <script src='https://www.google.com/recaptcha/api.js'></script>--%>
 </body>
 </html>

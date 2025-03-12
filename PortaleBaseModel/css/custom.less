@@ -26,11 +26,11 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 /*----------------------------------
 //////////////| FONT |//////////////
 ----------------------------------*/
-@primary-font: 'Lora', serif; /*titoli-principali*/
-@secondary-font: 'Lora', serif; /*sotto-titoli-principali*/
-@base-font: 'Raleway', sans-serif; /*menu - body*/
-@alternative-font: 'Raleway', sans-serif;
-@testata-font: 'Raleway', sans-serif; /*'Roboto Condensed', sans-serif;*/
+@primary-font: 'Red Hat Display', sans-serif; /*titoli-principali*/
+@secondary-font: 'Red Hat Display', sans-serif; /*sotto-titoli-principali*/
+@base-font: 'Red Hat Display', sans-serif; /*menu - body*/
+@alternative-font: 'Red Hat Display', sans-serif;
+@testata-font: 'Red Hat Display', sans-serif; /*'Roboto Condensed', sans-serif;*/
 
 .primary-font {
     font-family: @primary-font !important;
@@ -57,11 +57,11 @@ IMPORTAZ. STILI COMBINAZIONI COLORI
 ----------------------------------*/
 
 .bg-odd {
-    background: @bg-light-color;
+    background: @white-color;
 }
 
 .bg-even {
-    color: @white-color;
+    background: @bg-light-color;
 }
 
 
@@ -117,7 +117,12 @@ path.bg-light-color-path {
     fill: @white-color;
     stroke: @white-color;
 }
-
+.bg-white {
+    background-color: #ffffffd6!important;
+    border-radius: 5px;
+    padding: 5%;
+    margin: 15px 0;
+}
 .bg-gray-color {
     background-color: @gray-color !important;
 }
@@ -305,7 +310,7 @@ h6 {
 
 h1 {
     font-size: 1.7rem;
-    /*line-height: 35px;*/
+    line-height: 35px;
 }
 
 h2 {
@@ -621,7 +626,7 @@ b, strong {
     font-family: @body-font;
     font-size: @body-size;
     font-weight: @body-weight;
-    /* line-height: 1.4 !important;*/
+     line-height: 1.2 !important;
     /*    line-height: 135% !important;*/
 }
 
@@ -638,7 +643,6 @@ body {
 
 body, html, button, input, select, textarea {
     &:extend(.base-set);
-    font-size: 1em;
     background-color: transparent;
 }
 
@@ -650,6 +654,11 @@ p, p.lead, .lead p {
     position: relative;
 }
 
+@media (min-width: 1200px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1400px;
+    }
+}
 .body-wrapper {
     padding: 0;
     margin: 0;
@@ -665,6 +674,15 @@ p, p.lead, .lead p {
 }
 
 @media (max-width: 1179px) {
+    .base-set {
+        font-size: @scalable-medium-font-size-600;
+    }
+    .bg-white {
+        background-color: #ffffffd6!important;
+        border-radius: 5px;
+        padding:0%;
+        margin: 15px 0 0;
+    }
     .body-wrapper {
         overflow-x: hidden; //serve a bloccare la visualizzazione per tablet e mobile senno balla a destra e sinistra
     }
@@ -683,10 +701,10 @@ p, p.lead, .lead p {
         }
     }
 
-    .mbr-section-subtitle {
+ /*   .mbr-section-subtitle {
         font-size: 1.5rem !important;
         line-height: 2rem !important;
-    }
+    }*/
 
     .title-isotope, .big2 {
         font-size: 1.8rem !important;
@@ -905,24 +923,20 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
 
 
 .border-tipo1 {
-    border-color: #ccc !important;
-    /* background-color: rgba(200, 200, 200, 0.05); */
-    -webkit-box-shadow: 0px 1px 18px 1px rgba(135, 135, 135, 0.3);
-    -moz-box-shadow: 0px 1px 18px 1px rgba(135, 135, 135, 0.3);
-    box-shadow: 0px 1px 18px 1px rgba(135, 135, 135, 0.3);
+    border:none!important;
+    /* background-color: rgba(200,200,200,0.05); */
+    -webkit-box-shadow: 0px 0px 1px 1px rgba(200, 200, 200, 0.3);
+    -moz-box-shadow: 0px 0px 1px 1px rgba(200, 200, 200, 0.3);
+    box-shadow: 0px 0px 1px 1px rgba(200, 200, 200, 0.3);
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
-    border-radius: 30px !important;
+    border-radius: 10px;
     -webkit-transition: box-shadow 0.3s;
-    border-color: #3c3c3b;
-    border: none !important;
-    border-radius: 0;
-    overflow: hidden;
-    /* overflow:hidden;*/
+    BOX-SHADOW: 2PX 2PX 20px 1px #00000029;
 }
 
 .border-tipo1:hover {
-    border-color: #ccc !important;
+    border: none !important;
     -webkit-box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.6);
     -moz-box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.6);
     box-shadow: 0px 0px 1px 1px rgba(200,200,200,0.6);
@@ -930,6 +944,7 @@ PULSANTE SCORRIMENTO BANNER E PAGINA
     -moz-filter: drop-shadow(0 2px 5px .2px);
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
+    border-radius: 10px;
 }
 
 .border-tipo2 {
@@ -1216,7 +1231,7 @@ ul.footer-category-list {
 
 .footer-category-list .label-nav {
     font-size: calc (@link-footer-size * 1.1);
-    margin-left: -3px;
+/*    margin-left: -3px;*/
 }
 
 .footer .footer-col .footer-content .footer-category-list li {
@@ -1243,13 +1258,13 @@ ul.footer-category-list {
     }
 }*/
 
-.footer .footer-col .footer-content .footer-category-list li a:before {
+/*.footer .footer-col .footer-content .footer-category-list li a:before {
     content: "\f105";
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     padding-right: 5px
 }
-
+*/
 /*FOOTER ICON CATALOGO START*/
 
 .footer .footer-col .footer-content .footer-category-list li:first-child {
@@ -1311,7 +1326,7 @@ ul.footer-category-list {
     color: @title-footer-color;
     font-family: @tite-font;
     font-weight: bold;
-    border-bottom: 1px solid @title-footer-border-color;
+    border-bottom: 3px solid @color-sottomeu;
 }
 
 .footer .footer-col .footer-title a {
@@ -1335,6 +1350,7 @@ ul.footer-category-list {
     color: @body-footer-color;
     font-family: @base-font;
     font-size: @link-footer-size;
+    font-weight:@font-weight-medium
     /*color: @link-footer-color;*/
 }
 
@@ -1379,7 +1395,6 @@ ul.footer-category-list {
     width: 100%;
     height: 100%;
 }
-
 /*CSS per video responsive*/
 
 /*.sfondovideohome {
@@ -1960,15 +1975,15 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
     -o-transform: rotate(-40deg);
 }*/
 
-
-.prod_labelright {
+.prod_discount {
     position: absolute;
     padding: 1px 7px;
-    right: 15px;
-    top: 15px;
-    z-index: 2;
-    /* background: url(../images/sitespecific/bollino-1.png) no-repeat center center; */
-    border: 1px solid transparent;
+    border-radius: 1px;
+    left: 5px;
+    top: 10px;
+    z-index: 5;
+    /* background: url(../images/sitespecific/bollino-1.png) no-repeat center center;*/
+    border: 1px solid;
     background-color: #fff;
     text-align: left;
     color: black;
@@ -1976,33 +1991,6 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
     font-weight: 800;
     font-size: 0.8rem;
     word-wrap: normal;
-    border-radius: 5px;
-}
-
-.prod_labelright > span {
-    display: block;
-    transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-}
-
-.prod_discount { 
-    position: absolute;
-    padding: 1px 7px;
-    left: 15px;
-    top: 15px;
-    z-index: 2;
-    /* background: url(../images/sitespecific/bollino-1.png) no-repeat center center; */
-    border: 1px solid transparent;
-    background-color: #fff;
-    text-align: left;
-    color: black;
-    font-family: @primary-font;
-    font-weight: 800;
-    font-size: 0.8rem;
-    word-wrap: normal;
-    border-radius:5px;
 }
 
 .prod_discount > span {
@@ -2018,19 +2006,18 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
     position: absolute;
     padding: 1px 7px;
     border-radius: 1px;
-    left: 15px;
-    top: 15px;
-    z-index: 2;
-    /* background: url(../images/sitespecific/bollino-1.png) no-repeat center center; */
-    border: 1px solid transparent;
+    right: 25px;
+    top: 10px;
+    z-index: 5;
+    /* background: url(../images/sitespecific/bollino-1.png) no-repeat center center;*/
+    border: 1px solid;
     background-color: #fff;
     text-align: left;
-    color: black;
+    color: blue;
     font-family: @primary-font;
     font-weight: 800;
     font-size: 0.8rem;
     word-wrap: normal;
-    border-radius: 5px;
 }
 
 .prod_promo > span {
@@ -2093,7 +2080,7 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
     background-repeat: no-repeat;
     background-attachment: scroll;
     overflow: hidden;
-    min-height: 370px;
+    min-height: 450px;
 }
 
 /*----------------------------------
@@ -2321,6 +2308,8 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
     /*box-shadow: rgba(61, 61, 61, 0.1) 0px 25px 20px 0px;*/
     padding: 0px 40px 40px;
     min-height: 0px;
+    background-color: #fff;
+    border-radius: 15px !important;
     /*    top: -50px;
     left:30px;*/
 }
@@ -2370,9 +2359,9 @@ ISOTOPE & SCHEDA PRODOTTI & VARIE SHOP
     background-color: #ffffff;
 }
 
-.form-control, .form-control:focus {
+/*.form-control, .form-control:focus {
     border: 1px solid @bg-secondary-color;
-}
+}*/
 
 .ui-15 .ui-form .ui-icon {
     color: @bg-secondary-color !important;
@@ -2516,7 +2505,7 @@ Breadcrumb
 
 .breadcrumb {
     list-style: none;
-    padding: 0px 1.5rem;
+    padding: 0rem;
     margin: 0;
     font-size: 9px;
     display: inline-block;
@@ -2661,7 +2650,7 @@ button.js-roundedpush:hover {
 }
 
 .rating {
-    color: @bg-primary-color !important;
+    color: @color-sottomeu !important;
 }
 
 /* -------------------------
@@ -2796,7 +2785,7 @@ button.js-roundedpush:hover {
     /*padding-top: calc(141px + 48px);*/
     /*padding-top: 135px;*/ /*senza sottomenu a vista con icone*/
     /*padding-top: calc(141px + 82px);*/ /*con sottomenu a vista con icone*/
-    padding-top: calc(141px); /*con sottomenu a vista con icone + testate pagine*/
+    padding-top: calc(130px); /*con sottomenu a vista con icone + testate pagine*/
     /*padding-top: 95px;*/ /*senza menù top, tipo dolore di achille*/
 }
 /*--------- END ---------*/
@@ -2806,8 +2795,8 @@ button.js-roundedpush:hover {
 }*/
 
 @media (max-width:1179px) {
-    .headerspacer, .headerspacer-home {
-        padding-top: 134px !important;
+  .headerspacer-home {
+        padding-top: 5px !important;
     }
 }
 
@@ -3400,7 +3389,7 @@ button.js-roundedpush:hover {
     /*BANNER TESTATA HOME - 100% ON*/
     text-align: center;
     white-space: unset;
-    margin-bottom: 10px !important;
+    margin-bottom: 0px !important;
     /*inizio script icona svg*/
     /*padding-bottom: 35px !important;
     background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='135' height='21' fill='@{color-sottomeu-rgba}' stroke='none'><path d='M127.18,6.19C121-.05,109.94-.24,101.84.1,90.84.56,80,3.3,69.32,5.77c-8,1.86-16,3.63-24,5.72-9.21,2.41-18.6,4.72-28.14,5.19-4.1.2-8.48,0-12.16-2a6.6,6.6,0,0,1-2.7-9A5.46,5.46,0,0,1,7.07,2.77c4-.22,6.73,8.39-.08,4.58a.49.49,0,0,0-.49.84c4.88,3,10.8,0,5.4-4.91C7.6-.63.4,2.06,0,8-1,24,28.25,17,36.29,15.24,53.74,11.37,70.9,6.44,88.53,3.33c11.1-2,24.75-3.54,35.06,2.19a16,16,0,0,1,6.86,8.85c1.29,4.31-4.35,4.2-7,3.52-4.84-1.26-2.42-8,1.22-3,.61.83,2,0,1.4-.82-2.15-2.93-6.71-4.9-7.12.35s8.36,7.24,11.72,4.47C135,15.32,129.91,9,127.18,6.19Z'></path></svg>") no-repeat bottom center;
@@ -3533,7 +3522,9 @@ button.js-roundedpush:hover {
     -webkit-transition: all .35s ease;
     transition: all .35s ease;
 }
-
+.flexslider .slides img {
+border-radius:15px;
+}
 
 /* SCHEDA DETAILS CATALOGO CATALOGO */
 /*.flexslider .slides img {
@@ -3749,8 +3740,8 @@ Modify  class per jqxcalendar
 
 .lead-action {
     position: fixed;
-    bottom: 60px;
-    right: 0px;
+    bottom: 25px;
+    left: 20px;
     z-index: 97;
     display: flex;
     margin-bottom: 0;
@@ -3765,7 +3756,7 @@ Modify  class per jqxcalendar
     .lead-action {
         /*  width: 260px;*/
         margin-bottom: 0;
-        right: 0px;
+        left: 20px;
     }
 }
 
@@ -3773,7 +3764,7 @@ Modify  class per jqxcalendar
     .lead-action {
         /* width: 260px;*/
         margin-bottom: 0;
-        right: 0px;
+        left: 20px;
     }
 }
 
@@ -3781,38 +3772,36 @@ Modify  class per jqxcalendar
     .lead-action {
         /* width: 260px;*/
         margin-bottom: 0;
-        right: 0px;
+        left: 20px;
     }
 }
 
 @media (max-width: 500px) {
     .lead-action {
-        bottom: 60px;
-        right: 0px;
+        bottom: 20px;
+        left: 20px;
         z-index: 99;
     }
 }
 
 .lead-action-link:hover {
     color: #fff;
-    background-color: #328184;
+    background-color: #a60202;
 }
 
 .lead-action-link:active, .lead-action-link:focus {
     color: #fff;
-    background-color: #328184;
+    background-color: #a60202;
 }
 
 .lead-action-link {
+    text-transform: uppercase;
     white-space: nowrap;
-    box-shadow: 0 6px 13px 0 rgba(150,150,150,.32);
     text-decoration: none;
     color: #fff;
-    background-color: #328184;
-    width: 50px;
+    background-color: #a60202;
     height: 50px;
-    border-radius: 50%;
-    border: 3px solid white;
+    border-radius: 10px;
     /*padding: 0;*/
     /*margin: .7142857143em 1.4285714286em;*/
     display: flex;
@@ -3825,8 +3814,8 @@ Modify  class per jqxcalendar
     .lead-action-link {
         width: auto;
         height: auto;
-        border-radius: 0; //18px;
-        padding: .7142857143em 1.1428571429em;
+        border-radius: 10px; //18px;
+        padding: 15px;
         display: inline-flex;
         font-weight: 400;
         transition: all linear 250ms;
@@ -4332,7 +4321,9 @@ svg path {
     width: 100%;
     height: 100%;
     margin-top: 0;
-    z-index: 97;
+    z-index: 0;
+    background: linear-gradient(0deg, #000, rgba(0, 0, 0, 1) 5%, transparent 60%);
+    opacity: .6;
 }
 
 /*************************************************************************************************/
@@ -4390,170 +4381,81 @@ svg path {
     margin-left: -25% !important;
 }
 
-.custom-list-item {
-    list-style: none;
-    margin: auto auto auto 20px;
-    border-left: 6px dotted #00ccbd;
-    padding: 0 0 30px 20px;
+.testata::after {
+    color: #fff !important;
+    content: "";
+    display: block;
+    width: 10px;
+    height: 70px;
+    background-color: #085C47;
+    margin: 2vh 48vw 0px;
+}
+
+.testata {
+    letter-spacing: 2px;
+    color: #ffffff;
+    text-transform: uppercase;
+    line-height: 1;
+    bottom: -10vh;
     position: relative;
+    text-shadow: 0 0 12px #0000007d;
 }
 
-.custom-list-item::before {
-    position: absolute;
-    left: -14px;
-    content: ""; 
-    border: 8px solid hsla(0, 0%, 100%, .74);
-    border-radius: 100%;
-    background: #00ccbd;
-    height: 20px;
-    width: 20px;
+
+.even .side-image-content {
+    padding: 3% !important;
+    position: relative;
+    z-index: 10;
 }
 
-.custom-list-item:last-child {
-    border-left: none;
-    left: 7px;
-    padding-bottom: 0;
+.odd .side-image-content {
+    padding: 3% !important;
+    position: relative;
+    z-index: 10;
 }
 
-.accordion {
-    border-radius: 15px;
-    overflow: hidden
+@media (max-width: 576px) {
+
+
+    .even .side-image-content {
+        padding: 40px 5% 0px !important;
+        position: relative;
+    }
+
+    .odd .side-image-content {
+        padding: 10% !important;
+        position: relative;
+    }
 }
 
 .accordion button:after {
-    content: "";
+    content: "\f077";
     font-family: 'Font Awesome 5 Free';
     float: right;
     font-style: normal;
     font-weight: 900;
     text-decoration: inherit;
-    margin-left: -5px;
-    line-height: 42px
+    line-height: 42px;
 }
 
 .accordion button.collapsed:after {
-    content: "";
+    content: "\f078";
     font-family: 'Font Awesome 5 Free';
     float: right;
     font-style: normal;
     font-weight: 900;
     text-decoration: inherit;
-    margin-left: -5px;
-    line-height: 42px
+    line-height: 42px;
 }
 
 .btn-accordion, .btn-accordion:hover, .btn-accordion:active, .btn-accordion:focus {
-    background-color: @bg-custom-color1;
-    border: none;
+    border: 2px solid #f5f5f5  !important;
     font-size: 19px;
-    color: #481728 !important;
-    padding: 15px 20px;
+    padding: 10px 15px;
     border-radius: 0;
-    line-height: 2em;
+    line-height: 2em!important;
     box-shadow: none;
-    text-decoration: none
-}
-
-.custom-list {
-    list-style-type: none;
-    counter-reset: custom-counter;
-    font-size: 1.2rem
-}
-
-.custom-list-item {
-    list-style: none;
-    margin: auto auto auto 20px;
-    border-left: 6px dotted #00ccbd;
-    padding: 0 0 30px 20px;
-    position: relative
-}
-
-.custom-list-item:last-child {
-    border-left: none;
-    left: 7px;
-    padding-bottom: 0
-}
-
-.custom-list-item::before {
-    position: absolute;
-    left: -14px;
-    content: " ";
-    border: 8px solid hsla(0,0%,100%,.74);
-    border-radius: 100%;
-    background: #00ccbd;
-    height: 20px;
-    width: 20px
-}
-
-.custom-list-item h3 {
-    margin: 0;
-    display: inline
-}
-
-/* SCHEDA DETAILS CATALOGO schedadetails-fullimage-ctafixed */
-
-.detail-cta-fixed {
-    .title-post {
-        top: 140px;
-        backdrop-filter: saturate(180%) blur(20px) !important;
-        background-color: #ffffff9c;
-        z-index: 80;
-        padding: 0 0;
-    }
-
-    .headerspacer {
-        padding-top: calc(220px);
-    }
-
-    @media (max-width: 1179px) {
-        .headerspacer, .headerspacer-home {
-            padding-top: 70px !important;
-        }
-    }
-}
-/* Banner sliderBanner-textcenter-button */
-.txt-slider {
-    .testoTxtCenter {
-        font-size: 1em;
-        text-shadow: 0 0 6px #000000;
-        color: #fff;
-        font-style: italic;
-    }
-
-    .enfword {
-        font-size: 2em !important;
-        text-shadow: 0 0 20px #00000091;
-        color: #fff;
-        font-weight: 500;
-    }
-
-    .btn-testata, .btn-testata:hover, .btn-testata:active {
-        text-transform: uppercase;
-        background-color: transparent;
-        border: 1px solid #fff !important;
-        box-shadow: none !important;
-        font-size: .5em;
-        font-weight: 300;
-        color: #fff !important;
-        padding: 10px;
-        border-radius: 5px
-    }
-
-    @media screen and (max-width: 920px) {
-        .testoTxtCenter {
-            font-size: 3em;
-            margin: 15px !important;
-        }
-
-        .enfword {
-            margin: 0px;
-            font-size: 5em;
-            line-height: 0.9em !important;
-            font-weight: 100;
-        }
-
-        .btn-testata, .btn-testata:hover, .btn-testata:active {
-            font-size: 2em;
-        }
-    }
+    text-decoration: none;
+    background-color: #e4e4e4;
+    border-radius: 15px;
 }

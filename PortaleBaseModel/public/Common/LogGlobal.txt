@@ -459,3 +459,139 @@
 <Messaggio>httplocalhost62000Generato sitemap  13/12/2024 16:48:46</Messaggio>
  <Data>13/12/2024 16:48:46</Data>
 <Messaggio>httplocalhost62000Generato sitemap  13/12/2024 16:48:46Terminato Aggiornamento  13/12/2024 16:48:46</Messaggio>
+ <Data>10/03/2025 12:55:05</Data>
+<Messaggio> Application start : 10/03/2025 12:55:02</Messaggio>
+ <Data>10/03/2025 12:55:05</Data>
+<Messaggio> Global init original path: http://localhost:62000/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>10/03/2025 12:57:03</Data>
+<Messaggio> Application start : 10/03/2025 12:57:01</Messaggio>
+ <Data>10/03/2025 12:57:03</Data>
+<Messaggio> Global init original path: http://localhost:62000/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>10/03/2025 13:03:44</Data>
+<Messaggio> Application start : 10/03/2025 13:03:43</Messaggio>
+ <Data>10/03/2025 13:03:44</Data>
+<Messaggio> Global init original path: http://localhost:62000/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>10/03/2025 13:41:17</Data>
+<Messaggio> Application start : 10/03/2025 13:41:16</Messaggio>
+ <Data>10/03/2025 13:41:17</Data>
+<Messaggio> Global init original path: http://localhost:62000/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>10/03/2025 13:44:18</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 13:44:18</Messaggio>
+ <Data>10/03/2025 13:44:18</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 13:44:18Terminato Aggiornamento  10/03/2025 13:44:18</Messaggio>
+ <Data>10/03/2025 13:45:28</Data>
+<Messaggio> Application start : 10/03/2025 13:45:27</Messaggio>
+ <Data>10/03/2025 13:45:28</Data>
+<Messaggio> Global init original path: http://localhost:62000/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>10/03/2025 13:48:28</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 13:48:28</Messaggio>
+ <Data>10/03/2025 13:48:28</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 13:48:28Terminato Aggiornamento  10/03/2025 13:48:28</Messaggio>
+ <Data>10/03/2025 17:12:13</Data>
+<Messaggio> Errore rewriteclass : c:\Users\Rachele Leite\source\repos\angytour\PortaleBaseModel\AspNetPages\webdetail.aspx.cs(675): error CS0128: Una variabile locale denominata 'divc1' è già definita in quest'ambito 10/03/2025 17:12:13</Messaggio>
+ <Data>10/03/2025 17:18:43</Data>
+<Messaggio> Application start : 10/03/2025 17:18:42</Messaggio>
+ <Data>10/03/2025 17:18:43</Data>
+<Messaggio> Global init original path: http://localhost:62000/it/angy-tour/aaa-82 Global init AbsolutePath : /it/angy-tour/aaa-82 Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>10/03/2025 17:21:44</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 17:21:44</Messaggio>
+ <Data>10/03/2025 17:21:44</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 17:21:44Terminato Aggiornamento  10/03/2025 17:21:44</Messaggio>
+ <Data>10/03/2025 17:38:59</Data>
+<Messaggio> Application start : 10/03/2025 17:38:58</Messaggio>
+ <Data>10/03/2025 17:38:59</Data>
+<Messaggio> Global init original path: http://localhost:62000/it/tour Global init AbsolutePath : /it/tour Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>10/03/2025 17:42:01</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 17:42:01</Messaggio>
+ <Data>10/03/2025 17:42:01</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 17:42:01Terminato Aggiornamento  10/03/2025 17:42:01</Messaggio>
+ <Data>10/03/2025 17:44:46</Data>
+<Messaggio> Application start : 10/03/2025 17:44:45</Messaggio>
+ <Data>10/03/2025 17:44:47</Data>
+<Messaggio> Global init original path: http://localhost:62000/AreaContenuti/GestioneOfferte.aspx?CodiceTipologia=rif000011 Global init AbsolutePath : /AreaContenuti/GestioneOfferte.aspx Global init ApplicationPath : / Global init Query : ?CodiceTipologia=rif000011 Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>10/03/2025 17:47:47</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 17:47:47</Messaggio>
+ <Data>10/03/2025 17:47:47</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 17:47:47Terminato Aggiornamento  10/03/2025 17:47:47</Messaggio>
+ <Data>10/03/2025 20:00:16</Data>
+<Messaggio> Application start : 10/03/2025 20:00:15</Messaggio>
+ <Data>10/03/2025 20:00:16</Data>
+<Messaggio> Global init original path: http://localhost:62000/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>10/03/2025 20:03:16</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 20:03:16</Messaggio>
+ <Data>10/03/2025 20:03:16</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 20:03:16Terminato Aggiornamento  10/03/2025 20:03:16</Messaggio>
+ <Data>10/03/2025 22:27:35</Data>
+<Messaggio> Application start : 10/03/2025 22:27:34</Messaggio>
+ <Data>10/03/2025 22:27:35</Data>
+<Messaggio> Global init original path: http://localhost:62000/AreaContenuti/GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-land Global init AbsolutePath : /AreaContenuti/GestioneBanners.aspx Global init ApplicationPath : / Global init Query : ?NomeTblBanners=tbl_banners_generale&sezione=header-land Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>10/03/2025 22:30:36</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 22:30:36</Messaggio>
+ <Data>10/03/2025 22:30:36</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 22:30:36Terminato Aggiornamento  10/03/2025 22:30:36</Messaggio>
+ <Data>10/03/2025 22:31:06</Data>
+<Messaggio> Application start : 10/03/2025 22:31:05</Messaggio>
+ <Data>10/03/2025 22:31:06</Data>
+<Messaggio> Global init original path: http://localhost:62000/keepalive.aspx Global init AbsolutePath : /keepalive.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>10/03/2025 22:33:29</Data>
+<Messaggio> Application start : 10/03/2025 22:33:28</Messaggio>
+ <Data>10/03/2025 22:33:29</Data>
+<Messaggio> Global init original path: http://localhost:62000/keepalive.aspx Global init AbsolutePath : /keepalive.aspx Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>10/03/2025 22:36:30</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 22:36:30</Messaggio>
+ <Data>10/03/2025 22:36:30</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 22:36:30Terminato Aggiornamento  10/03/2025 22:36:30</Messaggio>
+ <Data>10/03/2025 22:36:48</Data>
+<Messaggio> Application start : 10/03/2025 22:36:47</Messaggio>
+ <Data>10/03/2025 22:36:48</Data>
+<Messaggio> Global init original path: http://localhost:62000/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>10/03/2025 22:39:49</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 22:39:49</Messaggio>
+ <Data>10/03/2025 22:39:49</Data>
+<Messaggio>httplocalhost62000Generato sitemap  10/03/2025 22:39:49Terminato Aggiornamento  10/03/2025 22:39:49</Messaggio>
+ <Data>10/03/2025 22:51:01</Data>
+<Messaggio> Errore rewriteclass : c:\Users\Rachele Leite\source\repos\angytour\PortaleBaseModel\AspNetPages\weblist.aspx.cs(504): error CS1520: Il metodo deve avere un tipo restituito 10/03/2025 22:51:01</Messaggio>
+ <Data>11/03/2025 09:10:47</Data>
+<Messaggio> Application start : 11/03/2025 09:10:43</Messaggio>
+ <Data>11/03/2025 09:10:47</Data>
+<Messaggio> Global init original path: http://localhost:62000/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>11/03/2025 09:13:48</Data>
+<Messaggio>httplocalhost62000Generato sitemap  11/03/2025 09:13:48</Messaggio>
+ <Data>11/03/2025 09:13:48</Data>
+<Messaggio>httplocalhost62000Generato sitemap  11/03/2025 09:13:48Terminato Aggiornamento  11/03/2025 09:13:48</Messaggio>
+ <Data>11/03/2025 13:13:49</Data>
+<Messaggio>httplocalhost62000Generato sitemap  11/03/2025 13:13:49</Messaggio>
+ <Data>11/03/2025 13:13:49</Data>
+<Messaggio>httplocalhost62000Generato sitemap  11/03/2025 13:13:49Terminato Aggiornamento  11/03/2025 13:13:49</Messaggio>
+ <Data>11/03/2025 18:57:59</Data>
+<Messaggio>httplocalhost62000Generato sitemap  11/03/2025 18:57:59</Messaggio>
+ <Data>11/03/2025 18:57:59</Data>
+<Messaggio>httplocalhost62000Generato sitemap  11/03/2025 18:57:59Terminato Aggiornamento  11/03/2025 18:57:59</Messaggio>
+ <Data>11/03/2025 21:13:47</Data>
+<Messaggio>httplocalhost62000Generato sitemap  11/03/2025 21:13:47</Messaggio>
+ <Data>11/03/2025 21:13:47</Data>
+<Messaggio>httplocalhost62000Generato sitemap  11/03/2025 21:13:47Terminato Aggiornamento  11/03/2025 21:13:47</Messaggio>
+ <Data>11/03/2025 22:45:48</Data>
+<Messaggio> Application start : 11/03/2025 22:45:47</Messaggio>
+ <Data>11/03/2025 22:45:48</Data>
+<Messaggio> Global init original path: http://localhost:62000/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>11/03/2025 22:48:49</Data>
+<Messaggio>httplocalhost62000Generato sitemap  11/03/2025 22:48:49</Messaggio>
+ <Data>11/03/2025 22:48:49</Data>
+<Messaggio>httplocalhost62000Generato sitemap  11/03/2025 22:48:49Terminato Aggiornamento  11/03/2025 22:48:49</Messaggio>
+ <Data>11/03/2025 23:32:20</Data>
+<Messaggio> Application start : 11/03/2025 23:32:19</Messaggio>
+ <Data>11/03/2025 23:32:20</Data>
+<Messaggio> Global init original path: http://localhost:62000/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>11/03/2025 23:35:21</Data>
+<Messaggio>httplocalhost62000Generato sitemap  11/03/2025 23:35:21</Messaggio>
+ <Data>11/03/2025 23:35:21</Data>
+<Messaggio>httplocalhost62000Generato sitemap  11/03/2025 23:35:21Terminato Aggiornamento  11/03/2025 23:35:21</Messaggio>
+ <Data>12/03/2025 09:07:20</Data>
+<Messaggio> Application start : 12/03/2025 09:07:17</Messaggio>
+ <Data>12/03/2025 09:07:20</Data>
+<Messaggio> Global init original path: http://localhost:62000/ Global init AbsolutePath : / Global init ApplicationPath : / Global init Query :  Global init server host : localhost Global init server appaddress : http://localhost:62000</Messaggio>
+ <Data>12/03/2025 09:10:20</Data>
+<Messaggio>httplocalhost62000Generato sitemap  12/03/2025 09:10:20</Messaggio>
+ <Data>12/03/2025 09:10:20</Data>
+<Messaggio>httplocalhost62000Generato sitemap  12/03/2025 09:10:20Terminato Aggiornamento  12/03/2025 09:10:20</Messaggio>

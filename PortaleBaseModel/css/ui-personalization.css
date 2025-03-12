@@ -1053,21 +1053,6 @@ Social icons
         border: 1px solid #00799e;
     }
 
-
-
-.social-icons .x-icon {
-    background-image: url("../images/social-media/social-media-x.png");
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    border: 1px solid #e8e8e8;
-}
-
-    .social-icons .x-icon:hover {
-        background-color: #000;
-        border: 1px solid #00799e;
-    }
-
 .social-icons .facebook-icon {
     background-image: url("../images/social-media/social-media-facebook.png");
     -webkit-box-sizing: border-box;
@@ -1284,7 +1269,7 @@ Social icons
         background-color: transparent;
         opacity: 0.5;
     }
-
+     
 
 
 .social-icons-small > ul {
@@ -1305,10 +1290,12 @@ Social icons
 
     .social-icons-small .social-media-icon-small {
         background-color: transparent;
-        height: 30px;
+        height: 40px;
         border: none;
         margin: 0;
-        background-position: 0 -33px;
+        background-size: cover;
+        width: 43px;
+        background-position: 0px -5px;
     }
 
         .social-icons-small .social-media-icon-small:hover {
@@ -1352,23 +1339,6 @@ Social icons
         background-color: #00a0d1;
         border: 1px solid #00799e;
     }
-
-
-
-
-.social-icons-small .x-icon-small {
-    background-image: url("../images/social-media/social-media-x-small-white.png");
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    border: none;
-}
-
-    .social-icons-small .x-icon-small:hover {
-        background-color: #000;
-        border: 1px solid #00799e;
-    }
-
 
 .social-icons-small .facebook-icon-small {
     background-image: url("../images/social-media/social-media-facebook-small-white.png");

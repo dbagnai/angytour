@@ -32,7 +32,7 @@ public partial class AreaContenuti_MasterPage : System.Web.UI.MasterPage
 
                 //Inizializzo i valori
 
-                List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologie = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && (Convert.ToInt32(t.Codice.Substring(3)) >= 2) && (Convert.ToInt32(t.Codice.Substring(3)) <= 11));
+                List<WelcomeLibrary.DOM.TipologiaOfferte> Tipologie = WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && (Convert.ToInt32(t.Codice.Substring(3)) >= 2) && (Convert.ToInt32(t.Codice.Substring(3)) <= 20));
                 Tipologie.AddRange(WelcomeLibrary.UF.Utility.TipologieOfferte.FindAll(t => t.Lingua == "I" && Convert.ToInt32(t.Codice.Substring(3)) == 199));
                 Tipologie.RemoveAll(delegate (WelcomeLibrary.DOM.TipologiaOfferte _t) { return _t.Codice == "rif000100"; });
                 rptTipologia.DataSource = Tipologie;

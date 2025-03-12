@@ -36,20 +36,24 @@
     /* Setta l'altezza del contenitore dei banner*/
     .heightcontainerbanner-fimb {
         /* height: 600px; */
-        height: calc(100vh);
+        height: calc(65vh);
         /*   height: calc(100vh - 90px) !important;*/
     }
 </style>
 
 <div id="replaceid" data-prev="+ div > div.cycle-prev" data-next="+ div > div.cycle-next" data-pager="+ div > div.cycle-pager" data-cycle-log="false" data-cycle-timeout="3500" data-cycle-speed="500" data-cycle-pause-on-hover="false" data-cycle-slides="> div" data-cycle-auto-height="container" style="z-index:95;" class="slidercycle">
-    <div class="w-100 heightcontainerbanner-fimb">
+    <div class="w-100 heightcontainerbanner-fimb" style="height:80vh!important;">
         <!--VISUALIZZAZIONE DESKTOP-->
-        <div class="w-100 h-100 m-0 position-relative imgbackstyle imgback bind lazy row align-items-center" mybind="Id">
-            <div class="overlayforlink bind" mybind="Id" myvalue="link" format="frmvisibilityinverted">
-                <a class="bind" target="_self" href="link" title="" mybind="Id" style="width:100%;height:100%"></a>
+        <div class="w-100 h-100 m-0 position-relative imgbackstyle imgback bind lazy row align-items-center" mybind="Id" >
+            <div class="overlayforlink">
             </div>
-            <div class="position-relative w-100 align-self-center" style="z-index:94">
-                <div class="bind" mybind="Id" myvalue="titolo" format="formattestoreplace"></div>
+            <div class="position-relative w-100 align-self-end p-5" style="z-index:94">
+                <h3 class="card-title title-isotope display-3 mb-2 mt-0  white-color"">
+                    <span class="bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
+                </h3>
+                <p class="scalablefont-small-medium font-weight-medium primary-font tx-sottomenu-color text-left mb-3 mt-1 white-color">
+                    <span class="bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                </p>
             </div>
         </div>
     </div>

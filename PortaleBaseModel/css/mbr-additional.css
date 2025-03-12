@@ -12,7 +12,7 @@
 }
 
 .bg-warning {
-    background-color: #f3c649 !important;
+    background-color: #085C47 !important;
 }
 
 .bg-danger {
@@ -112,8 +112,8 @@
     }
 
 .btn-warning {
-    background-color: #f3c649;
-    border-color: #f3c649;
+    background-color: #085C47;
+    border-color: #085C47;
     color: #ffffff;
 }
 
@@ -261,15 +261,15 @@
     .btn-warning-outline:active,
     .btn-warning-outline.active {
         color: #ffffff;
-        background-color: #f3c649;
-        border-color: #f3c649;
+        background-color: #085C47;
+        border-color: #085C47;
     }
 
     .btn-warning-outline.disabled,
     .btn-warning-outline:disabled {
         color: #ffffff !important;
-        background-color: #f3c649 !important;
-        border-color: #f3c649 !important;
+        background-color: #085C47 !important;
+        border-color: #085C47 !important;
     }
 
 .btn-danger-outline {
@@ -308,7 +308,7 @@
 }
 
 .text-warning {
-    color: #f3c649 !important;
+    color: #085C47 !important;
 }
 
 .text-danger {
@@ -324,7 +324,7 @@
 }
 
 .alert-warning {
-    background-color: #f3c649;
+    background-color: #085C47;
 }
 
 .alert-danger {

@@ -569,7 +569,7 @@
                         </ul>
                     </li>
 
-                    <li id="tagCatalogo" runat="server" class="hover" style="display: block">
+                    <li id="tagCatalogo" runat="server" class="hover" style="display: none">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-book"></i>
                             <span class="menu-text">Gestione Sezione Catalogo
@@ -670,7 +670,7 @@
                                 </a>
                                 <b class="arrow"></b>
                             </li>
-                            <li class="hover">
+                            <li class="hover" style="display:none">
                                 <a id="linkPaginestaticheesempi" href="#" runat="server">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     <asp:Label ID="Titolopaginestaticheesempi" CssClass="menu-text" runat="server" Text=""></asp:Label>
@@ -698,7 +698,7 @@
                                         <div style="display: block">
                                             <ul class="submenu display-active">
                                                 <li id="toggle-testatehome" class="newLi hover" role="tab">
-                                                    <a id="chevron-toggle-testatehome" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" data-core="" href="#menu-testatehome" aria-expanded="false"><i class="fa fa-chevron-down" aria-hidden="true"></i>Testate Home</a>
+                                                    <a id="chevron-toggle-testatehome" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" data-core="" href="#menu-testatehome" aria-expanded="false"><i class="fa fa-chevron-down" aria-hidden="true"></i>Testate</a>
                                                 </li>
                                             </ul>
                                             <div id="menu-testatehome" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
@@ -707,21 +707,99 @@
                                                         <li class="newLi hover">
                                                             <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-home">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Testate Home</span></a>
+                                                                <span class="menu-text">Testata Home</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
                                                         <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=video-testata">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-2">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Video Testata</span></a>
+                                                                <span class="menu-text">Testata auditiva</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
                                                         <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-home">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-3">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Testate Home mobile</span></a>
+                                                                <span class="menu-text">Testata Soluzioni</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
+                                                        <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-4">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Testata conosci</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
+                                                        <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-land">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Testata landing</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
+                                                        <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-11">
+                                                                <i class="menu-icon fa fa-caret-right"></i>
+                                                                <span class="menu-text">Testata Blog</span></a>
+                                                            <b class="arrow"></b>
+                                                        </li>
+                                                         <li class="newLi hover">
+     <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-15">
+         <i class="menu-icon fa fa-caret-right"></i>
+         <span class="menu-text">Testata 15</span></a>
+     <b class="arrow"></b>
+ </li>
+                                                         <li class="newLi hover">
+     <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-16">
+         <i class="menu-icon fa fa-caret-right"></i>
+         <span class="menu-text">Testata 16</span></a>
+     <b class="arrow"></b>
+ </li>
+                                                         <li class="newLi hover">
+     <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-17">
+         <i class="menu-icon fa fa-caret-right"></i>
+         <span class="menu-text">Testata 17</span></a>
+     <b class="arrow"></b>
+ </li>
+                                                         <li class="newLi hover">
+     <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-18">
+         <i class="menu-icon fa fa-caret-right"></i>
+         <span class="menu-text">Testata 18</span></a>
+     <b class="arrow"></b>
+ </li>
+                                                         <li class="newLi hover">
+     <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-19">
+         <i class="menu-icon fa fa-caret-right"></i>
+         <span class="menu-text">Testata 19</span></a>
+     <b class="arrow"></b>
+ </li>
+                                                         <li class="newLi hover">
+     <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-20">
+         <i class="menu-icon fa fa-caret-right"></i>
+         <span class="menu-text">Testata 20</span></a>
+     <b class="arrow"></b>
+ </li>
+                                                         <li class="newLi hover">
+     <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-21">
+         <i class="menu-icon fa fa-caret-right"></i>
+         <span class="menu-text">Testata 21</span></a>
+     <b class="arrow"></b>
+ </li>
+                                                         <li class="newLi hover">
+     <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-22">
+         <i class="menu-icon fa fa-caret-right"></i>
+         <span class="menu-text">Testata 22</span></a>
+     <b class="arrow"></b>
+ </li>
+                                                         <li class="newLi hover">
+     <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-23">
+         <i class="menu-icon fa fa-caret-right"></i>
+         <span class="menu-text">Testata 23</span></a>
+     <b class="arrow"></b>
+ </li>
+                                                         <li class="newLi hover">
+     <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-24">
+         <i class="menu-icon fa fa-caret-right"></i>
+         <span class="menu-text">Testata 24</span></a>
+     <b class="arrow"></b>
+ </li>
 
                                                     </ul>
                                                 </div>
@@ -732,184 +810,38 @@
                                             <hr style="margin: 2px 0" />
                                             <ul class="submenu display-active">
                                                 <li id="toggle-home" class="newLi hover" role="tab">
-                                                    <a id="chevron-toggle-home" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" data-core="" href="#menu-home" aria-expanded="false"><i class="fa fa-chevron-down" aria-hidden="true"></i>Banner Navigazione</a>
+                                                    <a id="chevron-toggle-home" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" data-core="" href="#menu-home" aria-expanded="false"><i class="fa fa-chevron-down" aria-hidden="true"></i>Banner Home</a>
                                                 </li>
                                             </ul>
                                             <div id="menu-home" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
                                                 <div class="panel-body" style="padding: 0 0 0 15px;">
                                                     <ul class="submenu display-active">
                                                         <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-angytour">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Navigazione Principale</span></a>
+                                                                <span class="menu-text">Banner Intro</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
                                                         <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-catalogo">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-tour">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Navigazione Catalogo</span></a>
+                                                                <span class="menu-text">Banner Tour</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
                                                         <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni-1">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-esperienze">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Navigazione Sezioni</span></a>
+                                                                <span class="menu-text">Banner Esperienze
+                                                                </span></a>
                                                             <b class="arrow"></b>
                                                         </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni-2">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Navigazione Sezioni 2</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Navigazione Blog</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                          <%= references.ResMan("Common", Lingua,"customnavigazionemenu1") %>
+                                                  
                                                         <%--<li class="newLi hover">
                                                 <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-blog0">
                                                     <i class="menu-icon fa fa-caret-right"></i>
                                                     <span class="menu-text">Banner area Blog</span></a>
                                                 <b class="arrow"></b>fci
                                             </li>--%>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div style="display: block">
-                                            <hr style="margin: 2px 0" />
-                                            <ul class="submenu display-active">
-                                                <li id="toggle_fascia" class="newLi hover" role="tab">
-                                                    <a id="chevron-toggle_fascia" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" data-core="" href="#menu-fascia" aria-expanded="false"><i class="fa fa-chevron-down" aria-hidden="true"></i>Banner fascia</a>
-                                                </li>
-                                            </ul>
-                                            <div id="menu-fascia" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
-                                                <div class="panel-body" style="padding: 0 0 0 15px;">
-                                                    <ul class="submenu display-active">
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-bg">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner fascia new-home background alternate</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-fascia">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Fasce alternate</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia1">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Fascia 1</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia2">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Fascia 2</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=video-banner1">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Video Banner</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-section1">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner generico (test parallax)</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                          <%= references.ResMan("Common", Lingua,"customnavigazionemenu2") %>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div style="display: block">
-                                            <hr style="margin: 2px 0" />
-                                            <ul class="submenu display-active">
-                                                <li id="toggle_altri" class="newLi hover" role="tab">
-                                                    <a id="chevron-toggle_altri" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" data-core="" href="#menu-altri" aria-expanded="false"><i class="fa fa-chevron-down" aria-hidden="true"></i>Altri banner</a>
-                                                </li>
-                                            </ul>
-                                            <div id="menu-altri" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
-                                                <div class="panel-body" style="padding: 0 0 0 15px;">
-                                                    <ul class="submenu display-active">
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-sfondo-cta1">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Cta Footer</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-presentazione">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Presentazione</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sticky-text">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Sticky text</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sticky-image">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Sticky image</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sticky-mix">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Sticky image e text</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-gallery-1">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Gallery</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-gallery-2">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Gallery masonry</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-popup">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Gestione Banner popup</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-processo-acquisto">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Processo Acquisto</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-metodo-lavoro">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Metodo lavoro</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-home-bottom">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Testata Bottom pages</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                          <%= references.ResMan("Common", Lingua,"customnavigazionemenu3") %>
-
                                                     </ul>
                                                 </div>
                                             </div>
@@ -928,203 +860,37 @@
                                         <div style="display: block">
                                             <ul class="submenu display-active">
                                                 <li id="toggle-testate" class="newLi hover" role="tab">
-                                                    <a id="chevron-toggle-testate" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" data-core="" href="#menu-testate" aria-expanded="false"><i class="fa fa-chevron-down" aria-hidden="true"></i>Testate pagine</a>
+                                                    <a id="chevron-toggle-testate" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" data-core="" href="#menu-testate" aria-expanded="false"><i class="fa fa-chevron-down" aria-hidden="true"></i>Altri Banner</a>
                                                 </li>
                                             </ul>
                                             <div id="menu-testate" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
                                                 <div class="panel-body" style="padding: 0 0 0 15px;">
                                                     <ul class="submenu display-active">
                                                         <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header2-bassa-1">
+     <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-esperienze">
+         <i class="menu-icon fa fa-caret-right"></i>
+         <span class="menu-text">Banner Esperienze</span></a>
+     <b class="arrow"></b>
+ </li>
+                                                         <li class="newLi hover">
+     <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-tour">
+         <i class="menu-icon fa fa-caret-right"></i>
+         <span class="menu-text">Banner Tour</span></a>
+     <b class="arrow"></b>
+ </li>
+                                                        <li class="newLi hover">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-land">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Testate Pagina Brand</span></a>
+                                                                <span class="menu-text">Banner Landing</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
                                                         <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-1">
+                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-land2">
                                                                 <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Testate Pagina 1</span></a>
+                                                                <span class="menu-text">Banner Landing2</span></a>
                                                             <b class="arrow"></b>
                                                         </li>
-                                                          <%= references.ResMan("Common", Lingua,"customtestatemenu1") %>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div style="display: none">
-                                            <hr style="margin: 2px 0" />
-                                            <ul class="submenu display-active">
-                                                <li id="toggle" class="newLi hover" role="tab">
-                                                    <a id="chevron-toggle" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" data-core="" href="#menu-ristoranti" aria-expanded="false"><i class="fa fa-chevron-down" aria-hidden="true"></i>Menù ristoranti</a>
-                                                </li>
-                                            </ul>
-                                            <div id="menu-ristoranti" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
-                                                <div class="panel-body" style="padding: 0 0 0 15px;">
-                                                    <ul class="submenu display-active">
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-menu-antipasti">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Menù Antipasti</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-menu-primi">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Menù Primi piatti</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-menu-secondi">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Menù Secondi piatti</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-menu-contorni">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Menù Contorni</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-menu-dolci">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Menù Dolci</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li>
-                                                            <hr style="margin: 2px 0" />
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-menu-terra">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Menù Fisso Terra</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-menu-acqua">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Menù Fisso Acqua</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="display: block">
-                                            <ul class="submenu display-active">
-                                                <li id="toggle-landing" class="newLi hover" role="tab">
-                                                    <a id="chevron-toggle-landing" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" data-core="" href="#menu-landing" aria-expanded="false"><i class="fa fa-chevron-down" aria-hidden="true"></i>Landing Page</a>
-                                                </li>
-                                            </ul>
-                                            <div id="menu-landing" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
-                                                <div class="panel-body" style="padding: 0 0 0 15px;">
-                                                    <ul class="submenu display-active">
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-feeds">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Land Feedbacks  1</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=header-land1">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Land Testata  1</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-land2">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Land Fascia 1</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-land3">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Land Fascia 2</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-land4">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Land Fascia 3</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-land5">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Land Fascia 4</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-fascia-land6">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Land Fascia 5</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                           <%= references.ResMan("Common", Lingua,"customlandingmenu1") %>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="display: none">
-                                            <hr style="margin: 2px 0" />
-                                            <ul class="submenu display-active">
-                                                <li id="toggle_funnel" class="newLi hover" role="tab">
-                                                    <a id="chevron-toggle_funnel" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" data-core="" href="#menu-funnel" aria-expanded="false"><i class="fa fa-chevron-down" aria-hidden="true"></i>Elementi funnel</a>
-                                                </li>
-                                            </ul>
-                                            <div id="menu-funnel" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
-                                                <div class="panel-body" style="padding: 0 0 0 15px;">
-                                                    <ul class="submenu display-active">
-
-
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banners-testata-funnel">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner testata funnel</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-funnel">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Funnel</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-funnel-navigazione">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Funnel navigazione</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div style="display: none">
-                                            <hr style="margin: 2px 0" />
-                                            <ul class="submenu display-active">
-                                                <li id="toggle_pwa" class="newLi hover" role="tab">
-                                                    <a id="chevron-toggle_pwa" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" data-core="" href="#menu-pwa" aria-expanded="false"><i class="fa fa-chevron-down" aria-hidden="true"></i>Elementi PWA</a>
-                                                </li>
-                                            </ul>
-                                            <div id="menu-pwa" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingOne">
-                                                <div class="panel-body" style="padding: 0 0 0 15px;">
-                                                    <ul class="submenu display-active">
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=banner-portfolio-sezioni-pwa">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Banner Navigazione Principale PWA</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
-                                                        <li class="newLi hover">
-                                                            <a href="GestioneBanners.aspx?NomeTblBanners=tbl_banners_generale&sezione=icon-portfolio-sezioni-pwa">
-                                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                                <span class="menu-text">Icone Navigazione Principale PWA</span></a>
-                                                            <b class="arrow"></b>
-                                                        </li>
+                                                      
                                                     </ul>
                                                 </div>
                                             </div>

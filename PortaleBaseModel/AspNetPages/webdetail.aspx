@@ -257,7 +257,7 @@
 
     <%--ALTRI ARTICOLI--%>
     <%--<div class="bd-light-color" style="position: relative; border-top: 10px dotted; background-color:#fff;" id="divSuggeritiContainer">--%>
-    <div class="bg-light-color" id="divSuggeritiContainer">
+    <div class="" id="divSuggeritiContainer">
         <div style="max-width: 1600px; margin: 0px auto; position: relative; padding: 30px 25px;">
             <div id="divScrollerSuggeritiJsTitle" class="row justify-content-center mb-4" style="display: none; margin-left: 30px; margin-right: 30px">
                 <div class="row">

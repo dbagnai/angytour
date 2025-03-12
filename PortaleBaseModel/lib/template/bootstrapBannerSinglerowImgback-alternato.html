@@ -1,47 +1,58 @@
 ﻿<style>
-    @media (min-width: 1200px) {
-        .altezzaminimalocal {
-            min-height: 650px;
-            /*        display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center;*/
+
+/*
+        .alternatecolor {
+            max-width: 1400px;
+            margin: auto;
+        }*/
+
+        .mbr-parallax-background {
+            background-size: cover;
+        }
+    @media screen and (max-width: 999px) {
+
+        .mbr-parallax-background {
+            background-size: cover;
+        }
+        .mbr-section {
+            padding-top: 20vh;
+            padding-bottom: 60px !important;
         }
     }
 </style>
 <div id="replaceid" class="alternatecolor">
         <div class="row even d-flex justify-content-center position-relative">
-            <div class="col-12 d-flex align-items-center position-relative  imgbackstyle imgback bind" mybind="Id">
+            <div class="col-12 d-flex align-items-center position-relative mbr-section mbr-parallax-background  imgback bind" mybind="Id">
                 <div class="container">
-                    <div class="row position-relative  d-flex justify-content-start">
-                        <div class="col-12 col-md-6 text-left mb-2 bg-transparent-white p-2 altezzaminimalocal">
-                            <span class="mbr-section-title scalablefont-medium-big bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
-                            <span class="mbr-section-subtitle scalablefont-small-medium bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                    <div class="row position-relative  d-flex justify-content-center">
+                        <div class="col-12 col-md-10 p-5  m-auto text-center bg-white altezzaminimalocal">
+                            <h3 class="mbr-section-title mb-3 mb-md-0 pt-0 text-center bind" mybind="Id" myvalue="titolo" format="formattitle"></h3>
+                            <span class="mbr-section-subtitle mb-0 mt-1 bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
                             <!--<a class="bind float-none float-sm-left" target="_self" href="link" title="titolo" mybind="Id">
-                                <button type="button" class="btn btn-primary button-isotope"><span class="bind" mybind="Id" myvalue="txtscopri" format="formatlabelresource"></span></button>
-                            </a>-->
+                    <button type="button" class="btn btn-primary button-isotope"><span class="bind" mybind="Id" myvalue="txtscopri" format="formatlabelresource"></span></button>
+                </a>-->
                         </div>
                     </div>
                 </div>
-                <div class="card-img-overlay card-overlay-rgba" style="z-index:1">
-                </div>
+                <!--<div class="card-img-overlay card-overlay-rgba" style="z-index:1">
+      </div>-->
             </div>
         </div>
-        <div class="row odd d-flex justify-content-center position-relative">
+        <div class="row odd d-flex justify-content-center position-relative" style=" border-top: 30px solid #1c7781;">
             <div class="col-12 d-flex align-items-center position-relative  imgbackstyle imgback bind" mybind="Id">
                 <div class="container">
-                    <div class="row position-relative  d-flex justify-content-end">
-                        <div class="col-12 col-md-6 text-left mb-2 bg-transparent-white p-2 altezzaminimalocal">
-                            <span class="mbr-section-title scalablefont-medium-big bind" mybind="Id" myvalue="titolo" format="formattitle"></span>
-                            <span class="mbr-section-subtitle scalablefont-small-medium bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
+                    <div class="row position-relative  d-flex justify-content-center ">
+                        <div class="col-12 col-md-10 p-5  m-auto text-center bg-white altezzaminimalocal">
+                            <h3 class="mbr-section-title mb-3 mb-md-0 pt-0 text-center bind" mybind="Id" myvalue="titolo" format="formattitle"></h3>
+                            <span class="mbr-section-subtitle mb-0 mt-1 bind" mybind="Id" myvalue="titolo" format="formatsubtitle"></span>
                             <!--<a class="bind float-none float-sm-left" target="_self" href="link" title="titolo" mybind="Id">
                                 <button type="button" class="btn btn-primary button-isotope"><span class="bind" mybind="Id" myvalue="txtscopri" format="formatlabelresource"></span></button>
                             </a>-->
                         </div>
                     </div>
                 </div>
-                <div class="card-img-overlay card-overlay-rgba" style="z-index:1">
-                </div>
+                <!--<div class="card-img-overlay card-overlay-rgba" style="z-index:1">
+                </div>-->
             </div>
     </div>
 </div>

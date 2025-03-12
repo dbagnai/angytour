@@ -2,14 +2,14 @@
 /*----------------------------------
 /////| COLORI BLOCCHI LINEARI |/////
 ----------------------------------*/
-@bg-primary-color: #098f8f; /*logo - sfondo-pulsanti - fixed-top*/ /*#9e532b*/ /*verde whats-app::after 2cbda5*/
+@bg-primary-color: #085C47; /*logo - sfondo-pulsanti - fixed-top*/ /*#9e532b*/ /*verde whats-app::after 2cbda5*/
 
-@bg-secondary-color: mix(@bg-primary-color, #fff, 45%); /*footer-link*/ /*#dac8a0;*/
-@bg-light-color: mix(@bg-primary-color, #fff, 8%); /*footer-social e banner*/ /*#f5f0e5;*/
+@bg-secondary-color: #cf8f39; /*footer-link*/ /*#dac8a0;*/
+@bg-light-color: #f5f5f5; /*footer-social e banner*/ /*#f5f0e5;*/
 @bg-secondarylight-color: mix(@bg-primary-color, #fff, 10%); /*footer-link*/ /*#dac8a0;*/
 @bg-dark-color: darken(@bg-primary-color, 0%); /*footer-bottom*/ /*#555;*/
 @bg-medium-color: mix(#000, #fff, 80%);
-@bg-custom-color1: #c8c8c8;
+@bg-custom-color1: #a60202;
 @bg-custom-color2: #c8c8c8;
 /**/
 @bg-manual-secondary-color-fade: fade(@secondary-color, 70%); /*sfondo modulo contatto*/
@@ -26,7 +26,7 @@
 @red-color: #f60d0d;
 @custom2-color: #caa840;
 
-@color-sottomeu: #f3c649; /*#d8e056;*/ /* fascia catalogo */
+@color-sottomeu: #085C47; /*#d8e056;*/ /* fascia catalogo */
 
 /* sistema di colori a triade */
 @triadic-secondary: spin(@bg-primary-color, -(360 / 3));
@@ -38,7 +38,7 @@
 /**/
 
 
-@bg-light-sottomenu-color: mix(@color-sottomeu, #fff, 15%); /*footer-social e banner*/ /*#f5f0e5;*/
+@bg-light-sottomenu-color: mix(@secondary-color, #fff, 5%); /*footer-social e banner*/ /*#f5f0e5;*/
 @color-sottomeu-active: mix(@color-sottomeu, #fff, 85%); /* fascia catalogo link active */
 @color-sottomeu-rgba: rgba(red(@color-sottomeu), green(@color-sottomeu), blue(@color-sottomeu), 0.8); /* colore sotto-menu per decorazione titoli*/
 @color-sottomeu-tenue: mix(@color-sottomeu, #fff, 28%); /* sottomenù molto tenue */
@@ -75,8 +75,8 @@
 /*----------------------------------
 //////////////| MENU |//////////////
 ----------------------------------*/
-@menu-size-base: 0.9rem;
-@menu-size: 0.85rem;
+@menu-size-base: 1rem;
+@menu-size: 1rem;
 @menu-font: @base-font;
 @menu-color: @primary-color;
 @menu-hover-color: @color-sottomeu;
@@ -132,10 +132,10 @@
 @scalable-extrime-font-size: calc(30px + 2vw + 1.6vh + 2vmin);
 @scalable-testata-extrime-font-size: calc(30px + 2vw + 0.8vh + 1vmin);
 @scalable-medium-extrime-font-size: calc(28px + 1vw + 0.7vh + 1vmin);
-@scalable-big-font-size: calc(24px + 0.5vw + 0.4vh + 0.3vmin);
+@scalable-big-font-size: calc(30px + 0.5vw + 0.4vh + 0.3vmin);
 @scalable-medium-big-font-size: calc(22px + 0.35vw + 0.24vh + 0.15vmin);
 @scalable-medium-font-size: calc(20px + 0.25vw + 0.18vh + 0.1vmin);
-@scalable-small-medium-font-size: calc(18px + 0.18vw + 0.1vh + 0.05vmin);
+@scalable-small-medium-font-size: calc(24px + 0.18vw + 0.1vh + 0.05vmin);
 @scalable-small-font-size: calc(15px + 0.15vw + 0.08vh + 0.05vmin);
 @scalable-smallest-font-size: calc(14px + 0.07vw + 0.03vh + 0.05vmin);
 @scalable-minimal-font-size: calc(10px + 0.04vw + 0.02vh + 0.02vmin);
@@ -149,8 +149,8 @@
 @scalable-medium-extrime-font-size-600: calc(22px + 0.4vw + 0.4vh + 0.2vmin);
 @scalable-big-font-size-600: calc(22px + 0.4vw + 0.4vh + 0.2vmin);
 @scalable-medium-big-font-size-600: calc(20px + 0.3vw + 0.3vh + 0.15vmin);
-@scalable-medium-font-size-600: calc(20px + 0.3vw + 0.3vh + 0.15vmin);
-@scalable-small-medium-font-size-600: calc(18px + 0.2vw + 0.2vh + 0.1vmin);
+@scalable-medium-font-size-600: calc(14px + 0.3vw + 0.3vh + 0.15vmin);
+@scalable-small-medium-font-size-600: calc(21px + 0.2vw + 0.2vh + 0.1vmin);
 @scalable-small-font-size-600: calc(16px + 0.18vw + 0.18vh + 0.09vmin);
 @scalable-smallest-font-size-600: calc(16px + 0.18vw + 0.18vh + 0.09vmin);
 
@@ -194,20 +194,20 @@
 ----------------------------------*/
 @motto-footer-color: @primary-color;
 @motto-footer-font: @primary-font;
-@title-footer-color: @bg-dark-color;
+@title-footer-color: @white-color;
 @title-footer-color-hover: @white-color;
 @title-footer-border-color: @bg-primary-color;
 /**/
 @link-footer-color: @white-color;
 @link-footer-color-hover: @primary-color;
-@link-footer-size: 0.9em;
+@link-footer-size: 1em;
 /**/
 @body-footer-color: @white-color;
 /*----------------------------------
 ///////////| COPYRIGHT |////////////
 ----------------------------------*/
-@body-copyright-size: 1.1rem;
-@body-copyright-lineh: 1.8rem;
+@body-copyright-size: 1rem;
+@body-copyright-lineh: 1.2rem;
 /*----------------------------------
 /////////////| BANNER |/////////////
 ----------------------------------*/
